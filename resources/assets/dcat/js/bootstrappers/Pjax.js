@@ -15,7 +15,11 @@ export default class Pjax {
         $.pjax.defaults.maxCacheLength = 0;
 
         $('a:not(a[target="_blank"])').click(function (event) {
-            $.pjax.click(event, container, { fragment: 'body' });
+            $.pjax.click(event, container, {
+                container: container,
+                fragment: container,
+                timeout: 8000
+            });
         });
 
         $d.on('pjax:timeout', function (event) {
