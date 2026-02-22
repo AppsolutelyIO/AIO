@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Json as JsonCast;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -455,6 +456,8 @@ class EloquentRepository extends Repository implements TreeRepository
                 $updates = Arr::except($updates, array_keys($relationKeyMap));
             }
 
+            $updates = $this->normalizeJsonCastAttributes($model, $updates);
+
             foreach ($updates as $column => $value) {
                 $model->setAttribute($column, $value);
             }
@@ -506,6 +509,8 @@ class EloquentRepository extends Repository implements TreeRepository
                 $updates = Arr::except($updates, array_keys($relationKeyMap));
             }
 
+            $updates = $this->normalizeJsonCastAttributes($model, $updates);
+
             foreach ($updates as $column => $value) {
                 /* @var EloquentModel $model */
                 $model->setAttribute($column, $value);
@@ -517,6 +522,36 @@ class EloquentRepository extends Repository implements TreeRepository
         });
 
         return $result;
+    }
+
+    /**
+     * Normalize attributes that are cast as JSON so that array/object values
+     * are encoded to a string. Prevents "json_decode(): Argument #1 ($json) must be
+     * of type string, array given" when the form submits arrays for JSON columns.
+     *
+     * @param  EloquentModel  $model
+     * @param  array  $updates
+     * @return array
+     */
+    protected function normalizeJsonCastAttributes(EloquentModel $model, array $updates)
+    {
+        $casts = $model->getCasts();
+
+        foreach ($updates as $column => $value) {
+            $cast = $casts[$column] ?? null;
+            if ($cast === null) {
+                continue;
+            }
+            $isJsonCast = $cast === 'json' || $cast === JsonCast::class;
+            if (! $isJsonCast) {
+                continue;
+            }
+            if (is_array($value) || is_object($value)) {
+                $updates[$column] = json_encode($value);
+            }
+        }
+
+        return $updates;
     }
 
     /**
