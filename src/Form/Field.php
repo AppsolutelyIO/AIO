@@ -1258,6 +1258,8 @@ class Field implements Renderable
 
     /**
      * 保存数据为json格式.
+     * When the model casts this attribute as 'array', do not encode here so the cast can encode once;
+     * otherwise double-encoding would break json_decode when reading.
      *
      * @param  int  $option
      * @return $this
@@ -1266,6 +1268,10 @@ class Field implements Renderable
     {
         return $this->saving(function ($value) use ($option) {
             if ($value === null || is_scalar($value)) {
+                return $value;
+            }
+            // If already an array, leave it so the model's array cast can encode once (avoids double-encode).
+            if (is_array($value)) {
                 return $value;
             }
 
