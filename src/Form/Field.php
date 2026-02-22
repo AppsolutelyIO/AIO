@@ -1258,8 +1258,9 @@ class Field implements Renderable
 
     /**
      * 保存数据为json格式.
-     * When the model casts this attribute as 'array', do not encode here so the cast can encode once;
-     * otherwise double-encoding would break json_decode when reading.
+     * Encodes arrays/objects to JSON string so Laravel's Json cast receives a string.
+     * If the value is already a valid JSON string, returns it as-is to avoid double-encoding.
+     * When using plain 'array' cast, prefer omitting saveAsJson() so the cast encodes once.
      *
      * @param  int  $option
      * @return $this
@@ -1267,11 +1268,14 @@ class Field implements Renderable
     public function saveAsJson($option = 0)
     {
         return $this->saving(function ($value) use ($option) {
-            if ($value === null || is_scalar($value)) {
-                return $value;
+            // Already a valid JSON string — do not double-encode
+            if (is_string($value)) {
+                json_decode($value);
+                if (json_last_error() === JSON_ERROR_NONE) {
+                    return $value;
+                }
             }
-            // If already an array, leave it so the model's array cast can encode once (avoids double-encode).
-            if (is_array($value)) {
+            if ($value === null || is_scalar($value)) {
                 return $value;
             }
 
