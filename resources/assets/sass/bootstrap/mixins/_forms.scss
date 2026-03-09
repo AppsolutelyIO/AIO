@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "sass:list";
 
 @use "sass:color";
 
@@ -97,7 +98,7 @@
 
       @if $enable-validation-icons {
         padding-right: $custom-select-feedback-icon-padding-right;
-        background: $custom-select-background, $icon $custom-select-bg no-repeat math.div($custom-select-feedback-icon-position, $custom-select-feedback-icon-size);
+        background: $custom-select-background, $icon $custom-select-bg no-repeat list.slash($custom-select-feedback-icon-position, $custom-select-feedback-icon-size);
       }
 
       &:focus {
