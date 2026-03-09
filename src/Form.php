@@ -81,6 +81,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @method Field\KeyValue keyValue($column, $label = '')
  * @method Field\Tel tel($column, $label = '')
  * @method Field\Markdown markdown($column, $label = '')
+ * @method Field\Vditor vditor($column, $label = '')
  * @method Field\Range range($start, $end, $label = '')
  * @method Field\Color color($column, $label = '')
  * @method Field\ArrayField array($column, $labelOrCallback, $callback = null)
@@ -166,6 +167,7 @@ class Form implements Renderable
         'keyValue'            => Field\KeyValue::class,
         'tel'                 => Field\Tel::class,
         'markdown'            => Field\Markdown::class,
+        'vditor'              => Field\Vditor::class,
         'range'               => Field\Range::class,
         'color'               => Field\Color::class,
         'array'               => Field\ArrayField::class,

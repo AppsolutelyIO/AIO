@@ -630,6 +630,7 @@ class Admin
             $router->get('render', 'RenderableController@handle')->name('render');
             $router->post('tinymce/upload', 'TinymceController@upload')->name('tinymce.upload');
             $router->post('editor-md/upload', 'EditorMDController@upload')->name('editor-md.upload');
+            $router->post('vditor/upload', 'VditorController@upload')->name('vditor.upload');
         });
     }
 

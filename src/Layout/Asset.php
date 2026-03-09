@@ -132,6 +132,10 @@ class Asset
                 '@admin/dcat/plugins/ionslider/ion.rangeSlider.skinNice.css',
             ],
         ],
+        '@vditor' => [
+            'js'  => '@admin/dcat/plugins/vditor/index.min.js',
+            'css' => '@admin/dcat/plugins/vditor/index.css',
+        ],
         '@editor-md' => [
             'js' => [
                 '@admin/dcat/plugins/editor-md/lib/raphael.min.js',
