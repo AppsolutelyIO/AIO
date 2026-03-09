@@ -18,26 +18,37 @@ class Vditor extends Field
      */
     protected $options = [
         'height'         => 500,
-        'mode'           => 'sv',
+        'mode'           => 'wysiwyg',
         'typewriterMode' => true,
         'minHeight'      => 200,
+        'tab'            => "\t",
+        'anchor'         => 1,
+        'icon'           => 'ant',
+        'speech'         => ['enable' => true],
         'outline'        => ['enable' => true, 'position' => 'right'],
         'counter'        => ['enable' => true, 'type' => 'markdown'],
         'resize'         => ['enable' => true],
-        'toolbarConfig'  => ['pin' => true],
-        'cache'          => ['enable' => false],
+        'toolbarConfig'  => ['pin' => true, 'hide' => false],
+        'fullscreen'     => ['index' => 1200],
+        'cache'          => ['enable' => true],
+        'hint'           => ['delay' => 100],
         'preview'        => [
-            'hljs'     => ['enable' => true, 'lineNumber' => true, 'style' => 'github'],
-            'math'     => ['engine' => 'KaTeX'],
-            'markdown' => ['mark' => true, 'autoSpace' => true, 'fixTermTypo' => true, 'toc' => true],
+            'delay'    => 500,
+            'hljs'     => ['enable' => true, 'lineNumber' => true, 'style' => 'github', 'defaultLang' => 'plaintext'],
+            'math'     => ['engine' => 'KaTeX', 'inlineDigit' => true],
+            'markdown' => ['mark' => true, 'autoSpace' => true, 'fixTermTypo' => true, 'toc' => true, 'footnotes' => true, 'gfmAutoLink' => true, 'sanitize' => true, 'listStyle' => true, 'paragraphBeginningSpace' => true],
             'render'   => ['media' => ['enable' => true]],
+            'maxWidth' => 1200,
+            'actions'  => ['desktop', 'tablet', 'mobile'],
         ],
-        'toolbar'  => [
+        'link'           => ['isOpen' => true],
+        'image'          => ['isPreview' => true],
+        'toolbar'        => [
             'headings', '|', 'bold', 'italic', 'strike', 'inline-code',
             '|', 'link', 'upload', 'emoji',
-            '|', 'list', 'ordered-list', 'check', 'outdent', 'indent',
             '|', 'quote', 'code', 'table', 'line',
-            '|', 'insert-before', 'insert-after',
+            'br',
+            'list', 'ordered-list', 'check', 'outdent', 'indent',
             '|', 'undo', 'redo',
             '|', 'fullscreen', 'both', 'preview', 'edit-mode',
             '|', 'export', 'devtools',
@@ -101,19 +112,6 @@ class Vditor extends Field
     }
 
     /**
-     * 设置输入区占位提示文字.
-     *
-     * @param  string  $placeholder
-     * @return $this
-     */
-    public function placeholder(string $placeholder)
-    {
-        $this->options['placeholder'] = $placeholder;
-
-        return $this;
-    }
-
-    /**
      * 添加智能提示扩展（如 @ 提及、# 标签）.
      *
      * @param  array  $extend  [['key' => '@', 'hint' => fn($val) => [...]]]
@@ -164,19 +162,39 @@ class Vditor extends Field
         $this->options['cdn'] = $cdn;
         $this->options['lang'] = $this->resolveLang();
 
+        if ($placeholder = parent::placeholder()) {
+            $this->options['placeholder'] = $placeholder;
+        }
+
         if (app()->isProduction()) {
             $this->options['toolbar'] = array_values(
                 array_filter($this->options['toolbar'], fn ($item) => $item !== 'devtools')
             );
         }
 
+        $this->options['preview']['markdown']['linkBase'] = url('/');
+        $this->options['preview']['theme'] = [
+            'path' => $cdn.'/dist/css/content-theme',
+            'list' => ['ant-design' => 'Ant Design', 'dark' => 'Dark', 'light' => 'Light', 'wechat' => 'WeChat'],
+        ];
+
         if (empty($this->options['upload']['url'])) {
-            $this->options['upload']['url'] = $this->defaultImageUploadUrl();
-            $this->options['upload']['fieldName'] = 'file[]';
-            $this->options['upload']['multiple'] = true;
+            $uploadUrl = $this->defaultImageUploadUrl();
+            $this->options['upload']['url']          = $uploadUrl;
+            $this->options['upload']['fieldName']    = 'file[]';
+            $this->options['upload']['multiple']     = true;
+            $this->options['upload']['linkToImgUrl'] = $uploadUrl;
         }
 
+        $this->options['upload'] += [
+            'accept'          => 'image/*,application/pdf',
+            'max'             => 10 * 1024 * 1024,
+            'withCredentials' => true,
+        ];
+
         $id = 'vditor-'.preg_replace('/[^a-zA-Z0-9_-]/', '-', $this->getElementName());
+
+        $this->options['cache']['id'] = $id;
 
         $this->addVariables(['cdn' => $cdn, 'id' => $id]);
 

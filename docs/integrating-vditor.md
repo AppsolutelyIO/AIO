@@ -18,16 +18,32 @@
 npm install vditor --save-dev
 ```
 
-将 Vditor 的 dist 文件复制到项目的静态资源目录：
+将 Vditor 的 dist 文件复制到项目的静态资源目录，**必须放在 `vditor/dist/` 子目录下**：
 
 ```bash
-cp -r node_modules/vditor/dist resources/dist/dcat/plugins/vditor
-cp -r node_modules/vditor/dist resources/assets/dcat/plugins/vditor
+cp -r node_modules/vditor/dist resources/dist/dcat/plugins/vditor/dist
+cp -r node_modules/vditor/dist resources/assets/dcat/plugins/vditor/dist
 ```
 
 `resources/dist` 是发布给使用者的静态资源，`resources/assets` 是源文件目录，两者保持同步。
 
-> **注意**：Vditor 的 `cdn` 选项决定它从哪里加载 KaTeX、highlight.js 等子资源。通过将整个 `dist` 目录复制到本地并将 `cdn` 指向本地路径，可以做到完全离线运行，无需外网依赖。
+> **路径陷阱**：Vditor 的 `cdn` 选项指定一个**基础目录**，它在内部会自动追加 `/dist/js/...`、`/dist/css/...` 等路径来加载 KaTeX、highlight.js 等子资源。
+>
+> 如果把 dist 内容直接复制到 `vditor/`（而不是 `vditor/dist/`），`cdn` 指向 `vditor/` 时，子资源请求会落在 `vditor/dist/js/...`，但实际文件只在 `vditor/js/...`，导致所有子资源 404。
+>
+> 正确结构：
+> ```
+> resources/dist/dcat/plugins/vditor/          ← cdn 指向这里
+> └── dist/
+>     ├── index.min.js                          ← 主 JS（别名路径）
+>     ├── index.css                             ← 主 CSS（别名路径）
+>     ├── js/
+>     │   ├── katex/
+>     │   ├── highlight.js/
+>     │   ├── mermaid/
+>     │   └── ...
+>     └── css/
+> ```
 
 ---
 
@@ -129,21 +145,29 @@ editor.md 的视图直接用带 `name` 属性的 `<textarea>` 提交数据，而
 
 ```html
 <div id="{{ $id }}"></div>
-<input type="hidden" name="{{ $name }}" id="{{ $id }}_val">
+<input type="hidden" name="{{ $name }}" id="{{ $id }}_val" value="{{ $value ?? '' }}">
 ```
 
 ```js
-new Vditor('{{ $id }}', {
+var _vditor_xxx = new Vditor('{{ $id }}', {
     ...options,
-    value: initialValue,
     input: function (val) {
         document.getElementById('{{ $id }}_val').value = val;
     },
     after: function () {
+        // 必须用 setValue() 而不是 options.value 来设置初始内容，
+        // 否则表单验证失败重回页面后内容会丢失。
+        if (initialValue) {
+            _vditor_xxx.setValue(initialValue);
+        }
         document.getElementById('{{ $id }}_val').value = initialValue;
     },
 });
 ```
+
+> **注意**：不要直接用 `options.value = initialValue` 的方式注入初始内容。Vditor 在某些模式下会忽略这个值，必须在 `after()` 回调中调用实例的 `setValue()` 方法。这也是为什么需要把 `new Vditor(...)` 的返回值赋给一个变量。
+>
+> 隐藏 input 也需要设置 `value` 属性（服务端渲染），否则用户不编辑直接提交时表单里会是空值。
 
 ---
 
