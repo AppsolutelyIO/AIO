@@ -18,6 +18,83 @@
     var _vditorValue = @json($value ?? '');
     var _vditorOptions = {!! json_encode($options, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!};
 
+    var _renderMarkmapBlock = function (element) {
+        var blocks = element.querySelectorAll('.language-markmap, code.language-markmap');
+        if (!blocks.length) return;
+
+        var loadedFeatures = {};
+        var doRender = function () {
+            var mm = window.markmap;
+            if (!mm || !mm.Markmap) return;
+            var transformer = new mm.Transformer();
+
+            blocks.forEach(function (block) {
+                if (!block || block.dataset.rendered) return;
+                block.dataset.rendered = '1';
+
+                var text = (block.textContent || '').trim();
+                if (!text) {
+                    delete block.dataset.rendered;
+                    return;
+                }
+
+                try {
+                    var result = transformer.transform(text);
+                    var features = Object.keys(result.features || {}).filter(function (feature) {
+                        return !loadedFeatures[feature];
+                    });
+
+                    features.forEach(function (feature) {
+                        loadedFeatures[feature] = true;
+                    });
+
+                    if (typeof transformer.getAssets === 'function') {
+                        var assets = transformer.getAssets(features);
+                        if (assets.styles && mm.loadCSS) {
+                            mm.loadCSS(assets.styles);
+                        }
+                        if (assets.scripts && mm.loadJS) {
+                            mm.loadJS(assets.scripts);
+                        }
+                    }
+
+                    var host = block.tagName === 'CODE' ? block.parentElement : block;
+                    host.innerHTML = '<svg style="width:100%;min-height:320px"></svg>';
+
+                    var svg = host.firstChild;
+                    var root = result.root || result;
+                    var options = null;
+                    if (typeof mm.deriveOptions === 'function') {
+                        options = mm.deriveOptions((result.frontmatter || {}).markmap);
+                    }
+
+                    var map = mm.Markmap.create(svg, options || null);
+                    if (typeof map.setData === 'function') {
+                        if (options) {
+                            map.setData(root, options);
+                        } else {
+                            map.setData(root);
+                        }
+                    }
+                    if (typeof map.fit === 'function') {
+                        map.fit();
+                    }
+                } catch (e) {
+                    delete block.dataset.rendered;
+                }
+            });
+        };
+
+        if (window.markmap && window.markmap.Markmap) {
+            doRender();
+        } else {
+            var s = document.createElement('script');
+            s.src = '{{ $cdn }}/dist/js/markmap/markmap.min.js';
+            s.onload = doRender;
+            document.head.appendChild(s);
+        }
+    };
+
     _vditorOptions.customRenders = [
         {
             language: 'mermaid',
@@ -81,37 +158,9 @@
             }
         },
         {
-            language: 'mindmap',
+            language: 'markmap',
             render: function (element) {
-                var codes = element.querySelectorAll('code.language-mindmap');
-                if (!codes.length) return;
-                var doRender = function () {
-                    var mm = window.markmap;
-                    var transformer = new mm.Transformer();
-                    codes.forEach(function (code) {
-                        if (code.dataset.rendered) return;
-                        code.dataset.rendered = '1';
-                        var pre = code.parentElement;
-                        var text = code.textContent.trim();
-                        var result = transformer.transform(text);
-                        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                        svg.style.width = '100%';
-                        svg.style.height = '400px';
-                        pre.innerHTML = '';
-                        pre.appendChild(svg);
-                        var map = mm.Markmap.create(svg);
-                        map.setData(result.root);
-                        map.fit();
-                    });
-                };
-                if (window.markmap && window.markmap.Markmap) {
-                    doRender();
-                } else {
-                    var s = document.createElement('script');
-                    s.src = '{{ $cdn }}/dist/js/markmap/markmap.min.js';
-                    s.onload = doRender;
-                    document.head.appendChild(s);
-                }
+                _renderMarkmapBlock(element);
             }
         },
         {
