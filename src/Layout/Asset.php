@@ -133,8 +133,8 @@ class Asset
             ],
         ],
         '@vditor' => [
-            'js'  => '@admin/dcat/plugins/vditor/index.min.js',
-            'css' => '@admin/dcat/plugins/vditor/index.css',
+            'js'  => '@admin/dcat/plugins/vditor/dist/index.min.js',
+            'css' => '@admin/dcat/plugins/vditor/dist/index.css',
         ],
         '@editor-md' => [
             'js' => [
