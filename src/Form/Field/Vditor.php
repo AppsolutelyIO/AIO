@@ -17,17 +17,30 @@ class Vditor extends Field
      * @var array
      */
     protected $options = [
-        'height'   => 500,
-        'mode'     => 'sv',
-        'typewriterMode' => false,
-        'outline'  => ['enable' => false],
+        'height'         => 500,
+        'mode'           => 'sv',
+        'typewriterMode' => true,
+        'minHeight'      => 200,
+        'outline'        => ['enable' => true, 'position' => 'right'],
+        'counter'        => ['enable' => true, 'type' => 'markdown'],
+        'resize'         => ['enable' => true],
+        'toolbarConfig'  => ['pin' => true],
+        'cache'          => ['enable' => false],
+        'preview'        => [
+            'hljs'     => ['enable' => true, 'lineNumber' => true, 'style' => 'github'],
+            'math'     => ['engine' => 'KaTeX'],
+            'markdown' => ['mark' => true, 'autoSpace' => true, 'fixTermTypo' => true, 'toc' => true],
+            'render'   => ['media' => ['enable' => true]],
+        ],
         'toolbar'  => [
-            'emoji', 'headings', 'bold', 'italic', 'strike', 'link',
+            'headings', '|', 'bold', 'italic', 'strike', 'inline-code',
+            '|', 'link', 'upload', 'emoji',
             '|', 'list', 'ordered-list', 'check', 'outdent', 'indent',
-            '|', 'quote', 'line', 'code', 'inline-code', 'insert-before', 'insert-after',
-            '|', 'upload', 'table',
+            '|', 'quote', 'code', 'table', 'line',
+            '|', 'insert-before', 'insert-after',
             '|', 'undo', 'redo',
-            '|', 'fullscreen', 'edit-mode',
+            '|', 'fullscreen', 'both', 'preview', 'edit-mode',
+            '|', 'export', 'devtools',
         ],
     ];
 
@@ -88,6 +101,32 @@ class Vditor extends Field
     }
 
     /**
+     * 设置输入区占位提示文字.
+     *
+     * @param  string  $placeholder
+     * @return $this
+     */
+    public function placeholder(string $placeholder)
+    {
+        $this->options['placeholder'] = $placeholder;
+
+        return $this;
+    }
+
+    /**
+     * 添加智能提示扩展（如 @ 提及、# 标签）.
+     *
+     * @param  array  $extend  [['key' => '@', 'hint' => fn($val) => [...]]]
+     * @return $this
+     */
+    public function hintExtend(array $extend)
+    {
+        $this->options['hint']['extend'] = $extend;
+
+        return $this;
+    }
+
+    /**
      * 自定义图片上传接口.
      *
      * @param  string  $url
@@ -125,13 +164,21 @@ class Vditor extends Field
         $this->options['cdn'] = $cdn;
         $this->options['lang'] = $this->resolveLang();
 
+        if (app()->isProduction()) {
+            $this->options['toolbar'] = array_values(
+                array_filter($this->options['toolbar'], fn ($item) => $item !== 'devtools')
+            );
+        }
+
         if (empty($this->options['upload']['url'])) {
             $this->options['upload']['url'] = $this->defaultImageUploadUrl();
             $this->options['upload']['fieldName'] = 'file[]';
             $this->options['upload']['multiple'] = true;
         }
 
-        $this->addVariables(['cdn' => $cdn]);
+        $id = 'vditor-'.preg_replace('/[^a-zA-Z0-9_-]/', '-', $this->getElementName());
+
+        $this->addVariables(['cdn' => $cdn, 'id' => $id]);
 
         Admin::requireAssets('@vditor');
 
