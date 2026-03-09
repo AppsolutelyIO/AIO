@@ -12,7 +12,7 @@
         data-refresh="{{ $refresh }}"
     >
         <span class="ie-display">
-            {{ $display }}
+            {!! $display !!}
             @if(! $display)
                 <i class="feather icon-edit-2"></i>
             @endif
@@ -36,8 +36,15 @@
 </template>
 
 <style>
+    .popover-body {
+        padding: 20px;
+    }
+    .ie-action {
+        overflow: hidden;
+        padding-bottom: 4px;
+    }
     .ie-action button {
-        margin: 10px 0 10px 10px;
+        margin: 10px 0 0 10px;
         float: right;
     }
     [data-editinline="popover"] {
@@ -78,6 +85,19 @@
 
             return $template.prop("outerHTML");
         }
+    }).on('show.bs.popover', function (e) {
+
+        var temp = $(this).data('temp');
+        var $templateContent = $($('template#' + temp).html());
+        if ($templateContent.find('textarea.ie-input').length) {
+            var popoverData = $(this).data('bs.popover');
+            if (popoverData) {
+                var $tip = $(popoverData.getTipElement());
+                $tip[0].style.setProperty('max-width', '600px', 'important');
+                $tip[0].style.setProperty('width', '400px', 'important');
+            }
+        }
+
     }).on('shown.bs.popover', function (e) {
 
         var $popover = $($(this).data('bs.popover').tip).find('.ie-content');
@@ -88,6 +108,20 @@
         $popover.data('trigger', $trigger);
 
         @yield('popover-shown')
+
+        var $input = $popover.find('.ie-input');
+        if ($input.is('textarea')) {
+            var $tip = $popover.closest('.popover');
+            $tip[0].style.setProperty('max-width', '600px', 'important');
+            $tip[0].style.setProperty('width', '400px', 'important');
+
+            function autoResize(el) {
+                el.style.height = 'auto';
+                el.style.height = (el.scrollHeight + 2) + 'px';
+            }
+            autoResize($input[0]);
+            $input.on('input', function () { autoResize(this); });
+        }
 
     }).click(function () {
         hide();

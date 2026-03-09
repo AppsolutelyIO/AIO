@@ -1,5 +1,7 @@
 <style>
     td .form-group {margin-bottom: 0 !important;}
+    .kv-value-textarea {field-sizing: content; resize: none; overflow: hidden; min-height: 34px; padding: 6px 12px; line-height: 1.6rem; font-size: 1rem; box-sizing: border-box;}
+    .kv-action-btn {margin-top: 7px;}
 </style>
 
 <div class="{{$viewClass['form-group']}} {{ $class }}">
@@ -15,7 +17,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>{!! $keyLabel !!}</th>
+                <th style="width: 200px;">{!! $keyLabel !!}</th>
                 <th>{!! $valueLabel !!}</th>
                 <th style="width: 85px;"></th>
             </tr>
@@ -38,14 +40,14 @@
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <div class="help-block with-errors"></div>
-                                <input name="{{ $name }}[values][{{ $loop->index }}]" value="{{ $v }}" class="form-control" />
+                                <textarea name="{{ $name }}[values][{{ $loop->index }}]" class="form-control kv-value-textarea">{{ $v }}</textarea>
                             </div>
                         </div>
                     </td>
 
-                    <td class="form-group">
-                        <div>
-                            <div class="kv-remove btn btn-white btn-sm pull-right">
+                    <td>
+                        <div class="form-group">
+                            <div class="kv-remove btn btn-white btn-sm pull-right kv-action-btn">
                                 <i class="feather icon-trash">&nbsp;</i>
                             </div>
                         </div>
@@ -81,14 +83,13 @@
                 <div class="form-group  ">
                     <div class="col-sm-12">
                         <div class="help-block with-errors"></div>
-                        <input name="{{ $name }}[values][{key}]" class="form-control" />
+                        <textarea name="{{ $name }}[values][{key}]" class="form-control kv-value-textarea" rows="1"></textarea>
                     </div>
                 </div>
             </td>
-
-            <td class="form-group">
-                <div>
-                    <div class="kv-remove btn btn-white btn-sm pull-right">
+            <td>
+                <div class="form-group">
+                    <div class="kv-remove btn btn-white btn-sm pull-right kv-action-btn">
                         <i class="feather icon-trash">&nbsp;</i>
                     </div>
                 </div>
@@ -99,6 +100,7 @@
 
 <script init="{!! $selector !!}">
     var index = {{ $count }};
+
     $this.find('.kv-add').on('click', function () {
         var tpl = $this.find('template').html().replace('{key}', index).replace('{key}', index);
         $this.find('tbody.kv-table').append(tpl);

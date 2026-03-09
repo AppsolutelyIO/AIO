@@ -41,7 +41,7 @@
                 clear            : "清空",
                 search           : "搜尋",
                 help             : "使用幫助",
-                info             : "關於" + exports.title
+                info             : "關於" + (exports && exports.title || "Editor.md")
             },
             buttons : {
                 enter  : "確定",

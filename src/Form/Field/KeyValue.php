@@ -48,6 +48,10 @@ class KeyValue extends Field
 
         unset($value[static::DEFAULT_FLAG_NAME]);
 
+        if ($this->allowDefaultValueInEditPage && is_array($this->default) && ! empty($this->default)) {
+            $value = array_merge($this->default, $value);
+        }
+
         return $value;
     }
 

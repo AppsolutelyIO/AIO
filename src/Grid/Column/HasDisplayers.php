@@ -236,6 +236,35 @@ trait HasDisplayers
     }
 
     /**
+     * Wrap current display value with a tooltip showing the original value.
+     *
+     * @param  string  $placement
+     * @return $this
+     */
+    public function tooltip(string $placement = 'left')
+    {
+        $column = $this;
+
+        Admin::script(<<<JS
+$('[data-toggle="dcat-tooltip"]').tooltip({placement: '{$placement}', trigger: 'hover', html: false});
+JS);
+
+        Admin::style('[data-toggle="dcat-tooltip"] + .tooltip .tooltip-inner { padding: 8px 12px; text-align: left; }');
+
+        return $this->display(function ($value) use ($column) {
+            $original = $column->getOriginal();
+
+            if (empty($original)) {
+                return $value;
+            }
+
+            $title = htmlspecialchars((string) $original, ENT_QUOTES);
+
+            return "<span data-toggle=\"dcat-tooltip\" title=\"{$title}\">{$value}</span>";
+        });
+    }
+
+    /**
      * Display column using a grid row action.
      *
      * @param  string  $action

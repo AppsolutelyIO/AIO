@@ -1,12 +1,12 @@
 @extends('admin::grid.displayer.editinline.template')
 
 @section('field')
-    <input class="form-control ie-input"/>
+    <textarea class="form-control ie-input" rows="5" style="resize:none;overflow:hidden;"></textarea>
 @endsection
 
 <script>
 @section('popover-content')
-    $template.find('input').attr('value', $trigger.data('value'));
+    $template.find('textarea').text($trigger.data('value'));
 @endsection
 
 @section('popover-shown')
