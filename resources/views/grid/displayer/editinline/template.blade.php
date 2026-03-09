@@ -136,6 +136,12 @@
 
     $(document).off('click', '.ie-content .ie-cancel').on('click', '.ie-content .ie-cancel', hide)
 
+    $(document).off('click.ie-outside').on('click.ie-outside', function (e) {
+        if (!$(e.target).closest('.popover').length && !$(e.target).closest('[data-editinline="popover"]').length) {
+            hide();
+        }
+    })
+
     $(document).off('click', '.ie-content .ie-submit').on('click', '.ie-content .ie-submit', function () {
         var $popover = $(this).closest('.ie-content'),
             $trigger = $popover.data('trigger'),
