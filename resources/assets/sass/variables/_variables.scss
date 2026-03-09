@@ -1,3 +1,4 @@
+@use "sass:map";
 
 @import "../../dcat/sass/theme/colors";
 
@@ -6,7 +7,7 @@
 $spacer: 1rem;
 $spacers: ();
 // stylelint-disable-next-line scss/dollar-variable-default
-$spacers: map-merge((0: 0,
+$spacers: map.merge((0: 0,
 25: ($spacer * .25),
 50: ($spacer * .5),
 75: ($spacer * .75),
