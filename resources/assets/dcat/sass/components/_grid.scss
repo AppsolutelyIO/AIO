@@ -1,6 +1,8 @@
+@use "sass:color";
+
 .grid-column-header {
   a {
-    color: darken($dark70, 5%);
+    color: color.adjust($dark70, $lightness: -5%, $space: hsl);
     font-size: 1rem;
   }
   a:hover, a.active {

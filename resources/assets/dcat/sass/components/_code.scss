@@ -1,9 +1,11 @@
+@use "sass:color";
+
 // code
 code {
   box-shadow: 0 1px 1px rgba(0,0,0,0.125);
   padding: 3px 5px;
   background: #f7f7f9;
-  color: darken($primary, 8%);
+  color: color.adjust($primary, $lightness: -8%, $space: hsl);
   font-family: Montserrat,Nunito,sans-serif;
 }
 pre {

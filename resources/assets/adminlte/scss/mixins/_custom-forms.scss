@@ -1,3 +1,5 @@
+@use "sass:color";
+
 //
 // Mixins: Custom Forms
 //
@@ -7,7 +9,7 @@
   &.custom-switch-off-#{$name} {
     & .custom-control-input ~ .custom-control-label::before {
       background: #{$color};
-      border-color: darken($color, 20%);
+      border-color: color.adjust($color, $lightness: -20%, $space: hsl);
     }
 
     & .custom-control-input:focus ~ .custom-control-label::before {
@@ -15,14 +17,14 @@
     }
 
     & .custom-control-input ~ .custom-control-label::after {
-      background: darken($color, 25%);
+      background: color.adjust($color, $lightness: -25%, $space: hsl);
     }
   }
 
   &.custom-switch-on-#{$name} {
     & .custom-control-input:checked ~ .custom-control-label::before {
       background: #{$color};
-      border-color: darken($color, 20%);
+      border-color: color.adjust($color, $lightness: -20%, $space: hsl);
     }
 
     & .custom-control-input:checked:focus ~ .custom-control-label::before {
@@ -30,7 +32,7 @@
     }
 
     & .custom-control-input:checked ~ .custom-control-label::after {
-      background: lighten($color, 30%);
+      background: color.adjust($color, $lightness: 30%, $space: hsl);
     }
   }
 }
@@ -58,7 +60,7 @@
       background-color: $color;
 
       &:active {
-        background-color: lighten($color, 35%);
+        background-color: color.adjust($color, $lightness: 35%, $space: hsl);
       }
     }
 
@@ -66,7 +68,7 @@
       background-color: $color;
 
       &:active {
-        background-color: lighten($color, 35%);
+        background-color: color.adjust($color, $lightness: 35%, $space: hsl);
       }
     }
 
@@ -74,7 +76,7 @@
       background-color: $color;
 
       &:active {
-        background-color: lighten($color, 35%);
+        background-color: color.adjust($color, $lightness: 35%, $space: hsl);
       }
     }
   }

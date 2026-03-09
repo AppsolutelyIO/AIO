@@ -1,3 +1,5 @@
+@use "sass:color";
+
 //
 // Component: Callout
 //
@@ -34,18 +36,18 @@
 
   // Themes for different contexts
   &.callout-danger {
-    border-left-color: darken(theme-color('danger'), 10%);
+    border-left-color: color.adjust(theme-color('danger'), $lightness: -10%, $space: hsl);
   }
 
   &.callout-warning {
-    border-left-color: darken(theme-color('warning'), 10%);
+    border-left-color: color.adjust(theme-color('warning'), $lightness: -10%, $space: hsl);
   }
 
   &.callout-info {
-    border-left-color: darken(theme-color('info'), 10%);
+    border-left-color: color.adjust(theme-color('info'), $lightness: -10%, $space: hsl);
   }
 
   &.callout-success {
-    border-left-color: darken(theme-color('success'), 10%);
+    border-left-color: color.adjust(theme-color('success'), $lightness: -10%, $space: hsl);
   }
 }

@@ -1,3 +1,5 @@
+@use "sass:color";
+
 
 @mixin scrollbar($selector) {
   #{$selector}::-webkit-scrollbar {
@@ -8,7 +10,7 @@
     background-color: #eee;
   }
   #{$selector}::-webkit-scrollbar-thumb {
-    background-color: darken(#ddd, 7.5%);
+    background-color: color.adjust(#ddd, $lightness: -7.5%, $space: hsl);
     border-radius: .4rem;
   }
 }

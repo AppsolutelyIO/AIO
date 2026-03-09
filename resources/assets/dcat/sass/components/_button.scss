@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .btn {
   padding: 0.54rem 1.2rem !important;
   height: 34px;
@@ -12,8 +14,8 @@
 }
 
 .btn-trans.btn-primary {
-  background-color: lighten($primary, 40%);
-  border-color: lighten($primary, 40%);
+  background-color: color.adjust($primary, $lightness: 40%, $space: hsl);
+  border-color: color.adjust($primary, $lightness: 40%, $space: hsl);
   color: $primary;
 }
 
@@ -137,8 +139,8 @@ a.btn-sm, .btn-group-sm > a.btn {
 }
 
 .btn-secondary {
-  border-color: darken($border-color, 2.2%)!important;
-  background-color: lighten(#eee, 2.5%)!important;
+  border-color: color.adjust($border-color, $lightness: -2.2%, $space: hsl)!important;
+  background-color: color.adjust(#eee, $lightness: 2.5%, $space: hsl)!important;
   color: $font-color!important;
   box-shadow: none;
 }

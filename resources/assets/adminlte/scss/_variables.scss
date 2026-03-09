@@ -1,3 +1,5 @@
+@use "sass:color";
+
 //
 // Core: Variables
 //
@@ -81,7 +83,7 @@ $main-header-dark-form-control-border: 0 !default;
 $main-header-dark-form-control-focused-border: 0 !default;
 $main-header-dark-placeholder-color: hsla(100, 100%, 100%, 0.6) !default;
 
-$main-header-light-form-control-bg: darken($gray-100, 2%) !default;
+$main-header-light-form-control-bg: color.adjust($gray-100, $lightness: -2%, $space: hsl) !default;
 $main-header-light-form-control-focused-bg: $gray-200 !default;
 $main-header-light-form-control-focused-color: $gray-800 !default;
 $main-header-light-form-control-border: 0 !default;
@@ -126,11 +128,11 @@ $main-footer-bg: transparent !default;
 
 // #262d37 #313a46 lighten(#8391a2, 8%) #242939
 // icon lighten(#4B5575, 3%)   #989EB3
-$sidebar-dark-bg: lighten(#3a4452, 2%)!default;
+$sidebar-dark-bg: color.adjust(#3a4452, $lightness: 2%, $space: hsl)!default;
 $sidebar-dark-hover-bg: transparent !default;
 $sidebar-dark-color: hsla(0,0%,100%,.95)!default;
 $sidebar-dark-icon-color: $sidebar-dark-color!default;
-$sidebar-dark-hover-color: lighten($sidebar-dark-color, 10%) !default;
+$sidebar-dark-hover-color: color.adjust($sidebar-dark-color, $lightness: 10%, $space: hsl) !default;
 $sidebar-dark-active-bg: transparent !default;
 $sidebar-dark-active-color: $white !default;
 $sidebar-dark-submenu-bg: transparent !default;
@@ -174,7 +176,7 @@ $control-sidebar-width: $sidebar-width !default;
 // Cards
 // --------------------------------------------------------
 $card-border-color: $gray-100 !default;
-$card-dark-border-color: lighten($gray-900, 10%) !default;
+$card-dark-border-color: color.adjust($gray-900, $lightness: 10%, $space: hsl) !default;
 $card-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2) !default;
 $card-title-font-size: 1.1rem !default;
 $card-title-font-size-sm: 1rem !default;

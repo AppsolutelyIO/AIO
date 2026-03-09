@@ -1,3 +1,5 @@
+@use "sass:color";
+
 //
 // Component: Cards
 //
@@ -346,7 +348,7 @@ html.maximized-card {
   }
 
   .comment-text {
-    color: lighten($gray-700, 20%);
+    color: color.adjust($gray-700, $lightness: 20%, $space: hsl);
     margin-left: 40px;
   }
 
@@ -424,7 +426,7 @@ html.maximized-card {
     }
 
     &.done {
-      color: darken($gray-500, 25%);
+      color: color.adjust($gray-500, $lightness: -25%, $space: hsl);
 
       .text {
         font-weight: 500;

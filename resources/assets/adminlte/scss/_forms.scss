@@ -1,3 +1,5 @@
+@use "sass:color";
+
 //
 // Component: Forms
 //
@@ -217,8 +219,8 @@ textarea.form-control {
 
   &:checked {
     ~ .custom-control-label::before {
-      @include gradient-bg(lighten(theme-color('warning'), 10%));
-      border-color: lighten(theme-color('warning'), 10%);
+      @include gradient-bg(color.adjust(theme-color('warning'), $lightness: 10%, $space: hsl));
+      border-color: color.adjust(theme-color('warning'), $lightness: 10%, $space: hsl);
     }
   }
 

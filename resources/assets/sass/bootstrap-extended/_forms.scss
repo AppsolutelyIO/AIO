@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // placeholder spacific scss
 .form-control{
   &::placeholder{
@@ -7,7 +9,7 @@
   }
 
   &:-ms-input-placeholder {
-     color: darken($body-bg, 20%);
+     color: color.adjust($body-bg, $lightness: -20%, $space: hsl);
   }
 
   &:focus{
@@ -27,7 +29,7 @@
 
 // Form Label Scscc
 label{
-    color: darken($body-bg, 70%);
+    color: color.adjust($body-bg, $lightness: -70%, $space: hsl);
     font-size: 0.85rem;
     margin-bottom: 0;
     padding-left: 0.2rem;
@@ -47,8 +49,8 @@ textarea.form-control{
 
 // Form control Scscc
 .form-control{
-    border: 1px solid darken($body-bg, 12%);
-    color: darken($body-bg, 60%);
+    border: 1px solid color.adjust($body-bg, $lightness: -12%, $space: hsl);
+    color: color.adjust($body-bg, $lightness: -60%, $space: hsl);
 }
 // Used for Card - Check it and remove if not used
 .form-section{
@@ -70,7 +72,7 @@ textarea.form-control{
 
 // Used for Card - Check it and remove if not used
 .form-actions{
-    border-top: 1px solid darken($body-bg, 10%);
+    border-top: 1px solid color.adjust($body-bg, $lightness: -10%, $space: hsl);
     padding: 20px 0;
     margin-top: 20px;
 
@@ -86,7 +88,7 @@ textarea.form-control{
 
     &.top{
         border-top: 0;
-        border-bottom: 1px solid darken($body-bg, 10%);
+        border-bottom: 1px solid color.adjust($body-bg, $lightness: -10%, $space: hsl);
         margin-top: 0;
         margin-bottom: 20px;
     }
@@ -450,7 +452,7 @@ select.form-control {
     .form-control-position{
       i{
         padding: 0.2rem 0.5rem;
-        border-right: 1px solid darken($body-bg, 12%);
+        border-right: 1px solid color.adjust($body-bg, $lightness: -12%, $space: hsl);
       }
     }
   }
@@ -458,7 +460,7 @@ select.form-control {
     .form-control-position{
       i{
         padding: 0.2rem 0.5rem;
-        border-left: 1px solid darken($body-bg, 12%);
+        border-left: 1px solid color.adjust($body-bg, $lightness: -12%, $space: hsl);
       }
     }
   }

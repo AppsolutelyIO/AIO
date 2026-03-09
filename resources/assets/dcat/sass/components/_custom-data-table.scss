@@ -1,3 +1,5 @@
+@use "sass:color";
+
 
 $table-border-radius: .3rem;
 
@@ -118,7 +120,7 @@ table.custom-data-table.data-table tbody tr:hover {
   //transform: translateY(-4px);
   //transition: all .3s ease;
   //transform: none;
-  background: lighten($dark30, 1%);
+  background: color.adjust($dark30, $lightness: 1%, $space: hsl);
 }
 
 table.custom-data-table.data-table tbody tr td:first-child {

@@ -1,3 +1,5 @@
+@use "sass:color";
+
 //
 // Component: Direct Chat
 //
@@ -18,13 +20,13 @@
 
   &.timestamp-light {
     .direct-chat-timestamp {
-      color: lighten(color-yiq($yiq-text-light), 10%);
+      color: color.adjust(color-yiq($yiq-text-light), $lightness: 10%, $space: hsl);
     }
   }
 
   &.timestamp-dark {
     .direct-chat-timestamp {
-      color: darken(color-yiq($yiq-text-dark), 20%);
+      color: color.adjust(color-yiq($yiq-text-dark), $lightness: -20%, $space: hsl);
     }
   }
 }
@@ -123,7 +125,7 @@
 }
 
 .direct-chat-timestamp {
-  color: darken($gray-500, 25%);
+  color: color.adjust($gray-500, $lightness: -25%, $space: hsl);
 }
 
 //Direct chat contacts pane
@@ -157,7 +159,7 @@
   }
 
   .contacts-list-msg {
-    color: darken($gray-600, 10%);
+    color: color.adjust($gray-600, $lightness: -10%, $space: hsl);
   }
 }
 
@@ -207,7 +209,7 @@
 }
 
 .contacts-list-msg {
-  color: darken($gray-400, 10%);
+  color: color.adjust($gray-400, $lightness: -10%, $space: hsl);
 }
 
 // Color variants

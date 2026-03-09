@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .table {
   color: $font-color;
   margin-bottom: 0;
@@ -100,14 +102,14 @@ table.data-table.complex-headers thead th, table.data-table.complex-headers thea
 }
 
 .data-table.table-bordered:not(.complex-headers) thead th {
-  border-right: 1px solid darken($border-color, 3%);
-  border-bottom: 1px solid darken($border-color, 3%);
+  border-right: 1px solid color.adjust($border-color, $lightness: -3%, $space: hsl);
+  border-bottom: 1px solid color.adjust($border-color, $lightness: -3%, $space: hsl);
 }
 .data-table.table-bordered:not(.complex-headers) tr:first-child th {
-  border-top: 1px solid darken($border-color, 3%);
+  border-top: 1px solid color.adjust($border-color, $lightness: -3%, $space: hsl);
 }
 .data-table.table-bordered:not(.complex-headers) thead tr th:first-child {
-  border-left: 1px solid darken($border-color, 3%);
+  border-left: 1px solid color.adjust($border-color, $lightness: -3%, $space: hsl);
 }
 
 /* ------------------- 多表头 --------------------- */
@@ -126,8 +128,8 @@ table.table-bordered.data-table.complex-headers {
     border-radius: 0;
 
     td {
-      border-bottom: 1px solid lighten($table-border-color-darker, 4%);
-      border-right: 1px solid lighten($table-border-color-darker, 4%);
+      border-bottom: 1px solid color.adjust($table-border-color-darker, $lightness: 4%, $space: hsl);
+      border-right: 1px solid color.adjust($table-border-color-darker, $lightness: 4%, $space: hsl);
     }
 
     td:first-child {
@@ -149,7 +151,7 @@ table.table-bordered.data-table.complex-headers {
 
 .table-hover tbody tr:hover {
   color: $font-color;
-  background-color: lighten($dark30, 1%);
+  background-color: color.adjust($dark30, $lightness: 1%, $space: hsl);
 }
 
 /*--------------------------------------------------- */
@@ -176,7 +178,7 @@ table.table-bordered.data-table.complex-headers {
 
 
 $table-border-color: #eff3f8;
-$table-bg: darken(#f7f7f9, 3.8%);
+$table-bg: color.adjust(#f7f7f9, $lightness: -3.8%, $space: hsl);
 //$table-bg: #f7f7f9;
 
 .table-collapse {

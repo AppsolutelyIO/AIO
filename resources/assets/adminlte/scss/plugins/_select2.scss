@@ -1,3 +1,5 @@
+@use "sass:color";
+
 //
 // Plugin: Select2
 //
@@ -22,7 +24,7 @@
 
   &.select2-container--open {
     .select2-selection--single {
-      border-color: lighten($primary, 25%);
+      border-color: color.adjust($primary, $lightness: 25%, $space: hsl);
     }
   }
 
@@ -103,7 +105,7 @@
     color: color-yiq($color);
 
     &[aria-selected] {
-      $color: darken($color, 3%);
+      $color: color.adjust($color, $lightness: -3%, $space: hsl);
 
       &,
       &:hover {
@@ -147,7 +149,7 @@
 
       .select2-selection__choice {
         background-color: $primary;
-        border-color: darken($primary, 5%);
+        border-color: color.adjust($primary, $lightness: -5%, $space: hsl);
         color: color-yiq($primary);
         padding: 0 10px;
         margin-top: .31rem;

@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // The dropdown menu
 .dropdown{
 
@@ -171,7 +173,7 @@
   .dropdown-item {
     &.active,
     &:hover {
-      background-color: darken($white, 20%);
+      background-color: color.adjust($white, $lightness: -20%, $space: hsl);
     }
   }
 }

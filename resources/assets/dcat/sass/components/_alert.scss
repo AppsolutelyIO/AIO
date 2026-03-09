@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .alert {
   font-weight: 500;
   border: none;
@@ -46,7 +48,7 @@
 }
 .alert-success {
   background: rgba($success,.2);
-  color: darken($success, 2%);
+  color: color.adjust($success, $lightness: -2%, $space: hsl);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
 }
 .alert-info {
@@ -61,20 +63,20 @@
 }
 .alert-warning {
   background-color: #f6f6eb;
-  color: darken($warning, 8%);
+  color: color.adjust($warning, $lightness: -8%, $space: hsl);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.09);
 }
 
 .callout {
   border-radius: .1rem;
   border: 0;
-  border-left: 3.5px solid lighten(#8e9aac, 5%);
+  border-left: 3.5px solid color.adjust(#8e9aac, $lightness: 5%, $space: hsl);
   background-color: #fff;
   margin-bottom: 1rem;
   box-shadow: $shadow;
 }
 .callout.callout-primary {
-  border-left: 3.5px solid lighten($primary, 2%);
+  border-left: 3.5px solid color.adjust($primary, $lightness: 2%, $space: hsl);
 }
 .callout.callout-light {
   background-color: #f7f7f9;

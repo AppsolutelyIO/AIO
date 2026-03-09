@@ -1,3 +1,5 @@
+@use "sass:color";
+
 //
 // Mixins: Cards Variant
 //
@@ -63,7 +65,7 @@
       table td.hour:hover,
       table td.minute:hover,
       table td.second:hover {
-        background: darken($color, 8%);
+        background: color.adjust($color, $lightness: -8%, $space: hsl);
         color: color-yiq($color);
       }
 
@@ -73,7 +75,7 @@
 
       table td.active,
       table td.active:hover {
-        background: lighten($color, 10%);
+        background: color.adjust($color, $lightness: 10%, $space: hsl);
         color: color-yiq($color);
       }
     }

@@ -1,3 +1,5 @@
+@use "sass:color";
+
 //
 // General: Mixins
 //
@@ -9,12 +11,12 @@
     + .select2-container--default {
       &.select2-container--open {
         .select2-selection--single {
-          border-color: lighten($color, 25%);
+          border-color: color.adjust($color, $lightness: 25%, $space: hsl);
         }
       }
 
       &.select2-container--focus .select2-selection--single {
-        border-color: lighten($color, 25%);
+        border-color: color.adjust($color, $lightness: 25%, $space: hsl);
       }
     }
 
@@ -25,7 +27,7 @@
       .select2-search--inline {
         .select2-search__field {
           &:focus {
-            border: $input-border-width solid lighten($color, 25%);
+            border: $input-border-width solid color.adjust($color, $lightness: 25%, $space: hsl);
           }
         }
       }
@@ -37,8 +39,8 @@
         &[aria-selected] {
           &,
           &:hover {
-            background-color: darken($color, 3%);
-            color: color-yiq(darken($color, 3%));
+            background-color: color.adjust($color, $lightness: -3%, $space: hsl);
+            color: color-yiq(color.adjust($color, $lightness: -3%, $space: hsl));
           }
         }
       }
@@ -47,12 +49,12 @@
       & {
         .select2-selection--multiple {
           &:focus {
-            border-color: lighten($color, 25%);
+            border-color: color.adjust($color, $lightness: 25%, $space: hsl);
           }
 
           .select2-selection__choice {
             background-color: $color;
-            border-color: darken($color, 5%);
+            border-color: color.adjust($color, $lightness: -5%, $space: hsl);
             color: color-yiq($color);
           }
 
@@ -66,7 +68,7 @@
         }
   
         &.select2-container--focus .select2-selection--multiple {
-          border-color: lighten($color, 25%);
+          border-color: color.adjust($color, $lightness: 25%, $space: hsl);
         }
       }
     }

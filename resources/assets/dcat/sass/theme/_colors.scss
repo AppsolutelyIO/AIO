@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // 主题颜色
 
 $white: #fff;
@@ -50,7 +52,7 @@ $yellow: #edc30e;
 $red-darker: #bd4147;
 
 // 深主题色
-$primary-darker: darken($primary, 5%);
+$primary-darker: color.adjust($primary, $lightness: -5%, $space: hsl);
 
 // 蓝色
 $blue: #3085d6;
@@ -102,9 +104,9 @@ $body-content-dark-bg: #2c2c43;
 $body-darker-color: #1e1e2d;
 $body-dark-font-color: #a8a9bb;
 //$body-dark-heading-color: darken(#ebeefd, 2%);
-$body-dark-heading-color: lighten($body-dark-font-color, 12%);
+$body-dark-heading-color: color.adjust($body-dark-font-color, $lightness: 12%, $space: hsl);
 $body-dark-table-bg: $body-dark-color;
-$body-dark-border-color: darken(#363950, 3%);
+$body-dark-border-color: color.adjust(#363950, $lightness: -3%, $space: hsl);
 
 // 灰背景色
 $gray-bg: #f1f1f1;
@@ -113,7 +115,7 @@ $gray-bg: #f1f1f1;
 $border-color: #ebeff2;
 
 // 表单边框颜色
-$input-border-color: darken(#e4eaec, 3%);
+$input-border-color: color.adjust(#e4eaec, $lightness: -3%, $space: hsl);
 
 // 常用分割线颜色
 $divider-color: #f4f4f4;

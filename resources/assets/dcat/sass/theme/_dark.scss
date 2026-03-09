@@ -1,6 +1,8 @@
+@use "sass:color";
+
 
 $body-dark-card-bg: $body-dark-color;
-$body-dark-modal-bg: lighten($body-dark-color, 3%);
+$body-dark-modal-bg: color.adjust($body-dark-color, $lightness: 3%, $space: hsl);
 
 @mixin dark-scrollbar($selector) {
   #{$selector}::-webkit-scrollbar {
@@ -33,18 +35,18 @@ body.dark-mode {
   }
 
   a {
-    color: lighten($primary, 1%);
+    color: color.adjust($primary, $lightness: 1%, $space: hsl);
 
     &:hover {
-      color: darken($primary, 4%);
+      color: color.adjust($primary, $lightness: -4%, $space: hsl);
     }
   }
 
   .grid-column-header a {
-    color: darken($body-dark-font-color, 15%);
+    color: color.adjust($body-dark-font-color, $lightness: -15%, $space: hsl);
   }
   .grid-column-header a:hover, .grid-column-header a.active {
-    color: lighten($primary, 1%);
+    color: color.adjust($primary, $lightness: 1%, $space: hsl);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -56,7 +58,7 @@ body.dark-mode {
   }
 
   .label {
-    color: darken($white, 2.5%);
+    color: color.adjust($white, $lightness: -2.5%, $space: hsl);
   }
 
   .dcat-loading:not(.layui-layer-shade) {
@@ -75,7 +77,7 @@ body.dark-mode {
   .btn.btn-white:focus,
   .btn.btn-default:hover,
   .btn.btn-light:hover {
-    color: lighten($body-dark-font-color, 2%)!important;
+    color: color.adjust($body-dark-font-color, $lightness: 2%, $space: hsl)!important;
   }
   .btn.btn-light,
   .bg-light {
@@ -89,7 +91,7 @@ body.dark-mode {
   }
 
   .btn-light:hover, .btn-light:focus {
-    color: lighten($body-dark-font-color, 1.2%)!important;
+    color: color.adjust($body-dark-font-color, $lightness: 1.2%, $space: hsl)!important;
   }
   .btn.btn-primary:not(.btn-outline),
   .btn.btn-warning:not(.btn-outline),
@@ -97,7 +99,7 @@ body.dark-mode {
   .btn.btn-info:not(.btn-outline),
   .btn.btn-danger:not(.btn-outline),
   .btn.btn-custom:not(.btn-outline) {
-    color: darken($white, 8%)
+    color: color.adjust($white, $lightness: -8%, $space: hsl)
   }
 
   hr {
@@ -211,7 +213,7 @@ body.dark-mode {
     .modal-header,
     .modal-header[class*="bg-"] {
       border-color: $body-dark-border-color;
-      background-color: lighten($body-dark-color, 1%);
+      background-color: color.adjust($body-dark-color, $lightness: 1%, $space: hsl);
       .close {
         span {
           color: $white50;
@@ -322,14 +324,14 @@ body.dark-mode {
 
   // ------ tab
   .nav.nav-tabs {
-    border-color: lighten($body-dark-border-color, 10%);
+    border-color: color.adjust($body-dark-border-color, $lightness: 10%, $space: hsl);
   }
   .nav-theme-primary .nav.nav-tabs,
   .nav-theme-white .nav.nav-tabs {
     background-color: $body-dark-card-bg;
 
     .nav-item .nav-link:not(.active) {
-      color: darken($body-dark-font-color, 4%)
+      color: color.adjust($body-dark-font-color, $lightness: -4%, $space: hsl)
     }
 
     .nav-item .nav-link.active {
@@ -356,11 +358,11 @@ body.dark-mode {
   table.table-bordered.dataTable.complex-headers,
   .table.default-table {
     th {
-      background: darken($body-dark-bg, 3%);
+      background: color.adjust($body-dark-bg, $lightness: -3%, $space: hsl);
     }
 
     td {
-      background: darken($body-dark-bg, 1%);
+      background: color.adjust($body-dark-bg, $lightness: -1%, $space: hsl);
     }
   }
 
@@ -496,7 +498,7 @@ body.dark-mode {
   }
 
   .dd-handle {
-    background: darken($body-dark-bg, 1.2%);
+    background: color.adjust($body-dark-bg, $lightness: -1.2%, $space: hsl);
     color: $body-dark-font-color;
     margin-bottom: 2px;
   }
@@ -517,19 +519,19 @@ body.dark-mode {
   }
 
   input::-webkit-input-placeholder{
-    color: darken($body-dark-font-color, 5%)!important;
+    color: color.adjust($body-dark-font-color, $lightness: -5%, $space: hsl)!important;
   }
   input::-moz-placeholder{
-    color: darken($body-dark-font-color, 5%)!important;
+    color: color.adjust($body-dark-font-color, $lightness: -5%, $space: hsl)!important;
   }
   input::-moz-placeholder{
-    color: darken($body-dark-font-color, 5%)!important;
+    color: color.adjust($body-dark-font-color, $lightness: -5%, $space: hsl)!important;
   }
   input:-ms-input-placeholder {
-    color: darken($body-dark-font-color, 5%)!important;
+    color: color.adjust($body-dark-font-color, $lightness: -5%, $space: hsl)!important;
   }
   .help-block {
-    color: darken($body-dark-font-color, 1.3%)!important;
+    color: color.adjust($body-dark-font-color, $lightness: -1.3%, $space: hsl)!important;
   }
   .has-error .checkbox, .has-error .checkbox-inline, .has-error.checkbox label, .has-error .control-label, .has-error .form-control-position i, .has-error .form-control:focus~.form-control-position i, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.radio label
   {
@@ -592,14 +594,14 @@ body.dark-mode {
   .form-control[readonly],
   .select2-container--default.select2-container--disabled .select2-selection--single,
   .select2-container--default.select2-container--disabled .select2-selection--multiple {
-    background-color: darken($body-dark-bg, 2%)!important;
+    background-color: color.adjust($body-dark-bg, $lightness: -2%, $space: hsl)!important;
   }
 
   // ------ layer
   // 滚动条
   @include dark-scrollbar('.layui-layer-page .layui-layer-content');
   .layui-layer {
-    background-color: lighten($body-dark-color, 1%)!important;
+    background-color: color.adjust($body-dark-color, $lightness: 1%, $space: hsl)!important;
   }
   .layui-layer-page {
     .layui-layer-btn,
@@ -608,7 +610,7 @@ body.dark-mode {
     }
   }
   .layui-layer-title {
-    background-color: lighten($body-dark-color, 1%)!important;
+    background-color: color.adjust($body-dark-color, $lightness: 1%, $space: hsl)!important;
     border-bottom: 1px solid $body-dark-border-color!important;
     color: $body-dark-font-color!important;
   }
@@ -626,7 +628,7 @@ body.dark-mode {
   .web-uploader {
     .placeholder {
       border-width: 2px;
-      border-color: darken($body-dark-font-color, 7%)!important;
+      border-color: color.adjust($body-dark-font-color, $lightness: -7%, $space: hsl)!important;
     }
     .filelist li {
       background: $body-dark-color!important;
@@ -643,11 +645,11 @@ body.dark-mode {
 
   // ----- slider
   .slider-panel {
-    background-color: lighten($body-dark-color, 1.1%);
+    background-color: color.adjust($body-dark-color, $lightness: 1.1%, $space: hsl);
   }
   .right-side-filter-container .header {
     border-color: $body-dark-border-color;
-    background-color: lighten($body-dark-color, 1.1%);;
+    background-color: color.adjust($body-dark-color, $lightness: 1.1%, $space: hsl);;
   }
 
   // ----- sweet2
@@ -659,7 +661,7 @@ body.dark-mode {
     }
   }
   .swal2-content {
-    color: darken($body-dark-font-color, 1.5%)
+    color: color.adjust($body-dark-font-color, $lightness: -1.5%, $space: hsl)
   }
 
 
@@ -667,7 +669,7 @@ body.dark-mode {
   .quick-create {
     td {
       background-color: $body-dark-modal-bg!important;
-      color: darken($body-dark-font-color, 5%)
+      color: color.adjust($body-dark-font-color, $lightness: -5%, $space: hsl)
     }
   }
 
@@ -710,16 +712,16 @@ body.dark-mode {
   }
   .alert.alert-warning {
     h3, h4, h5 {
-      color: darken($warning, 5%);
+      color: color.adjust($warning, $lightness: -5%, $space: hsl);
     }
   }
 
   .callout {
-    background: darken($body-dark-bg, 3%);
+    background: color.adjust($body-dark-bg, $lightness: -3%, $space: hsl);
     border-color: #8e9aac;
 
     h3, h4, h5 {
-      color: lighten($body-dark-font-color, 5%);
+      color: color.adjust($body-dark-font-color, $lightness: 5%, $space: hsl);
     }
   }
   
@@ -779,7 +781,7 @@ body.dark-mode {
     }
 
     .select-label {
-      color: darken($body-dark-font-color, 5%);
+      color: color.adjust($body-dark-font-color, $lightness: -5%, $space: hsl);
     }
     ul > li a {
       color: $body-dark-font-color;
@@ -793,12 +795,12 @@ body.dark-mode {
 
   // ----- switchery
   .switchery {
-    background-color: lighten($body-dark-font-color, 4%)!important;
-    border-color: lighten($body-dark-font-color, 4%)!important;
+    background-color: color.adjust($body-dark-font-color, $lightness: 4%, $space: hsl)!important;
+    border-color: color.adjust($body-dark-font-color, $lightness: 4%, $space: hsl)!important;
     box-shadow: $shadow-200;
   }
   .switchery>small {
-    background-color: lighten($body-dark-font-color, 10%)!important;
+    background-color: color.adjust($body-dark-font-color, $lightness: 10%, $space: hsl)!important;
   }
 
 
@@ -817,13 +819,13 @@ body.dark-mode {
 
     .active > .dcat-step-item-container > .dcat-step-content > .dcat-step-title,
     .done > .dcat-step-item-container > .dcat-step-content > .dcat-step-title {
-      color: lighten($body-dark-font-color, 8%);
+      color: color.adjust($body-dark-font-color, $lightness: 8%, $space: hsl);
     }
 
     .dcat-step-icons {
-      border-color: lighten($body-dark-font-color, 4%);
+      border-color: color.adjust($body-dark-font-color, $lightness: 4%, $space: hsl);
       > .dcat-step-icon {
-        color: lighten($body-dark-font-color, 4%);
+        color: color.adjust($body-dark-font-color, $lightness: 4%, $space: hsl);
       }
     }
 
@@ -832,7 +834,7 @@ body.dark-mode {
     }
 
     .active > .dcat-step-item-container > .dcat-step-content > .dcat-step-title:after {
-      background-color: lighten($body-dark-font-color, 4%);
+      background-color: color.adjust($body-dark-font-color, $lightness: 4%, $space: hsl);
     }
 
     .done .dcat-step-icons {

@@ -1,3 +1,5 @@
+@use "sass:color";
+
 %extend_hamburger_color {
 
   .hamburger-inner,
@@ -8,7 +10,7 @@
 }
 
 @function set-navbar-text-color($color) {
-  @if (lightness($color) > 50) {
+  @if (color.channel($color, 'lightness', $space: hsl) > 50) {
     @return $white; // Lighter backgorund, return dark color
   }
 
