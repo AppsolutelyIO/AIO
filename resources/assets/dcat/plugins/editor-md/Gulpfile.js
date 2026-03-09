@@ -2,15 +2,13 @@
 
 var os           = require("os");
 var gulp         = require("gulp");
-var gutil        = require("gulp-util");
-var sass         = require("gulp-ruby-sass");
-var jshint       = require("gulp-jshint");
-var uglify       = require("gulp-uglifyjs");
+var sass         = require("gulp-sass")(require("sass"));
+var uglify       = require("gulp-uglify");
 var rename       = require("gulp-rename");
 var concat       = require("gulp-concat");
 var notify       = require("gulp-notify");
 var header       = require("gulp-header");
-var minifycss    = require("gulp-minify-css");
+var minifycss    = require("gulp-clean-css");
 //var jsdoc        = require("gulp-jsdoc");
 //var jsdoc2md     = require("gulp-jsdoc-to-markdown");
 var pkg          = require("./package.json");
@@ -41,7 +39,8 @@ var scssTask = function(fileName, path) {
     
     var distPath = "css";
     
-    return sass(path + fileName + ".scss", { style: "expanded", sourcemap: false, noCache : true })
+    return gulp.src(path + fileName + ".scss")
+        .pipe(sass({outputStyle: "expanded"}).on("error", sass.logError))
         .pipe(gulp.dest(distPath))
         .pipe(header(headerComment, {pkg : pkg, fileName : function(file) { 
             var name = file.path.split(file.base);
@@ -74,8 +73,6 @@ gulp.task("scss3", function() {
 
 gulp.task("js", function() { 
   return gulp.src("./src/editormd.js")
-            .pipe(jshint("./.jshintrc"))
-            .pipe(jshint.reporter("default"))
             .pipe(header(headerComment, {pkg : pkg, fileName : function(file) { 
                 var name = file.path.split(file.base);
                 return name[1].replace(/[\\\/]?/, "");
@@ -171,7 +168,7 @@ gulp.task("amd", function() {
         "   }"
     ].join("\r\n");
     
-    gulp.src("src/editormd.js")
+    return gulp.src("src/editormd.js")
         .pipe(rename({ suffix: ".amd" }))
         .pipe(gulp.dest('./'))
         .pipe(header(headerComment, {pkg : pkg, fileName : function(file) { 
@@ -325,18 +322,10 @@ gulp.task("jsdoc2md", function() {
 });
 */
 gulp.task("watch", function() {
-	gulp.watch("scss/editormd.scss", ["scss"]);
-	gulp.watch("scss/editormd.preview.scss", ["scss", "scss2"]);
-	gulp.watch("scss/editormd.logo.scss", ["scss", "scss3"]);
-	gulp.watch("src/editormd.js", ["js", "amd"]);
+	gulp.watch("scss/editormd.scss", gulp.series("scss"));
+	gulp.watch("scss/editormd.preview.scss", gulp.series("scss", "scss2"));
+	gulp.watch("scss/editormd.logo.scss", gulp.series("scss", "scss3"));
+	gulp.watch("src/editormd.js", gulp.series("js", "amd"));
 });
 
-gulp.task("default", function() {
-    gulp.run("scss");
-    gulp.run("scss2");
-    gulp.run("scss3");
-    gulp.run("js");
-    gulp.run("amd");
-    gulp.run("cm-addon");
-    gulp.run("cm-mode");
-});
+gulp.task("default", gulp.series("scss", "scss2", "scss3", "js", "amd", "cm-addon", "cm-mode"));
