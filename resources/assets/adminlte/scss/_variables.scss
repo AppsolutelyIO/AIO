@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @use "sass:color";
 
 //
@@ -167,7 +169,7 @@ $sidebar-tree-item-padding: 5px 10px 7px 25px;
 // --------------------------------------------------------
 $sidebar-mini-width: ($nav-link-padding-x + $sidebar-padding-x + .8rem) * 3 !default;
 $sidebar-nav-icon-width: $sidebar-mini-width - (($sidebar-padding-x + $nav-link-padding-x) * 3) !default;
-$sidebar-user-image-width: $sidebar-nav-icon-width + ($nav-link-padding-x / 3) !default;
+$sidebar-user-image-width: $sidebar-nav-icon-width + math.div($nav-link-padding-x, 3) !default;
 
 // CONTROL SIDEBAR
 // --------------------------------------------------------
