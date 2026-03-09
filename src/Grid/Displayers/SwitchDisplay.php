@@ -22,13 +22,17 @@ class SwitchDisplay extends AbstractDisplayer
         }
 
         $column = $this->column->getName();
-        $checked = $this->value ? 'checked' : '';
+        $value = $this->value instanceof \BackedEnum ? $this->value->value : $this->value;
+        $checked = $value ? 'checked' : '';
         $color = $this->color ?: Admin::color()->primary();
         $url = $this->url();
+        $inlineUpdateEndpoint = route(admin_api_route_name('inline-update'));
+        $model = get_class($this->row);
+        $id = $this->getKey();
 
         return Admin::view(
             'admin::grid.displayer.switch',
-            compact('column', 'color', 'refresh', 'checked', 'url')
+            compact('column', 'color', 'refresh', 'checked', 'url', 'inlineUpdateEndpoint', 'model', 'id')
         );
     }
 

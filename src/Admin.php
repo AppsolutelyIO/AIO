@@ -627,6 +627,7 @@ class Admin
             $router->post('form/upload', 'HandleFormController@uploadFile')->name('form.upload');
             $router->post('form/destroy-file', 'HandleFormController@destroyFile')->name('form.destroy-file');
             $router->post('value', 'ValueController@handle')->name('value');
+            $router->post('inline-update', 'InlineUpdateController@handle')->name('inline-update');
             $router->get('render', 'RenderableController@handle')->name('render');
             $router->post('tinymce/upload', 'TinymceController@upload')->name('tinymce.upload');
             $router->post('editor-md/upload', 'EditorMDController@upload')->name('editor-md.upload');
