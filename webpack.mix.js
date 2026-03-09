@@ -18,7 +18,7 @@ let theme = null;
 let distPath = mix.inProduction() ? 'resources/dist' : 'resources/pre-dist';
 const sassBuildOptions = {
   sassOptions: {
-    silenceDeprecations: ['import', 'global-builtin'],
+    silenceDeprecations: ['import', 'global-builtin', 'if-function'],
   },
 };
 
