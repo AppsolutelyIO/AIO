@@ -358,7 +358,7 @@ B --> 管理员: 保存成功提示
 
 [Vditor 官网](https://b3log.org/vditor/) — Markdown 编辑器
 
-[Dcat Admin 文档](https://dcatadmin.com) — Laravel 后台框架
+[Appsolutely AIO 文档](https://dcatadmin.com) — Laravel 后台框架
 
 ---
 
