@@ -61,7 +61,7 @@ class IdeHelperCommand extends Command
         'show-column' => '* @method $this %s(...$params)',
     ];
 
-    protected $path = 'dcat_admin_ide_helper.php';
+    protected $path = 'aio_ide_helper.php';
 
     /**
      * Execute the console command.

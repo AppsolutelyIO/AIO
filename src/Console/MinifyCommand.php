@@ -101,7 +101,7 @@ class MinifyCommand extends Command
      */
     protected function publishAssets()
     {
-        $options = ['--provider' => 'Appsolutely\AIO\AdminServiceProvider', '--force' => true, '--tag' => 'dcat-admin-assets'];
+        $options = ['--provider' => 'Appsolutely\AIO\AdminServiceProvider', '--force' => true, '--tag' => 'aio-assets'];
 
         $this->call('vendor:publish', $options);
     }

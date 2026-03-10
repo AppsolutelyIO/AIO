@@ -308,7 +308,7 @@ if (! function_exists('admin_toastr')) {
     {
         $toastr = new MessageBag(get_defined_vars());
 
-        session()->flash('dcat-admin-toastr', $toastr);
+        session()->flash('aio-toastr', $toastr);
     }
 }
 
@@ -426,7 +426,7 @@ if (! function_exists('admin_extension_path')) {
      */
     function admin_extension_path(string $path = '')
     {
-        $dir = rtrim(config('admin.extension.dir'), '/') ?: base_path('dcat-admin-extensions');
+        $dir = rtrim(config('admin.extension.dir'), '/') ?: base_path('aio-extensions');
 
         $path = ltrim($path, '/');
 

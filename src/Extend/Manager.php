@@ -235,7 +235,7 @@ class Manager
     {
         $composerProperty = Composer::parse($directory.'/composer.json');
 
-        $serviceProvider = $composerProperty->get('extra.dcat-admin');
+        $serviceProvider = $composerProperty->get('extra.aio');
         $psr4 = $composerProperty->get('autoload.psr-4');
 
         if (! $serviceProvider || ! $psr4) {
@@ -413,7 +413,7 @@ class Manager
 
         $composerProperty = Composer::parse($directory.'/composer.json');
 
-        if (! $composerProperty->name || ! $composerProperty->get('extra.dcat-admin')) {
+        if (! $composerProperty->name || ! $composerProperty->get('extra.aio')) {
             return false;
         }
 

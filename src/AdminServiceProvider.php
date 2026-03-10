@@ -168,10 +168,10 @@ class AdminServiceProvider extends ServiceProvider
     protected function registerPublishing()
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes([__DIR__.'/../config' => config_path()], 'dcat-admin-config');
-            $this->publishes([__DIR__.'/../resources/lang' => $this->app->langPath()], 'dcat-admin-lang');
-            $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'dcat-admin-migrations');
-            $this->publishes([__DIR__.'/../resources/dist' => public_path(Admin::asset()->getRealPath('@admin'))], 'dcat-admin-assets');
+            $this->publishes([__DIR__.'/../config' => config_path()], 'aio-config');
+            $this->publishes([__DIR__.'/../resources/lang' => $this->app->langPath()], 'aio-lang');
+            $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'aio-migrations');
+            $this->publishes([__DIR__.'/../resources/dist' => public_path(Admin::asset()->getRealPath('@admin'))], 'aio-assets');
         }
     }
 

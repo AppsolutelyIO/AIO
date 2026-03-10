@@ -19,7 +19,7 @@ class ExportSeedCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Export seed a dcat-admin database tables menu, roles and permissions';
+    protected $description = 'Export seed a aio database tables menu, roles and permissions';
 
     /**
      * Execute the console command.

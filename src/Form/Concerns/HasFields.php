@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the Dcat package.
+ * This file is part of the Appsolutely AIO.
  *
  * (c) Pian Zhou <pianzhou2021@163.com>
  *

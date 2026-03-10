@@ -70,7 +70,7 @@ class ExtensionController extends Controller
             $grid->quickCreate(function (Grid\Tools\QuickCreate $create) {
                 $create->text('name')
                     ->attribute('style', 'width:240px')
-                    ->placeholder('Input Name. Eg: dcat-admin/demo')
+                    ->placeholder('Input Name. Eg: aio/demo')
                     ->required();
                 $create->text('namespace')
                     ->attribute('style', 'width:240px')

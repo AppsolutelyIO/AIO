@@ -25,7 +25,7 @@ class ExtensionMakeCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Build a dcat-admin extension';
+    protected $description = 'Build a aio extension';
 
     /**
      * @var string

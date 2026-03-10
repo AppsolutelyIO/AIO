@@ -168,7 +168,7 @@ class ScaffoldController extends Controller
                 try {
                     Artisan::call('admin:ide-helper', ['-c' => $controller]);
 
-                    $paths['ide-helper'] = 'dcat_admin_ide_helper.php';
+                    $paths['ide-helper'] = 'aio_ide_helper.php';
                 } catch (\Throwable $e) {
                 }
             }
