@@ -4,29 +4,29 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin name
+    | aio name
     |--------------------------------------------------------------------------
     |
-    | This value is the name of dcat-admin, This setting is displayed on the
+    | This value is the name of aio, This setting is displayed on the
     | login page.
     |
     */
-    'name' => 'Dcat Admin',
+    'name' => 'Appsolutely AIO',
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin logo
+    | aio logo
     |--------------------------------------------------------------------------
     |
     | The logo of all admin pages. You can also set it as an image by using a
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<img src="/vendor/dcat-admin/images/logo.png" width="35"> &nbsp;Dcat Admin',
+    'logo' => '<img src="/vendor/aio/images/logo.png" width="35"> &nbsp;Appsolutely AIO',
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin mini logo
+    | aio mini logo
     |--------------------------------------------------------------------------
     |
     | The logo of all admin pages when the sidebar menu is collapsed. You can
@@ -34,11 +34,11 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<img src="/vendor/dcat-admin/images/logo.png">',
+    'logo-mini' => '<img src="/vendor/aio/images/logo.png">',
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin favicon
+    | aio favicon
     |--------------------------------------------------------------------------
     |
     */
@@ -56,7 +56,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin route settings
+    | aio route settings
     |--------------------------------------------------------------------------
     |
     | The routing configuration of the admin page, including the path prefix,
@@ -78,7 +78,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin install directory
+    | aio install directory
     |--------------------------------------------------------------------------
     |
     | The installation directory of the controller and routing configuration
@@ -90,7 +90,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin html title
+    | aio html title
     |--------------------------------------------------------------------------
     |
     | Html title for all pages.
@@ -118,7 +118,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin auth setting
+    | aio auth setting
     |--------------------------------------------------------------------------
     |
     | Authentication settings for all admin pages. Include an authentication
@@ -196,7 +196,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin helpers setting.
+    | aio helpers setting.
     |--------------------------------------------------------------------------
     */
     'helpers' => [
@@ -205,7 +205,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin permission setting
+    | aio permission setting
     |--------------------------------------------------------------------------
     |
     | Permission settings for all admin pages.
@@ -227,7 +227,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin menu setting
+    | aio menu setting
     |--------------------------------------------------------------------------
     |
     */
@@ -252,7 +252,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin upload setting
+    | aio upload setting
     |--------------------------------------------------------------------------
     |
     | File system configuration for form upload files and images, including
@@ -274,10 +274,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin database settings
+    | aio database settings
     |--------------------------------------------------------------------------
     |
-    | Here are database settings for dcat-admin builtin model & tables.
+    | Here are database settings for aio builtin model & tables.
     |
     */
     'database' => [
@@ -363,6 +363,6 @@ return [
     'extension' => [
         // When you use command `php artisan admin:ext-make` to generate extensions,
         // the extension files will be generated in this directory.
-        'dir' => base_path('dcat-admin-extensions'),
+        'dir' => base_path('aio-extensions'),
     ],
 ];
