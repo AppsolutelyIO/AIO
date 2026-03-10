@@ -29,7 +29,7 @@
 </ul>
 
 <div class="box-footer text-center">
-    <a href="https://github.com/jqhph/dcat-admin#%E6%89%A9%E5%B1%95" target="_blank" class="uppercase">View All Extensions</a>
+    <a href="https://github.com/jqhph/aio#%E6%89%A9%E5%B1%95" target="_blank" class="uppercase">View All Extensions</a>
 </div>
 
 <script>Dcat.ready(function () {
@@ -37,7 +37,7 @@
     // $box.loading();
     //
     // $.ajax({
-    //     url: 'https://jqhph.github.io/dcat-admin/extra/extensions.html',
+    //     url: 'https://jqhph.github.io/aio/extra/extensions.html',
     //     success: function (response) {
     //         $box.loading(false);
     //

@@ -18,7 +18,7 @@ export default class DarkMode {
     initSwitcher (selector) {
         var storage = localStorage || {setItem:function () {}, getItem: function () {}},
             darkMode = this,
-            key = 'dcat-admin-theme-mode',
+            key = 'aio-theme-mode',
             icon = '.dark-mode-switcher i';
 
         function switchMode(theme) {
