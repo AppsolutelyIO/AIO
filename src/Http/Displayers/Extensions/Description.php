@@ -1,11 +1,11 @@
 <?php
 
-namespace Dcat\Admin\Http\Displayers\Extensions;
+namespace Appsolutely\AIO\Http\Displayers\Extensions;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Grid\Displayers\AbstractDisplayer;
-use Dcat\Admin\Http\Actions\Extensions\Update;
-use Dcat\Admin\Widgets\Modal;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Grid\Displayers\AbstractDisplayer;
+use Appsolutely\AIO\Http\Actions\Extensions\Update;
+use Appsolutely\AIO\Widgets\Modal;
 
 class Description extends AbstractDisplayer
 {

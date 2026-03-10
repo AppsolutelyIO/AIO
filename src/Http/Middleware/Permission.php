@@ -1,11 +1,11 @@
 <?php
 
-namespace Dcat\Admin\Http\Middleware;
+namespace Appsolutely\AIO\Http\Middleware;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Exception\RuntimeException;
-use Dcat\Admin\Http\Auth\Permission as Checker;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Http\Auth\Permission as Checker;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Form\Field;
+namespace Appsolutely\AIO\Form\Field;
 
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Widgets\Checkbox as WidgetCheckbox;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Widgets\Checkbox as WidgetCheckbox;
 
 class Checkbox extends MultipleSelect
 {

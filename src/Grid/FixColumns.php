@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Grid;
+namespace Appsolutely\AIO\Grid;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Grid;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Grid;
 use Illuminate\Support\Collection;
 
 class FixColumns

@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Support;
+namespace Appsolutely\AIO\Support;
 
-use Dcat\Admin\Grid;
+use Appsolutely\AIO\Grid;
 use Dcat\Laravel\Database\WhereHasInServiceProvider;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;

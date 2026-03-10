@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Widgets\Metrics;
+namespace Appsolutely\AIO\Widgets\Metrics;
 
-use Dcat\Admin\Admin;
+use Appsolutely\AIO\Admin;
 
 class Donut extends Card
 {

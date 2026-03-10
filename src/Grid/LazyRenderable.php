@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Grid;
+namespace Appsolutely\AIO\Grid;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Support\LazyRenderable as Renderable;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Support\LazyRenderable as Renderable;
 
 abstract class LazyRenderable extends Renderable
 {

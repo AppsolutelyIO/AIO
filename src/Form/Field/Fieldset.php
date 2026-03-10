@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Form\Field;
+namespace Appsolutely\AIO\Form\Field;
 
-use Dcat\Admin\Admin;
+use Appsolutely\AIO\Admin;
 
 class Fieldset
 {

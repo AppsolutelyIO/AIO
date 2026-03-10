@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Support;
+namespace Appsolutely\AIO\Support;
 
-use Dcat\Admin\Exception\AdminException;
+use Appsolutely\AIO\Exception\AdminException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Seeder;

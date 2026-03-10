@@ -1,14 +1,14 @@
 <?php
 
-namespace Dcat\Admin\Widgets;
+namespace Appsolutely\AIO\Widgets;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Contracts\LazyRenderable;
-use Dcat\Admin\Grid\LazyRenderable as LazyGrid;
-use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Traits\HasHtmlAttributes;
-use Dcat\Admin\Traits\HasVariables;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Contracts\LazyRenderable;
+use Appsolutely\AIO\Grid\LazyRenderable as LazyGrid;
+use Appsolutely\AIO\Layout\Content;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Traits\HasHtmlAttributes;
+use Appsolutely\AIO\Traits\HasVariables;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Arr;

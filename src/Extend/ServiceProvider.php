@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Extend;
+namespace Appsolutely\AIO\Extend;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Exception\RuntimeException;
-use Dcat\Admin\Support\ComposerProperty;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Support\ComposerProperty;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;

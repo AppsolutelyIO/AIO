@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Widgets\Metrics;
+namespace Appsolutely\AIO\Widgets\Metrics;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Support\JavaScript;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Support\JavaScript;
 
 /**
  * 环形图卡片.

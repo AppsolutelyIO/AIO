@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Form;
+namespace Appsolutely\AIO\Form;
 
-use Dcat\Admin\Exception\RuntimeException;
-use Dcat\Admin\Form;
-use Dcat\Admin\Widgets\Form as WidgetForm;
+use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Widgets\Form as WidgetForm;
 
 /**
  * Class BlockForm.
@@ -30,7 +30,7 @@ class BlockForm extends WidgetForm
     protected $title;
 
     /**
-     * @var \Dcat\Admin\Layout\Row
+     * @var \Appsolutely\AIO\Layout\Row
      */
     public $layoutRow;
 

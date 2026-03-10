@@ -1,17 +1,17 @@
 <?php
 
-namespace Dcat\Admin;
+namespace Appsolutely\AIO;
 
 use Closure;
-use Dcat\Admin\Contracts\TreeRepository;
-use Dcat\Admin\Exception\InvalidArgumentException;
-use Dcat\Admin\Repositories\EloquentRepository;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Traits\HasBuilderEvents;
-use Dcat\Admin\Traits\HasVariables;
-use Dcat\Admin\Tree\AbstractTool;
-use Dcat\Admin\Tree\Actions;
-use Dcat\Admin\Tree\Tools;
+use Appsolutely\AIO\Contracts\TreeRepository;
+use Appsolutely\AIO\Exception\InvalidArgumentException;
+use Appsolutely\AIO\Repositories\EloquentRepository;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Traits\HasBuilderEvents;
+use Appsolutely\AIO\Traits\HasVariables;
+use Appsolutely\AIO\Tree\AbstractTool;
+use Appsolutely\AIO\Tree\Actions;
+use Appsolutely\AIO\Tree\Tools;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;

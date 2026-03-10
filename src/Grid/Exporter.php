@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Grid;
+namespace Appsolutely\AIO\Grid;
 
-use Dcat\Admin\Grid;
-use Dcat\Admin\Grid\Exporters\ExporterInterface;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Grid\Exporters\ExporterInterface;
 
 /**
  * @mixin Grid\Exporters\AbstractExporter

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Show;
+namespace Appsolutely\AIO\Show;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Fluent;

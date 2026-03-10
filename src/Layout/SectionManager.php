@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Layout;
+namespace Appsolutely\AIO\Layout;
 
-use Dcat\Admin\Exception\RuntimeException;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Fluent;

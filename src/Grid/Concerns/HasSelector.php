@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Grid\Concerns;
+namespace Appsolutely\AIO\Grid\Concerns;
 
-use Dcat\Admin\Grid;
-use Dcat\Admin\Grid\Tools\Selector;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Grid\Tools\Selector;
+use Appsolutely\AIO\Support\Helper;
 
 /**
  * @mixin Grid

@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Show;
+namespace Appsolutely\AIO\Show;
 
-use Dcat\Admin\Form;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;

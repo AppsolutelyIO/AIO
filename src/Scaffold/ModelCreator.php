@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Scaffold;
+namespace Appsolutely\AIO\Scaffold;
 
-use Dcat\Admin\Exception\AdminException;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Exception\AdminException;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Support\Str;
 
 class ModelCreator

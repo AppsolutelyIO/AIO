@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Grid\Tools;
+namespace Appsolutely\AIO\Grid\Tools;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Widgets\Dropdown;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Widgets\Dropdown;
 use Illuminate\Contracts\Support\Renderable;
 
 class PerPageSelector implements Renderable

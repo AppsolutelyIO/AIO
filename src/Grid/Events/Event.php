@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Grid\Events;
+namespace Appsolutely\AIO\Grid\Events;
 
-use Dcat\Admin\Grid;
+use Appsolutely\AIO\Grid;
 
 abstract class Event
 {

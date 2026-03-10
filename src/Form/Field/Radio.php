@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Form\Field;
+namespace Appsolutely\AIO\Form\Field;
 
-use Dcat\Admin\Form\Field;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Widgets\Radio as WidgetRadio;
+use Appsolutely\AIO\Form\Field;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Widgets\Radio as WidgetRadio;
 
 class Radio extends Field
 {

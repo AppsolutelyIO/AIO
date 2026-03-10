@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Form;
+namespace Appsolutely\AIO\Form;
 
-use Dcat\Admin\Form;
+use Appsolutely\AIO\Form;
 
 /**
  * @mixin Form

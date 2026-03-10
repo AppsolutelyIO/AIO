@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Layout;
+namespace Appsolutely\AIO\Layout;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Contracts\Support\Renderable;
 
 class Column implements Renderable

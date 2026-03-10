@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Grid\Displayers;
+namespace Appsolutely\AIO\Grid\Displayers;
 
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Support\Arr;
 
 class Checkbox extends Editable
@@ -22,7 +22,7 @@ class Checkbox extends Editable
 
     protected function renderCheckbox($options)
     {
-        $checkbox = \Dcat\Admin\Widgets\Checkbox::make($this->getName().'[]');
+        $checkbox = \Appsolutely\AIO\Widgets\Checkbox::make($this->getName().'[]');
         $checkbox->options($options);
         $checkbox->class('ie-input');
 

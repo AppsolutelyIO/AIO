@@ -1,13 +1,13 @@
 <?php
 
-namespace Dcat\Admin\Widgets;
+namespace Appsolutely\AIO\Widgets;
 
 use Closure;
-use Dcat\Admin\Admin;
-use Dcat\Admin\Contracts\LazyRenderable;
-use Dcat\Admin\Grid\LazyRenderable as LazyGrid;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Traits\InteractsWithRenderApi;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Contracts\LazyRenderable;
+use Appsolutely\AIO\Grid\LazyRenderable as LazyGrid;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Traits\InteractsWithRenderApi;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
 

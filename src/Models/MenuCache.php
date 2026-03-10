@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Models;
+namespace Appsolutely\AIO\Models;
 
-use Dcat\Admin\Admin;
+use Appsolutely\AIO\Admin;
 use Illuminate\Support\Facades\Cache;
 
 trait MenuCache

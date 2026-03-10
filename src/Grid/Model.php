@@ -1,11 +1,11 @@
 <?php
 
-namespace Dcat\Admin\Grid;
+namespace Appsolutely\AIO\Grid;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Exception\AdminException;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Repositories\Repository;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Exception\AdminException;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Repositories\Repository;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder;

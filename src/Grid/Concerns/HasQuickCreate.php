@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Grid\Concerns;
+namespace Appsolutely\AIO\Grid\Concerns;
 
 use Closure;
-use Dcat\Admin\Grid\Tools\QuickCreate;
+use Appsolutely\AIO\Grid\Tools\QuickCreate;
 
 trait HasQuickCreate
 {

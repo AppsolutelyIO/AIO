@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Actions;
+namespace Appsolutely\AIO\Actions;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Traits\HasAuthorization;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Traits\HasAuthorization;
 
 trait HasActionHandler
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Console\Development;
+namespace Appsolutely\AIO\Console\Development;
 
-use Dcat\Admin\Admin;
+use Appsolutely\AIO\Admin;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 

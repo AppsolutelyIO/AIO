@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Http\Controllers;
+namespace Appsolutely\AIO\Http\Controllers;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Contracts\LazyRenderable;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Contracts\LazyRenderable;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Http\Request;
 
 class RenderableController

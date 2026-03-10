@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Grid;
+namespace Appsolutely\AIO\Grid;
 
-use Dcat\Admin\Actions\Action;
-use Dcat\Admin\Grid;
+use Appsolutely\AIO\Actions\Action;
+use Appsolutely\AIO\Grid;
 
 /**
  * Class GridAction.

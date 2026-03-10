@@ -1,13 +1,13 @@
 <?php
 
-namespace Dcat\Admin\Show;
+namespace Appsolutely\AIO\Show;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Show;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Traits\HasBuilderEvents;
-use Dcat\Admin\Traits\HasVariables;
-use Dcat\Admin\Widgets\Dump;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Show;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Traits\HasBuilderEvents;
+use Appsolutely\AIO\Traits\HasVariables;
+use Appsolutely\AIO\Widgets\Dump;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Arr;

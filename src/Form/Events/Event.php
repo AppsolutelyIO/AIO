@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Form\Events;
+namespace Appsolutely\AIO\Form\Events;
 
-use Dcat\Admin\Form;
+use Appsolutely\AIO\Form;
 
 abstract class Event
 {

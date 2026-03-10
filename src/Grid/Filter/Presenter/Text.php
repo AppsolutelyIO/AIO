@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Grid\Filter\Presenter;
+namespace Appsolutely\AIO\Grid\Filter\Presenter;
 
-use Dcat\Admin\Admin;
+use Appsolutely\AIO\Admin;
 
 class Text extends Presenter
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Dcat\Admin\Extend;
+namespace Appsolutely\AIO\Extend;
 
 use Carbon\Carbon;
-use Dcat\Admin\Models\Extension;
-use Dcat\Admin\Models\ExtensionHistory;
-use Dcat\Admin\Support\DatabaseUpdater;
+use Appsolutely\AIO\Models\Extension;
+use Appsolutely\AIO\Models\ExtensionHistory;
+use Appsolutely\AIO\Support\DatabaseUpdater;
 use Illuminate\Support\Arr;
 
 /**

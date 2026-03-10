@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Show;
+namespace Appsolutely\AIO\Show;
 
-use Dcat\Admin\Show;
-use Dcat\Admin\Traits\HasVariables;
+use Appsolutely\AIO\Show;
+use Appsolutely\AIO\Traits\HasVariables;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 

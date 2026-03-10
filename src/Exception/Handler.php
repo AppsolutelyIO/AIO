@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Exception;
+namespace Appsolutely\AIO\Exception;
 
-use Dcat\Admin\Contracts\ExceptionHandler;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Contracts\ExceptionHandler;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;

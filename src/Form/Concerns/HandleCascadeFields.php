@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Form\Concerns;
+namespace Appsolutely\AIO\Form\Concerns;
 
-use Dcat\Admin\Form\Field;
+use Appsolutely\AIO\Form\Field;
 
 trait HandleCascadeFields
 {

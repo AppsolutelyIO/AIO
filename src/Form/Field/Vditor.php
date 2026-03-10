@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Form\Field;
+namespace Appsolutely\AIO\Form\Field;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Form\Field;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Form\Field;
+use Appsolutely\AIO\Support\Helper;
 
 /**
  * @see https://b3log.org/vditor/

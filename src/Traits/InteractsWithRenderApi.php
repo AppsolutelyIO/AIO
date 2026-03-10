@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Traits;
+namespace Appsolutely\AIO\Traits;
 
-use Dcat\Admin\Contracts\LazyRenderable;
+use Appsolutely\AIO\Contracts\LazyRenderable;
 
 /**
  * @property string $target

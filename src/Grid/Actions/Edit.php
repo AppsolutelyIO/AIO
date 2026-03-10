@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Grid\Actions;
+namespace Appsolutely\AIO\Grid\Actions;
 
-use Dcat\Admin\Grid\RowAction;
+use Appsolutely\AIO\Grid\RowAction;
 
 class Edit extends RowAction
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Grid;
+namespace Appsolutely\AIO\Grid;
 
 use Closure;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Jsonable;

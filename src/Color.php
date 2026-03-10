@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin;
+namespace Appsolutely\AIO;
 
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Support\Traits\Macroable;
 
 /**

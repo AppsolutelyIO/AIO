@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Grid\Filter\Layout;
+namespace Appsolutely\AIO\Grid\Filter\Layout;
 
-use Dcat\Admin\Grid\Filter;
+use Appsolutely\AIO\Grid\Filter;
 use Illuminate\Support\Collection;
 
 class Layout

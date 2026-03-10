@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Grid\Filter\Presenter;
+namespace Appsolutely\AIO\Grid\Filter\Presenter;
 
-use Dcat\Admin\Exception\RuntimeException;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;

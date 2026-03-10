@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Scaffold;
+namespace Appsolutely\AIO\Scaffold;
 
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Support\Helper;
 
 class RepositoryCreator
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Support;
+namespace Appsolutely\AIO\Support;
 
-use Dcat\Admin\Admin;
+use Appsolutely\AIO\Admin;
 
 class Translator
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Traits;
+namespace Appsolutely\AIO\Traits;
 
-use Dcat\Admin\Admin;
+use Appsolutely\AIO\Admin;
 
 /**
  * Trait LazyWidget.

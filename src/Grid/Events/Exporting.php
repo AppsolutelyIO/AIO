@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Grid\Events;
+namespace Appsolutely\AIO\Grid\Events;
 
 class Exporting extends Event
 {

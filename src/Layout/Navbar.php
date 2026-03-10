@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Layout;
+namespace Appsolutely\AIO\Layout;
 
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Traits\HasBuilderEvents;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 

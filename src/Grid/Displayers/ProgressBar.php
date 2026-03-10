@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Grid\Displayers;
+namespace Appsolutely\AIO\Grid\Displayers;
 
 class ProgressBar extends AbstractDisplayer
 {

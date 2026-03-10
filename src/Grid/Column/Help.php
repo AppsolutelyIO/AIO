@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Grid\Column;
+namespace Appsolutely\AIO\Grid\Column;
 
-use Dcat\Admin\Widgets\Tooltip;
+use Appsolutely\AIO\Widgets\Tooltip;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
 

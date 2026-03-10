@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Layout;
+namespace Appsolutely\AIO\Layout;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Support\Facades\Lang;
 
 class Menu
@@ -196,7 +196,7 @@ class Menu
     /**
      * 判断用户.
      *
-     * @param  array|\Dcat\Admin\Models\Menu  $item
+     * @param  array|\Appsolutely\AIO\Models\Menu  $item
      * @return bool
      */
     protected function userCanSeeMenu($item)

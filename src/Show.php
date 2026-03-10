@@ -1,19 +1,19 @@
 <?php
 
-namespace Dcat\Admin;
+namespace Appsolutely\AIO;
 
 use Closure;
-use Dcat\Admin\Contracts\Repository;
-use Dcat\Admin\Show\AbstractTool;
-use Dcat\Admin\Show\Divider;
-use Dcat\Admin\Show\Field;
-use Dcat\Admin\Show\Html;
-use Dcat\Admin\Show\Newline;
-use Dcat\Admin\Show\Panel;
-use Dcat\Admin\Show\Relation;
-use Dcat\Admin\Show\Row;
-use Dcat\Admin\Show\Tools;
-use Dcat\Admin\Traits\HasBuilderEvents;
+use Appsolutely\AIO\Contracts\Repository;
+use Appsolutely\AIO\Show\AbstractTool;
+use Appsolutely\AIO\Show\Divider;
+use Appsolutely\AIO\Show\Field;
+use Appsolutely\AIO\Show\Html;
+use Appsolutely\AIO\Show\Newline;
+use Appsolutely\AIO\Show\Panel;
+use Appsolutely\AIO\Show\Relation;
+use Appsolutely\AIO\Show\Row;
+use Appsolutely\AIO\Show\Tools;
+use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Contracts;
+namespace Appsolutely\AIO\Contracts;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;

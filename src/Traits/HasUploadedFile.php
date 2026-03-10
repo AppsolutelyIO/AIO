@@ -1,11 +1,11 @@
 <?php
 
-namespace Dcat\Admin\Traits;
+namespace Appsolutely\AIO\Traits;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Form\Field\File;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Support\WebUploader;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Form\Field\File;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\WebUploader;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Storage;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Grid;
+namespace Appsolutely\AIO\Grid;
 
 abstract class BatchAction extends GridAction
 {

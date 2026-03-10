@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Show;
+namespace Appsolutely\AIO\Show;
 
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Support\Helper;
 
 class Html extends Field
 {

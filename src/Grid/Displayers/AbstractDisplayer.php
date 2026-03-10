@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Grid\Displayers;
+namespace Appsolutely\AIO\Grid\Displayers;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Grid\Column;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Grid\Column;
 use Illuminate\Support\Fluent;
 
 abstract class AbstractDisplayer

@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Http\Middleware;
+namespace Appsolutely\AIO\Http\Middleware;
 
 use Closure;
-use Dcat\Admin\Admin;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Http\Request;
 
 class Authenticate

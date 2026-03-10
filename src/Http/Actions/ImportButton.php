@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Http\Actions;
+namespace Appsolutely\AIO\Http\Actions;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Grid\RowAction;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Grid\RowAction;
 
 class ImportButton extends RowAction
 {

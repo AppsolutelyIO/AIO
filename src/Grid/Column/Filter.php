@@ -1,11 +1,11 @@
 <?php
 
-namespace Dcat\Admin\Grid\Column;
+namespace Appsolutely\AIO\Grid\Column;
 
-use Dcat\Admin\Grid\Column;
-use Dcat\Admin\Grid\Events\Fetching;
-use Dcat\Admin\Grid\Model;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Grid\Column;
+use Appsolutely\AIO\Grid\Events\Fetching;
+use Appsolutely\AIO\Grid\Model;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Contracts\Support\Renderable;
 
 abstract class Filter implements Renderable

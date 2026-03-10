@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Widgets\Metrics;
+namespace Appsolutely\AIO\Widgets\Metrics;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Contracts\Support\Renderable;
 
 /**

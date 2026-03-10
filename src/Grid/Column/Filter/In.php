@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Grid\Column\Filter;
+namespace Appsolutely\AIO\Grid\Column\Filter;
 
-use Dcat\Admin\Grid\Column\Filter;
-use Dcat\Admin\Grid\Model;
+use Appsolutely\AIO\Grid\Column\Filter;
+use Appsolutely\AIO\Grid\Model;
 
 class In extends Filter
 {

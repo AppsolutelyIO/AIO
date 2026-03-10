@@ -1,12 +1,12 @@
 <?php
 
-namespace Dcat\Admin\Repositories;
+namespace Appsolutely\AIO\Repositories;
 
-use Dcat\Admin\Contracts\Repository as RepositoryInterface;
-use Dcat\Admin\Contracts\TreeRepository;
-use Dcat\Admin\Form;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Show;
+use Appsolutely\AIO\Contracts\Repository as RepositoryInterface;
+use Appsolutely\AIO\Contracts\TreeRepository;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Show;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 use RuntimeException;
@@ -120,7 +120,7 @@ abstract class Repository implements RepositoryInterface, TreeRepository
      * 新增记录.
      *
      * @param  Form  $form
-     * @return int|bool|\Dcat\Admin\Http\JsonResponse
+     * @return int|bool|\Appsolutely\AIO\Http\JsonResponse
      */
     public function store(Form $form)
     {
@@ -142,7 +142,7 @@ abstract class Repository implements RepositoryInterface, TreeRepository
      * 更新数据.
      *
      * @param  Form  $form
-     * @return bool|\Dcat\Admin\Http\JsonResponse
+     * @return bool|\Appsolutely\AIO\Http\JsonResponse
      */
     public function update(Form $form)
     {
@@ -154,7 +154,7 @@ abstract class Repository implements RepositoryInterface, TreeRepository
      *
      * @param  Form  $form
      * @param  array  $deletingData
-     * @return bool|int|\Dcat\Admin\Http\JsonResponse
+     * @return bool|int|\Appsolutely\AIO\Http\JsonResponse
      */
     public function delete(Form $form, array $deletingData)
     {

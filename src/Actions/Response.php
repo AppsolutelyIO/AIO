@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Actions;
+namespace Appsolutely\AIO\Actions;
 
-use Dcat\Admin\Http\JsonResponse;
+use Appsolutely\AIO\Http\JsonResponse;
 
 class Response extends JsonResponse
 {

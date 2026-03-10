@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Support;
+namespace Appsolutely\AIO\Support;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Fluent;

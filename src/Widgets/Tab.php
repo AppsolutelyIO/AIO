@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Widgets;
+namespace Appsolutely\AIO\Widgets;
 
-use Dcat\Admin\Admin;
+use Appsolutely\AIO\Admin;
 use Illuminate\Contracts\Support\Renderable;
 
 class Tab extends Widget

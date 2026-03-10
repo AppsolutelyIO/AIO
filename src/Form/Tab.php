@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Form;
+namespace Appsolutely\AIO\Form;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Form;
-use Dcat\Admin\Widgets\Form as WidgetForm;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Widgets\Form as WidgetForm;
 use Illuminate\Support\Collection;
 
 class Tab

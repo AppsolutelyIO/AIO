@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Widgets;
+namespace Appsolutely\AIO\Widgets;
 
-use Dcat\Admin\Support\StringOutput;
+use Appsolutely\AIO\Support\StringOutput;
 use Illuminate\Support\Facades\Artisan;
 
 class Terminal extends Widget

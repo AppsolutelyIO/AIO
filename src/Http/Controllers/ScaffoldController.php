@@ -1,16 +1,16 @@
 <?php
 
-namespace Dcat\Admin\Http\Controllers;
+namespace Appsolutely\AIO\Http\Controllers;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Http\Auth\Permission;
-use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Scaffold\ControllerCreator;
-use Dcat\Admin\Scaffold\LangCreator;
-use Dcat\Admin\Scaffold\MigrationCreator;
-use Dcat\Admin\Scaffold\ModelCreator;
-use Dcat\Admin\Scaffold\RepositoryCreator;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Http\Auth\Permission;
+use Appsolutely\AIO\Layout\Content;
+use Appsolutely\AIO\Scaffold\ControllerCreator;
+use Appsolutely\AIO\Scaffold\LangCreator;
+use Appsolutely\AIO\Scaffold\MigrationCreator;
+use Appsolutely\AIO\Scaffold\ModelCreator;
+use Appsolutely\AIO\Scaffold\RepositoryCreator;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Layout;
+namespace Appsolutely\AIO\Layout;
 
 use Illuminate\Contracts\Support\Renderable;
 

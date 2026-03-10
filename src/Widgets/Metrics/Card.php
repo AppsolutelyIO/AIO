@@ -1,12 +1,12 @@
 <?php
 
-namespace Dcat\Admin\Widgets\Metrics;
+namespace Appsolutely\AIO\Widgets\Metrics;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Traits\InteractsWithApi;
-use Dcat\Admin\Widgets\ApexCharts\Chart;
-use Dcat\Admin\Widgets\Widget;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Traits\InteractsWithApi;
+use Appsolutely\AIO\Widgets\ApexCharts\Chart;
+use Appsolutely\AIO\Widgets\Widget;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;

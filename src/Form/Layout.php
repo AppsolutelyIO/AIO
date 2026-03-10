@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Form;
+namespace Appsolutely\AIO\Form;
 
-use Dcat\Admin\Form;
-use Dcat\Admin\Layout\Column;
-use Dcat\Admin\Widgets\Form as WidgetForm;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Layout\Column;
+use Appsolutely\AIO\Widgets\Form as WidgetForm;
 
 class Layout
 {
@@ -105,7 +105,7 @@ class Layout
         $this->column($width, function (Column $column) use ($callback) {
             $this->form->layoutColumn = $column;
 
-            $column->row(function (\Dcat\Admin\Layout\Row $row) use ($callback) {
+            $column->row(function (\Appsolutely\AIO\Layout\Row $row) use ($callback) {
                 $form = $this->form();
 
                 $form->layoutRow = $row;

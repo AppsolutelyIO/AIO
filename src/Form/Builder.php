@@ -1,17 +1,17 @@
 <?php
 
-namespace Dcat\Admin\Form;
+namespace Appsolutely\AIO\Form;
 
 use Closure;
-use Dcat\Admin\Admin;
-use Dcat\Admin\Contracts\FieldsCollection;
-use Dcat\Admin\Contracts\UploadField;
-use Dcat\Admin\Form;
-use Dcat\Admin\Form\Concerns\HasFields;
-use Dcat\Admin\Form\Field\Hidden;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Traits\HasVariables;
-use Dcat\Admin\Widgets\DialogForm;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Contracts\FieldsCollection;
+use Appsolutely\AIO\Contracts\UploadField;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Form\Concerns\HasFields;
+use Appsolutely\AIO\Form\Field\Hidden;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Traits\HasVariables;
+use Appsolutely\AIO\Widgets\DialogForm;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\URL;

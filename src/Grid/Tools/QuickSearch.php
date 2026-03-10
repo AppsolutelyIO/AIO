@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Grid\Tools;
+namespace Appsolutely\AIO\Grid\Tools;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Support\Traits\Macroable;
 
 class QuickSearch extends AbstractTool

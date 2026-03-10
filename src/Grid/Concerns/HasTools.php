@@ -1,11 +1,11 @@
 <?php
 
-namespace Dcat\Admin\Grid\Concerns;
+namespace Appsolutely\AIO\Grid\Concerns;
 
 use Closure;
-use Dcat\Admin\Actions\Action;
-use Dcat\Admin\Grid\BatchAction;
-use Dcat\Admin\Grid\Tools;
+use Appsolutely\AIO\Actions\Action;
+use Appsolutely\AIO\Grid\BatchAction;
+use Appsolutely\AIO\Grid\Tools;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Dcat\Admin\Http\Controllers;
+namespace Appsolutely\AIO\Http\Controllers;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Form;
-use Dcat\Admin\Http\Repositories\Permission;
-use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Tree;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Http\Repositories\Permission;
+use Appsolutely\AIO\Layout\Content;
+use Appsolutely\AIO\Tree;
 use Illuminate\Support\Str;
 
 class PermissionController extends AdminController

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Show;
+namespace Appsolutely\AIO\Show;
 
 class Divider extends Field
 {

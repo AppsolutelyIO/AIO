@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Grid\Column;
+namespace Appsolutely\AIO\Grid\Column;
 
-use Dcat\Admin\Grid\Column;
+use Appsolutely\AIO\Grid\Column;
 
 /**
  * @mixin Column

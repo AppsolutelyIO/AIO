@@ -1,21 +1,21 @@
 <?php
 
-namespace Dcat\Admin\Widgets;
+namespace Appsolutely\AIO\Widgets;
 
 use Closure;
-use Dcat\Admin\Admin;
-use Dcat\Admin\Contracts\LazyRenderable;
-use Dcat\Admin\Exception\RuntimeException;
-use Dcat\Admin\Form\Concerns\HandleCascadeFields;
-use Dcat\Admin\Form\Concerns\HasLayout;
-use Dcat\Admin\Form\Concerns\HasRows;
-use Dcat\Admin\Form\Concerns\HasTabs;
-use Dcat\Admin\Form\Field;
-use Dcat\Admin\Form\ResolveField;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Traits\HasAuthorization;
-use Dcat\Admin\Traits\HasFormResponse;
-use Dcat\Admin\Traits\HasHtmlAttributes;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Contracts\LazyRenderable;
+use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Form\Concerns\HandleCascadeFields;
+use Appsolutely\AIO\Form\Concerns\HasLayout;
+use Appsolutely\AIO\Form\Concerns\HasRows;
+use Appsolutely\AIO\Form\Concerns\HasTabs;
+use Appsolutely\AIO\Form\Field;
+use Appsolutely\AIO\Form\ResolveField;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Traits\HasAuthorization;
+use Appsolutely\AIO\Traits\HasFormResponse;
+use Appsolutely\AIO\Traits\HasHtmlAttributes;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -427,7 +427,7 @@ class Form implements Renderable
     {
         $failedValidators = [];
 
-        /** @var \Dcat\Admin\Form\Field $field */
+        /** @var \Appsolutely\AIO\Form\Field $field */
         foreach ($this->fields() as $field) {
             if (! $validator = $field->getValidator($request->all())) {
                 continue;
@@ -541,7 +541,7 @@ class Form implements Renderable
      */
     public static function findFieldClass($method)
     {
-        $class = Arr::get(\Dcat\Admin\Form::extensions(), $method);
+        $class = Arr::get(\Appsolutely\AIO\Form::extensions(), $method);
 
         if (class_exists($class)) {
             return $class;

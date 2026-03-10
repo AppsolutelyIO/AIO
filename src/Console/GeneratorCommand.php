@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Console;
+namespace Appsolutely\AIO\Console;
 
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Console\Command;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Filesystem\Filesystem;

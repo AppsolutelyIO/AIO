@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Contracts;
+namespace Appsolutely\AIO\Contracts;
 
-use Dcat\Admin\Form\Field;
+use Appsolutely\AIO\Form\Field;
 use Illuminate\Support\Collection;
 
 interface FieldsCollection

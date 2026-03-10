@@ -1,19 +1,19 @@
 <?php
 
-namespace Dcat\Admin\Grid\Filter;
+namespace Appsolutely\AIO\Grid\Filter;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Exception\RuntimeException;
-use Dcat\Admin\Grid\Filter;
-use Dcat\Admin\Grid\Filter\Presenter\Checkbox;
-use Dcat\Admin\Grid\Filter\Presenter\DateTime;
-use Dcat\Admin\Grid\Filter\Presenter\MultipleSelect;
-use Dcat\Admin\Grid\Filter\Presenter\Presenter;
-use Dcat\Admin\Grid\Filter\Presenter\Radio;
-use Dcat\Admin\Grid\Filter\Presenter\Select;
-use Dcat\Admin\Grid\Filter\Presenter\Text;
-use Dcat\Admin\Grid\LazyRenderable;
-use Dcat\Admin\Traits\HasVariables;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Grid\Filter;
+use Appsolutely\AIO\Grid\Filter\Presenter\Checkbox;
+use Appsolutely\AIO\Grid\Filter\Presenter\DateTime;
+use Appsolutely\AIO\Grid\Filter\Presenter\MultipleSelect;
+use Appsolutely\AIO\Grid\Filter\Presenter\Presenter;
+use Appsolutely\AIO\Grid\Filter\Presenter\Radio;
+use Appsolutely\AIO\Grid\Filter\Presenter\Select;
+use Appsolutely\AIO\Grid\Filter\Presenter\Text;
+use Appsolutely\AIO\Grid\LazyRenderable;
+use Appsolutely\AIO\Traits\HasVariables;
 use Dcat\Laravel\Database\WhereHasInServiceProvider;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;

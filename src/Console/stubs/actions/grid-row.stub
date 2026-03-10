@@ -2,9 +2,9 @@
 
 namespace DummyNamespace;
 
-use Dcat\Admin\Grid\RowAction;
-use Dcat\Admin\Actions\Response;
-use Dcat\Admin\Traits\HasPermissions;
+use Appsolutely\AIO\Grid\RowAction;
+use Appsolutely\AIO\Actions\Response;
+use Appsolutely\AIO\Traits\HasPermissions;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;

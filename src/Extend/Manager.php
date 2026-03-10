@@ -1,14 +1,14 @@
 <?php
 
-namespace Dcat\Admin\Extend;
+namespace Appsolutely\AIO\Extend;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Exception\AdminException;
-use Dcat\Admin\Exception\RuntimeException;
-use Dcat\Admin\Models\Extension as ExtensionModel;
-use Dcat\Admin\Support\Composer;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Support\Zip;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Exception\AdminException;
+use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Models\Extension as ExtensionModel;
+use Appsolutely\AIO\Support\Composer;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\Zip;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
@@ -287,7 +287,7 @@ class Manager
     /**
      * 添加扩展.
      *
-     * @param  \Dcat\Admin\Extend\ServiceProvider  $serviceProvider
+     * @param  \Appsolutely\AIO\Extend\ServiceProvider  $serviceProvider
      */
     public function addExtension(ServiceProvider $serviceProvider)
     {

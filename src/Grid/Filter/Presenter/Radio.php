@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Grid\Filter\Presenter;
+namespace Appsolutely\AIO\Grid\Filter\Presenter;
 
 use Illuminate\Contracts\Support\Arrayable;
 

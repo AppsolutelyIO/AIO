@@ -1,12 +1,12 @@
 <?php
 
-namespace Dcat\Admin\Form\Field;
+namespace Appsolutely\AIO\Form\Field;
 
-use Dcat\Admin\Contracts\FieldsCollection;
-use Dcat\Admin\Form\EmbeddedForm;
-use Dcat\Admin\Form\Field;
-use Dcat\Admin\Form\ResolveField;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Contracts\FieldsCollection;
+use Appsolutely\AIO\Form\EmbeddedForm;
+use Appsolutely\AIO\Form\Field;
+use Appsolutely\AIO\Form\ResolveField;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;

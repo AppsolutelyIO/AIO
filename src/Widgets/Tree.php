@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Widgets;
+namespace Appsolutely\AIO\Widgets;
 
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 

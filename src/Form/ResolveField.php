@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Form;
+namespace Appsolutely\AIO\Form;
 
 trait ResolveField
 {

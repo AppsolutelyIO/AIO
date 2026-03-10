@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Grid\Concerns;
+namespace Appsolutely\AIO\Grid\Concerns;
 
-use Dcat\Admin\Grid\Events;
+use Appsolutely\AIO\Grid\Events;
 use Illuminate\Support\Facades\Event;
 
 trait HasEvents
@@ -32,7 +32,7 @@ trait HasEvents
     /**
      * 触发事件.
      *
-     * @param  \Dcat\Admin\Grid\Events\Event  $event
+     * @param  \Appsolutely\AIO\Grid\Events\Event  $event
      */
     public function fire(Events\Event $event)
     {
@@ -46,7 +46,7 @@ trait HasEvents
     /**
      * 只触发一次.
      *
-     * @param  \Dcat\Admin\Grid\Events\Event  $event
+     * @param  \Appsolutely\AIO\Grid\Events\Event  $event
      */
     public function fireOnce(Events\Event $event)
     {

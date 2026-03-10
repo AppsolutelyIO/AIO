@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Contracts;
+namespace Appsolutely\AIO\Contracts;
 
 interface ExceptionHandler
 {

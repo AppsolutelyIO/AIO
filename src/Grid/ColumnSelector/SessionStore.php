@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Grid\ColumnSelector;
+namespace Appsolutely\AIO\Grid\ColumnSelector;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Contracts\Grid\ColumnSelectorStore;
-use Dcat\Admin\Grid;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Contracts\Grid\ColumnSelectorStore;
+use Appsolutely\AIO\Grid;
 
 class SessionStore implements ColumnSelectorStore
 {

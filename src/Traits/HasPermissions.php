@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Traits;
+namespace Appsolutely\AIO\Traits;
 
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Tree;
+namespace Appsolutely\AIO\Tree;
 
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Tree;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Tree;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;

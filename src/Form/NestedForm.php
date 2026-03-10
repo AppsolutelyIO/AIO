@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Form;
+namespace Appsolutely\AIO\Form;
 
-use Dcat\Admin\Form;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Widgets\Form as WidgetForm;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Widgets\Form as WidgetForm;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 

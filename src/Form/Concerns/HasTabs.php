@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Form\Concerns;
+namespace Appsolutely\AIO\Form\Concerns;
 
 use Closure;
-use Dcat\Admin\Form\Tab;
+use Appsolutely\AIO\Form\Tab;
 
 trait HasTabs
 {

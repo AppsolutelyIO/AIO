@@ -2,8 +2,8 @@
 
 namespace {namespace};
 
-use Dcat\Admin\Extend\ServiceProvider;
-use Dcat\Admin\Admin;
+use Appsolutely\AIO\Extend\ServiceProvider;
+use Appsolutely\AIO\Admin;
 
 class {className}ServiceProvider extends ServiceProvider
 {

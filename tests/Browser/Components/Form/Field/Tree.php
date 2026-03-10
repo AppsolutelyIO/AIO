@@ -2,7 +2,7 @@
 
 namespace Tests\Browser\Components\Form\Field;
 
-use Dcat\Admin\Form\Field;
+use Appsolutely\AIO\Form\Field;
 use Laravel\Dusk\Browser;
 use Tests\Browser\Components\Component;
 

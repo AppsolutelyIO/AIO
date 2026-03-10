@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Grid\Concerns;
+namespace Appsolutely\AIO\Grid\Concerns;
 
-use Dcat\Admin\Exception\InvalidArgumentException;
-use Dcat\Admin\Grid\Column;
-use Dcat\Admin\Grid\ComplexHeader;
+use Appsolutely\AIO\Exception\InvalidArgumentException;
+use Appsolutely\AIO\Grid\Column;
+use Appsolutely\AIO\Grid\ComplexHeader;
 use Illuminate\Support\Collection;
 
 trait HasComplexHeaders

@@ -1,13 +1,13 @@
 <?php
 
-namespace Dcat\Admin\Grid\Column;
+namespace Appsolutely\AIO\Grid\Column;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Exception\InvalidArgumentException;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Grid\Column;
-use Dcat\Admin\Grid\Displayers\AbstractDisplayer;
-use Dcat\Admin\Grid\RowAction;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Exception\InvalidArgumentException;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Grid\Column;
+use Appsolutely\AIO\Grid\Displayers\AbstractDisplayer;
+use Appsolutely\AIO\Grid\RowAction;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -273,7 +273,7 @@ JS);
     public function action($action)
     {
         if (! is_subclass_of($action, RowAction::class)) {
-            throw new InvalidArgumentException("Action class [$action] must be sub-class of [Dcat\Admin\Grid\RowAction]");
+            throw new InvalidArgumentException("Action class [$action] must be sub-class of [Appsolutely\AIO\Grid\RowAction]");
         }
 
         $grid = $this->grid;

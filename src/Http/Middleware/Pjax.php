@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Http\Middleware;
+namespace Appsolutely\AIO\Http\Middleware;
 
 use Closure;
-use Dcat\Admin\Admin;
+use Appsolutely\AIO\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use Symfony\Component\HttpFoundation\Response;

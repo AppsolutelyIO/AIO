@@ -1,13 +1,13 @@
 <?php
 
-namespace Dcat\Admin\Repositories;
+namespace Appsolutely\AIO\Repositories;
 
-use Dcat\Admin\Contracts\TreeRepository;
-use Dcat\Admin\Exception\AdminException;
-use Dcat\Admin\Exception\RuntimeException;
-use Dcat\Admin\Form;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Show;
+use Appsolutely\AIO\Contracts\TreeRepository;
+use Appsolutely\AIO\Exception\AdminException;
+use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Show;
 use Dcat\Laravel\Database\SoftDeletes as DcatSoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as EloquentModel;

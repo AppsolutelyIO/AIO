@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Http\Auth;
+namespace Appsolutely\AIO\Http\Auth;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Layout\Content;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Contracts\Support\Arrayable;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -1,17 +1,17 @@
 <?php
 
-namespace Dcat\Admin;
+namespace Appsolutely\AIO;
 
 use Closure;
-use Dcat\Admin\Contracts\Repository;
-use Dcat\Admin\Grid\Column;
-use Dcat\Admin\Grid\Concerns;
-use Dcat\Admin\Grid\Model;
-use Dcat\Admin\Grid\Row;
-use Dcat\Admin\Grid\Tools;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Traits\HasBuilderEvents;
-use Dcat\Admin\Traits\HasVariables;
+use Appsolutely\AIO\Contracts\Repository;
+use Appsolutely\AIO\Grid\Column;
+use Appsolutely\AIO\Grid\Concerns;
+use Appsolutely\AIO\Grid\Model;
+use Appsolutely\AIO\Grid\Row;
+use Appsolutely\AIO\Grid\Tools;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Traits\HasBuilderEvents;
+use Appsolutely\AIO\Traits\HasVariables;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -45,7 +45,7 @@ class Grid
     /**
      * The grid data model instance.
      *
-     * @var \Dcat\Admin\Grid\Model
+     * @var \Appsolutely\AIO\Grid\Model
      */
     protected $model;
 

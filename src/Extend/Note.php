@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Extend;
+namespace Appsolutely\AIO\Extend;
 
 use Symfony\Component\Console\Output\OutputInterface;
 

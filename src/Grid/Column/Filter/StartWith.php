@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Grid\Column\Filter;
+namespace Appsolutely\AIO\Grid\Column\Filter;
 
-use Dcat\Admin\Grid\Model;
+use Appsolutely\AIO\Grid\Model;
 
 class StartWith extends Equal
 {

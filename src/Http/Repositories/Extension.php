@@ -1,13 +1,13 @@
 <?php
 
-namespace Dcat\Admin\Http\Repositories;
+namespace Appsolutely\AIO\Http\Repositories;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Extend\ServiceProvider as AbstractExtension;
-use Dcat\Admin\Form;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Repositories\Repository;
-use Dcat\Admin\Show;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Extend\ServiceProvider as AbstractExtension;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Repositories\Repository;
+use Appsolutely\AIO\Show;
 
 class Extension extends Repository
 {

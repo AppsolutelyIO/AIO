@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Show;
+namespace Appsolutely\AIO\Show;
 
-use Dcat\Admin\Grid;
-use Dcat\Admin\Show;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Show;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Fluent;
 

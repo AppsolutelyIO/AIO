@@ -1,14 +1,14 @@
 <?php
 
-namespace Dcat\Admin\Http\Controllers;
+namespace Appsolutely\AIO\Http\Controllers;
 
-use Dcat\Admin\Form;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Http\Auth\Permission;
-use Dcat\Admin\Http\Repositories\Role;
-use Dcat\Admin\Show;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Widgets\Tree;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Http\Auth\Permission;
+use Appsolutely\AIO\Http\Repositories\Role;
+use Appsolutely\AIO\Show;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Widgets\Tree;
 
 class RoleController extends AdminController
 {

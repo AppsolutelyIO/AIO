@@ -1,11 +1,11 @@
 <?php
 
-namespace Dcat\Admin\Grid\Filter\Presenter;
+namespace Appsolutely\AIO\Grid\Filter\Presenter;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Grid\LazyRenderable;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Widgets\DialogTable;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Grid\LazyRenderable;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Widgets\DialogTable;
 use Illuminate\Support\Str;
 
 class SelectTable extends Presenter

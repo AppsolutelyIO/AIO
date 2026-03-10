@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Traits;
+namespace Appsolutely\AIO\Traits;
 
 /**
  * @method array defaultVariables()

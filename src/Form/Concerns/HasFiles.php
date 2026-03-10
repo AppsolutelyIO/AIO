@@ -1,13 +1,13 @@
 <?php
 
-namespace Dcat\Admin\Form\Concerns;
+namespace Appsolutely\AIO\Form\Concerns;
 
-use Dcat\Admin\Contracts\FieldsCollection;
-use Dcat\Admin\Contracts\UploadField as UploadFieldInterface;
-use Dcat\Admin\Form\Builder;
-use Dcat\Admin\Form\Field;
-use Dcat\Admin\Form\NestedForm;
-use Dcat\Admin\Support\WebUploader;
+use Appsolutely\AIO\Contracts\FieldsCollection;
+use Appsolutely\AIO\Contracts\UploadField as UploadFieldInterface;
+use Appsolutely\AIO\Form\Builder;
+use Appsolutely\AIO\Form\Field;
+use Appsolutely\AIO\Form\NestedForm;
+use Appsolutely\AIO\Support\WebUploader;
 use Illuminate\Support\Arr;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;

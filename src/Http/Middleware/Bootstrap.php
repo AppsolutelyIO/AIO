@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Http\Middleware;
+namespace Appsolutely\AIO\Http\Middleware;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Widgets\DarkModeSwitcher;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Widgets\DarkModeSwitcher;
 use Illuminate\Http\Request;
 
 class Bootstrap

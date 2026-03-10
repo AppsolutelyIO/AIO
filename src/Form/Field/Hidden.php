@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Form\Field;
+namespace Appsolutely\AIO\Form\Field;
 
-use Dcat\Admin\Form\Field;
+use Appsolutely\AIO\Form\Field;
 
 class Hidden extends Field
 {

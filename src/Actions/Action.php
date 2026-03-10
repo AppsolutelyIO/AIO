@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Actions;
+namespace Appsolutely\AIO\Actions;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Traits\HasHtmlAttributes;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Traits\HasHtmlAttributes;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
 

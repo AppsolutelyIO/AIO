@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Form\Field;
+namespace Appsolutely\AIO\Form\Field;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

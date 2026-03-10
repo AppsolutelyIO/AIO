@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Form\Field;
+namespace Appsolutely\AIO\Form\Field;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Form\Field;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Form\Field;
 use Illuminate\Support\Str;
 
 class Map extends Field

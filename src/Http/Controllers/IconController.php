@@ -1,11 +1,11 @@
 <?php
 
-namespace Dcat\Admin\Http\Controllers;
+namespace Appsolutely\AIO\Http\Controllers;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Layout\Row;
-use Dcat\Admin\Widgets\Tab;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Layout\Content;
+use Appsolutely\AIO\Layout\Row;
+use Appsolutely\AIO\Widgets\Tab;
 use Illuminate\Routing\Controller;
 
 class IconController extends Controller

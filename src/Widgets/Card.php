@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Widgets;
+namespace Appsolutely\AIO\Widgets;
 
-use Dcat\Admin\Grid\LazyRenderable as LazyGrid;
-use Dcat\Admin\Traits\LazyWidget;
+use Appsolutely\AIO\Grid\LazyRenderable as LazyGrid;
+use Appsolutely\AIO\Traits\LazyWidget;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Dcat\Admin\Repositories;
+namespace Appsolutely\AIO\Repositories;
 
-use Dcat\Admin\Contracts\TreeRepository;
-use Dcat\Admin\Exception\RuntimeException;
-use Dcat\Admin\Form;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Show;
+use Appsolutely\AIO\Contracts\TreeRepository;
+use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Show;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Grid\Column\Filter;
+namespace Appsolutely\AIO\Grid\Column\Filter;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Grid\Column\ValueFilter;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Grid\Column\ValueFilter;
 
 trait Input
 {

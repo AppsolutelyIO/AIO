@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Widgets;
+namespace Appsolutely\AIO\Widgets;
 
 class Code extends Markdown
 {

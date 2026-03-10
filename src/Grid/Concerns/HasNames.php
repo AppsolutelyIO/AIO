@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Grid\Concerns;
+namespace Appsolutely\AIO\Grid\Concerns;
 
-use Dcat\Admin\Grid;
+use Appsolutely\AIO\Grid;
 
 /**
  * @method Grid\Model model()

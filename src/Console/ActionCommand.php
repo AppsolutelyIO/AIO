@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Console;
+namespace Appsolutely\AIO\Console;
 
 class ActionCommand extends GeneratorCommand
 {

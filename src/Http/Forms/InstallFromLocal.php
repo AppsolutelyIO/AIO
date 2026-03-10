@@ -1,12 +1,12 @@
 <?php
 
-namespace Dcat\Admin\Http\Forms;
+namespace Appsolutely\AIO\Http\Forms;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Contracts\LazyRenderable;
-use Dcat\Admin\Exception\RuntimeException;
-use Dcat\Admin\Traits\LazyWidget;
-use Dcat\Admin\Widgets\Form;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Contracts\LazyRenderable;
+use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Traits\LazyWidget;
+use Appsolutely\AIO\Widgets\Form;
 
 class InstallFromLocal extends Form implements LazyRenderable
 {

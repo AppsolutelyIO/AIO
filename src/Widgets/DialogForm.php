@@ -1,11 +1,11 @@
 <?php
 
-namespace Dcat\Admin\Widgets;
+namespace Appsolutely\AIO\Widgets;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Form;
-use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Layout\Content;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Contracts\Support\Arrayable;
 
 class DialogForm

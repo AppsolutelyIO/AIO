@@ -1,11 +1,11 @@
 <?php
 
-namespace Dcat\Admin\Traits;
+namespace Appsolutely\AIO\Traits;
 
 trait HasAssets
 {
     /**
-     * @return \Dcat\Admin\Layout\Asset
+     * @return \Appsolutely\AIO\Layout\Asset
      */
     public static function asset()
     {

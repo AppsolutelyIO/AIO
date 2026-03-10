@@ -1,22 +1,22 @@
 <?php
 
-namespace Dcat\Admin;
+namespace Appsolutely\AIO;
 
-use Dcat\Admin\Contracts\ExceptionHandler;
-use Dcat\Admin\Exception\Handler;
-use Dcat\Admin\Extend\Manager;
-use Dcat\Admin\Extend\UpdateManager;
-use Dcat\Admin\Extend\VersionManager;
-use Dcat\Admin\Layout\Asset;
-use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Layout\Menu;
-use Dcat\Admin\Layout\Navbar;
-use Dcat\Admin\Layout\SectionManager;
-use Dcat\Admin\Support\Context;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Support\Setting;
-use Dcat\Admin\Support\Translator;
-use Dcat\Admin\Support\WebUploader;
+use Appsolutely\AIO\Contracts\ExceptionHandler;
+use Appsolutely\AIO\Exception\Handler;
+use Appsolutely\AIO\Extend\Manager;
+use Appsolutely\AIO\Extend\UpdateManager;
+use Appsolutely\AIO\Extend\VersionManager;
+use Appsolutely\AIO\Layout\Asset;
+use Appsolutely\AIO\Layout\Content;
+use Appsolutely\AIO\Layout\Menu;
+use Appsolutely\AIO\Layout\Navbar;
+use Appsolutely\AIO\Layout\SectionManager;
+use Appsolutely\AIO\Support\Context;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\Setting;
+use Appsolutely\AIO\Support\Translator;
+use Appsolutely\AIO\Support\WebUploader;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin;
+namespace Appsolutely\AIO;
 
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Facades\Route;

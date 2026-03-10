@@ -1,12 +1,12 @@
 <?php
 
-namespace Dcat\Admin\Http\Displayers\Extensions;
+namespace Appsolutely\AIO\Http\Displayers\Extensions;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Grid\Displayers\AbstractDisplayer;
-use Dcat\Admin\Http\Actions\Extensions\Disable;
-use Dcat\Admin\Http\Actions\Extensions\Enable;
-use Dcat\Admin\Http\Actions\Extensions\Uninstall;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Grid\Displayers\AbstractDisplayer;
+use Appsolutely\AIO\Http\Actions\Extensions\Disable;
+use Appsolutely\AIO\Http\Actions\Extensions\Enable;
+use Appsolutely\AIO\Http\Actions\Extensions\Uninstall;
 
 class Name extends AbstractDisplayer
 {

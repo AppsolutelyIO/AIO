@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Console;
+namespace Appsolutely\AIO\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;

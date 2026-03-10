@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Http\Controllers;
+namespace Appsolutely\AIO\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
@@ -32,7 +32,7 @@ class ValueController
 
     /**
      * @param  Request  $request
-     * @return \Dcat\Admin\Traits\InteractsWithApi
+     * @return \Appsolutely\AIO\Traits\InteractsWithApi
      *
      * @throws Exception
      */

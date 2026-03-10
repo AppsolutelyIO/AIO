@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Widgets;
+namespace Appsolutely\AIO\Widgets;
 
-use Dcat\Admin\Grid\LazyRenderable;
+use Appsolutely\AIO\Grid\LazyRenderable;
 use Illuminate\Support\Str;
 
 class LazyTable extends Widget

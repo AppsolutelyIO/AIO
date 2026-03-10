@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Form;
+namespace Appsolutely\AIO\Form;
 
-use Dcat\Admin\Actions\Action;
-use Dcat\Admin\Form;
+use Appsolutely\AIO\Actions\Action;
+use Appsolutely\AIO\Form;
 
 abstract class AbstractTool extends Action
 {

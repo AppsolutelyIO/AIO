@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Grid\Concerns;
+namespace Appsolutely\AIO\Grid\Concerns;
 
-use Dcat\Admin\Grid\Tools;
+use Appsolutely\AIO\Grid\Tools;
 
 trait HasPaginator
 {
@@ -73,7 +73,7 @@ trait HasPaginator
     /**
      * Get the grid paginator.
      *
-     * @return \Dcat\Admin\Grid\Tools\Paginator
+     * @return \Appsolutely\AIO\Grid\Tools\Paginator
      */
     public function paginator()
     {

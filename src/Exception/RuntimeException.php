@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Exception;
+namespace Appsolutely\AIO\Exception;
 
 class RuntimeException extends AdminException
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Tree\Actions;
+namespace Appsolutely\AIO\Tree\Actions;
 
-use Dcat\Admin\Tree\RowAction;
+use Appsolutely\AIO\Tree\RowAction;
 
 class Edit extends RowAction
 {

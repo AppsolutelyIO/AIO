@@ -1,19 +1,19 @@
 <?php
 
-namespace Dcat\Admin\Grid\Concerns;
+namespace Appsolutely\AIO\Grid\Concerns;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Grid\Events\Fetched;
-use Dcat\Admin\Grid\Events\Fetching;
-use Dcat\Admin\Repositories\EloquentRepository;
-use Dcat\Admin\Support\Helper;
+use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Grid\Events\Fetched;
+use Appsolutely\AIO\Grid\Events\Fetching;
+use Appsolutely\AIO\Repositories\EloquentRepository;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Support\Collection;
 
 /**
  * Trait HasTree.
  *
  *
- * @method \Dcat\Admin\Grid grid()
+ * @method \Appsolutely\AIO\Grid grid()
  */
 trait HasTree
 {

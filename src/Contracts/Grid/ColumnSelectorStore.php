@@ -1,8 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Contracts\Grid;
+namespace Appsolutely\AIO\Contracts\Grid;
 
-use Dcat\Admin\Grid;
+use Appsolutely\AIO\Grid;
 
 interface ColumnSelectorStore
 {

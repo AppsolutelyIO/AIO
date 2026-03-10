@@ -1,16 +1,16 @@
 <?php
 
-namespace Dcat\Admin\Http\Controllers;
+namespace Appsolutely\AIO\Http\Controllers;
 
-use Dcat\Admin\Form;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Http\Actions\Extensions\InstallFromLocal;
-use Dcat\Admin\Http\Actions\Extensions\Marketplace;
-use Dcat\Admin\Http\Displayers\Extensions;
-use Dcat\Admin\Http\Repositories\Extension;
-use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Support\Helper;
-use Dcat\Admin\Support\StringOutput;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Http\Actions\Extensions\InstallFromLocal;
+use Appsolutely\AIO\Http\Actions\Extensions\Marketplace;
+use Appsolutely\AIO\Http\Displayers\Extensions;
+use Appsolutely\AIO\Http\Repositories\Extension;
+use Appsolutely\AIO\Layout\Content;
+use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\StringOutput;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 

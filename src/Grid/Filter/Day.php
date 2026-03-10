@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Grid\Filter;
+namespace Appsolutely\AIO\Grid\Filter;
 
 class Day extends Date
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Dcat\Admin\Grid\Exporters;
+namespace Appsolutely\AIO\Grid\Exporters;
 
-use Dcat\Admin\Exception\RuntimeException;
-use Dcat\Admin\Grid;
+use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Grid;
 use Dcat\EasyExcel\Excel;
 
 class ExcelExporter extends AbstractExporter

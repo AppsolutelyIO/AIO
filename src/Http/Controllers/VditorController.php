@@ -1,6 +1,6 @@
 <?php
 
-namespace Dcat\Admin\Http\Controllers;
+namespace Appsolutely\AIO\Http\Controllers;
 
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Request;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Dcat\Admin\Http\Controllers;
+namespace Appsolutely\AIO\Http\Controllers;
 
-use Dcat\Admin\Actions\Action;
-use Dcat\Admin\Actions\Response;
-use Dcat\Admin\Exception\AdminException;
+use Appsolutely\AIO\Actions\Action;
+use Appsolutely\AIO\Actions\Response;
+use Appsolutely\AIO\Exception\AdminException;
 use Illuminate\Http\Request;
 
 class HandleActionController
