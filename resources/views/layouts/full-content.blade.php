@@ -10,32 +10,32 @@
 @endsection
 
 @section('app')
-    {!! Dcat\Admin\Admin::asset()->styleToHtml() !!}
+    {!! Appsolutely\AIO\Admin::asset()->styleToHtml() !!}
 
     <div class="content-body" id="app">
         {{-- 页面埋点--}}
-        {!! admin_section(Dcat\Admin\Admin::SECTION['APP_INNER_BEFORE']) !!}
+        {!! admin_section(Appsolutely\AIO\Admin::SECTION['APP_INNER_BEFORE']) !!}
 
         @yield('content')
 
         {{-- 页面埋点--}}
-        {!! admin_section(Dcat\Admin\Admin::SECTION['APP_INNER_AFTER']) !!}
+        {!! admin_section(Appsolutely\AIO\Admin::SECTION['APP_INNER_AFTER']) !!}
     </div>
 
-    {!! Dcat\Admin\Admin::asset()->scriptToHtml() !!}
-    <div class="extra-html">{!! Dcat\Admin\Admin::html() !!}</div>
+    {!! Appsolutely\AIO\Admin::asset()->scriptToHtml() !!}
+    <div class="extra-html">{!! Appsolutely\AIO\Admin::html() !!}</div>
 @endsection
 
 
 @if(!request()->pjax())
     @include('admin::layouts.full-page', ['header' => $header])
 @else
-    <title>{{ Dcat\Admin\Admin::title() }} @if($header) | {{ $header }}@endif</title>
+    <title>{{ Appsolutely\AIO\Admin::title() }} @if($header) | {{ $header }}@endif</title>
 
     <script>Dcat.wait();</script>
 
-    {!! Dcat\Admin\Admin::asset()->cssToHtml() !!}
-    {!! Dcat\Admin\Admin::asset()->jsToHtml() !!}
+    {!! Appsolutely\AIO\Admin::asset()->cssToHtml() !!}
+    {!! Appsolutely\AIO\Admin::asset()->jsToHtml() !!}
 
     @yield('app')
 @endif

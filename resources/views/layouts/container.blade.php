@@ -3,10 +3,10 @@
         {{ $configData['navbar_class'] === 'fixed-top' ? 'navbar-fixed-top' : '' }} " >
 
 <script>
-    var Dcat = CreateDcat({!! Dcat\Admin\Admin::jsVariables() !!});
+    var Dcat = CreateDcat({!! Appsolutely\AIO\Admin::jsVariables() !!});
 </script>
 
-{!! admin_section(Dcat\Admin\Admin::SECTION['BODY_INNER_BEFORE']) !!}
+{!! admin_section(Appsolutely\AIO\Admin::SECTION['BODY_INNER_BEFORE']) !!}
 
 <div class="wrapper">
     @include('admin::partials.sidebar')
@@ -26,7 +26,7 @@
                 Powered by
                 <a target="_blank" href="https://appsolutely.io">Appsolutely AIO</a>
                 <span>&nbsp;·&nbsp;</span>
-                v{{ Dcat\Admin\Admin::VERSION }}
+                v{{ Appsolutely\AIO\Admin::VERSION }}
             </span>
 
         <button class="btn btn-primary btn-icon scroll-top pull-right" style="position: fixed;bottom: 2%; right: 10px;display: none">
@@ -35,9 +35,9 @@
     </p>
 </footer>
 
-{!! admin_section(Dcat\Admin\Admin::SECTION['BODY_INNER_AFTER']) !!}
+{!! admin_section(Appsolutely\AIO\Admin::SECTION['BODY_INNER_AFTER']) !!}
 
-{!! Dcat\Admin\Admin::asset()->jsToHtml() !!}
+{!! Appsolutely\AIO\Admin::asset()->jsToHtml() !!}
 
 <script>Dcat.boot();</script>
 
