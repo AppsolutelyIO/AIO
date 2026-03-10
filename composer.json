@@ -1,21 +1,21 @@
 {
-    "name": "dcat/laravel-admin",
-    "description": "dcat admin",
+    "name": "appsolutely/aio",
+    "description": "Appsolutely AIO - AI-powered Dashboard",
     "type": "library",
     "keywords": [
-        "dcat",
+        "appsolutely",
+        "aio",
         "laravel",
         "admin",
-        "grid",
-        "form",
-        "laravel admin"
+        "dashboard",
+        "ai"
     ],
-    "homepage": "https://github.com/jqhph/dcat-admin",
+    "homepage": "https://appsolutely.io",
     "license": "MIT",
     "authors": [
         {
-            "name": "jqh",
-            "email": "841324345@qq.com"
+            "name": "Appsolutely",
+            "homepage": "https://appsolutely.io"
         }
     ],
     "require": {
@@ -34,7 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Dcat\\Admin\\": "src/"
+            "Appsolutely\\AIO\\": "src/"
         },
         "files": [
             "src/Support/helpers.php"
@@ -42,7 +42,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Dcat\\Admin\\Tests\\": "tests/"
+            "Appsolutely\\AIO\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -52,7 +52,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Dcat\\Admin\\AdminServiceProvider"
+                "Appsolutely\\AIO\\AdminServiceProvider"
             ]
         }
     }
