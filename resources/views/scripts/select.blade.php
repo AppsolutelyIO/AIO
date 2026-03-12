@@ -47,7 +47,7 @@
 
     $(document).off('change', selector);
     $(document).on('change', selector, function () {
-        Dcat.helpers.loadFields(this, {
+        AIO.helpers.loadFields(this, {
             group: '{{ $loads['group'] ?? '.fields-group' }}',
             urls: urls,
             fields: fields,

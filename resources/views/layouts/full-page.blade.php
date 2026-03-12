@@ -28,7 +28,7 @@
 <body class="aio-body full-page {{ $configData['body_class'] }}">
 
 <script>
-    var Dcat = CreateDcat({!! Appsolutely\AIO\Admin::jsVariables() !!});
+    var AIO = CreateAIO({!! Appsolutely\AIO\Admin::jsVariables() !!});
 </script>
 
 {{-- 页面埋点 --}}
@@ -44,7 +44,7 @@
 
 {!! Appsolutely\AIO\Admin::asset()->jsToHtml() !!}
 
-<script>Dcat.boot();</script>
+<script>AIO.boot();</script>
 
 </body>
 </html>

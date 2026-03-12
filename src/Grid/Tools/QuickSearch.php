@@ -127,7 +127,7 @@ class QuickSearch extends AbstractTool
         ignoreKeys = [16, 17, 18, 20, 35, 36, 37, 38, 39, 40, 45, 144],
         auto = $ipt.attr('auto');
 
-    var submit = Dcat.helpers.debounce(function (input) {
+    var submit = AIO.helpers.debounce(function (input) {
         inputting || $(input).parents('form').submit()
     }, 1200);
 

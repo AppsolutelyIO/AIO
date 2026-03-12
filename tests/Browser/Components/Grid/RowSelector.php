@@ -75,7 +75,7 @@ JS
      */
     public function selectAll(Browser $browser)
     {
-        $browser->script("Dcat.ready(
+        $browser->script("AIO.ready(
             setTimeout(function () {
                 $('{$this->formatSelector($browser)} .select-all').first().click()
             }, 10)

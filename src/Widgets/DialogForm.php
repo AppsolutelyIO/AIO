@@ -237,7 +237,7 @@ class DialogForm
         {$this->handlers['saved']}
     };
 
-    Dcat.DialogForm(opts);
+    AIO.DialogForm(opts);
 })();
 JS
         );
@@ -306,7 +306,7 @@ JS
 
         Admin::script(
             <<<JS
-Dcat.FormConfirm = {$confirm};
+AIO.FormConfirm = {$confirm};
 JS
         );
     }

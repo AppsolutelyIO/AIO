@@ -1044,7 +1044,7 @@ HTML;
 
             Admin::script(
                 <<<JS
-Dcat.grid.async({$options}).render()
+AIO.grid.async({$options}).render()
 JS
             );
         }

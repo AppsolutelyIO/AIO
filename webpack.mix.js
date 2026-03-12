@@ -35,18 +35,18 @@ function themeCss(path) {
   return `${distPath}/${path}${sf}.css`
 }
 
-function dcatPath(path) {
-  return 'resources/assets/dcat/' + path;
+function aioPath(path) {
+  return 'resources/assets/aio/' + path;
 }
 
-function dcatDistPath(path) {
-  return distPath + '/dcat/' + path;
+function aioDistPath(path) {
+  return distPath + '/aio/' + path;
 }
 
 
 /*
  |--------------------------------------------------------------------------
- | Dcat Admin assets
+ | AIO assets
  |--------------------------------------------------------------------------
  */
 
@@ -58,13 +58,13 @@ mix.sass('resources/assets/adminlte/scss/AdminLTE.scss', themeCss('adminlte/admi
 mix.js('resources/assets/adminlte/js/AdminLTE.js', distPath + '/adminlte/adminlte.js').sourceMaps();
 
 // 复制第三方插件文件夹
-mix.copyDirectory(dcatPath('plugins'), dcatDistPath('plugins'));
+mix.copyDirectory(aioPath('plugins'), aioDistPath('plugins'));
 // 打包app.js
-mix.js(dcatPath('js/dcat-app.js'), dcatDistPath('js/dcat-app.js')).sourceMaps();
+mix.js(aioPath('js/aio-app.js'), aioDistPath('js/aio-app.js')).sourceMaps();
 // 打包app.scss
-mix.sass(dcatPath('sass/dcat-app.scss'), themeCss('dcat/css/dcat-app'), sassBuildOptions).sourceMaps();
-mix.copy(dcatPath('sass/nunito.css'), `${distPath}/dcat/css/nunito.css`);
+mix.sass(aioPath('sass/aio-app.scss'), themeCss('aio/css/aio-app'), sassBuildOptions).sourceMaps();
+mix.copy(aioPath('sass/nunito.css'), `${distPath}/aio/css/nunito.css`);
 
 // 打包所有 extra 里面的所有js和css
-mixAssetsDir('dcat/extra/*.js', (src, dest) => mix.js(src, dest));
-mixAssetsDir('dcat/extra/*.scss', (src, dest) => mix.sass(src, dest.replace('scss', 'css'), sassBuildOptions));
+mixAssetsDir('aio/extra/*.js', (src, dest) => mix.js(src, dest));
+mixAssetsDir('aio/extra/*.scss', (src, dest) => mix.sass(src, dest.replace('scss', 'css'), sassBuildOptions));

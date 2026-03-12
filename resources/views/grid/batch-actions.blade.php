@@ -20,9 +20,9 @@
 @endif
 
 <script>
-Dcat.init('.{{ $parent->getRowName() }}-checkbox', function ($this) {
+AIO.init('.{{ $parent->getRowName() }}-checkbox', function ($this) {
     $this.on('change', function () {
-        var btn = $('.{{ $selectAllName }}-btn'), selected = Dcat.grid.selectedRows('{{ $parent->getName() }}').length;
+        var btn = $('.{{ $selectAllName }}-btn'), selected = AIO.grid.selectedRows('{{ $parent->getName() }}').length;
 
         if (selected) {
             btn.show()

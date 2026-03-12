@@ -101,7 +101,7 @@ trait HasActionHandler
     protected function addHandlerScript()
     {
         $script = <<<JS
-Dcat.Action({
+AIO.Action({
     selector: '{$this->selector()}',
     event: '{$this->event}',
     method: '{$this->method()}',
@@ -118,7 +118,7 @@ Dcat.Action({
 JS;
 
         Admin::script($script);
-        Admin::js('@admin/dcat/extra/action.js');
+        Admin::js('@admin/aio/extra/action.js');
     }
 
     /**

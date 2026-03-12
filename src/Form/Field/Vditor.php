@@ -157,7 +157,7 @@ class Vditor extends Field
      */
     public function render()
     {
-        $cdn = admin_asset('@admin/dcat/plugins/vditor');
+        $cdn = admin_asset('@admin/aio/plugins/vditor');
 
         $this->options['cdn'] = $cdn;
         $this->options['lang'] = $this->resolveLang();

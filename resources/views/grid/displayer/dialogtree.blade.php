@@ -35,7 +35,7 @@
                 t.buttonLoading(false);
 
                 if (!resp.status) {
-                    return Dcat.error(resp.message || '系统繁忙，请稍后再试');
+                    return AIO.error(resp.message || '系统繁忙，请稍后再试');
                 }
 
                 open(resp.value);
@@ -83,7 +83,7 @@
 
                 v['state'] = {'disabled': true};
 
-                if (ckall || (value && Dcat.helpers.inObject(value, v[idColumn]))) {
+                if (ckall || (value && AIO.helpers.inObject(value, v[idColumn]))) {
                     v['state']['selected'] = true;
                 }
 

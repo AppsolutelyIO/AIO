@@ -66,7 +66,7 @@
             success: function (data) {
                 _this.buttonLoading(false);
 
-                Dcat.handleJsonResponse(data)
+                AIO.handleJsonResponse(data)
             }
         });
     });

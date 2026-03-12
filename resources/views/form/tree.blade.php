@@ -44,7 +44,7 @@
         $input.val('');
 
         for (i in data.selected) {
-            if (Dcat.helpers.inObject(parents, data.selected[i])) { // 过滤父节点
+            if (AIO.helpers.inObject(parents, data.selected[i])) { // 过滤父节点
                 continue;
             }
             selected.push(data.selected[i]);

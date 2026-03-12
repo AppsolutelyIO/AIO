@@ -1,4 +1,4 @@
-<div class="dcat-box custom-data-table">
+<div class="aio-box custom-data-table">
     @include('admin::grid.table-toolbar')
 
     {!! $grid->renderFilter() !!}

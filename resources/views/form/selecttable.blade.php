@@ -27,7 +27,7 @@
     var dialogId = $this.parent().find('{!! $dialogSelector !!}').attr('id');
     var $input = $(this).find('input');
 
-    Dcat.grid.SelectTable({
+    AIO.grid.SelectTable({
         dialog: '[data-id="' + dialogId + '"]',
         container: $this,
         input: $input,
@@ -45,7 +45,7 @@
     $input.on('change', function () {
         var values = this.value;
 
-        Dcat.helpers.loadFields(this, {
+        AIO.helpers.loadFields(this, {
             group: '.fields-group',
             urls: urls,
             fields: fields,

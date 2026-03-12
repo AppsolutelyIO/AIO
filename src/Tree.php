@@ -629,7 +629,7 @@ class Tree implements Renderable
 
             Form::dialog(trans('admin.new'))
                 ->click('.tree-quick-create')
-                ->success('Dcat.reload()')
+                ->success('AIO.reload()')
                 ->dimensions($width, $height);
         }
     }

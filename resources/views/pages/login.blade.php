@@ -120,7 +120,7 @@
 </div>
 
 <script>
-Dcat.ready(function () {
+AIO.ready(function () {
     // ajax表单提交
     $('#login-form').form({
         validate: true,

@@ -61,7 +61,7 @@ class FilterButton extends AbstractTool
         expand = {$expand};
 
      function initSlider() {
-        slider = new Dcat.Slider({
+        slider = new AIO.Slider({
             target: '#{$id}',
         });
 

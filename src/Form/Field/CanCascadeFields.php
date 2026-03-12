@@ -122,7 +122,7 @@ trait CanCascadeFields
 
         Admin::script(
             <<<JS
-Dcat.init('{$this->getElementClassSelector()}', function (\$this) {
+AIO.init('{$this->getElementClassSelector()}', function (\$this) {
     {$script}
 });
 JS
@@ -193,9 +193,9 @@ JS
         '!=': function(a, b) {
              return ! operator_table['='](a, b);
         },
-        'in': function(a, b) { return Dcat.helpers.inObject(a, String(b), true); },
-        'notIn': function(a, b) { return ! Dcat.helpers.inObject(a, String(b), true); },
-        'has': function(a, b) { return Dcat.helpers.inObject(b, String(b), true); },
+        'in': function(a, b) { return AIO.helpers.inObject(a, String(b), true); },
+        'notIn': function(a, b) { return ! AIO.helpers.inObject(a, String(b), true); },
+        'has': function(a, b) { return AIO.helpers.inObject(b, String(b), true); },
     };
     var cascade_groups = {$cascadeGroups}, event = '{$this->cascadeEvent}';
 

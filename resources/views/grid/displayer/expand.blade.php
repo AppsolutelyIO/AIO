@@ -16,7 +16,7 @@
             var key = _th.data('key');
             var row = _th.closest('tr');
             var html = $('template.grid-expand-'+key).html();
-            var id = 'expand-'+key+Dcat.helpers.random(10);
+            var id = 'expand-'+key+AIO.helpers.random(10);
             var rowKey = _th.data('id');
 
             $(this).attr('data-expand', '#'+id);
@@ -25,9 +25,9 @@
             if (url) {
                 var collapse = $('#grid-collapse-'+key);
                 collapse.find('div').loading();
-                $('.dcat-loading').css({position: 'inherit', 'padding-top': '70px'});
+                $('.aio-loading').css({position: 'inherit', 'padding-top': '70px'});
 
-                Dcat.helpers.asyncRender(url+'&key='+rowKey, function (html) {
+                AIO.helpers.asyncRender(url+'&key='+rowKey, function (html) {
                     collapse.html(html);
                 })
             }

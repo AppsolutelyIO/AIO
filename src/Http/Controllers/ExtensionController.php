@@ -74,7 +74,7 @@ class ExtensionController extends Controller
                     ->required();
                 $create->text('namespace')
                     ->attribute('style', 'width:240px')
-                    ->placeholder('Input Namespace. Eg: DcatAdmin\\Demo');
+                    ->placeholder('Input Namespace. Eg: AIO\\Demo');
                 $create->select('type')
                     ->options([1 => trans('admin.application'), 2 => trans('admin.theme')])
                     ->attribute('style', 'width:140px!important')

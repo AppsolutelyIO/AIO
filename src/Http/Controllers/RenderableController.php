@@ -65,7 +65,7 @@ class RenderableController
     protected function addScript()
     {
         // 等待JS脚本加载完成
-        Admin::script('Dcat.wait()', true);
+        Admin::script('AIO.wait()', true);
     }
 
     protected function forgetDefaultAssets()

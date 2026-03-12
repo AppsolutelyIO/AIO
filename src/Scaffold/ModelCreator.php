@@ -174,7 +174,7 @@ class ModelCreator
         $import = $use = '';
 
         if (version_compare(app()->version(), '7.0.0') >= 0) {
-            $import = 'use Dcat\\Admin\\Traits\\HasDateTimeFormatter;';
+            $import = 'use Appsolutely\\AIO\\Traits\\HasDateTimeFormatter;';
             $use = 'use HasDateTimeFormatter;';
         }
 

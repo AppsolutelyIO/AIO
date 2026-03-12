@@ -29,160 +29,160 @@ class Asset
         ],
         '@nunito' => [
             //'css' => 'https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,800,800i,900,900i',
-            'css' => '@admin/dcat/css/nunito.css',
+            'css' => '@admin/aio/css/nunito.css',
         ],
-        '@dcat' => [
-            'js'  => '@admin/dcat/js/dcat-app.js',
-            'css' => '@admin/dcat/css/dcat-app.css',
+        '@aio' => [
+            'js'  => '@admin/aio/js/aio-app.js',
+            'css' => '@admin/aio/css/aio-app.css',
         ],
         '@vendors' => [
-            'js'  => '@admin/dcat/plugins/vendors.min.js',
-            'css' => '@admin/dcat/plugins/vendors.min.css',
+            'js'  => '@admin/aio/plugins/vendors.min.js',
+            'css' => '@admin/aio/plugins/vendors.min.css',
         ],
         '@jquery.initialize' => [
-            'js' => '@admin/dcat/plugins/jquery.initialize/jquery.initialize.min.js',
+            'js' => '@admin/aio/plugins/jquery.initialize/jquery.initialize.min.js',
         ],
         '@datatables' => [
-            'css' => '@admin/dcat/plugins/tables/datatable/datatables.min.css',
+            'css' => '@admin/aio/plugins/tables/datatable/datatables.min.css',
         ],
         '@grid-extension' => [
-            'js' => '@admin/dcat/extra/grid-extend.js',
+            'js' => '@admin/aio/extra/grid-extend.js',
         ],
         '@resource-selector' => [
-            'js' => '@admin/dcat/extra/resource-selector.js',
+            'js' => '@admin/aio/extra/resource-selector.js',
         ],
         '@select-table' => [
-            'js' => '@admin/dcat/extra/select-table.js',
+            'js' => '@admin/aio/extra/select-table.js',
         ],
         '@layer' => [
-            'js' => '@admin/dcat/plugins/layer/layer.js',
+            'js' => '@admin/aio/plugins/layer/layer.js',
         ],
         '@tinymce' => [
-            'js' => '@admin/dcat/plugins/tinymce/tinymce.min.js',
+            'js' => '@admin/aio/plugins/tinymce/tinymce.min.js',
         ],
         '@pjax' => [
-            'js' => '@admin/dcat/plugins/jquery-pjax/jquery.pjax.min.js',
+            'js' => '@admin/aio/plugins/jquery-pjax/jquery.pjax.min.js',
         ],
         '@toastr' => [
-            'js'  => '@admin/dcat/plugins/extensions/toastr.min.js',
-            'css' => '@admin/dcat/plugins/extensions/toastr.css',
+            'js'  => '@admin/aio/plugins/extensions/toastr.min.js',
+            'css' => '@admin/aio/plugins/extensions/toastr.css',
         ],
         '@jquery.nestable' => [
-            'js'  => '@admin/dcat/plugins/nestable/jquery.nestable.min.js',
-            'css' => '@admin/dcat/plugins/nestable/nestable.css',
+            'js'  => '@admin/aio/plugins/nestable/jquery.nestable.min.js',
+            'css' => '@admin/aio/plugins/nestable/nestable.css',
         ],
         '@validator' => [
-            'js' => '@admin/dcat/plugins/bootstrap-validator/validator.min.js',
+            'js' => '@admin/aio/plugins/bootstrap-validator/validator.min.js',
         ],
         '@select2' => [
             'js'  => [
-                '@admin/dcat/plugins/select/select2.full.min.js',
-                '@admin/dcat/plugins/select/i18n/{lang}.js',
+                '@admin/aio/plugins/select/select2.full.min.js',
+                '@admin/aio/plugins/select/i18n/{lang}.js',
             ],
-            'css' => '@admin/dcat/plugins/select/select2.min.css',
+            'css' => '@admin/aio/plugins/select/select2.min.css',
         ],
         '@bootstrap-datetimepicker' => [
-            'js'  => '@admin/dcat/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js',
-            'css' => '@admin/dcat/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css',
+            'js'  => '@admin/aio/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js',
+            'css' => '@admin/aio/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css',
         ],
         '@moment' => [
             'js' => [
-                '@admin/dcat/plugins/moment/moment-with-locales.min.js',
+                '@admin/aio/plugins/moment/moment-with-locales.min.js',
             ],
         ],
         '@moment-timezone' => [
             'js' => [
-                '@admin/dcat/plugins/moment-timezone/moment-timezone-with-data.min.js',
+                '@admin/aio/plugins/moment-timezone/moment-timezone-with-data.min.js',
             ],
         ],
         '@jstree' => [
-            'js'  => '@admin/dcat/plugins/jstree-theme/jstree.min.js',
-            'css' => '@admin/dcat/plugins/jstree-theme/themes/proton/style.min.css',
+            'js'  => '@admin/aio/plugins/jstree-theme/jstree.min.js',
+            'css' => '@admin/aio/plugins/jstree-theme/themes/proton/style.min.css',
         ],
         '@switchery' => [
-            'js'  => '@admin/dcat/plugins/switchery/switchery.min.js',
-            'css' => '@admin/dcat/plugins/switchery/switchery.min.css',
+            'js'  => '@admin/aio/plugins/switchery/switchery.min.js',
+            'css' => '@admin/aio/plugins/switchery/switchery.min.css',
         ],
         '@webuploader' => [
             'js' => [
-                '@admin/dcat/plugins/webuploader/webuploader.min.js',
-                '@admin/dcat/extra/upload.js',
+                '@admin/aio/plugins/webuploader/webuploader.min.js',
+                '@admin/aio/extra/upload.js',
             ],
-            'css' => '@admin/dcat/extra/upload.css',
+            'css' => '@admin/aio/extra/upload.css',
         ],
         '@chartjs' => [
-            'js' => '@admin/dcat/plugins/chart.js/chart.bundle.min.js',
+            'js' => '@admin/aio/plugins/chart.js/chart.bundle.min.js',
         ],
         '@jquery.sparkline' => [
-            'js' => '@admin/dcat/plugins/jquery.sparkline/jquery.sparkline.min.js',
+            'js' => '@admin/aio/plugins/jquery.sparkline/jquery.sparkline.min.js',
         ],
         '@jquery.bootstrap-duallistbox' => [
-            'js'  => '@admin/dcat/plugins/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js',
-            'css' => '@admin/dcat/plugins/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css',
+            'js'  => '@admin/aio/plugins/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js',
+            'css' => '@admin/aio/plugins/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css',
         ],
         '@number-input' => [
-            'js' => '@admin/dcat/plugins/number-input/bootstrap-number-input.js',
+            'js' => '@admin/aio/plugins/number-input/bootstrap-number-input.js',
         ],
         '@ionslider' => [
             'js' => [
-                '@admin/dcat/plugins/ionslider/ion.rangeSlider.min.js',
+                '@admin/aio/plugins/ionslider/ion.rangeSlider.min.js',
             ],
             'css' => [
-                '@admin/dcat/plugins/ionslider/ion.rangeSlider.css',
-                '@admin/dcat/plugins/ionslider/ion.rangeSlider.skinNice.css',
+                '@admin/aio/plugins/ionslider/ion.rangeSlider.css',
+                '@admin/aio/plugins/ionslider/ion.rangeSlider.skinNice.css',
             ],
         ],
         '@vditor' => [
-            'js'  => '@admin/dcat/plugins/vditor/dist/index.min.js',
-            'css' => '@admin/dcat/plugins/vditor/dist/index.css',
+            'js'  => '@admin/aio/plugins/vditor/dist/index.min.js',
+            'css' => '@admin/aio/plugins/vditor/dist/index.css',
         ],
         '@editor-md' => [
             'js' => [
-                '@admin/dcat/plugins/editor-md/lib/raphael.min.js',
-                '@admin/dcat/plugins/editor-md/lib/marked.min.js',
-                '@admin/dcat/plugins/editor-md/lib/prettify.min.js',
-                '@admin/dcat/plugins/editor-md/lib/underscore.min.js',
-                '@admin/dcat/plugins/editor-md/lib/sequence-diagram.min.js',
-                '@admin/dcat/plugins/editor-md/lib/flowchart.min.js',
-                '@admin/dcat/plugins/editor-md/lib/jquery.flowchart.min.js',
-                '@admin/dcat/plugins/editor-md/editormd.min.js',
+                '@admin/aio/plugins/editor-md/lib/raphael.min.js',
+                '@admin/aio/plugins/editor-md/lib/marked.min.js',
+                '@admin/aio/plugins/editor-md/lib/prettify.min.js',
+                '@admin/aio/plugins/editor-md/lib/underscore.min.js',
+                '@admin/aio/plugins/editor-md/lib/sequence-diagram.min.js',
+                '@admin/aio/plugins/editor-md/lib/flowchart.min.js',
+                '@admin/aio/plugins/editor-md/lib/jquery.flowchart.min.js',
+                '@admin/aio/plugins/editor-md/editormd.min.js',
             ],
             'css' => [
-                '@admin/dcat/plugins/editor-md/css/editormd.preview.min.css',
-                '@admin/dcat/extra/markdown.css',
+                '@admin/aio/plugins/editor-md/css/editormd.preview.min.css',
+                '@admin/aio/extra/markdown.css',
             ],
         ],
         '@editor-md-form' => [
             'js' => [
-                '@admin/dcat/plugins/editor-md/lib/raphael.min.js',
-                '@admin/dcat/plugins/editor-md/editormd.min.js',
+                '@admin/aio/plugins/editor-md/lib/raphael.min.js',
+                '@admin/aio/plugins/editor-md/editormd.min.js',
             ],
             'css' => [
-                '@admin/dcat/plugins/editor-md/css/editormd.min.css',
+                '@admin/aio/plugins/editor-md/css/editormd.min.css',
             ],
         ],
         '@jquery.inputmask' => [
-            'js' => '@admin/dcat/plugins/input-mask/jquery.inputmask.bundle.min.js',
+            'js' => '@admin/aio/plugins/input-mask/jquery.inputmask.bundle.min.js',
         ],
         '@apex-charts' => [
-            'js' => '@admin/dcat/plugins/charts/apexcharts.min.js',
+            'js' => '@admin/aio/plugins/charts/apexcharts.min.js',
         ],
         '@fontawesome-iconpicker' => [
-            'js' => '@admin/dcat/plugins/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js',
-            'css' => '@admin/dcat/plugins/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css',
+            'js' => '@admin/aio/plugins/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js',
+            'css' => '@admin/aio/plugins/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css',
         ],
         '@color' => [
-            'js' => '@admin/dcat/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js',
-            'css' => '@admin/dcat/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css',
+            'js' => '@admin/aio/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js',
+            'css' => '@admin/aio/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css',
         ],
         '@qrcode' => [
-            'js' => '@admin/dcat/plugins/jquery-qrcode/dist/jquery-qrcode.min.js',
+            'js' => '@admin/aio/plugins/jquery-qrcode/dist/jquery-qrcode.min.js',
         ],
         '@sortable' => [
-            'js' => '@admin/dcat/plugins/sortable/Sortable.min.js',
+            'js' => '@admin/aio/plugins/sortable/Sortable.min.js',
         ],
         '@autocomplete' => [
-            'js' => '@admin/dcat/plugins/autocomplete/jquery.autocomplete.min.js',
+            'js' => '@admin/aio/plugins/autocomplete/jquery.autocomplete.min.js',
         ],
     ];
 
@@ -226,7 +226,7 @@ class Asset
      */
     public $headerJs = [
         'vendors' => '@vendors',
-        'dcat'    => '@dcat',
+        'aio'    => '@aio',
     ];
 
     /**
@@ -239,7 +239,7 @@ class Asset
         'vendors'     => '@vendors',
         'toastr'      => '@toastr',
         'datatables'  => '@datatables',
-        'dcat'        => '@dcat',
+        'aio'        => '@aio',
     ];
 
     /**
@@ -276,7 +276,7 @@ class Asset
 
         $alias = [
             '@adminlte',
-            '@dcat',
+            '@aio',
         ];
 
         foreach ($alias as $n) {
@@ -765,7 +765,7 @@ class Asset
         console.error(e)
     }
 })();
-Dcat.ready(function () {
+AIO.ready(function () {
     try {
         {$script}
     } catch (e) {

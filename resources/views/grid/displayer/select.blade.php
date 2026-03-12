@@ -26,17 +26,17 @@
             data[name[0]][name[1]] = value;
         }
 
-        Dcat.NP.start();
+        AIO.NP.start();
         $.put({
             url: url,
             data: data,
             success: function (d) {
-                Dcat.NP.done();
+                AIO.NP.done();
                 if (d.status) {
-                    Dcat.success(d.data.message);
-                    reload && Dcat.reload();
+                    AIO.success(d.data.message);
+                    reload && AIO.reload();
                 } else {
-                    Dcat.error(d.data.message);
+                    AIO.error(d.data.message);
                 }
             }
         });

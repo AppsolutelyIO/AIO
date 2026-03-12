@@ -246,10 +246,10 @@ trait HasDisplayers
         $column = $this;
 
         Admin::script(<<<JS
-$('[data-toggle="dcat-tooltip"]').tooltip({placement: '{$placement}', trigger: 'hover', html: false});
+$('[data-toggle="aio-tooltip"]').tooltip({placement: '{$placement}', trigger: 'hover', html: false});
 JS);
 
-        Admin::style('[data-toggle="dcat-tooltip"] + .tooltip .tooltip-inner { padding: 8px 12px; text-align: left; }');
+        Admin::style('[data-toggle="aio-tooltip"] + .tooltip .tooltip-inner { padding: 8px 12px; text-align: left; }');
 
         return $this->display(function ($value) use ($column) {
             $original = $column->getOriginal();
@@ -260,7 +260,7 @@ JS);
 
             $title = htmlspecialchars((string) $original, ENT_QUOTES);
 
-            return "<span data-toggle=\"dcat-tooltip\" title=\"{$title}\">{$value}</span>";
+            return "<span data-toggle=\"aio-tooltip\" title=\"{$title}\">{$value}</span>";
         });
     }
 

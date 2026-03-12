@@ -36,9 +36,9 @@ class MultipleSelectTable extends SelectTable
 
         Admin::script(
             <<<JS
-Dcat.init('#{$this->id}', function (self) {
+AIO.init('#{$this->id}', function (self) {
     var dialogId = self.parent().find('{$this->dialog->getElementSelector()}').attr('id');
-    Dcat.grid.SelectTable({
+    AIO.grid.SelectTable({
         dialog: '[data-id="' + dialogId + '"]',
         container: '#{$this->id}',
         input: '#hidden-{$this->id}',

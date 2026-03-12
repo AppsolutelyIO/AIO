@@ -30,7 +30,7 @@ EOT;
     protected function script()
     {
         return <<<JS
-        Dcat.grid.Orderable({
+        AIO.grid.Orderable({
             button: '.{$this->grid->getRowName()}-orderable',
             url: '{$this->resource()}/:key',
         });

@@ -35,7 +35,7 @@ class CreateButton implements Renderable
 
         Form::dialog($new)
             ->click(".{$class}")
-            ->success('Dcat.reload()')
+            ->success('AIO.reload()')
             ->dimensions($width, $height);
 
         return "<button data-url='$url' class='btn btn-primary {$class}'><i class='feather icon-plus'></i><span class='d-none d-sm-inline'>&nbsp; $new</span></button>";

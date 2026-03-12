@@ -7,7 +7,7 @@ use Appsolutely\AIO\Grid\Filter;
 use Appsolutely\AIO\Show;
 
 /**
- * Dcat-admin - admin builder based on Laravel.
+ * Appsolutely AIO - admin builder based on Laravel.
  * @author jqh <https://github.com/jqhph>
  *
  * Bootstraper for Admin.

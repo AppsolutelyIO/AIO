@@ -3,7 +3,7 @@
         {{ $configData['navbar_class'] === 'fixed-top' ? 'navbar-fixed-top' : '' }} " >
 
 <script>
-    var Dcat = CreateDcat({!! Appsolutely\AIO\Admin::jsVariables() !!});
+    var AIO = CreateAIO({!! Appsolutely\AIO\Admin::jsVariables() !!});
 </script>
 
 {!! admin_section(Appsolutely\AIO\Admin::SECTION['BODY_INNER_BEFORE']) !!}
@@ -39,7 +39,7 @@
 
 {!! Appsolutely\AIO\Admin::asset()->jsToHtml() !!}
 
-<script>Dcat.boot();</script>
+<script>AIO.boot();</script>
 
 </body>
 

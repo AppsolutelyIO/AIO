@@ -112,13 +112,13 @@ EOT;
 
         Admin::script(
             <<<JS
-var selector = Dcat.RowSelector({
+var selector = AIO.RowSelector({
     checkboxSelector: '.{$this->grid->getRowName()}-checkbox',
     selectAllSelector: '.{$this->grid->getSelectAllName()}', 
     clickRow: {$clickable},
     background: '{$background}',
 });
-Dcat.grid.addSelector(selector, '{$this->grid->getName()}');
+AIO.grid.addSelector(selector, '{$this->grid->getName()}');
 JS
         );
     }

@@ -41,7 +41,7 @@ class Lazy extends Widget
         $loader = $this->load ? "target.trigger('{$this->target}:load')" : '';
 
         $this->script = <<<JS
-Dcat.init('{$this->getElementSelector()}', function (target) {
+AIO.init('{$this->getElementSelector()}', function (target) {
     var body = target;
     {$this->getRenderableScript()}
 

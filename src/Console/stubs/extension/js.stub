@@ -10,7 +10,7 @@
     ExtensionDemo.prototype = {
         init: function (options) {
             options.$el.on('click', function () {
-                Dcat.success($(this).text());
+                AIO.success($(this).text());
             });
 
             console.log('Done.');

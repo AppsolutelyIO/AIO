@@ -64,7 +64,7 @@
                 eval($(_event).html());
 
                 setTimeout(function () {
-                    Dcat.grid.AsyncTable({container: $t});
+                    AIO.grid.AsyncTable({container: $t});
 
                     $t.trigger('table:load');
                 }, 100);

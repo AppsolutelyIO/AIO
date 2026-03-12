@@ -1,5 +1,5 @@
 
-<div class="dcat-box">
+<div class="aio-box">
 
     <div class="d-block pb-0">
         @include('admin::grid.table-toolbar')

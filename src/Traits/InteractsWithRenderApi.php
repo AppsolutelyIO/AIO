@@ -54,7 +54,7 @@ trait InteractsWithRenderApi
 
         return <<<JS
 target.on('{$this->target}:load', function () {
-    Dcat.helpers.asyncRender('{$url}', function (html) {
+    AIO.helpers.asyncRender('{$url}', function (html) {
         body.html(html);
         
         {$this->loadScript}

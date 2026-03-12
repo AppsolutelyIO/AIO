@@ -39,7 +39,7 @@ class Date extends Text
         $options = admin_javascript_json($this->options);
 
         $this->script = <<<JS
-Dcat.init('{$this->getElementClassSelector()}', function (self) {
+AIO.init('{$this->getElementClassSelector()}', function (self) {
     self.datetimepicker({$options});
 });
 JS;

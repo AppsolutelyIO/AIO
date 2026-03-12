@@ -118,8 +118,8 @@ class LazyTable extends Widget
     protected function addScript()
     {
         $this->script = <<<JS
-Dcat.init('{$this->getElementSelector()}', function (\$this) {
-    Dcat.grid.AsyncTable({container: \$this})
+AIO.init('{$this->getElementSelector()}', function (\$this) {
+    AIO.grid.AsyncTable({container: \$this})
 
     {$this->loadScript}
 

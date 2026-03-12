@@ -23,7 +23,7 @@
         $(this).parents('.column-selector').find('.column-select-item').prop('checked', this.checked).change()
     });
 
-    var submit = Dcat.helpers.debounce(function ($this) {
+    var submit = AIO.helpers.debounce(function ($this) {
         var defaults = {!! json_encode($defaults) !!};
         var selected = [];
         var $parent = $this.parents('.column-selector');
@@ -45,7 +45,7 @@
             url.searchParams.set(column, selected.join());
         }
 
-        Dcat.reload(url.toString());
+        AIO.reload(url.toString());
     }, 200);
 
     $('.column-selector .column-select-item').on('change', function () {

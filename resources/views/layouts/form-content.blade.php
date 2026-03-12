@@ -1,4 +1,4 @@
-<script>Dcat.wait();</script>
+<script>AIO.wait();</script>
 
 <style>
     .form-content .row {

@@ -62,7 +62,7 @@
                 ctr.attr('submitting', '');
                 btn.buttonLoading(false);
 
-                Dcat.handleJsonResponse(data);
+                AIO.handleJsonResponse(data);
             },
             error:function(xhq){
                 btn.buttonLoading(false);
@@ -70,14 +70,14 @@
                 var json = xhq.responseJSON;
                 if (typeof json === 'object') {
                     if (json.message) {
-                        Dcat.error(json.message);
+                        AIO.error(json.message);
                     } else if (json.errors) {
                         var i, errors = [];
                         for (i in json.errors) {
                             errors.push(json.errors[i].join("<br>"));
                         }
 
-                        Dcat.error(errors.join("<br>"));
+                        AIO.error(errors.join("<br>"));
                     }
                 }
             }

@@ -25,7 +25,7 @@
     $(document).on('change', selector, function () {
         var values = this.value;
 
-        Dcat.helpers.loadFields(this, {
+        AIO.helpers.loadFields(this, {
             group: '.fields-group',
             urls: urls,
             fields: fields,

@@ -15,7 +15,7 @@ class QuickEdit extends RowAction
 
         Form::dialog(trans('admin.edit'))
             ->click('.tree-quick-edit')
-            ->success('Dcat.reload()')
+            ->success('AIO.reload()')
             ->dimensions($width, $height);
 
         return <<<HTML

@@ -42,7 +42,7 @@
     var lat = $this.find('.form-lat'),
         lng = $this.find('.form-lng'),
         container = $this.find('.form-map'),
-        mapId = "_" + Dcat.helpers.random();
+        mapId = "_" + AIO.helpers.random();
 
     container.attr('id', mapId);
 

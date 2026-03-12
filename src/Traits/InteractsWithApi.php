@@ -214,7 +214,7 @@ trait InteractsWithApi
           },
           error: function (a, b, c) {
               loading = 0;
-              Dcat.handleAjaxError(a, b, c)
+              AIO.handleAjaxError(a, b, c)
           },
         });
     }

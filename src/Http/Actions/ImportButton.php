@@ -35,16 +35,16 @@ $('.import-extension').on('click', function () {
     var id = $(this).data('id'), req;
     if (req) return;
     
-    Dcat.confirm("{$text}", '', function () {
+    AIO.confirm("{$text}", '', function () {
         req = 1;
         
-        Dcat.loading();
+        AIO.loading();
         $.post('$url?id='+id, {}, function (response) {
-           Dcat.loading(false);
+           AIO.loading(false);
            req = 0;
         
            if (!response.status) {
-               Dcat.error(response.message);
+               AIO.error(response.message);
            }
            
            $('#app').prepend('<div class="row"><div class="col-md-12">'+response.content+'</div></div>');

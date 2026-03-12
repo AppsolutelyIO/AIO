@@ -16,7 +16,7 @@ function (data, target, action) {
     var key = {$this->getSelectedKeysScript()}
     
     if (key.length === 0) {
-        Dcat.warning('{$warning}');
+        AIO.warning('{$warning}');
         return false;
     }
     
@@ -31,6 +31,6 @@ JS;
      */
     public function getSelectedKeysScript()
     {
-        return "Dcat.grid.selected('{$this->parent->getName()}')";
+        return "AIO.grid.selected('{$this->parent->getName()}')";
     }
 }

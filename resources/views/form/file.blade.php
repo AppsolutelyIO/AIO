@@ -82,7 +82,7 @@
             paste: $this.find('.web-uploader')
         }, opts);
 
-        uploader = Dcat.Uploader(opts);
+        uploader = AIO.Uploader(opts);
         uploader.build();
         uploader.preview();
 

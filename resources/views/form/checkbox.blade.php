@@ -44,7 +44,7 @@
             }
         });
 
-        Dcat.helpers.loadFields(this, {
+        AIO.helpers.loadFields(this, {
             group: '.fields-group',
             urls: urls,
             fields: fields,

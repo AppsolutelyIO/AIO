@@ -298,7 +298,7 @@
 </template>
 
 <script>
-    Dcat.ready(function () {
+    AIO.ready(function () {
         var $model = $('#inputModelName'),
             $controller = $('#inputControllerName'),
             $repository = $('#inputRepositoryName'),
@@ -310,7 +310,7 @@
             repositoryNamespace = namespaceBase + '\\Repositories\\',
             controllerNamespace = namespaceBase + '\\Controllers\\',
             dataTypeMap = {!! json_encode($dataTypeMap) !!},
-            helpers = Dcat.helpers;
+            helpers = AIO.helpers;
 
         var withSingularName = helpers.debounce(function (table) {
             $.ajax('{{ url(request()->path()) }}?singular=' + table, {
@@ -385,7 +385,7 @@
             db = val[0];
             tb = val[1];
 
-            Dcat.loading();
+            AIO.loading();
             $table.val(tb);
 
             withSingularName(tb);
@@ -394,7 +394,7 @@
                 url: '{{ admin_url('helpers/scaffold/table') }}',
                 data: {db: db, tb: tb},
                 success: function (res) {
-                    Dcat.loading(false);
+                    AIO.loading(false);
 
                     if (!res.list) return;
                     var i, list = res.list, $id = $('#inputPrimaryKey'), updated, created, soft;

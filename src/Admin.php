@@ -408,7 +408,7 @@ class Admin
         }
 
         // 等待JS脚本加载完成
-        static::script('Dcat.wait()', true);
+        static::script('AIO.wait()', true);
 
         $asset = static::asset();
 
@@ -614,10 +614,10 @@ class Admin
     public static function registerApiRoutes()
     {
         $attributes = [
-            'prefix'     => admin_base_path('dcat-api'),
+            'prefix'     => admin_base_path('aio-api'),
             'middleware' => config('admin.route.middleware'),
             'namespace'  => 'Appsolutely\AIO\Http\Controllers',
-            'as'         => 'dcat-api.',
+            'as'         => 'aio-api.',
         ];
 
         app('router')->group($attributes, function ($router) {

@@ -32,7 +32,7 @@
     <a href="https://github.com/jqhph/aio#%E6%89%A9%E5%B1%95" target="_blank" class="uppercase">View All Extensions</a>
 </div>
 
-<script>Dcat.ready(function () {
+<script>AIO.ready(function () {
     // var $box = $('#extension-box');
     // $box.loading();
     //

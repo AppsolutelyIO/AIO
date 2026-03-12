@@ -222,7 +222,7 @@ JS;
         $this->fetched(
             <<<JS
 if (! response.status) {
-    return Dcat.error(response.message || 'Server internal error.');
+    return AIO.error(response.message || 'Server internal error.');
 }
 
 var chartBox = $(response.selector || '{$this->containerSelector}');

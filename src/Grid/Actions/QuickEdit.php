@@ -29,7 +29,7 @@ class QuickEdit extends RowAction
             ->click(".{$this->getElementClass()}")
             ->dimensions($width, $height)
             ->forceRefresh()
-            ->success('Dcat.reload()');
+            ->success('AIO.reload()');
 
         $this->setHtmlAttribute([
             'data-url' => $this->parent->getEditUrl($this->getKey()),

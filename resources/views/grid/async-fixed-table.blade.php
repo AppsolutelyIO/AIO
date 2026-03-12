@@ -140,7 +140,7 @@
 
     {!! $grid->renderPagination() !!}
 @else
-<div class="dcat-box custom-data-table async-{{ $tableId }}">
+<div class="aio-box custom-data-table async-{{ $tableId }}">
     @include('admin::grid.table-toolbar')
 
     {!! $grid->renderFilter() !!}

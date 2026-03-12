@@ -44,7 +44,7 @@ class Bootstrap
     protected function addScript()
     {
         $token = csrf_token();
-        Admin::script("Dcat.token = \"$token\";");
+        Admin::script("AIO.token = \"$token\";");
     }
 
     protected function fireEvents()

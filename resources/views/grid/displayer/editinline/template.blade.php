@@ -177,7 +177,7 @@
             return;
         }
 
-        Dcat.NP.start();
+        AIO.NP.start();
 
         var data = {};
 
@@ -195,13 +195,13 @@
             url: $trigger.data('url'),
             data: data,
             error:function(a,b,c) {
-                Dcat.handleAjaxError(a, b, c);
+                AIO.handleAjaxError(a, b, c);
             },
         }).done(function (res) {
-            Dcat.NP.done();
+            AIO.NP.done();
             var data = res.data;
             if (res.status === true) {
-                Dcat.success(data.message);
+                AIO.success(data.message);
                 var $display = $popover.data('display');
                 $display.text(label);
                 if (! label) {
@@ -209,9 +209,9 @@
                 }
                 $trigger.data('value', val).data('original', val);
                 hide();
-                refresh && Dcat.reload();
+                refresh && AIO.reload();
             } else {
-                Dcat.error(data.message);
+                AIO.error(data.message);
             }
         });
     });

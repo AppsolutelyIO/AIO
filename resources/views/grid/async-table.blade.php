@@ -45,7 +45,7 @@
 
     {!! $grid->renderPagination() !!}
 @else
-    <div class="dcat-box async-{{ $tableId }}">
+    <div class="aio-box async-{{ $tableId }}">
 
         <div class="d-block pb-0">
             @include('admin::grid.table-toolbar')

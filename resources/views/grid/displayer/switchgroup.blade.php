@@ -49,19 +49,19 @@
             data[name[0]] = {};
             data[name[0]][name[1]] = value;
         }
-        Dcat.NP.start();
+        AIO.NP.start();
 
         $.put({
             url: url,
             data: data,
             success: function (d) {
-                Dcat.NP.done();
+                AIO.NP.done();
                 var msg = d.data.message || d.message;
                 if (d.status) {
-                    Dcat.success(msg);
-                    reload && Dcat.reload()
+                    AIO.success(msg);
+                    reload && AIO.reload()
                 } else {
-                    Dcat.error(msg);
+                    AIO.error(msg);
                 }
             }
         });

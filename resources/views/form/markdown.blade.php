@@ -21,7 +21,7 @@
 
 <script first>
     var ele = window.Element;
-    Dcat.eMatches = ele.prototype.matches ||
+    AIO.eMatches = ele.prototype.matches ||
         ele.prototype.msMatchesSelector ||
         ele.prototype.webkitMatchesSelector;
 </script>
@@ -29,5 +29,5 @@
 <script require="@editor-md-form" init="{!! $selector !!}">
     editormd(id, {!! $options !!});
 
-    Element.prototype.matches = Dcat.eMatches;
+    Element.prototype.matches = AIO.eMatches;
 </script>

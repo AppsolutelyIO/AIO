@@ -44,7 +44,7 @@
         }
 
         if (inlineEndpoint && model && id !== undefined && id !== '') {
-            Dcat.NP.start();
+            AIO.NP.start();
 
             $.post({
                 url: inlineEndpoint,
@@ -53,40 +53,40 @@
                     id: id,
                     field: that.attr('name'),
                     value: value,
-                    _token: Dcat.token
+                    _token: AIO.token
                 },
                 success: function (d) {
-                    Dcat.NP.done();
+                    AIO.NP.done();
                     var msg = (d.data && d.data.message) || d.message;
 
                     if (d.status) {
-                        Dcat.success(msg);
-                        reload && Dcat.reload();
+                        AIO.success(msg);
+                        reload && AIO.reload();
                     } else {
-                        Dcat.error(msg);
+                        AIO.error(msg);
                         that.prop('checked', !checked);
                     }
                 },
                 error: function () {
-                    Dcat.NP.done();
+                    AIO.NP.done();
                     that.prop('checked', !checked);
                 }
             });
         } else {
-            Dcat.NP.start();
+            AIO.NP.start();
 
             $.put({
                 url: url,
                 data: data,
                 success: function (d) {
-                    Dcat.NP.done();
+                    AIO.NP.done();
                     var msg = d.data.message || d.message;
 
                     if (d.status) {
-                        Dcat.success(msg);
-                        reload && Dcat.reload();
+                        AIO.success(msg);
+                        reload && AIO.reload();
                     } else {
-                        Dcat.error(msg);
+                        AIO.error(msg);
                     }
                 }
             });

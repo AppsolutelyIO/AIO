@@ -188,7 +188,7 @@ class MinifyCommand extends Command
      */
     protected function getColorFile()
     {
-        return $this->packagePath.'/resources/assets/dcat/sass/theme/_primary.scss';
+        return $this->packagePath.'/resources/assets/aio/sass/theme/_primary.scss';
     }
 
     /**

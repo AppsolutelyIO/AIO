@@ -32,7 +32,7 @@
 @else
     <title>{{ Appsolutely\AIO\Admin::title() }} @if($header) | {{ $header }}@endif</title>
 
-    <script>Dcat.wait();</script>
+    <script>AIO.wait();</script>
 
     {!! Appsolutely\AIO\Admin::asset()->cssToHtml() !!}
     {!! Appsolutely\AIO\Admin::asset()->jsToHtml() !!}

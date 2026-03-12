@@ -289,7 +289,7 @@ EOF;
             Form::dialog($edit)
                 ->click(".$id")
                 ->dimensions($width, $height)
-                ->success('Dcat.reload()');
+                ->success('AIO.reload()');
 
             $text = $this->showEdit ? '' : "<span class='d-none d-sm-inline'> &nbsp; $edit</span>";
 

@@ -30,7 +30,7 @@ class DarkModeSwitcher implements Renderable
 </ul>
 
 <script>
-Dcat.darkMode.initSwitcher('.dark-mode-switcher');
+AIO.darkMode.initSwitcher('.dark-mode-switcher');
 </script>
 HTML;
     }

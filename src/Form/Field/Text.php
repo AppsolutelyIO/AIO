@@ -115,7 +115,7 @@ class Text extends Field
     {
         Admin::script(
             <<<'JS'
-Dcat.validator.extend('maxlength', function ($el) {
+AIO.validator.extend('maxlength', function ($el) {
     return $el.val().length > $el.attr('data-maxlength');
 });
 JS
@@ -145,7 +145,7 @@ JS
 
         $options = admin_javascript_json($options);
 
-        $this->script = "Dcat.init('{$this->getElementClassSelector()}', function (self) {
+        $this->script = "AIO.init('{$this->getElementClassSelector()}', function (self) {
             self.inputmask($options);
         });";
 

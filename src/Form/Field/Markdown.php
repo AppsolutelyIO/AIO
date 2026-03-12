@@ -35,8 +35,8 @@ class Markdown extends Field
     protected $language;
 
     protected $defaultLangs = [
-        'en'    => '@admin/dcat/plugins/editor-md/languages/en.js',
-        'zh_TW' => '@admin/dcat/plugins/editor-md/languages/zh-tw.js',
+        'en'    => '@admin/aio/plugins/editor-md/languages/en.js',
+        'zh_TW' => '@admin/aio/plugins/editor-md/languages/zh-tw.js',
     ];
 
     protected $disk;
@@ -149,7 +149,7 @@ class Markdown extends Field
      */
     public function render()
     {
-        $this->options['path'] = admin_asset('@admin/dcat/plugins/editor-md/lib').'/';
+        $this->options['path'] = admin_asset('@admin/aio/plugins/editor-md/lib').'/';
         $this->options['name'] = $this->column;
         $this->options['placeholder'] = $this->placeholder();
         $this->options['readonly'] = ! empty($this->attributes['readonly']) || ! empty($this->attributes['disabled']);
