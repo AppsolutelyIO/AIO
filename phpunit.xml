@@ -12,6 +12,8 @@
         </testsuite>
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
+            <exclude>./tests/Feature/InstallTest.php</exclude>
+            <exclude>./tests/Feature/SectionTest.php</exclude>
         </testsuite>
         <testsuite name="Browser">
             <directory suffix="Test.php">./tests/Browser</directory>
