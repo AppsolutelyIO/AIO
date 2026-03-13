@@ -383,15 +383,15 @@ class VersionManager
         }
 
         foreach ($historyInfo as $history) {
-            if ($history->version != $version) {
+            if ($history->version !== $version) {
                 continue;
             }
 
-            if ($history->type == static::HISTORY_TYPE_COMMENT && ! $script) {
+            if ($history->type === static::HISTORY_TYPE_COMMENT && ! $script) {
                 return true;
             }
 
-            if ($history->type == static::HISTORY_TYPE_SCRIPT && $history->detail == $script) {
+            if ($history->type === static::HISTORY_TYPE_SCRIPT && $history->detail === $script) {
                 return true;
             }
         }
