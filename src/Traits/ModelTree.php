@@ -85,7 +85,7 @@ trait ModelTree
      * @param  \Closure|null  $query
      * @return $this
      */
-    public function withQuery(\Closure $query = null)
+    public function withQuery(?\Closure $query = null)
     {
         $this->queryCallbacks[] = $query;
 
@@ -286,7 +286,7 @@ trait ModelTree
      * @param  string  $rootText
      * @return array
      */
-    public static function selectOptions(\Closure $closure = null, $rootText = null)
+    public static function selectOptions(?\Closure $closure = null, $rootText = null)
     {
         $rootText = $rootText ?: admin_trans_label('root');
 

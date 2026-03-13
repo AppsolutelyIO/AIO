@@ -1697,7 +1697,7 @@ class Form implements Renderable
      * @param  Closure  $callback
      * @return bool|void
      */
-    public function inDialog(\Closure $callback = null)
+    public function inDialog(?\Closure $callback = null)
     {
         if (! $callback) {
             return DialogForm::is();
