@@ -79,16 +79,18 @@ class MenuController extends AdminController
             });
 
             $tree->branch(function ($branch) {
-                $payload = "<i class='fa {$branch['icon']}'></i>&nbsp;<strong>{$branch['title']}</strong>";
+                $icon = e($branch['icon']);
+                $title = e($branch['title']);
+                $payload = "<i class='fa {$icon}'></i>&nbsp;<strong>{$title}</strong>";
 
                 if (! isset($branch['children'])) {
                     if (url()->isValidUrl($branch['uri'])) {
-                        $uri = $branch['uri'];
+                        $uri = e($branch['uri']);
                     } else {
-                        $uri = admin_base_path($branch['uri']);
+                        $uri = e(admin_base_path($branch['uri']));
                     }
 
-                    $payload .= "&nbsp;&nbsp;&nbsp;<a href=\"$uri\" class=\"dd-nodrag\">$uri</a>";
+                    $payload .= "&nbsp;&nbsp;&nbsp;<a href=\"{$uri}\" class=\"dd-nodrag\">{$uri}</a>";
                 }
 
                 return $payload;
