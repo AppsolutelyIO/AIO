@@ -70,6 +70,7 @@ abstract class Setting extends Form implements LazyRenderable
      */
     public function title()
     {
+        return '';
     }
 
     /**
