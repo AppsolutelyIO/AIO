@@ -1,6 +1,6 @@
 {
     "name": "appsolutely/aio",
-    "description": "Appsolutely AIO - AI-powered Dashboard",
+    "description": "AI-powered application framework for Laravel — admin dashboard, CMS, e-commerce, and production-ready APIs out of the box",
     "type": "library",
     "keywords": [
         "appsolutely",
@@ -8,7 +8,10 @@
         "laravel",
         "admin",
         "dashboard",
-        "ai"
+        "cms",
+        "e-commerce",
+        "ai",
+        "api"
     ],
     "homepage": "https://appsolutely.io",
     "license": "MIT",
