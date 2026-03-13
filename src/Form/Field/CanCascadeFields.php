@@ -63,9 +63,9 @@ trait CanCascadeFields
         }
 
         if (is_array($value)) {
-            $value = array_map('strval', $value);
+            $value = array_map(fn ($v) => (string) $v, $value);
         } else {
-            $value = strval($value);
+            $value = (string) $value;
         }
     }
 
