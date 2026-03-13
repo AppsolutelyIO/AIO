@@ -569,7 +569,7 @@ class EloquentRepository extends Repository implements TreeRepository
             );
         }
 
-        return $model->moveOrderUp() ? true : false;
+        return (bool) $model->moveOrderUp();
     }
 
     /**
@@ -591,7 +591,7 @@ class EloquentRepository extends Repository implements TreeRepository
             );
         }
 
-        return $model->moveOrderDown() ? true : false;
+        return (bool) $model->moveOrderDown();
     }
 
     /**
