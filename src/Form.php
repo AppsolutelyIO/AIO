@@ -942,12 +942,12 @@ class Form implements Renderable
             return rtrim($resourcesPath, '/')."/{$key}/edit";
         }
 
-        if ($this->request->get('after-save') == 2) {
+        if ((int) $this->request->get('after-save') === 2) {
             // continue creating
             return rtrim($resourcesPath, '/').'/create';
         }
 
-        if ($this->request->get('after-save') == 3) {
+        if ((int) $this->request->get('after-save') === 3) {
             // view resource
             return rtrim($resourcesPath, '/')."/{$key}";
         }

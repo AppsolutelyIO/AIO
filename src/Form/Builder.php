@@ -465,7 +465,7 @@ class Builder implements FieldsCollection
      */
     public function option($option, $value = null)
     {
-        if (func_num_args() == 1) {
+        if (func_num_args() === 1) {
             return Arr::get($this->options, $option);
         }
 

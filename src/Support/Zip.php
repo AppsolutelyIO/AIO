@@ -226,7 +226,7 @@ class Zip extends ZipArchive
             return $this;
         }
 
-        if (substr($source, 0, 1) == '/') {
+        if (substr($source, 0, 1) === '/') {
             $source = substr($source, 1);
         }
 

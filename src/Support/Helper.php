@@ -859,7 +859,7 @@ class Helper
 
         $name = explode('.', $name);
 
-        if (count($name) == 1) {
+        if (count($name) === 1) {
             return $name[0];
         }
 

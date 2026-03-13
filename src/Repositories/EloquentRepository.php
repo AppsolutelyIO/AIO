@@ -932,7 +932,7 @@ class EloquentRepository extends Repository implements TreeRepository
 
                         $instance = $relation->findOrNew(Arr::get($related, $keyName));
 
-                        if (Arr::get($related, Form::REMOVE_FLAG_NAME) == 1) {
+                        if (Arr::get($related, Form::REMOVE_FLAG_NAME) == '1') {
                             $instance->delete();
 
                             continue;

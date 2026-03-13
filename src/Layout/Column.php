@@ -117,7 +117,7 @@ class Column implements Renderable
     {
         // get class name using width array
         $classnName = collect($this->width)->map(function ($value, $key) {
-            return $value == 0 ? "col-$key" : "col-$key-$value";
+            return $value === 0 ? "col-$key" : "col-$key-$value";
         })->implode(' ');
 
         return "<div class=\"{$classnName}\">";

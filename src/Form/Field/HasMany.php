@@ -101,12 +101,12 @@ class HasMany extends Field
 
         $this->columnClass = $this->formatClass($relationName);
 
-        if (count($arguments) == 1) {
+        if (count($arguments) === 1) {
             $this->label = $this->formatLabel();
             $this->builder = $arguments[0];
         }
 
-        if (count($arguments) == 2) {
+        if (count($arguments) === 2) {
             [$this->label, $this->builder] = $arguments;
         }
     }

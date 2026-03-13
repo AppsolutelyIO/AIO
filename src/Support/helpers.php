@@ -284,11 +284,11 @@ if (! function_exists('admin_base_path')) {
     {
         $prefix = '/'.trim(config('admin.route.prefix'), '/');
 
-        $prefix = ($prefix == '/') ? '' : $prefix;
+        $prefix = ($prefix === '/') ? '' : $prefix;
 
         $path = trim($path, '/');
 
-        if (is_null($path) || strlen($path) == 0) {
+        if (is_null($path) || strlen($path) === 0) {
             return $prefix ?: '/';
         }
 

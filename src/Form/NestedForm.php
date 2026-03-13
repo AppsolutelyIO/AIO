@@ -208,7 +208,7 @@ class NestedForm extends WidgetForm
      */
     protected function prepareRecord($record)
     {
-        if ($record[static::REMOVE_FLAG_NAME] == 1) {
+        if ($record[static::REMOVE_FLAG_NAME] == '1') {
             return $record;
         }
 
