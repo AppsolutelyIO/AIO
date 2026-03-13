@@ -9,10 +9,9 @@
         "type-check": "tsc --noEmit"
     },
     "devDependencies": {
-        "@rollup/plugin-commonjs": "^29.0.2",
         "@types/nprogress": "^0.2.3",
         "apexcharts": "^5.10.3",
-        "bootstrap-colorpicker": "^3.2.0",
+        "bootstrap-colorpicker": "^3.4.0",
         "bootstrap-duallistbox": "^3.0.9",
         "bootstrap-validator": "^0.11.9",
         "devbridge-autocomplete": "^1.5.0",
@@ -34,7 +33,7 @@
         "tsx": "^4.21.0",
         "typescript": "^5.9.3",
         "vditor": "^3.11.2",
-        "vite": "^7.3.1"
+        "vite": "^8.0.0"
     },
     "dependencies": {
         "admin-lte": "^3.2.0",

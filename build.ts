@@ -2,7 +2,6 @@ import { build, type InlineConfig } from 'vite';
 import { resolve, basename } from 'path';
 import { cpSync, copyFileSync, mkdirSync, readdirSync } from 'fs';
 import { globSync } from 'glob';
-import commonjs from '@rollup/plugin-commonjs';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const outDir = isProduction ? 'resources/dist' : 'resources/pre-dist';
@@ -49,7 +48,6 @@ async function buildAll(): Promise<void> {
         await build({
             configFile: false,
             css: cssConfig,
-            plugins: [commonjs()],
             build: {
                 outDir,
                 emptyOutDir: false,
@@ -59,13 +57,8 @@ async function buildAll(): Promise<void> {
                     input: { [name]: entry },
                     output: {
                         format: 'iife',
-                        inlineDynamicImports: true,
                         entryFileNames: '[name].js',
                         assetFileNames: '[name][extname]',
-                    },
-                    onwarn(warning, defaultHandler) {
-                        if (warning.code === 'EVAL') return;
-                        defaultHandler(warning);
                     },
                 },
             },
