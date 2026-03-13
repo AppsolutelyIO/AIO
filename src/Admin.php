@@ -595,6 +595,9 @@ class Admin
                         $router->resource('auth/roles', 'RoleController');
                         $router->resource('auth/permissions', 'PermissionController');
                     }
+
+                    $router->get('site-settings', 'SiteSettingController@index');
+                    $router->post('site-settings', 'SiteSettingController@store');
                 });
 
                 $router->resource('auth/extensions', 'Appsolutely\AIO\Http\Controllers\ExtensionController', ['only' => ['index', 'store', 'update']]);
