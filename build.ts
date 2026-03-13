@@ -116,10 +116,11 @@ async function buildAll(): Promise<void> {
 
     // Plugins sourced from npm (skip when copying vendored assets)
     const npmPlugins = new Set([
-        'autocomplete', 'bootstrap-datetimepicker', 'bootstrap-validator',
-        'charts', 'ionslider', 'jquery-pjax', 'jquery.initialize',
-        'jstree-theme', 'moment', 'moment-timezone', 'nestable',
-        'select', 'sortable', 'vditor',
+        'autocomplete', 'bootstrap-datetimepicker', 'bootstrap-duallistbox',
+        'bootstrap-validator', 'charts', 'extensions', 'input-mask',
+        'ionslider', 'jquery-pjax', 'jquery.initialize', 'jstree-theme',
+        'moment', 'moment-timezone', 'nestable', 'select', 'sortable',
+        'tinymce', 'vditor',
     ]);
 
     // Copy vendored plugins (those not sourced from npm)
@@ -186,6 +187,27 @@ async function buildAll(): Promise<void> {
 
     // devbridge-autocomplete
     copy('node_modules/devbridge-autocomplete/dist/jquery.autocomplete.min.js', `${p}/autocomplete/jquery.autocomplete.min.js`);
+
+    // jquery.inputmask (phone-codes kept as vendored assets)
+    copy('node_modules/jquery.inputmask/dist/jquery.inputmask.bundle.js', `${p}/input-mask/jquery.inputmask.bundle.min.js`);
+    cpSync(`${pluginsSrc}/input-mask/phone-codes`, `${p}/input-mask/phone-codes`, { recursive: true });
+
+    // bootstrap-duallistbox
+    copy('node_modules/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js', `${p}/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js`);
+    copy('node_modules/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css', `${p}/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css`);
+
+    // tinymce (langs from tinymce-i18n)
+    copy('node_modules/tinymce/tinymce.min.js', `${p}/tinymce/tinymce.min.js`);
+    copy('node_modules/tinymce/tinymce.d.ts', `${p}/tinymce/tinymce.d.ts`);
+    copy('node_modules/tinymce/themes', `${p}/tinymce/themes`);
+    copy('node_modules/tinymce/skins', `${p}/tinymce/skins`);
+    copy('node_modules/tinymce/plugins', `${p}/tinymce/plugins`);
+    copy('node_modules/tinymce/icons', `${p}/tinymce/icons`);
+    copy('node_modules/tinymce-i18n/langs5', `${p}/tinymce/langs`);
+
+    // toastr (extensions dir only needs toastr; sweetalert2 is bundled via TS)
+    copy('node_modules/toastr/build/toastr.min.js', `${p}/extensions/toastr.min.js`);
+    copy('node_modules/toastr/build/toastr.css', `${p}/extensions/toastr.css`);
 
     // vditor
     copy('node_modules/vditor/dist', `${p}/vditor/dist`);
