@@ -264,7 +264,7 @@ class MigrationRegressionTest extends TestCase
     public function test_dist_files_no_dcat_references()
     {
         $distPath = __DIR__.'/../../resources/dist/aio/';
-        $files = ['js/aio-app.js', 'extra/action.js', 'extra/grid-extend.js'];
+        $files = ['js/app.js', 'extra/action.js', 'extra/grid-extend.js'];
 
         foreach ($files as $file) {
             $content = file_get_contents($distPath . $file);

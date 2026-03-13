@@ -25,7 +25,7 @@ const cssConfig: InlineConfig['css'] = {
 
 // === JS/TS entries (build as IIFE) ===
 const jsEntries: Record<string, string> = {
-    'aio/js/aio-app': resolve(dir, 'resources/assets/aio/js/aio-app.ts'),
+    'aio/js/app': resolve(dir, 'resources/assets/aio/js/app.ts'),
 };
 
 for (const f of globSync('resources/assets/aio/extra/*.ts')) {
@@ -37,7 +37,7 @@ for (const f of globSync('resources/assets/aio/extra/*.ts')) {
 // === CSS entries (SCSS → CSS) ===
 const cssEntries: CssEntry[] = [
     { input: 'resources/assets/adminlte/scss/AdminLTE.scss', output: 'adminlte/adminlte.css' },
-    { input: 'resources/assets/aio/sass/aio-app.scss', output: 'aio/css/aio-app.css' },
+    { input: 'resources/assets/aio/sass/app.scss', output: 'aio/css/app.css' },
     { input: 'resources/assets/aio/extra/upload.scss', output: 'aio/extra/upload.css' },
     { input: 'resources/assets/aio/extra/markdown.scss', output: 'aio/extra/markdown.css' },
 ];

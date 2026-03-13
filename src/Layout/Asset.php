@@ -32,8 +32,8 @@ class Asset
             'css' => '@admin/aio/css/nunito.css',
         ],
         '@aio' => [
-            'js'  => '@admin/aio/js/aio-app.js',
-            'css' => '@admin/aio/css/aio-app.css',
+            'js'  => '@admin/aio/js/app.js',
+            'css' => '@admin/aio/css/app.css',
         ],
         '@vendors' => [
             'js'  => '@admin/aio/plugins/vendors.min.js',

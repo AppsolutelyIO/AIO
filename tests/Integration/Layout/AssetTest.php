@@ -49,8 +49,8 @@ class AssetTest extends TestCase
     public function test_get_real_path_resolves_admin_alias()
     {
         $asset = $this->getAsset();
-        $path = $asset->getRealPath('@admin/aio/js/aio-app.js');
-        $this->assertSame('vendor/aio/aio/js/aio-app.js', $path);
+        $path = $asset->getRealPath('@admin/aio/js/app.js');
+        $this->assertSame('vendor/aio/aio/js/app.js', $path);
     }
 
     public function test_get_real_path_returns_non_alias_unchanged()
