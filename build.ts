@@ -25,7 +25,6 @@ const cssConfig: InlineConfig['css'] = {
 
 // === JS/TS entries (build as IIFE) ===
 const jsEntries: Record<string, string> = {
-    'adminlte/adminlte': resolve(dir, 'resources/assets/adminlte/js/AdminLTE.ts'),
     'aio/js/aio-app': resolve(dir, 'resources/assets/aio/js/aio-app.ts'),
 };
 
@@ -117,6 +116,13 @@ async function buildAll(): Promise<void> {
     cpSync('resources/assets/aio/plugins', `${outDir}/aio/plugins`, { recursive: true });
     mkdirSync(`${outDir}/aio/css`, { recursive: true });
     copyFileSync('resources/assets/aio/sass/nunito.css', `${outDir}/aio/css/nunito.css`);
+
+    // 4. Copy AdminLTE JS from npm package (pre-built)
+    console.log('[COPY] AdminLTE JS (from npm)');
+    mkdirSync(`${outDir}/adminlte`, { recursive: true });
+    const adminlteSrc = isProduction ? 'adminlte.min.js' : 'adminlte.js';
+    copyFileSync(`node_modules/admin-lte/dist/js/${adminlteSrc}`, `${outDir}/adminlte/adminlte.js`);
+    copyFileSync(`node_modules/admin-lte/dist/js/${adminlteSrc}.map`, `${outDir}/adminlte/adminlte.js.map`);
 
     console.log('Done.');
 }
