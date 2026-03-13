@@ -23,7 +23,7 @@
 
 <div class="{{$viewClass['form-group']}} {{ $class }}">
 
-    <label for="{{$column}}" class="{{$viewClass['label']}} control-label">{!! $label !!}</label>
+    <label class="{{$viewClass['label']}} control-label">{!! $label !!}</label>
 
     <div class="{{$viewClass['field']}}">
 
