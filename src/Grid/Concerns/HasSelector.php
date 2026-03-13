@@ -44,7 +44,7 @@ trait HasSelector
      */
     protected function applySelectorQuery()
     {
-        if (is_null($this->_selector)) {
+        if ($this->_selector === null) {
             return $this;
         }
 

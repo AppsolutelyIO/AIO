@@ -873,7 +873,7 @@ class EloquentRepository extends Repository implements TreeRepository
                     $related = $model->$relationName;
 
                     // if related is empty
-                    if (is_null($related)) {
+                    if ($related === null) {
                         $related = $relation->getRelated();
                         $qualifiedParentKeyName = $relation->getQualifiedParentKeyName();
                         $localKey = Arr::last(explode('.', $qualifiedParentKeyName));
@@ -892,7 +892,7 @@ class EloquentRepository extends Repository implements TreeRepository
                     $parent = $model->$relationName;
 
                     // if related is empty
-                    if (is_null($parent)) {
+                    if ($parent === null) {
                         $parent = $relation->getRelated();
                     }
 
@@ -913,7 +913,7 @@ class EloquentRepository extends Repository implements TreeRepository
                     break;
                 case $relation instanceof Relations\MorphOne:
                     $related = $model->$relationName;
-                    if (is_null($related)) {
+                    if ($related === null) {
                         $related = $relation->make();
                     }
                     foreach ($prepared[$name] as $column => $value) {

@@ -382,7 +382,7 @@ class Model
      */
     public function buildData()
     {
-        if (is_null($this->data)) {
+        if ($this->data === null) {
             $this->setData($this->fetch());
         }
 

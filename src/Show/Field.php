@@ -196,7 +196,7 @@ class Field implements Renderable
     public function using(array $values, $default = null)
     {
         return $this->as(function ($value) use ($values, $default) {
-            if (is_null($value)) {
+            if ($value === null) {
                 return $default;
             }
 
@@ -348,7 +348,7 @@ HTML;
     public function dot($options = [], $default = 'default')
     {
         return $this->unescape()->prepend(function ($_, $original) use ($options, $default) {
-            $style = is_null($original) ? $default : Arr::get((array) $options, $original, $default);
+            $style = $original === null ? $default : Arr::get((array) $options, $original, $default);
 
             $style = $style === 'default' ? 'dark70' : $style;
 

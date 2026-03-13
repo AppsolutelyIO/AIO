@@ -542,7 +542,7 @@ class Field implements Renderable
      */
     public function value($value = null)
     {
-        if (is_null($value)) {
+        if ($value === null) {
             if (
                 $this->value === null
                 || (is_array($this->value) && empty($this->value))
@@ -566,7 +566,7 @@ class Field implements Renderable
      */
     public function data(array $data = null)
     {
-        if (is_null($data)) {
+        if ($data === null) {
             if (! $this->data || is_array($this->data)) {
                 $this->data = new Fluent((array) $this->data);
             }

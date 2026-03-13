@@ -1031,7 +1031,7 @@ class Form implements Renderable
         Helper::prepareHasOneRelation($this->builder->fields(), $inserts);
 
         foreach ($inserts as $column => $value) {
-            if (is_null($field = $this->field($column))) {
+            if (($field = $this->field($column)) === null) {
                 unset($inserts[$column]);
                 continue;
             }
@@ -1628,11 +1628,11 @@ class Form implements Renderable
      */
     public function input($key = null, $value = null)
     {
-        if (is_null($key)) {
+        if ($key === null) {
             return $this->inputs;
         }
 
-        if (is_null($value)) {
+        if ($value === null) {
             return Arr::get($this->inputs, $key);
         }
 

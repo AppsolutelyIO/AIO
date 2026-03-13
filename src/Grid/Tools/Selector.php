@@ -128,7 +128,7 @@ class Selector
      */
     public function parseSelected()
     {
-        if (! is_null($this->selected)) {
+        if ($this->selected !== null) {
             return $this->selected;
         }
 
@@ -138,7 +138,7 @@ class Selector
         }
 
         $selected = array_filter($selected, function ($value) {
-            return ! is_null($value);
+            return $value !== null;
         });
 
         foreach ($selected as &$value) {
@@ -175,7 +175,7 @@ class Selector
         $options = Arr::get($selected, $column, []);
         $queryName = "{$this->getQueryName()}.{$column}";
 
-        if (is_null($value)) {
+        if ($value === null) {
             Arr::forget($query, $queryName);
 
             return $this->request->fullUrlWithQuery($query);

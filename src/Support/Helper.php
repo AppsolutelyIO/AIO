@@ -883,7 +883,7 @@ class Helper
      */
     public static function arraySet(&$array, $key, $value)
     {
-        if (is_null($key)) {
+        if ($key === null) {
             return $array = $value;
         }
 

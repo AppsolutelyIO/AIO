@@ -241,7 +241,7 @@ abstract class AbstractFilter
      */
     public function siblings($index = null)
     {
-        if (! is_null($index)) {
+        if ($index !== null) {
             return Arr::get($this->parent->filters(), $index);
         }
 

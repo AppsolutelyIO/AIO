@@ -202,7 +202,7 @@ trait UploadField
 
         $this->prepareFile($file);
 
-        if (! is_null($this->storagePermission)) {
+        if ($this->storagePermission !== null) {
             $result = $this->getStorage()->putFileAs($this->getDirectory(), $file, $this->name, $this->storagePermission);
         } else {
             $result = $this->getStorage()->putFileAs($this->getDirectory(), $file, $this->name);

@@ -67,7 +67,7 @@ class Number extends Text
      */
     public function value($value = null)
     {
-        if (is_null($value)) {
+        if ($value === null) {
             return (int) parent::value();
         }
 
