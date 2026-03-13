@@ -288,7 +288,7 @@ if (! function_exists('admin_base_path')) {
 
         $path = trim($path, '/');
 
-        if (is_null($path) || strlen($path) === 0) {
+        if ($path === '') {
             return $prefix ?: '/';
         }
 
