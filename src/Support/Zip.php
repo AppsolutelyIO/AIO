@@ -232,7 +232,7 @@ class Zip extends ZipArchive
 
         for ($i = 0; $i < $this->numFiles; $i++) {
             $stats = $this->statIndex($i);
-            if (substr($stats['name'], 0, strlen($source)) == $source) {
+            if (str_starts_with($stats['name'], $source)) {
                 $this->deleteIndex($i);
             }
         }
