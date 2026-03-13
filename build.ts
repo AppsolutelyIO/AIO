@@ -112,7 +112,7 @@ async function buildAll(): Promise<void> {
         'autocomplete', 'bootstrap-colorpicker', 'bootstrap-datetimepicker',
         'bootstrap-duallistbox', 'bootstrap-validator', 'charts',
         'extensions', 'fontawesome-iconpicker', 'input-mask', 'ionslider',
-        'jquery-pjax', 'jquery.initialize', 'jstree-theme', 'moment',
+        'jquery.initialize', 'jstree-theme', 'moment',
         'moment-timezone', 'nestable', 'select', 'sortable', 'tinymce',
         'vditor',
     ]);
@@ -165,8 +165,8 @@ async function buildAll(): Promise<void> {
     cpSync(`${pluginsSrc}/ionslider/ion.rangeSlider.skinFlat.css`, `${p}/ionslider/ion.rangeSlider.skinFlat.css`);
     cpSync(`${pluginsSrc}/ionslider/img`, `${p}/ionslider/img`, { recursive: true });
 
-    // jquery-pjax (no minified JS in npm)
-    copy('node_modules/jquery-pjax/jquery.pjax.js', `${p}/jquery-pjax/jquery.pjax.min.js`);
+    // jquery-pjax: uses vendored custom version (includes SeaJS + pjax:loaded event)
+    // NOT sourced from npm — the npm version lacks the sequential script loader
 
     // jquery.initialize
     copy('node_modules/jquery.initialize/jquery.initialize.min.js', `${p}/jquery.initialize/jquery.initialize.min.js`);
