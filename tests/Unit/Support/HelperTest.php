@@ -34,6 +34,11 @@ class HelperTest extends TestCase
         $this->assertSame(['foo' => 'bar'], Helper::array('{"foo":"bar"}'));
     }
 
+    public function test_array_falls_back_to_comma_split_on_invalid_json()
+    {
+        $this->assertSame(['not', '{json}'], Helper::array('not,{json}'));
+    }
+
     public function test_array_filters_empty_values_by_default()
     {
         $result = Helper::array(['a', '', null, 'b']);

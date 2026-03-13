@@ -58,12 +58,7 @@ class Helper
         } elseif ($value instanceof Arrayable) {
             $value = $value->toArray();
         } elseif (is_string($value)) {
-            $array = null;
-
-            try {
-                $array = json_decode($value, true);
-            } catch (\Throwable $e) {
-            }
+            $array = json_decode($value, true);
 
             $value = is_array($array) ? $array : explode(',', $value);
         } else {
