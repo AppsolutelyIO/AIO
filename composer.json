@@ -41,7 +41,20 @@
             "Appsolutely\\AIO\\": "src/"
         },
         "files": [
-            "src/Support/helpers.php"
+            "src/Support/helpers.php",
+            "src/Helpers/helpers.php",
+            "src/Helpers/admin_ui_helpers.php",
+            "src/Helpers/app_config_helpers.php",
+            "src/Helpers/data_helpers.php",
+            "src/Helpers/grid_helpers.php",
+            "src/Helpers/http_helpers.php",
+            "src/Helpers/logging_helpers.php",
+            "src/Helpers/markdown_helpers.php",
+            "src/Helpers/site_config_helpers.php",
+            "src/Helpers/theme_helpers.php",
+            "src/Helpers/timezone_helpers.php",
+            "src/Helpers/translation_helpers.php",
+            "src/Helpers/url_helpers.php"
         ]
     },
     "autoload-dev": {
