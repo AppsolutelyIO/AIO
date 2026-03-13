@@ -21,6 +21,7 @@
         "vite": "^7.3.1"
     },
     "dependencies": {
+        "admin-lte": "^3.2.0",
         "nprogress": "^0.2.0",
         "sweetalert2": "^9.17.4"
     }
