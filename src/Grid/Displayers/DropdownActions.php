@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Grid\Displayers;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 
 class DropdownActions extends Actions
 {
@@ -35,7 +35,7 @@ class DropdownActions extends Actions
      */
     protected function wrapCustomAction($action)
     {
-        $action = Helper::render($action);
+        $action = HtmlHelper::render($action);
 
         if (mb_strpos($action, '</a>') === false) {
             return "<a>$action</a>";

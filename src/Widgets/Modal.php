@@ -6,7 +6,7 @@ use Closure;
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Contracts\LazyRenderable;
 use Appsolutely\AIO\Grid\LazyRenderable as LazyGrid;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\InteractsWithRenderApi;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
@@ -385,17 +385,17 @@ HTML;
 
     protected function renderTitle()
     {
-        return Helper::render($this->title);
+        return HtmlHelper::render($this->title);
     }
 
     protected function renderContent()
     {
-        return Helper::render($this->content);
+        return HtmlHelper::render($this->content);
     }
 
     protected function renderFooter()
     {
-        $footer = Helper::render($this->footer);
+        $footer = HtmlHelper::render($this->footer);
 
         if (! $footer) {
             return;
@@ -412,7 +412,7 @@ HTML;
             return;
         }
 
-        $button = Helper::render($this->button);
+        $button = HtmlHelper::render($this->button);
 
         // 如果没有HTML标签则添加一个 a 标签
         if (! preg_match('/(\<\/[\d\w]+\s*\>+)/i', $button)) {

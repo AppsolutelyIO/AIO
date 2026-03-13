@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Grid\Displayers;
 
 use Appsolutely\AIO\Contracts\LazyRenderable;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Widgets\Modal as WidgetModal;
 
 class Modal extends AbstractDisplayer
@@ -47,7 +47,7 @@ class Modal extends AbstractDisplayer
             $callback = $callback->call($this->row, $this);
 
             if (! $callback instanceof LazyRenderable) {
-                $html = Helper::render($callback);
+                $html = HtmlHelper::render($callback);
 
                 $callback = null;
             }

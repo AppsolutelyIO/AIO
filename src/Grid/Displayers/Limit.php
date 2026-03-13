@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Grid\Displayers;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 
 class Limit extends AbstractDisplayer
 {
@@ -20,7 +21,7 @@ JS;
 
     public function display($limit = 100, $end = '...')
     {
-        $this->value = Helper::htmlEntityEncode($this->value);
+        $this->value = HtmlHelper::entityEncode($this->value);
 
         // 数组
         if ($this->value !== null && ! is_scalar($this->value)) {

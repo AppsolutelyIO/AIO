@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Form;
 
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
@@ -261,7 +262,7 @@ class EmbeddedForm
 
     protected function formatName($name)
     {
-        return Helper::formatElementName($name);
+        return HtmlHelper::formatElementName($name);
     }
 
     protected function formatClass(string $column)

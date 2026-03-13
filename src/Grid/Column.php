@@ -6,6 +6,7 @@ use Closure;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Grid\Displayers\AbstractDisplayer;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
@@ -620,7 +621,7 @@ class Column
      */
     protected function htmlEntityEncode($item)
     {
-        return Helper::htmlEntityEncode($item);
+        return HtmlHelper::entityEncode($item);
     }
 
     /**

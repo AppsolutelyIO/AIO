@@ -4,7 +4,7 @@ namespace Appsolutely\AIO\Grid\Displayers;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Contracts\LazyRenderable;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Support\Str;
 
 class Expand extends AbstractDisplayer
@@ -27,7 +27,7 @@ class Expand extends AbstractDisplayer
             $callbackOrButton = $callbackOrButton->call($this->row, $this);
 
             if (! $callbackOrButton instanceof LazyRenderable) {
-                $html = Helper::render($callbackOrButton);
+                $html = HtmlHelper::render($callbackOrButton);
 
                 $callbackOrButton = null;
             }

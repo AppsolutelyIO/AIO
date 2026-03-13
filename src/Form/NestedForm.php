@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Form;
 
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Widgets\Form as WidgetForm;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -382,12 +383,12 @@ class NestedForm extends WidgetForm
         if (is_array($column)) {
             foreach ($column as $k => $name) {
                 $errorKey[$k] = sprintf('%s.%s.%s', $this->relationName, $key, $name);
-                $elementName[$k] = Helper::formatElementName($this->formatName().'.'.$key.'.'.$name);
+                $elementName[$k] = HtmlHelper::formatElementName($this->formatName().'.'.$key.'.'.$name);
                 $elementClass[$k] = [$this->formatClass(), $this->formatClass($name), $this->formatClass($name, false)];
             }
         } else {
             $errorKey = sprintf('%s.%s.%s', $this->relationName, $key, $column);
-            $elementName = Helper::formatElementName($this->formatName().'.'.$key.'.'.$column);
+            $elementName = HtmlHelper::formatElementName($this->formatName().'.'.$key.'.'.$column);
             $elementClass = [$this->formatClass(), $this->formatClass($column), $this->formatClass($column, false)];
         }
 
@@ -405,7 +406,7 @@ class NestedForm extends WidgetForm
 
     protected function formatName($name = null)
     {
-        return Helper::formatElementName($name ?: $this->relationName);
+        return HtmlHelper::formatElementName($name ?: $this->relationName);
     }
 
     /**

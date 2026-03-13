@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Grid\Displayers;
 
 use Appsolutely\AIO\Admin;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 
 /**
  * Class Copyable.
@@ -36,7 +36,7 @@ JS;
     {
         $this->addScript();
 
-        $this->value = Helper::htmlEntityEncode($this->value);
+        $this->value = HtmlHelper::entityEncode($this->value);
 
         $html = <<<HTML
 <a href="javascript:void(0);" class="grid-column-copyable text-muted" data-content="{$this->value}" title="{$this->trans('copied')}" data-placement="bottom">

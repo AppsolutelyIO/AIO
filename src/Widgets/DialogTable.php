@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Widgets;
 
 use Appsolutely\AIO\Grid\LazyRenderable;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Contracts\Support\Renderable;
 
 class DialogTable extends Widget
@@ -238,7 +238,7 @@ class DialogTable extends Widget
 
     protected function renderFooter()
     {
-        return Helper::render($this->footer);
+        return HtmlHelper::render($this->footer);
     }
 
     protected function renderButton()
@@ -247,7 +247,7 @@ class DialogTable extends Widget
             return;
         }
 
-        $button = Helper::render($this->button);
+        $button = HtmlHelper::render($this->button);
 
         // 如果没有HTML标签则添加一个 a 标签
         if (! preg_match('/(\<\/[\d\w]+\s*\>+)/i', $button)) {

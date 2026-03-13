@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Widgets;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
 
@@ -51,7 +51,7 @@ class Markdown extends Widget
 
     protected function renderContent()
     {
-        return Helper::render($this->content);
+        return HtmlHelper::render($this->content);
     }
 
     public function render()

@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Show;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 
 class Html extends Field
 {
@@ -15,6 +15,6 @@ class Html extends Field
 
     public function render()
     {
-        return Helper::render($this->html, [$this->value()], $this->parent->model());
+        return HtmlHelper::render($this->html, [$this->value()], $this->parent->model());
     }
 }

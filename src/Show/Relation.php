@@ -4,7 +4,7 @@ namespace Appsolutely\AIO\Show;
 
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Show;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Fluent;
 
@@ -102,7 +102,7 @@ class Relation extends Field
                 ->render();
         }
 
-        return Helper::render($view);
+        return HtmlHelper::render($view);
     }
 
     /**

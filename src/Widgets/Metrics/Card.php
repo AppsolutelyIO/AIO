@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Widgets\Metrics;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\InteractsWithApi;
 use Appsolutely\AIO\Widgets\ApexCharts\Chart;
 use Appsolutely\AIO\Widgets\Widget;
@@ -482,7 +483,7 @@ JS;
      */
     public function renderHeader()
     {
-        return Helper::render($this->header);
+        return HtmlHelper::render($this->header);
     }
 
     /**
@@ -492,7 +493,7 @@ JS;
      */
     public function renderContent()
     {
-        return Helper::render($this->content);
+        return HtmlHelper::render($this->content);
     }
 
     /**

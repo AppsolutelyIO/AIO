@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Http;
 
 use Appsolutely\AIO\Exception\AdminException;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\MessageBag;
@@ -371,7 +371,7 @@ class JsonResponse implements Arrayable
         $data = ['status' => $this->status, 'data' => $this->data];
 
         if ($this->html) {
-            $data['html'] = Helper::render($this->html);
+            $data['html'] = HtmlHelper::render($this->html);
         }
 
         return $data + $this->options;

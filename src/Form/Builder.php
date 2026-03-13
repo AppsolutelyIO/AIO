@@ -10,6 +10,7 @@ use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Form\Concerns\HasFields;
 use Appsolutely\AIO\Form\Field\Hidden;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Support\UrlHelper;
 use Appsolutely\AIO\Traits\HasVariables;
 use Appsolutely\AIO\Widgets\DialogForm;
@@ -738,7 +739,7 @@ class Builder implements FieldsCollection
     protected function doWrap(Renderable $view)
     {
         if ($wrapper = $this->wrapper) {
-            return Helper::render($wrapper($view));
+            return HtmlHelper::render($wrapper($view));
         }
 
         return "<div class='card'>{$view->render()}</div>";

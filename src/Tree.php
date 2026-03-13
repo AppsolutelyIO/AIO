@@ -6,7 +6,7 @@ use Closure;
 use Appsolutely\AIO\Contracts\TreeRepository;
 use Appsolutely\AIO\Exception\InvalidArgumentException;
 use Appsolutely\AIO\Repositories\EloquentRepository;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Appsolutely\AIO\Traits\HasVariables;
 use Appsolutely\AIO\Tree\AbstractTool;
@@ -670,7 +670,7 @@ class Tree implements Renderable
             return "<div class='card'>{$html}</div>";
         }
 
-        return Admin::resolveHtml(Helper::render($wrapper($view)))['html'];
+        return Admin::resolveHtml(HtmlHelper::render($wrapper($view)))['html'];
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Traits;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use DOMDocument;
 use DOMElement;
 
@@ -24,7 +24,7 @@ trait HasHtml
 
         static::context()->html = array_merge(
             $html,
-            array_map([Helper::class, 'render'], (array) $content)
+            array_map([HtmlHelper::class, 'render'], (array) $content)
         );
     }
 
@@ -51,7 +51,7 @@ trait HasHtml
      */
     public static function resolveHtml($content, array $options = []): array
     {
-        $dom = static::getDOMDocument(Helper::render($content));
+        $dom = static::getDOMDocument(HtmlHelper::render($content));
 
         $head = static::resolveElement($dom->getElementsByTagName('head')->item(0) ?: null);
         $body = static::resolveElement($dom->getElementsByTagName('body')->item(0) ?: null);

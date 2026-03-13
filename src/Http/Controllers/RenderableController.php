@@ -4,7 +4,7 @@ namespace Appsolutely\AIO\Http\Controllers;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Contracts\LazyRenderable;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Http\Request;
 
 class RenderableController
@@ -30,7 +30,7 @@ class RenderableController
     {
         $asset = Admin::asset();
 
-        return Helper::render($renderable->render())
+        return HtmlHelper::render($renderable->render())
             .Admin::html()
             .$asset->jsToHtml()
             .$asset->cssToHtml()

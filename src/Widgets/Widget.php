@@ -6,7 +6,7 @@ use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Contracts\LazyRenderable;
 use Appsolutely\AIO\Grid\LazyRenderable as LazyGrid;
 use Appsolutely\AIO\Layout\Content;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\HasHtmlAttributes;
 use Appsolutely\AIO\Traits\HasVariables;
 use Illuminate\Contracts\Support\Arrayable;
@@ -168,7 +168,7 @@ abstract class Widget implements Renderable
      */
     protected function toString($value)
     {
-        return Helper::render($value);
+        return HtmlHelper::render($value);
     }
 
     /**
@@ -242,7 +242,7 @@ abstract class Widget implements Renderable
     protected function autoRender()
     {
         Content::composed(function () {
-            if ($results = Helper::render($this->render())) {
+            if ($results = HtmlHelper::render($this->render())) {
                 Admin::html($results);
             }
         });

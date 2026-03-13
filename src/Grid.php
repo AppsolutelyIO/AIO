@@ -9,7 +9,7 @@ use Appsolutely\AIO\Grid\Concerns;
 use Appsolutely\AIO\Grid\Model;
 use Appsolutely\AIO\Grid\Row;
 use Appsolutely\AIO\Grid\Tools;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Support\UrlHelper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Appsolutely\AIO\Traits\HasVariables;
@@ -708,7 +708,7 @@ HTML;
         $content = [];
 
         foreach ($callbacks as $callback) {
-            $content[] = Helper::render($callback, $target);
+            $content[] = HtmlHelper::render($callback, $target);
         }
 
         if (empty($content)) {
@@ -1066,7 +1066,7 @@ JS
             return $view->render();
         }
 
-        return Helper::render($wrapper($view));
+        return HtmlHelper::render($wrapper($view));
     }
 
     /**

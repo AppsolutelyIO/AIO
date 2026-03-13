@@ -5,6 +5,7 @@ namespace Appsolutely\AIO\Form;
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Appsolutely\AIO\Traits\HasVariables;
 use Appsolutely\AIO\Widgets\Form as WidgetForm;
@@ -273,7 +274,7 @@ class Field implements Renderable
      */
     protected function formatName($column)
     {
-        return Helper::formatElementName($column);
+        return HtmlHelper::formatElementName($column);
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Layout;
 
 use Appsolutely\AIO\Exception\RuntimeException;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Fluent;
@@ -94,7 +94,7 @@ class SectionManager
         $defaultSection = $this->defaultSections[$section] ?? null;
 
         if (! $this->hasSection($section) && $defaultSection === null) {
-            return Helper::render($default, [new Fluent()]);
+            return HtmlHelper::render($default, [new Fluent()]);
         }
 
         $content = $this->getSections($section) ?: $defaultSection;
@@ -173,7 +173,7 @@ class SectionManager
 
         $result = '';
         foreach ($content as &$item) {
-            $value = Helper::render($item['value'] ?? '', [$options]);
+            $value = HtmlHelper::render($item['value'] ?? '', [$options]);
             $append = $item['append'] ?? false;
 
             if (! $append) {

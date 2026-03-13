@@ -5,7 +5,7 @@ namespace Appsolutely\AIO\Widgets;
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Layout\Content;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -314,7 +314,7 @@ JS
 
     public function __destruct()
     {
-        if ($results = Helper::render($this->render())) {
+        if ($results = HtmlHelper::render($this->render())) {
             Admin::html($results);
         }
     }

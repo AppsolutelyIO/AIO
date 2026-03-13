@@ -4,7 +4,7 @@ namespace Appsolutely\AIO\Grid;
 
 use Closure;
 use Appsolutely\AIO\Grid;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Jsonable;
@@ -86,7 +86,7 @@ class Row implements Arrayable
      */
     private function formatHtmlAttributes($attributes = [])
     {
-        return Helper::buildHtmlAttributes($attributes);
+        return HtmlHelper::buildAttributes($attributes);
     }
 
     /**

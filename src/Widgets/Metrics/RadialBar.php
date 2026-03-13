@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Widgets\Metrics;
 
 use Appsolutely\AIO\Admin;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Contracts\Support\Renderable;
 
 /**
@@ -156,7 +156,7 @@ class RadialBar extends Card
      */
     public function renderFooter()
     {
-        return Helper::render($this->footer);
+        return HtmlHelper::render($this->footer);
     }
 
     /**

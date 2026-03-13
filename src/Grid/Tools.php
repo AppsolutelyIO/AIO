@@ -8,7 +8,7 @@ use Appsolutely\AIO\Grid\Tools\AbstractTool;
 use Appsolutely\AIO\Grid\Tools\BatchActions;
 use Appsolutely\AIO\Grid\Tools\FilterButton;
 use Appsolutely\AIO\Grid\Tools\RefreshButton;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
@@ -214,7 +214,7 @@ class Tools implements Renderable
                 return;
             }
 
-            return Helper::render($tool);
+            return HtmlHelper::render($tool);
         })->implode(' ');
 
         return $this->addButtonOutline($value);

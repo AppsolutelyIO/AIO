@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Form\Field;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Support\Arr;
 
 class Html extends Field
@@ -56,7 +56,7 @@ class Html extends Field
     public function render()
     {
         if ($this->html instanceof \Closure) {
-            $this->html = Helper::render(
+            $this->html = HtmlHelper::render(
                 $this->html->call($this->values(), $this->form)
             );
         }

@@ -13,7 +13,7 @@ use Appsolutely\AIO\Layout\Navbar;
 use Appsolutely\AIO\Layout\SectionManager;
 use Appsolutely\AIO\Repositories\EloquentRepository;
 use Appsolutely\AIO\Support\Composer;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\HasAssets;
 use Appsolutely\AIO\Traits\HasHtml;
 use Appsolutely\AIO\Traits\HasPermissions;
@@ -410,7 +410,7 @@ class Admin
         $results = '';
 
         foreach (static::context()->getArray('contents') as $content) {
-            $results .= Helper::render($content);
+            $results .= HtmlHelper::render($content);
         }
 
         // 等待JS脚本加载完成

@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Actions;
 
 use Appsolutely\AIO\Admin;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\HasHtmlAttributes;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
@@ -252,7 +252,7 @@ HTML;
      */
     public function __toString()
     {
-        return Helper::render($this->render());
+        return HtmlHelper::render($this->render());
     }
 
     /**

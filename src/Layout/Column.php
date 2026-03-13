@@ -4,7 +4,7 @@ namespace Appsolutely\AIO\Layout;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Grid;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Contracts\Support\Renderable;
 
 class Column implements Renderable
@@ -102,7 +102,7 @@ class Column implements Renderable
 
                 continue;
             }
-            $html .= Helper::render($content);
+            $html .= HtmlHelper::render($content);
         }
 
         return $html.$this->endColumn();

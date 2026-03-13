@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Traits;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Support\Arr;
 
 trait HasHtmlAttributes
@@ -67,6 +67,6 @@ trait HasHtmlAttributes
 
     public function formatHtmlAttributes()
     {
-        return Helper::buildHtmlAttributes($this->htmlAttributes);
+        return HtmlHelper::buildAttributes($this->htmlAttributes);
     }
 }
