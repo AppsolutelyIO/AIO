@@ -116,11 +116,12 @@ async function buildAll(): Promise<void> {
 
     // Plugins sourced from npm (skip when copying vendored assets)
     const npmPlugins = new Set([
-        'autocomplete', 'bootstrap-datetimepicker', 'bootstrap-duallistbox',
-        'bootstrap-validator', 'charts', 'extensions', 'input-mask',
-        'ionslider', 'jquery-pjax', 'jquery.initialize', 'jstree-theme',
-        'moment', 'moment-timezone', 'nestable', 'select', 'sortable',
-        'tinymce', 'vditor',
+        'autocomplete', 'bootstrap-colorpicker', 'bootstrap-datetimepicker',
+        'bootstrap-duallistbox', 'bootstrap-validator', 'charts',
+        'extensions', 'fontawesome-iconpicker', 'input-mask', 'ionslider',
+        'jquery-pjax', 'jquery.initialize', 'jstree-theme', 'moment',
+        'moment-timezone', 'nestable', 'select', 'sortable', 'tinymce',
+        'vditor',
     ]);
 
     // Copy vendored plugins (those not sourced from npm)
@@ -208,6 +209,14 @@ async function buildAll(): Promise<void> {
     // toastr (extensions dir only needs toastr; sweetalert2 is bundled via TS)
     copy('node_modules/toastr/build/toastr.min.js', `${p}/extensions/toastr.min.js`);
     copy('node_modules/toastr/build/toastr.css', `${p}/extensions/toastr.css`);
+
+    // bootstrap-colorpicker
+    copy('node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js', `${p}/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js`);
+    copy('node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css', `${p}/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css`);
+
+    // fontawesome-iconpicker
+    copy('node_modules/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js', `${p}/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js`);
+    copy('node_modules/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css', `${p}/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css`);
 
     // vditor
     copy('node_modules/vditor/dist', `${p}/vditor/dist`);
