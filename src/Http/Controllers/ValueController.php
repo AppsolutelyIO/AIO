@@ -52,6 +52,10 @@ class ValueController
             throw new Exception("The method '{$key}::handle()' does not exist.");
         }
 
+        if (! method_exists($instance, 'passesAuthorization')) {
+            throw new Exception("Class [{$key}] must use the HasAuthorization trait.");
+        }
+
         return $instance;
     }
 }
