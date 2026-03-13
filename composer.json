@@ -56,7 +56,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Appsolutely\\AIO\\AdminServiceProvider"
+                "Appsolutely\\AIO\\AdminServiceProvider",
+                "Appsolutely\\AIO\\AIOServiceProvider"
             ]
         }
     }
