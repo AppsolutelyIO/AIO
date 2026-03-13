@@ -82,14 +82,14 @@ class Application
     public function routes($pathOrCallback)
     {
         $this->switch(static::DEFAULT);
-        $this->loadRoutesFrom($pathOrCallback, static::DEFAULT);
+        $this->loadRoutesFrom($pathOrCallback, static::DEFAULT, ['admin.pjax']);
 
         if ($apps = $this->getApps()) {
             foreach ($apps as $app => $enable) {
                 if ($enable) {
                     $this->switch($app);
 
-                    $this->loadRoutesFrom($pathOrCallback, $app);
+                    $this->loadRoutesFrom($pathOrCallback, $app, ['admin.pjax']);
                 }
             }
 
@@ -132,12 +132,14 @@ class Application
     {
         $this->switch($app);
 
+        // API routes — no pjax needed (JSON responses)
         $this->loadRoutesFrom(function () {
             Admin::registerApiRoutes();
         }, $app);
 
+        // Page routes — pjax middleware for pushState navigation
         if (is_file($routes = admin_path('routes.php'))) {
-            $this->loadRoutesFrom($routes, $app);
+            $this->loadRoutesFrom($routes, $app, ['admin.pjax']);
         }
     }
 
@@ -150,10 +152,12 @@ class Application
         config(['admin' => $this->configs[$app]]);
     }
 
-    protected function loadRoutesFrom($path, ?string $app)
+    protected function loadRoutesFrom($path, ?string $app, array $extraMiddleware = [])
     {
+        $middleware = ['admin.app:'.$app, ...$extraMiddleware];
+
         Route::group(array_filter([
-            'middleware' => 'admin.app:'.$app,
+            'middleware' => $middleware,
             'domain'     => config("{$app}.route.domain"),
             'as'         => $this->getRoutePrefix($app),
         ]), $path);
