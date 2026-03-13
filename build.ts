@@ -1,6 +1,6 @@
 import { build, type InlineConfig } from 'vite';
 import { resolve, basename } from 'path';
-import { cpSync, copyFileSync, mkdirSync } from 'fs';
+import { cpSync, copyFileSync, mkdirSync, readdirSync } from 'fs';
 import { globSync } from 'glob';
 import commonjs from '@rollup/plugin-commonjs';
 
@@ -113,7 +113,20 @@ async function buildAll(): Promise<void> {
     console.log('[COPY] static assets');
     cpSync('resources/assets/images', `${outDir}/images`, { recursive: true });
     cpSync('resources/assets/fonts', `${outDir}/fonts`, { recursive: true });
-    cpSync('resources/assets/aio/plugins', `${outDir}/aio/plugins`, { recursive: true });
+
+    // Copy plugins except vditor (which comes from npm)
+    const pluginsSrc = 'resources/assets/aio/plugins';
+    const pluginsDest = `${outDir}/aio/plugins`;
+    mkdirSync(pluginsDest, { recursive: true });
+    for (const entry of readdirSync(pluginsSrc)) {
+        if (entry === 'vditor') continue;
+        cpSync(`${pluginsSrc}/${entry}`, `${pluginsDest}/${entry}`, { recursive: true });
+    }
+
+    // Copy vditor from npm package
+    console.log('[COPY] Vditor (from npm)');
+    cpSync('node_modules/vditor/dist', `${pluginsDest}/vditor/dist`, { recursive: true });
+
     mkdirSync(`${outDir}/aio/css`, { recursive: true });
     copyFileSync('resources/assets/aio/sass/nunito.css', `${outDir}/aio/css/nunito.css`);
 
