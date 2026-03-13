@@ -226,7 +226,7 @@ class Zip extends ZipArchive
             return $this;
         }
 
-        if (substr($source, 0, 1) === '/') {
+        if (str_starts_with($source, '/')) {
             $source = substr($source, 1);
         }
 
@@ -249,7 +249,7 @@ class Zip extends ZipArchive
      */
     protected function removePathPrefix($prefix, $path)
     {
-        return (strpos($path, $prefix) === 0)
+        return str_starts_with($path, $prefix)
             ? substr($path, strlen($prefix))
             : $path;
     }
