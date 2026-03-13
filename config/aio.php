@@ -32,7 +32,7 @@ return [
         'form_field'              => \Appsolutely\AIO\Models\FormField::class,
         'general_page'            => \Appsolutely\AIO\Models\GeneralPage::class,
         'inventory_movement'      => \Appsolutely\AIO\Models\InventoryMovement::class,
-        'membership'              => \Appsolutely\AIO\Models\Membership::class,
+        'membership'              => \App\Models\Membership::class,
         'menu'                    => \Appsolutely\AIO\Models\CmsMenu::class,
         'notification_queue'      => \Appsolutely\AIO\Models\NotificationQueue::class,
         'notification_rule'       => \Appsolutely\AIO\Models\NotificationRule::class,
