@@ -36,7 +36,6 @@ class HasTabsTest extends TestCase
 
         // Use reflection to set the tab property
         $ref = new \ReflectionProperty($instance, 'tab');
-        $ref->setAccessible(true);
         $ref->setValue($instance, new \stdClass());
 
         $this->assertTrue($instance->hasTab());
@@ -47,7 +46,6 @@ class HasTabsTest extends TestCase
         $instance = $this->createInstance();
 
         $ref = new \ReflectionProperty($instance, 'tab');
-        $ref->setAccessible(true);
         $ref->setValue($instance, new \stdClass());
 
         $this->assertIsBool($instance->hasTab());
