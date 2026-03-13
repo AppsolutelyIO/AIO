@@ -32,9 +32,9 @@ class AdminServiceProviderTest extends TestCase
         );
     }
 
-    // --- Composer dependencies should only support Laravel 11+ ---
+    // --- Composer dependencies should only support Laravel 12+ ---
 
-    public function test_composer_json_requires_laravel_11_or_higher()
+    public function test_composer_json_requires_laravel_12_or_higher()
     {
         $composerPath = dirname(__DIR__, 2).'/composer.json';
         $composer = json_decode(file_get_contents($composerPath), true);
@@ -46,10 +46,10 @@ class AdminServiceProviderTest extends TestCase
             $laravelConstraint,
             'Should not support Laravel 10'
         );
-        $this->assertStringContainsString(
+        $this->assertStringNotContainsString(
             '^11.0',
             $laravelConstraint,
-            'Should support Laravel 11'
+            'Should not support Laravel 11'
         );
         $this->assertStringContainsString(
             '^12.0',
@@ -89,7 +89,7 @@ class AdminServiceProviderTest extends TestCase
         );
     }
 
-    public function test_composer_json_testbench_requires_v9_or_higher()
+    public function test_composer_json_testbench_requires_v10_or_higher()
     {
         $composerPath = dirname(__DIR__, 2).'/composer.json';
         $composer = json_decode(file_get_contents($composerPath), true);
@@ -101,10 +101,10 @@ class AdminServiceProviderTest extends TestCase
             $constraint,
             'orchestra/testbench v8 is for Laravel 10 only'
         );
-        $this->assertStringContainsString(
+        $this->assertStringNotContainsString(
             '^9.0',
             $constraint,
-            'Should support testbench ^9.0 for Laravel 11'
+            'orchestra/testbench v9 is for Laravel 11 only'
         );
         $this->assertStringContainsString(
             '^10.0',
