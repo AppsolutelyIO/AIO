@@ -13,7 +13,6 @@ class AdminServiceProviderTest extends TestCase
     {
         $rc = new ReflectionClass(AdminServiceProvider::class);
         $method = $rc->getMethod('compatibleBlade');
-        $method->setAccessible(true);
 
         $source = file_get_contents($rc->getFileName());
         $startLine = $method->getStartLine();
