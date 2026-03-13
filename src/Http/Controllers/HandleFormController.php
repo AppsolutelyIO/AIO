@@ -61,7 +61,7 @@ class HandleFormController
         $relationField = $form->field($relation);
 
         if (! $relationField) {
-            return;
+            throw new AdminException("Field [{$relation}] not found.");
         }
 
         if ($relationField instanceof HasMany) {
@@ -70,6 +70,8 @@ class HandleFormController
         if ($relationField instanceof Embeds) {
             return $relationField->field($column);
         }
+
+        throw new AdminException("Field [{$relation}] is not a relation field.");
     }
 
     public function destroyFile(Request $request)
