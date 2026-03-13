@@ -32,10 +32,10 @@ trait HasPermissions
      * Check if user has permission.
      *
      * @param $ability
-     * @param  array|mixed  $arguments
+     * @param  array|mixed  $parameters
      * @return bool
      */
-    public function can($ability, $paramters = []): bool
+    public function can($ability, $parameters = []): bool
     {
         if (! $ability) {
             return false;
