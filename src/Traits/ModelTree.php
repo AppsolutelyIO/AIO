@@ -343,6 +343,8 @@ trait ModelTree
                 return true;
             }
         }
+
+        return false;
     }
 
     /**
