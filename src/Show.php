@@ -616,7 +616,7 @@ class Show implements Renderable
      */
     protected function call($method, $arguments = [])
     {
-        $label = isset($arguments[0]) ? $arguments[0] : '';
+        $label = $arguments[0] ?? '';
 
         if ($field = $this->handleRelationField($method, $arguments)) {
             return $field;
