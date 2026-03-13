@@ -634,9 +634,9 @@ class Show implements Renderable
      */
     protected function handleRelationField($method, $arguments)
     {
-        if (count($arguments) == 1 && $arguments[0] instanceof \Closure) {
+        if (count($arguments) === 1 && $arguments[0] instanceof \Closure) {
             return $this->addRelation($method, $arguments[0]);
-        } elseif (count($arguments) == 2 && $arguments[1] instanceof \Closure) {
+        } elseif (count($arguments) === 2 && $arguments[1] instanceof \Closure) {
             return $this->addRelation($method, $arguments[1], $arguments[0]);
         }
 

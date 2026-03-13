@@ -645,7 +645,7 @@ class Field implements Renderable
      */
     public function label($label = null)
     {
-        if ($label == null) {
+        if ($label === null) {
             return $this->label;
         }
 

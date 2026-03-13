@@ -38,7 +38,7 @@ abstract class RowAction extends GridAction
      */
     public function row($key = null)
     {
-        if (func_num_args() == 0) {
+        if (func_num_args() === 0) {
             return $this->row;
         }
 

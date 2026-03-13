@@ -331,7 +331,7 @@ class Grid
             return $this->columns;
         }
 
-        if (func_num_args() == 1 && is_array($columns)) {
+        if (func_num_args() === 1 && is_array($columns)) {
             foreach ($columns as $column => $label) {
                 $this->column($column, $label);
             }

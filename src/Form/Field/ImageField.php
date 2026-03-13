@@ -99,13 +99,13 @@ trait ImageField
      */
     public function thumbnail($name, int $width = null, int $height = null)
     {
-        if (func_num_args() == 1 && is_array($name)) {
+        if (func_num_args() === 1 && is_array($name)) {
             foreach ($name as $key => $size) {
                 if (count($size) >= 2) {
                     $this->thumbnails[$key] = $size;
                 }
             }
-        } elseif (func_num_args() == 3) {
+        } elseif (func_num_args() === 3) {
             $this->thumbnails[$name] = [$width, $height];
         }
 
