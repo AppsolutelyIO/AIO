@@ -2,13 +2,14 @@
 
 namespace Appsolutely\AIO\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * Migration regression tests.
  *
  * Ensures the dcat → aio rename is complete and no stale references remain.
- *
- * @group migration-regression
  */
+#[Group('migration-regression')]
 class MigrationRegressionTest extends TestCase
 {
     /**
