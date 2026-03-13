@@ -45,11 +45,15 @@ class Pjax
      */
     protected function handleErrorResponse(Response $response)
     {
-        if (config('app.debug')) {
-            throw $response->exception;
+        $exception = $response->exception ?? null;
+
+        if (config('app.debug') && $exception) {
+            throw $exception;
         }
 
-        $exception = $response->exception;
+        if (! $exception) {
+            return back()->withInput();
+        }
 
         $error = new MessageBag([
             'type'    => get_class($exception),
