@@ -170,10 +170,10 @@ trait InteractsWithApi
      */
     public function allowBuildRequest()
     {
-        return (
+        return (bool) (
             $this->url
             || method_exists($this, 'handle')
-        ) ? true : false;
+        );
     }
 
     /**

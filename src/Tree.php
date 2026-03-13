@@ -393,7 +393,7 @@ class Tree implements Renderable
      */
     public function hasWrapper()
     {
-        return $this->wrapper ? true : false;
+        return (bool) $this->wrapper;
     }
 
     /**

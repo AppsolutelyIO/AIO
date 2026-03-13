@@ -265,7 +265,7 @@ JS
      */
     public static function is()
     {
-        return request(static::QUERY_NAME) ? true : false;
+        return (bool) request(static::QUERY_NAME);
     }
 
     /**
