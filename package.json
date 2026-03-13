@@ -10,6 +10,7 @@
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^29.0.2",
+        "@types/nprogress": "^0.2.3",
         "glob": "^13.0.6",
         "lodash": "^4.17.23",
         "rtlcss": "^4.3.0",
@@ -18,5 +19,8 @@
         "typescript": "^5.9.3",
         "vditor": "^3.11.2",
         "vite": "^7.3.1"
+    },
+    "dependencies": {
+        "nprogress": "^0.2.0"
     }
 }

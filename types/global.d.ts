@@ -61,21 +61,6 @@ interface WebUploaderFile {
     serverUrl?: string | null;
 }
 
-// NProgress (vendored UMD library)
-declare module '*/NProgress/NProgress.min' {
-    const NProgress: {
-        configure(options: Record<string, unknown>): typeof NProgress;
-        start(): typeof NProgress;
-        done(force?: boolean): typeof NProgress;
-        inc(amount?: number): typeof NProgress;
-        set(n: number): typeof NProgress;
-        remove(): void;
-        isStarted(): boolean;
-        status: number | null;
-    };
-    export default NProgress;
-}
-
 // sweetalert2 (vendored UMD library)
 declare module '*/sweetalert/sweetalert2' {
     const Swal: {
