@@ -366,7 +366,7 @@ class Asset
         }
 
         return array_filter($files, function ($file) {
-            return ! mb_strpos($file, '{');
+            return mb_strpos($file, '{') === false;
         });
     }
 

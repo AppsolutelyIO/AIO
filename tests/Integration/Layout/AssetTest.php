@@ -282,6 +282,43 @@ class AssetTest extends TestCase
         $this->assertArrayHasKey('adminlte', $asset->baseCss);
     }
 
+    // --- normalizeAliasPaths ---
+
+    public function test_normalize_alias_paths_replaces_params()
+    {
+        $asset = $this->getAsset();
+        $ref = new \ReflectionMethod($asset, 'normalizeAliasPaths');
+
+        $result = $ref->invoke($asset, ['path/{version}/app.js'], ['version' => '1.0']);
+        $this->assertSame(['path/1.0/app.js'], $result);
+    }
+
+    public function test_normalize_alias_paths_filters_unresolved_placeholders()
+    {
+        $asset = $this->getAsset();
+        $ref = new \ReflectionMethod($asset, 'normalizeAliasPaths');
+
+        $result = $ref->invoke($asset, [
+            'resolved.js',
+            '{unresolved}/file.js',
+            'path/{missing}.js',
+        ], []);
+
+        // Only 'resolved.js' should remain — others contain unresolved '{'
+        $this->assertSame(['resolved.js'], array_values($result));
+    }
+
+    public function test_normalize_alias_paths_filters_placeholder_at_start()
+    {
+        $asset = $this->getAsset();
+        $ref = new \ReflectionMethod($asset, 'normalizeAliasPaths');
+
+        // Bug test: '{foo}/bar.js' has '{' at position 0
+        // mb_strpos returns 0, which is falsy — the file would NOT be filtered
+        $result = $ref->invoke($asset, ['{foo}/bar.js'], []);
+        $this->assertSame([], array_values($result));
+    }
+
     // --- No dcat references ---
 
     public function test_no_dcat_in_default_aliases()
