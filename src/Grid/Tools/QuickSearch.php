@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Grid\Tools;
 
 use Appsolutely\AIO\Admin;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Support\Traits\Macroable;
 
 class QuickSearch extends AbstractTool
@@ -80,7 +80,7 @@ class QuickSearch extends AbstractTool
      */
     public function formAction()
     {
-        return Helper::fullUrlWithoutQuery([
+        return UrlHelper::fullUrlWithoutQuery([
             $this->getQueryName(),
             $this->parent->model()->getPageName(),
             '_pjax',

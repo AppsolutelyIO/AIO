@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Grid\Filter\Presenter;
 
 use Appsolutely\AIO\Exception\RuntimeException;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
@@ -162,7 +162,7 @@ class Select extends Presenter
     protected function loadRemoteOptions(string $url, array $parameters = [], array $options = [])
     {
         $ajaxOptions = [
-            'url' => Helper::urlWithQuery(admin_url($url), $parameters),
+            'url' => UrlHelper::withQuery(admin_url($url), $parameters),
         ];
         $this->config([
             'allowClear'  => true,

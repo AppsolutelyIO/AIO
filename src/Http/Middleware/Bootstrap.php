@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Http\Middleware;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Appsolutely\AIO\Widgets\DarkModeSwitcher;
 use Illuminate\Http\Request;
 
@@ -69,7 +70,7 @@ class Bootstrap
             Admin::addIgnoreQueryName(['_token', '_pjax']);
 
             Helper::setPreviousUrl(
-                Helper::fullUrlWithoutQuery(Admin::getIgnoreQueryNames())
+                UrlHelper::fullUrlWithoutQuery(Admin::getIgnoreQueryNames())
             );
         }
     }

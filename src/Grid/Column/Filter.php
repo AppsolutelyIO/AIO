@@ -6,6 +6,7 @@ use Appsolutely\AIO\Grid\Column;
 use Appsolutely\AIO\Grid\Events\Fetching;
 use Appsolutely\AIO\Grid\Model;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Contracts\Support\Renderable;
 
 abstract class Filter implements Renderable
@@ -173,7 +174,7 @@ HMLT;
      */
     public function formAction()
     {
-        return Helper::fullUrlWithoutQuery([
+        return UrlHelper::fullUrlWithoutQuery([
             $this->getQueryName(),
             $this->getColumnName(),
             $this->parent->grid()->model()->getPageName(),
@@ -186,7 +187,7 @@ HMLT;
      */
     protected function urlWithoutFilter()
     {
-        return Helper::fullUrlWithoutQuery([
+        return UrlHelper::fullUrlWithoutQuery([
             $this->getQueryName(),
         ]);
     }

@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Form\Field;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 
 /**
  * TinyMCE editor.
@@ -130,7 +130,7 @@ class Editor extends Field
      */
     protected function formatUrl(string $url)
     {
-        return Helper::urlWithQuery(
+        return UrlHelper::withQuery(
             $url,
             [
                 '_token' => csrf_token(),

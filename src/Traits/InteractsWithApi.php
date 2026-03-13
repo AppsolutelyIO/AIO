@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Traits;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Http\Request;
 
 /**
@@ -70,7 +70,7 @@ trait InteractsWithApi
     public function request(string $method, string $url, array $query = [])
     {
         $this->method = $method;
-        $this->url = admin_url(Helper::urlWithQuery($url, $query));
+        $this->url = admin_url(UrlHelper::withQuery($url, $query));
 
         return $this;
     }

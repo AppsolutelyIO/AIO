@@ -4,7 +4,7 @@ namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Form\Field;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 
 /**
  * @see https://b3log.org/vditor/
@@ -142,7 +142,7 @@ class Vditor extends Field
      */
     protected function defaultImageUploadUrl(): string
     {
-        return Helper::urlWithQuery(
+        return UrlHelper::withQuery(
             route(admin_api_route_name('vditor.upload')),
             [
                 '_token' => csrf_token(),

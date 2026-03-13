@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Models;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Appsolutely\AIO\Traits\HasDateTimeFormatter;
 use Appsolutely\AIO\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Model;
@@ -158,7 +158,7 @@ class Permission extends Model implements Sortable
             return false;
         }
 
-        if (! Helper::matchRequestPath($path, $request->decodedPath())) {
+        if (! UrlHelper::matchRequestPath($path, $request->decodedPath())) {
             return false;
         }
 

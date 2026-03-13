@@ -33,7 +33,7 @@ use Appsolutely\AIO\Grid\Filter\StartWith;
 use Appsolutely\AIO\Grid\Filter\Where;
 use Appsolutely\AIO\Grid\Filter\WhereBetween;
 use Appsolutely\AIO\Grid\Filter\Year;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Appsolutely\AIO\Traits\HasVariables;
 use Illuminate\Contracts\Support\Renderable;
@@ -752,7 +752,7 @@ class Filter implements Renderable
             return "{$filter->getId()}_group";
         });
 
-        return Helper::fullUrlWithoutQuery(
+        return UrlHelper::fullUrlWithoutQuery(
             $columns->merge($groupNames)
         );
     }
@@ -764,7 +764,7 @@ class Filter implements Renderable
      */
     public function urlWithoutScopes()
     {
-        return Helper::fullUrlWithoutQuery($this->getScopeQueryName());
+        return UrlHelper::fullUrlWithoutQuery($this->getScopeQueryName());
     }
 
     /**

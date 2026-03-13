@@ -10,6 +10,7 @@ use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Form\Concerns\HasFields;
 use Appsolutely\AIO\Form\Field\Hidden;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Appsolutely\AIO\Traits\HasVariables;
 use Appsolutely\AIO\Widgets\DialogForm;
 use Illuminate\Contracts\Support\Renderable;
@@ -538,7 +539,7 @@ class Builder implements FieldsCollection
 
         if (
             Str::contains($previous, url($this->resource()))
-            && ! Helper::urlHasQuery($previous, [DialogForm::QUERY_NAME])
+            && ! UrlHelper::hasQuery($previous, [DialogForm::QUERY_NAME])
         ) {
             $this->addHiddenField(
                 (new Hidden(static::PREVIOUS_URL_KEY))->value($previous)

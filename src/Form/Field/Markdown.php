@@ -4,7 +4,7 @@ namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Form\Field;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Appsolutely\AIO\Support\JavaScript;
 
 /**
@@ -134,7 +134,7 @@ class Markdown extends Field
      */
     protected function formatUrl(string $url)
     {
-        return Helper::urlWithQuery(
+        return UrlHelper::withQuery(
             $url,
             [
                 '_token' => csrf_token(),

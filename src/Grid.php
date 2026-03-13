@@ -10,6 +10,7 @@ use Appsolutely\AIO\Grid\Model;
 use Appsolutely\AIO\Grid\Row;
 use Appsolutely\AIO\Grid\Tools;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Appsolutely\AIO\Traits\HasVariables;
 use Illuminate\Contracts\Support\Renderable;
@@ -1027,8 +1028,8 @@ HTML;
     {
         if ($this->async && ! $this->isAsyncRequest()) {
             $query = static::ASYNC_NAME;
-            $url = Helper::fullUrlWithoutQuery(['_pjax']);
-            $url = Helper::urlWithQuery($url, [static::ASYNC_NAME => 1]);
+            $url = UrlHelper::fullUrlWithoutQuery(['_pjax']);
+            $url = UrlHelper::withQuery($url, [static::ASYNC_NAME => 1]);
 
             $options = [
                 'selector'  => ".async-{$this->getTableId()}",

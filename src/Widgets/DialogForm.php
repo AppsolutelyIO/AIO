@@ -6,6 +6,7 @@ use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Layout\Content;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Contracts\Support\Arrayable;
 
 class DialogForm
@@ -204,7 +205,7 @@ class DialogForm
     public function url(?string $url)
     {
         if ($url) {
-            $this->options['defaultUrl'] = Helper::urlWithQuery(
+            $this->options['defaultUrl'] = UrlHelper::withQuery(
                 admin_url($url),
                 [static::QUERY_NAME => 1]
             );

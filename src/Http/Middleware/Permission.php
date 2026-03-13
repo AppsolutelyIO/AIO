@@ -5,7 +5,7 @@ namespace Appsolutely\AIO\Http\Middleware;
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Exception\RuntimeException;
 use Appsolutely\AIO\Http\Auth\Permission as Checker;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -113,7 +113,7 @@ class Permission
                 $except = trim($except, '/');
             }
 
-            if (Helper::matchRequestPath($except)) {
+            if (UrlHelper::matchRequestPath($except)) {
                 return true;
             }
         }

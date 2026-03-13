@@ -5,7 +5,7 @@ namespace Appsolutely\AIO\Grid\Concerns;
 use Closure;
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Grid;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Support\Collection;
 
 trait HasFilter
@@ -149,7 +149,7 @@ $('.async-{$this->getTableId()}').find('.filter-count').text(count > 0 ? ('('+co
 JS
         );
 
-        $url = Helper::urlWithoutQuery($this->filter()->urlWithoutFilters(), ['_pjax', static::ASYNC_NAME]);
+        $url = UrlHelper::withoutQuery($this->filter()->urlWithoutFilters(), ['_pjax', static::ASYNC_NAME]);
 
         Admin::script("$('.grid-filter-form').attr('action', '{$url}');", true);
     }

@@ -4,7 +4,7 @@ namespace Appsolutely\AIO\Http\Middleware;
 
 use Closure;
 use Appsolutely\AIO\Admin;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Http\Request;
 
 class Authenticate
@@ -53,7 +53,7 @@ class Authenticate
                 $except = trim($except, '/');
             }
 
-            if (Helper::matchRequestPath($except)) {
+            if (UrlHelper::matchRequestPath($except)) {
                 return true;
             }
         }

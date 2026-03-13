@@ -6,7 +6,7 @@ use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Grid\Events\Fetched;
 use Appsolutely\AIO\Grid\Events\Fetching;
 use Appsolutely\AIO\Repositories\EloquentRepository;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Support\Collection;
 
 /**
@@ -138,7 +138,7 @@ trait HasTree
 
     public function generateTreeUrl()
     {
-        return Helper::urlWithoutQuery(
+        return UrlHelper::withoutQuery(
             $this->grid()->filter()->urlWithoutFilters(),
             $this->treeIgnoreQueryNames
         );
@@ -247,7 +247,7 @@ HTML
             return $url;
         }
 
-        return Helper::urlWithoutQuery($url, [
+        return UrlHelper::withoutQuery($url, [
             $this->getParentIdQueryName(),
             $this->getChildrenPageName($parentId),
             $this->getDepthQueryName(),

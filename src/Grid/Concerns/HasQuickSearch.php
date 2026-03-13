@@ -8,6 +8,7 @@ use Appsolutely\AIO\Grid\Events\ApplyQuickSearch;
 use Appsolutely\AIO\Grid\Model;
 use Appsolutely\AIO\Grid\Tools;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -329,7 +330,7 @@ trait HasQuickSearch
     protected function addQuickSearchScript()
     {
         if ($this->isAsyncRequest()) {
-            $url = Helper::fullUrlWithoutQuery([
+            $url = UrlHelper::fullUrlWithoutQuery([
                 '_pjax',
                 $this->quickSearch->getQueryName(),
                 static::ASYNC_NAME,
