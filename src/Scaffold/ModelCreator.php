@@ -173,10 +173,8 @@ class ModelCreator
     {
         $import = $use = '';
 
-        if (version_compare(app()->version(), '7.0.0') >= 0) {
-            $import = 'use Appsolutely\\AIO\\Traits\\HasDateTimeFormatter;';
-            $use = 'use HasDateTimeFormatter;';
-        }
+        $import = 'use Appsolutely\\AIO\\Traits\\HasDateTimeFormatter;';
+        $use = 'use HasDateTimeFormatter;';
 
         $stub = str_replace(['DummyImportDateTimeFormatterTrait', 'DummyUseDateTimeFormatterTrait'], [$import, $use], $stub);
 
