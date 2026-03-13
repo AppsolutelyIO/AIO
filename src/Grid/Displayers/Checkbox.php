@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Grid\Displayers;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Arr;
 
 class Checkbox extends Editable
@@ -31,13 +31,13 @@ class Checkbox extends Editable
 
     protected function getValue()
     {
-        return implode('; ', Arr::only($this->options['options'], Helper::array($this->value, false)));
+        return implode('; ', Arr::only($this->options['options'], ArrayHelper::convert($this->value, false)));
     }
 
     protected function getOriginal()
     {
         return json_encode(array_map(function ($value) {
             return (string) $value;
-        }, Helper::array($this->column->getOriginal(), false)));
+        }, ArrayHelper::convert($this->column->getOriginal(), false)));
     }
 }

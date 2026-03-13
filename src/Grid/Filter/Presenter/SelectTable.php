@@ -4,7 +4,7 @@ namespace Appsolutely\AIO\Grid\Filter\Presenter;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Grid\LazyRenderable;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Widgets\DialogTable;
 use Illuminate\Support\Str;
 
@@ -146,7 +146,7 @@ class SelectTable extends Presenter
 
     protected function formatOptions()
     {
-        $value = Helper::array($this->value());
+        $value = ArrayHelper::convert($this->value());
 
         if ($this->options instanceof \Closure) {
             $this->options = ($this->options)($value, $this);
@@ -154,7 +154,7 @@ class SelectTable extends Presenter
 
         $values = [];
 
-        foreach (Helper::array($this->options) as $id => $label) {
+        foreach (ArrayHelper::convert($this->options) as $id => $label) {
             foreach ($value as $v) {
                 if ($v == $id && $v !== null) {
                     $values[] = ['id' => $v, 'label' => $label];

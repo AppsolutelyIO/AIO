@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Grid\Displayers;
 
 use Appsolutely\AIO\Admin;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 
 class Label extends AbstractDisplayer
 {
@@ -44,7 +44,7 @@ class Label extends AbstractDisplayer
 
     protected function value($max)
     {
-        $values = Helper::array($this->value);
+        $values = ArrayHelper::convert($this->value);
 
         if ($max && count($values) > $max) {
             $values = array_slice($values, 0, $max);

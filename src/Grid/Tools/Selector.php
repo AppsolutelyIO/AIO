@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Grid\Tools;
 
 use Appsolutely\AIO\Grid;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -182,7 +182,7 @@ class Selector
         }
 
         if (in_array((string) $value, $options, true)) {
-            Helper::deleteByValue($options, (string) $value, true);
+            ArrayHelper::deleteByValue($options, (string) $value, true);
         } else {
             if ($add) {
                 $options = [];

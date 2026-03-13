@@ -5,7 +5,7 @@ namespace Appsolutely\AIO\Grid\Concerns;
 use Appsolutely\AIO\Contracts\Grid\ColumnSelectorStore;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Grid\Tools\ColumnSelector;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Collection;
 
 trait CanHidesColumns
@@ -103,7 +103,7 @@ trait CanHidesColumns
             return $this->visibleColumnsFromQuery;
         }
 
-        $columns = $input = Helper::array($this->request->get($this->getColumnSelectorQueryName()));
+        $columns = $input = ArrayHelper::convert($this->request->get($this->getColumnSelectorQueryName()));
 
         if (! $input && ! $this->hasColumnSelectorRequestInput()) {
             $columns = $this->getVisibleColumnsFromStorage() ?: array_values(array_diff(

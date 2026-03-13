@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Grid\Displayers;
 
 use Appsolutely\AIO\Admin;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Contracts\Support\Arrayable;
 
 class DialogTree extends AbstractDisplayer
@@ -167,6 +167,6 @@ class DialogTree extends AbstractDisplayer
 
     protected function format($val)
     {
-        return implode(',', Helper::array($val, true));
+        return implode(',', ArrayHelper::convert($val, true));
     }
 }

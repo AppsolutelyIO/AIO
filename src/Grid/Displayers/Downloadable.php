@@ -3,13 +3,14 @@
 namespace Appsolutely\AIO\Grid\Displayers;
 
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Facades\Storage;
 
 class Downloadable extends AbstractDisplayer
 {
     public function display($server = '', $disk = null)
     {
-        return collect(Helper::array($this->value))->filter()->map(function ($value) use ($server, $disk) {
+        return collect(ArrayHelper::convert($this->value))->filter()->map(function ($value) use ($server, $disk) {
             if (empty($value)) {
                 return '';
             }

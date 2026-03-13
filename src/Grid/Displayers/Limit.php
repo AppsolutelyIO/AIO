@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Grid\Displayers;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Support\HtmlHelper;
 
 class Limit extends AbstractDisplayer
@@ -25,7 +26,7 @@ JS;
 
         // 数组
         if ($this->value !== null && ! is_scalar($this->value)) {
-            $value = Helper::array($this->value);
+            $value = ArrayHelper::convert($this->value);
 
             if (count($value) <= $limit) {
                 return $value;

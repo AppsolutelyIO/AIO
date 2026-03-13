@@ -5,7 +5,7 @@ namespace Appsolutely\AIO\Grid;
 use Closure;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Grid\Displayers\AbstractDisplayer;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Illuminate\Contracts\Support\Arrayable;
@@ -573,7 +573,7 @@ class Column
             }
 
             if ($original !== $value) {
-                Helper::arraySet($row, $this->name, $value);
+                ArrayHelper::set($row, $this->name, $value);
             }
 
             $this->setValue($value ?? null);
@@ -596,7 +596,7 @@ class Column
 
         $array = $row->toArray();
 
-        return Helper::camelArray($array);
+        return ArrayHelper::camel($array);
     }
 
     /**
