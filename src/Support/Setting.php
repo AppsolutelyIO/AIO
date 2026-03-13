@@ -70,9 +70,9 @@ class Setting extends Fluent
         $results = $this->getArray($key);
 
         if ($k !== null) {
-            $results[] = $value;
-        } else {
             $results[$k] = $value;
+        } else {
+            $results[] = $value;
         }
 
         return $this->set($key, $results);
