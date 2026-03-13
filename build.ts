@@ -1,4 +1,4 @@
-import { build } from 'vite';
+import { build, type InlineConfig } from 'vite';
 import { resolve, basename } from 'path';
 import { cpSync, copyFileSync, mkdirSync } from 'fs';
 import { globSync } from 'glob';
@@ -9,8 +9,13 @@ const outDir = isProduction ? 'resources/dist' : 'resources/pre-dist';
 
 const dir = import.meta.dirname;
 
+interface CssEntry {
+    input: string;
+    output: string;
+}
+
 // Shared SCSS options
-const cssConfig = {
+const cssConfig: InlineConfig['css'] = {
     preprocessorOptions: {
         scss: {
             silenceDeprecations: ['import', 'global-builtin', 'if-function'],
@@ -18,28 +23,28 @@ const cssConfig = {
     },
 };
 
-// === JS entries (build as IIFE, CSS disabled) ===
-const jsEntries = {
-    'adminlte/adminlte': resolve(dir, 'resources/assets/adminlte/js/AdminLTE.js'),
-    'aio/js/aio-app': resolve(dir, 'resources/assets/aio/js/aio-app.js'),
+// === JS/TS entries (build as IIFE) ===
+const jsEntries: Record<string, string> = {
+    'adminlte/adminlte': resolve(dir, 'resources/assets/adminlte/js/AdminLTE.ts'),
+    'aio/js/aio-app': resolve(dir, 'resources/assets/aio/js/aio-app.ts'),
 };
 
-for (const f of globSync('resources/assets/aio/extra/*.js')) {
-    const name = basename(f, '.js');
+for (const f of globSync('resources/assets/aio/extra/*.ts')) {
+    const name = basename(f, '.ts');
     if (name === 'markdown') continue; // CSS-only entry, handled below
     jsEntries[`aio/extra/${name}`] = resolve(dir, f);
 }
 
 // === CSS entries (SCSS → CSS) ===
-const cssEntries = [
+const cssEntries: CssEntry[] = [
     { input: 'resources/assets/adminlte/scss/AdminLTE.scss', output: 'adminlte/adminlte.css' },
     { input: 'resources/assets/aio/sass/aio-app.scss', output: 'aio/css/aio-app.css' },
     { input: 'resources/assets/aio/extra/upload.scss', output: 'aio/extra/upload.css' },
     { input: 'resources/assets/aio/extra/markdown.scss', output: 'aio/extra/markdown.css' },
 ];
 
-async function buildAll() {
-    // 1. Build all JS entries as IIFE (no CSS extraction)
+async function buildAll(): Promise<void> {
+    // 1. Build all JS/TS entries as IIFE (no CSS extraction)
     for (const [name, entry] of Object.entries(jsEntries)) {
         console.log(`[JS]  ${name}`);
         await build({
@@ -73,12 +78,11 @@ async function buildAll() {
             plugins: [
                 {
                     name: 'css-rename',
-                    generateBundle(_, bundle) {
+                    generateBundle(_options, bundle) {
                         for (const [key, asset] of Object.entries(bundle)) {
                             if (asset.type === 'asset' && key.endsWith('.css')) {
                                 asset.fileName = output;
                             }
-                            // Remove the empty JS wrapper
                             if (asset.type === 'chunk') {
                                 delete bundle[key];
                             }
@@ -113,7 +117,7 @@ async function buildAll() {
     console.log('Done.');
 }
 
-buildAll().catch(err => {
+buildAll().catch((err: unknown) => {
     console.error(err);
     process.exit(1);
 });

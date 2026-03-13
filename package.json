@@ -2,10 +2,11 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "NODE_ENV=development node build.js",
-        "build": "NODE_ENV=production node build.js",
-        "prod": "NODE_ENV=production node build.js",
-        "production": "NODE_ENV=production node build.js"
+        "dev": "NODE_ENV=development tsx build.ts",
+        "build": "NODE_ENV=production tsx build.ts",
+        "prod": "NODE_ENV=production tsx build.ts",
+        "production": "NODE_ENV=production tsx build.ts",
+        "type-check": "tsc --noEmit"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^29.0.2",
@@ -13,6 +14,7 @@
         "lodash": "^4.17.23",
         "rtlcss": "^4.3.0",
         "sass": "^1.98.0",
+        "tsx": "^4.21.0",
         "typescript": "^5.9.3",
         "vditor": "^3.11.2",
         "vite": "^7.3.1"
