@@ -156,128 +156,43 @@ class Helper
     }
 
     /**
-     * @param  string  $url
-     * @param  array  $query
-     * @return string
+     * @deprecated Use UrlHelper::withQuery() instead.
      */
     public static function urlWithQuery(?string $url, array $query = [])
     {
-        if (! $url || ! $query) {
-            return $url;
-        }
-
-        $array = explode('?', $url);
-
-        $url = $array[0];
-
-        parse_str($array[1] ?? '', $originalQuery);
-
-        return $url.'?'.http_build_query(array_merge($originalQuery, $query));
+        return UrlHelper::withQuery($url, $query);
     }
 
     /**
-     * @param  string  $url
-     * @param  string|array|Arrayable  $keys
-     * @return string
+     * @deprecated Use UrlHelper::withoutQuery() instead.
      */
     public static function urlWithoutQuery($url, $keys)
     {
-        if (! Str::contains($url, '?') || ! $keys) {
-            return $url;
-        }
-
-        if ($keys instanceof Arrayable) {
-            $keys = $keys->toArray();
-        }
-
-        $keys = (array) $keys;
-
-        $urlInfo = parse_url($url);
-
-        parse_str($urlInfo['query'], $query);
-
-        Arr::forget($query, $keys);
-
-        $baseUrl = explode('?', $url)[0];
-
-        return $query
-            ? $baseUrl.'?'.http_build_query($query)
-            : $baseUrl;
+        return UrlHelper::withoutQuery($url, $keys);
     }
 
     /**
-     * @param  Arrayable|array|string  $keys
-     * @return string
+     * @deprecated Use UrlHelper::fullUrlWithoutQuery() instead.
      */
     public static function fullUrlWithoutQuery($keys)
     {
-        return static::urlWithoutQuery(request()->fullUrl(), $keys);
+        return UrlHelper::fullUrlWithoutQuery($keys);
     }
 
     /**
-     * @param  string  $url
-     * @param  string|array  $keys
-     * @return bool
+     * @deprecated Use UrlHelper::hasQuery() instead.
      */
     public static function urlHasQuery(string $url, $keys)
     {
-        $value = explode('?', $url);
-
-        if (empty($value[1])) {
-            return false;
-        }
-
-        parse_str($value[1], $query);
-
-        foreach ((array) $keys as $key) {
-            if (Arr::has($query, $key)) {
-                return true;
-            }
-        }
-
-        return false;
+        return UrlHelper::hasQuery($url, $keys);
     }
 
     /**
-     * 匹配请求路径.
-     *
-     * @example
-     *      Helper::matchRequestPath(admin_base_path('auth/user'))
-     *      Helper::matchRequestPath(admin_base_path('auth/user*'))
-     *      Helper::matchRequestPath(admin_base_path('auth/user/* /edit'))
-     *      Helper::matchRequestPath('GET,POST:auth/user')
-     *
-     * @param  string  $path
-     * @param  null|string  $current
-     * @return bool
+     * @deprecated Use UrlHelper::matchRequestPath() instead.
      */
     public static function matchRequestPath($path, ?string $current = null)
     {
-        $request = request();
-        $current = $current ?: $request->decodedPath();
-
-        if (Str::contains($path, ':')) {
-            [$methods, $path] = explode(':', $path);
-
-            $methods = array_map('strtoupper', explode(',', $methods));
-
-            if (! empty($methods) && ! in_array($request->method(), $methods, true)) {
-                return false;
-            }
-        }
-
-        // 判断路由名称
-        if ($request->routeIs($path) || $request->routeIs(admin_route_name($path))) {
-            return true;
-        }
-
-        if (! Str::contains($path, '*')) {
-            return $path === $current;
-        }
-
-        $path = str_replace(['*', '/'], ['([0-9a-z-_,])*', "\/"], $path);
-
-        return preg_match("/$path/i", $current);
+        return UrlHelper::matchRequestPath($path, $current);
     }
 
     /**
