@@ -59,7 +59,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Appsolutely\\AIO\\Tests\\": "tests/"
+            "Appsolutely\\AIO\\Tests\\": "tests/",
+            "Appsolutely\\AIO\\Database\\Factories\\": "database/factories/",
+            "Appsolutely\\AIO\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "scripts": {
