@@ -12,13 +12,16 @@ use Appsolutely\AIO\Layout\Content;
 use Appsolutely\AIO\Layout\Menu;
 use Appsolutely\AIO\Layout\Navbar;
 use Appsolutely\AIO\Layout\SectionManager;
+use Appsolutely\AIO\Models\SiteSetting;
 use Appsolutely\AIO\Support\Context;
 use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Support\Setting;
 use Appsolutely\AIO\Support\Translator;
 use Appsolutely\AIO\Support\WebUploader;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AdminServiceProvider extends ServiceProvider
@@ -110,6 +113,7 @@ class AdminServiceProvider extends ServiceProvider
         $this->compatibleBlade();
         $this->bootExtensions();
         $this->registerBladeDirective();
+        $this->loadSiteSettings();
     }
 
     protected function aliasAdmin()
@@ -274,6 +278,36 @@ PHP;
                 ArrayHelper::deleteByValue($middleware, 'admin.permission', true);
             }
             $router->middlewareGroup($key, $middleware);
+        }
+    }
+
+    /**
+     * Load site settings from the database into Laravel's config.
+     *
+     * This replaces the DcatConfigServiceProvider::load() functionality.
+     * Each site_setting row's key becomes a config key (e.g. 'general.site_name').
+     */
+    protected function loadSiteSettings(): void
+    {
+        try {
+            if (! Schema::hasTable('site_settings')) {
+                return;
+            }
+
+            SiteSetting::query()
+                ->get(['key', 'value', 'type'])
+                ->each(function (SiteSetting $setting) {
+                    $value = match ($setting->type) {
+                        'boolean' => filter_var($setting->value, FILTER_VALIDATE_BOOLEAN),
+                        'integer' => (int) $setting->value,
+                        'json'    => json_decode($setting->value, true),
+                        default   => $setting->value,
+                    };
+
+                    config([$setting->key => $value]);
+                });
+        } catch (QueryException $e) {
+            Admin::reportException($e);
         }
     }
 }
