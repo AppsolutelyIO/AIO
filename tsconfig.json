@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "useDefineForClassFields": true,
+        "module": "ESNext",
+        "lib": ["ES2020", "DOM", "DOM.Iterable"],
+        "skipLibCheck": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "types": ["vite/client"],
+        "baseUrl": ".",
+        "paths": {
+            "@aio/*": ["./resources/assets/aio/js/*"],
+            "@adminlte/*": ["./resources/assets/adminlte/js/*"]
+        }
+    },
+    "include": [
+        "resources/assets/**/*.ts",
+        "types/**/*.d.ts",
+        "build.ts"
+    ],
+    "exclude": ["node_modules", "vendor", "resources/dist"]
+}
