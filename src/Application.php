@@ -113,7 +113,7 @@ class Application
 
     public function getApiRoutePrefix(?string $app = null)
     {
-        return $this->getRoutePrefix($app).'aio-api.';
+        return $this->getRoutePrefix($app).'api.';
     }
 
     public function getRoutePrefix(?string $app = null)

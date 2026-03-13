@@ -266,7 +266,7 @@ grep -r "\.dcat-" resources/sass/ --include="*.scss"
 
 ```
 旧：{admin_prefix}/dcat-api/*
-新：{admin_prefix}/aio-api/*
+新：{admin_prefix}/api/*
 ```
 
 如果你的前端代码中有硬编码的 API 路径，需要更新：
@@ -276,7 +276,7 @@ grep -r "\.dcat-" resources/sass/ --include="*.scss"
 $.post('/admin/dcat-api/action', data);
 
 // 新
-$.post('/admin/aio-api/action', data);
+$.post('/admin/api/action', data);
 ```
 
 > **提示**：推荐使用 `AIO.helpers.action` 或路由生成方法，而非硬编码路径。
@@ -288,7 +288,7 @@ $.post('/admin/aio-api/action', data);
 route('dcat-api.action');
 
 // 新
-route('aio-api.action');
+route('api.action');
 ```
 
 ---
@@ -362,7 +362,7 @@ use Appsolutely\AIO\Extend\ServiceProvider;
 - [ ] 替换 JS 全局对象：`Dcat.` → `AIO.`、`CreateDcat` → `CreateAIO`
 - [ ] 替换 CSS 类名：`.dcat-` → `.aio-`
 - [ ] 替换资源路径：`@admin/dcat/` → `@admin/aio/`、`@dcat` → `@aio`
-- [ ] 替换 API 路由：`dcat-api` → `aio-api`（如有硬编码）
+- [ ] 替换 API 路由：`dcat-api` → `api`（如有硬编码）
 - [ ] 更新自定义 Blade 视图中的引用
 - [ ] 更新扩展中的引用
 - [ ] `php artisan view:clear`

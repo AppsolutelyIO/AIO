@@ -165,7 +165,7 @@ class MigrationRegressionTest extends TestCase
         foreach ($this->getSrcFiles() as $file) {
             $content = file_get_contents($file);
 
-            // Look for dcat-api route prefix (should be aio-api)
+            // Look for dcat-api route prefix (should be api)
             if (preg_match('/[\'"]dcat-api/', $content)) {
                 $violations[] = str_replace(realpath(__DIR__.'/../..'), '', $file);
             }

@@ -614,10 +614,10 @@ class Admin
     public static function registerApiRoutes()
     {
         $attributes = [
-            'prefix'     => admin_base_path('aio-api'),
+            'prefix'     => admin_base_path('api'),
             'middleware' => config('admin.route.middleware'),
             'namespace'  => 'Appsolutely\AIO\Http\Controllers',
-            'as'         => 'aio-api.',
+            'as'         => 'api.',
         ];
 
         app('router')->group($attributes, function ($router) {

@@ -198,7 +198,7 @@ abstract class TestCase extends BaseTestCase
 
 | 测试文件 | 测试内容 |
 |---------|---------|
-| `Feature/RouteTest.php` | API 路由 `aio-api/*` 是否正确注册、路由名称前缀 `aio-api.` 是否正确 |
+| `Feature/RouteTest.php` | API 路由 `api/*` 是否正确注册、路由名称前缀 `api.` 是否正确 |
 | `Feature/AdminTest.php` | `Admin::css()`, `Admin::js()`, `Admin::script()` 输出、`jsVariables()` 包含正确配置 |
 | `Feature/AuthTest.php` | 登录/登出、未登录重定向、权限中间件拦截 |
 | `Feature/GridCrudTest.php` | Grid 列表页渲染、分页、搜索、排序、导出、批量删除 |
@@ -236,8 +236,8 @@ class MigrationRegressionTest extends TestCase
 
     public function test_api_routes_use_aio_prefix()
     {
-        // 验证 API 路由使用 aio-api 前缀
-        $this->assertStringContainsString('aio-api', admin_api_route_name('action'));
+        // 验证 API 路由使用 api 前缀
+        $this->assertStringContainsString('api', admin_api_route_name('action'));
     }
 
     public function test_css_classes_use_aio_prefix()

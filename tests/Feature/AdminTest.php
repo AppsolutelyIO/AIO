@@ -75,7 +75,7 @@ class AdminTest extends TestCase
     {
         $prefix = Admin::app()->getApiRoutePrefix();
 
-        $this->assertSame('aio.admin.aio-api.', $prefix);
+        $this->assertSame('aio.admin.api.', $prefix);
     }
 
     // --- No dcat references ---
@@ -93,7 +93,7 @@ class AdminTest extends TestCase
         $prefix = Admin::app()->getApiRoutePrefix();
 
         $this->assertStringNotContainsString('dcat', $prefix);
-        $this->assertStringContainsString('aio-api', $prefix);
+        $this->assertStringContainsString('api', $prefix);
     }
 
     // --- Context ---
