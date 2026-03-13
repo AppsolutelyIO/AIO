@@ -169,11 +169,11 @@ class UserController extends AdminController
             $form->display('created_at', trans('admin.created_at'));
             $form->display('updated_at', trans('admin.updated_at'));
 
-            if ($id == AdministratorModel::DEFAULT_ID) {
+            if ((int) $id === AdministratorModel::DEFAULT_ID) {
                 $form->disableDeleteButton();
             }
         })->saving(function (Form $form) {
-            if ($form->password && $form->model()->password != $form->password) {
+            if ($form->password && $form->model()->password !== $form->password) {
                 $form->password = bcrypt($form->password);
             }
 

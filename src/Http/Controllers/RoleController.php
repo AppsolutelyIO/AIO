@@ -67,7 +67,7 @@ class RoleController extends AdminController
             $show->field('updated_at');
 
             $roleModel = config('admin.database.roles_model');
-            if ($show->getKey() == $roleModel::ADMINISTRATOR_ID) {
+            if ((int) $show->getKey() === $roleModel::ADMINISTRATOR_ID) {
                 $show->disableDeleteButton();
             }
         });
@@ -133,7 +133,7 @@ class RoleController extends AdminController
             $form->display('updated_at', trans('admin.updated_at'));
 
             $roleModel = config('admin.database.roles_model');
-            if ($id == $roleModel::ADMINISTRATOR_ID) {
+            if ((int) $id === $roleModel::ADMINISTRATOR_ID) {
                 $form->disableDeleteButton();
             }
         })->saved(function () {

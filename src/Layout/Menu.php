@@ -131,11 +131,11 @@ class Menu
                 return false;
             }
 
-            return trim($this->getPath($item['uri']), '/') == $path;
+            return trim($this->getPath($item['uri']), '/') === $path;
         }
 
         foreach ($item['children'] as $v) {
-            if ($path == trim($this->getPath($v['uri']), '/')) {
+            if ($path === trim($this->getPath($v['uri']), '/')) {
                 return true;
             }
             if (! empty($v['children'])) {

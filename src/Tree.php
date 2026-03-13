@@ -406,7 +406,7 @@ class Tree implements Renderable
     {
         $tree = json_decode($serialize, true);
 
-        if (json_last_error() != JSON_ERROR_NONE) {
+        if (json_last_error() !== JSON_ERROR_NONE) {
             throw new InvalidArgumentException(json_last_error_msg());
         }
 

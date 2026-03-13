@@ -759,7 +759,7 @@ class Form implements Renderable
     protected function handleOrderable(array $input = [])
     {
         if (array_key_exists('_orderable', $input)) {
-            $updated = $input['_orderable'] == 1
+            $updated = (int) $input['_orderable'] === 1
                 ? $this->repository->moveOrderUp()
                 : $this->repository->moveOrderDown();
 
@@ -933,7 +933,7 @@ class Form implements Renderable
 
         $resourcesPath = $this->isCreating() ? $this->resource(0) : $this->resource(-1);
 
-        if ($this->request->get('after-save') == 1) {
+        if ((int) $this->request->get('after-save') === 1) {
             // continue editing
             if ($this->builder->isEditing()) {
                 return false;
