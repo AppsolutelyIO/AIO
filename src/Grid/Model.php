@@ -430,7 +430,7 @@ class Model
     public function addConditions(array $conditions)
     {
         foreach ($conditions as $condition) {
-            call_user_func_array([$this, key($condition)], current($condition));
+            $this->{key($condition)}(...current($condition));
         }
 
         return $this;
@@ -680,7 +680,7 @@ class Model
                 }
             }
 
-            $query = call_user_func_array([$query, $value['method']], $value['arguments'] ?? []);
+            $query = $query->{$value['method']}(...($value['arguments'] ?? []));
         });
 
         return $query;
