@@ -173,7 +173,7 @@ class QueryBuilderRepository extends Repository implements TreeRepository
         [$relationName, $relationColumn] = explode('.', $column);
 
         if ($model->getQueries()->contains(function ($query) use ($relationName) {
-            return $query['method'] == 'with' && in_array($relationName, $query['arguments']);
+            return $query['method'] === 'with' && in_array($relationName, $query['arguments']);
         })) {
             $model->addQuery('select', [$this->getGridColumns()]);
 
