@@ -2,21 +2,14 @@
 
 namespace Appsolutely\AIO\Grid\Exporters;
 
-use Appsolutely\AIO\Exception\RuntimeException;
 use Appsolutely\AIO\Grid;
-use Dcat\EasyExcel\Excel;
+use OpenSpout\Common\Entity\Row;
+use OpenSpout\Writer\XLSX\Writer as XlsxWriter;
+use OpenSpout\Writer\CSV\Writer as CsvWriter;
+use OpenSpout\Writer\ODS\Writer as OdsWriter;
 
 class ExcelExporter extends AbstractExporter
 {
-    public function __construct($titles = [])
-    {
-        parent::__construct($titles);
-
-        if (! class_exists(Excel::class)) {
-            throw new RuntimeException('To use exporter, please install [dcat/easy-excel] first.');
-        }
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -24,18 +17,59 @@ class ExcelExporter extends AbstractExporter
     {
         $filename = $this->getFilename().'.'.$this->extension;
 
-        $exporter = Excel::export();
+        $writer = $this->createWriter();
+        $writer->openToBrowser($filename);
 
-        if ($this->scope === Grid\Exporter::SCOPE_ALL) {
-            $exporter->chunk(function (int $times) {
-                return $this->buildData($times);
-            });
-        } else {
-            $exporter->data($this->buildData() ?: [[]]);
+        $titles = $this->titles();
+        if ($titles) {
+            $writer->addRow(Row::fromValues(array_values($titles)));
         }
 
-        $exporter->headings($this->titles())->download($filename);
+        if ($this->scope === Grid\Exporter::SCOPE_ALL) {
+            $page = 1;
+            while (true) {
+                $data = $this->buildData($page);
+                if (empty($data)) {
+                    break;
+                }
+                $this->writeData($writer, $data, $titles);
+                $page++;
+            }
+        } else {
+            $data = $this->buildData();
+            if (! empty($data)) {
+                $this->writeData($writer, $data, $titles);
+            }
+        }
+
+        $writer->close();
 
         exit;
+    }
+
+    protected function writeData($writer, array $data, $titles): void
+    {
+        $keys = $titles ? array_keys($titles) : null;
+
+        foreach ($data as $row) {
+            if ($keys) {
+                $values = [];
+                foreach ($keys as $key) {
+                    $values[] = $row[$key] ?? '';
+                }
+                $writer->addRow(Row::fromValues($values));
+            } else {
+                $writer->addRow(Row::fromValues(array_values($row)));
+            }
+        }
+    }
+
+    protected function createWriter(): XlsxWriter|CsvWriter|OdsWriter
+    {
+        return match ($this->extension) {
+            'csv' => new CsvWriter(),
+            'ods' => new OdsWriter(),
+            default => new XlsxWriter(),
+        };
     }
 }
