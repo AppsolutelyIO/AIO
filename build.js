@@ -57,7 +57,6 @@ async function buildAll() {
                         format: 'iife',
                         inlineDynamicImports: true,
                         entryFileNames: '[name].js',
-                        // Discard any extracted CSS (handled separately)
                         assetFileNames: '[name][extname]',
                     },
                 },
@@ -65,14 +64,13 @@ async function buildAll() {
         });
     }
 
-    // 2. Build CSS entries via tiny JS wrappers
+    // 2. Build CSS entries
     for (const { input, output } of cssEntries) {
         console.log(`[CSS] ${output}`);
         await build({
             configFile: false,
             css: cssConfig,
             plugins: [
-                // Inline plugin: remap the CSS output filename
                 {
                     name: 'css-rename',
                     generateBundle(_, bundle) {
