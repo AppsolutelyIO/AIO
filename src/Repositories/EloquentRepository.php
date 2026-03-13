@@ -8,7 +8,6 @@ use Appsolutely\AIO\Exception\RuntimeException;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Show;
-use Dcat\Laravel\Database\SoftDeletes as DcatSoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\Relations;
@@ -87,7 +86,6 @@ class EloquentRepository extends Repository implements TreeRepository
 
         $this->setIsSoftDeletes(
             in_array(SoftDeletes::class, $traits, true)
-            || in_array(DcatSoftDeletes::class, $traits, true)
         );
     }
 

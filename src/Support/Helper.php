@@ -3,7 +3,6 @@
 namespace Appsolutely\AIO\Support;
 
 use Appsolutely\AIO\Grid;
-use Dcat\Laravel\Database\WhereHasInServiceProvider;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Jsonable;
@@ -814,10 +813,7 @@ class Helper
 
         $relColumn = array_pop($column);
 
-        // 增加对whereHasIn的支持
-        $method = class_exists(WhereHasInServiceProvider::class) ? 'whereHasIn' : 'whereHas';
-
-        $model->$method(implode('.', $column), function ($relation) use ($relColumn, $params, $query) {
+        $model->whereHas(implode('.', $column), function ($relation) use ($relColumn, $params, $query) {
             $table = $relation->getModel()->getTable();
             $relation->$query("{$table}.{$relColumn}", ...$params);
         });

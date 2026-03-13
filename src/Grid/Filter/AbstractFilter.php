@@ -14,7 +14,6 @@ use Appsolutely\AIO\Grid\Filter\Presenter\Select;
 use Appsolutely\AIO\Grid\Filter\Presenter\Text;
 use Appsolutely\AIO\Grid\LazyRenderable;
 use Appsolutely\AIO\Traits\HasVariables;
-use Dcat\Laravel\Database\WhereHasInServiceProvider;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
@@ -581,10 +580,7 @@ abstract class AbstractFilter
 
         $relColumn = is_callable($relColumn) ? $relColumn : $col;
 
-        // 增加对whereHasIn的支持
-        $method = class_exists(WhereHasInServiceProvider::class) ? 'whereHasIn' : 'whereHas';
-
-        return [$method => [implode('.', $column), function ($q) use ($relColumn, $params) {
+        return ['whereHas' => [implode('.', $column), function ($q) use ($relColumn, $params) {
             $relColumn = is_string($relColumn) ? $q->getModel()->getTable().'.'.$relColumn : $relColumn;
             array_unshift($params, $relColumn);
 
