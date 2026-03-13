@@ -1,0 +1,163 @@
+// GrapesJS Overrides & Customization
+// All gjs-* class styles in one place
+
+// Canvas
+.gjs-cv-canvas {
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gjs-cv-canvas-bg {
+    background-color: #fff !important;
+    color: var(--pb-dark) !important;
+    font-weight: bold;
+}
+
+// Editor
+.gjs-editor,
+.gjs-title {
+    background-color: #fff !important;
+    color: var(--pb-dark) !important;
+    font-weight: bold;
+}
+
+// Blocks panel layout fix: gjs-pn-panel uses position:absolute, breaks our layout
+#blocks-content .gjs-pn-panel {
+    position: static !important;
+    display: block !important;
+}
+
+.gjs-blocks-c {
+    background-color: #fff !important;
+    color: var(--pb-dark) !important;
+    font-weight: bold;
+
+    .gjs-block {
+        margin-bottom: var(--pb-spacing-md);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.gjs-one-bg {
+    background-color: #fff !important;
+}
+
+// Block item
+.gjs-block {
+    border-radius: var(--pb-radius-lg);
+    padding: var(--pb-spacing-lg);
+    box-shadow: var(--pb-shadow-sm);
+    transition: var(--pb-transition);
+    background: #fff !important;
+    width: 100%;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--pb-shadow-lg);
+    }
+}
+
+// Block categories
+.gjs-block-category {
+    margin-bottom: var(--pb-spacing-lg);
+
+    &.gjs-open {
+        border-bottom: none;
+    }
+
+    .gjs-block-category-title {
+        font-weight: 600;
+        color: var(--pb-dark);
+        margin-bottom: var(--pb-spacing-sm);
+        padding: var(--pb-spacing-sm) 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+}
+
+// Block items (drag source in sidebar)
+.gjs-block-item {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    padding: var(--pb-spacing-md);
+    border-radius: var(--pb-radius-md);
+    transition: var(--pb-transition);
+
+    &:hover {
+        background-color: #f8fafc;
+    }
+
+    .block-icon {
+        background-color: #e2e8f0;
+        border: 2px dashed #cbd5e1;
+        border-radius: var(--pb-radius-xl);
+        width: 4rem;
+        height: 4rem;
+        margin-right: var(--pb-spacing-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .block-content {
+        flex: 1;
+
+        .block-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--pb-dark);
+            margin-bottom: var(--pb-spacing-xs);
+        }
+
+        .block-description {
+            font-size: 0.875rem;
+            color: #64748b;
+            line-height: 1.4;
+        }
+    }
+}
+
+// Component toolbar: align all icons (including custom cog) and remove underlines/outlines
+.gjs-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0;
+
+    a,
+    [class*="toolbar-item"] {
+        text-decoration: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 2em;
+        line-height: 1;
+
+        &:focus,
+        &:hover {
+            text-decoration: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+
+    .fa {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        line-height: 1;
+    }
+
+    .fa-cog {
+        position: static;
+        top: auto;
+    }
+}

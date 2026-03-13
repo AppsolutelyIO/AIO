@@ -1,0 +1,12 @@
+// Page Builder Main SCSS Entry Point
+
+// 1. All @import statements must come first
+@import "grapesjs/dist/css/grapes.min.css";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "variables";
+@import "base";
+@import "components/grapesjs";
+@import "components/editor";
+@import "components/panels";
+@import "components/modals";
+@import "components/notifications";

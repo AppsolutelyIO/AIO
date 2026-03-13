@@ -1,0 +1,66 @@
+// Page Builder Editor Components
+
+// Layout: constrain to viewport, canvas + blocks scroll internally
+.grapes-editor {
+    height: calc(100vh - var(--pb-header-height));
+    min-height: 0;
+    overflow: hidden;
+    background-color: #444;
+}
+
+.editor-canvas-wrapper {
+    min-height: 0;
+    overflow-y: auto;
+    background-color: #444;
+}
+
+#editor-canvas {
+    background-color: var(--pb-editor);
+    background-image:
+        linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+    background-size: 20px 20px;
+    min-height: 500px;
+}
+
+// Device Preview Buttons
+.device-btn {
+    transition: var(--pb-transition);
+
+    &.active {
+        background-color: var(--pb-primary);
+        color: white;
+    }
+
+    &:hover:not(.active) {
+        background-color: #e2e8f0;
+    }
+}
+
+// Drag and Drop
+.drag-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(99 102 241 / 10%);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+
+    &.visible {
+        display: flex;
+    }
+}
+
+.drag-placeholder {
+    background: rgb(99 102 241 / 30%);
+    border: 2px dashed var(--pb-primary);
+    border-radius: var(--pb-radius-lg);
+    padding: var(--pb-spacing-xl);
+    font-size: 1.125rem;
+    color: var(--pb-primary);
+    font-weight: bold;
+}

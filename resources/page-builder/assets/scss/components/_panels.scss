@@ -1,0 +1,80 @@
+// Page Builder Panels
+
+// Layout: allow sidebar to shrink so blocks panel scrolls internally
+.page-builder-sidebar {
+    min-height: 0;
+    flex-shrink: 0;
+}
+
+.config-panel {
+    max-height: var(--pb-panel-max-height);
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f5f9;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+}
+
+// Tab Navigation
+.tab-btn {
+    transition: var(--pb-transition);
+    border-bottom: 2px solid transparent;
+
+    &.active {
+        color: var(--pb-primary);
+        border-bottom-color: var(--pb-primary);
+    }
+
+    &:hover:not(.active) {
+        color: #64748b;
+    }
+}
+
+// Configuration Form
+#config-form {
+    .form-group {
+        margin-bottom: var(--pb-spacing-lg);
+
+        label {
+            display: block;
+            font-weight: 500;
+            color: var(--pb-dark);
+            margin-bottom: var(--pb-spacing-sm);
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: var(--pb-spacing-sm) var(--pb-spacing-md);
+            border: 1px solid #d1d5db;
+            border-radius: var(--pb-radius-md);
+            font-size: 0.875rem;
+            transition: var(--pb-transition);
+
+            &:focus {
+                outline: none;
+                border-color: var(--pb-primary);
+                box-shadow: 0 0 0 3px rgb(99 102 241 / 10%);
+            }
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+    }
+}
