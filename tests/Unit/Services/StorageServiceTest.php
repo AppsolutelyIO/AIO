@@ -54,7 +54,7 @@ class StorageServiceTest extends TestCase
 
         $file = UploadedFile::fake()->create('document.pdf', 100);
 
-        $this->expectException(\App\Exceptions\StorageException::class);
+        $this->expectException(\Appsolutely\AIO\Exceptions\StorageException::class);
         $this->expectExceptionMessage('Failed to upload file');
 
         $this->storageService->store($file);
@@ -70,7 +70,7 @@ class StorageServiceTest extends TestCase
 
         $file = UploadedFile::fake()->create('document.pdf', 100);
 
-        $this->expectException(\App\Exceptions\StorageException::class);
+        $this->expectException(\Appsolutely\AIO\Exceptions\StorageException::class);
         $this->expectExceptionMessage('was not found in S3 storage after upload');
 
         $this->storageService->store($file);

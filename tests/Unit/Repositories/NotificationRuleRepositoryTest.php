@@ -386,8 +386,8 @@ final class NotificationRuleRepositoryTest extends TestCase
     public function test_get_with_usage_stats_returns_rules_with_counts(): void
     {
         $rule = NotificationRule::factory()->create();
-        \App\Models\NotificationQueue::factory()->sent()->count(3)->create(['rule_id' => $rule->id]);
-        \App\Models\NotificationQueue::factory()->pending()->count(2)->create(['rule_id' => $rule->id]);
+        \Appsolutely\AIO\Models\NotificationQueue::factory()->sent()->count(3)->create(['rule_id' => $rule->id]);
+        \Appsolutely\AIO\Models\NotificationQueue::factory()->pending()->count(2)->create(['rule_id' => $rule->id]);
 
         $result = $this->repository->getWithUsageStats();
 

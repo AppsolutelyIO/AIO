@@ -24,7 +24,7 @@ final class BlockRendererServiceTest extends TestCase
 
     private function makePage(): GeneralPage
     {
-        $page = \App\Models\Page::factory()->create();
+        $page = \Appsolutely\AIO\Models\Page::factory()->create();
 
         return new GeneralPage($page);
     }

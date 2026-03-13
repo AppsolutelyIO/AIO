@@ -37,7 +37,7 @@ final class PageBlockSettingRepositoryTest extends TestCase
         return DB::table('page_blocks')->insertGetId(array_merge([
             'block_group_id' => $groupId,
             'title'          => 'Block ' . uniqid(),
-            'class'          => 'App\\Block\\' . uniqid(),
+            'class'          => 'Appsolutely\\AIO\\Block\\' . uniqid(),
             'scope'          => BlockScope::Page->value,
             'sort'           => 0,
             'status'         => Status::ACTIVE->value,

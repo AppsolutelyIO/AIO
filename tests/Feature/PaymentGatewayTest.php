@@ -609,8 +609,8 @@ class PaymentGatewayTest extends TestCase
 
     public function test_buy_now_pay_later_payment_method(): void
     {
-        $this->assertEquals('buy_now_pay_later', \App\Enums\PaymentMethod::BuyNowPayLater->value);
-        $this->assertEquals('Buy Now, Pay Later', \App\Enums\PaymentMethod::BuyNowPayLater->label());
+        $this->assertEquals('buy_now_pay_later', \Appsolutely\AIO\Enums\PaymentMethod::BuyNowPayLater->value);
+        $this->assertEquals('Buy Now, Pay Later', \Appsolutely\AIO\Enums\PaymentMethod::BuyNowPayLater->label());
     }
 
     // === New Provider Factory State Tests ===

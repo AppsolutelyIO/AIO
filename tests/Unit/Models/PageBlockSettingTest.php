@@ -28,7 +28,7 @@ final class PageBlockSettingTest extends TestCase
         $blockId = DB::table('page_blocks')->insertGetId([
             'block_group_id' => $groupId,
             'title'          => 'Block',
-            'class'          => 'App\\Block\\' . uniqid(),
+            'class'          => 'Appsolutely\\AIO\\Block\\' . uniqid(),
             'scope'          => BlockScope::Page->value,
             'sort'           => 0,
             'status'         => Status::ACTIVE->value,

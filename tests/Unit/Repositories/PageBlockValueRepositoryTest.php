@@ -36,7 +36,7 @@ final class PageBlockValueRepositoryTest extends TestCase
         return DB::table('page_blocks')->insertGetId([
             'block_group_id' => $groupId,
             'title'          => 'Block ' . uniqid(),
-            'class'          => 'App\\Block\\' . uniqid(),
+            'class'          => 'Appsolutely\\AIO\\Block\\' . uniqid(),
             'scope'          => BlockScope::Page->value,
             'status'         => Status::ACTIVE->value,
             'created_at'     => now()->toDateTimeString(),

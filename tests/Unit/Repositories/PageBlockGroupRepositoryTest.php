@@ -40,7 +40,7 @@ final class PageBlockGroupRepositoryTest extends TestCase
             'block_group_id' => $groupId,
             'title'          => 'Block ' . uniqid(),
             'reference'      => 'ref-' . uniqid(),
-            'class'          => 'App\\Block\\' . uniqid(),
+            'class'          => 'Appsolutely\\AIO\\Block\\' . uniqid(),
             'scope'          => BlockScope::Page->value,
             'sort'           => 0,
             'status'         => Status::ACTIVE->value,

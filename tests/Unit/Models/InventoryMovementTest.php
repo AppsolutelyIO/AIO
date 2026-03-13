@@ -94,7 +94,7 @@ final class InventoryMovementTest extends TestCase
     public function test_inventory_movement_has_morph_reference(): void
     {
         $sku   = $this->createSku();
-        $order = \App\Models\Order::factory()->create();
+        $order = \Appsolutely\AIO\Models\Order::factory()->create();
 
         $movement = InventoryMovement::create([
             'product_sku_id' => $sku->id,
@@ -106,6 +106,6 @@ final class InventoryMovementTest extends TestCase
             'reference_id'   => $order->id,
         ]);
 
-        $this->assertInstanceOf(\App\Models\Order::class, $movement->reference);
+        $this->assertInstanceOf(\Appsolutely\AIO\Models\Order::class, $movement->reference);
     }
 }

@@ -47,7 +47,7 @@ final class PageBlockSettingServiceTest extends TestCase
         $blockId = DB::table('page_blocks')->insertGetId([
             'block_group_id' => $groupId,
             'title'          => 'Test Block',
-            'class'          => 'App\\Livewire\\TestBlock',
+            'class'          => 'Appsolutely\\AIO\\Livewire\\TestBlock',
             'reference'      => 'test-block',
             'sort'           => 0,
             'status'         => 1,
@@ -74,7 +74,7 @@ final class PageBlockSettingServiceTest extends TestCase
         $blockId = DB::table('page_blocks')->insertGetId([
             'block_group_id' => $groupId,
             'title'          => 'Shared Block',
-            'class'          => 'App\\Livewire\\SharedBlock',
+            'class'          => 'Appsolutely\\AIO\\Livewire\\SharedBlock',
             'reference'      => 'shared-block',
             'sort'           => 0,
             'status'         => 1,

@@ -128,7 +128,7 @@ final class FormEntryNotificationRelationshipTest extends TestCase
     {
         $form     = Form::factory()->create();
         $entry    = FormEntry::factory()->create(['form_id' => $form->id]);
-        $template = \App\Models\NotificationTemplate::factory()->create();
+        $template = \Appsolutely\AIO\Models\NotificationTemplate::factory()->create();
 
         $notification = NotificationQueue::create([
             'template_id'     => $template->id,

@@ -42,7 +42,7 @@ final class PageBlockRepositoryTest extends TestCase
         $id = DB::table('page_blocks')->insertGetId(array_merge([
             'block_group_id' => $groupId,
             'title'          => 'Test Block ' . uniqid(),
-            'class'          => 'App\\Blocks\\TestBlock' . uniqid(),
+            'class'          => 'Appsolutely\\AIO\\Blocks\\TestBlock' . uniqid(),
             'scope'          => BlockScope::Page->value,
             'sort'           => 0,
             'status'         => Status::ACTIVE->value,

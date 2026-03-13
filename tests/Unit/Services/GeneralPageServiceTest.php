@@ -63,11 +63,11 @@ final class GeneralPageServiceTest extends TestCase
 
     public function test_get_block_mappings_returns_configured_mappings(): void
     {
-        config(['appsolutely.blocks' => ['App\Blocks\HeroBlock' => ['App\Repositories\PageRepository']]]);
+        config(['appsolutely.blocks' => ['Appsolutely\AIO\Blocks\HeroBlock' => ['Appsolutely\AIO\Repositories\PageRepository']]]);
 
         $result = $this->service->getBlockMappings();
 
-        $this->assertArrayHasKey('App\Blocks\HeroBlock', $result);
+        $this->assertArrayHasKey('Appsolutely\AIO\Blocks\HeroBlock', $result);
     }
 
     // --- hasBlockMapping ---
@@ -76,25 +76,25 @@ final class GeneralPageServiceTest extends TestCase
     {
         config(['appsolutely.blocks' => []]);
 
-        $result = $this->service->hasBlockMapping('App\Blocks\NonExistentBlock');
+        $result = $this->service->hasBlockMapping('Appsolutely\AIO\Blocks\NonExistentBlock');
 
         $this->assertFalse($result);
     }
 
     public function test_has_block_mapping_returns_true_for_mapped_block(): void
     {
-        config(['appsolutely.blocks' => ['App\Blocks\HeroBlock' => ['App\Repositories\PageRepository']]]);
+        config(['appsolutely.blocks' => ['Appsolutely\AIO\Blocks\HeroBlock' => ['Appsolutely\AIO\Repositories\PageRepository']]]);
 
-        $result = $this->service->hasBlockMapping('App\Blocks\HeroBlock');
+        $result = $this->service->hasBlockMapping('Appsolutely\AIO\Blocks\HeroBlock');
 
         $this->assertTrue($result);
     }
 
     public function test_has_block_mapping_returns_false_when_repositories_are_empty(): void
     {
-        config(['appsolutely.blocks' => ['App\Blocks\EmptyBlock' => []]]);
+        config(['appsolutely.blocks' => ['Appsolutely\AIO\Blocks\EmptyBlock' => []]]);
 
-        $result = $this->service->hasBlockMapping('App\Blocks\EmptyBlock');
+        $result = $this->service->hasBlockMapping('Appsolutely\AIO\Blocks\EmptyBlock');
 
         $this->assertFalse($result);
     }
@@ -105,23 +105,23 @@ final class GeneralPageServiceTest extends TestCase
     {
         config(['appsolutely.blocks' => []]);
 
-        $this->service->addBlockMapping('App\Blocks\NewBlock', ['App\Repositories\PageRepository']);
+        $this->service->addBlockMapping('Appsolutely\AIO\Blocks\NewBlock', ['Appsolutely\AIO\Repositories\PageRepository']);
 
         $result = $this->service->getBlockMappings();
 
-        $this->assertArrayHasKey('App\Blocks\NewBlock', $result);
+        $this->assertArrayHasKey('Appsolutely\AIO\Blocks\NewBlock', $result);
     }
 
     public function test_add_block_mapping_preserves_existing_mappings(): void
     {
-        config(['appsolutely.blocks' => ['App\Blocks\ExistingBlock' => ['App\Repositories\PageRepository']]]);
+        config(['appsolutely.blocks' => ['Appsolutely\AIO\Blocks\ExistingBlock' => ['Appsolutely\AIO\Repositories\PageRepository']]]);
 
-        $this->service->addBlockMapping('App\Blocks\NewBlock', ['App\Repositories\ArticleRepository']);
+        $this->service->addBlockMapping('Appsolutely\AIO\Blocks\NewBlock', ['Appsolutely\AIO\Repositories\ArticleRepository']);
 
         $result = $this->service->getBlockMappings();
 
-        $this->assertArrayHasKey('App\Blocks\ExistingBlock', $result);
-        $this->assertArrayHasKey('App\Blocks\NewBlock', $result);
+        $this->assertArrayHasKey('Appsolutely\AIO\Blocks\ExistingBlock', $result);
+        $this->assertArrayHasKey('Appsolutely\AIO\Blocks\NewBlock', $result);
     }
 
     // --- getCacheStats ---

@@ -97,7 +97,7 @@ final class InventoryServiceTest extends TestCase
     public function test_record_movement_with_reference_model(): void
     {
         $sku   = $this->createSku(100);
-        $order = \App\Models\Order::factory()->create();
+        $order = \Appsolutely\AIO\Models\Order::factory()->create();
 
         $movement = $this->service->recordMovement(
             $sku,

@@ -33,7 +33,7 @@ final class NotificationQueueServiceTest extends TestCase
 
     public function test_process_pending_dispatches_jobs_for_pending_notifications(): void
     {
-        \App\Models\NotificationQueue::factory()->count(3)->create([
+        \Appsolutely\AIO\Models\NotificationQueue::factory()->count(3)->create([
             'status'       => 'pending',
             'scheduled_at' => now()->subMinute(),
         ]);
@@ -45,7 +45,7 @@ final class NotificationQueueServiceTest extends TestCase
 
     public function test_process_pending_respects_limit(): void
     {
-        \App\Models\NotificationQueue::factory()->count(10)->create([
+        \Appsolutely\AIO\Models\NotificationQueue::factory()->count(10)->create([
             'status'       => 'pending',
             'scheduled_at' => now()->subMinute(),
         ]);
@@ -57,7 +57,7 @@ final class NotificationQueueServiceTest extends TestCase
 
     public function test_process_pending_marks_notifications_as_processing(): void
     {
-        $notification = \App\Models\NotificationQueue::factory()->create([
+        $notification = \Appsolutely\AIO\Models\NotificationQueue::factory()->create([
             'status'       => 'pending',
             'scheduled_at' => now()->subMinute(),
         ]);
@@ -72,7 +72,7 @@ final class NotificationQueueServiceTest extends TestCase
 
     public function test_process_pending_does_not_process_non_pending_notifications(): void
     {
-        \App\Models\NotificationQueue::factory()->create([
+        \Appsolutely\AIO\Models\NotificationQueue::factory()->create([
             'status'       => 'sent',
             'scheduled_at' => now()->subMinute(),
         ]);

@@ -140,8 +140,8 @@ final class FormRepositoryTest extends TestCase
         $form1 = Form::factory()->create();
         $form2 = Form::factory()->create();
 
-        \App\Models\FormEntry::factory()->count(3)->create(['form_id' => $form1->id]);
-        \App\Models\FormEntry::factory()->count(2)->create(['form_id' => $form2->id]);
+        \Appsolutely\AIO\Models\FormEntry::factory()->count(3)->create(['form_id' => $form1->id]);
+        \Appsolutely\AIO\Models\FormEntry::factory()->count(2)->create(['form_id' => $form2->id]);
 
         $result = $this->repository->getFormsWithStats();
 

@@ -108,7 +108,7 @@ final class NotificationRuleServiceTest extends TestCase
 
     public function test_validate_rule_returns_empty_for_valid_data(): void
     {
-        $template = \App\Models\NotificationTemplate::factory()->create();
+        $template = \Appsolutely\AIO\Models\NotificationTemplate::factory()->create();
         $data     = [
             'name'             => 'Test Rule',
             'trigger_type'     => 'form_submission',
@@ -164,7 +164,7 @@ final class NotificationRuleServiceTest extends TestCase
 
     public function test_validate_rule_does_not_require_emails_for_admin_type(): void
     {
-        $template = \App\Models\NotificationTemplate::factory()->create();
+        $template = \Appsolutely\AIO\Models\NotificationTemplate::factory()->create();
         $data     = [
             'name'             => 'Test',
             'trigger_type'     => 'form_submission',
