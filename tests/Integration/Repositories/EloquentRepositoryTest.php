@@ -5,6 +5,8 @@ namespace Appsolutely\AIO\Tests\Integration\Repositories;
 use Appsolutely\AIO\Repositories\EloquentRepository;
 use Appsolutely\AIO\Tests\Integration\TestCase;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -13,6 +15,28 @@ class TestModel extends Model
     protected $table = 'test_items';
     protected $guarded = [];
     public $timestamps = true;
+}
+
+class TestParentModel extends Model
+{
+    protected $table = 'test_parents';
+    protected $guarded = [];
+
+    public function profile(): HasOne
+    {
+        return $this->hasOne(TestChildModel::class, 'parent_id');
+    }
+}
+
+class TestChildModel extends Model
+{
+    protected $table = 'test_children';
+    protected $guarded = [];
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(TestParentModel::class, 'parent_id');
+    }
 }
 
 class EloquentRepositoryTest extends TestCase
@@ -27,10 +51,25 @@ class EloquentRepositoryTest extends TestCase
             $table->string('status')->default('active');
             $table->timestamps();
         });
+
+        Schema::create('test_parents', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        Schema::create('test_children', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('parent_id');
+            $table->string('name');
+            $table->timestamps();
+        });
     }
 
     protected function tearDown(): void
     {
+        Schema::dropIfExists('test_children');
+        Schema::dropIfExists('test_parents');
         Schema::dropIfExists('test_items');
         parent::tearDown();
     }
@@ -152,5 +191,37 @@ class EloquentRepositoryTest extends TestCase
         $repo = EloquentRepository::make(new TestModel());
         $this->assertInstanceOf(EloquentRepository::class, $repo);
         $this->assertInstanceOf(TestModel::class, $repo->model());
+    }
+
+    // --- joinParameters ---
+
+    public function test_join_parameters_belongs_to()
+    {
+        $child = new TestChildModel();
+        $relation = $child->parent();
+
+        $repo = new EloquentRepository(TestChildModel::class);
+        $method = new \ReflectionMethod($repo, 'joinParameters');
+        $result = $method->invoke($repo, $relation);
+
+        $this->assertCount(4, $result);
+        $this->assertSame('test_parents', $result[0]);
+        $this->assertSame('parent_id', $result[1]);
+        $this->assertSame('=', $result[2]);
+        $this->assertSame('test_parents.id', $result[3]);
+    }
+
+    public function test_join_parameters_has_one()
+    {
+        $parent = new TestParentModel();
+        $relation = $parent->profile();
+
+        $repo = new EloquentRepository(TestParentModel::class);
+        $method = new \ReflectionMethod($repo, 'joinParameters');
+        $result = $method->invoke($repo, $relation);
+
+        $this->assertCount(4, $result);
+        $this->assertSame('test_children', $result[0]);
+        $this->assertSame('=', $result[2]);
     }
 }
