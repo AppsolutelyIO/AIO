@@ -1,25 +1,19 @@
 {
     "private": true,
+    "type": "module",
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
+        "dev": "NODE_ENV=development node build.js",
+        "build": "NODE_ENV=production node build.js",
+        "prod": "NODE_ENV=production node build.js",
+        "production": "NODE_ENV=production node build.js"
     },
     "devDependencies": {
-        "cross-env": "^10.1.0",
-        "laravel-mix": "^6.0.49",
+        "@rollup/plugin-commonjs": "^29.0.2",
+        "glob": "^11.0.0",
         "lodash": "^4.17.23",
-        "resolve-url-loader": "^5.0.0",
         "rtlcss": "^4.3.0",
         "sass": "^1.22.12",
-        "sass-loader": "^16.0.7",
         "vditor": "^3.11.2",
-        "vue-template-compiler": "^2.6.12",
-        "webpack": "^5.105.4",
-        "webpack-cli": "^6.0.1"
+        "vite": "^6.0.0"
     }
 }
