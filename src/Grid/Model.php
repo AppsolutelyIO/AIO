@@ -711,7 +711,7 @@ class Model
                 $relations = explode(':', $relations)[0];
             }
 
-            if (in_array($relations, $this->eagerLoads)) {
+            if (in_array($relations, $this->eagerLoads, true)) {
                 return $this;
             }
 

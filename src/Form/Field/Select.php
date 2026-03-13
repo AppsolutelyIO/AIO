@@ -43,7 +43,7 @@ class Select extends Field
         // remote options
         if (is_string($options)) {
             // reload selected
-            if (class_exists($options) && in_array(Model::class, class_parents($options))) {
+            if (class_exists($options) && in_array(Model::class, class_parents($options), true)) {
                 return $this->model(...func_get_args());
             }
 
@@ -94,7 +94,7 @@ class Select extends Field
     public function model($model, string $idField = 'id', string $textField = 'name')
     {
         if (! class_exists($model)
-            || ! in_array(Model::class, class_parents($model))
+            || ! in_array(Model::class, class_parents($model), true)
         ) {
             throw new RuntimeException("[$model] must be a valid model class");
         }

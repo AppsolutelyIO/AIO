@@ -40,7 +40,7 @@ class CreateUserCommand extends Command
         $selected = $this->choice('Please choose a role for the user', $roles->pluck('name')->toArray(), null, null, true);
 
         $roles = $roles->filter(function ($role) use ($selected) {
-            return in_array($role->name, $selected);
+            return in_array($role->name, $selected, true);
         });
 
         $user = new $userModel(compact('username', 'password', 'name'));

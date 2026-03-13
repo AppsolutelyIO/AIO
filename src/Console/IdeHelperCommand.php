@@ -100,7 +100,7 @@ class IdeHelperCommand extends Command
         $databases = Arr::where(config('database.connections', []), function ($value) {
             $supports = ['mysql'];
 
-            return in_array(strtolower(Arr::get($value, 'driver')), $supports);
+            return in_array(strtolower(Arr::get($value, 'driver')), $supports, true);
         });
 
         $exceptTables = [
@@ -118,7 +118,7 @@ class IdeHelperCommand extends Command
                     ->map(function ($v) use ($exceptTables, &$reject) {
                         $v = (array) $v;
 
-                        if (in_array($v['TABLE_NAME'], $exceptTables) || in_array($v['COLUMN_NAME'], $reject)) {
+                        if (in_array($v['TABLE_NAME'], $exceptTables, true) || in_array($v['COLUMN_NAME'], $reject, true)) {
                             return;
                         }
 
@@ -156,7 +156,7 @@ class IdeHelperCommand extends Command
                 $show = $show[1];
 
                 return collect(array_merge($grid, $show))->reject(function ($name) use (&$reject) {
-                    return in_array($name, $reject);
+                    return in_array($name, $reject, true);
                 });
             })
             ->flatten()
@@ -222,7 +222,7 @@ class IdeHelperCommand extends Command
         $reject = $fields[1];
 
         $fields = collect(Grid\Filter::extensions())->reject(function ($value, $key) use (&$reject) {
-            return in_array($key, $reject);
+            return in_array($key, $reject, true);
         });
 
         $space = str_repeat(' ', 5);
@@ -266,7 +266,7 @@ class IdeHelperCommand extends Command
         $reject = $fields[1];
 
         $fields = collect(Form::extensions())->reject(function ($value, $key) use (&$reject) {
-            return in_array($key, $reject);
+            return in_array($key, $reject, true);
         });
 
         $space = str_repeat(' ', 5);
@@ -292,7 +292,7 @@ class IdeHelperCommand extends Command
         $reject = $column[1];
 
         $columns = collect(array_keys(Grid\Column::extensions()))->reject(function ($displayer) use (&$reject) {
-            return in_array($displayer, $reject);
+            return in_array($displayer, $reject, true);
         });
 
         $space = str_repeat(' ', 5);

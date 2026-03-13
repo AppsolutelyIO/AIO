@@ -119,7 +119,7 @@ class ScaffoldController extends Controller
 
         try {
             // 1. Create model.
-            if (in_array('model', $creates)) {
+            if (in_array('model', $creates, true)) {
                 $modelCreator = new ModelCreator($table, $model);
 
                 $paths['model'] = $modelCreator->create(
@@ -130,13 +130,13 @@ class ScaffoldController extends Controller
             }
 
             // 2. Create controller.
-            if (in_array('controller', $creates)) {
+            if (in_array('controller', $creates, true)) {
                 $paths['controller'] = (new ControllerCreator($controller))
-                    ->create(in_array('repository', $creates) ? $repository : $model);
+                    ->create(in_array('repository', $creates, true) ? $repository : $model);
             }
 
             // 3. Create migration.
-            if (in_array('migration', $creates)) {
+            if (in_array('migration', $creates, true)) {
                 $migrationName = 'create_'.$table.'_table';
 
                 $paths['migration'] = (new MigrationCreator(app('files')))->buildBluePrint(
@@ -147,24 +147,24 @@ class ScaffoldController extends Controller
                 )->create($migrationName, database_path('migrations'), $table);
             }
 
-            if (in_array('lang', $creates)) {
+            if (in_array('lang', $creates, true)) {
                 $paths['lang'] = (new LangCreator($request->get('fields')))
                     ->create($controller, $request->get('translate_title'));
             }
 
-            if (in_array('repository', $creates)) {
+            if (in_array('repository', $creates, true)) {
                 $paths['repository'] = (new RepositoryCreator())
                     ->create($model, $repository);
             }
 
             // Run migrate.
-            if (in_array('migrate', $creates)) {
+            if (in_array('migrate', $creates, true)) {
                 Artisan::call('migrate');
                 $message = Artisan::output();
             }
 
             // Make ide helper file.
-            if (in_array('migrate', $creates) || in_array('controller', $creates)) {
+            if (in_array('migrate', $creates, true) || in_array('controller', $creates, true)) {
                 try {
                     Artisan::call('admin:ide-helper', ['-c' => $controller]);
 
@@ -213,7 +213,7 @@ class ScaffoldController extends Controller
         $databases = Arr::where(config('database.connections', []), function ($value) {
             $supports = ['mysql'];
 
-            return in_array(strtolower(Arr::get($value, 'driver')), $supports);
+            return in_array(strtolower(Arr::get($value, 'driver')), $supports, true);
         });
 
         $data = [];

@@ -123,7 +123,7 @@ class Select extends Presenter
     public function model($model, string $idField = 'id', string $textField = 'name')
     {
         if (! class_exists($model)
-            || ! in_array(Model::class, class_parents($model))
+            || ! in_array(Model::class, class_parents($model), true)
         ) {
             throw new RuntimeException("[$model] must be a valid model class");
         }

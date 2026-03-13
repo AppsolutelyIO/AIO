@@ -153,7 +153,7 @@ trait CanHidesColumns
         array_push($visible, Grid\Column::SELECT_COLUMN_NAME, Grid\Column::ACTION_COLUMN_NAME);
 
         return optional($this->getComplexHeaders())->filter(function ($column) use ($visible) {
-            return in_array($column->getName(), $visible);
+            return in_array($column->getName(), $visible, true);
         });
     }
 
@@ -179,7 +179,7 @@ trait CanHidesColumns
         array_push($visible, Grid\Column::SELECT_COLUMN_NAME, Grid\Column::ACTION_COLUMN_NAME);
 
         return $this->columns->filter(function (Grid\Column $column) use ($visible) {
-            return in_array($column->getName(), $visible);
+            return in_array($column->getName(), $visible, true);
         });
     }
 
@@ -205,7 +205,7 @@ trait CanHidesColumns
         array_push($visible, Grid\Column::SELECT_COLUMN_NAME, Grid\Column::ACTION_COLUMN_NAME);
 
         return collect($this->columnNames)->filter(function ($column) use ($visible) {
-            return in_array($column, $visible);
+            return in_array($column, $visible, true);
         })->toArray();
     }
 

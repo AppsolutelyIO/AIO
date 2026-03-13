@@ -261,7 +261,7 @@ class Helper
 
             $methods = array_map('strtoupper', explode(',', $methods));
 
-            if (! empty($methods) && ! in_array($request->method(), $methods)) {
+            if (! empty($methods) && ! in_array($request->method(), $methods, true)) {
                 return false;
             }
         }

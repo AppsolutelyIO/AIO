@@ -76,12 +76,12 @@ class ColumnSelector extends AbstractTool
             array_push($visible, Grid\Column::SELECT_COLUMN_NAME, Grid\Column::ACTION_COLUMN_NAME);
 
             $columns = collect($columns)->filter(function ($column) use ($visible) {
-                return in_array($column, $visible);
+                return in_array($column, $visible, true);
             })->toArray();
         }
 
         return array_filter($columns, function ($v) {
-            return ! in_array($v, [Grid\Column::SELECT_COLUMN_NAME, Grid\Column::ACTION_COLUMN_NAME]);
+            return ! in_array($v, [Grid\Column::SELECT_COLUMN_NAME, Grid\Column::ACTION_COLUMN_NAME], true);
         });
     }
 
@@ -111,7 +111,7 @@ class ColumnSelector extends AbstractTool
      */
     protected function isColumnIgnored($name)
     {
-        return in_array($name, $this->ignoredColumns);
+        return in_array($name, $this->ignoredColumns, true);
     }
 
     /**

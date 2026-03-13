@@ -46,11 +46,11 @@ class Help implements Renderable
 
         $tooltip = Tooltip::make('.'.$class);
 
-        if (in_array($this->style, ['green', 'blue', 'red', 'purple'])) {
+        if (in_array($this->style, ['green', 'blue', 'red', 'purple'], true)) {
             $tooltip->{$this->style}();
         }
 
-        if (in_array($this->placement, ['bottom', 'left', 'right', 'top'])) {
+        if (in_array($this->placement, ['bottom', 'left', 'right', 'top'], true)) {
             $tooltip->{$this->placement}();
         }
 

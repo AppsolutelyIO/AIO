@@ -403,7 +403,7 @@ class Filter implements Renderable
     {
         $this->filters = array_filter($this->filters, function (AbstractFilter $filter) use (&$column) {
             if (is_array($column)) {
-                return ! in_array($filter->column(), $column);
+                return ! in_array($filter->column(), $column, true);
             }
 
             return $filter->column() != $column;
