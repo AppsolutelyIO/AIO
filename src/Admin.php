@@ -93,7 +93,9 @@ class Admin
     {
         $menu = app('admin.menu');
 
-        $builder && $builder($menu);
+        if ($builder) {
+            $builder($menu);
+        }
 
         return $menu;
     }
@@ -161,7 +163,9 @@ class Admin
     {
         $navbar = app('admin.navbar');
 
-        $builder && $builder($navbar);
+        if ($builder) {
+            $builder($navbar);
+        }
 
         return $navbar;
     }
@@ -213,7 +217,9 @@ class Admin
     {
         $manager = app('admin.sections');
 
-        $builder && $builder($manager);
+        if ($builder) {
+            $builder($manager);
+        }
 
         return $manager;
     }
