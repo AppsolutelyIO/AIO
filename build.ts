@@ -64,6 +64,10 @@ async function buildAll(): Promise<void> {
                         entryFileNames: '[name].js',
                         assetFileNames: '[name][extname]',
                     },
+                    onwarn(warning, defaultHandler) {
+                        if (warning.code === 'EVAL') return;
+                        defaultHandler(warning);
+                    },
                 },
             },
         });
