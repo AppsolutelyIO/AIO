@@ -2,6 +2,7 @@
 
 namespace Appsolutely\AIO;
 
+use Appsolutely\AIO\Support\ColorHelper;
 use Appsolutely\AIO\Support\Helper;
 use Illuminate\Support\Traits\Macroable;
 
@@ -282,7 +283,7 @@ class Color
      */
     public function lighten(?string $color, int $amt)
     {
-        return Helper::colorLighten($this->get($color, $color), $amt);
+        return ColorHelper::lighten($this->get($color, $color), $amt);
     }
 
     /**
@@ -294,7 +295,7 @@ class Color
      */
     public function darken(string $color, int $amt)
     {
-        return Helper::colorDarken($this->get($color, $color), $amt);
+        return ColorHelper::darken($this->get($color, $color), $amt);
     }
 
     /**
@@ -306,7 +307,7 @@ class Color
      */
     public function alpha(?string $color, $alpha)
     {
-        return Helper::colorAlpha($this->get($color, $color), $alpha);
+        return ColorHelper::alpha($this->get($color, $color), $alpha);
     }
 
     /**
