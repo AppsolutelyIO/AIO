@@ -1,0 +1,21 @@
+// Tabler Theme - Variable Overrides
+// Override Tabler/Bootstrap variables before the framework imports them
+
+// Typography
+$font-family-sans-serif:
+    "Inter",
+    -apple-system,
+    blinkmacsystemfont,
+    "Segoe UI",
+    roboto,
+    "Helvetica Neue",
+    arial,
+    sans-serif;
+
+// Brand colors (override as needed)
+// $primary: #0054a6;
+// $secondary: #6c757d;
+
+// Body
+$body-bg: #f6f8fb;
+$body-color: #1d273b;

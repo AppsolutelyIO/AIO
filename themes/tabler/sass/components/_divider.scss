@@ -1,0 +1,14 @@
+// Divider Component Styles (Tabler)
+
+.divider {
+    display: block;
+    overflow: hidden;
+
+    @media (width <= 767.98px) {
+        &[data-hide-mobile="true"] {
+            display: none;
+        }
+
+        height: var(--mobile-height, 200px) !important;
+    }
+}

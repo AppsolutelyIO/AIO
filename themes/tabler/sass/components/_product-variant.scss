@@ -1,0 +1,53 @@
+// Product Variant Styles (Tabler)
+
+.product-variant {
+    [x-cloak] {
+        display: none !important;
+    }
+
+    &__tabs {
+        .nav-link {
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                border-bottom-color: var(--tblr-primary);
+                color: var(--tblr-primary);
+            }
+
+            &.active {
+                font-weight: 600;
+            }
+        }
+    }
+
+    &__color-selection {
+        .product-variant__color-option {
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+
+            &:hover {
+                transform: scale(1.1);
+                box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+            }
+        }
+    }
+
+    &__main-image-img {
+        transition: opacity 0.3s ease;
+    }
+
+    &__thumbnail {
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    &__price {
+        border-left: 4px solid var(--tblr-primary);
+        padding: 0.5rem 1rem;
+        border-radius: var(--tblr-border-radius);
+    }
+}

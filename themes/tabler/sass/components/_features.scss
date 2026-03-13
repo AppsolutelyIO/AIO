@@ -1,0 +1,77 @@
+// Features Block Component Styles (Tabler)
+
+.features {
+    &__descriptions {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    &__image-wrapper {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
+
+        &:hover {
+            .features__image {
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    &__image {
+        transition: transform 0.3s ease;
+    }
+
+    &__image-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        height: 100%;
+    }
+}
+
+// Fullscreen Features
+.features-fullscreen {
+    &__content {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+    }
+
+    &__image-wrapper {
+        &:hover .features-fullscreen__image {
+            transform: scale(1.05);
+        }
+    }
+
+    &__image {
+        transition: transform 0.3s ease;
+    }
+
+    &__image-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        height: 100%;
+    }
+}
+
+// Equal Columns Features
+.features-equal-columns {
+    &__image-wrapper {
+        &:hover .features-equal-columns__image {
+            transform: scale(1.05);
+        }
+    }
+
+    &__image {
+        transition: transform 0.3s ease;
+    }
+
+    &__image-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        height: 100%;
+    }
+}

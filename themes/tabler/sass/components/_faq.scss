@@ -1,0 +1,27 @@
+// FAQ Component Styles (Tabler)
+
+.faq {
+    &__accordion-button:not(.collapsed) {
+        background-color: var(--tblr-bg-surface-secondary);
+        color: var(--tblr-body-color);
+    }
+
+    // Cards variant
+    &--card-grid {
+        .faq__card {
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: var(--tblr-shadow-card);
+            }
+        }
+
+        .faq__card-number {
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+    }
+}

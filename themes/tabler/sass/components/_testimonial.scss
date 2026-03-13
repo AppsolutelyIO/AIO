@@ -1,0 +1,17 @@
+// Testimonial block styles
+
+.block-testimonials {
+    .card {
+        border: 0;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 4%);
+        transition: box-shadow 0.2s ease;
+
+        &:hover {
+            box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
+        }
+    }
+
+    .avatar {
+        flex-shrink: 0;
+    }
+}

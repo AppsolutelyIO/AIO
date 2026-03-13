@@ -1,0 +1,27 @@
+// Header component styles
+.site-header {
+    .navbar-brand-image {
+        height: 2rem;
+    }
+
+    // Active nav link indicator
+    .nav-link.active {
+        color: var(--tblr-primary);
+        font-weight: 600;
+    }
+
+    // Submenu styling
+    .submenu-container {
+        .dropdown-menu {
+            min-width: 12rem;
+        }
+
+        .nav-thumbnail {
+            width: 100%;
+            max-width: 8rem;
+            height: auto;
+            border-radius: var(--tblr-border-radius);
+            object-fit: cover;
+        }
+    }
+}

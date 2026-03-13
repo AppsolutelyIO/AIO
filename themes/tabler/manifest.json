@@ -1,0 +1,857 @@
+{
+    "version": "1.0.0",
+    "description": "Tabler theme manifest - clean, modern admin-style public site using Tabler UI",
+    "templates": {
+        "anchor": {
+            "label": "Anchor Navigation",
+            "description": "Sticky navigation bar linking to sections below",
+            "component": "App\\Livewire\\Anchor",
+            "view": "anchor-navigation",
+            "displayOptions": {
+                "cta_text": "Get Started",
+                "cta_url": "/contact",
+                "cta_icon": ""
+            },
+            "displayOptionsDefinition": {
+                "cta_text": { "type": "text", "label": "CTA Text", "default": "Get Started" },
+                "cta_url": { "type": "url", "label": "CTA URL", "default": "/contact" },
+                "cta_icon": { "type": "text", "label": "CTA Icon (class name)", "default": "" }
+            },
+            "styles": ["default"]
+        },
+        "article-list": {
+            "label": "Article List",
+            "description": "Display a list of articles with pagination",
+            "component": "App\\Livewire\\ArticleList",
+            "view": "article-list",
+            "displayOptions": {
+                "title": "Latest Articles",
+                "subtitle": "Stay updated with our latest news",
+                "show_featured_image": true,
+                "show_excerpt": true,
+                "show_author": true,
+                "show_date": true,
+                "show_read_more": true,
+                "read_more_text": "Read More",
+                "layout": "grid"
+            },
+            "displayOptionsDefinition": {
+                "title": { "type": "text", "label": "Title", "default": "Latest Articles" },
+                "subtitle": { "type": "textarea", "label": "Subtitle", "default": "Stay updated with our latest news" },
+                "show_featured_image": { "type": "boolean", "label": "Show Featured Image", "default": true },
+                "show_excerpt": { "type": "boolean", "label": "Show Excerpt", "default": true },
+                "show_author": { "type": "boolean", "label": "Show Author", "default": true },
+                "show_date": { "type": "boolean", "label": "Show Date", "default": true },
+                "show_read_more": { "type": "boolean", "label": "Show Read More", "default": true },
+                "read_more_text": { "type": "text", "label": "Read More Text", "default": "Read More" },
+                "layout": {
+                    "type": "select",
+                    "label": "Layout",
+                    "options": [
+                        { "value": "grid", "label": "Grid" },
+                        { "value": "list", "label": "List" }
+                    ],
+                    "default": "grid"
+                }
+            },
+            "styles": ["default"]
+        },
+        "dynamic-form": {
+            "label": "Dynamic Form",
+            "description": "Dynamic form with validation and submission",
+            "component": "App\\Livewire\\DynamicForm",
+            "view": "dynamic-form",
+            "displayOptions": {
+                "title": "Contact Us",
+                "subtitle": "We'd love to hear from you",
+                "description": "Fill out the form below and we'll get back to you shortly.",
+                "submit_text": "Send Message",
+                "success_title": "Thank You!",
+                "success_message": "Your message has been sent. We'll be in touch soon.",
+                "layout": "form",
+                "theme": "default",
+                "columns": 1,
+                "redirect": "",
+                "redirect_url": "",
+                "redirect_after_submit": ""
+            },
+            "displayOptionsDefinition": {
+                "title": { "type": "text", "label": "Title", "default": "Contact Us" },
+                "subtitle": { "type": "text", "label": "Subtitle", "default": "We'd love to hear from you" },
+                "description": {
+                    "type": "textarea",
+                    "label": "Description",
+                    "default": "Fill out the form below and we'll get back to you shortly."
+                },
+                "submit_text": { "type": "text", "label": "Submit Button Text", "default": "Send Message" },
+                "success_title": { "type": "text", "label": "Success Title", "default": "Thank You!" },
+                "success_message": {
+                    "type": "textarea",
+                    "label": "Success Message",
+                    "default": "Your message has been sent. We'll be in touch soon."
+                },
+                "layout": {
+                    "type": "select",
+                    "label": "Layout",
+                    "options": [{ "value": "form", "label": "Form" }],
+                    "default": "form"
+                },
+                "theme": {
+                    "type": "select",
+                    "label": "Theme",
+                    "options": [{ "value": "default", "label": "Default" }],
+                    "default": "default"
+                },
+                "columns": { "type": "number", "label": "Columns", "min": 1, "max": 3, "default": 1 },
+                "redirect": {
+                    "type": "select",
+                    "label": "Redirect mode",
+                    "options": [
+                        { "value": "", "label": "None" },
+                        { "value": "force", "label": "Force (alias URL)" }
+                    ],
+                    "default": ""
+                },
+                "redirect_url": { "type": "text", "label": "Redirect URL path", "default": "" },
+                "redirect_after_submit": { "type": "url", "label": "Redirect After Submit", "default": "" }
+            },
+            "styles": ["default", "interactive", "content"]
+        },
+        "features": {
+            "label": "Features",
+            "description": "Feature highlight cards in a Tabler grid layout",
+            "component": "App\\Livewire\\GeneralBlock",
+            "view": "features",
+            "displayOptions": {
+                "title": "",
+                "subtitle": "",
+                "descriptions": [],
+                "features": [
+                    { "type": "image", "url": "https://placehold.co/400x300", "title": "", "subtitle": "", "link": "" },
+                    { "type": "image", "url": "https://placehold.co/400x300", "title": "", "subtitle": "", "link": "" },
+                    { "type": "image", "url": "https://placehold.co/400x300", "title": "", "subtitle": "", "link": "" }
+                ]
+            },
+            "displayOptionsDefinition": {
+                "title": { "type": "text", "label": "Title", "default": "" },
+                "subtitle": { "type": "textarea", "label": "Subtitle", "default": "" },
+                "descriptions": {
+                    "type": "table",
+                    "label": "Descriptions",
+                    "fields": { "text": { "type": "textarea", "label": "Text" } },
+                    "default": []
+                },
+                "features": {
+                    "type": "table",
+                    "label": "Features",
+                    "fields": {
+                        "type": {
+                            "type": "select",
+                            "label": "Type",
+                            "options": [{ "value": "image", "label": "Image" }],
+                            "default": "image"
+                        },
+                        "url": { "type": "image", "label": "Image", "default": "" },
+                        "title": { "type": "text", "label": "Title", "default": "" },
+                        "subtitle": { "type": "text", "label": "Subtitle", "default": "" },
+                        "link": { "type": "url", "label": "Link", "default": "" }
+                    },
+                    "default": []
+                }
+            },
+            "styles": ["default", "equal-columns", "fullscreen", "alternating-rows"]
+        },
+        "footer": {
+            "label": "Footer",
+            "description": "Site footer with menus, contact info, and social links",
+            "component": "App\\Livewire\\Footer",
+            "view": "footer",
+            "displayOptions": {
+                "logo": true,
+                "contact": {
+                    "enabled": true,
+                    "phone": "",
+                    "email": "",
+                    "address": ""
+                },
+                "newsletter": {
+                    "enabled": true,
+                    "title": "Subscribe to our newsletter",
+                    "text": "Get the latest updates and offers"
+                },
+                "company_name": "",
+                "address": "",
+                "email": "",
+                "copyright": {
+                    "text": "© 2025 Your Company. All rights reserved."
+                }
+            },
+            "displayOptionsDefinition": {
+                "logo": { "type": "boolean", "label": "Show Logo", "default": true },
+                "contact": {
+                    "type": "object",
+                    "label": "Contact",
+                    "fields": {
+                        "enabled": { "type": "boolean", "label": "Enabled", "default": true },
+                        "phone": { "type": "text", "label": "Phone", "default": "" },
+                        "email": { "type": "email", "label": "Email", "default": "" },
+                        "address": { "type": "text", "label": "Address", "default": "" }
+                    }
+                },
+                "newsletter": {
+                    "type": "object",
+                    "label": "Newsletter",
+                    "fields": {
+                        "enabled": { "type": "boolean", "label": "Enabled", "default": true },
+                        "title": { "type": "text", "label": "Title", "default": "Subscribe to our newsletter" },
+                        "text": { "type": "text", "label": "Text", "default": "Get the latest updates and offers" }
+                    }
+                },
+                "company_name": { "type": "text", "label": "Company Name", "default": "" },
+                "address": { "type": "text", "label": "Address", "default": "" },
+                "email": { "type": "email", "label": "Email", "default": "" },
+                "copyright": {
+                    "type": "object",
+                    "label": "Copyright",
+                    "fields": {
+                        "text": {
+                            "type": "text",
+                            "label": "Text",
+                            "default": "© 2025 Your Company. All rights reserved."
+                        }
+                    }
+                }
+            },
+            "styles": ["default"]
+        },
+        "header": {
+            "label": "Header",
+            "description": "Site header with Tabler navbar and navigation",
+            "component": "App\\Livewire\\Header",
+            "view": "header",
+            "displayOptions": {
+                "logo": true,
+                "cta": {
+                    "text": "Get Started",
+                    "url": "/contact"
+                }
+            },
+            "displayOptionsDefinition": {
+                "logo": { "type": "boolean", "label": "Show Logo", "default": true },
+                "cta": {
+                    "type": "object",
+                    "label": "Call To Action",
+                    "fields": {
+                        "text": { "type": "text", "label": "Button Text", "default": "Get Started" },
+                        "url": { "type": "url", "label": "Button URL", "default": "/contact" }
+                    }
+                }
+            },
+            "styles": ["default"]
+        },
+        "hero-banner": {
+            "label": "Hero Banner",
+            "description": "Full-width hero section with images or videos",
+            "component": "App\\Livewire\\GeneralBlock",
+            "view": "hero",
+            "displayOptions": {
+                "heroes": [
+                    {
+                        "type": "image",
+                        "link": "/",
+                        "url": "https://placehold.co/1200x800",
+                        "title": "Slide Title 1",
+                        "subtitle": "Slide Subtitle 1"
+                    },
+                    {
+                        "type": "image",
+                        "link": "/",
+                        "url": "https://placehold.co/1200x800",
+                        "title": "Slide Title 2",
+                        "subtitle": "Slide Subtitle 2"
+                    }
+                ],
+                "heading": "Welcome to Our Platform",
+                "subheading": "Built for teams that move fast",
+                "cta_primary_text": "Get Started",
+                "cta_primary_url": "/contact",
+                "cta_secondary_text": "Learn More",
+                "cta_secondary_url": "#features",
+                "background_color": "primary"
+            },
+            "displayOptionsDefinition": {
+                "heroes": {
+                    "type": "table",
+                    "label": "Hero Slides",
+                    "fields": {
+                        "type": {
+                            "type": "select",
+                            "label": "Type",
+                            "options": [
+                                { "value": "image", "label": "Image" },
+                                { "value": "video", "label": "Video" }
+                            ],
+                            "default": "image"
+                        },
+                        "link": { "type": "url", "label": "Link", "default": "/" },
+                        "url": { "type": "file", "accept": "image/*,video/*", "label": "Media File", "default": "" },
+                        "title": { "type": "text", "label": "Title", "default": "" },
+                        "subtitle": { "type": "text", "label": "Subtitle", "default": "" }
+                    },
+                    "default": []
+                },
+                "heading": { "type": "text", "label": "Heading", "default": "Welcome to Our Platform" },
+                "subheading": {
+                    "type": "textarea",
+                    "label": "Subheading",
+                    "default": "Built for teams that move fast"
+                },
+                "cta_primary_text": { "type": "text", "label": "Primary CTA Text", "default": "Get Started" },
+                "cta_primary_url": { "type": "url", "label": "Primary CTA URL", "default": "/contact" },
+                "cta_secondary_text": { "type": "text", "label": "Secondary CTA Text", "default": "Learn More" },
+                "cta_secondary_url": { "type": "url", "label": "Secondary CTA URL", "default": "#features" },
+                "background_color": {
+                    "type": "select",
+                    "label": "Background",
+                    "options": [
+                        { "value": "primary", "label": "Primary" },
+                        { "value": "dark", "label": "Dark" },
+                        { "value": "light", "label": "Light" }
+                    ],
+                    "default": "primary"
+                }
+            },
+            "styles": ["default", "split-layout"]
+        },
+        "media-slider": {
+            "label": "Media Slider",
+            "description": "Image or video slider with navigation controls",
+            "component": "App\\Livewire\\GeneralBlock",
+            "view": "slider",
+            "displayOptions": {
+                "title": "Media Slider",
+                "subtitle": "Media Slider Subtitle",
+                "description": [],
+                "slides": [
+                    {
+                        "type": "image",
+                        "link": "/",
+                        "url": "https://placehold.co/1200x800",
+                        "title": "Slide 1",
+                        "subtitle": ""
+                    },
+                    {
+                        "type": "image",
+                        "link": "/",
+                        "url": "https://placehold.co/1200x800",
+                        "title": "Slide 2",
+                        "subtitle": ""
+                    }
+                ],
+                "vehicles": [],
+                "show_controls": true,
+                "show_indicators": true,
+                "autoplay": true
+            },
+            "displayOptionsDefinition": {
+                "title": { "type": "text", "label": "Title", "default": "Media Slider" },
+                "subtitle": { "type": "text", "label": "Subtitle", "default": "" },
+                "description": {
+                    "type": "table",
+                    "label": "Description",
+                    "fields": { "text": { "type": "textarea", "label": "Text" } },
+                    "default": []
+                },
+                "slides": {
+                    "type": "table",
+                    "label": "Slides",
+                    "fields": {
+                        "type": {
+                            "type": "select",
+                            "label": "Type",
+                            "options": [
+                                { "value": "image", "label": "Image" },
+                                { "value": "video", "label": "Video" }
+                            ],
+                            "default": "image"
+                        },
+                        "link": { "type": "url", "label": "Link", "default": "/" },
+                        "url": { "type": "file", "accept": "image/*,video/*", "label": "Media File", "default": "" },
+                        "title": { "type": "text", "label": "Title", "default": "" },
+                        "subtitle": { "type": "text", "label": "Subtitle", "default": "" }
+                    },
+                    "default": []
+                },
+                "vehicles": { "type": "table", "label": "Vehicles", "fields": {}, "default": [] },
+                "show_controls": { "type": "boolean", "label": "Show Controls", "default": true },
+                "show_indicators": { "type": "boolean", "label": "Show Indicators", "default": true },
+                "autoplay": { "type": "boolean", "label": "Autoplay", "default": true }
+            },
+            "styles": ["default", "carousel", "fullscreen"]
+        },
+        "photo-gallery": {
+            "label": "Photo Gallery",
+            "description": "Grid of photos with lightbox support",
+            "component": "App\\Livewire\\GeneralBlock",
+            "view": "gallery",
+            "displayOptions": {
+                "title": "Photo Gallery",
+                "subtitle": "",
+                "descriptions": [],
+                "photos": [
+                    {
+                        "image_src": "https://placehold.co/600x400",
+                        "title": "",
+                        "subtitle": "",
+                        "alt": "Gallery photo 1",
+                        "caption": "",
+                        "link": ""
+                    },
+                    {
+                        "image_src": "https://placehold.co/600x400",
+                        "title": "",
+                        "subtitle": "",
+                        "alt": "Gallery photo 2",
+                        "caption": "",
+                        "link": ""
+                    }
+                ]
+            },
+            "displayOptionsDefinition": {
+                "title": { "type": "text", "label": "Title", "default": "Photo Gallery" },
+                "subtitle": { "type": "text", "label": "Subtitle", "default": "" },
+                "descriptions": {
+                    "type": "table",
+                    "label": "Descriptions",
+                    "fields": { "text": { "type": "textarea", "label": "Text" } },
+                    "default": []
+                },
+                "photos": {
+                    "type": "table",
+                    "label": "Photos",
+                    "fields": {
+                        "image_src": { "type": "image", "label": "Image", "default": "" },
+                        "title": { "type": "text", "label": "Title", "default": "" },
+                        "subtitle": { "type": "text", "label": "Subtitle", "default": "" },
+                        "alt": { "type": "text", "label": "Alt Text", "default": "" },
+                        "caption": { "type": "text", "label": "Caption", "default": "" },
+                        "link": { "type": "url", "label": "Link", "default": "" }
+                    },
+                    "default": []
+                }
+            },
+            "styles": ["default", "waterfall"]
+        },
+        "product-variant-block": {
+            "label": "Product Variant Block",
+            "description": "Display product variants with options",
+            "component": "App\\Livewire\\GeneralBlock",
+            "view": "product-variant",
+            "displayOptions": {
+                "product": {}
+            },
+            "displayOptionsDefinition": {
+                "product": { "type": "object", "label": "Product", "fields": {}, "default": {} }
+            },
+            "styles": ["default"]
+        },
+        "specifications": {
+            "label": "Specifications",
+            "description": "Product or service specifications table",
+            "component": "App\\Livewire\\GeneralBlock",
+            "view": "specs",
+            "displayOptions": {
+                "title": "Item Specifications",
+                "subtitle": "Overview of Key Features & Details",
+                "description": "Explore the core specifications and visual highlights.",
+                "layout": "table",
+                "columns": 2,
+                "dimensions": [
+                    { "label": "Length (mm)", "value": "" },
+                    { "label": "Width (mm)", "value": "" }
+                ],
+                "drives": [
+                    { "label": "Power", "value": "" },
+                    { "label": "Torque", "value": "" }
+                ],
+                "specifications": [
+                    { "label": "Front Exterior", "value": "Modern design with signature grille" },
+                    { "label": "Dashboard Interior", "value": "Premium materials with digital display" }
+                ],
+                "download_url": "#",
+                "download_filename": "",
+                "download_label": ""
+            },
+            "displayOptionsDefinition": {
+                "title": { "type": "text", "label": "Title", "default": "Item Specifications" },
+                "subtitle": { "type": "text", "label": "Subtitle", "default": "Overview of Key Features & Details" },
+                "description": { "type": "textarea", "label": "Description", "default": "" },
+                "layout": {
+                    "type": "select",
+                    "label": "Layout",
+                    "options": [
+                        { "value": "table", "label": "Table" },
+                        { "value": "list", "label": "List" },
+                        { "value": "grid", "label": "Grid" }
+                    ],
+                    "default": "table"
+                },
+                "columns": { "type": "number", "label": "Columns", "min": 1, "max": 4, "default": 2 },
+                "dimensions": {
+                    "type": "table",
+                    "label": "Dimensions",
+                    "fields": {
+                        "label": { "type": "text", "label": "Label", "default": "" },
+                        "value": { "type": "text", "label": "Value", "default": "" }
+                    },
+                    "default": []
+                },
+                "drives": {
+                    "type": "table",
+                    "label": "Drives",
+                    "fields": {
+                        "label": { "type": "text", "label": "Label", "default": "" },
+                        "value": { "type": "text", "label": "Value", "default": "" }
+                    },
+                    "default": []
+                },
+                "specifications": {
+                    "type": "table",
+                    "label": "Specifications",
+                    "fields": {
+                        "label": { "type": "text", "label": "Label", "default": "" },
+                        "value": { "type": "text", "label": "Value", "default": "" }
+                    },
+                    "default": []
+                },
+                "download_url": {
+                    "type": "file",
+                    "accept": ".pdf,.doc,.docx",
+                    "label": "Download File",
+                    "default": ""
+                },
+                "download_filename": { "type": "text", "label": "Download Filename", "default": "" },
+                "download_label": { "type": "text", "label": "Download Label", "default": "" }
+            },
+            "styles": ["default", "side-by-side"]
+        },
+        "store-locations": {
+            "label": "Store Locations",
+            "description": "Display store locations with map and contact information",
+            "component": "App\\Livewire\\GeneralBlock",
+            "view": "locations",
+            "displayOptions": {
+                "title": "Store Locations",
+                "subtitle": "Find a Location Near You",
+                "description": "Visit our retail points for personalized services.",
+                "layout": "grid",
+                "columns": 2,
+                "show_map": true,
+                "map_api_key": "",
+                "locations": [
+                    {
+                        "name": "Location A",
+                        "address": "123 Main Street",
+                        "city": "City Name",
+                        "state": "Region",
+                        "zip_code": "0000",
+                        "country": "Country",
+                        "phone": "+00 0 0000 0000",
+                        "email": "contact@store.example",
+                        "website": "",
+                        "hours": "Mon-Fri: 9AM-6PM",
+                        "image": "https://placehold.co/600x400",
+                        "latitude": "",
+                        "longitude": "",
+                        "featured": true
+                    }
+                ]
+            },
+            "displayOptionsDefinition": {
+                "title": { "type": "text", "label": "Title", "default": "Store Locations" },
+                "subtitle": { "type": "text", "label": "Subtitle", "default": "Find a Location Near You" },
+                "description": { "type": "textarea", "label": "Description", "default": "" },
+                "layout": {
+                    "type": "select",
+                    "label": "Layout",
+                    "options": [
+                        { "value": "grid", "label": "Grid" },
+                        { "value": "list", "label": "List" }
+                    ],
+                    "default": "grid"
+                },
+                "columns": { "type": "number", "label": "Columns", "min": 1, "max": 4, "default": 2 },
+                "show_map": { "type": "boolean", "label": "Show Map", "default": true },
+                "map_api_key": { "type": "text", "label": "Map API Key", "default": "" },
+                "locations": {
+                    "type": "table",
+                    "label": "Locations",
+                    "fields": {
+                        "name": { "type": "text", "label": "Name", "default": "" },
+                        "address": { "type": "text", "label": "Address", "default": "" },
+                        "city": { "type": "text", "label": "City", "default": "" },
+                        "state": { "type": "text", "label": "State/Region", "default": "" },
+                        "zip_code": { "type": "text", "label": "ZIP Code", "default": "" },
+                        "country": { "type": "text", "label": "Country", "default": "" },
+                        "phone": { "type": "text", "label": "Phone", "default": "" },
+                        "email": { "type": "email", "label": "Email", "default": "" },
+                        "website": { "type": "url", "label": "Website", "default": "" },
+                        "hours": { "type": "text", "label": "Hours", "default": "" },
+                        "image": { "type": "image", "label": "Image", "default": "" },
+                        "latitude": { "type": "text", "label": "Latitude", "default": "" },
+                        "longitude": { "type": "text", "label": "Longitude", "default": "" },
+                        "featured": { "type": "boolean", "label": "Featured", "default": false }
+                    },
+                    "default": []
+                }
+            },
+            "styles": ["default", "dropdown"]
+        },
+        "testimonial": {
+            "label": "Testimonials",
+            "description": "Customer testimonial cards",
+            "component": "App\\Livewire\\GeneralBlock",
+            "view": "testimonial",
+            "displayOptions": {
+                "title": "What Our Clients Say"
+            },
+            "displayOptionsDefinition": {
+                "title": { "type": "text", "label": "Section Title", "default": "What Our Clients Say" }
+            },
+            "styles": ["default"]
+        },
+        "text-document": {
+            "label": "Text Document",
+            "description": "Rich text content with optional metadata",
+            "component": "App\\Livewire\\GeneralBlock",
+            "view": "document",
+            "displayOptions": {
+                "title": "Sample Title",
+                "subtitle": "Optional Subtitle",
+                "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>",
+                "published_date": null,
+                "author": "Anonymous",
+                "show_meta": true
+            },
+            "displayOptionsDefinition": {
+                "title": { "type": "text", "label": "Title", "default": "Sample Title" },
+                "subtitle": { "type": "text", "label": "Subtitle", "default": "Optional Subtitle" },
+                "content": {
+                    "type": "textarea",
+                    "label": "Content",
+                    "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>"
+                },
+                "published_date": { "type": "date", "label": "Published Date", "default": null },
+                "author": { "type": "text", "label": "Author", "default": "Anonymous" },
+                "show_meta": { "type": "boolean", "label": "Show Meta", "default": true }
+            },
+            "styles": ["default", "accordion", "table-of-contents"]
+        },
+        "transition-section": {
+            "label": "Transition Section",
+            "description": "Visual transition element between sections",
+            "component": "App\\Livewire\\TransitionSection",
+            "view": "divider",
+            "displayOptions": {
+                "image": "https://placehold.co/1920x800",
+                "height": "300px",
+                "background_position": "center center",
+                "background_size": "cover",
+                "overlay": { "enabled": false, "color": "#000000", "opacity": 0.3 },
+                "responsive": { "mobile_height": "200px", "hide_on_mobile": false }
+            },
+            "displayOptionsDefinition": {
+                "image": { "type": "image", "label": "Background Image", "default": "" },
+                "height": { "type": "text", "label": "Height", "default": "300px" },
+                "background_position": { "type": "text", "label": "Background Position", "default": "center center" },
+                "background_size": { "type": "text", "label": "Background Size", "default": "cover" },
+                "overlay": {
+                    "type": "object",
+                    "label": "Overlay",
+                    "fields": {
+                        "enabled": { "type": "boolean", "label": "Enabled", "default": false },
+                        "color": { "type": "color", "label": "Color", "default": "#000000" },
+                        "opacity": {
+                            "type": "number",
+                            "label": "Opacity",
+                            "min": 0,
+                            "max": 1,
+                            "step": 0.1,
+                            "default": 0.3
+                        }
+                    }
+                },
+                "responsive": {
+                    "type": "object",
+                    "label": "Responsive",
+                    "fields": {
+                        "mobile_height": { "type": "text", "label": "Mobile Height", "default": "200px" },
+                        "hide_on_mobile": { "type": "boolean", "label": "Hide on Mobile", "default": false }
+                    }
+                }
+            },
+            "styles": ["default"]
+        },
+        "video-showcase": {
+            "label": "Video Showcase",
+            "description": "Video player with customizable controls and overlay",
+            "component": "App\\Livewire\\GeneralBlock",
+            "view": "video",
+            "displayOptions": {
+                "video_url": "",
+                "poster_image": "https://placehold.co/1280x720",
+                "title": "Your Title Here",
+                "subtitle": "Your Subtitle Here",
+                "description": "Your descriptive text goes here.",
+                "cta_text": "Call To Action",
+                "cta_link": "/",
+                "autoplay": true,
+                "loop": true,
+                "muted": true,
+                "controls": false,
+                "mobile_fallback_image": "",
+                "overlay_opacity": 0.4,
+                "text_color": "white",
+                "text_position": "center",
+                "video_format": "mp4",
+                "fallback_videos": [],
+                "fallback_text": "Your browser does not support the video tag."
+            },
+            "displayOptionsDefinition": {
+                "video_url": { "type": "file", "accept": "video/*", "label": "Video", "default": "" },
+                "poster_image": { "type": "image", "label": "Poster Image", "default": "" },
+                "title": { "type": "text", "label": "Title", "default": "Your Title Here" },
+                "subtitle": { "type": "text", "label": "Subtitle", "default": "" },
+                "description": { "type": "textarea", "label": "Description", "default": "" },
+                "cta_text": { "type": "text", "label": "CTA Text", "default": "Call To Action" },
+                "cta_link": { "type": "url", "label": "CTA Link", "default": "/" },
+                "autoplay": { "type": "boolean", "label": "Autoplay", "default": true },
+                "loop": { "type": "boolean", "label": "Loop", "default": true },
+                "muted": { "type": "boolean", "label": "Muted", "default": true },
+                "controls": { "type": "boolean", "label": "Show Controls", "default": false },
+                "mobile_fallback_image": { "type": "image", "label": "Mobile Fallback Image", "default": "" },
+                "overlay_opacity": {
+                    "type": "number",
+                    "label": "Overlay Opacity",
+                    "min": 0,
+                    "max": 1,
+                    "step": 0.1,
+                    "default": 0.4
+                },
+                "text_color": { "type": "text", "label": "Text Color", "default": "white" },
+                "text_position": {
+                    "type": "select",
+                    "label": "Text Position",
+                    "options": [
+                        { "value": "center", "label": "Center" },
+                        { "value": "left", "label": "Left" },
+                        { "value": "right", "label": "Right" }
+                    ],
+                    "default": "center"
+                },
+                "video_format": { "type": "text", "label": "Video Format", "default": "mp4" },
+                "fallback_videos": {
+                    "type": "table",
+                    "label": "Fallback Videos",
+                    "fields": {
+                        "url": { "type": "file", "accept": "video/*", "label": "Video File", "default": "" },
+                        "format": { "type": "text", "label": "Format", "default": "webm" }
+                    },
+                    "default": []
+                },
+                "fallback_text": {
+                    "type": "text",
+                    "label": "Fallback Text",
+                    "default": "Your browser does not support the video tag."
+                }
+            },
+            "styles": ["default", "inline-player"]
+        },
+        "user-manual": {
+            "label": "User Manual",
+            "description": "Display user manual items with cover images and PDF links",
+            "component": "App\\Livewire\\GeneralBlock",
+            "view": "manual",
+            "displayOptions": {
+                "title": "User Manuals",
+                "subtitle": "Download guides and documentation",
+                "items": [
+                    {
+                        "image_src": "https://placehold.co/200x280",
+                        "title": "Manual Title",
+                        "links": [
+                            { "label": "English (PDF)", "url": "/documents/manual-en.pdf" },
+                            { "label": "Manual (PDF)", "url": "/documents/manual.pdf" }
+                        ]
+                    }
+                ]
+            },
+            "displayOptionsDefinition": {
+                "title": { "type": "text", "label": "Title", "default": "User Manuals" },
+                "subtitle": { "type": "text", "label": "Subtitle", "default": "Download guides and documentation" },
+                "items": {
+                    "type": "table",
+                    "label": "Manual Items",
+                    "fields": {
+                        "image_src": { "type": "image", "label": "Cover Image", "default": "" },
+                        "title": { "type": "text", "label": "Title", "default": "" },
+                        "links": {
+                            "type": "table",
+                            "label": "Links",
+                            "fields": {
+                                "label": { "type": "text", "label": "Label", "default": "" },
+                                "url": {
+                                    "type": "file",
+                                    "accept": ".pdf,.doc,.docx,video/*",
+                                    "label": "File",
+                                    "default": ""
+                                }
+                            },
+                            "default": []
+                        }
+                    },
+                    "default": []
+                }
+            },
+            "styles": ["default"]
+        },
+        "faq-section": {
+            "label": "FAQ Section",
+            "description": "Frequently asked questions with accordion layout",
+            "component": "App\\Livewire\\GeneralBlock",
+            "view": "faq",
+            "displayOptions": {
+                "title": "Frequently Asked Questions",
+                "subtitle": "Find answers to common questions below.",
+                "items": [
+                    {
+                        "question": "What is your return policy?",
+                        "answer": "We offer a 30-day return policy for most items."
+                    },
+                    {
+                        "question": "How can I track my order?",
+                        "answer": "You will receive an email with a tracking number once your order ships."
+                    }
+                ]
+            },
+            "displayOptionsDefinition": {
+                "title": { "type": "text", "label": "Title", "default": "Frequently Asked Questions" },
+                "subtitle": {
+                    "type": "text",
+                    "label": "Subtitle",
+                    "default": "Find answers to common questions below."
+                },
+                "items": {
+                    "type": "table",
+                    "label": "FAQ Items",
+                    "fields": {
+                        "question": { "type": "text", "label": "Question", "default": "" },
+                        "answer": { "type": "textarea", "label": "Answer", "default": "" }
+                    },
+                    "default": []
+                }
+            },
+            "styles": ["default", "card-grid"]
+        }
+    }
+}

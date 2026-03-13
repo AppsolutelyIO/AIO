@@ -1,0 +1,67 @@
+// Document & Collapsible Component Styles (Tabler)
+
+.document {
+    &__body {
+        line-height: 1.7;
+
+        p {
+            margin-bottom: 0.75rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.document-accordion {
+    &__header {
+        cursor: pointer;
+        transition: background 0.3s ease;
+        user-select: none;
+
+        &[aria-expanded="true"] {
+            .document-accordion__arrow {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &__arrow {
+        transition: transform 0.3s ease;
+    }
+
+    &__content-body {
+        line-height: 1.7;
+
+        p {
+            margin-bottom: 0.75rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+// TOC variant
+.document--table-of-contents {
+    .document__toc-link {
+        transition: color 0.2s ease;
+        border-left: 2px solid transparent;
+        padding-left: 0.5rem;
+
+        &:hover {
+            color: var(--tblr-primary) !important;
+            border-left-color: var(--tblr-primary);
+        }
+    }
+
+    .document__body {
+        h2,
+        h3,
+        h4 {
+            scroll-margin-top: 1rem;
+        }
+    }
+}

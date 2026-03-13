@@ -1,0 +1,32 @@
+// Auth pages styling
+.page-center {
+    .card-md {
+        .card-body {
+            padding: 2rem;
+        }
+    }
+
+    .form-footer {
+        margin-top: 1.5rem;
+    }
+}
+
+// Custom modal backdrop for Livewire modals
+.modal-backdrop-custom {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    overflow-y: auto;
+
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background-color: rgb(0 0 0 / 50%);
+        transition: opacity 0.3s ease;
+    }
+
+    .modal {
+        position: relative;
+        z-index: 1;
+    }
+}

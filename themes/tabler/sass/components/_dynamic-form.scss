@@ -1,0 +1,207 @@
+// Dynamic Form Interactive Component Styles (Tabler)
+
+.dynamic-form-interactive {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    &__background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    &__background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+
+        &.active {
+            opacity: 1;
+        }
+    }
+
+    &__background-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgb(0 0 0 / 5%) 0%, rgb(0 0 0 / 10%) 100%);
+        z-index: 1;
+    }
+
+    &__container {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        min-height: 50vh;
+    }
+
+    &__wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+    &__header {
+        margin-bottom: 1rem;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    &__subtitle {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: var(--tblr-secondary);
+    }
+
+    &__description {
+        font-size: 0.875rem;
+        color: var(--tblr-secondary);
+        margin-bottom: 0;
+    }
+
+    &__content {
+        .form-group {
+            margin-bottom: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .form-control,
+        .form-select {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.8125rem;
+            border-radius: var(--tblr-border-radius);
+        }
+
+        .form-text {
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        .invalid-feedback {
+            font-size: 0.75rem;
+        }
+
+        button[type="submit"] {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+    }
+
+    &__success {
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+
+    &__success-icon {
+        font-size: 4rem;
+        color: var(--tblr-success);
+        margin-bottom: 1rem;
+    }
+
+    &__success-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    &__success-message {
+        font-size: 1rem;
+        color: var(--tblr-secondary);
+        margin-bottom: 1rem;
+    }
+
+    &__reset-btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+        border: 1px solid var(--tblr-border-color);
+        background: transparent;
+        color: var(--tblr-body-color);
+        border-radius: var(--tblr-border-radius);
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: var(--tblr-dark);
+            color: #fff;
+        }
+    }
+
+    &__error {
+        padding: 0.75rem 1rem;
+        background: var(--tblr-bg-surface-secondary);
+        border: 1px solid var(--tblr-border-color);
+        border-radius: var(--tblr-border-radius);
+        font-size: 0.875rem;
+        margin-top: 1rem;
+    }
+
+    @media (width >= 992px) {
+        &__container {
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 8rem 2rem 4rem;
+        }
+
+        &__wrapper {
+            width: 40%;
+            max-width: 500px;
+            padding: 2rem;
+            background: rgb(255 255 255 / 98%);
+            backdrop-filter: blur(10px);
+            border-radius: var(--tblr-border-radius-lg);
+            box-shadow: var(--tblr-shadow-card);
+        }
+
+        &__title {
+            font-size: 1.75rem;
+        }
+
+        &__subtitle {
+            font-size: 1.125rem;
+        }
+    }
+
+    @media (width <= 991.98px) {
+        &__background {
+            min-height: 50vh;
+        }
+
+        &__container {
+            padding: 1.5rem 1rem;
+        }
+
+        &__wrapper {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: var(--tblr-border-radius);
+            box-shadow: var(--tblr-shadow-card);
+        }
+    }
+}

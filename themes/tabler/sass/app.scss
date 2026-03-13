@@ -1,0 +1,34 @@
+// Tabler Theme - Main SCSS
+
+// 1. Custom variable overrides (before Tabler imports)
+@import "variables";
+
+// 2. Import Tabler core (includes Bootstrap)
+@import "@tabler/core/scss/tabler";
+
+// 3. Swiper carousel styles
+@import "swiper/css/bundle";
+
+// 4. Theme-specific component styles
+@import "components/header";
+@import "components/footer";
+@import "components/blocks";
+@import "components/auth";
+@import "components/dashboard";
+
+// 5. Page builder block component styles
+@import "components/features";
+@import "components/slider";
+@import "components/video";
+@import "components/document";
+@import "components/product-variant";
+@import "components/faq";
+@import "components/specs";
+@import "components/anchor-navigation";
+@import "components/divider";
+@import "components/manual";
+@import "components/locations";
+@import "components/gallery";
+@import "components/dynamic-form";
+@import "components/hero";
+@import "components/testimonial";

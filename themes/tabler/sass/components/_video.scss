@@ -1,0 +1,39 @@
+// Video Component Styles (Tabler)
+
+.video {
+    min-height: 100vh !important;
+
+    video {
+        min-width: 100%;
+        min-height: 100%;
+    }
+
+    .video__content {
+        z-index: 3 !important;
+        min-height: 100vh !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .btn {
+            transition: none;
+        }
+    }
+}
+
+.video-inline-player {
+    .video-inline-player__video {
+        min-height: 300px;
+    }
+}
+
+@media (width <= 767.98px) {
+    .video {
+        .display-3 {
+            font-size: 2.5rem !important;
+        }
+
+        .lead {
+            font-size: 1.1rem !important;
+        }
+    }
+}
