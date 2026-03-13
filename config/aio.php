@@ -33,7 +33,7 @@ return [
         'general_page'            => \Appsolutely\AIO\Models\GeneralPage::class,
         'inventory_movement'      => \Appsolutely\AIO\Models\InventoryMovement::class,
         'membership'              => \Appsolutely\AIO\Models\Membership::class,
-        'menu'                    => \Appsolutely\AIO\Models\Menu::class,
+        'menu'                    => \Appsolutely\AIO\Models\CmsMenu::class,
         'notification_queue'      => \Appsolutely\AIO\Models\NotificationQueue::class,
         'notification_rule'       => \Appsolutely\AIO\Models\NotificationRule::class,
         'notification_sender'     => \Appsolutely\AIO\Models\NotificationSender::class,
