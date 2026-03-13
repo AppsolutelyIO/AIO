@@ -79,11 +79,9 @@ class AdminServiceProvider extends ServiceProvider
     protected $middlewareGroups = [
         'admin' => [
             'admin.auth',
-            'admin.pjax',
             'admin.bootstrap',
             'admin.permission',
             'admin.session',
-            'admin.upload',
         ],
     ];
 

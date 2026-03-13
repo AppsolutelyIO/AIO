@@ -630,14 +630,18 @@ class Admin
             /* @var \Illuminate\Routing\Router $router */
             $router->post('action', 'HandleActionController@handle')->name('action');
             $router->post('form', 'HandleFormController@handle')->name('form');
-            $router->post('form/upload', 'HandleFormController@uploadFile')->name('form.upload');
-            $router->post('form/destroy-file', 'HandleFormController@destroyFile')->name('form.destroy-file');
             $router->post('value', 'ValueController@handle')->name('value');
             $router->post('inline-update', 'InlineUpdateController@handle')->name('inline-update');
             $router->get('render', 'RenderableController@handle')->name('render');
-            $router->post('tinymce/upload', 'TinymceController@upload')->name('tinymce.upload');
-            $router->post('editor-md/upload', 'EditorMDController@upload')->name('editor-md.upload');
-            $router->post('vditor/upload', 'VditorController@upload')->name('vditor.upload');
+
+            // Upload routes — admin.upload middleware handles chunked file merging
+            $router->group(['middleware' => 'admin.upload'], function ($router) {
+                $router->post('form/upload', 'HandleFormController@uploadFile')->name('form.upload');
+                $router->post('form/destroy-file', 'HandleFormController@destroyFile')->name('form.destroy-file');
+                $router->post('tinymce/upload', 'TinymceController@upload')->name('tinymce.upload');
+                $router->post('editor-md/upload', 'EditorMDController@upload')->name('editor-md.upload');
+                $router->post('vditor/upload', 'VditorController@upload')->name('vditor.upload');
+            });
         });
     }
 
