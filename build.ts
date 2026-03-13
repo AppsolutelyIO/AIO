@@ -114,18 +114,81 @@ async function buildAll(): Promise<void> {
     cpSync('resources/assets/images', `${outDir}/images`, { recursive: true });
     cpSync('resources/assets/fonts', `${outDir}/fonts`, { recursive: true });
 
-    // Copy plugins except vditor (which comes from npm)
+    // Plugins sourced from npm (skip when copying vendored assets)
+    const npmPlugins = new Set([
+        'autocomplete', 'bootstrap-datetimepicker', 'bootstrap-validator',
+        'charts', 'ionslider', 'jquery-pjax', 'jquery.initialize',
+        'jstree-theme', 'moment', 'moment-timezone', 'nestable',
+        'select', 'sortable', 'vditor',
+    ]);
+
+    // Copy vendored plugins (those not sourced from npm)
     const pluginsSrc = 'resources/assets/aio/plugins';
     const pluginsDest = `${outDir}/aio/plugins`;
     mkdirSync(pluginsDest, { recursive: true });
     for (const entry of readdirSync(pluginsSrc)) {
-        if (entry === 'vditor') continue;
+        if (npmPlugins.has(entry)) continue;
         cpSync(`${pluginsSrc}/${entry}`, `${pluginsDest}/${entry}`, { recursive: true });
     }
 
-    // Copy vditor from npm package
-    console.log('[COPY] Vditor (from npm)');
-    cpSync('node_modules/vditor/dist', `${pluginsDest}/vditor/dist`, { recursive: true });
+    // Copy npm-sourced plugins
+    console.log('[COPY] npm plugins');
+    const p = pluginsDest;
+    const copy = (src: string, dest: string) => {
+        mkdirSync(resolve(dest, '..'), { recursive: true });
+        cpSync(src, dest, { recursive: true });
+    };
+
+    // select2
+    copy('node_modules/select2/dist/js/select2.full.min.js', `${p}/select/select2.full.min.js`);
+    copy('node_modules/select2/dist/css/select2.min.css', `${p}/select/select2.min.css`);
+    copy('node_modules/select2/dist/js/i18n', `${p}/select/i18n`);
+
+    // apexcharts
+    copy('node_modules/apexcharts/dist/apexcharts.min.js', `${p}/charts/apexcharts.min.js`);
+
+    // sortablejs
+    copy('node_modules/sortablejs/Sortable.min.js', `${p}/sortable/Sortable.min.js`);
+
+    // moment
+    copy('node_modules/moment/min/moment-with-locales.min.js', `${p}/moment/moment-with-locales.min.js`);
+
+    // moment-timezone
+    copy('node_modules/moment-timezone/builds/moment-timezone-with-data.min.js', `${p}/moment-timezone/moment-timezone-with-data.min.js`);
+
+    // bootstrap-validator
+    copy('node_modules/bootstrap-validator/dist/validator.min.js', `${p}/bootstrap-validator/validator.min.js`);
+
+    // jquery-nestable (no minified JS or CSS in npm; keep vendored CSS)
+    copy('node_modules/jquery-nestable/jquery.nestable.js', `${p}/nestable/jquery.nestable.min.js`);
+    cpSync(`${pluginsSrc}/nestable/nestable.css`, `${p}/nestable/nestable.css`);
+
+    // ion-rangeslider (skin CSS and sprites not in npm; keep vendored)
+    copy('node_modules/ion-rangeslider/js/ion.rangeSlider.min.js', `${p}/ionslider/ion.rangeSlider.min.js`);
+    copy('node_modules/ion-rangeslider/css/ion.rangeSlider.css', `${p}/ionslider/ion.rangeSlider.css`);
+    cpSync(`${pluginsSrc}/ionslider/ion.rangeSlider.skinNice.css`, `${p}/ionslider/ion.rangeSlider.skinNice.css`);
+    cpSync(`${pluginsSrc}/ionslider/ion.rangeSlider.skinFlat.css`, `${p}/ionslider/ion.rangeSlider.skinFlat.css`);
+    cpSync(`${pluginsSrc}/ionslider/img`, `${p}/ionslider/img`, { recursive: true });
+
+    // jquery-pjax (no minified JS in npm)
+    copy('node_modules/jquery-pjax/jquery.pjax.js', `${p}/jquery-pjax/jquery.pjax.min.js`);
+
+    // jquery.initialize
+    copy('node_modules/jquery.initialize/jquery.initialize.min.js', `${p}/jquery.initialize/jquery.initialize.min.js`);
+
+    // jstree (proton theme not in npm; keep vendored)
+    copy('node_modules/jstree/dist/jstree.min.js', `${p}/jstree-theme/jstree.min.js`);
+    cpSync(`${pluginsSrc}/jstree-theme/themes`, `${p}/jstree-theme/themes`, { recursive: true });
+
+    // bootstrap4-datetimepicker (pc-bootstrap4-datetimepicker)
+    copy('node_modules/pc-bootstrap4-datetimepicker/build/js/bootstrap-datetimepicker.min.js', `${p}/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js`);
+    copy('node_modules/pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.min.css', `${p}/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css`);
+
+    // devbridge-autocomplete
+    copy('node_modules/devbridge-autocomplete/dist/jquery.autocomplete.min.js', `${p}/autocomplete/jquery.autocomplete.min.js`);
+
+    // vditor
+    copy('node_modules/vditor/dist', `${p}/vditor/dist`);
 
     mkdirSync(`${outDir}/aio/css`, { recursive: true });
     copyFileSync('resources/assets/aio/sass/nunito.css', `${outDir}/aio/css/nunito.css`);
