@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Widgets;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Arr;
 
 class Table extends Widget
@@ -80,7 +80,7 @@ class Table extends Widget
      */
     public function setRows($rows = [])
     {
-        if ($rows && ! Arr::isAssoc(Helper::array($rows, false))) {
+        if ($rows && ! Arr::isAssoc(ArrayHelper::convert($rows, false))) {
             $this->rows = $rows;
 
             return $this;

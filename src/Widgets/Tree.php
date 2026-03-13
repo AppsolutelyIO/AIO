@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Widgets;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 
@@ -60,7 +60,7 @@ class Tree extends Widget
 
     public function check($value)
     {
-        $this->value = Helper::array($value);
+        $this->value = ArrayHelper::convert($value);
 
         return $this;
     }

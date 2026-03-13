@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Widgets\Metrics;
 
 use Appsolutely\AIO\Admin;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\InteractsWithApi;
 use Appsolutely\AIO\Widgets\ApexCharts\Chart;
@@ -371,7 +371,7 @@ class Card extends Widget
         } else {
             $this->chartOptions = array_merge(
                 $this->chartOptions,
-                Helper::array($options)
+                ArrayHelper::convert($options)
             );
         }
 

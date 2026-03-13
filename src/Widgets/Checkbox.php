@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Widgets;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Arr;
 
 class Checkbox extends Radio
@@ -19,7 +19,7 @@ class Checkbox extends Radio
      */
     public function check($options)
     {
-        $this->checked = Helper::array($options);
+        $this->checked = ArrayHelper::convert($options);
 
         return $this;
     }

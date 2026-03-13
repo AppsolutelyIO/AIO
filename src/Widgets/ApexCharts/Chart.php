@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Widgets\ApexCharts;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Support\JavaScript;
 use Appsolutely\AIO\Traits\InteractsWithApi;
 use Appsolutely\AIO\Widgets\Widget;
@@ -68,7 +68,7 @@ class Chart extends Widget
         if (is_string($title)) {
             $options = ['text' => $title];
         } else {
-            $options = Helper::array($title);
+            $options = ArrayHelper::convert($title);
         }
 
         $this->options['title'] = $options;
@@ -82,7 +82,7 @@ class Chart extends Widget
      */
     public function series($series)
     {
-        $this->options['series'] = Helper::array($series);
+        $this->options['series'] = ArrayHelper::convert($series);
 
         return $this;
     }
@@ -93,7 +93,7 @@ class Chart extends Widget
      */
     public function labels($value)
     {
-        $this->options['labels'] = Helper::array($value);
+        $this->options['labels'] = ArrayHelper::convert($value);
 
         return $this;
     }
@@ -104,7 +104,7 @@ class Chart extends Widget
      */
     public function colors($colors)
     {
-        $this->options['colors'] = Helper::array($colors);
+        $this->options['colors'] = ArrayHelper::convert($colors);
 
         return $this;
     }
@@ -115,7 +115,7 @@ class Chart extends Widget
      */
     public function stroke($value)
     {
-        $this->options['stroke'] = Helper::array($value);
+        $this->options['stroke'] = ArrayHelper::convert($value);
 
         return $this;
     }
@@ -126,7 +126,7 @@ class Chart extends Widget
      */
     public function xaxis($value)
     {
-        $this->options['xaxis'] = Helper::array($value);
+        $this->options['xaxis'] = ArrayHelper::convert($value);
 
         return $this;
     }
@@ -137,7 +137,7 @@ class Chart extends Widget
      */
     public function tooltip($value)
     {
-        $this->options['tooltip'] = Helper::array($value);
+        $this->options['tooltip'] = ArrayHelper::convert($value);
 
         return $this;
     }
@@ -148,7 +148,7 @@ class Chart extends Widget
      */
     public function yaxis($value)
     {
-        $this->options['yaxis'] = Helper::array($value);
+        $this->options['yaxis'] = ArrayHelper::convert($value);
 
         return $this;
     }
@@ -159,7 +159,7 @@ class Chart extends Widget
      */
     public function fill($value)
     {
-        $this->options['fill'] = Helper::array($value);
+        $this->options['fill'] = ArrayHelper::convert($value);
 
         return $this;
     }
@@ -170,7 +170,7 @@ class Chart extends Widget
      */
     public function chart($value)
     {
-        $this->options['chart'] = Helper::array($value);
+        $this->options['chart'] = ArrayHelper::convert($value);
 
         return $this;
     }
@@ -185,7 +185,7 @@ class Chart extends Widget
             $value = ['enabled' => $value];
         }
 
-        $this->options['dataLabels'] = Helper::array($value);
+        $this->options['dataLabels'] = ArrayHelper::convert($value);
 
         return $this;
     }

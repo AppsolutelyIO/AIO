@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Widgets;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Str;
 
 class Dropdown extends Widget
@@ -68,7 +68,7 @@ class Dropdown extends Widget
             return $this;
         }
 
-        $this->options[] = [$title, Helper::array($options)];
+        $this->options[] = [$title, ArrayHelper::convert($options)];
 
         return $this;
     }
