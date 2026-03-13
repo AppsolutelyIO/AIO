@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Traits;
 
 use Appsolutely\AIO\Exception\AdminException;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Tree;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -103,7 +103,7 @@ trait ModelTree
             $nodes = $this->allNodes();
         }
 
-        return Helper::buildNestedArray(
+        return ArrayHelper::buildNested(
             $nodes,
             $this->getDefaultParentId(),
             $this->getKeyName(),

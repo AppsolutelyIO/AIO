@@ -3,6 +3,7 @@
 namespace Appsolutely\AIO\Scaffold;
 
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Facades\App;
 
 class LangCreator
@@ -49,7 +50,7 @@ class LangCreator
         }
 
         $files = app('files');
-        if ($files->put($filename, Helper::exportArrayPhp($content))) {
+        if ($files->put($filename, ArrayHelper::exportPhp($content))) {
             $files->chmod($filename, 0777);
 
             return $filename;

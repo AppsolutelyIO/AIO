@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Traits;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 
@@ -102,7 +102,7 @@ trait HasPermissions
         /* @var Collection $all */
         $all = $this->roles;
 
-        $roles = Helper::array($roles);
+        $roles = ArrayHelper::convert($roles);
 
         return $all->pluck('slug')->intersect($roles)->isNotEmpty() ?:
             $all->pluck('id')->intersect($roles)->isNotEmpty();

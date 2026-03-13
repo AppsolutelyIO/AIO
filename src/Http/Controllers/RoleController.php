@@ -7,7 +7,7 @@ use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Http\Auth\Permission;
 use Appsolutely\AIO\Http\Repositories\Role;
 use Appsolutely\AIO\Show;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Widgets\Tree;
 
 class RoleController extends AdminController
@@ -57,7 +57,7 @@ class RoleController extends AdminController
 
                 $keyName = $permissionModel->getKeyName();
                 $tree->check(
-                    array_column(Helper::array($permission), $keyName)
+                    array_column(ArrayHelper::convert($permission), $keyName)
                 );
 
                 return $tree->render();
@@ -145,7 +145,7 @@ class RoleController extends AdminController
     public function destroy($id)
     {
         $roleModel = config('admin.database.roles_model');
-        if (in_array($roleModel::ADMINISTRATOR_ID, Helper::array($id))) {
+        if (in_array($roleModel::ADMINISTRATOR_ID, ArrayHelper::convert($id))) {
             Permission::error();
         }
 

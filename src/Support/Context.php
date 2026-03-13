@@ -5,6 +5,7 @@ namespace Appsolutely\AIO\Support;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Fluent;
 
+use Appsolutely\AIO\Support\ArrayHelper;
 /**
  * Class Context.
  *
@@ -48,7 +49,7 @@ class Context extends Fluent
 
     public function getArray($key, $default = null)
     {
-        return Helper::array($this->get($key, $default), false);
+        return ArrayHelper::convert($this->get($key, $default), false);
     }
 
     public function add($key, $value, $k = null)

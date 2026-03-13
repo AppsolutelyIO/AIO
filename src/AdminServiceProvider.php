@@ -13,7 +13,7 @@ use Appsolutely\AIO\Layout\Menu;
 use Appsolutely\AIO\Layout\Navbar;
 use Appsolutely\AIO\Layout\SectionManager;
 use Appsolutely\AIO\Support\Context;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Support\Setting;
 use Appsolutely\AIO\Support\Translator;
 use Appsolutely\AIO\Support\WebUploader;
@@ -271,7 +271,7 @@ PHP;
         // register middleware group.
         foreach ($this->middlewareGroups as $key => $middleware) {
             if ($disablePermission) {
-                Helper::deleteByValue($middleware, 'admin.permission', true);
+                ArrayHelper::deleteByValue($middleware, 'admin.permission', true);
             }
             $router->middlewareGroup($key, $middleware);
         }

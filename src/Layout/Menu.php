@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Layout;
 
 use Appsolutely\AIO\Admin;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Facades\Lang;
 
 class Menu
@@ -82,7 +82,7 @@ class Menu
     {
         $html = '';
 
-        foreach (Helper::buildNestedArray($nodes) as $item) {
+        foreach (ArrayHelper::buildNested($nodes) as $item) {
             $html .= $this->render($item);
         }
 
@@ -219,8 +219,8 @@ class Menu
     protected function checkPermission($item)
     {
         $permissionIds = $item['permission_id'] ?? null;
-        $roles = array_column(Helper::array($item['roles'] ?? []), 'slug');
-        $permissions = array_column(Helper::array($item['permissions'] ?? []), 'slug');
+        $roles = array_column(ArrayHelper::convert($item['roles'] ?? []), 'slug');
+        $permissions = array_column(ArrayHelper::convert($item['permissions'] ?? []), 'slug');
 
         if (! $permissionIds && ! $roles && ! $permissions) {
             return true;
@@ -232,7 +232,7 @@ class Menu
             return true;
         }
 
-        foreach (array_merge(Helper::array($permissionIds), $permissions) as $permission) {
+        foreach (array_merge(ArrayHelper::convert($permissionIds), $permissions) as $permission) {
             if ($user->can($permission)) {
                 return true;
             }

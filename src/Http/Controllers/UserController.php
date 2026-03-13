@@ -8,7 +8,7 @@ use Appsolutely\AIO\Http\Auth\Permission;
 use Appsolutely\AIO\Http\Repositories\Administrator;
 use Appsolutely\AIO\Models\Administrator as AdministratorModel;
 use Appsolutely\AIO\Show;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Widgets\Tree;
 
 class UserController extends AdminController
@@ -185,7 +185,7 @@ class UserController extends AdminController
 
     public function destroy($id)
     {
-        if (in_array(AdministratorModel::DEFAULT_ID, Helper::array($id))) {
+        if (in_array(AdministratorModel::DEFAULT_ID, ArrayHelper::convert($id))) {
             Permission::error();
         }
 

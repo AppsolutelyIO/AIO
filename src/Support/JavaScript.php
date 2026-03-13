@@ -5,6 +5,7 @@ namespace Appsolutely\AIO\Support;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 
+use Appsolutely\AIO\Support\ArrayHelper;
 class JavaScript
 {
     protected static $scripts = [];
@@ -74,7 +75,7 @@ class JavaScript
     public static function format($value)
     {
         if (is_array($value) || is_object($value)) {
-            $value = json_encode(Helper::array($value, false));
+            $value = json_encode(ArrayHelper::convert($value, false));
         }
 
         foreach (static::all() as $id => $script) {

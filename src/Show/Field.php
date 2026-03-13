@@ -5,6 +5,7 @@ namespace Appsolutely\AIO\Show;
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Show;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Appsolutely\AIO\Traits\HasVariables;
 use Appsolutely\AIO\Widgets\Dump;
@@ -219,7 +220,7 @@ class Field implements Renderable
                 return '';
             }
 
-            $path = Helper::array($path);
+            $path = ArrayHelper::convert($path);
 
             return collect($path)->transform(function ($path) use ($server, $width, $height) {
                 if (url()->isValidUrl($path)) {
@@ -256,7 +257,7 @@ class Field implements Renderable
                 return '';
             }
 
-            $path = Helper::array($path);
+            $path = ArrayHelper::convert($path);
 
             $list = collect($path)->transform(function ($path) use ($server, $field) {
                 $name = Helper::basename($path);
