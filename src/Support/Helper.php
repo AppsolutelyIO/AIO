@@ -427,90 +427,35 @@ class Helper
     }
 
     /**
-     * 颜色转亮.
-     *
-     * @param  string  $color
-     * @param  int  $amt
-     * @return string
+     * @deprecated Use ColorHelper::lighten() instead.
      */
     public static function colorLighten(string $color, int $amt)
     {
-        if (! $amt) {
-            return $color;
-        }
-
-        $hasPrefix = false;
-
-        if (str_starts_with($color, '#')) {
-            $color = mb_substr($color, 1);
-
-            $hasPrefix = true;
-        }
-
-        [$red, $blue, $green] = static::colorToRBG($color, $amt);
-
-        return ($hasPrefix ? '#' : '').dechex($green + ($blue << 8) + ($red << 16));
+        return ColorHelper::lighten($color, $amt);
     }
 
     /**
-     * 颜色转暗.
-     *
-     * @param  string  $color
-     * @param  int  $amt
-     * @return string
+     * @deprecated Use ColorHelper::darken() instead.
      */
     public static function colorDarken(string $color, int $amt)
     {
-        return static::colorLighten($color, -$amt);
+        return ColorHelper::darken($color, $amt);
     }
 
     /**
-     * 颜色透明度.
-     *
-     * @param  string  $color
-     * @param  float|string  $alpha
-     * @return string
+     * @deprecated Use ColorHelper::alpha() instead.
      */
     public static function colorAlpha(string $color, $alpha)
     {
-        if ($alpha >= 1) {
-            return $color;
-        }
-
-        if (str_starts_with($color, '#')) {
-            $color = mb_substr($color, 1);
-        }
-
-        [$red, $blue, $green] = static::colorToRBG($color);
-
-        return "rgba($red, $blue, $green, $alpha)";
+        return ColorHelper::alpha($color, $alpha);
     }
 
     /**
-     * @param  string  $color
-     * @param  int  $amt
-     * @return array
+     * @deprecated Use ColorHelper::toRGB() instead.
      */
     public static function colorToRBG(string $color, int $amt = 0)
     {
-        $format = function ($value) {
-            if ($value > 255) {
-                return 255;
-            }
-            if ($value < 0) {
-                return 0;
-            }
-
-            return $value;
-        };
-
-        $num = hexdec($color);
-
-        $red = $format(($num >> 16) + $amt);
-        $blue = $format((($num >> 8) & 0x00FF) + $amt);
-        $green = $format(($num & 0x0000FF) + $amt);
-
-        return [$red, $blue, $green];
+        return ColorHelper::toRGB($color, $amt);
     }
 
     /**
