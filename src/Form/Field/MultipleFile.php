@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Form\Field;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 
 class MultipleFile extends File
 {
@@ -51,7 +51,7 @@ class MultipleFile extends File
             return array_values(array_diff($this->original, [$path]));
         }
 
-        $file = Helper::array($file, true);
+        $file = ArrayHelper::convert($file, true);
 
         $this->destroyIfChanged($file);
 

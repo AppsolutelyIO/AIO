@@ -4,7 +4,7 @@ namespace Appsolutely\AIO\Form;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Form;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Appsolutely\AIO\Traits\HasVariables;
@@ -310,7 +310,7 @@ class Field implements Renderable
      */
     public function fill($data)
     {
-        $data = Helper::array($data);
+        $data = ArrayHelper::convert($data);
 
         $this->data($data);
 
@@ -383,7 +383,7 @@ class Field implements Renderable
      */
     final public function setOriginal($data)
     {
-        $data = Helper::array($data);
+        $data = ArrayHelper::convert($data);
 
         $this->original = $this->formatFieldData($data);
 
@@ -466,7 +466,7 @@ class Field implements Renderable
             $options = $options->call($this->data(), $this->value());
         }
 
-        $this->options = array_merge($this->options, Helper::array($options));
+        $this->options = array_merge($this->options, ArrayHelper::convert($options));
 
         return $this;
     }
@@ -1058,7 +1058,7 @@ class Field implements Renderable
      */
     public function removeElementClass($class)
     {
-        Helper::deleteByValue($this->elementClass, $class);
+        ArrayHelper::deleteByValue($this->elementClass, $class);
 
         return $this;
     }

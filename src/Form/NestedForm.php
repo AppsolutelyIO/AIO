@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Form;
 
 use Appsolutely\AIO\Form;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Widgets\Form as WidgetForm;
 use Illuminate\Support\Arr;
@@ -193,7 +193,7 @@ class NestedForm extends WidgetForm
     protected function setFieldOriginalValue($key)
     {
         $values = [];
-        if (Helper::keyExists($key, $this->original)) {
+        if (ArrayHelper::keyExists($key, $this->original)) {
             $values = $this->original[$key];
         }
         $this->fields->each(function (Field $field) use ($values) {
@@ -229,7 +229,7 @@ class NestedForm extends WidgetForm
                 $value = $field->prepare($value);
             }
 
-            if (($field instanceof Form\Field\Hidden) || ! Helper::equal($field->original(), $value)) {
+            if (($field instanceof Form\Field\Hidden) || ! ArrayHelper::equal($field->original(), $value)) {
                 if (is_array($columns)) {
                     foreach ($columns as $name => $column) {
                         Arr::set($prepared, $column, $value[$name]);

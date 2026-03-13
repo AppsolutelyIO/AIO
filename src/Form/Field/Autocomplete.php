@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Form\Field;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Support\JavaScript;
 
 class Autocomplete extends Text
@@ -88,7 +88,7 @@ class Autocomplete extends Text
             $configs = $configs->call($this->data(), $this->value());
         }
 
-        $this->configs = array_merge($this->configs, Helper::array($configs));
+        $this->configs = array_merge($this->configs, ArrayHelper::convert($configs));
 
         return $this;
     }
@@ -162,6 +162,6 @@ class Autocomplete extends Text
             }
 
             return $opt;
-        }, Helper::array($options)));
+        }, ArrayHelper::convert($options)));
     }
 }

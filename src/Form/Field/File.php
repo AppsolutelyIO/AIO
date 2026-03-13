@@ -5,6 +5,7 @@ namespace Appsolutely\AIO\Form\Field;
 use Appsolutely\AIO\Contracts\UploadField as UploadFieldInterface;
 use Appsolutely\AIO\Form\Field;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Support\JavaScript;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
@@ -124,7 +125,7 @@ class File extends Field implements UploadFieldInterface
 
     protected function formatFieldData($data)
     {
-        return Helper::array($this->getValueFromData($data));
+        return ArrayHelper::convert($this->getValueFromData($data));
     }
 
     /**
@@ -134,7 +135,7 @@ class File extends Field implements UploadFieldInterface
     {
         $previews = [];
 
-        foreach (Helper::array($this->value()) as $value) {
+        foreach (ArrayHelper::convert($this->value()) as $value) {
             $previews[] = [
                 'id'   => $value,
                 'path' => Helper::basename($value),
@@ -179,7 +180,7 @@ class File extends Field implements UploadFieldInterface
     protected function formatValue()
     {
         if ($this->value !== null) {
-            $this->value = implode(',', Helper::array($this->value));
+            $this->value = implode(',', ArrayHelper::convert($this->value));
         } elseif (is_array($this->default)) {
             $this->default = implode(',', $this->default);
         }
@@ -228,7 +229,7 @@ class File extends Field implements UploadFieldInterface
         if ($field instanceof self) {
             $fieldRules = is_string($fieldRules) ? explode('|', $fieldRules) : $fieldRules;
 
-            Helper::deleteContains($fieldRules, ['image', 'file', 'dimensions', 'size', 'max', 'min']);
+            ArrayHelper::deleteContains($fieldRules, ['image', 'file', 'dimensions', 'size', 'max', 'min']);
         }
     }
 

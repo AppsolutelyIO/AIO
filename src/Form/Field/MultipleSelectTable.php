@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Form\Field;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 
 class MultipleSelectTable extends SelectTable
 {
@@ -38,7 +38,7 @@ class MultipleSelectTable extends SelectTable
      */
     public function prepareInputValue($value)
     {
-        return Helper::array($value, true);
+        return ArrayHelper::convert($value, true);
     }
 
     public function render()

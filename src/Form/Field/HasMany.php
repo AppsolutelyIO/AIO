@@ -5,7 +5,7 @@ namespace Appsolutely\AIO\Form\Field;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Form\Field;
 use Appsolutely\AIO\Form\NestedForm;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -503,7 +503,7 @@ class HasMany extends Field
          *
          * Else get data from database.
          */
-        foreach (Helper::array($this->value()) as $idx => $data) {
+        foreach (ArrayHelper::convert($this->value()) as $idx => $data) {
             $key = Arr::get($data, $this->getKeyName(), $idx);
 
             $forms[$key] = $this->buildNestedForm($key)
@@ -540,7 +540,7 @@ class HasMany extends Field
     public function value($value = null)
     {
         if ($value === null) {
-            return Helper::array(parent::value($value));
+            return ArrayHelper::convert(parent::value($value));
         }
 
         return parent::value($value);

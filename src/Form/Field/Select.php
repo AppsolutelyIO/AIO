@@ -4,7 +4,7 @@ namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Exception\RuntimeException;
 use Appsolutely\AIO\Form\Field;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
@@ -50,7 +50,7 @@ class Select extends Field
             return $this->loadRemoteOptions(...func_get_args());
         }
 
-        $this->options = Helper::array($options);
+        $this->options = ArrayHelper::convert($options);
 
         return $this;
     }
@@ -232,7 +232,7 @@ class Select extends Field
 
         $this->initSize();
 
-        $this->attribute('data-value', implode(',', Helper::array($this->value())));
+        $this->attribute('data-value', implode(',', ArrayHelper::convert($this->value())));
 
         return parent::render();
     }

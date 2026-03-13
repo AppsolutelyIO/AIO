@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Form\NestedForm;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 
 class ArrayField extends HasMany
 {
@@ -29,7 +29,7 @@ class ArrayField extends HasMany
 
         $forms = [];
 
-        foreach (Helper::array($this->value()) as $key => $data) {
+        foreach (ArrayHelper::convert($this->value()) as $key => $data) {
             if (isset($data['pivot'])) {
                 $data = array_merge($data, $data['pivot']);
             }

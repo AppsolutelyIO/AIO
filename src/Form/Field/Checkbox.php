@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Form\Field;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Widgets\Checkbox as WidgetCheckbox;
 
 class Checkbox extends MultipleSelect
@@ -31,7 +31,7 @@ class Checkbox extends MultipleSelect
             return $this;
         }
 
-        $this->options = Helper::array($options);
+        $this->options = ArrayHelper::convert($options);
 
         return $this;
     }

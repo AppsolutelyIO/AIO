@@ -4,7 +4,7 @@ namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Form\Field;
 use Appsolutely\AIO\Grid\LazyRenderable;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Widgets\DialogTable;
 
 class SelectTable extends Field
@@ -140,13 +140,13 @@ class SelectTable extends Field
                 return [];
             }
 
-            return $model::whereIn($id, Helper::array($v))->pluck($text, $id);
+            return $model::whereIn($id, ArrayHelper::convert($v))->pluck($text, $id);
         });
     }
 
     protected function formatOptions()
     {
-        $value = Helper::array($this->value());
+        $value = ArrayHelper::convert($this->value());
 
         if ($this->options instanceof \Closure) {
             $this->options = $this->options->call($this->values(), $value, $this);
@@ -154,7 +154,7 @@ class SelectTable extends Field
 
         $values = [];
 
-        foreach (Helper::array($this->options) as $id => $label) {
+        foreach (ArrayHelper::convert($this->options) as $id => $label) {
             foreach ($value as $v) {
                 if ($v == $id && $v !== null) {
                     $values[] = ['id' => $v, 'label' => $label];

@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Form\Field;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -46,7 +46,7 @@ class Tags extends Field
             $value = array_column($value, $this->visibleColumn, $this->key);
         }
 
-        return Helper::array($value);
+        return ArrayHelper::convert($value);
     }
 
     /**
@@ -140,10 +140,10 @@ class Tags extends Field
     public function value($value = null)
     {
         if ($value === null) {
-            return Helper::array(parent::value());
+            return ArrayHelper::convert(parent::value());
         }
 
-        $this->value = Helper::array($value);
+        $this->value = ArrayHelper::convert($value);
 
         return $this;
     }
@@ -168,7 +168,7 @@ class Tags extends Field
      */
     public function render()
     {
-        $value = Helper::array($this->value());
+        $value = ArrayHelper::convert($this->value());
 
         if ($this->options instanceof \Closure) {
             $this->options(

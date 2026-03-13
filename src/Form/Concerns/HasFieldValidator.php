@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Form\Concerns;
 
 use Appsolutely\AIO\Form;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
@@ -230,7 +230,7 @@ trait HasFieldValidator
     protected function deleteRuleByKeyword(&$rules, $rule)
     {
         if (is_array($rules)) {
-            Helper::deleteByValue($rules, $rule);
+            ArrayHelper::deleteByValue($rules, $rule);
 
             return;
         }

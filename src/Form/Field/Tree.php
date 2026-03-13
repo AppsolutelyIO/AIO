@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Form\Field;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Widgets\Checkbox as WidgetCheckbox;
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -135,12 +135,12 @@ class Tree extends Field
 
     protected function formatNodes()
     {
-        $value = Helper::array($this->value());
+        $value = ArrayHelper::convert($this->value());
 
         $this->value = &$value;
 
         if ($this->nodes instanceof \Closure) {
-            $this->nodes = Helper::array($this->nodes->call($this->values(), $value, $this));
+            $this->nodes = ArrayHelper::convert($this->nodes->call($this->values(), $value, $this));
         }
 
         if (! $this->nodes) {
@@ -230,12 +230,12 @@ class Tree extends Field
 
     protected function formatFieldData($data)
     {
-        return Helper::array($this->getValueFromData($data), true);
+        return ArrayHelper::convert($this->getValueFromData($data), true);
     }
 
     protected function prepareInputValue($value)
     {
-        return Helper::array($value, true);
+        return ArrayHelper::convert($value, true);
     }
 
     public function render()

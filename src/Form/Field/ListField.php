@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Form\Field;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\MessageBag;
 
@@ -58,7 +58,7 @@ class ListField extends Field
     {
         $this->data = $data;
 
-        $value = Helper::array($this->getValueFromData($data, null, $this->value));
+        $value = ArrayHelper::convert($this->getValueFromData($data, null, $this->value));
 
         unset($value['values'][static::DEFAULT_FLAG_NAME]);
 

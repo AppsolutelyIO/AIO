@@ -6,7 +6,7 @@ use Appsolutely\AIO\Contracts\FieldsCollection;
 use Appsolutely\AIO\Form\EmbeddedForm;
 use Appsolutely\AIO\Form\Field;
 use Appsolutely\AIO\Form\ResolveField;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -235,7 +235,7 @@ class Embeds extends Field implements FieldsCollection
      */
     protected function getEmbeddedData()
     {
-        return Helper::array($this->value);
+        return ArrayHelper::convert($this->value);
     }
 
     /**

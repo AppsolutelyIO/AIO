@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Form;
 
 use Appsolutely\AIO\Form;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Support\HtmlHelper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -205,7 +205,7 @@ class EmbeddedForm
      */
     protected function setFieldOriginalValue($key)
     {
-        if (Helper::keyExists($key, $this->original)) {
+        if (ArrayHelper::keyExists($key, $this->original)) {
             $values = $this->original[$key];
 
             $this->fields->each(function (Field $field) use ($values) {

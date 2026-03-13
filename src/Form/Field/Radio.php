@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Form\Field;
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Widgets\Radio as WidgetRadio;
 
 class Radio extends Field
@@ -30,7 +30,7 @@ class Radio extends Field
             return $this;
         }
 
-        $this->options = Helper::array($options);
+        $this->options = ArrayHelper::convert($options);
 
         return $this;
     }

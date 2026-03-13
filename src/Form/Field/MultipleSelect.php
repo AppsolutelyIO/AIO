@@ -2,17 +2,17 @@
 
 namespace Appsolutely\AIO\Form\Field;
 
-use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\ArrayHelper;
 
 class MultipleSelect extends Select
 {
     protected function formatFieldData($data)
     {
-        return Helper::array($this->getValueFromData($data));
+        return ArrayHelper::convert($this->getValueFromData($data));
     }
 
     protected function prepareInputValue($value)
     {
-        return Helper::array($value, true);
+        return ArrayHelper::convert($value, true);
     }
 }
