@@ -54,12 +54,12 @@ class Radio extends Widget
     /**
      * 是否排成一行.
      *
-     * @param  bool  $inine
+     * @param  bool  $inline
      * @return $this
      */
-    public function inline(bool $inine = true)
+    public function inline(bool $inline = true)
     {
-        $this->inline = $inine;
+        $this->inline = $inline;
 
         return $this;
     }
