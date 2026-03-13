@@ -1,0 +1,84 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Appsolutely\AIO\Services;
+
+use Appsolutely\AIO\Constants\BasicConstant;
+use Appsolutely\AIO\Models\GeneralPage;
+use Appsolutely\AIO\Models\Page;
+use Appsolutely\AIO\Repositories\PageBlockSettingRepository;
+use Illuminate\Support\Arr;
+
+/**
+ * Enriches Page Builder project data by injecting server-rendered HTML for each block.
+ *
+ * Flow:
+ * 1. Read components from JSON (pages.0.frames.0.component.components)
+ * 2. For each component: get reference → find block setting by page_id + reference
+ * 3. Get block value (display_options, query_options) from block setting
+ * 4. Render HTML via BlockRendererService
+ * 5. Inject content into component
+ */
+final readonly class PageBuilderDataEnricherService
+{
+    public function __construct(
+        protected BlockRendererService $blockRendererService,
+        protected PageBlockSettingRepository $blockSettingRepository
+    ) {}
+
+    /**
+     * Enrich project data with rendered block HTML.
+     *
+     * @param  array<string, mixed>  $setting  GrapesJS project data (from page.setting)
+     */
+    public function enrich(Page $page, array $setting): array
+    {
+        $components = Arr::get($setting, BasicConstant::PAGE_GRAPESJS_KEY);
+
+        if (! is_array($components)) {
+            return $setting;
+        }
+
+        $generalPage = new GeneralPage($page);
+
+        $enriched = [];
+        foreach ($components as $component) {
+            $enriched[] = $this->enrichComponent($component, $page->id, $generalPage);
+        }
+
+        Arr::set($setting, BasicConstant::PAGE_GRAPESJS_KEY, $enriched);
+
+        return $setting;
+    }
+
+    /**
+     * Enrich a single component with rendered HTML.
+     *
+     * @param  array<string, mixed>  $component  GrapesJS component data
+     * @return array<string, mixed> Component with content (HTML) injected
+     */
+    private function enrichComponent(array $component, int $pageId, GeneralPage $generalPage): array
+    {
+        $reference = $component['reference'] ?? $component['attributes']['reference'] ?? null;
+        $blockId   = $component['block_id'] ?? $component['attributes']['block_id'] ?? null;
+
+        if (empty($reference)) {
+            return $component;
+        }
+
+        $setting = $this->blockSettingRepository->findBy($pageId, $blockId, $reference);
+
+        if ($setting === null) {
+            return $component;
+        }
+
+        $setting->load(['block', 'blockValue']);
+
+        $html = $this->blockRendererService->renderBlockSafely($setting, $generalPage);
+
+        $component['content'] = $html;
+
+        return $component;
+    }
+}
