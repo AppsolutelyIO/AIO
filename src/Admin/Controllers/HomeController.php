@@ -1,0 +1,37 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Appsolutely\AIO\Admin\Controllers;
+
+use Appsolutely\AIO\Admin\Metrics\Examples;
+use Appsolutely\AIO\Http\Controllers\Dashboard;
+use Appsolutely\AIO\Layout\Column;
+use Appsolutely\AIO\Layout\Content;
+use Appsolutely\AIO\Layout\Row;
+
+final class HomeController extends AdminBaseController
+{
+    public function index(Content $content)
+    {
+        return $content
+            ->header('Dashboard')
+            ->description('Description...')
+            ->body(function (Row $row) {
+                $row->column(6, function (Column $column) {
+                    $column->row(Dashboard::title());
+                    $column->row(new Examples\Tickets());
+                });
+
+                $row->column(6, function (Column $column) {
+                    $column->row(function (Row $row) {
+                        $row->column(6, new Examples\NewUsers());
+                        $row->column(6, new Examples\NewDevices());
+                    });
+
+                    $column->row(new Examples\Sessions());
+                    $column->row(new Examples\ProductOrders());
+                });
+            });
+    }
+}
