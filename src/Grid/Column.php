@@ -518,7 +518,7 @@ class Column
             ) {
                 [$last, $params] = $last;
                 $last = $this->bindOriginalRowModel($last);
-                $value = call_user_func($last, $previous, $this, ...$params);
+                $value = $last($previous, $this, ...$params);
             }
         }
 

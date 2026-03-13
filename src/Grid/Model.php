@@ -448,7 +448,7 @@ class Model
         }
 
         if ($this->builder && is_callable($this->builder)) {
-            $results = call_user_func($this->builder, $this);
+            $results = ($this->builder)($this);
         } else {
             $results = $this->repository->get($this);
         }
@@ -569,7 +569,7 @@ class Model
             }
 
             if (is_callable($method)) {
-                return call_user_func($method, $query, $k);
+                return $method($query, $k);
             }
 
             return true;
@@ -604,7 +604,7 @@ class Model
     {
         $this->queries = $this->queries->reject(function ($query) use ($method) {
             if (is_callable($method)) {
-                return call_user_func($method, $query);
+                return $method($query);
             }
 
             return in_array($query['method'], (array) $method, true);
