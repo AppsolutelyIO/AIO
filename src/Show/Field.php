@@ -501,7 +501,7 @@ HTML;
         return $this->unescape()->as(function ($value) use ($view, $name, $data) {
             $model = $this;
 
-            return view($view, array_merge(compact('model', 'value', 'name'), $data))->render();
+            return view($view, array_merge(['model' => $model, 'value' => $value, 'name' => $name], $data))->render();
         });
     }
 

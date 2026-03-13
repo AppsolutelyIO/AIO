@@ -64,7 +64,7 @@ class Tab
 
         $id = $id ?: ('tab-form-'.($this->tabs->count() + 1).'-'.mt_rand(0, 9999));
 
-        $this->tabs->push(compact('id', 'title', 'fields', 'active', 'layout'));
+        $this->tabs->push(['id' => $id, 'title' => $title, 'fields' => $fields, 'active' => $active, 'layout' => $layout]);
 
         return $this;
     }

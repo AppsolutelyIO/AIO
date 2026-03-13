@@ -88,12 +88,12 @@ class Selector
             $label = admin_trans_field($column);
         }
 
-        $this->selectors[$column] = compact(
-            'label',
-            'options',
-            'type',
-            'query'
-        );
+        $this->selectors[$column] = [
+            'label'   => $label,
+            'options' => $options,
+            'type'    => $type,
+            'query'   => $query,
+        ];
 
         return $this;
     }

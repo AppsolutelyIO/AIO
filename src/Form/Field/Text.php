@@ -174,7 +174,7 @@ JS
             }
         }
 
-        return compact('original', 'toReplace', 'options');
+        return ['original' => $original, 'toReplace' => $toReplace, 'options' => $options];
     }
 
     /**

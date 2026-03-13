@@ -32,7 +32,7 @@ class SwitchDisplay extends AbstractDisplayer
 
         return Admin::view(
             'admin::grid.displayer.switch',
-            compact('column', 'color', 'refresh', 'checked', 'url', 'inlineUpdateEndpoint', 'model', 'id')
+            ['column' => $column, 'color' => $color, 'refresh' => $refresh, 'checked' => $checked, 'url' => $url, 'inlineUpdateEndpoint' => $inlineUpdateEndpoint, 'model' => $model, 'id' => $id]
         );
     }
 

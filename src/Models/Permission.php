@@ -99,7 +99,7 @@ class Permission extends Model implements Sortable
 
             $path = Str::contains($path, '.') ? $path : ltrim(admin_base_path($path), '/');
 
-            return compact('method', 'path');
+            return ['method' => $method, 'path' => $path];
         }, $this->http_path);
 
         foreach ($matches as $match) {

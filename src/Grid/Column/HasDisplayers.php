@@ -103,7 +103,7 @@ trait HasDisplayers
         return $this->display(function ($value) use ($view, $name) {
             $model = $this;
 
-            return view($view, compact('model', 'value', 'name'))->render();
+            return view($view, ['model' => $model, 'value' => $value, 'name' => $name])->render();
         });
     }
 

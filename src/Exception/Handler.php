@@ -56,7 +56,7 @@ class Handler implements ExceptionHandler
         $errors = new ViewErrorBag();
         $errors->put('exception', $error);
 
-        return view('admin::partials.exception', compact('errors'))->render();
+        return view('admin::partials.exception', ['errors' => $errors])->render();
     }
 
     /**

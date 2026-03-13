@@ -622,7 +622,7 @@ class Field implements Renderable
      */
     public function help($text = '', $icon = 'feather icon-help-circle')
     {
-        $this->help = compact('text', 'icon');
+        $this->help = ['text' => $text, 'icon' => $icon];
 
         return $this;
     }

@@ -260,7 +260,7 @@ class Modal extends Widget
      */
     public function on(string $event, string $script)
     {
-        $this->events[] = compact('event', 'script');
+        $this->events[] = ['event' => $event, 'script' => $script];
 
         return $this;
     }

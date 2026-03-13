@@ -160,7 +160,7 @@ class Tags extends Field
     {
         $url = admin_url($url);
 
-        return $this->addVariables(['ajax' => compact('url', 'idField', 'textField')]);
+        return $this->addVariables(['ajax' => ['url' => $url, 'idField' => $idField, 'textField' => $textField]]);
     }
 
     /**

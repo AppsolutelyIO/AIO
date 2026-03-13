@@ -199,7 +199,7 @@ class File extends Field implements UploadFieldInterface
     {
         $script = JavaScript::make($script);
 
-        $this->options['events'][] = compact('event', 'script', 'once');
+        $this->options['events'][] = ['event' => $event, 'script' => $script, 'once' => $once];
 
         return $this;
     }

@@ -69,7 +69,7 @@ class Group extends AbstractFilter
     protected function joinGroup($label, array $condition)
     {
         $this->group->push(
-            compact('label', 'condition')
+            ['label' => $label, 'condition' => $condition]
         );
 
         return $this;

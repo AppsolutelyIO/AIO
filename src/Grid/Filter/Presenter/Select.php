@@ -177,7 +177,7 @@ class Select extends Presenter
         $values = array_filter((array) $this->filter->getValue());
 
         return $this->addVariables([
-            'remote' => compact('ajaxOptions', 'values'),
+            'remote' => ['ajaxOptions' => $ajaxOptions, 'values' => $values],
         ]);
     }
 
@@ -238,7 +238,7 @@ class Select extends Presenter
 
         $url = admin_url($resourceUrl);
 
-        return $this->addVariables(['ajax' => compact('url', 'idField', 'textField')]);
+        return $this->addVariables(['ajax' => ['url' => $url, 'idField' => $idField, 'textField' => $textField]]);
     }
 
     /**

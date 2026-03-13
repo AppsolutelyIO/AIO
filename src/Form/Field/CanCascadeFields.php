@@ -76,7 +76,7 @@ trait CanCascadeFields
      */
     protected function addDependents(string $operator, $value, \Closure $closure)
     {
-        $this->conditions[] = compact('operator', 'value', 'closure');
+        $this->conditions[] = ['operator' => $operator, 'value' => $value, 'closure' => $closure];
 
         ($this->parent ?: $this->form)->cascadeGroup($closure, [
             'column' => $this->column(),

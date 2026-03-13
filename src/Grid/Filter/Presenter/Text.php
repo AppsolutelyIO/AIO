@@ -147,7 +147,7 @@ class Text extends Presenter
      */
     public function mobile($mask = '19999999999')
     {
-        return $this->inputmask(compact('mask'), 'phone');
+        return $this->inputmask(['mask' => $mask], 'phone');
     }
 
     /**

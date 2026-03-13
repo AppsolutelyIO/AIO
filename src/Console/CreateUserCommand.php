@@ -43,7 +43,7 @@ class CreateUserCommand extends Command
             return in_array($role->name, $selected, true);
         });
 
-        $user = new $userModel(compact('username', 'password', 'name'));
+        $user = new $userModel(['username' => $username, 'password' => $password, 'name' => $name]);
 
         $user->save();
 

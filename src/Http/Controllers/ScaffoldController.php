@@ -90,7 +90,7 @@ class ScaffoldController extends Controller
             ->description(' ')
             ->body(view(
                 'admin::helpers.scaffold',
-                compact('dbTypes', 'action', 'tables', 'dataTypeMap', 'namespaceBase')
+                ['dbTypes' => $dbTypes, 'action' => $action, 'tables' => $tables, 'dataTypeMap' => $dataTypeMap, 'namespaceBase' => $namespaceBase]
             ));
     }
 
@@ -280,7 +280,7 @@ class ScaffoldController extends Controller
             'message' => $exception->getMessage(),
         ]);
 
-        return redirect()->refresh()->withInput()->with(compact('error'));
+        return redirect()->refresh()->withInput()->with(['error' => $error]);
     }
 
     protected function backWithSuccess($paths, $message)
@@ -298,6 +298,6 @@ class ScaffoldController extends Controller
             'message' => implode('<br />', $messages),
         ]);
 
-        return redirect()->refresh()->with(compact('success'));
+        return redirect()->refresh()->with(['success' => $success]);
     }
 }

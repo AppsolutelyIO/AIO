@@ -112,7 +112,7 @@ class Autocomplete extends Text
     {
         $url = admin_url($url);
 
-        return $this->addVariables(['ajax' => compact('url', 'valueField', 'groupField')]);
+        return $this->addVariables(['ajax' => ['url' => $url, 'valueField' => $valueField, 'groupField' => $groupField]]);
     }
 
     public function render()

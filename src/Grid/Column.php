@@ -351,7 +351,7 @@ class Column
      */
     public function style($style)
     {
-        return $this->setAttributes(compact('style'));
+        return $this->setAttributes(['style' => $style]);
     }
 
     /**
