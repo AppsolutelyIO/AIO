@@ -10,7 +10,7 @@
 
 import AIO from './AIO'
 
-import * as NProgress from 'nprogress'
+import NProgress from './shims/nprogress'
 import Ajax from './extensions/Ajax'
 import Toastr from './extensions/Toastr'
 import SweetAlert2 from './extensions/SweetAlert2'
