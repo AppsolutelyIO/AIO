@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Http\Controllers\Auth;
 
 use Appsolutely\AIO\Http\Controllers\BaseController;
-use App\Models\User;
+use Appsolutely\AIO\Models\Model;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +38,9 @@ final class RegisteredUserController extends BaseController
             'password' => 'required|string|confirmed|min:8',
         ]);
 
-        Auth::login($user = User::create([
+        $userModel = Model::userModel();
+
+        Auth::login($user = $userModel::create([
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => Hash::make($request->password),
