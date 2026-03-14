@@ -21,7 +21,14 @@ class AdminTablesSeeder extends Seeder
         $this->seedRoles();
         $this->seedPermissions();
 
-        $this->call(AdminMenuFullSeeder::class);
+        $this->call([
+            AdminMenuFullSeeder::class,
+            SiteSettingSeeder::class,
+            NotificationSenderSeeder::class,
+            NotificationTemplateSeeder::class,
+            PageBlockSeeder::class,
+            PageBlockSchemaSeeder::class,
+        ]);
     }
 
     protected function seedAdminUser(): void
