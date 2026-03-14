@@ -37,8 +37,10 @@ final class RestrictAdminDomainToAdminRoutes
                 ], 404);
             }
 
+            $viewPath = resource_path('views/errors/404.blade.php');
+
             return response(
-                view()->file(resource_path('views/errors/404.blade.php')),
+                file_exists($viewPath) ? view()->file($viewPath) : 'Not Found',
                 404
             );
         }

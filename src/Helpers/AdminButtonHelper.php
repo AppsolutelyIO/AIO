@@ -174,7 +174,7 @@ final class AdminButtonHelper
         $paramList     = $hasPayload ? 'id' : '';
         $urlIsTemplate = str_contains($config['api_url'], '__ID__');
 
-        // Assign to window so onclick="markEntryValid(id)" works (admin_script() runs code inside Dcat.ready())
+        // Assign to window so onclick="markEntryValid(id)" works (admin_script() wraps code in an immediately-invoked function)
         $js = "window.{$functionName} = function({$paramList}) {\n";
 
         // Add confirmation if specified
