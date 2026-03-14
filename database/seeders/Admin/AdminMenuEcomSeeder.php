@@ -1,6 +1,6 @@
 <?php
 
-namespace Appsolutely\AIO\Database\Seeders;
+namespace Appsolutely\AIO\Database\Seeders\Admin;
 
 use Appsolutely\AIO\Models\Menu;
 use Illuminate\Database\Seeder;

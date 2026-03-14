@@ -1,18 +1,17 @@
 <?php
 
-namespace Appsolutely\AIO\Database\Seeders;
+namespace Appsolutely\AIO\Database\Seeders\Admin;
 
 use Appsolutely\AIO\Models\Menu;
 use Illuminate\Database\Seeder;
 
 /**
- * Full admin menu — all features enabled.
+ * CMS-only admin menu — content management features.
  *
  * Includes: Dashboard, CMS (Articles, Pages, Menus, Forms, Notifications),
- * E-Commerce (Products, Orders, Coupons), Media, Releases, Site Settings,
- * and System Administration.
+ * Media, Site Settings, and System Administration.
  */
-class AdminMenuFullSeeder extends Seeder
+class AdminMenuCmsSeeder extends Seeder
 {
     public function run(): void
     {
@@ -85,101 +84,9 @@ class AdminMenuFullSeeder extends Seeder
             'uri'       => 'menus/entry',
         ]);
 
-        // ── Products ─────────────────────────────────────────
-        Menu::create([
-            'id'        => 8,
-            'parent_id' => 0,
-            'order'     => ++$order,
-            'title'     => 'Products',
-            'icon'      => 'feather icon-shopping-bag',
-            'uri'       => '',
-        ]);
-
-        Menu::create([
-            'id'        => 9,
-            'parent_id' => 8,
-            'order'     => ++$order,
-            'title'     => 'All Products',
-            'icon'      => '',
-            'uri'       => 'products/entry',
-        ]);
-
-        Menu::create([
-            'id'        => 10,
-            'parent_id' => 8,
-            'order'     => ++$order,
-            'title'     => 'Categories',
-            'icon'      => '',
-            'uri'       => 'products/categories',
-        ]);
-
-        Menu::create([
-            'id'        => 11,
-            'parent_id' => 8,
-            'order'     => ++$order,
-            'title'     => 'Attributes',
-            'icon'      => '',
-            'uri'       => 'products/attributes',
-        ]);
-
-        Menu::create([
-            'id'        => 12,
-            'parent_id' => 8,
-            'order'     => ++$order,
-            'title'     => 'Reviews',
-            'icon'      => '',
-            'uri'       => 'products/reviews',
-        ]);
-
-        // ── Orders ───────────────────────────────────────────
-        Menu::create([
-            'id'        => 13,
-            'parent_id' => 0,
-            'order'     => ++$order,
-            'title'     => 'Orders',
-            'icon'      => 'feather icon-shopping-cart',
-            'uri'       => '',
-        ]);
-
-        Menu::create([
-            'id'        => 14,
-            'parent_id' => 13,
-            'order'     => ++$order,
-            'title'     => 'All Orders',
-            'icon'      => '',
-            'uri'       => 'orders/entry',
-        ]);
-
-        Menu::create([
-            'id'        => 15,
-            'parent_id' => 13,
-            'order'     => ++$order,
-            'title'     => 'Shipments',
-            'icon'      => '',
-            'uri'       => 'orders/shipments',
-        ]);
-
-        Menu::create([
-            'id'        => 16,
-            'parent_id' => 13,
-            'order'     => ++$order,
-            'title'     => 'Refunds',
-            'icon'      => '',
-            'uri'       => 'orders/refunds',
-        ]);
-
-        Menu::create([
-            'id'        => 17,
-            'parent_id' => 13,
-            'order'     => ++$order,
-            'title'     => 'Coupons',
-            'icon'      => '',
-            'uri'       => 'coupons/entry',
-        ]);
-
         // ── Forms ────────────────────────────────────────────
         Menu::create([
-            'id'        => 18,
+            'id'        => 8,
             'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Forms',
@@ -189,7 +96,7 @@ class AdminMenuFullSeeder extends Seeder
 
         // ── Notifications ────────────────────────────────────
         Menu::create([
-            'id'        => 19,
+            'id'        => 9,
             'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Notifications',
@@ -199,7 +106,7 @@ class AdminMenuFullSeeder extends Seeder
 
         // ── Media ────────────────────────────────────────────
         Menu::create([
-            'id'        => 20,
+            'id'        => 10,
             'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Media',
@@ -207,19 +114,9 @@ class AdminMenuFullSeeder extends Seeder
             'uri'       => 'file-manager',
         ]);
 
-        // ── Releases ─────────────────────────────────────────
-        Menu::create([
-            'id'        => 21,
-            'parent_id' => 0,
-            'order'     => ++$order,
-            'title'     => 'Releases',
-            'icon'      => 'feather icon-package',
-            'uri'       => 'releases',
-        ]);
-
         // ── Site Settings ────────────────────────────────────
         Menu::create([
-            'id'        => 22,
+            'id'        => 11,
             'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Site Settings',
@@ -229,7 +126,7 @@ class AdminMenuFullSeeder extends Seeder
 
         // ── System ───────────────────────────────────────────
         Menu::create([
-            'id'        => 23,
+            'id'        => 12,
             'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'System',
@@ -238,8 +135,8 @@ class AdminMenuFullSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 24,
-            'parent_id' => 23,
+            'id'        => 13,
+            'parent_id' => 12,
             'order'     => ++$order,
             'title'     => 'Admin Users',
             'icon'      => '',
@@ -247,8 +144,8 @@ class AdminMenuFullSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 25,
-            'parent_id' => 23,
+            'id'        => 14,
+            'parent_id' => 12,
             'order'     => ++$order,
             'title'     => 'Roles',
             'icon'      => '',
@@ -256,8 +153,8 @@ class AdminMenuFullSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 26,
-            'parent_id' => 23,
+            'id'        => 15,
+            'parent_id' => 12,
             'order'     => ++$order,
             'title'     => 'Permissions',
             'icon'      => '',
@@ -265,8 +162,8 @@ class AdminMenuFullSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 27,
-            'parent_id' => 23,
+            'id'        => 16,
+            'parent_id' => 12,
             'order'     => ++$order,
             'title'     => 'Menu',
             'icon'      => '',
@@ -274,8 +171,8 @@ class AdminMenuFullSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 28,
-            'parent_id' => 23,
+            'id'        => 17,
+            'parent_id' => 12,
             'order'     => ++$order,
             'title'     => 'Extensions',
             'icon'      => '',
