@@ -27,7 +27,6 @@ class AdminTablesSeeder extends Seeder
             NotificationSenderSeeder::class,
             NotificationTemplateSeeder::class,
             PageBlockSeeder::class,
-            PageBlockSchemaSeeder::class,
         ]);
     }
 
