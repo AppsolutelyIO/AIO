@@ -37,7 +37,6 @@
         window.pageBuilderConfig = {
             blockRegistryUrl: '{{ admin_route('api.pages.block-registry') }}',
             blockOptionUrl: '{{ admin_route('api.pages.block-option') }}',
-            blockSchemaFieldsUrl: '{{ admin_route('api.pages.block.schema-fields') }}',
             blockHtmlUrl: '{{ admin_route('api.pages.block-html') }}',
             renderBlockUrl: '{{ admin_route('api.pages.render-block') }}',
             fileUploadUrl: '{{ admin_route('api.files.upload') }}',

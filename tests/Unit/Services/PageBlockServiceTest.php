@@ -57,16 +57,6 @@ final class PageBlockServiceTest extends TestCase
         $this->assertEquals(0, $result);
     }
 
-    // --- getSchemaFields ---
-
-    public function test_get_schema_fields_returns_empty_array_for_nonexistent_block(): void
-    {
-        $result = $this->service->getSchemaFields(99999);
-
-        $this->assertIsArray($result);
-        $this->assertEmpty($result);
-    }
-
     // --- renderBlockSafely ---
 
     public function test_render_block_safely_returns_error_html_for_invalid_block(): void

@@ -330,7 +330,7 @@ export class PageBuilderService {
         if (!component.get('reference')) {
             component.set('reference', this.generateRandomId(component.get('type')));
         }
-        // Ensure block_id and type are on attributes for option panel (getBlockOption / getSchemaFields)
+        // Ensure block_id and type are on attributes for option panel (getBlockOption)
         const attrs = component.get('attributes') || {};
         const type = component.get('type') || attrs.type;
         if (type && (attrs.block_id == null || attrs.block_id === undefined)) {
