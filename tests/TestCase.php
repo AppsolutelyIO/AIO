@@ -34,9 +34,16 @@ abstract class TestCase extends BaseTestCase
         });
     }
 
+    protected function tearDown(): void
+    {
+        \Mockery::close();
+        parent::tearDown();
+    }
+
     protected function getPackageProviders($app): array
     {
         return [
+            \Laravel\Sanctum\SanctumServiceProvider::class,
             \Livewire\LivewireServiceProvider::class,
             \Qirolab\Theme\ThemeServiceProvider::class,
             \Spatie\ResponseCache\ResponseCacheServiceProvider::class,
@@ -79,6 +86,17 @@ abstract class TestCase extends BaseTestCase
             'driver' => 'eloquent',
             'model'  => \Appsolutely\AIO\Models\Administrator::class,
         ]);
+
+        // Sanctum auth guard for API tests
+        $app['config']->set('auth.guards.sanctum', [
+            'driver'   => 'sanctum',
+            'provider' => 'users',
+        ]);
+
+        // Load query_params_cookie config for middleware tests
+        if (file_exists(__DIR__.'/../config/query_params_cookie.php')) {
+            $app['config']->set('query_params_cookie', require __DIR__.'/../config/query_params_cookie.php');
+        }
     }
 
     /**
