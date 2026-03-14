@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Enums\Status;
-use Appsolutely\AIO\Models\Menu;
+use Appsolutely\AIO\Models\CmsMenu as Menu;
 use Appsolutely\AIO\Services\Contracts\MenuServiceInterface;
 use Appsolutely\AIO\Services\MenuService;
 use Illuminate\Database\Eloquent\Collection;

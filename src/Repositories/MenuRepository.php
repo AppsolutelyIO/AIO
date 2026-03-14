@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Repositories;
 
 use Appsolutely\AIO\Enums\Status;
-use Appsolutely\AIO\Models\Menu;
+use Appsolutely\AIO\Models\CmsMenu;
 use Appsolutely\AIO\Repositories\Traits\ActiveTreeList;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -16,7 +16,7 @@ final class MenuRepository extends BaseRepository
 
     public function model(): string
     {
-        return Menu::class;
+        return CmsMenu::class;
     }
 
     public function getActiveMenus(int $menuId, ?Carbon $datetime): Collection
@@ -56,7 +56,7 @@ final class MenuRepository extends BaseRepository
             ->get();
     }
 
-    public function findByReference(string $reference, bool $status = true): ?Menu
+    public function findByReference(string $reference, bool $status = true): ?CmsMenu
     {
         return $this->model
             ->with([

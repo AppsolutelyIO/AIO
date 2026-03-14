@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Services\Contracts;
 
-use Appsolutely\AIO\Models\Menu;
+use Appsolutely\AIO\Models\CmsMenu;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
@@ -24,7 +24,7 @@ interface MenuServiceInterface
     /**
      * Find menu by reference
      */
-    public function findByReference(string $reference): ?Menu;
+    public function findByReference(string $reference): ?CmsMenu;
 
     /**
      * Get menus by reference

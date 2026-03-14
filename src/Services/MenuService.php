@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Services;
 
-use Appsolutely\AIO\Models\Menu;
+use Appsolutely\AIO\Models\CmsMenu;
 use Appsolutely\AIO\Repositories\MenuRepository;
 use Appsolutely\AIO\Services\Contracts\MenuServiceInterface;
 use Carbon\Carbon;
@@ -26,7 +26,7 @@ final readonly class MenuService implements MenuServiceInterface
         return $this->menuRepository->getActiveMenus($menuId, $datetime);
     }
 
-    public function findByReference(string $reference): ?Menu
+    public function findByReference(string $reference): ?CmsMenu
     {
         return $this->menuRepository->findByReference($reference);
     }

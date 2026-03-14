@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Repositories;
 
 use Appsolutely\AIO\Enums\Status;
-use Appsolutely\AIO\Models\Menu;
+use Appsolutely\AIO\Models\CmsMenu as Menu;
 use Appsolutely\AIO\Repositories\MenuRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
