@@ -8,9 +8,9 @@ use Illuminate\Database\Seeder;
 /**
  * E-commerce + CMS admin menu — online store with content management.
  *
- * Includes: Dashboard, CMS (Articles, Pages, Menus), E-Commerce (Products,
- * Orders, Coupons), Forms, Notifications, Media, Site Settings,
- * and System Administration.
+ * Orders and Products grouped (multiple sub-items each), CMS items
+ * flattened at top level. Ordered by daily usage: orders first,
+ * then products, then content management.
  */
 class AdminMenuEcomSeeder extends Seeder
 {
@@ -18,11 +18,12 @@ class AdminMenuEcomSeeder extends Seeder
     {
         Menu::truncate();
 
+        $id    = 0;
         $order = 0;
 
         // ── Dashboard ────────────────────────────────────────
         Menu::create([
-            'id'        => 1,
+            'id'        => ++$id,
             'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Dashboard',
@@ -30,55 +31,10 @@ class AdminMenuEcomSeeder extends Seeder
             'uri'       => '/',
         ]);
 
-        // ── Products ─────────────────────────────────────────
-        Menu::create([
-            'id'        => 2,
-            'parent_id' => 0,
-            'order'     => ++$order,
-            'title'     => 'Products',
-            'icon'      => 'feather icon-shopping-bag',
-            'uri'       => '',
-        ]);
-
-        Menu::create([
-            'id'        => 3,
-            'parent_id' => 2,
-            'order'     => ++$order,
-            'title'     => 'All Products',
-            'icon'      => '',
-            'uri'       => 'products/entry',
-        ]);
-
-        Menu::create([
-            'id'        => 4,
-            'parent_id' => 2,
-            'order'     => ++$order,
-            'title'     => 'Categories',
-            'icon'      => '',
-            'uri'       => 'products/categories',
-        ]);
-
-        Menu::create([
-            'id'        => 5,
-            'parent_id' => 2,
-            'order'     => ++$order,
-            'title'     => 'Attributes',
-            'icon'      => '',
-            'uri'       => 'products/attributes',
-        ]);
-
-        Menu::create([
-            'id'        => 6,
-            'parent_id' => 2,
-            'order'     => ++$order,
-            'title'     => 'Reviews',
-            'icon'      => '',
-            'uri'       => 'products/reviews',
-        ]);
-
         // ── Orders ───────────────────────────────────────────
+        $ordersId = ++$id;
         Menu::create([
-            'id'        => 7,
+            'id'        => $ordersId,
             'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Orders',
@@ -87,8 +43,8 @@ class AdminMenuEcomSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 8,
-            'parent_id' => 7,
+            'id'        => ++$id,
+            'parent_id' => $ordersId,
             'order'     => ++$order,
             'title'     => 'All Orders',
             'icon'      => '',
@@ -96,8 +52,8 @@ class AdminMenuEcomSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 9,
-            'parent_id' => 7,
+            'id'        => ++$id,
+            'parent_id' => $ordersId,
             'order'     => ++$order,
             'title'     => 'Shipments',
             'icon'      => '',
@@ -105,8 +61,8 @@ class AdminMenuEcomSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 10,
-            'parent_id' => 7,
+            'id'        => ++$id,
+            'parent_id' => $ordersId,
             'order'     => ++$order,
             'title'     => 'Refunds',
             'icon'      => '',
@@ -114,72 +70,114 @@ class AdminMenuEcomSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 11,
-            'parent_id' => 7,
+            'id'        => ++$id,
+            'parent_id' => $ordersId,
             'order'     => ++$order,
             'title'     => 'Coupons',
             'icon'      => '',
             'uri'       => 'coupons/entry',
         ]);
 
-        // ── Content ──────────────────────────────────────────
+        // ── Products ─────────────────────────────────────────
+        $productsId = ++$id;
         Menu::create([
-            'id'        => 12,
+            'id'        => $productsId,
             'parent_id' => 0,
             'order'     => ++$order,
-            'title'     => 'Content',
-            'icon'      => 'feather icon-edit',
+            'title'     => 'Products',
+            'icon'      => 'feather icon-shopping-bag',
             'uri'       => '',
         ]);
 
         Menu::create([
-            'id'        => 13,
-            'parent_id' => 12,
+            'id'        => ++$id,
+            'parent_id' => $productsId,
             'order'     => ++$order,
-            'title'     => 'Articles',
+            'title'     => 'All Products',
             'icon'      => '',
-            'uri'       => 'articles/entry',
+            'uri'       => 'products/entry',
         ]);
 
         Menu::create([
-            'id'        => 14,
-            'parent_id' => 12,
+            'id'        => ++$id,
+            'parent_id' => $productsId,
             'order'     => ++$order,
             'title'     => 'Categories',
             'icon'      => '',
-            'uri'       => 'articles/categories',
+            'uri'       => 'products/categories',
         ]);
 
         Menu::create([
-            'id'        => 15,
-            'parent_id' => 12,
+            'id'        => ++$id,
+            'parent_id' => $productsId,
+            'order'     => ++$order,
+            'title'     => 'Attributes',
+            'icon'      => '',
+            'uri'       => 'products/attributes',
+        ]);
+
+        Menu::create([
+            'id'        => ++$id,
+            'parent_id' => $productsId,
+            'order'     => ++$order,
+            'title'     => 'Reviews',
+            'icon'      => '',
+            'uri'       => 'products/reviews',
+        ]);
+
+        // ── Articles ─────────────────────────────────────────
+        Menu::create([
+            'id'        => ++$id,
+            'parent_id' => 0,
+            'order'     => ++$order,
+            'title'     => 'Articles',
+            'icon'      => 'feather icon-file-text',
+            'uri'       => 'articles/entry',
+        ]);
+
+        // ── Pages ────────────────────────────────────────────
+        Menu::create([
+            'id'        => ++$id,
+            'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Pages',
-            'icon'      => '',
+            'icon'      => 'feather icon-layout',
             'uri'       => 'pages/entry',
         ]);
 
+        // ── Page Blocks ──────────────────────────────────────
         Menu::create([
-            'id'        => 16,
-            'parent_id' => 12,
+            'id'        => ++$id,
+            'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Page Blocks',
-            'icon'      => '',
+            'icon'      => 'feather icon-grid',
             'uri'       => 'pages/blocks',
         ]);
 
+        // ── Categories ───────────────────────────────────────
         Menu::create([
-            'id'        => 17,
-            'parent_id' => 12,
+            'id'        => ++$id,
+            'parent_id' => 0,
+            'order'     => ++$order,
+            'title'     => 'Categories',
+            'icon'      => 'feather icon-folder',
+            'uri'       => 'articles/categories',
+        ]);
+
+        // ── Menus ────────────────────────────────────────────
+        Menu::create([
+            'id'        => ++$id,
+            'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Menus',
-            'icon'      => '',
+            'icon'      => 'feather icon-menu',
             'uri'       => 'menus/entry',
         ]);
 
         // ── Forms ────────────────────────────────────────────
         Menu::create([
-            'id'        => 18,
+            'id'        => ++$id,
             'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Forms',
@@ -189,7 +187,7 @@ class AdminMenuEcomSeeder extends Seeder
 
         // ── Notifications ────────────────────────────────────
         Menu::create([
-            'id'        => 19,
+            'id'        => ++$id,
             'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Notifications',
@@ -199,7 +197,7 @@ class AdminMenuEcomSeeder extends Seeder
 
         // ── Media ────────────────────────────────────────────
         Menu::create([
-            'id'        => 20,
+            'id'        => ++$id,
             'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Media',
@@ -209,7 +207,7 @@ class AdminMenuEcomSeeder extends Seeder
 
         // ── Site Settings ────────────────────────────────────
         Menu::create([
-            'id'        => 21,
+            'id'        => ++$id,
             'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'Site Settings',
@@ -218,8 +216,9 @@ class AdminMenuEcomSeeder extends Seeder
         ]);
 
         // ── System ───────────────────────────────────────────
+        $systemId = ++$id;
         Menu::create([
-            'id'        => 22,
+            'id'        => $systemId,
             'parent_id' => 0,
             'order'     => ++$order,
             'title'     => 'System',
@@ -228,8 +227,8 @@ class AdminMenuEcomSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 23,
-            'parent_id' => 22,
+            'id'        => ++$id,
+            'parent_id' => $systemId,
             'order'     => ++$order,
             'title'     => 'Admin Users',
             'icon'      => '',
@@ -237,8 +236,8 @@ class AdminMenuEcomSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 24,
-            'parent_id' => 22,
+            'id'        => ++$id,
+            'parent_id' => $systemId,
             'order'     => ++$order,
             'title'     => 'Roles',
             'icon'      => '',
@@ -246,8 +245,8 @@ class AdminMenuEcomSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 25,
-            'parent_id' => 22,
+            'id'        => ++$id,
+            'parent_id' => $systemId,
             'order'     => ++$order,
             'title'     => 'Permissions',
             'icon'      => '',
@@ -255,8 +254,8 @@ class AdminMenuEcomSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 26,
-            'parent_id' => 22,
+            'id'        => ++$id,
+            'parent_id' => $systemId,
             'order'     => ++$order,
             'title'     => 'Menu',
             'icon'      => '',
@@ -264,8 +263,8 @@ class AdminMenuEcomSeeder extends Seeder
         ]);
 
         Menu::create([
-            'id'        => 27,
-            'parent_id' => 22,
+            'id'        => ++$id,
+            'parent_id' => $systemId,
             'order'     => ++$order,
             'title'     => 'Extensions',
             'icon'      => '',
