@@ -39,6 +39,7 @@ class AIOServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/aio.php', 'aio');
 
         $this->registerServices();
+        $this->registerRouteMacros();
     }
 
     /**
@@ -55,7 +56,6 @@ class AIOServiceProvider extends ServiceProvider
         $this->registerLivewireComponents();
         $this->registerPageBuilderViewNamespace();
         $this->configureRateLimiting();
-        $this->registerRouteMacros();
         $this->registerPublishing();
     }
 
