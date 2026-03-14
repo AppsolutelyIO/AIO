@@ -11,6 +11,20 @@ use Appsolutely\AIO\Livewire\Footer;
 use Appsolutely\AIO\Livewire\GeneralBlock;
 use Appsolutely\AIO\Livewire\Header;
 use Appsolutely\AIO\Livewire\TransitionSection;
+use Appsolutely\AIO\Events\ArticleCreated;
+use Appsolutely\AIO\Events\ArticleDeleted;
+use Appsolutely\AIO\Events\ArticleUpdated;
+use Appsolutely\AIO\Events\FormSubmitted;
+use Appsolutely\AIO\Events\PageCreated;
+use Appsolutely\AIO\Events\PageDeleted;
+use Appsolutely\AIO\Events\PageUpdated;
+use Appsolutely\AIO\Events\ProductCreated;
+use Appsolutely\AIO\Events\ProductDeleted;
+use Appsolutely\AIO\Events\ProductUpdated;
+use Appsolutely\AIO\Jobs\ProcessMissingTranslations;
+use Appsolutely\AIO\Listeners\ClearPageSlugAliasCache;
+use Appsolutely\AIO\Listeners\ClearSitemapCache;
+use Appsolutely\AIO\Listeners\TriggerFormNotifications;
 use Appsolutely\AIO\Observers\ArticleObserver;
 use Appsolutely\AIO\Observers\OrderObserver;
 use Appsolutely\AIO\Observers\PageBlockSettingObserver;
@@ -19,18 +33,44 @@ use Appsolutely\AIO\Observers\PageObserver;
 use Appsolutely\AIO\Observers\ProductObserver;
 use Appsolutely\AIO\Repositories\TranslationRepository;
 use Appsolutely\AIO\Services\PageBlockService;
+use Appsolutely\AIO\Services\Translation\DeepSeekTranslator;
+use Appsolutely\AIO\Services\Translation\OpenAITranslator;
+use Appsolutely\AIO\Services\Translation\TranslatorInterface;
 use Appsolutely\AIO\Services\TranslationService;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schedule;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
 class AIOServiceProvider extends ServiceProvider
 {
+    /**
+     * Console commands provided by the package.
+     *
+     * @var array<int, class-string>
+     */
+    protected array $commands = [
+        Console\CleanupOrphanFilesCommand::class,
+        Console\ClearManifestCacheCommand::class,
+        Console\ExportFormEntriesCommand::class,
+        Console\GenerateConfigClassesCommand::class,
+        Console\GenerateSitemapCommand::class,
+        Console\MigrateBlockValueDisplayOptionToColumnCommand::class,
+        Console\NotificationQueueStatusCommand::class,
+        Console\ProcessAndSendNotificationsCommand::class,
+        Console\ProcessNotificationQueueCommand::class,
+        Console\ResyncFormEntryNotificationsCommand::class,
+        Console\TestNotificationEmailCommand::class,
+        Console\TranslateCommand::class,
+    ];
+
     /**
      * Register any application services.
      */
@@ -52,10 +92,13 @@ class AIOServiceProvider extends ServiceProvider
 
         $this->registerRoutes();
         $this->registerObservers();
+        $this->registerEventListeners();
         $this->registerBladeDirectives();
         $this->registerLivewireComponents();
         $this->registerPageBuilderViewNamespace();
         $this->configureRateLimiting();
+        $this->registerCommands();
+        $this->registerSchedule();
         $this->registerPublishing();
     }
 
@@ -66,6 +109,15 @@ class AIOServiceProvider extends ServiceProvider
     {
         $this->app->singleton(TranslationRepository::class);
         $this->app->singleton(TranslationService::class);
+
+        $this->app->bind(TranslatorInterface::class, function ($app) {
+            $provider = $app['config']->get('services.translation.provider', 'deepseek');
+
+            return match ($provider) {
+                'openai' => new OpenAITranslator(),
+                default  => new DeepSeekTranslator(),
+            };
+        });
 
         foreach ((array) config('aio.services') as $interface => $implementation) {
             $this->app->singleton($interface, $implementation);
@@ -225,6 +277,75 @@ class AIOServiceProvider extends ServiceProvider
             } else {
                 Route::group([], $callback);
             }
+        });
+    }
+
+    /**
+     * Register event listeners for AIO domain events.
+     */
+    protected function registerEventListeners(): void
+    {
+        // Page events
+        Event::listen(PageCreated::class, ClearPageSlugAliasCache::class);
+        Event::listen(PageCreated::class, ClearSitemapCache::class);
+        Event::listen(PageUpdated::class, ClearPageSlugAliasCache::class);
+        Event::listen(PageUpdated::class, ClearSitemapCache::class);
+        Event::listen(PageDeleted::class, ClearPageSlugAliasCache::class);
+        Event::listen(PageDeleted::class, ClearSitemapCache::class);
+
+        // Product events
+        Event::listen(ProductCreated::class, ClearSitemapCache::class);
+        Event::listen(ProductUpdated::class, ClearSitemapCache::class);
+        Event::listen(ProductDeleted::class, ClearSitemapCache::class);
+
+        // Article events
+        Event::listen(ArticleCreated::class, ClearSitemapCache::class);
+        Event::listen(ArticleUpdated::class, ClearSitemapCache::class);
+        Event::listen(ArticleDeleted::class, ClearSitemapCache::class);
+
+        // Form events
+        Event::listen(FormSubmitted::class, TriggerFormNotifications::class);
+    }
+
+    /**
+     * Register console commands.
+     */
+    protected function registerCommands(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands($this->commands);
+        }
+    }
+
+    /**
+     * Register scheduled tasks.
+     */
+    protected function registerSchedule(): void
+    {
+        $this->app->afterResolving(Schedule::class, function (Schedule $schedule) {
+            // Run the translation job every minute
+            $schedule->job(new ProcessMissingTranslations(null, 10))
+                ->everyMinute()
+                ->withoutOverlapping()
+                ->onFailure(function () {
+                    Log::error('Translation job failed to schedule');
+                });
+
+            // Regenerate sitemap every hour
+            $schedule->command('sitemap:generate --force')
+                ->hourly()
+                ->withoutOverlapping()
+                ->onFailure(function () {
+                    Log::error('Sitemap generation failed');
+                });
+
+            // Process notification queue every minute
+            $schedule->command('notifications:process-queue --once')
+                ->everyMinute()
+                ->withoutOverlapping()
+                ->onFailure(function () {
+                    Log::error('Notification queue processing failed');
+                });
         });
     }
 
