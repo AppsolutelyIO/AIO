@@ -205,10 +205,17 @@ AIO ships with three admin menu seeders for different use cases. The default ins
 ### Switching Menu Profile
 
 ```bash
+# Full (default)
+php artisan db:seed --class="Appsolutely\AIO\Database\Seeders\Admin\AdminMenuFullSeeder"
+
+# CMS only
 php artisan db:seed --class="Appsolutely\AIO\Database\Seeders\Admin\AdminMenuCmsSeeder"
+
+# E-Commerce + CMS
+php artisan db:seed --class="Appsolutely\AIO\Database\Seeders\Admin\AdminMenuEcomSeeder"
 ```
 
-Replace `AdminMenuCmsSeeder` with the desired profile class. This command is safe to run multiple times — it clears the existing menu and rebuilds it each time.
+Safe to run multiple times — each run clears the existing menu and rebuilds it.
 
 ### Menu Structure
 
