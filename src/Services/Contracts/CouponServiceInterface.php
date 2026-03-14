@@ -6,7 +6,7 @@ namespace Appsolutely\AIO\Services\Contracts;
 
 use Appsolutely\AIO\Models\Coupon;
 use Appsolutely\AIO\Models\Order;
-use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 interface CouponServiceInterface
 {
@@ -18,10 +18,10 @@ interface CouponServiceInterface
     /**
      * Check if a coupon is valid for the given user.
      */
-    public function isValidForUser(Coupon $coupon, User $user): bool;
+    public function isValidForUser(Coupon $coupon, Authenticatable $user): bool;
 
     /**
      * Record coupon usage after order is placed.
      */
-    public function recordUsage(Coupon $coupon, User $user, Order $order, int $discountAmount): void;
+    public function recordUsage(Coupon $coupon, Authenticatable $user, Order $order, int $discountAmount): void;
 }

@@ -8,8 +8,8 @@ use Appsolutely\AIO\Enums\CouponType;
 use Appsolutely\AIO\Models\Coupon;
 use Appsolutely\AIO\Models\CouponUsage;
 use Appsolutely\AIO\Models\Order;
-use App\Models\User;
 use Appsolutely\AIO\Repositories\CouponRepository;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Appsolutely\AIO\Repositories\CouponUsageRepository;
 use Appsolutely\AIO\Services\Contracts\CouponServiceInterface;
 
@@ -38,7 +38,7 @@ final readonly class CouponService implements CouponServiceInterface
         return min($discount, $orderAmount);
     }
 
-    public function isValidForUser(Coupon $coupon, User $user): bool
+    public function isValidForUser(Coupon $coupon, Authenticatable $user): bool
     {
         if (! $coupon->isValid()) {
             return false;
@@ -56,7 +56,7 @@ final readonly class CouponService implements CouponServiceInterface
         return $userUsageCount < $coupon->usage_per_user;
     }
 
-    public function recordUsage(Coupon $coupon, User $user, Order $order, int $discountAmount): void
+    public function recordUsage(Coupon $coupon, Authenticatable $user, Order $order, int $discountAmount): void
     {
         CouponUsage::query()->create([
             'coupon_id'       => $coupon->id,
