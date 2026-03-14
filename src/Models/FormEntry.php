@@ -6,6 +6,7 @@ namespace Appsolutely\AIO\Models;
 
 use Appsolutely\AIO\Enums\FormEntrySpamStatus;
 use Appsolutely\AIO\Enums\FormFieldType;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;

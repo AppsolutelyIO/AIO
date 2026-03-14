@@ -13,10 +13,18 @@ return new class() extends Migration
      */
     public function up(): void
     {
+        if (! Schema::hasTable('teams')) {
+            return;
+        }
+
         Schema::table('teams', function (Blueprint $table) {
-            //
-            $table->string('reference')->nullable()->after('user_id');
-            $table->softDeletes();
+            if (! Schema::hasColumn('teams', 'reference')) {
+                $table->string('reference')->nullable()->after('user_id');
+            }
+
+            if (! Schema::hasColumn('teams', 'deleted_at')) {
+                $table->softDeletes();
+            }
         });
     }
 
@@ -25,8 +33,11 @@ return new class() extends Migration
      */
     public function down(): void
     {
+        if (! Schema::hasTable('teams')) {
+            return;
+        }
+
         Schema::table('teams', function (Blueprint $table) {
-            //
             $table->dropColumn('reference');
             $table->dropSoftDeletes();
         });

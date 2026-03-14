@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Models\Concerns;
 
-use App\Repositories\FileRepository;
+use Appsolutely\AIO\Repositories\FileRepository;
 use Str;
 
 trait HasMarkdownContent

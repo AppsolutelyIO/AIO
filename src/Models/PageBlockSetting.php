@@ -10,7 +10,7 @@ use Appsolutely\AIO\Models\Concerns\ClearsResponseCache;
 use Appsolutely\AIO\Models\Concerns\ScopePublished;
 use Appsolutely\AIO\Models\Concerns\ScopeReference;
 use Appsolutely\AIO\Models\Concerns\ScopeStatus;
-use App\Services\Contracts\ManifestServiceInterface;
+use Appsolutely\AIO\Services\Contracts\ManifestServiceInterface;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class PageBlockSetting extends Model

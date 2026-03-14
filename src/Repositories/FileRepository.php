@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Repositories;
 
-use App\Helpers\FileHelper;
+use Appsolutely\AIO\Helpers\FileHelper;
 use Appsolutely\AIO\Models\File;
 use Appsolutely\AIO\Models\FileAttachment;
 use Illuminate\Http\Request;
