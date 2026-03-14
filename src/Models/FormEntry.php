@@ -6,7 +6,6 @@ namespace Appsolutely\AIO\Models;
 
 use Appsolutely\AIO\Enums\FormEntrySpamStatus;
 use Appsolutely\AIO\Enums\FormFieldType;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -48,7 +47,7 @@ final class FormEntry extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(self::userModel());
     }
 
     public function notifications(): HasMany

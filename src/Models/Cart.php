@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Models;
 
-use App\Models\User;
-
 use Appsolutely\AIO\Enums\CartStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,7 +43,7 @@ class Cart extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(self::userModel());
     }
 
     public function items(): HasMany

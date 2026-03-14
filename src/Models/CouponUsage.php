@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Models;
 
-use App\Models\User;
-
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CouponUsage extends Model
@@ -28,7 +26,7 @@ class CouponUsage extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(self::userModel());
     }
 
     public function order(): BelongsTo

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Models;
 
-use App\Models\User;
-
 use Appsolutely\AIO\Enums\RefundStatus;
 use Appsolutely\AIO\Models\Concerns\ScopeReference;
 use Appsolutely\AIO\Models\Concerns\ScopeStatus;
@@ -52,6 +50,6 @@ class Refund extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(self::userModel());
     }
 }

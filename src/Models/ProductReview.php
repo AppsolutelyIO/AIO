@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Models;
 
-use App\Models\User;
-
 use Appsolutely\AIO\Enums\ReviewStatus;
 use Appsolutely\AIO\Models\Concerns\ScopeStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -46,7 +44,7 @@ class ProductReview extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(self::userModel());
     }
 
     public function order(): BelongsTo

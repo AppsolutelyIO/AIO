@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Models;
 
-use App\Models\User;
-
 use Appsolutely\AIO\Enums\OrderStatus;
 use Appsolutely\AIO\Models\Concerns\ScopeReference;
 use Appsolutely\AIO\Models\Concerns\ScopeStatus;
@@ -46,7 +44,7 @@ class Order extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(self::userModel());
     }
 
     public function items(): HasMany
