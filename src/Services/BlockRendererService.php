@@ -24,6 +24,7 @@ final readonly class BlockRendererService implements BlockRendererServiceInterfa
         }
 
         $className = ! empty($block['block']['class']) ? $block['block']['class'] : 'Appsolutely\AIO\Livewire\GeneralBlock';
+        $className = $this->resolveClassName($className);
         $reference = $block['reference'];
 
         // Validate class exists
@@ -88,6 +89,23 @@ final readonly class BlockRendererService implements BlockRendererServiceInterfa
                 'block_title'     => (string) ($b->block?->title ?? ''),
             ];
         })->values()->toArray();
+    }
+
+    /**
+     * Resolve legacy App\ class names to AIO package namespace.
+     */
+    private function resolveClassName(string $className): string
+    {
+        if (str_starts_with($className, 'App\\Livewire\\') && ! class_exists($className)) {
+            $shortName = substr($className, strlen('App\\Livewire\\'));
+            $aioClass = 'Appsolutely\\AIO\\Livewire\\' . $shortName;
+
+            if (class_exists($aioClass)) {
+                return $aioClass;
+            }
+        }
+
+        return $className;
     }
 
     /**
