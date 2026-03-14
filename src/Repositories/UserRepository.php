@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Repositories;
 
-use App\Models\User;
+use Appsolutely\AIO\Models\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Builder;
 
 final class UserRepository extends BaseRepository
 {
     public function model(): string
     {
-        return User::class;
+        return Model::userModel();
     }
 
     /**
@@ -28,7 +29,7 @@ final class UserRepository extends BaseRepository
     /**
      * Find user by email
      */
-    public function findByEmail(string $email): ?User
+    public function findByEmail(string $email): ?Authenticatable
     {
         return $this->model->where('email', $email)->first();
     }
