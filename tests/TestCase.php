@@ -49,8 +49,9 @@ abstract class TestCase extends BaseTestCase
     {
         $app['config']->set('database.default', 'testing');
         $app['config']->set('database.connections.testing', [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
+            'driver'                  => 'sqlite',
+            'database'                => ':memory:',
+            'foreign_key_constraints' => true,
         ]);
 
         $app['config']->set('app.key', 'base64:'.base64_encode(str_repeat('a', 32)));
@@ -87,8 +88,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected function defineDatabaseMigrations(): void
     {
-        $this->loadMigrationsFrom(
-            \Orchestra\Testbench\default_migration_path()
-        );
+        $this->loadMigrationsFrom(\Orchestra\Testbench\default_migration_path());
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 }
