@@ -5,16 +5,36 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Feature\Controllers;
 
 use Appsolutely\AIO\Enums\Status;
+use Appsolutely\AIO\Http\Controllers\PageController;
 use Appsolutely\AIO\Models\GeneralPage;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Services\Contracts\GeneralPageServiceInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Route;
 use Mockery;
 use Appsolutely\AIO\Tests\TestCase;
 
 final class PageControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function getEnvironmentSetUp($app): void
+    {
+        parent::getEnvironmentSetUp($app);
+
+        // Register stub views directory so themed_view() can find pages.show
+        $app['config']->set('view.paths', [
+            __DIR__.'/../../resources/views',
+        ]);
+    }
+
+    protected function defineRoutes($router): void
+    {
+        $router->get('/', [PageController::class, 'show'])->name('home');
+        $router->get('{slug?}', [PageController::class, 'show'])
+            ->where('slug', '[a-zA-Z0-9\/_\-\.~%]+')
+            ->name('pages.show');
+    }
 
     public function test_show_returns_page_view_for_published_page(): void
     {
