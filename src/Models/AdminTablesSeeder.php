@@ -9,33 +9,41 @@ class AdminTablesSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
+     * Seeds admin user, roles, permissions, and the full menu.
+     * Override the menu profile by passing --class with a specific menu seeder.
      */
-    public function run()
+    public function run(): void
     {
-        $createdAt = date('Y-m-d H:i:s');
+        $this->seedAdminUser();
+        $this->seedRoles();
+        $this->seedPermissions();
 
-        // create a user.
+        $this->call(AdminMenuFullSeeder::class);
+    }
+
+    protected function seedAdminUser(): void
+    {
         Administrator::truncate();
         Administrator::create([
-            'username'   => 'admin',
-            'password'   => bcrypt('admin'),
-            'name'       => 'Administrator',
-            'created_at' => $createdAt,
+            'username' => 'admin',
+            'password' => bcrypt('admin'),
+            'name'     => 'Administrator',
         ]);
+    }
 
-        // create a role.
+    protected function seedRoles(): void
+    {
         Role::truncate();
         Role::create([
-            'name'       => 'Administrator',
-            'slug'       => Role::ADMINISTRATOR,
-            'created_at' => $createdAt,
+            'name' => 'Administrator',
+            'slug' => Role::ADMINISTRATOR,
         ]);
 
-        // add role to user.
         Administrator::first()->roles()->save(Role::first());
+    }
 
-        //create a permission
+    protected function seedPermissions(): void
+    {
         Permission::truncate();
         Permission::insert([
             [
@@ -46,7 +54,6 @@ class AdminTablesSeeder extends Seeder
                 'http_path'   => '',
                 'parent_id'   => 0,
                 'order'       => 1,
-                'created_at'  => $createdAt,
             ],
             [
                 'id'          => 2,
@@ -56,7 +63,6 @@ class AdminTablesSeeder extends Seeder
                 'http_path'   => '/auth/users*',
                 'parent_id'   => 1,
                 'order'       => 2,
-                'created_at'  => $createdAt,
             ],
             [
                 'id'          => 3,
@@ -66,7 +72,6 @@ class AdminTablesSeeder extends Seeder
                 'http_path'   => '/auth/roles*',
                 'parent_id'   => 1,
                 'order'       => 3,
-                'created_at'  => $createdAt,
             ],
             [
                 'id'          => 4,
@@ -76,7 +81,6 @@ class AdminTablesSeeder extends Seeder
                 'http_path'   => '/auth/permissions*',
                 'parent_id'   => 1,
                 'order'       => 4,
-                'created_at'  => $createdAt,
             ],
             [
                 'id'          => 5,
@@ -86,7 +90,6 @@ class AdminTablesSeeder extends Seeder
                 'http_path'   => '/auth/menu*',
                 'parent_id'   => 1,
                 'order'       => 5,
-                'created_at'  => $createdAt,
             ],
             [
                 'id'          => 6,
@@ -96,73 +99,7 @@ class AdminTablesSeeder extends Seeder
                 'http_path'   => '/auth/extensions*',
                 'parent_id'   => 1,
                 'order'       => 6,
-                'created_at'  => $createdAt,
             ],
         ]);
-
-//        Role::first()->permissions()->save(Permission::first());
-
-        // add default menus.
-        Menu::truncate();
-        Menu::insert([
-            [
-                'parent_id'     => 0,
-                'order'         => 1,
-                'title'         => 'Index',
-                'icon'          => 'feather icon-bar-chart-2',
-                'uri'           => '/',
-                'created_at'    => $createdAt,
-            ],
-            [
-                'parent_id'     => 0,
-                'order'         => 2,
-                'title'         => 'Admin',
-                'icon'          => 'feather icon-settings',
-                'uri'           => '',
-                'created_at'    => $createdAt,
-            ],
-            [
-                'parent_id'     => 2,
-                'order'         => 3,
-                'title'         => 'Users',
-                'icon'          => '',
-                'uri'           => 'auth/users',
-                'created_at'    => $createdAt,
-            ],
-            [
-                'parent_id'     => 2,
-                'order'         => 4,
-                'title'         => 'Roles',
-                'icon'          => '',
-                'uri'           => 'auth/roles',
-                'created_at'    => $createdAt,
-            ],
-            [
-                'parent_id'     => 2,
-                'order'         => 5,
-                'title'         => 'Permission',
-                'icon'          => '',
-                'uri'           => 'auth/permissions',
-                'created_at'    => $createdAt,
-            ],
-            [
-                'parent_id'     => 2,
-                'order'         => 6,
-                'title'         => 'Menu',
-                'icon'          => '',
-                'uri'           => 'auth/menu',
-                'created_at'    => $createdAt,
-            ],
-            [
-                'parent_id'     => 2,
-                'order'         => 7,
-                'title'         => 'Extensions',
-                'icon'          => '',
-                'uri'           => 'auth/extensions',
-                'created_at'    => $createdAt,
-            ],
-        ]);
-
-        (new Menu())->flushCache();
     }
 }
