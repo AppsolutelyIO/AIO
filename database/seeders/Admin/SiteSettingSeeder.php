@@ -83,12 +83,6 @@ class SiteSettingSeeder extends Seeder
             ['group' => 'contact', 'key' => 'contact.postal_code',     'type' => 'string', 'default' => null],
             ['group' => 'contact', 'key' => 'contact.google_maps_url', 'type' => 'string', 'default' => null],
             ['group' => 'contact', 'key' => 'contact.business_hours',  'type' => 'json',   'default' => null],
-
-            // Mail
-            ['group' => 'mail', 'key' => 'mail.host',     'type' => 'string', 'default' => ''],
-            ['group' => 'mail', 'key' => 'mail.port',     'type' => 'string', 'default' => ''],
-            ['group' => 'mail', 'key' => 'mail.username',  'type' => 'string', 'default' => ''],
-            ['group' => 'mail', 'key' => 'mail.password',  'type' => 'string', 'default' => ''],
         ];
     }
 }
