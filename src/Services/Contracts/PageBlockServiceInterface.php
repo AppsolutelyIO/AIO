@@ -25,11 +25,6 @@ interface PageBlockServiceInterface
     public function updateBlockSettingPublishStatus(int $settingId, ?string $publishedAt = null, ?string $expiredAt = null): int;
 
     /**
-     * Get schema fields for a block
-     */
-    public function getSchemaFields(int $blockId): array;
-
-    /**
      * Render a block safely
      */
     public function renderBlockSafely($block, GeneralPage $page): string;

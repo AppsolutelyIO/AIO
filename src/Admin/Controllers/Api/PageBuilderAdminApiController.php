@@ -8,7 +8,6 @@ use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Services\BlockOptionFormRenderer;
 use Appsolutely\AIO\Services\BlockOptionService;
 use Appsolutely\AIO\Services\BlockRegistryService;
-use Appsolutely\AIO\Services\PageBlockSchemaService;
 use Appsolutely\AIO\Services\PageBlockService;
 use Appsolutely\AIO\Services\PageBuilderDataEnricherService;
 use Appsolutely\AIO\Services\PageService;
@@ -20,7 +19,6 @@ final class PageBuilderAdminApiController extends AdminBaseApiController
     public function __construct(
         protected PageService $pageService,
         protected PageBlockService $pageBlockService,
-        protected PageBlockSchemaService $pageBlockSchemaService,
         protected BlockRegistryService $blockRegistryService,
         protected PageBuilderDataEnricherService $dataEnricherService,
         protected BlockOptionService $blockOptionService,
@@ -80,21 +78,6 @@ final class PageBuilderAdminApiController extends AdminBaseApiController
         $data = $this->blockRegistryService->getRegistry();
 
         return $this->success($data);
-    }
-
-    /**
-     * Get schema fields for a block
-     */
-    public function getSchemaFields(Request $request): JsonResponse
-    {
-        $blockId    = $request->get('q');
-        $formConfig = $this->pageBlockService->getSchemaFields($blockId);
-
-        if (empty($formConfig)) {
-            return $this->error('Page block not found.');
-        }
-
-        return $this->success($formConfig);
     }
 
     /**

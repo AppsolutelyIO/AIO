@@ -26,7 +26,6 @@ final class PageBlock extends Model
         'template',
         'instruction',
         'scope',
-        'schema',
         'query_options',
         'query_options_definition',
         'droppable',
@@ -36,7 +35,6 @@ final class PageBlock extends Model
     ];
 
     protected $casts = [
-        'schema'                   => 'array',
         'query_options'            => 'array',
         'query_options_definition' => 'array',
         'setting'                  => 'array',

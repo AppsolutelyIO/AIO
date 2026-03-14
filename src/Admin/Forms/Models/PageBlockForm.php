@@ -42,10 +42,6 @@ class PageBlockForm extends ModelForm
         $this->textarea('description', __t('Description'))->rows(2);
         $this->textarea('template', __t('template'))->rows(3);
         $this->textarea('instruction', __t('Instruction'))->rows(2);
-        $this->textarea('schema', __t('Schema'))
-            ->rows(10)
-            ->help(__t('Enter JSON format for block schema'));
-
         // Add scope field with radio buttons
         $this->radio('scope', __t('Scope'))
             ->options([

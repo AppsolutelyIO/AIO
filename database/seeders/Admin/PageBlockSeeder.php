@@ -185,7 +185,6 @@ final class PageBlockSeeder extends Seeder
     {
         return [
             'instruction' => null,
-            'schema'      => [],
             'setting'     => [],
             'droppable'   => 0,
             'status'      => Status::ACTIVE,
