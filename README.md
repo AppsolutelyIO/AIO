@@ -192,6 +192,40 @@ AIO registers the following route groups automatically:
 
 ---
 
+## Admin Menu Profiles
+
+AIO ships with three admin menu seeders for different use cases. The default installation uses the **Full** profile. You can switch profiles at any time — each run truncates the menu table and re-seeds from scratch.
+
+| Profile | Seeder Class | Use Case |
+|---------|-------------|----------|
+| **Full** | `AdminMenuFullSeeder` | All features: CMS + E-Commerce + Releases. For projects that need everything. |
+| **CMS** | `AdminMenuCmsSeeder` | Content management only: Articles, Pages, Page Blocks, Categories, Menus, Forms, Notifications, Media. No e-commerce. |
+| **E-Commerce** | `AdminMenuEcomSeeder` | Online store with CMS: Orders and Products first, then content management features. |
+
+### Switching Menu Profile
+
+```bash
+php artisan db:seed --class="Appsolutely\AIO\Database\Seeders\Admin\AdminMenuCmsSeeder"
+```
+
+Replace `AdminMenuCmsSeeder` with the desired profile class. This command is safe to run multiple times — it clears the existing menu and rebuilds it each time.
+
+### Menu Structure
+
+**Full** — 14 top-level items, Articles and Pages first:
+
+> Dashboard, Articles, Pages, Page Blocks, Categories, Menus, Orders ▸ (All Orders, Shipments, Refunds, Coupons), Products ▸ (All Products, Categories, Attributes, Reviews), Forms, Notifications, Media, Releases, Site Settings, System ▸ (Admin Users, Roles, Permissions, Menu, Extensions)
+
+**CMS** — 11 top-level items, flat layout:
+
+> Dashboard, Articles, Pages, Page Blocks, Categories, Menus, Forms, Notifications, Media, Site Settings, System ▸ …
+
+**E-Commerce** — 14 top-level items, orders-first layout:
+
+> Dashboard, Orders ▸ (…), Products ▸ (…), Articles, Pages, Page Blocks, Categories, Menus, Forms, Notifications, Media, Site Settings, System ▸ …
+
+---
+
 ## Available Commands
 
 | Command | Description |
