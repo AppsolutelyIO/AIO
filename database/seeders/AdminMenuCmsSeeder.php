@@ -1,7 +1,8 @@
 <?php
 
-namespace Appsolutely\AIO\Models;
+namespace Appsolutely\AIO\Database\Seeders;
 
+use Appsolutely\AIO\Models\Menu;
 use Illuminate\Database\Seeder;
 
 /**

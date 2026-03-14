@@ -2,7 +2,7 @@
 
 namespace Appsolutely\AIO\Console;
 
-use Appsolutely\AIO\Models\AdminTablesSeeder;
+use Appsolutely\AIO\Database\Seeders\AdminTablesSeeder;
 use Illuminate\Console\Command;
 
 class InstallCommand extends Command

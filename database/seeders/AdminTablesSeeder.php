@@ -1,7 +1,10 @@
 <?php
 
-namespace Appsolutely\AIO\Models;
+namespace Appsolutely\AIO\Database\Seeders;
 
+use Appsolutely\AIO\Models\Administrator;
+use Appsolutely\AIO\Models\Permission;
+use Appsolutely\AIO\Models\Role;
 use Illuminate\Database\Seeder;
 
 class AdminTablesSeeder extends Seeder
