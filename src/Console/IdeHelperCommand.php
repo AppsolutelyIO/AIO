@@ -92,7 +92,6 @@ class IdeHelperCommand extends Command
     }
 
     /**
-     * @param  array  $reject
      * @return Collection
      */
     protected function getFieldsFromDatabase(array $reject = [])
@@ -135,7 +134,6 @@ class IdeHelperCommand extends Command
     }
 
     /**
-     * @param  array  $reject
      * @return Collection
      */
     protected function getFieldsFromControllerFiles(array $reject = [])
@@ -164,9 +162,6 @@ class IdeHelperCommand extends Command
             ->filter();
     }
 
-    /**
-     * @param  Collection  $fields
-     */
     protected function write(Collection $fields)
     {
         $content = str_replace(
@@ -193,21 +188,19 @@ class IdeHelperCommand extends Command
     }
 
     /**
-     * @param  string  $type
-     * @param  Collection  $fields
      * @return string
      */
     public function generate(string $type, Collection $fields)
     {
         $methods = $properties = [];
-        $space = str_repeat(' ', 5);
+        $space   = str_repeat(' ', 5);
 
         $fields->each(function ($name) use ($type, &$methods, &$properties, $space) {
-            $properties[] = $space.sprintf($this->templates[$type]['property'], $name);
-            $methods[] = $space.sprintf($this->templates[$type]['method'], $name);
+            $properties[] = $space . sprintf($this->templates[$type]['property'], $name);
+            $methods[]    = $space . sprintf($this->templates[$type]['method'], $name);
         });
 
-        return trim(implode("\r\n", array_merge($properties, [$space.'*'], $methods)));
+        return trim(implode("\r\n", array_merge($properties, [$space . '*'], $methods)));
     }
 
     /**
@@ -230,7 +223,7 @@ class IdeHelperCommand extends Command
         return trim(
             $fields
                 ->map(function ($value, $key) use (&$space) {
-                    return $space.sprintf($this->templates['grid-filter'], '\\'.$value, $key);
+                    return $space . sprintf($this->templates['grid-filter'], '\\' . $value, $key);
                 })
                 ->implode("\r\n")
         );
@@ -248,7 +241,7 @@ class IdeHelperCommand extends Command
         return trim(
             $extensions
                 ->map(function ($value, $key) use (&$space) {
-                    return $space.sprintf($this->templates['show-column'], $key);
+                    return $space . sprintf($this->templates['show-column'], $key);
                 })
                 ->implode("\r\n")
         );
@@ -274,7 +267,7 @@ class IdeHelperCommand extends Command
         return trim(
             $fields
                 ->map(function ($value, $key) use (&$space) {
-                    return $space.sprintf($this->templates['form'], '\\'.$value, $key);
+                    return $space . sprintf($this->templates['form'], '\\' . $value, $key);
                 })
                 ->implode("\r\n")
         );
@@ -300,7 +293,7 @@ class IdeHelperCommand extends Command
         return trim(
             $columns
                 ->map(function ($value) use (&$space) {
-                    return $space.sprintf($this->templates['grid-column'], $value);
+                    return $space . sprintf($this->templates['grid-column'], $value);
                 })
                 ->implode("\r\n")
         );
@@ -333,7 +326,7 @@ class IdeHelperCommand extends Command
      */
     protected function getStub()
     {
-        return __DIR__.'/stubs/ide-helper.stub';
+        return __DIR__ . '/stubs/ide-helper.stub';
     }
 
     /**

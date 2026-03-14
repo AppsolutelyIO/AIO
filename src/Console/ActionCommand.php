@@ -114,7 +114,7 @@ class ActionCommand extends GeneratorCommand
      */
     public function getStub()
     {
-        return __DIR__."/stubs/actions/{$this->choice}.stub";
+        return __DIR__ . "/stubs/actions/{$this->choice}.stub";
     }
 
     /**

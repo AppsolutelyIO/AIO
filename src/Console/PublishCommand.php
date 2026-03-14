@@ -33,7 +33,7 @@ class PublishCommand extends Command
     protected $description = "Re-publish aio's assets, configuration, language and migration files. If you want overwrite the existing files, you can add the `--force` option";
 
     /**
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
@@ -90,7 +90,7 @@ class PublishCommand extends Command
         // 设置默认标签.
         if (! $tags && ! $this->tags) {
             $this->tags[] = 'aio-lang';
-            $tags = [
+            $tags         = [
                 'aio-migrations',
                 'aio-assets',
                 'aio-config',
@@ -150,7 +150,7 @@ class PublishCommand extends Command
 
         $this->moveManagedFiles(new MountManager([
             'from' => new Flysystem(new $localClass($from)),
-            'to' => new Flysystem(new $localClass($to)),
+            'to'   => new Flysystem(new $localClass($to)),
         ]));
 
         $this->status($from, $to, 'Directory');
@@ -162,10 +162,10 @@ class PublishCommand extends Command
             foreach ($manager->listContents('from://', true) as $file) {
                 if (
                     $file['type'] === 'file'
-                    && (! $manager->has('to://'.$file['path']) || $this->option('force'))
+                    && (! $manager->has('to://' . $file['path']) || $this->option('force'))
                     && ! $this->isExceptPath($manager, $file['path'])
                 ) {
-                    $manager->put('to://'.$file['path'], $manager->read('from://'.$file['path']));
+                    $manager->put('to://' . $file['path'], $manager->read('from://' . $file['path']));
                 }
             }
 
@@ -175,15 +175,15 @@ class PublishCommand extends Command
         foreach ($manager->listContents('from://', true) as $file) {
             $path = Str::after($file['path'], 'from://');
 
-            if ($file['type'] === 'file' && (! $manager->fileExists('to://'.$path) || $this->option('force'))) {
-                $manager->write('to://'.$path, $manager->read($file['path']));
+            if ($file['type'] === 'file' && (! $manager->fileExists('to://' . $path) || $this->option('force'))) {
+                $manager->write('to://' . $path, $manager->read($file['path']));
             }
         }
     }
 
     protected function isExceptPath($manager, $path)
     {
-        return $manager->has('to://'.$path) && Str::contains($path, ['/menu.php', '/global.php']);
+        return $manager->has('to://' . $path) && Str::contains($path, ['/menu.php', '/global.php']);
     }
 
     protected function createParentDirectory($directory)
@@ -199,6 +199,6 @@ class PublishCommand extends Command
 
         $to = str_replace(base_path(), '', realpath($to));
 
-        $this->line('<info>Copied '.$type.'</info> <comment>['.$from.']</comment> <info>To</info> <comment>['.$to.']</comment>');
+        $this->line('<info>Copied ' . $type . '</info> <comment>[' . $from . ']</comment> <info>To</info> <comment>[' . $to . ']</comment>');
     }
 }

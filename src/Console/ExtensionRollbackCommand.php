@@ -28,7 +28,7 @@ class ExtensionRollbackCommand extends Command
             if (! Admin::extension()->versionManager()->hasDatabaseVersion($name, $stopOnVersion)) {
                 throw new \InvalidArgumentException('Extension version not found');
             }
-            $confirmQuestion = 'Please confirm that you wish to revert the extension to version '.$stopOnVersion.'. This may result in changes to your database and potential data loss.';
+            $confirmQuestion = 'Please confirm that you wish to revert the extension to version ' . $stopOnVersion . '. This may result in changes to your database and potential data loss.';
         } else {
             $confirmQuestion = 'Please confirm that you wish to completely rollback this extension. This may result in potential data loss.';
         }

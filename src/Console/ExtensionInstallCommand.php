@@ -23,7 +23,7 @@ class ExtensionInstallCommand extends Command
 
         if ($path) {
             if (! is_file($path)) {
-                $path = rtrim($path, '/').sprintf('/%s.zip', str_replace('/', '.', $name));
+                $path = rtrim($path, '/') . sprintf('/%s.zip', str_replace('/', '.', $name));
             }
         } else {
             $extensionDetails = $manager->requestDetails($name);

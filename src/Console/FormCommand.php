@@ -2,6 +2,8 @@
 
 namespace Appsolutely\AIO\Console;
 
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+
 class FormCommand extends GeneratorCommand
 {
     /**
@@ -23,7 +25,7 @@ class FormCommand extends GeneratorCommand
     /**
      * @return bool|null
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public function handle()
     {
@@ -39,7 +41,7 @@ class FormCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/stubs/form.stub';
+        return __DIR__ . '/stubs/form.stub';
     }
 
     /**

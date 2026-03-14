@@ -98,10 +98,10 @@ class ExtensionMakeCommand extends Command
             $this->makeDir();
         }
 
-        $this->package = str_replace('.', '/', $this->argument('name'));
+        $this->package       = str_replace('.', '/', $this->argument('name'));
         $this->extensionName = str_replace('/', '.', $this->package);
 
-        $this->basePath = rtrim($this->extensionDir, '/').'/'.ltrim($this->package, '/');
+        $this->basePath = rtrim($this->extensionDir, '/') . '/' . ltrim($this->package, '/');
 
         if (is_dir($this->basePath)) {
             return $this->error(sprintf('The extension [%s] already exists!', $this->package));
@@ -188,8 +188,8 @@ TREE;
         // make composer.json
         $composerContents = str_replace(
             ['{package}', '{alias}', '{namespace}', '{className}'],
-            [$this->package, '', str_replace('\\', '\\\\', $this->namespace).'\\\\', $this->className],
-            file_get_contents(__DIR__.'/stubs/extension/composer.json.stub')
+            [$this->package, '', str_replace('\\', '\\\\', $this->namespace) . '\\\\', $this->className],
+            file_get_contents(__DIR__ . '/stubs/extension/composer.json.stub')
         );
         $this->putFile('composer.json', $composerContents);
 
@@ -197,7 +197,7 @@ TREE;
         $settingContents = str_replace(
             ['{namespace}'],
             [$this->namespace],
-            file_get_contents(__DIR__.'/stubs/extension/setting.stub')
+            file_get_contents(__DIR__ . '/stubs/extension/setting.stub')
         );
         $this->putFile('src/Setting.php', $settingContents);
 
@@ -215,7 +215,7 @@ TREE;
                 $this->makeProviderContent(),
                 $this->makeRegisterThemeContent(),
             ],
-            file_get_contents(__DIR__.'/stubs/extension/extension.stub')
+            file_get_contents(__DIR__ . '/stubs/extension/extension.stub')
         );
         $this->putFile("src/{$this->className}ServiceProvider.php", $classContents);
 
@@ -224,14 +224,14 @@ TREE;
             $controllerContent = str_replace(
                 ['{namespace}', '{className}', '{name}'],
                 [$this->namespace, $this->className, $this->extensionName],
-                file_get_contents(__DIR__.'/stubs/extension/controller.stub')
+                file_get_contents(__DIR__ . '/stubs/extension/controller.stub')
             );
             $this->putFile("src/Http/Controllers/{$this->className}Controller.php", $controllerContent);
 
             $viewContents = str_replace(
                 ['{name}'],
                 [$this->extensionName],
-                file_get_contents(__DIR__.'/stubs/extension/view.stub')
+                file_get_contents(__DIR__ . '/stubs/extension/view.stub')
             );
             $this->putFile('resources/views/index.blade.php', $viewContents);
 
@@ -239,7 +239,7 @@ TREE;
             $routesContent = str_replace(
                 ['{namespace}', '{className}', '{path}'],
                 [$this->namespace, $this->className, $basePackage],
-                file_get_contents(__DIR__.'/stubs/extension/routes.stub')
+                file_get_contents(__DIR__ . '/stubs/extension/routes.stub')
             );
             $this->putFile('src/Http/routes.php', $routesContent);
         }
@@ -275,12 +275,12 @@ TEXT;
     protected function copyFiles()
     {
         $files = [
-            $view = __DIR__.'/stubs/extension/view.stub' => 'resources/views/index.blade.php',
-            $js = __DIR__.'/stubs/extension/js.stub'     => 'resources/assets/js/index.js',
-            __DIR__.'/stubs/extension/css.stub'          => 'resources/assets/css/index.css',
-            __DIR__.'/stubs/extension/.gitignore.stub'   => '.gitignore',
-            __DIR__.'/stubs/extension/README.md.stub'    => 'README.md',
-            __DIR__.'/stubs/extension/version.stub'      => 'version.php',
+            $view = __DIR__ . '/stubs/extension/view.stub' => 'resources/views/index.blade.php',
+            $js   = __DIR__ . '/stubs/extension/js.stub'   => 'resources/assets/js/index.js',
+            __DIR__ . '/stubs/extension/css.stub'          => 'resources/assets/css/index.css',
+            __DIR__ . '/stubs/extension/.gitignore.stub'   => '.gitignore',
+            __DIR__ . '/stubs/extension/README.md.stub'    => 'README.md',
+            __DIR__ . '/stubs/extension/version.stub'      => 'version.php',
         ];
 
         if ($this->option('theme')) {
@@ -299,7 +299,7 @@ TEXT;
     {
         [$vendor, $name] = explode('/', $this->package);
 
-        $default = str_replace(['-'], '', Str::title($vendor).'\\'.Str::title($name));
+        $default = str_replace(['-'], '', Str::title($vendor) . '\\' . Str::title($name));
 
         if (! $namespace = $this->option('namespace')) {
             $namespace = $this->ask('Root namespace', $default);
@@ -340,7 +340,7 @@ TEXT;
             return rtrim($this->basePath, '/');
         }
 
-        return rtrim($this->basePath, '/').'/'.ltrim($path, '/');
+        return rtrim($this->basePath, '/') . '/' . ltrim($path, '/');
     }
 
     /**

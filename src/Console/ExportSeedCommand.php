@@ -28,18 +28,18 @@ class ExportSeedCommand extends Command
      */
     public function handle()
     {
-        $name = $this->argument('classname');
+        $name         = $this->argument('classname');
         $exceptFields = [];
-        $exportUsers = $this->option('users');
+        $exportUsers  = $this->option('users');
 
         $namespace = 'seeders';
 
-        $seedFile = $this->laravel->databasePath().'/'.$namespace.'/'.$name.'.php';
+        $seedFile = $this->laravel->databasePath() . '/' . $namespace . '/' . $name . '.php';
         $contents = $this->getStub('AdminTablesSeeder');
 
         $replaces = [
             'DummyNamespace' => ucwords($namespace),
-            'DummyClass' => $name,
+            'DummyClass'     => $name,
 
             'ClassMenu'             => $this->getTableName('admin.database.menu_model'),
             'ClassPermission'       => $this->getTableName('admin.database.permissions_model'),
@@ -66,10 +66,10 @@ class ExportSeedCommand extends Command
 
         if ($exportUsers) {
             $replaces = array_merge($replaces, [
-                'ClassUsers'            => $this->getTableName('admin.database.users_model'),
-                'TableRoleUsers'        => config('admin.database.role_users_table'),
-                'ArrayUsers'            => $this->getTableDataArrayAsString(config('admin.database.users_table'), $exceptFields),
-                'ArrayPivotRoleUsers'   => $this->getTableDataArrayAsString(config('admin.database.role_users_table'), $exceptFields),
+                'ClassUsers'          => $this->getTableName('admin.database.users_model'),
+                'TableRoleUsers'      => config('admin.database.role_users_table'),
+                'ArrayUsers'          => $this->getTableDataArrayAsString(config('admin.database.users_table'), $exceptFields),
+                'ArrayPivotRoleUsers' => $this->getTableDataArrayAsString(config('admin.database.role_users_table'), $exceptFields),
             ]);
         } else {
             $contents = preg_replace('/\/\/ users tables[\s\S]*?(?=\/\/ finish)/mu', '', $contents);
@@ -79,7 +79,7 @@ class ExportSeedCommand extends Command
 
         $this->laravel['files']->put($seedFile, $contents);
 
-        $this->line('<info>Admin tables seed file was created:</info> '.str_replace(base_path(), '', $seedFile));
+        $this->line('<info>Admin tables seed file was created:</info> ' . str_replace(base_path(), '', $seedFile));
         $this->line("Use: <info>php artisan db:seed --class={$name}</info>");
     }
 
@@ -110,18 +110,16 @@ class ExportSeedCommand extends Command
     /**
      * Get stub contents.
      *
-     * @param $name
      * @return string
      */
     protected function getStub($name)
     {
-        return $this->laravel['files']->get(__DIR__."/stubs/$name.stub");
+        return $this->laravel['files']->get(__DIR__ . "/stubs/$name.stub");
     }
 
     /**
      * Custom var_export for correct work with \r\n.
      *
-     * @param $var
      * @param  string  $indent
      * @return string
      */
@@ -130,7 +128,7 @@ class ExportSeedCommand extends Command
         switch (gettype($var)) {
 
             case 'string':
-                return '"'.addcslashes($var, "\\\$\"\r\n\t\v\f").'"';
+                return '"' . addcslashes($var, "\\\$\"\r\n\t\v\f") . '"';
 
             case 'array':
                 $indexed = array_keys($var) === range(0, count($var) - 1);
@@ -139,11 +137,11 @@ class ExportSeedCommand extends Command
 
                 foreach ($var as $key => $value) {
                     $r[] = "$indent    "
-                        .($indexed ? '' : $this->varExport($key).' => ')
-                        .$this->varExport($value, "{$indent}    ");
+                        . ($indexed ? '' : $this->varExport($key) . ' => ')
+                        . $this->varExport($value, "{$indent}    ");
                 }
 
-                return "[\n".implode(",\n", $r)."\n".$indent.']';
+                return "[\n" . implode(",\n", $r) . "\n" . $indent . ']';
 
             case 'boolean':
                 return $var ? 'true' : 'false';

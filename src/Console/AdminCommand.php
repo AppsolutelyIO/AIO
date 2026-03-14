@@ -74,7 +74,7 @@ LOGO;
     }
 
     /**
-     * @param (Command|string)[] $commands
+     * @param  (Command|string)[]  $commands
      * @return int
      */
     private function getColumnWidth(array $commands)

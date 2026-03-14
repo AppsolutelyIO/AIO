@@ -4,13 +4,6 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO;
 
-use Appsolutely\AIO\Livewire\Anchor;
-use Appsolutely\AIO\Livewire\ArticleList;
-use Appsolutely\AIO\Livewire\DynamicForm;
-use Appsolutely\AIO\Livewire\Footer;
-use Appsolutely\AIO\Livewire\GeneralBlock;
-use Appsolutely\AIO\Livewire\Header;
-use Appsolutely\AIO\Livewire\TransitionSection;
 use Appsolutely\AIO\Events\ArticleCreated;
 use Appsolutely\AIO\Events\ArticleDeleted;
 use Appsolutely\AIO\Events\ArticleUpdated;
@@ -25,6 +18,13 @@ use Appsolutely\AIO\Jobs\ProcessMissingTranslations;
 use Appsolutely\AIO\Listeners\ClearPageSlugAliasCache;
 use Appsolutely\AIO\Listeners\ClearSitemapCache;
 use Appsolutely\AIO\Listeners\TriggerFormNotifications;
+use Appsolutely\AIO\Livewire\Anchor;
+use Appsolutely\AIO\Livewire\ArticleList;
+use Appsolutely\AIO\Livewire\DynamicForm;
+use Appsolutely\AIO\Livewire\Footer;
+use Appsolutely\AIO\Livewire\GeneralBlock;
+use Appsolutely\AIO\Livewire\Header;
+use Appsolutely\AIO\Livewire\TransitionSection;
 use Appsolutely\AIO\Observers\ArticleObserver;
 use Appsolutely\AIO\Observers\OrderObserver;
 use Appsolutely\AIO\Observers\PageBlockSettingObserver;
@@ -76,7 +76,7 @@ class AIOServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/aio.php', 'aio');
+        $this->mergeConfigFrom(__DIR__ . '/../config/aio.php', 'aio');
 
         $this->registerServices();
         $this->registerRouteMacros();
@@ -87,8 +87,8 @@ class AIOServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'aio');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'aio');
 
         $this->registerRoutes();
         $this->registerObservers();
@@ -130,15 +130,15 @@ class AIOServiceProvider extends ServiceProvider
     protected function registerRoutes(): void
     {
         if (config('aio.routes.web', true)) {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         }
 
         if (config('aio.routes.api', true)) {
-            $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+            $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
         }
 
         if (config('aio.routes.cache', true)) {
-            $this->loadRoutesFrom(__DIR__.'/../routes/cache/test.php');
+            $this->loadRoutesFrom(__DIR__ . '/../routes/cache/test.php');
         }
     }
 
@@ -218,7 +218,7 @@ class AIOServiceProvider extends ServiceProvider
      */
     protected function registerPageBuilderViewNamespace(): void
     {
-        View::addNamespace('page-builder', __DIR__.'/../resources/page-builder');
+        View::addNamespace('page-builder', __DIR__ . '/../resources/page-builder');
     }
 
     /**
@@ -359,27 +359,27 @@ class AIOServiceProvider extends ServiceProvider
         }
 
         $this->publishes(
-            [__DIR__.'/../config/aio.php' => config_path('aio.php')],
+            [__DIR__ . '/../config/aio.php' => config_path('aio.php')],
             'aio-config'
         );
 
         $this->publishes(
-            [__DIR__.'/../resources/views' => resource_path('views/vendor/aio')],
+            [__DIR__ . '/../resources/views' => resource_path('views/vendor/aio')],
             'aio-views'
         );
 
         $this->publishes(
-            [__DIR__.'/../database/migrations' => database_path('migrations')],
+            [__DIR__ . '/../database/migrations' => database_path('migrations')],
             'aio-migrations'
         );
 
         $this->publishes(
-            [__DIR__.'/../database/seeders' => database_path('seeders/aio')],
+            [__DIR__ . '/../database/seeders' => database_path('seeders/aio')],
             'aio-seeders'
         );
 
         $this->publishes(
-            [__DIR__.'/../themes/tabler' => base_path('themes/tabler')],
+            [__DIR__ . '/../themes/tabler' => base_path('themes/tabler')],
             'aio-theme'
         );
     }

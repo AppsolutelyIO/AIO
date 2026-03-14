@@ -5,6 +5,7 @@ namespace Appsolutely\AIO\Console;
 use Appsolutely\AIO\Support\Helper;
 use Illuminate\Console\Command;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,7 +17,7 @@ abstract class GeneratorCommand extends Command
     /**
      * The filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
@@ -106,7 +107,6 @@ abstract class GeneratorCommand extends Command
     /**
      * Create a new controller creator command instance.
      *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
      * @return void
      */
     public function __construct(Filesystem $files)
@@ -132,7 +132,7 @@ abstract class GeneratorCommand extends Command
      *
      * @return bool|null
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public function handle()
     {
@@ -140,7 +140,7 @@ abstract class GeneratorCommand extends Command
         // language and that the class name will actually be valid. If it is not valid we
         // can error now and prevent from polluting the filesystem using invalid files.
         if ($this->isReservedName($this->getNameInput())) {
-            $this->error('The name "'.$this->getNameInput().'" is reserved by PHP.');
+            $this->error('The name "' . $this->getNameInput() . '" is reserved by PHP.');
 
             return false;
         }
@@ -155,7 +155,7 @@ abstract class GeneratorCommand extends Command
         if ((! $this->hasOption('force') ||
                 ! $this->option('force')) &&
             $this->alreadyExists($this->getNameInput())) {
-            $this->error($this->type.' already exists!');
+            $this->error($this->type . ' already exists!');
 
             return false;
         }
@@ -167,7 +167,7 @@ abstract class GeneratorCommand extends Command
 
         $this->files->put($path, $this->sortImports($this->buildClass($name)));
 
-        $this->info($this->type.' created successfully.');
+        $this->info($this->type . ' created successfully.');
 
         if (in_array(CreatesMatchingTest::class, class_uses_recursive($this), true)) {
             $this->handleTestCreation($path);
@@ -193,14 +193,13 @@ abstract class GeneratorCommand extends Command
         }
 
         return $this->qualifyClass(
-            $this->getDefaultNamespace(trim($rootNamespace, '\\')).'\\'.$name
+            $this->getDefaultNamespace(trim($rootNamespace, '\\')) . '\\' . $name
         );
     }
 
     /**
      * Qualify the given model class base name.
      *
-     * @param  string  $model
      * @return string
      */
     protected function qualifyModel(string $model)
@@ -216,8 +215,8 @@ abstract class GeneratorCommand extends Command
         }
 
         return is_dir(app_path('Models'))
-            ? $rootNamespace.'Models\\'.$model
-            : $rootNamespace.$model;
+            ? $rootNamespace . 'Models\\' . $model
+            : $rootNamespace . $model;
     }
 
     /**
@@ -263,7 +262,7 @@ abstract class GeneratorCommand extends Command
      * @param  string  $name
      * @return string
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     protected function buildClass($name)
     {
@@ -318,7 +317,7 @@ abstract class GeneratorCommand extends Command
      */
     protected function replaceClass($stub, $name)
     {
-        $class = str_replace($this->getNamespace($name).'\\', '', $name);
+        $class = str_replace($this->getNamespace($name) . '\\', '', $name);
 
         return str_replace(['DummyClass', '{{ class }}', '{{class}}'], $class, $stub);
     }
@@ -361,7 +360,7 @@ abstract class GeneratorCommand extends Command
     {
         $config = $this->laravel['config'];
 
-        $provider = $config->get('auth.guards.'.$config->get('auth.defaults.guard').'.provider');
+        $provider = $config->get('auth.guards.' . $config->get('auth.defaults.guard') . '.provider');
 
         return $config->get("auth.providers.{$provider}.model");
     }
@@ -389,7 +388,7 @@ abstract class GeneratorCommand extends Command
     {
         $views = $this->laravel['config']['view.paths'][0] ?? resource_path('views');
 
-        return $views.($path ? DIRECTORY_SEPARATOR.$path : $path);
+        return $views . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 
     /**

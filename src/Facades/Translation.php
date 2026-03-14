@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static void clearCache()
  * @method static array getMissingTranslations(string $locale = null)
  *
- * @see \Appsolutely\AIO\Services\TranslationService
+ * @see TranslationService
  */
 class Translation extends Facade
 {
