@@ -6,7 +6,7 @@
 
 <p align="center">
     <a><img src="https://img.shields.io/badge/php-8.2+-59a9f8.svg?style=flat" /></a>
-    <a><img src="https://img.shields.io/badge/laravel-10+-59a9f8.svg?style=flat" ></a>
+    <a><img src="https://img.shields.io/badge/laravel-12+-59a9f8.svg?style=flat" ></a>
 </p>
 
 `Appsolutely AIO` is an AI-powered application framework for Laravel that goes beyond a traditional admin panel. It provides a complete foundation for building modern web applications — install it once and start shipping.
@@ -14,39 +14,203 @@
 ### What's Included
 
 - **Admin Dashboard** — A fully featured admin panel with configurable layouts, themes, and role-based access control.
-- **CMS** — Built-in content management with article publishing, categories, and media handling.
-- **E-Commerce Essentials** — Base configuration for product catalogs, orders, and payment integration.
-- **AI Modules** — Integrated AI capabilities ready to plug into your application workflows.
-- **Production-Ready APIs** — Authentication (login, registration, password reset), user management, and other common endpoints — available immediately after installation.
+- **CMS** — Built-in content management with article publishing, page builder, categories, forms, and media handling.
+- **E-Commerce** — Product catalog, orders, carts, coupons, shipping zones, tax rates, inventory management, wishlists, and product reviews.
+- **Notification System** — Templated notifications with queue processing, configurable senders and rules.
+- **Production-Ready APIs** — Authentication, user management, delivery, file management, and other common endpoints — available immediately after installation.
 
-### Installation
+---
+
+## Requirements
+
+- PHP 8.2+
+- Laravel 12+
+- A supported database (MySQL, PostgreSQL, or SQLite)
+
+## Installation
+
+### 1. Create a Laravel Application
+
+Skip this step if you already have one.
+
+```bash
+composer create-project laravel/laravel my-app
+cd my-app
+```
+
+### 2. Require the Package
 
 ```bash
 composer require appsolutely/aio
 ```
 
-Publish resources:
+If you are developing locally with a path repository:
+
+```bash
+composer config repositories.aio path ../aio
+composer require appsolutely/aio:@dev
+```
+
+### 3. Publish Assets and Configuration
 
 ```bash
 php artisan admin:publish
 ```
 
-Run installation:
+This publishes:
+
+| Tag | Destination | Description |
+|-----|-------------|-------------|
+| `aio-config` | `config/aio.php`, `config/admin.php` | Package and admin panel configuration |
+| `aio-migrations` | `database/migrations/` | All database migrations |
+| `aio-assets` | `public/vendor/aio/` | Admin panel frontend assets (CSS, JS, fonts) |
+| `aio-lang` | `lang/` | Translation files |
+
+You can publish individual tags with flags: `--config`, `--migrations`, `--assets`, `--lang`.
+
+### 4. Configure Environment
+
+Add the following to your `.env` file:
+
+```dotenv
+# Admin panel route prefix (default: admin)
+ADMIN_ROUTE_PREFIX=admin
+
+# Optional: restrict admin to a specific domain
+# ADMIN_ROUTE_DOMAIN=admin.example.com
+
+# Disable HTTPS for local development
+ADMIN_HTTPS=false
+```
+
+> **Important:** If you copied `.env` from another project, make sure `APP_URL` matches your local address (e.g. `http://127.0.0.1:8000`) and remove or clear any production-specific values like `ADMIN_ASSETS_SERVER`.
+
+### 5. Run Installation
 
 ```bash
 php artisan admin:install
 ```
 
-Open `http://localhost/admin` in your browser, login with `admin` / `admin`.
+This command will:
 
-### Usage as a Package
+1. Run all database migrations
+2. Seed the default admin user, roles, permissions, and menu
+3. Scaffold the `app/Admin/` directory with starter controllers, routes, and bootstrap file
 
-AIO is designed to be required into your own Laravel application. Once installed, all admin routes, API endpoints, and UI components are available out of the box. You can extend, override, or compose them to fit your application's needs.
+### 6. Access the Admin Panel
 
-### Credits
+Start the development server:
+
+```bash
+php artisan serve
+```
+
+Open **http://localhost:8000/admin** in your browser.
+
+Default credentials:
+
+| Username | Password |
+|----------|----------|
+| `admin`  | `admin`  |
+
+> Change the default password immediately after first login.
+
+---
+
+## Configuration
+
+### User Model
+
+AIO does not ship its own User model — it uses your application's `App\Models\User` by default. This is configurable in `config/aio.php`:
+
+```php
+'models' => [
+    'user' => \App\Models\User::class,
+    'team' => \App\Models\Team::class,
+    // ...
+],
+```
+
+For type safety, your User model can implement the `Appsolutely\AIO\Contracts\Authenticatable` interface:
+
+```php
+use Appsolutely\AIO\Contracts\Authenticatable;
+
+class User extends \Illuminate\Foundation\Auth\User implements Authenticatable
+{
+    // ...
+}
+```
+
+### Admin Routes
+
+Route configuration is in `config/admin.php`:
+
+```php
+'route' => [
+    'domain'     => env('ADMIN_ROUTE_DOMAIN'),
+    'prefix'     => env('ADMIN_ROUTE_PREFIX', 'admin'),
+    'namespace'  => 'App\\Admin\\Controllers',
+    'middleware'  => ['web', 'admin'],
+],
+```
+
+### Service Overrides
+
+All services are bound via interfaces. Override any service by rebinding in your `AppServiceProvider`:
+
+```php
+$this->app->bind(
+    \Appsolutely\AIO\Services\Contracts\OrderServiceInterface::class,
+    \App\Services\CustomOrderService::class,
+);
+```
+
+---
+
+## Project Structure
+
+After installation, your project will contain:
+
+```
+app/Admin/
+├── Controllers/
+│   ├── AuthController.php      # Admin authentication
+│   └── HomeController.php      # Dashboard
+├── Metrics/Examples/            # Example dashboard metric cards
+├── bootstrap.php                # Admin panel bootstrapping
+└── routes.php                   # Admin route definitions
+```
+
+AIO registers the following route groups automatically:
+
+| Group | Prefix | Description |
+|-------|--------|-------------|
+| Admin | `/admin` | Admin panel (configurable) |
+| Web | `/` | Frontend routes (member auth, pages, sitemap) |
+| API | `/` | API endpoints (deliveries, forms, releases) |
+
+---
+
+## Available Commands
+
+| Command | Description |
+|---------|-------------|
+| `admin:install` | Install the admin package (migrate, seed, scaffold) |
+| `admin:publish` | Publish assets, config, migrations, and language files |
+| `admin:create-user` | Create a new admin user |
+| `admin:reset-password` | Reset password for an admin user |
+| `admin:menu-cache` | Flush and rebuild the menu cache |
+| `admin:ext-make` | Create a new AIO extension |
+| `admin:ext-install` | Install an extension |
+| `admin:ide-helper` | Generate IDE helper file for autocompletion |
+
+---
+
+## Credits
 
 Based on [Dcat Admin](https://github.com/jqhph/dcat-admin) by [jqhph](https://github.com/jqhph).
 
-### License
+## License
 
 `Appsolutely AIO` is licensed under [The MIT License (MIT)](LICENSE).
