@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Appsolutely\AIO\Database\Seeders;
+namespace Appsolutely\AIO\Database\Seeders\Admin;
 
 use Appsolutely\AIO\Models\PageBlock;
 use Illuminate\Database\Seeder;
