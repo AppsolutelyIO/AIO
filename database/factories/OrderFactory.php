@@ -6,7 +6,7 @@ namespace Appsolutely\AIO\Database\Factories;
 
 use Appsolutely\AIO\Enums\OrderStatus;
 use Appsolutely\AIO\Models\Order;
-use App\Models\User;
+use Appsolutely\AIO\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -27,7 +27,7 @@ class OrderFactory extends Factory
         $summary = fake()->sentence();
 
         return [
-            'user_id'           => User::factory(),
+            'user_id'           => Model::userModel()::factory(),
             'reference'         => (string) Str::ulid(),
             'summary'           => $summary,
             'amount'            => fake()->numberBetween(10000, 100000),

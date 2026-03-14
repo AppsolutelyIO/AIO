@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Database\Factories;
 
-use App\Models\User;
+use Appsolutely\AIO\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +21,7 @@ class TeamFactory extends Factory
     {
         return [
             'name'          => $this->faker->unique()->company(),
-            'user_id'       => User::factory(),
+            'user_id'       => Model::userModel()::factory(),
             'personal_team' => true,
         ];
     }

@@ -8,7 +8,7 @@ use Appsolutely\AIO\Enums\RefundStatus;
 use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\OrderPayment;
 use Appsolutely\AIO\Models\Refund;
-use App\Models\User;
+use Appsolutely\AIO\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -30,7 +30,7 @@ class RefundFactory extends Factory
             'reference'         => (string) Str::ulid(),
             'order_id'          => Order::factory(),
             'order_payment_id'  => OrderPayment::factory(),
-            'user_id'           => User::factory(),
+            'user_id'           => Model::userModel()::factory(),
             'amount'            => fake()->numberBetween(1000, 50000),
             'status'            => RefundStatus::Pending,
             'reason'            => fake()->sentence(),

@@ -7,7 +7,7 @@ namespace Appsolutely\AIO\Database\Factories;
 use Appsolutely\AIO\Enums\ReviewStatus;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Models\ProductReview;
-use App\Models\User;
+use Appsolutely\AIO\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +24,7 @@ class ProductReviewFactory extends Factory
     {
         return [
             'product_id' => Product::factory(),
-            'user_id'    => User::factory(),
+            'user_id'    => Model::userModel()::factory(),
             'order_id'   => null,
             'rating'     => fake()->numberBetween(1, 5),
             'title'      => fake()->sentence(4),

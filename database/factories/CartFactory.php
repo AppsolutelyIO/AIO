@@ -6,7 +6,7 @@ namespace Appsolutely\AIO\Database\Factories;
 
 use Appsolutely\AIO\Enums\CartStatus;
 use Appsolutely\AIO\Models\Cart;
-use App\Models\User;
+use Appsolutely\AIO\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +24,7 @@ class CartFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id'      => User::factory(),
+            'user_id'      => Model::userModel()::factory(),
             'session_id'   => null,
             'status'       => CartStatus::Active,
             'total_amount' => 0,

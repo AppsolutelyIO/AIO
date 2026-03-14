@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Database\Factories;
 
-use App\Models\User;
+use Appsolutely\AIO\Models\Model;
 use Appsolutely\AIO\Models\Wishlist;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,7 +21,7 @@ class WishlistFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'user_id' => Model::userModel()::factory(),
             'name'    => 'Default',
         ];
     }
