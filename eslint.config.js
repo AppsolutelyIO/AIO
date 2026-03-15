@@ -109,6 +109,30 @@ export default tseslint.config(
         },
     },
 
+    // AIO legacy jQuery code — relaxed rules for migrated JS-to-TS files
+    {
+        files: ['resources/assets/aio/**/*.{ts,js}'],
+        rules: {
+            '@typescript-eslint/no-explicit-any': 'off',
+            '@typescript-eslint/no-this-alias': 'off',
+            '@typescript-eslint/no-unused-vars': 'off',
+            '@typescript-eslint/no-unused-expressions': 'off',
+            '@typescript-eslint/consistent-type-imports': 'off',
+            'prefer-const': 'off',
+            'prefer-rest-params': 'off',
+            'no-var': 'off',
+            'no-console': 'off',
+            'no-empty': 'off',
+            'no-undef': 'off',
+            'no-prototype-builtins': 'off',
+            'no-useless-escape': 'off',
+            'no-useless-assignment': 'off',
+            eqeqeq: 'off',
+            'perfectionist/sort-imports': 'off',
+            'perfectionist/sort-named-imports': 'off',
+        },
+    },
+
     // Prettier — must be last to disable conflicting formatting rules
     prettierConfig,
 );
