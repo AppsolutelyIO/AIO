@@ -48,7 +48,7 @@ final class DynamicForm extends GeneralBlock
 
             if (! $this->form) {
                 \Log::warning("Form not found for slug: {$formSlug}.");
-                abort(404);
+                abort(404, "Form not found for slug: \"{$formSlug}\"");
             }
 
             $this->formFields = $this->formService->getFields($this->form);
