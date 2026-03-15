@@ -57,7 +57,7 @@ final readonly class PageService implements PageServiceInterface
 
     public function findByReference(string $reference): Model
     {
-        $page = $this->pageRepository->with(['blocks.block', 'blocks.blockValue'])->reference($reference)->firstOrFail();
+        $page = $this->pageRepository->findByReference($reference);
         $this->filterPageBlocksByTheme($page);
 
         return $page;

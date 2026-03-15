@@ -104,6 +104,17 @@ final class PageRepository extends BaseRepository
     }
 
     /**
+     * Find page by reference with standard blocks eager loading.
+     */
+    public function findByReference(string $reference): Page
+    {
+        return $this->model->newQuery()
+            ->where('reference', $reference)
+            ->with($this->blocksEagerLoad())
+            ->firstOrFail();
+    }
+
+    /**
      * Get published pages with blocks eager loaded
      */
     public function getPublishedWithBlocks(?Carbon $datetime = null): \Illuminate\Database\Eloquent\Collection
