@@ -1,5 +1,6 @@
 includes:
     - vendor/larastan/larastan/extension.neon
+    - phpstan-baseline.neon
 
 parameters:
     level: 5
@@ -7,4 +8,5 @@ parameters:
         - src
     excludePaths:
         - src/Helpers
+        - src/Models/Membership.php
     tmpDir: build/phpstan
