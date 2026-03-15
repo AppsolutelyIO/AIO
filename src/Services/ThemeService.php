@@ -47,6 +47,9 @@ final readonly class ThemeService implements ThemeServiceInterface
         // Set the active theme
         Theme::set($themeName, $parentTheme);
 
+        // Register package theme view paths for themes bundled with AIO
+        $this->registerPackageThemePaths($viewFinder, $themeName, $parentTheme);
+
         // Ensure the view finder is properly set
         $paths = $viewFinder->getPaths();
 
@@ -62,6 +65,46 @@ final readonly class ThemeService implements ThemeServiceInterface
 
     public function getThemeViewPath(string $themeName): string
     {
+        // Check package themes directory first, then fall back to site themes
+        $packagePath = $this->getPackageThemeViewPath($themeName);
+        if ($packagePath !== null) {
+            return $packagePath;
+        }
+
         return themed_absolute_path($themeName, 'views');
+    }
+
+    /**
+     * Get the view path for a theme bundled with the AIO package.
+     */
+    private function getPackageThemeViewPath(string $themeName): ?string
+    {
+        $path = dirname(__DIR__, 2) . '/themes/' . $themeName . '/views';
+
+        return is_dir($path) ? $path : null;
+    }
+
+    /**
+     * Register view paths for themes that live in the AIO package directory.
+     * This allows themes bundled with AIO to be resolved by the view finder
+     * even when they don't exist in the site's themes/ directory.
+     */
+    private function registerPackageThemePaths(ThemeViewFinder $viewFinder, string $themeName, ?string $parentTheme): void
+    {
+        $paths = $viewFinder->getPaths();
+
+        // Register parent theme from package
+        if ($parentTheme) {
+            $parentPath = $this->getPackageThemeViewPath($parentTheme);
+            if ($parentPath !== null && ! in_array($parentPath, $paths, true)) {
+                $viewFinder->prependLocation($parentPath);
+            }
+        }
+
+        // Register active theme from package (prepend so it takes priority)
+        $themePath = $this->getPackageThemeViewPath($themeName);
+        if ($themePath !== null && ! in_array($themePath, $paths, true)) {
+            $viewFinder->prependLocation($themePath);
+        }
     }
 }

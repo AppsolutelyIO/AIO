@@ -6,21 +6,32 @@ use Qirolab\Theme\Theme;
 
 if (! function_exists('themed_absolute_path')) {
     /**
-     * Get the path to a theme's views directory.
+     * Get the path to a theme's directory.
+     *
+     * Checks the site's themes directory first, then falls back to the AIO
+     * package's bundled themes directory.
      *
      * @param  string  $themeName  The name of the theme
-     * @param  string  $path  The path within the theme's views directory
-     * @return string The full path to the theme's views directory or a path within it
+     * @param  string  $path  The path within the theme directory
+     * @return string The full path to the theme directory or a path within it
      */
     function themed_absolute_path(string $themeName = '', string $path = ''): string
     {
-        $basePath = base_path(themed_path($themeName));
+        $sitePath = base_path(themed_path($themeName));
 
-        if (empty($path)) {
-            return $basePath;
+        // Check if the theme exists in the AIO package when not found in site
+        if (! empty($themeName) && ! is_dir($sitePath)) {
+            $packagePath = dirname(__DIR__, 2) . '/themes/' . $themeName;
+            if (is_dir($packagePath)) {
+                $sitePath = $packagePath;
+            }
         }
 
-        return $basePath . '/' . ltrim($path, '/');
+        if (empty($path)) {
+            return $sitePath;
+        }
+
+        return $sitePath . '/' . ltrim($path, '/');
     }
 }
 
