@@ -1,0 +1,32 @@
+# Check if npx is available
+if ! command -v npx >/dev/null 2>&1; then
+    echo "❌ Error: npx is not available. Please install Node.js and npm."
+    exit 1
+fi
+
+# Check if lint-staged is installed
+if ! npm list lint-staged >/dev/null 2>&1; then
+    echo "❌ Error: lint-staged is not installed."
+    echo "💡 Run: npm install"
+    exit 1
+fi
+
+# Check if there are staged files
+if git diff --cached --quiet 2>/dev/null; then
+    exit 0
+fi
+
+# Run lint-staged (show output only on failure)
+OUTPUT=$(npx lint-staged 2>&1)
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+    echo "$OUTPUT"
+    echo ""
+    echo "❌ Pre-commit checks failed!"
+    echo "💡 Fix the errors above and try committing again."
+    echo "💡 Or use 'git commit --no-verify' to skip (not recommended)."
+    exit $EXIT_CODE
+fi
+
+exit 0

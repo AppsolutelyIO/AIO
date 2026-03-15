@@ -1,0 +1,119 @@
+echo "🔍 Running pre-push checks..."
+echo ""
+
+# Colors for output (if terminal supports it)
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+print_error() {
+    echo "${RED}❌ $1${NC}"
+}
+
+print_success() {
+    echo "${GREEN}✅ $1${NC}"
+}
+
+# Check if we're in a git repository
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    print_error "Not in a git repository!"
+    exit 1
+fi
+
+# Read ref information from stdin (pre-push hook standard)
+HAS_COMMITS_TO_PUSH=false
+while read -r local_ref local_sha remote_ref remote_sha; do
+    if [ "$local_sha" != "0000000000000000000000000000000000000000" ] && [ "$local_sha" != "$remote_sha" ]; then
+        HAS_COMMITS_TO_PUSH=true
+        break
+    fi
+done
+
+if [ "$HAS_COMMITS_TO_PUSH" = false ]; then
+    echo "ℹ️  No commits to push. Skipping checks."
+    exit 0
+fi
+
+FAILED=0
+START_TIME=$(date +%s)
+
+# PHP code style check
+echo "🎨 Checking PHP code style (Pint)..."
+OUTPUT=$(./vendor/bin/pint --test 2>&1)
+EXIT=$?
+if [ $EXIT -ne 0 ]; then
+    echo "$OUTPUT"
+    print_error "PHP code style check failed!"
+    echo ""
+    echo "💡 Run './vendor/bin/pint' to auto-fix."
+    FAILED=1
+fi
+echo ""
+
+# TypeScript type check
+if command -v npm >/dev/null 2>&1; then
+    echo "📝 Type checking TypeScript files..."
+    OUTPUT=$(npm run type-check 2>&1)
+    EXIT=$?
+    if [ $EXIT -ne 0 ]; then
+        echo "$OUTPUT"
+        print_error "TypeScript type check failed!"
+        FAILED=1
+    fi
+    echo ""
+
+    # Linters
+    echo "🧹 Running linters..."
+    OUTPUT=$(npm run lint:all 2>&1)
+    EXIT=$?
+    if [ $EXIT -ne 0 ]; then
+        echo "$OUTPUT"
+        print_error "Linting failed!"
+        echo ""
+        echo "💡 Run 'npm run lint:all:fix' to auto-fix."
+        FAILED=1
+    fi
+    echo ""
+fi
+
+# PHPStan static analysis
+if [ -f ./vendor/bin/phpstan ]; then
+    echo "🔬 Running PHPStan..."
+    OUTPUT=$(./vendor/bin/phpstan analyse 2>&1)
+    EXIT=$?
+    if [ $EXIT -ne 0 ]; then
+        echo "$OUTPUT"
+        print_error "PHPStan analysis failed!"
+        FAILED=1
+    fi
+    echo ""
+fi
+
+# PHPUnit tests (skip with SKIP_PHP_TESTS=1)
+if [ "${SKIP_PHP_TESTS:-0}" != "1" ] && [ -f ./vendor/bin/phpunit ]; then
+    echo "🧪 Running PHPUnit tests..."
+    OUTPUT=$(./vendor/bin/phpunit --testsuite=Unit 2>&1)
+    EXIT=$?
+    if [ $EXIT -ne 0 ]; then
+        echo "$OUTPUT"
+        print_error "PHPUnit tests failed!"
+        FAILED=1
+    fi
+    echo ""
+fi
+
+# Calculate duration
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+if [ $FAILED -eq 1 ]; then
+    echo ""
+    print_error "Pre-push checks failed! (took ${DURATION}s)"
+    echo ""
+    echo "💡 Fix the errors above before pushing."
+    echo "💡 Or use 'git push --no-verify' to skip (not recommended)."
+    exit 1
+fi
+
+print_success "All pre-push checks passed! (took ${DURATION}s)"
+exit 0
