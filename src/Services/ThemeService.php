@@ -61,6 +61,7 @@ final readonly class ThemeService implements ThemeServiceInterface
             $newPaths = array_merge([$themePath], array_diff($paths, [$themePath]));
             $viewFinder->setPaths($newPaths);
         }
+
     }
 
     public function getThemeViewPath(string $themeName): string
