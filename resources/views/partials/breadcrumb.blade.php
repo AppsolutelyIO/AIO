@@ -28,11 +28,17 @@
     <ol class="breadcrumb float-right text-capitalize">
         <li class="breadcrumb-item"><a href="{{ admin_url('/') }}"><i class="fa fa-dashboard"></i> {{admin_trans('admin.home')}}</a></li>
         @for($i = 2; $i <= ($len = count(Request::segments())); $i++)
-            <li class="breadcrumb-item">
-                @if($i == $len) <a href=""> @endif
-                {{admin_trans_label(Request::segment($i))}}
-                @if($i == $len) </a> @endif
-            </li>
+            @if($i < $len)
+                <li class="breadcrumb-item">
+                    <a href="{{ url(implode('/', array_slice(Request::segments(), 0, $i))) }}">
+                        {{admin_trans_label(Request::segment($i))}}
+                    </a>
+                </li>
+            @else
+                <li class="active breadcrumb-item">
+                    {{admin_trans_label(Request::segment($i))}}
+                </li>
+            @endif
         @endfor
     </ol>
     </div>
