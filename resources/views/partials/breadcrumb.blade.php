@@ -33,8 +33,9 @@
                 $hasRoute = false;
                 if ($i < $len) {
                     try {
-                        $matched = app('router')->getRoutes()->match(app('request')->create($segmentUrl, 'GET'));
-                        $hasRoute = ! $matched->isFallback;
+                        $testUrl = Request::getScheme() . '://' . Request::getHost() . '/' . $segmentUrl;
+                        $matched = app('router')->getRoutes()->match(app('request')->create($testUrl, 'GET'));
+                        $hasRoute = ! $matched->isFallback && ! str_contains($matched->uri, '{');
                     } catch (\Throwable $e) {}
                 }
             @endphp
