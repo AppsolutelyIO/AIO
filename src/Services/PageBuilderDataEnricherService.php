@@ -46,7 +46,10 @@ final readonly class PageBuilderDataEnricherService
 
         $enriched = [];
         foreach ($components as $component) {
-            $enriched[] = $this->enrichComponent($component, $page->id, $generalPage);
+            $result = $this->enrichComponent($component, $page->id, $generalPage);
+            if ($result !== null) {
+                $enriched[] = $result;
+            }
         }
 
         Arr::set($setting, BasicConstant::PAGE_GRAPESJS_KEY, $enriched);
@@ -58,22 +61,22 @@ final readonly class PageBuilderDataEnricherService
      * Enrich a single component with rendered HTML.
      *
      * @param  array<string, mixed>  $component  GrapesJS component data
-     * @return array<string, mixed> Component with content (HTML) injected
+     * @return array<string, mixed>|null Component with content (HTML) injected, or null if no matching setting
      */
-    private function enrichComponent(array $component, int $pageId, GeneralPage $generalPage): array
+    private function enrichComponent(array $component, int $pageId, GeneralPage $generalPage): ?array
     {
         $reference = $component['reference'] ?? $component['attributes']['reference'] ?? null;
         $blockId   = $component['block_id'] ?? $component['attributes']['block_id'] ?? null;
 
         if (empty($reference)) {
-            return $component;
+            return null;
         }
 
         $theme   = $this->themeService->resolveThemeName();
         $setting = $this->blockSettingRepository->findBy($pageId, $blockId, $reference, $theme);
 
         if ($setting === null) {
-            return $component;
+            return null;
         }
 
         $setting->load(['block', 'blockValue']);
