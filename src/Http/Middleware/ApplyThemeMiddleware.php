@@ -9,7 +9,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class SetThemeMiddleware
+final class ApplyThemeMiddleware
 {
     public function __construct(
         protected ThemeServiceInterface $themeService

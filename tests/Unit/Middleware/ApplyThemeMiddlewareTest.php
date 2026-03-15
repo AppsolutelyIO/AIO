@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Middleware;
 
-use Appsolutely\AIO\Http\Middleware\SetThemeMiddleware;
+use Appsolutely\AIO\Http\Middleware\ApplyThemeMiddleware;
 use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Illuminate\Http\Request;
 use Mockery;
 use Mockery\MockInterface;
 use Appsolutely\AIO\Tests\TestCase;
 
-final class SetThemeMiddlewareTest extends TestCase
+final class ApplyThemeMiddlewareTest extends TestCase
 {
     private ThemeServiceInterface|MockInterface $themeService;
 
-    private SetThemeMiddleware $middleware;
+    private ApplyThemeMiddleware $middleware;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->themeService = Mockery::mock(ThemeServiceInterface::class);
-        $this->middleware   = new SetThemeMiddleware($this->themeService);
+        $this->middleware   = new ApplyThemeMiddleware($this->themeService);
     }
 
     private function makeRequest(string $path = '/'): Request
