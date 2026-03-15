@@ -122,8 +122,8 @@ final readonly class PageBlockSettingService implements PageBlockSettingServiceI
         $view  = $this->resolveViewFromManifest($blockReference);
         $theme = $this->themeService->resolveThemeName();
 
-        // Check if this block setting already exists for this page
-        $found = $this->pageBlockSettingRepository->findBy($pageId, $blockId, $reference);
+        // Check if this block setting already exists for this page and theme
+        $found = $this->pageBlockSettingRepository->findBy($pageId, $blockId, $reference, $theme);
         if ($found) {
             // Reactivate, update sort order, and ensure block_value_id matches current theme
             $blockValueId = $this->getBlockValueId($blockId, $theme, $view);
@@ -136,11 +136,13 @@ final readonly class PageBlockSettingService implements PageBlockSettingServiceI
 
             return []; // Return empty array since we updated, not created
         }
-        $data  = [
+
+        $data = [
             'page_id'        => $pageId,
             'block_id'       => $blockId,
             'block_value_id' => $this->getBlockValueId($blockId, $theme, $view),
             'reference'      => $reference,
+            'theme'          => $theme,
             'status'         => Status::ACTIVE->value,
             'sort'           => $sort,
             'published_at'   => now(),
