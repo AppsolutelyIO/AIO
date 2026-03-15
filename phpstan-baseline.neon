@@ -1,14 +1,14 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Method Appsolutely\\AIO\\Actions\\Action\:\:make\(\) should return \$this\(Appsolutely\\AIO\\Actions\\Action\) but returns static\(Appsolutely\\AIO\\Actions\\Action\)\.$#'
-			identifier: return.type
+			message: '#^Call to function method_exists\(\) with \$this\(Appsolutely\\AIO\\Actions\\Action\) and ''href'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
 			count: 1
 			path: src/Actions/Action.php
 
 		-
-			message: '#^PHPDoc tag @method has invalid value \(string href\)\: Unexpected token "\\n ", expected ''\('' at offset 46 on line 4$#'
-			identifier: phpDoc.parseError
+			message: '#^Method Appsolutely\\AIO\\Actions\\Action\:\:make\(\) should return \$this\(Appsolutely\\AIO\\Actions\\Action\) but returns static\(Appsolutely\\AIO\\Actions\\Action\)\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Actions/Action.php
 
@@ -129,12 +129,6 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\File\:\:\$path\.$#'
 			identifier: property.notFound
-			count: 1
-			path: src/Admin/Controllers/Api/FileController.php
-
-		-
-			message: '#^PHPDoc tag @param has invalid value \(string\|null\)\: Unexpected token "\\n     \* ", expected variable at offset 126 on line 5$#'
-			identifier: phpDoc.parseError
 			count: 1
 			path: src/Admin/Controllers/Api/FileController.php
 
@@ -1051,12 +1045,6 @@ parameters:
 			path: src/Contracts/TreeRepository.php
 
 		-
-			message: '#^PHPDoc tag @return has invalid value \(void\.\)\: Unexpected token "\.", expected TOKEN_HORIZONTAL_WS at offset 61 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Contracts/UploadField.php
-
-		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\ArticleCategory\:\:\$cover\.$#'
 			identifier: property.notFound
 			count: 1
@@ -1495,24 +1483,6 @@ parameters:
 			path: src/Form.php
 
 		-
-			message: '#^PHPDoc tag @return has invalid value \(\$this;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 140 on line 5$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Form.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(\$this;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 24 on line 2$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Form.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(\\Illuminate\\Http\\JsonResponse\|\\Illuminate\\Http\\RedirectResponse\|\|Response\)\: Unexpected token "\|", expected type at offset 152 on line 5$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Form.php
-
-		-
 			message: '#^Property Appsolutely\\AIO\\Form\:\:\$request \(Illuminate\\Http\\Request\) in empty\(\) is not falsy\.$#'
 			identifier: empty.property
 			count: 1
@@ -1617,18 +1587,6 @@ parameters:
 		-
 			message: '#^Negated boolean expression is always false\.$#'
 			identifier: booleanNot.alwaysFalse
-			count: 1
-			path: src/Form/Builder.php
-
-		-
-			message: '#^PHPDoc tag @param has invalid value \(\[type\] \$reject\)\: Unexpected token "\[", expected type at offset 47 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Form/Builder.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(\$this;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 24 on line 2$#'
-			identifier: phpDoc.parseError
 			count: 1
 			path: src/Form/Builder.php
 
@@ -1921,12 +1879,6 @@ parameters:
 			path: src/Form/Field/Embeds.php
 
 		-
-			message: '#^PHPDoc tag @return has invalid value \(void\.\)\: Unexpected token "\.", expected TOKEN_HORIZONTAL_WS at offset 137 on line 5$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Form/Field/Embeds.php
-
-		-
 			message: '#^Return type \(Illuminate\\View\\View\) of method Appsolutely\\AIO\\Form\\Field\\Embeds\:\:render\(\) should be compatible with return type \(string\) of method Illuminate\\Contracts\\Support\\Renderable\:\:render\(\)$#'
 			identifier: method.childReturnType
 			count: 1
@@ -2011,26 +1963,8 @@ parameters:
 			path: src/Form/Field/File.php
 
 		-
-			message: '#^PHPDoc tag @param has invalid value \(string\|null\)\: Unexpected token "\\n     \* ", expected variable at offset 126 on line 5$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Form/Field/File.php
-
-		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$path$#'
 			identifier: parameter.notFound
-			count: 1
-			path: src/Form/Field/File.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(void\.\)\: Unexpected token "\.", expected TOKEN_HORIZONTAL_WS at offset 61 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Form/Field/File.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(void\.\)\: Unexpected token "\.", expected TOKEN_HORIZONTAL_WS at offset 70 on line 4$#'
-			identifier: phpDoc.parseError
 			count: 1
 			path: src/Form/Field/File.php
 
@@ -2068,6 +2002,12 @@ parameters:
 			message: '#^Property Appsolutely\\AIO\\Form\\Field\\File\:\:\$storage \(Illuminate\\Filesystem\\Filesystem\) does not accept false\.$#'
 			identifier: assign.propertyType
 			count: 1
+			path: src/Form/Field/File.php
+
+		-
+			message: '#^Result of method Appsolutely\\AIO\\Form\\Field\\File\:\:destroy\(\) \(void\) is used\.$#'
+			identifier: method.void
+			count: 2
 			path: src/Form/Field/File.php
 
 		-
@@ -2131,12 +2071,6 @@ parameters:
 			path: src/Form/Field/HasMany.php
 
 		-
-			message: '#^PHPDoc tag @return has invalid value \(void\.\)\: Unexpected token "\.", expected TOKEN_HORIZONTAL_WS at offset 137 on line 5$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Form/Field/HasMany.php
-
-		-
 			message: '#^Parameter \#2 \$array of function implode expects array\<string\>, list\<Illuminate\\Contracts\\View\\Factory\|Illuminate\\View\\View\|string\> given\.$#'
 			identifier: argument.type
 			count: 1
@@ -2187,12 +2121,6 @@ parameters:
 		-
 			message: '#^Call to static method make\(\) on an unknown class Intervention\\Image\\ImageManagerStatic\.$#'
 			identifier: class.notFound
-			count: 1
-			path: src/Form/Field/Image.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(void\.\)\: Unexpected token "\.", expected TOKEN_HORIZONTAL_WS at offset 106 on line 5$#'
-			identifier: phpDoc.parseError
 			count: 1
 			path: src/Form/Field/Image.php
 
@@ -2593,12 +2521,6 @@ parameters:
 			path: src/Grid.php
 
 		-
-			message: '#^PHPDoc tag @param has invalid value \(array\|string\|\\Closure\)\: Unexpected token "\\n     \* ", expected variable at offset 39 on line 2$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Grid.php
-
-		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$closure$#'
 			identifier: parameter.notFound
 			count: 1
@@ -2613,24 +2535,6 @@ parameters:
 		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$toArray$#'
 			identifier: parameter.notFound
-			count: 1
-			path: src/Grid.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(\$this\.\)\: Unexpected token "\.", expected TOKEN_HORIZONTAL_WS at offset 58 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Grid.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(\$this\.\)\: Unexpected token "\.", expected TOKEN_HORIZONTAL_WS at offset 62 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Grid.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(\$this;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 24 on line 2$#'
-			identifier: phpDoc.parseError
 			count: 1
 			path: src/Grid.php
 
@@ -2763,12 +2667,6 @@ parameters:
 		-
 			message: '#^Method Appsolutely\\AIO\\Grid\\Column\\Filter\:\:render\(\) should return string but return statement is missing\.$#'
 			identifier: return.missing
-			count: 1
-			path: src/Grid/Column/Filter.php
-
-		-
-			message: '#^PHPDoc tag @param has invalid value \(mixed array \$params\)\: Unexpected token "array", expected variable at offset 53 on line 3$#'
-			identifier: phpDoc.parseError
 			count: 1
 			path: src/Grid/Column/Filter.php
 
@@ -2917,24 +2815,6 @@ parameters:
 			path: src/Grid/Displayers/Actions.php
 
 		-
-			message: '#^PHPDoc tag @return has invalid value \(\$this\.\)\: Unexpected token "\.", expected TOKEN_HORIZONTAL_WS at offset 52 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Grid/Displayers/Actions.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(\$this\.\)\: Unexpected token "\.", expected TOKEN_HORIZONTAL_WS at offset 54 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Grid/Displayers/Actions.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(\$this\.\)\: Unexpected token "\.", expected TOKEN_HORIZONTAL_WS at offset 58 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Grid/Displayers/Actions.php
-
-		-
 			message: '#^Instanceof between array and Illuminate\\Contracts\\Support\\Arrayable will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
 			count: 2
@@ -3021,12 +2901,6 @@ parameters:
 		-
 			message: '#^If condition is always true\.$#'
 			identifier: if.alwaysTrue
-			count: 1
-			path: src/Grid/Exporter.php
-
-		-
-			message: '#^PHPDoc tag @method has invalid value \(mixed export\)\: Unexpected token "\\n ", expected ''\('' at offset 67 on line 4$#'
-			identifier: phpDoc.parseError
 			count: 1
 			path: src/Grid/Exporter.php
 
@@ -3817,12 +3691,6 @@ parameters:
 			path: src/Http/Controllers/HandleFormController.php
 
 		-
-			message: '#^PHPDoc tag @param has invalid value \(string\|null\)\: Unexpected token "\\n     \* ", expected variable at offset 126 on line 5$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Http/Controllers/HandleFormController.php
-
-		-
 			message: '#^Trait Appsolutely\\AIO\\Http\\Controllers\\HasNestedResource is used zero times and is not analysed\.$#'
 			identifier: trait.unused
 			count: 1
@@ -3963,12 +3831,6 @@ parameters:
 		-
 			message: '#^Call to function method_exists\(\) with Illuminate\\Http\\Request and ''prefetch'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/Http/Middleware/Bootstrap.php
-
-		-
-			message: '#^PHPDoc tag @param has invalid value \(Request\)\: Unexpected token "\\n     \* ", expected variable at offset 26 on line 2$#'
-			identifier: phpDoc.parseError
 			count: 1
 			path: src/Http/Middleware/Bootstrap.php
 
@@ -7495,6 +7357,12 @@ parameters:
 			path: src/Show.php
 
 		-
+			message: '#^Parameter \#1 \$fields of method Appsolutely\\AIO\\Show\\Panel\:\:fill\(\) expects array\<Appsolutely\\AIO\\Show\\Field\>, Illuminate\\Support\\Collection given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Show.php
+
+		-
 			message: '#^Parameter \#1 \$model of method Appsolutely\\AIO\\Show\:\:model\(\) expects Illuminate\\Database\\Eloquent\\Model\|Illuminate\\Support\\Fluent\|null, array\|Illuminate\\Contracts\\Support\\Arrayable given\.$#'
 			identifier: argument.type
 			count: 1
@@ -7627,12 +7495,6 @@ parameters:
 			path: src/Show/Panel.php
 
 		-
-			message: '#^PHPDoc tag @param has invalid value \(\[\]Field \$fields\)\: Unexpected token "\[", expected type at offset 54 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Show/Panel.php
-
-		-
 			message: '#^Parameter \#1 \$view of function view expects view\-string\|null, string given\.$#'
 			identifier: argument.type
 			count: 1
@@ -7749,12 +7611,6 @@ parameters:
 		-
 			message: '#^PHPDoc tag @param for parameter \$params with type mixed is not subtype of native type array\.$#'
 			identifier: parameter.phpDocType
-			count: 1
-			path: src/Support/Helper.php
-
-		-
-			message: '#^PHPDoc tag @param has invalid value \(mixed array \$params\)\: Unexpected token "array", expected variable at offset 87 on line 5$#'
-			identifier: phpDoc.parseError
 			count: 1
 			path: src/Support/Helper.php
 
@@ -7951,12 +7807,6 @@ parameters:
 			path: src/Tree.php
 
 		-
-			message: '#^PHPDoc tag @return has invalid value \(\$this;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 24 on line 2$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Tree.php
-
-		-
 			message: '#^Property Appsolutely\\AIO\\Tree\:\:\$branchCallback \(null\) does not accept Closure\.$#'
 			identifier: assign.propertyType
 			count: 2
@@ -7985,12 +7835,6 @@ parameters:
 			identifier: new.static
 			count: 1
 			path: src/Tree.php
-
-		-
-			message: '#^PHPDoc tag @var has invalid value \(\\Appsolutely\\AIO\\Tree\\Actions;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 45 on line 2$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Tree/RowAction.php
 
 		-
 			message: '#^Call to function method_exists\(\) with \$this\(Appsolutely\\AIO\\Widgets\\ApexCharts\\Chart\) and ''handle'' will always evaluate to true\.$#'
