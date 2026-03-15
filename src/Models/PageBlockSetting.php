@@ -23,6 +23,7 @@ final class PageBlockSetting extends Model
         'block_id',
         'block_value_id',
         'reference',
+        'theme',
         'type',
         'remark',
         'sort',
