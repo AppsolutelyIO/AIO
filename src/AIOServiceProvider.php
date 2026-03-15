@@ -138,7 +138,9 @@ class AIOServiceProvider extends ServiceProvider
         }
 
         if (config('aio.routes.cache', true)) {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/cache/test.php');
+            foreach (glob(__DIR__ . '/../routes/cache/*.php') as $routeFile) {
+                $this->loadRoutesFrom($routeFile);
+            }
         }
 
         // Fallback (catch-all page routes) must load last
