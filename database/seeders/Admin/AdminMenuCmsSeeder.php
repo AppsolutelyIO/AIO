@@ -55,7 +55,7 @@ class AdminMenuCmsSeeder extends Seeder
             'id'        => ++$id,
             'parent_id' => 0,
             'order'     => ++$order,
-            'title'     => 'Categories',
+            'title'     => 'Article Categories',
             'icon'      => 'feather icon-folder',
             'uri'       => 'articles/categories',
         ]);
