@@ -83,7 +83,7 @@
     },
     "lint-staged": {
         "*.php": [
-            "./vendor/bin/pint"
+            "../site/vendor/bin/pint"
         ],
         "*.blade.php": [
             "blade-formatter --write --no-php-syntax-check"

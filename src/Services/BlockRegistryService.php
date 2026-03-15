@@ -10,10 +10,12 @@ use Appsolutely\AIO\Models\PageBlockGroup;
 use Appsolutely\AIO\Repositories\PageBlockRepository;
 use Appsolutely\AIO\Services\Concerns\ResolvesLivewireClassName;
 use Appsolutely\AIO\Services\Contracts\ManifestServiceInterface;
+use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 use Livewire\Livewire;
 use Qirolab\Theme\Theme;
+use Throwable;
 
 /**
  * Builds block registry from theme manifest.json, matching blocks to page_block by class
@@ -28,6 +30,7 @@ use Qirolab\Theme\Theme;
 final readonly class BlockRegistryService
 {
     use ResolvesLivewireClassName;
+
     private const CACHE_KEY_PREFIX = 'block_registry:';
 
     private const CACHE_TTL = 3600;
@@ -36,7 +39,8 @@ final readonly class BlockRegistryService
 
     public function __construct(
         protected ManifestServiceInterface $manifestService,
-        protected PageBlockRepository $blockRepository
+        protected PageBlockRepository $blockRepository,
+        protected ThemeServiceInterface $themeService,
     ) {}
 
     /**
@@ -46,8 +50,13 @@ final readonly class BlockRegistryService
      */
     public function getRegistry(?string $themeName = null): array
     {
-        $themeName = $themeName ?? Theme::active();
-        $cacheKey  = self::CACHE_KEY_PREFIX . $themeName;
+        $themeName = $themeName ?? Theme::active() ?? $this->themeService->resolveThemeName();
+
+        if ($themeName === null || $themeName === '') {
+            return [];
+        }
+
+        $cacheKey = self::CACHE_KEY_PREFIX . $themeName;
 
         return Cache::remember($cacheKey, self::CACHE_TTL, function () use ($themeName) {
             return $this->buildRegistry($themeName);
@@ -56,6 +65,8 @@ final readonly class BlockRegistryService
 
     private function buildRegistry(string $themeName): array
     {
+        $this->ensureThemeSetup($themeName);
+
         $manifest  = $this->manifestService->loadManifest($themeName);
         $templates = $manifest['templates'] ?? [];
 
@@ -110,7 +121,7 @@ final readonly class BlockRegistryService
             return;
         }
 
-        $themeName = Theme::active();
+        $themeName = Theme::active() ?? $this->themeService->resolveThemeName();
         Cache::forget(self::CACHE_KEY_PREFIX . $themeName);
     }
 
@@ -206,7 +217,7 @@ final readonly class BlockRegistryService
             $reference = 'registry-preview-' . $manifestRef;
 
             return Livewire::mount($component, $data, $reference);
-        } catch (\Throwable) {
+        } catch (Throwable) {
             return $this->buildPlaceholder($manifestRef);
         }
     }
@@ -221,10 +232,17 @@ final readonly class BlockRegistryService
         array $displayOptions = [],
         array $queryOptions = [],
         string $reference = '',
-        array $pageData = []
+        array $pageData = [],
     ): string {
-        $themeName = Theme::active();
-        $config    = $this->manifestService->getTemplateConfig($type, $themeName);
+        $themeName = Theme::active() ?? $this->themeService->resolveThemeName();
+
+        if ($themeName === null || $themeName === '') {
+            return $this->buildPlaceholder($type);
+        }
+
+        $this->ensureThemeSetup($themeName);
+
+        $config = $this->manifestService->getTemplateConfig($type, $themeName);
 
         if ($config === null) {
             return $this->buildPlaceholder($type);
@@ -257,9 +275,22 @@ final readonly class BlockRegistryService
 
         try {
             return Livewire::mount($component, $data, $ref);
-        } catch (\Throwable) {
+        } catch (Throwable) {
             return $this->buildPlaceholder($type);
         }
+    }
+
+    /**
+     * Ensure theme view paths are registered (needed in admin context where ApplyThemeMiddleware skips).
+     */
+    private function ensureThemeSetup(string $themeName): void
+    {
+        if (Theme::active() !== null) {
+            return;
+        }
+
+        $parentTheme = $this->themeService->getParentTheme();
+        $this->themeService->setupTheme($themeName, $parentTheme);
     }
 
     /**
