@@ -13,13 +13,16 @@ use Illuminate\Support\Facades\Schema;
 class TestModel extends Model
 {
     protected $table = 'test_items';
+
     protected $guarded = [];
+
     public $timestamps = true;
 }
 
 class TestParentModel extends Model
 {
     protected $table = 'test_parents';
+
     protected $guarded = [];
 
     public function profile(): HasOne
@@ -31,6 +34,7 @@ class TestParentModel extends Model
 class TestChildModel extends Model
 {
     protected $table = 'test_children';
+
     protected $guarded = [];
 
     public function parent(): BelongsTo
@@ -79,7 +83,7 @@ class EloquentRepositoryTest extends TestCase
     public function test_create_from_model_instance()
     {
         $model = new TestModel();
-        $repo = new EloquentRepository($model);
+        $repo  = new EloquentRepository($model);
 
         $this->assertSame('id', $repo->getKeyName());
         $this->assertInstanceOf(TestModel::class, $repo->model());
@@ -96,7 +100,7 @@ class EloquentRepositoryTest extends TestCase
     public function test_create_from_builder()
     {
         $builder = TestModel::where('status', 'active');
-        $repo = new EloquentRepository($builder);
+        $repo    = new EloquentRepository($builder);
 
         $this->assertInstanceOf(TestModel::class, $repo->model());
     }
@@ -177,7 +181,7 @@ class EloquentRepositoryTest extends TestCase
 
     public function test_create_model()
     {
-        $repo = new EloquentRepository(TestModel::class);
+        $repo  = new EloquentRepository(TestModel::class);
         $model = $repo->createModel(['name' => 'Test']);
 
         $this->assertInstanceOf(TestModel::class, $model);
@@ -197,10 +201,10 @@ class EloquentRepositoryTest extends TestCase
 
     public function test_join_parameters_belongs_to()
     {
-        $child = new TestChildModel();
+        $child    = new TestChildModel();
         $relation = $child->parent();
 
-        $repo = new EloquentRepository(TestChildModel::class);
+        $repo   = new EloquentRepository(TestChildModel::class);
         $method = new \ReflectionMethod($repo, 'joinParameters');
         $result = $method->invoke($repo, $relation);
 
@@ -213,10 +217,10 @@ class EloquentRepositoryTest extends TestCase
 
     public function test_join_parameters_has_one()
     {
-        $parent = new TestParentModel();
+        $parent   = new TestParentModel();
         $relation = $parent->profile();
 
-        $repo = new EloquentRepository(TestParentModel::class);
+        $repo   = new EloquentRepository(TestParentModel::class);
         $method = new \ReflectionMethod($repo, 'joinParameters');
         $result = $method->invoke($repo, $relation);
 

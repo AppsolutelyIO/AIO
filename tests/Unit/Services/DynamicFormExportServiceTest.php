@@ -7,8 +7,9 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Models\FormEntry;
 use Appsolutely\AIO\Services\DynamicFormExportService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final class DynamicFormExportServiceTest extends TestCase
 {
@@ -80,13 +81,13 @@ final class DynamicFormExportServiceTest extends TestCase
 
         $response = $this->service->exportFormEntriesForApi($form->id);
 
-        $this->assertInstanceOf(\Symfony\Component\HttpFoundation\StreamedResponse::class, $response);
+        $this->assertInstanceOf(StreamedResponse::class, $response);
     }
 
     public function test_export_form_entries_for_api_with_null_form_id_returns_streamed_response(): void
     {
         $response = $this->service->exportFormEntriesForApi(null);
 
-        $this->assertInstanceOf(\Symfony\Component\HttpFoundation\StreamedResponse::class, $response);
+        $this->assertInstanceOf(StreamedResponse::class, $response);
     }
 }

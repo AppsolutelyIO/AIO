@@ -6,8 +6,11 @@ use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Form\Field\File;
 use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Support\WebUploader;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemAdapter;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 trait HasUploadedFile
 {
@@ -24,7 +27,7 @@ trait HasUploadedFile
     /**
      * 获取上传文件.
      *
-     * @return \Symfony\Component\HttpFoundation\File\UploadedFile|void
+     * @return UploadedFile|void
      */
     public function file()
     {
@@ -34,8 +37,7 @@ trait HasUploadedFile
     /**
      * 获取文件管理仓库.
      *
-     * @param  string|null  $disk
-     * @return \Illuminate\Contracts\Filesystem\Filesystem|FilesystemAdapter
+     * @return Filesystem|FilesystemAdapter
      */
     public function disk(?string $disk = null)
     {
@@ -55,7 +57,7 @@ trait HasUploadedFile
     /**
      * 删除文件.
      *
-     * @param  \Illuminate\Contracts\Filesystem\Filesystem|FilesystemAdapter  $disk
+     * @param  Filesystem|FilesystemAdapter  $disk
      * @param  string|null  $path
      * @return bool
      */
@@ -69,9 +71,9 @@ trait HasUploadedFile
     /**
      * 删除文件并响应返回值.
      *
-     * @param  \Illuminate\Contracts\Filesystem\Filesystem|FilesystemAdapter  $disk
+     * @param  Filesystem|FilesystemAdapter  $disk
      * @param string|null
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function deleteFileAndResponse($disk = null, $path = null)
     {
@@ -84,7 +86,6 @@ trait HasUploadedFile
      * 响应上传成功信息.
      *
      * @param  string  $path  文件完整路径
-     * @param  string  $url
      * @return mixed
      */
     public function responseUploaded(string $path, string $url)
@@ -111,8 +112,7 @@ trait HasUploadedFile
     /**
      * 响应失败信息.
      *
-     * @param $error
-     * @param $code
+     * @param  $code
      * @return mixed
      */
     public function responseErrorMessage($error)
@@ -134,7 +134,7 @@ trait HasUploadedFile
      * 文件删除失败.
      *
      * @param  string  $message
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function responseDeleteFailed($message = '')
     {

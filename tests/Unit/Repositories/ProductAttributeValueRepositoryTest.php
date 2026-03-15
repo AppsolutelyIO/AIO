@@ -7,8 +7,9 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 use Appsolutely\AIO\Models\ProductAttribute;
 use Appsolutely\AIO\Models\ProductAttributeValue;
 use Appsolutely\AIO\Repositories\ProductAttributeValueRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class ProductAttributeValueRepositoryTest extends TestCase
 {
@@ -36,7 +37,7 @@ final class ProductAttributeValueRepositoryTest extends TestCase
     {
         $result = $this->repository->all();
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
     }
 
     public function test_create_stores_product_attribute_value(): void

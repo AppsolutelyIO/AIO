@@ -470,14 +470,14 @@ class HelperTest extends TestCase
 
     public function test_export_array_simple()
     {
-        $array = ['key' => 'value'];
+        $array  = ['key' => 'value'];
         $result = Helper::exportArray($array);
         $this->assertStringContainsString("'key' => 'value'", $result);
     }
 
     public function test_export_array_booleans()
     {
-        $array = ['enabled' => true, 'disabled' => false, 'empty' => null];
+        $array  = ['enabled' => true, 'disabled' => false, 'empty' => null];
         $result = Helper::exportArray($array);
         $this->assertStringContainsString("'enabled' => true", $result);
         $this->assertStringContainsString("'disabled' => false", $result);
@@ -486,7 +486,7 @@ class HelperTest extends TestCase
 
     public function test_export_array_php()
     {
-        $array = ['key' => 'value'];
+        $array  = ['key' => 'value'];
         $result = Helper::exportArrayPhp($array);
         $this->assertStringStartsWith('<?php', $result);
         $this->assertStringContainsString('return [', $result);
@@ -510,7 +510,7 @@ class HelperTest extends TestCase
 
     public function test_array_set_null_key_replaces_array()
     {
-        $array = ['old'];
+        $array  = ['old'];
         $result = Helper::arraySet($array, null, 'replaced');
         $this->assertSame('replaced', $result);
     }
@@ -567,7 +567,7 @@ class HelperTest extends TestCase
     public function test_render_closure_with_params()
     {
         $result = Helper::render(function ($a, $b) {
-            return $a.'-'.$b;
+            return $a . '-' . $b;
         }, ['foo', 'bar']);
         $this->assertSame('foo-bar', $result);
     }

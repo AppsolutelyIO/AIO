@@ -6,15 +6,17 @@ namespace Appsolutely\AIO\Http\Controllers\Auth;
 
 use Appsolutely\AIO\Http\Controllers\BaseController;
 use Appsolutely\AIO\Http\Requests\Auth\LoginRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 final class AuthenticatedSessionController extends BaseController
 {
     /**
      * Display the login view.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -24,7 +26,7 @@ final class AuthenticatedSessionController extends BaseController
     /**
      * Handle an incoming authentication request.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(LoginRequest $request)
     {
@@ -38,7 +40,7 @@ final class AuthenticatedSessionController extends BaseController
     /**
      * Destroy an authenticated session.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy(Request $request)
     {

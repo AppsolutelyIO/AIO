@@ -6,6 +6,7 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Services\ManifestService;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Support\Facades\Cache;
 
 final class ManifestServiceTest extends TestCase
 {
@@ -51,11 +52,11 @@ final class ManifestServiceTest extends TestCase
     public function test_clear_cache_removes_cached_manifest(): void
     {
         // Put something in the manifest cache
-        \Illuminate\Support\Facades\Cache::put('manifest_test-theme', ['templates' => ['hero' => []]], 3600);
-        $this->assertNotNull(\Illuminate\Support\Facades\Cache::get('manifest_test-theme'));
+        Cache::put('manifest_test-theme', ['templates' => ['hero' => []]], 3600);
+        $this->assertNotNull(Cache::get('manifest_test-theme'));
 
         $this->service->clearCache('test-theme');
 
-        $this->assertNull(\Illuminate\Support\Facades\Cache::get('manifest_test-theme'));
+        $this->assertNull(Cache::get('manifest_test-theme'));
     }
 }

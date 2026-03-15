@@ -84,8 +84,6 @@ class Select extends Presenter
 
     /**
      * Build options.
-     *
-     * @return array
      */
     protected function buildOptions(): array
     {
@@ -116,8 +114,6 @@ class Select extends Presenter
      * Load options from current selected resource(s).
      *
      * @param  string  $model
-     * @param  string  $idField
-     * @param  string  $textField
      * @return $this
      */
     public function model($model, string $idField = 'id', string $textField = 'name')
@@ -154,9 +150,6 @@ class Select extends Presenter
     /**
      * Load options from remote.
      *
-     * @param  string  $url
-     * @param  array  $parameters
-     * @param  array  $options
      * @return $this
      */
     protected function loadRemoteOptions(string $url, array $parameters = [], array $options = [])
@@ -206,10 +199,9 @@ class Select extends Presenter
     /**
      * Set input placeholder.
      *
-     * @param  string  $placeholder
      * @return $this|string
      */
-    public function placeholder(string $placeholder = null)
+    public function placeholder(?string $placeholder = null)
     {
         if ($placeholder === null) {
             return $this->placeholder ?: __('admin.choose');
@@ -223,9 +215,6 @@ class Select extends Presenter
     /**
      * Load options from ajax.
      *
-     * @param  string  $resourceUrl
-     * @param $idField
-     * @param $textField
      * @return $this
      */
     public function ajax(string $resourceUrl, string $idField = 'id', string $textField = 'text')
@@ -241,9 +230,6 @@ class Select extends Presenter
         return $this->addVariables(['ajax' => ['url' => $url, 'idField' => $idField, 'textField' => $textField]]);
     }
 
-    /**
-     * @return array
-     */
     public function defaultVariables(): array
     {
         return [
@@ -257,12 +243,9 @@ class Select extends Presenter
 
     public function getElementClassSelector()
     {
-        return '.'.$this->getElementClass();
+        return '.' . $this->getElementClass();
     }
 
-    /**
-     * @return string
-     */
     public function getElementClass(): string
     {
         return $this->elementClass ?:
@@ -273,9 +256,6 @@ class Select extends Presenter
      * Load options for other select when change.
      *
      * @param  string  $target
-     * @param  string  $resourceUrl
-     * @param  string  $idField
-     * @param  string  $textField
      * @return $this
      */
     public function load($target, string $resourceUrl, string $idField = 'id', string $textField = 'text'): self
@@ -288,8 +268,6 @@ class Select extends Presenter
      *
      * @param  array|string  $fields
      * @param  array|string  $sourceUrls
-     * @param  string  $idField
-     * @param  string  $textField
      * @return $this
      */
     public function loads($fields = [], $sourceUrls = [], string $idField = 'id', string $textField = 'text')

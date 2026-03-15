@@ -70,7 +70,7 @@ class SiteSettingController extends AdminController
 
                 $form->tab($label, function () use ($form, $items) {
                     foreach ($items as $setting) {
-                        $fieldName = str_replace('.', '-', $setting->key);
+                        $fieldName  = str_replace('.', '-', $setting->key);
                         $fieldLabel = $this->keyToLabel($setting->key);
 
                         $field = match ($setting->type) {
@@ -97,7 +97,7 @@ class SiteSettingController extends AdminController
     protected function keyToLabel(string $key): string
     {
         $parts = explode('.', $key);
-        $last = end($parts);
+        $last  = end($parts);
 
         return ucwords(str_replace('_', ' ', $last));
     }

@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Tests\Unit\Http\Controllers;
 
 use Appsolutely\AIO\Http\Controllers\ValueController;
 use Appsolutely\AIO\Tests\Unit\TestCase;
+use Appsolutely\AIO\Traits\HasAuthorization;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class ValueControllerTest extends TestCase
     protected function callResolve(Request $request): object
     {
         $controller = new ValueController();
-        $method = new \ReflectionMethod($controller, 'resolve');
+        $method     = new \ReflectionMethod($controller, 'resolve');
 
         return $method->invoke($controller, $request);
     }
@@ -76,10 +77,7 @@ class ValueControllerTest extends TestCase
  */
 class ValueControllerTestClassWithHandleOnly
 {
-    public function handle(Request $request)
-    {
-        return null;
-    }
+    public function handle(Request $request) {}
 }
 
 /**
@@ -87,10 +85,7 @@ class ValueControllerTestClassWithHandleOnly
  */
 class ValueControllerTestValidClass
 {
-    use \Appsolutely\AIO\Traits\HasAuthorization;
+    use HasAuthorization;
 
-    public function handle(Request $request)
-    {
-        return null;
-    }
+    public function handle(Request $request) {}
 }

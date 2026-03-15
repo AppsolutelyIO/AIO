@@ -8,6 +8,7 @@ use Appsolutely\AIO\Grid\Model;
 use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
 
 abstract class Filter implements Renderable
 {
@@ -36,9 +37,6 @@ abstract class Filter implements Renderable
      */
     protected $display = true;
 
-    /**
-     * @param  Column  $column
-     */
     public function setParent(Column $column)
     {
         $this->parent = $column;
@@ -65,7 +63,6 @@ abstract class Filter implements Renderable
     }
 
     /**
-     * @param  \Closure  $callback
      * @return $this
      */
     public function resolving(\Closure $callback)
@@ -76,7 +73,6 @@ abstract class Filter implements Renderable
     }
 
     /**
-     * @param  string  $name
      * @return $this
      */
     public function setColumnName(string $name)
@@ -110,7 +106,7 @@ abstract class Filter implements Renderable
     public function getQueryName()
     {
         return $this->parent->grid()->makeName(
-            'filter-'.$this->getColumnName()
+            'filter-' . $this->getColumnName()
         );
     }
 
@@ -118,7 +114,7 @@ abstract class Filter implements Renderable
      * Get filter value of this column.
      *
      * @param  string  $default
-     * @return array|\Illuminate\Http\Request|string
+     * @return array|Request|string
      */
     public function value($default = '')
     {
@@ -127,7 +123,6 @@ abstract class Filter implements Renderable
 
     /**
      * @param  mixed  $model
-     * @param  string  $query
      * @param mixed array $params
      * @return void
      */
@@ -202,7 +197,6 @@ HMLT;
     }
 
     /**
-     * @param  bool  $value
      * @return $this
      */
     public function display(bool $value)
@@ -232,7 +226,6 @@ HMLT;
      * Add a query binding.
      *
      * @param  mixed  $value
-     * @param  Model  $model
      */
     public function addBinding($value, Model $model)
     {

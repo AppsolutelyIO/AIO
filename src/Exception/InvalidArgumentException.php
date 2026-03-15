@@ -2,6 +2,4 @@
 
 namespace Appsolutely\AIO\Exception;
 
-class InvalidArgumentException extends AdminException
-{
-}
+class InvalidArgumentException extends AdminException {}

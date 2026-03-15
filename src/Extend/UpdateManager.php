@@ -26,7 +26,7 @@ class UpdateManager
 
     public function __construct(Manager $manager)
     {
-        $this->manager = $manager;
+        $this->manager        = $manager;
         $this->versionManager = $manager->versionManager();
     }
 
@@ -46,7 +46,7 @@ class UpdateManager
             ! ($extension = $this->manager->get($name))
             && $this->versionManager->purge($name)
         ) {
-            $this->note('<info>Purged from database:</info> '.$name);
+            $this->note('<info>Purged from database:</info> ' . $name);
 
             return $this;
         }
@@ -60,16 +60,16 @@ class UpdateManager
         }
 
         if ($this->versionManager->remove($extension, $stopOnVersion, true)) {
-            $this->note('<info>Rolled back:</info> '.$name);
+            $this->note('<info>Rolled back:</info> ' . $name);
 
             if ($currentVersion = $this->versionManager->getCurrentVersion($extension)) {
-                $this->note('<info>Current Version:</info> '.$currentVersion.' ('.$this->versionManager->getCurrentVersionNote($extension).')');
+                $this->note('<info>Current Version:</info> ' . $currentVersion . ' (' . $this->versionManager->getCurrentVersionNote($extension) . ')');
             }
 
             return $this;
         }
 
-        $this->note('<error>Unable to find:</error> '.$name);
+        $this->note('<error>Unable to find:</error> ' . $name);
 
         return $this;
     }
@@ -79,7 +79,7 @@ class UpdateManager
         $name = $this->manager->getName($name);
 
         if (! ($extension = $this->manager->get($name))) {
-            $this->note('<error>Unable to find:</error> '.$name);
+            $this->note('<error>Unable to find:</error> ' . $name);
 
             return;
         }
@@ -109,7 +109,7 @@ class UpdateManager
 
     protected function versionUpdate($extension, $stopOnVersion)
     {
-        $this->versionManager->notes = [];
+        $this->versionManager->notes  = [];
         $this->versionManager->output = $this->output;
 
         if ($this->versionManager->update($extension, $stopOnVersion) !== false) {

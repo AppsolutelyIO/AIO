@@ -75,12 +75,12 @@ class ScaffoldController extends Controller
         Admin::requireAssets('select2');
         Admin::requireAssets('sortable');
 
-        $dbTypes = static::$dbTypes;
-        $dataTypeMap = static::$dataTypeMap;
-        $action = URL::current();
-        $namespaceBase = 'App\\'.implode('\\', array_map(function ($name) {
+        $dbTypes       = static::$dbTypes;
+        $dataTypeMap   = static::$dataTypeMap;
+        $action        = URL::current();
+        $namespaceBase = 'App\\' . implode('\\', array_map(function ($name) {
             return Str::studly($name);
-        }, explode(DIRECTORY_SEPARATOR, substr(config('admin.directory'), strlen(app_path().DIRECTORY_SEPARATOR)))));
+        }, explode(DIRECTORY_SEPARATOR, substr(config('admin.directory'), strlen(app_path() . DIRECTORY_SEPARATOR)))));
         $tables = collect($this->getDatabaseColumns())->map(function ($v) {
             return array_keys($v);
         })->toArray();
@@ -108,13 +108,13 @@ class ScaffoldController extends Controller
             Permission::error();
         }
 
-        $paths = [];
+        $paths   = [];
         $message = '';
 
-        $creates = (array) $request->get('create');
-        $table = Helper::slug($request->get('table_name'), '_');
+        $creates    = (array) $request->get('create');
+        $table      = Helper::slug($request->get('table_name'), '_');
         $controller = $request->get('controller_name');
-        $model = $request->get('model_name');
+        $model      = $request->get('model_name');
         $repository = $request->get('repository_name');
 
         try {
@@ -137,7 +137,7 @@ class ScaffoldController extends Controller
 
             // 3. Create migration.
             if (in_array('migration', $creates, true)) {
-                $migrationName = 'create_'.$table.'_table';
+                $migrationName = 'create_' . $table . '_table';
 
                 $paths['migration'] = (new MigrationCreator(app('files')))->buildBluePrint(
                     $request->get('fields'),
@@ -187,7 +187,7 @@ class ScaffoldController extends Controller
      */
     public function table()
     {
-        $db = addslashes(\request('db'));
+        $db    = addslashes(\request('db'));
         $table = \request('tb');
         if (! $table || ! $db) {
             return ['status' => 1, 'list' => []];
@@ -250,7 +250,7 @@ class ScaffoldController extends Controller
                 $data[$value['database']] = $collection->groupBy('TABLE_NAME')->map(function ($v) {
                     return collect($v)->keyBy('COLUMN_NAME')->map(function ($v) {
                         $v['COLUMN_TYPE'] = strtolower($v['COLUMN_TYPE']);
-                        $v['DATA_TYPE'] = strtolower($v['DATA_TYPE']);
+                        $v['DATA_TYPE']   = strtolower($v['DATA_TYPE']);
 
                         if (Str::contains($v['COLUMN_TYPE'], 'unsigned')) {
                             $v['DATA_TYPE'] .= '@unsigned';
@@ -288,7 +288,7 @@ class ScaffoldController extends Controller
         $messages = [];
 
         foreach ($paths as $name => $path) {
-            $messages[] = ucfirst($name).": $path";
+            $messages[] = ucfirst($name) . ": $path";
         }
 
         $messages[] = "<br />$message";

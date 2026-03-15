@@ -112,8 +112,6 @@ class DialogTree extends AbstractDisplayer
     }
 
     /**
-     * @param  string  $width
-     * @param  string  $height
      * @return $this
      */
     public function area(string $width, string $height)

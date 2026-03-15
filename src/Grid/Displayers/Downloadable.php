@@ -2,8 +2,8 @@
 
 namespace Appsolutely\AIO\Grid\Displayers;
 
-use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Support\ArrayHelper;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Support\Facades\Storage;
 
 class Downloadable extends AbstractDisplayer
@@ -18,7 +18,7 @@ class Downloadable extends AbstractDisplayer
             if (url()->isValidUrl($value)) {
                 $src = $value;
             } elseif ($server) {
-                $src = rtrim($server, '/').'/'.ltrim($value, '/');
+                $src = rtrim($server, '/') . '/' . ltrim($value, '/');
             } else {
                 $src = Storage::disk($disk ?: config('admin.upload.disk'))->url($value);
             }

@@ -9,7 +9,7 @@ class MiddlewareGroupTest extends TestCase
 {
     private function getMiddlewareGroups(): array
     {
-        $rc = new ReflectionClass(AdminServiceProvider::class);
+        $rc   = new ReflectionClass(AdminServiceProvider::class);
         $prop = $rc->getProperty('middlewareGroups');
 
         return $prop->getDefaultValue();

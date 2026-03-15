@@ -6,9 +6,9 @@ namespace Appsolutely\AIO\Admin\Controllers;
 
 use Appsolutely\AIO\Admin\Forms\ProductSkuForm;
 use Appsolutely\AIO\Enums\Status;
+use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Models\ProductSku;
 use Appsolutely\AIO\Repositories\ProductRepository;
-use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Widgets\Modal;
 
 final class ProductSkuController extends AdminBaseController

@@ -5,14 +5,12 @@ namespace Appsolutely\AIO\Scaffold;
 trait ShowCreator
 {
     /**
-     * @param  string  $primaryKey
-     * @param  array  $fields
      * @return string
      */
-    protected function generateShow(string $primaryKey = null, array $fields = [], $timestamps = null)
+    protected function generateShow(?string $primaryKey = null, array $fields = [], $timestamps = null)
     {
         $primaryKey = $primaryKey ?: request('primary_key', 'id');
-        $fields = $fields ?: request('fields', []);
+        $fields     = $fields ?: request('fields', []);
         $timestamps = $timestamps === null ? request('timestamps') : $timestamps;
 
         $rows = [];
@@ -28,9 +26,9 @@ trait ShowCreator
 
             $rows[] = "            \$show->field('{$field['name']}');";
 
-//            if ($k === 1 && (count($fields) > 2 || $timestamps)) {
-//                $rows[] = '            $show->divider();';
-//            }
+            //            if ($k === 1 && (count($fields) > 2 || $timestamps)) {
+            //                $rows[] = '            $show->divider();';
+            //            }
         }
 
         if ($timestamps) {

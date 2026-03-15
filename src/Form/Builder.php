@@ -2,7 +2,6 @@
 
 namespace Appsolutely\AIO\Form;
 
-use Closure;
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Contracts\FieldsCollection;
 use Appsolutely\AIO\Contracts\UploadField;
@@ -14,6 +13,7 @@ use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Support\UrlHelper;
 use Appsolutely\AIO\Traits\HasVariables;
 use Appsolutely\AIO\Widgets\DialogForm;
+use Closure;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\URL;
@@ -24,8 +24,8 @@ use Illuminate\Support\Str;
  */
 class Builder implements FieldsCollection
 {
-    use HasVariables;
     use HasFields;
+    use HasVariables;
 
     /**
      *  上个页面URL保存的key.
@@ -36,7 +36,9 @@ class Builder implements FieldsCollection
      * Modes constants.
      */
     const MODE_EDIT = 'edit';
+
     const MODE_CREATE = 'create';
+
     const MODE_DELETE = 'delete';
 
     /**
@@ -49,9 +51,6 @@ class Builder implements FieldsCollection
      */
     protected $form;
 
-    /**
-     * @var
-     */
     protected $action;
 
     /**
@@ -116,7 +115,7 @@ class Builder implements FieldsCollection
     protected $elementId;
 
     /**
-     * @var \Closure
+     * @var Closure
      */
     protected $wrapper;
 
@@ -137,19 +136,17 @@ class Builder implements FieldsCollection
 
     /**
      * Builder constructor.
-     *
-     * @param  Form  $form
      */
     public function __construct(Form $form)
     {
-        $this->form = $form;
+        $this->form   = $form;
         $this->layout = new Layout($form);
-        $this->tools = new Tools($this);
+        $this->tools  = new Tools($this);
         $this->footer = new Footer($this);
     }
 
     /**
-     * @param  \Closure  $closure
+     * @param  Closure  $closure
      * @return Layout
      */
     public function layout($closure = null)
@@ -162,7 +159,6 @@ class Builder implements FieldsCollection
     }
 
     /**
-     * @param  Closure  $closure
      * @return $this;
      */
     public function wrap(Closure $closure)
@@ -201,13 +197,11 @@ class Builder implements FieldsCollection
     }
 
     /**
-     * @param  string  $title
-     * @param  string  $content
      * @return $this
      */
     public function confirm(?string $title = null, ?string $content = null)
     {
-        $this->confirm['title'] = $title;
+        $this->confirm['title']   = $title;
         $this->confirm['content'] = $content;
 
         return $this;
@@ -216,10 +210,9 @@ class Builder implements FieldsCollection
     /**
      * Set the builder mode.
      *
-     * @param  string  $mode
      * @return void|string
      */
-    public function mode(string $mode = null)
+    public function mode(?string $mode = null)
     {
         if ($mode === null) {
             return $this->mode;
@@ -231,7 +224,6 @@ class Builder implements FieldsCollection
     /**
      * Returns builder is $mode.
      *
-     * @param $mode
      * @return bool
      */
     public function isMode($mode)
@@ -272,7 +264,6 @@ class Builder implements FieldsCollection
     /**
      * Set resource Id.
      *
-     * @param $id
      * @return mixed|void
      */
     public function setResourceId($id)
@@ -346,7 +337,7 @@ class Builder implements FieldsCollection
         }
 
         if ($this->isMode(static::MODE_EDIT)) {
-            return $this->form->resource().'/'.$this->id;
+            return $this->form->resource() . '/' . $this->id;
         }
 
         if ($this->isMode(static::MODE_CREATE)) {
@@ -435,7 +426,6 @@ class Builder implements FieldsCollection
     }
 
     /**
-     * @param  Field  $field
      * @return void
      */
     public function addHiddenField(Field $field)
@@ -475,7 +465,6 @@ class Builder implements FieldsCollection
     }
 
     /**
-     * @param  bool  $disable
      * @return void
      */
     public function disableHeader(bool $disable = true)
@@ -484,7 +473,6 @@ class Builder implements FieldsCollection
     }
 
     /**
-     * @param  bool  $disable
      * @return void
      */
     public function disableFooter(bool $disable = true)
@@ -493,7 +481,6 @@ class Builder implements FieldsCollection
     }
 
     /**
-     * @param $id
      * @return void
      */
     public function setElementId($id)
@@ -506,7 +493,7 @@ class Builder implements FieldsCollection
      */
     public function getElementId()
     {
-        return $this->elementId ?: ($this->elementId = 'form-'.Str::random(8));
+        return $this->elementId ?: ($this->elementId = 'form-' . Str::random(8));
     }
 
     /**
@@ -564,12 +551,12 @@ class Builder implements FieldsCollection
 
         $this->addRedirectUrlField();
 
-        $attributes['id'] = $this->getElementId();
-        $attributes['action'] = $this->action();
-        $attributes['method'] = Arr::get($options, 'method', 'post');
+        $attributes['id']             = $this->getElementId();
+        $attributes['action']         = $this->action();
+        $attributes['method']         = Arr::get($options, 'method', 'post');
         $attributes['accept-charset'] = 'UTF-8';
-        $attributes['data-toggle'] = 'validator';
-        $attributes['class'] = Arr::get($options, 'class');
+        $attributes['data-toggle']    = 'validator';
+        $attributes['class']          = Arr::get($options, 'class');
 
         if ($this->hasFile()) {
             $attributes['enctype'] = 'multipart/form-data';
@@ -580,7 +567,7 @@ class Builder implements FieldsCollection
             $html[] = "$name=\"$value\"";
         }
 
-        return '<form '.implode(' ', $html).' '.Admin::getPjaxContainerId().'>';
+        return '<form ' . implode(' ', $html) . ' ' . Admin::getPjaxContainerId() . '>';
     }
 
     /**
@@ -628,13 +615,13 @@ class Builder implements FieldsCollection
         $reject = function ($field) use (&$reservedColumns) {
             if ($field instanceof Field) {
                 return in_array($field->column(), $reservedColumns, true)
-                    && $field instanceof Form\Field\Display;
+                    && $field instanceof Field\Display;
             }
 
             if ($field instanceof Row) {
                 $fields = $field->fields()->reject(function ($item) use (&$reservedColumns) {
                     return in_array($item['element']->column(), $reservedColumns, true)
-                        && $item['element'] instanceof Form\Field\Display;
+                        && $item['element'] instanceof Field\Display;
                 });
 
                 $field->setFields($fields);
@@ -733,7 +720,6 @@ class Builder implements FieldsCollection
     }
 
     /**
-     * @param  Renderable  $view
      * @return string
      */
     protected function doWrap(Renderable $view)
@@ -751,7 +737,7 @@ class Builder implements FieldsCollection
     protected function addSubmitScript()
     {
         $confirm = admin_javascript_json($this->confirm);
-        $toastr = $this->form->validationErrorToastr ? 'true' : 'false';
+        $toastr  = $this->form->validationErrorToastr ? 'true' : 'false';
 
         Admin::script(
             <<<JS

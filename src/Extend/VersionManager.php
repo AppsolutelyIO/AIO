@@ -2,10 +2,10 @@
 
 namespace Appsolutely\AIO\Extend;
 
-use Carbon\Carbon;
 use Appsolutely\AIO\Models\Extension;
 use Appsolutely\AIO\Models\ExtensionHistory;
 use Appsolutely\AIO\Support\DatabaseUpdater;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
 /**
@@ -20,12 +20,17 @@ class VersionManager
     const NO_VERSION_VALUE = 0;
 
     const HISTORY_TYPE_COMMENT = 1;
+
     const HISTORY_TYPE_SCRIPT = 2;
 
     protected $fileVersions;
+
     protected $databaseVersions;
+
     protected $databaseHistory;
+
     protected $updater;
+
     protected $manager;
 
     public function __construct(Manager $manager)
@@ -42,7 +47,7 @@ class VersionManager
             return false;
         }
 
-        $currentVersion = $this->getLatestFileVersion($name);
+        $currentVersion  = $this->getLatestFileVersion($name);
         $databaseVersion = $this->getDatabaseVersion($name);
 
         if ($currentVersion === $databaseVersion) {
@@ -111,7 +116,7 @@ class VersionManager
         $extensionHistory = $this->getDatabaseHistory($name);
         $extensionHistory = array_reverse($extensionHistory);
 
-        $stopOnNextVersion = false;
+        $stopOnNextVersion   = false;
         $newExtensionVersion = null;
 
         try {
@@ -258,8 +263,8 @@ class VersionManager
         if (! isset($this->databaseVersions[$name])) {
             $this->databaseVersions[$name] =
                 Extension::query()
-                ->where('name', $name)
-                ->value('version');
+                    ->where('name', $name)
+                    ->value('version');
         }
 
         return $this->databaseVersions[$name] ?? static::NO_VERSION_VALUE;
@@ -277,7 +282,7 @@ class VersionManager
         } elseif ($version && $currentVersion) {
             Extension::query()->where('name', $name)->update([
                 'version'    => $version,
-                'updated_at' => new Carbon,
+                'updated_at' => new Carbon(),
             ]);
         } elseif ($currentVersion) {
             Extension::query()->where('name', $name)->delete();
@@ -307,7 +312,7 @@ class VersionManager
 
     protected function applyDatabaseScript($name, $version, $script)
     {
-        $updateFile = $this->manager->path($name, 'updates/'.$script);
+        $updateFile = $this->manager->path($name, 'updates/' . $script);
 
         if (! is_file($updateFile)) {
             $this->note(sprintf('- <error>v%s:  Migration file "%s" not found</error>', $version, $script));
@@ -340,7 +345,7 @@ class VersionManager
 
     protected function removeDatabaseScript($name, $version, $script)
     {
-        $updateFile = $this->manager->path($name, 'updates/'.$script);
+        $updateFile = $this->manager->path($name, 'updates/' . $script);
 
         $this->updater->packDown($this->resolveUpdater($name, $updateFile), function () use ($name, $version, $script) {
             ExtensionHistory::query()

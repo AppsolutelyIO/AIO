@@ -7,10 +7,11 @@ use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Laravel\Dusk\TestCase as BaseTestCase;
+use Symfony\Component\Process\Process;
 
 abstract class DuskTestCase extends BaseTestCase
 {
-    use CreatesApplication, BrowserExtension, InteractsWithDatabase;
+    use BrowserExtension, CreatesApplication, InteractsWithDatabase;
 
     /**
      * @var Administrator
@@ -27,7 +28,7 @@ abstract class DuskTestCase extends BaseTestCase
         $browser->loginAs($this->getUser(), 'admin');
     }
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -36,7 +37,7 @@ abstract class DuskTestCase extends BaseTestCase
         $this->boot();
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         $this->destory();
 
@@ -56,7 +57,7 @@ abstract class DuskTestCase extends BaseTestCase
     }
 
     /**
-     * @param  \Facebook\WebDriver\Remote\RemoteWebDriver  $driver
+     * @param  RemoteWebDriver  $driver
      * @return \Laravel\Dusk\Browser
      */
     protected function newBrowser($driver)
@@ -75,11 +76,11 @@ abstract class DuskTestCase extends BaseTestCase
     /**
      * Create the RemoteWebDriver instance.
      *
-     * @return \Facebook\WebDriver\Remote\RemoteWebDriver
+     * @return RemoteWebDriver
      */
     protected function driver()
     {
-        $options = (new ChromeOptions)->addArguments([
+        $options = (new ChromeOptions())->addArguments([
             '--disable-gpu',
             '--headless',
             '--window-size=1920,1080',
@@ -95,8 +96,7 @@ abstract class DuskTestCase extends BaseTestCase
     /**
      * Build the process to run the Chromedriver.
      *
-     * @param  array  $arguments
-     * @return \Symfony\Component\Process\Process
+     * @return Process
      *
      * @throws \RuntimeException
      */

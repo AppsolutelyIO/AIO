@@ -2,10 +2,10 @@
 
 namespace Appsolutely\AIO\Layout;
 
-use Closure;
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Exception\RuntimeException;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
+use Closure;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\ViewErrorBag;
@@ -57,10 +57,8 @@ class Content implements Renderable
 
     /**
      * Content constructor.
-     *
-     * @param  Closure|null  $callback
      */
-    public function __construct(?\Closure $callback = null)
+    public function __construct(?Closure $callback = null)
     {
         $this->callResolving();
 
@@ -118,7 +116,6 @@ class Content implements Renderable
     /**
      * 设置翻译文件路径.
      *
-     * @param  string|null  $translation
      * @return $this
      */
     public function translation(?string $translation)
@@ -160,7 +157,6 @@ class Content implements Renderable
     }
 
     /**
-     * @param  array  $breadcrumb
      * @return void
      *
      * @throws \Exception
@@ -209,7 +205,6 @@ class Content implements Renderable
     /**
      * Add one row for content body.
      *
-     * @param $content
      * @return $this
      */
     public function row($content)
@@ -226,7 +221,6 @@ class Content implements Renderable
     }
 
     /**
-     * @param $content
      * @return $this
      */
     public function prepend($content)
@@ -249,8 +243,6 @@ class Content implements Renderable
 
     /**
      * Add Row.
-     *
-     * @param  Row  $row
      */
     protected function addRow(Row $row)
     {
@@ -278,7 +270,6 @@ class Content implements Renderable
     }
 
     /**
-     * @param  \Throwable  $e
      * @return mixed|string
      */
     protected function handleException(\Throwable $e)
@@ -353,7 +344,6 @@ class Content implements Renderable
     /**
      * Set content view.
      *
-     * @param  null|string  $view
      * @return $this
      */
     public function view(?string $view)
@@ -526,9 +516,6 @@ class Content implements Renderable
 
     /**
      * Register a composed event.
-     *
-     * @param  callable  $callback
-     * @param  bool  $once
      */
     public static function composed(callable $callback, bool $once = false)
     {

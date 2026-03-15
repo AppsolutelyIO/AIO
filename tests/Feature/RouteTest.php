@@ -3,6 +3,7 @@
 namespace Appsolutely\AIO\Tests\Feature;
 
 use Appsolutely\AIO\Admin;
+use Illuminate\Http\Request;
 
 class RouteTest extends TestCase
 {
@@ -56,16 +57,16 @@ class RouteTest extends TestCase
 
         foreach ($postRoutes as $uri) {
             $matched = $routes->match(
-                \Illuminate\Http\Request::create($uri, 'POST')
+                Request::create($uri, 'POST')
             );
             $this->assertNotNull($matched, "POST API route [{$uri}] should be registered");
         }
 
         // render is GET
         $renderRoute = $routes->match(
-            \Illuminate\Http\Request::create('admin/api/render', 'GET')
+            Request::create('admin/api/render', 'GET')
         );
-        $this->assertNotNull($renderRoute, "GET API route [admin/api/render] should be registered");
+        $this->assertNotNull($renderRoute, 'GET API route [admin/api/render] should be registered');
     }
 
     // --- Route prefix ---
@@ -79,7 +80,7 @@ class RouteTest extends TestCase
 
     public function test_api_route_names_contain_api()
     {
-        $routes = app('router')->getRoutes();
+        $routes   = app('router')->getRoutes();
         $apiNames = [];
 
         foreach ($routes as $route) {
@@ -93,7 +94,7 @@ class RouteTest extends TestCase
 
         // Check key routes exist
         $hasAction = false;
-        $hasForm = false;
+        $hasForm   = false;
         foreach ($apiNames as $name) {
             if (str_ends_with($name, 'api.action')) {
                 $hasAction = true;
@@ -124,7 +125,7 @@ class RouteTest extends TestCase
     {
         $routes = app('router')->getRoutes();
 
-        $matched = $routes->match(\Illuminate\Http\Request::create('/admin/auth/users', 'GET'));
+        $matched = $routes->match(Request::create('/admin/auth/users', 'GET'));
         $this->assertNotNull($matched, 'GET /admin/auth/users route should exist');
     }
 
@@ -132,7 +133,7 @@ class RouteTest extends TestCase
     {
         $routes = app('router')->getRoutes();
 
-        $matched = $routes->match(\Illuminate\Http\Request::create('/admin/auth/menu', 'GET'));
+        $matched = $routes->match(Request::create('/admin/auth/menu', 'GET'));
         $this->assertNotNull($matched, 'GET /admin/auth/menu route should exist');
     }
 }

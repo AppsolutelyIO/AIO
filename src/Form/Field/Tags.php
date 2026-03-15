@@ -52,8 +52,6 @@ class Tags extends Field
     /**
      * Set visible column and key of data.
      *
-     * @param $visibleColumn
-     * @param $key
      * @return $this
      */
     public function pluck($visibleColumn, $key = 'id')
@@ -63,7 +61,7 @@ class Tags extends Field
         }
 
         $this->visibleColumn = $visibleColumn;
-        $this->key = $key;
+        $this->key           = $key;
 
         return $this;
     }
@@ -151,9 +149,6 @@ class Tags extends Field
     /**
      * Load options from ajax results.
      *
-     * @param  string  $url
-     * @param $idField
-     * @param $textField
      * @return $this
      */
     public function ajax(string $url, string $idField = 'id', string $textField = 'text')

@@ -7,8 +7,8 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Models\FormField;
 use Appsolutely\AIO\Repositories\FormFieldRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class FormFieldRepositoryTest extends TestCase
 {

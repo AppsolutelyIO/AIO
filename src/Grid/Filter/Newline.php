@@ -4,13 +4,9 @@ namespace Appsolutely\AIO\Grid\Filter;
 
 class Newline extends AbstractFilter
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
-    public function condition($inputs)
-    {
-    }
+    public function condition($inputs) {}
 
     public function render()
     {

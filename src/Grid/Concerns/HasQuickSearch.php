@@ -11,6 +11,7 @@ use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Support\UrlHelper;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 /**
  * @property Collection $columns
@@ -72,7 +73,7 @@ trait HasQuickSearch
     }
 
     /**
-     * @return \Illuminate\View\View|string
+     * @return View|string
      */
     public function renderQuickSearch()
     {
@@ -121,7 +122,7 @@ trait HasQuickSearch
 
         if (is_array($this->search)) {
             $this->model()->where(function ($q) use ($query) {
-                $keyword = '%'.$query.'%';
+                $keyword = '%' . $query . '%';
 
                 foreach ($this->search as $column) {
                     $this->addWhereLikeBinding($q, $column, true, $keyword);
@@ -150,36 +151,43 @@ trait HasQuickSearch
             foreach ($queries as [$column, $condition, $or]) {
                 if (preg_match('/(?<not>!?)\((?<values>.+)\)/', $condition, $match) !== 0) {
                     $this->addWhereInBinding($q, $column, $or, (bool) $match['not'], $match['values']);
+
                     continue;
                 }
 
                 if (preg_match('/\[(?<start>.*?),(?<end>.*?)]/', $condition, $match) !== 0) {
                     $this->addWhereBetweenBinding($q, $column, $or, $match['start'], $match['end']);
+
                     continue;
                 }
 
                 if (preg_match('/(?<function>date|time|day|month|year),(?<value>.*)/', $condition, $match) !== 0) {
                     $this->addWhereDatetimeBinding($q, $column, $or, $match['function'], $match['value']);
+
                     continue;
                 }
 
                 if (preg_match('/(?<pattern>%[^%]+%)/', $condition, $match) !== 0) {
                     $this->addWhereLikeBinding($q, $column, $or, $match['pattern']);
+
                     continue;
                 }
 
                 if (preg_match('/(?<pattern>[^%]+%)/', $condition, $match) !== 0) {
                     $this->addWhereLikeBinding($q, $column, $or, $match['pattern']);
+
                     continue;
                 }
 
                 if (preg_match('/\/(?<value>.*)\//', $condition, $match) !== 0) {
                     $this->addWhereBasicBinding($q, $column, $or, 'REGEXP', $match['value']);
+
                     continue;
                 }
 
                 if (preg_match('/(?<operator>>=?|<=?|!=|%){0,1}(?<value>.*)/', $condition, $match) !== 0) {
                     $this->addWhereBasicBinding($q, $column, $or, $match['operator'], $match['value']);
+
                     continue;
                 }
             }
@@ -189,14 +197,13 @@ trait HasQuickSearch
     /**
      * Parse quick query bindings.
      *
-     * @param  array  $queries
      * @return array
      */
     protected function parseQueryBindings(array $queries)
     {
         $columnMap = $this->columns->mapWithKeys(function (Column $column) {
             $label = $column->getLabel();
-            $name = $column->getName();
+            $name  = $column->getName();
 
             return [$label => $name, $name => $name];
         });
@@ -207,11 +214,11 @@ trait HasQuickSearch
                 return;
             }
 
-            $or = false;
+            $or                   = false;
             [$column, $condition] = $segments;
 
             if (Str::startsWith($column, '|')) {
-                $or = true;
+                $or     = true;
                 $column = substr($column, 1);
             }
 
@@ -229,14 +236,11 @@ trait HasQuickSearch
      * Add where like binding to model query.
      *
      * @param  mixed  $query
-     * @param  string  $column
-     * @param  bool  $or
-     * @param  string  $pattern
      */
     protected function addWhereLikeBinding($query, ?string $column, ?bool $or, ?string $pattern)
     {
         $likeOperator = 'like';
-        $method = $or ? 'orWhere' : 'where';
+        $method       = $or ? 'orWhere' : 'where';
 
         Helper::withQueryCondition($query, $column, $method, [$likeOperator, $pattern]);
     }
@@ -245,14 +249,10 @@ trait HasQuickSearch
      * Add where date time function binding to model query.
      *
      * @param  mixed  $query
-     * @param  string  $column
-     * @param  bool  $or
-     * @param  string  $function
-     * @param  string  $value
      */
     protected function addWhereDatetimeBinding($query, ?string $column, ?bool $or, ?string $function, ?string $value)
     {
-        $method = ($or ? 'orWhere' : 'where').ucfirst($function);
+        $method = ($or ? 'orWhere' : 'where') . ucfirst($function);
 
         Helper::withQueryCondition($query, $column, $method, [$value]);
     }
@@ -261,10 +261,6 @@ trait HasQuickSearch
      * Add where in binding to the model query.
      *
      * @param  mixed  $query
-     * @param  string  $column
-     * @param  bool  $or
-     * @param  bool  $not
-     * @param  string  $values
      */
     protected function addWhereInBinding($query, ?string $column, ?bool $or, ?bool $not, ?string $values)
     {
@@ -276,8 +272,8 @@ trait HasQuickSearch
             }
         }
 
-        $where = $or ? 'orWhere' : 'where';
-        $method = $where.($not ? 'NotIn' : 'In');
+        $where  = $or ? 'orWhere' : 'where';
+        $method = $where . ($not ? 'NotIn' : 'In');
 
         Helper::withQueryCondition($query, $column, $method, [$values]);
     }
@@ -286,10 +282,6 @@ trait HasQuickSearch
      * Add where between binding to the model query.
      *
      * @param  mixed  $query
-     * @param  string  $column
-     * @param  bool  $or
-     * @param  string  $start
-     * @param  string  $end
      */
     protected function addWhereBetweenBinding($query, ?string $column, ?bool $or, ?string $start, ?string $end)
     {
@@ -302,18 +294,14 @@ trait HasQuickSearch
      * Add where basic binding to the model query.
      *
      * @param  mixed  $query
-     * @param  string  $column
-     * @param  bool  $or
-     * @param  string  $operator
-     * @param  string  $value
      */
     protected function addWhereBasicBinding($query, ?string $column, ?bool $or, ?string $operator, ?string $value)
     {
-        $method = $or ? 'orWhere' : 'where';
+        $method   = $or ? 'orWhere' : 'where';
         $operator = $operator ?: '=';
         if ($operator == '%') {
             $operator = 'like';
-            $value = "%{$value}%";
+            $value    = "%{$value}%";
         }
 
         if ($value === 'NULL') {

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Admin\Controllers;
 
+use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Exceptions\NotFoundException;
-use Appsolutely\AIO\Models\Model;
-use Appsolutely\AIO\Services\SitemapBuilderService;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Http\Controllers\AdminController;
+use Appsolutely\AIO\Models\Model;
+use Appsolutely\AIO\Services\SitemapBuilderService;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
@@ -100,7 +101,7 @@ class AdminBaseController extends AdminController
      */
     protected function makeTabLink(string $tabLabel, string $url): void
     {
-        \Appsolutely\AIO\Admin::script(<<<JS
+        Admin::script(<<<JS
             (function () {
                 document.querySelectorAll('.nav-tabs .nav-link, .nav-tabs > li > a').forEach(function (tab) {
                     if (tab.textContent.trim() === '$tabLabel') {

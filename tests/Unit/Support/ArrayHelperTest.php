@@ -3,6 +3,7 @@
 namespace Appsolutely\AIO\Tests\Unit\Support;
 
 use Appsolutely\AIO\Support\ArrayHelper;
+use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Tests\Unit\TestCase;
 
 class ArrayHelperTest extends TestCase
@@ -120,14 +121,14 @@ class ArrayHelperTest extends TestCase
 
     public function test_export_simple()
     {
-        $array = ['key' => 'value'];
+        $array  = ['key' => 'value'];
         $result = ArrayHelper::export($array);
         $this->assertStringContainsString("'key' => 'value'", $result);
     }
 
     public function test_export_booleans()
     {
-        $array = ['enabled' => true, 'disabled' => false, 'empty' => null];
+        $array  = ['enabled' => true, 'disabled' => false, 'empty' => null];
         $result = ArrayHelper::export($array);
         $this->assertStringContainsString("'enabled' => true", $result);
         $this->assertStringContainsString("'disabled' => false", $result);
@@ -136,7 +137,7 @@ class ArrayHelperTest extends TestCase
 
     public function test_export_php()
     {
-        $array = ['key' => 'value'];
+        $array  = ['key' => 'value'];
         $result = ArrayHelper::exportPhp($array);
         $this->assertStringStartsWith('<?php', $result);
         $this->assertStringContainsString('return [', $result);
@@ -160,7 +161,7 @@ class ArrayHelperTest extends TestCase
 
     public function test_set_null_key_replaces_array()
     {
-        $array = ['old'];
+        $array  = ['old'];
         $result = ArrayHelper::set($array, null, 'replaced');
         $this->assertSame('replaced', $result);
     }
@@ -217,21 +218,21 @@ class ArrayHelperTest extends TestCase
 
     public function test_helper_delegates_array()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::array('a,b,c');
+        $helper = Helper::array('a,b,c');
         $direct = ArrayHelper::convert('a,b,c');
         $this->assertSame($direct, $helper);
     }
 
     public function test_helper_delegates_equal()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::equal('foo', 'foo');
+        $helper = Helper::equal('foo', 'foo');
         $direct = ArrayHelper::equal('foo', 'foo');
         $this->assertSame($direct, $helper);
     }
 
     public function test_helper_delegates_in_array()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::inArray(1, [1, 2]);
+        $helper = Helper::inArray(1, [1, 2]);
         $direct = ArrayHelper::inArray(1, [1, 2]);
         $this->assertSame($direct, $helper);
     }

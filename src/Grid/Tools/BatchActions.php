@@ -10,8 +10,8 @@ use Illuminate\Support\Traits\Macroable;
 
 class BatchActions extends AbstractTool
 {
-    use Macroable;
     use HasVariables;
+    use Macroable;
 
     protected $view = 'admin::grid.batch-actions';
 
@@ -91,13 +91,11 @@ class BatchActions extends AbstractTool
     /**
      * Add a batch action.
      *
-     * @param  BatchAction  $action
-     * @param  ?string  $key
      * @return $this
      */
     public function add(BatchAction $action, ?string $key = null)
     {
-        $action->selectorPrefix = '.grid-batch-action-'.$this->actions->count();
+        $action->selectorPrefix = '.grid-batch-action-' . $this->actions->count();
 
         if ($key) {
             $this->actions->put($key, $action);

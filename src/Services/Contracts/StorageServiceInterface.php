@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Services\Contracts;
 
 use Appsolutely\AIO\Models\File;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -31,7 +32,7 @@ interface StorageServiceInterface
     /**
      * Find a file by its ID.
      */
-    public function findFile(int $id): \Illuminate\Database\Eloquent\Model;
+    public function findFile(int $id): Model;
 
     /**
      * Find an existing file by its SHA-256 hash.

@@ -15,7 +15,7 @@ class AuthTest extends TestCase
 {
     protected $login = false;
 
-    public function testLoginPage()
+    public function test_login_page()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(admin_base_path('auth/login'))
@@ -23,7 +23,7 @@ class AuthTest extends TestCase
         });
     }
 
-    public function testVisitWithoutLogin()
+    public function test_visit_without_login()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(admin_base_path('/'))
@@ -32,7 +32,7 @@ class AuthTest extends TestCase
         });
     }
 
-    public function testLogin()
+    public function test_login()
     {
         $this->browse(function (Browser $browser) {
             $credentials = ['username' => 'admin', 'password' => 'admin'];
@@ -59,11 +59,11 @@ class AuthTest extends TestCase
             $browser->within('.main-menu-content', function (Browser $browser) {
                 $browser->assertSeeText('Admin')
                     ->clickLink($this->translateMenuTitle('Admin'));
-//                    ->waitForText($this->translateMenuTitle('Users'), 1)
-//                    ->waitForText($this->translateMenuTitle('Roles'), 1)
-//                    ->waitForText($this->translateMenuTitle('Permission'), 1)
-//                    ->waitForText($this->translateMenuTitle('Operation log'), 1)
-//                    ->waitForText($this->translateMenuTitle('Menu'), 1);
+                //                    ->waitForText($this->translateMenuTitle('Users'), 1)
+                //                    ->waitForText($this->translateMenuTitle('Roles'), 1)
+                //                    ->waitForText($this->translateMenuTitle('Permission'), 1)
+                //                    ->waitForText($this->translateMenuTitle('Operation log'), 1)
+                //                    ->waitForText($this->translateMenuTitle('Menu'), 1);
             });
         });
     }
@@ -71,7 +71,6 @@ class AuthTest extends TestCase
     /**
      * 翻译菜单标题.
      *
-     * @param $title
      * @return string
      */
     protected function translateMenuTitle($title)
@@ -79,7 +78,7 @@ class AuthTest extends TestCase
         return Admin::menu()->translate($title);
     }
 
-    public function testLogout()
+    public function test_logout()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(admin_base_path('auth/logout'))

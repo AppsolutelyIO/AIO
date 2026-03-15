@@ -3,6 +3,7 @@
 namespace Appsolutely\AIO\Models;
 
 use Appsolutely\AIO\Admin;
+use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Support\Facades\Cache;
 
 trait MenuCache
@@ -12,7 +13,6 @@ trait MenuCache
     /**
      * Get an item from the cache, or execute the given Closure and store the result.
      *
-     * @param  \Closure  $builder
      * @return mixed
      */
     protected function remember(\Closure $builder)
@@ -55,7 +55,7 @@ trait MenuCache
     /**
      * Get cache store.
      *
-     * @return \Illuminate\Contracts\Cache\Repository
+     * @return Repository
      */
     public function getStore()
     {

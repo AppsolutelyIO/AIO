@@ -6,6 +6,8 @@ namespace Appsolutely\AIO\Admin\Controllers\Api;
 
 use Appsolutely\AIO\Repositories\FormEntryRepository;
 use Appsolutely\AIO\Services\DynamicFormExportService;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final class DynamicFormApiController extends AdminBaseApiController
 {
@@ -17,7 +19,7 @@ final class DynamicFormApiController extends AdminBaseApiController
     /**
      * Mark entry as spam
      */
-    public function markAsSpam(int $id): \Illuminate\Http\JsonResponse
+    public function markAsSpam(int $id): JsonResponse
     {
         try {
             $this->entryRepository->markSingleAsSpam($id);
@@ -31,7 +33,7 @@ final class DynamicFormApiController extends AdminBaseApiController
     /**
      * Mark entry as not spam
      */
-    public function markAsNotSpam(int $id): \Illuminate\Http\JsonResponse
+    public function markAsNotSpam(int $id): JsonResponse
     {
         try {
             $this->entryRepository->markSingleAsNotSpam($id);
@@ -45,7 +47,7 @@ final class DynamicFormApiController extends AdminBaseApiController
     /**
      * Export form entries as CSV
      */
-    public function exportCsv(?int $formId = null): \Symfony\Component\HttpFoundation\StreamedResponse
+    public function exportCsv(?int $formId = null): StreamedResponse
     {
         return $this->exportService->exportFormEntriesForApi($formId);
     }

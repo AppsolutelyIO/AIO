@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Models\NotificationRule;
+use Appsolutely\AIO\Models\NotificationTemplate;
 use Appsolutely\AIO\Repositories\NotificationRuleRepository;
 use Appsolutely\AIO\Services\NotificationRuleService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class NotificationRuleServiceTest extends TestCase
 {
@@ -108,7 +109,7 @@ final class NotificationRuleServiceTest extends TestCase
 
     public function test_validate_rule_returns_empty_for_valid_data(): void
     {
-        $template = \Appsolutely\AIO\Models\NotificationTemplate::factory()->create();
+        $template = NotificationTemplate::factory()->create();
         $data     = [
             'name'             => 'Test Rule',
             'trigger_type'     => 'form_submission',
@@ -164,7 +165,7 @@ final class NotificationRuleServiceTest extends TestCase
 
     public function test_validate_rule_does_not_require_emails_for_admin_type(): void
     {
-        $template = \Appsolutely\AIO\Models\NotificationTemplate::factory()->create();
+        $template = NotificationTemplate::factory()->create();
         $data     = [
             'name'             => 'Test',
             'trigger_type'     => 'form_submission',

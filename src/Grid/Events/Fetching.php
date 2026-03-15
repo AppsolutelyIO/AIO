@@ -2,6 +2,4 @@
 
 namespace Appsolutely\AIO\Grid\Events;
 
-class Fetching extends Event
-{
-}
+class Fetching extends Event {}

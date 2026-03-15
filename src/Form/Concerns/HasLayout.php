@@ -2,8 +2,8 @@
 
 namespace Appsolutely\AIO\Form\Concerns;
 
-use Closure;
 use Appsolutely\AIO\Form\Layout;
+use Closure;
 
 trait HasLayout
 {
@@ -14,7 +14,6 @@ trait HasLayout
 
     /**
      * @param  int|float  $width
-     * @param  Closure  $callback
      * @return $this
      */
     public function column($width, Closure $callback)

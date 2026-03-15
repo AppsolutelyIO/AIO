@@ -8,8 +8,8 @@ use Appsolutely\AIO\Enums\FormFieldType;
 use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Models\FormField;
 use Appsolutely\AIO\Services\DynamicFormRenderService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class DynamicFormRenderServiceTest extends TestCase
 {

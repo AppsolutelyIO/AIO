@@ -40,7 +40,7 @@ class Donut extends Card
 
         return [
             'chart' => [
-                'type' => 'donut',
+                'type'    => 'donut',
                 'toolbar' => [
                     'show' => false,
                 ],
@@ -82,8 +82,6 @@ class Donut extends Card
     /**
      * 设置内容宽度.
      *
-     * @param  int  $left
-     * @param  int  $right
      * @return $this
      */
     public function contentWidth(int $left, int $right)

@@ -37,16 +37,13 @@ class LazyTable extends Widget
 
     /**
      * LazyTable constructor.
-     *
-     * @param  LazyRenderable  $renderable
-     * @param  bool  $load
      */
-    public function __construct(LazyRenderable $renderable = null, bool $load = true)
+    public function __construct(?LazyRenderable $renderable = null, bool $load = true)
     {
         $this->from($renderable);
         $this->load($load);
 
-        $this->elementClass = 'async-table-'.Str::random(10);
+        $this->elementClass = 'async-table-' . Str::random(10);
 
         $this->class(['async-table']);
     }
@@ -54,7 +51,6 @@ class LazyTable extends Widget
     /**
      * 设置异步表格实例.
      *
-     * @param  LazyRenderable|null  $renderable
      * @return $this
      */
     public function from(?LazyRenderable $renderable)
@@ -79,7 +75,6 @@ class LazyTable extends Widget
     /**
      * 设置是否自动加载.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function load(bool $value)
@@ -92,7 +87,6 @@ class LazyTable extends Widget
     /**
      * 设置是否启用表格简化模式.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function simple(bool $value = true)
@@ -105,7 +99,6 @@ class LazyTable extends Widget
     /**
      * 监听异步渲染完成事件.
      *
-     * @param  string  $script
      * @return $this
      */
     public function onLoad(string $script)

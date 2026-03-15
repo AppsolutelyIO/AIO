@@ -7,8 +7,8 @@ namespace Appsolutely\AIO\Tests\Unit\Models;
 use Appsolutely\AIO\Enums\ShippingRateType;
 use Appsolutely\AIO\Models\ShippingRate;
 use Appsolutely\AIO\Models\ShippingZone;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ShippingZoneTest extends TestCase
 {

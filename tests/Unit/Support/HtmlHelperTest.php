@@ -2,6 +2,7 @@
 
 namespace Appsolutely\AIO\Tests\Unit\Support;
 
+use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Tests\Unit\TestCase;
 
@@ -72,7 +73,7 @@ class HtmlHelperTest extends TestCase
     public function test_render_closure_with_params()
     {
         $result = HtmlHelper::render(function ($a, $b) {
-            return $a.'-'.$b;
+            return $a . '-' . $b;
         }, ['foo', 'bar']);
         $this->assertSame('foo-bar', $result);
     }
@@ -114,28 +115,28 @@ class HtmlHelperTest extends TestCase
 
     public function test_helper_delegates_render()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::render('test');
+        $helper = Helper::render('test');
         $direct = HtmlHelper::render('test');
         $this->assertSame($direct, $helper);
     }
 
     public function test_helper_delegates_build_html_attributes()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::buildHtmlAttributes(['class' => 'foo']);
+        $helper = Helper::buildHtmlAttributes(['class' => 'foo']);
         $direct = HtmlHelper::buildAttributes(['class' => 'foo']);
         $this->assertSame($direct, $helper);
     }
 
     public function test_helper_delegates_html_entity_encode()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::htmlEntityEncode('<b>test</b>');
+        $helper = Helper::htmlEntityEncode('<b>test</b>');
         $direct = HtmlHelper::entityEncode('<b>test</b>');
         $this->assertSame($direct, $helper);
     }
 
     public function test_helper_delegates_format_element_name()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::formatElementName('user.name');
+        $helper = Helper::formatElementName('user.name');
         $direct = HtmlHelper::formatElementName('user.name');
         $this->assertSame($direct, $helper);
     }

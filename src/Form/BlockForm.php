@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Form;
 
 use Appsolutely\AIO\Exception\RuntimeException;
 use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Layout\Row;
 use Appsolutely\AIO\Widgets\Form as WidgetForm;
 
 /**
@@ -30,13 +31,13 @@ class BlockForm extends WidgetForm
     protected $title;
 
     /**
-     * @var \Appsolutely\AIO\Layout\Row
+     * @var Row
      */
     public $layoutRow;
 
     public function __construct(Form $form)
     {
-        $this->form = $form;
+        $this->form    = $form;
         $this->builder = $form->builder();
 
         $this->initFields();
@@ -74,7 +75,6 @@ class BlockForm extends WidgetForm
     /**
      * 在当前列增加一块表单.
      *
-     * @param  \Closure  $callback
      * @return $this
      */
     public function next(\Closure $callback)
@@ -157,7 +157,5 @@ HTML;
         }
     }
 
-    public function fillFields(array $data)
-    {
-    }
+    public function fillFields(array $data) {}
 }

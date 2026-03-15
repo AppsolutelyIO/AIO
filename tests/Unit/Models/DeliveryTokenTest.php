@@ -9,8 +9,8 @@ use Appsolutely\AIO\Enums\ProductType;
 use Appsolutely\AIO\Models\DeliveryToken;
 use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\OrderItem;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DeliveryTokenTest extends TestCase
 {

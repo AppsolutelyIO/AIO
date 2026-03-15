@@ -7,6 +7,7 @@ use Appsolutely\AIO\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Spatie\EloquentSortable\Sortable;
 
 /**
@@ -41,8 +42,6 @@ class Menu extends Model implements Sortable
 
     /**
      * Create a new Eloquent model instance.
-     *
-     * @param  array  $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -62,8 +61,6 @@ class Menu extends Model implements Sortable
 
     /**
      * A Menu belongs to many roles.
-     *
-     * @return BelongsToMany
      */
     public function roles(): BelongsToMany
     {
@@ -91,8 +88,7 @@ class Menu extends Model implements Sortable
     /**
      * Get all elements.
      *
-     * @param  bool  $force
-     * @return static[]|\Illuminate\Support\Collection
+     * @return static[]|Collection
      */
     public function allNodes(bool $force = false)
     {
@@ -108,7 +104,7 @@ class Menu extends Model implements Sortable
     /**
      * Fetch all elements.
      *
-     * @return static[]|\Illuminate\Support\Collection
+     * @return static[]|Collection
      */
     public function fetchAll()
     {

@@ -39,8 +39,8 @@ trait Sizeable
     protected function initSize()
     {
         if ($this->size) {
-            $this->addElementClass('form-control-'.$this->size);
-            $this->setLabelClass('control-label-'.$this->size);
+            $this->addElementClass('form-control-' . $this->size);
+            $this->setLabelClass('control-label-' . $this->size);
         }
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Appsolutely AIO.
  *
@@ -59,7 +60,6 @@ trait HasFields
     /**
      * Remove Field.
      *
-     * @param $column
      * @return void
      */
     public function removeField($column)
@@ -72,7 +72,6 @@ trait HasFields
     /**
      * Push Field.
      *
-     * @param  Field  $field
      * @return Collection
      */
     public function pushField(Field $field)
@@ -104,7 +103,6 @@ trait HasFields
     /**
      * Set Fields.
      *
-     * @param  Collection  $fields
      * @return void
      */
     public function setFields(Collection $fields)

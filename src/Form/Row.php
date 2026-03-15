@@ -5,7 +5,11 @@ namespace Appsolutely\AIO\Form;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Widgets\Form as WidgetForm;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Fluent;
+use Illuminate\View\View;
 
 /**
  * Class Row.
@@ -106,13 +110,12 @@ class Row implements Renderable
     /**
      * Row constructor.
      *
-     * @param  \Closure  $callback
      * @param  Form|WidgetForm  $form
      */
     public function __construct(\Closure $callback, $form)
     {
         $this->callback = $callback;
-        $this->fields = collect();
+        $this->fields   = collect();
 
         $this->form = $form;
 
@@ -132,7 +135,6 @@ class Row implements Renderable
     /**
      * If the form horizontal layout.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function horizontal(bool $value = true)
@@ -160,7 +162,7 @@ class Row implements Renderable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Support\Fluent|void
+     * @return Model|Fluent|void
      */
     public function model()
     {
@@ -170,7 +172,6 @@ class Row implements Renderable
     /**
      * Set default width for field.
      *
-     * @param  int  $width
      * @return $this
      */
     public function defaultWidth(int $width = 12)
@@ -196,7 +197,7 @@ class Row implements Renderable
     /**
      * Render the row.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function render()
     {

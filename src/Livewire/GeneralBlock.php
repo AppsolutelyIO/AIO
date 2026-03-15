@@ -6,6 +6,7 @@ namespace Appsolutely\AIO\Livewire;
 
 use Appsolutely\AIO\Services\Contracts\ManifestServiceInterface;
 use Carbon\Carbon;
+use Illuminate\Contracts\Container\Container;
 use Livewire\Component;
 
 class GeneralBlock extends Component
@@ -70,9 +71,9 @@ class GeneralBlock extends Component
      * Initialize the component after mounting.
      * Override this method in child classes to add custom initialization logic.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container  The service container for dependency resolution
+     * @param  Container  $container  The service container for dependency resolution
      */
-    protected function initializeComponent(\Illuminate\Contracts\Container\Container $container): void
+    protected function initializeComponent(Container $container): void
     {
         // Override in child classes if needed
     }

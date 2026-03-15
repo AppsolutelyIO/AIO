@@ -16,6 +16,7 @@ use Appsolutely\AIO\Services\Contracts\NotificationQueueServiceInterface;
 use Appsolutely\AIO\Services\Contracts\NotificationRuleServiceInterface;
 use Appsolutely\AIO\Services\Contracts\NotificationServiceInterface;
 use Appsolutely\AIO\Services\Contracts\NotificationTemplateServiceInterface;
+use Carbon\Carbon;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Mail\MailException;
 use Illuminate\Queue\MaxAttemptsExceededException;
@@ -135,7 +136,7 @@ final class NotificationService implements NotificationServiceInterface
         }
     }
 
-    public function schedule(string $templateSlug, string $email, array $data, \Carbon\Carbon $when): NotificationQueue
+    public function schedule(string $templateSlug, string $email, array $data, Carbon $when): NotificationQueue
     {
         $template = $this->templateRepository->findBySlug($templateSlug);
         if (! $template) {

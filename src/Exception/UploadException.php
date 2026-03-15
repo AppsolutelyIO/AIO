@@ -2,6 +2,4 @@
 
 namespace Appsolutely\AIO\Exception;
 
-class UploadException extends AdminException
-{
-}
+class UploadException extends AdminException {}

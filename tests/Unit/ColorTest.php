@@ -57,7 +57,7 @@ class ColorTest extends TestCase
     public function test_all_returns_resolved_colors()
     {
         $color = $this->createColor();
-        $all = $color->all();
+        $all   = $color->all();
 
         $this->assertIsArray($all);
         // 'info' should be resolved to blue's actual hex value
@@ -80,7 +80,7 @@ class ColorTest extends TestCase
 
     public function test_lighten()
     {
-        $color = $this->createColor();
+        $color  = $this->createColor();
         $result = $color->lighten('red', 20);
         $this->assertIsString($result);
         $this->assertNotSame('#ea5455', $result);
@@ -88,7 +88,7 @@ class ColorTest extends TestCase
 
     public function test_darken()
     {
-        $color = $this->createColor();
+        $color  = $this->createColor();
         $result = $color->darken('red', 20);
         $this->assertIsString($result);
         $this->assertNotSame('#ea5455', $result);
@@ -96,7 +96,7 @@ class ColorTest extends TestCase
 
     public function test_alpha()
     {
-        $color = $this->createColor();
+        $color  = $this->createColor();
         $result = $color->alpha('red', 0.5);
         $this->assertStringContainsString('rgba(', $result);
         $this->assertStringContainsString('0.5', $result);
@@ -112,7 +112,7 @@ class ColorTest extends TestCase
 
     public function test_magic_call_with_amount()
     {
-        $color = $this->createColor();
+        $color  = $this->createColor();
         $result = $color->red(10);
         $this->assertIsString($result);
         // Should be darker than original
@@ -122,7 +122,7 @@ class ColorTest extends TestCase
     public function test_extend_adds_new_theme()
     {
         Color::extend('custom-theme', [
-            'primary' => '#ff0000',
+            'primary'        => '#ff0000',
             'primary-darker' => '#cc0000',
         ]);
 

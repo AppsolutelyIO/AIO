@@ -6,6 +6,7 @@ namespace Appsolutely\AIO\Http\Controllers\Api;
 
 use Appsolutely\AIO\Http\Requests\Api\FulfillDeliveryRequest;
 use Appsolutely\AIO\Services\Contracts\DeliveryServiceInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 
 final class DeliveryController extends BaseApiController
@@ -50,7 +51,7 @@ final class DeliveryController extends BaseApiController
                 $validated['channel'] ?? null,
                 $request->user()?->name ?? $request->ip(),
             );
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException) {
+        } catch (ModelNotFoundException) {
             return $this->failNotFound('Delivery token not found.');
         } catch (\InvalidArgumentException $e) {
             return $this->error($e->getMessage());

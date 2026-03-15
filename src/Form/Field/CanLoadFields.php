@@ -11,8 +11,6 @@ trait CanLoadFields
      *
      * @param  string  $field
      * @param  string  $sourceUrl
-     * @param  string  $idField
-     * @param  string  $textField
      * @return $this
      */
     public function load($field, $sourceUrl, string $idField = 'id', string $textField = 'text')
@@ -25,15 +23,13 @@ trait CanLoadFields
      *
      * @param  array|string  $fields
      * @param  array|string  $sourceUrls
-     * @param  string  $idField
-     * @param  string  $textField
      * @return $this
      */
     public function loads($fields = [], $sourceUrls = [], string $idField = 'id', string $textField = 'text')
     {
         $fieldsStr = implode('^', array_map(function ($field) {
             if (Str::contains($field, '.')) {
-                return $this->normalizeElementClass($field).'_';
+                return $this->normalizeElementClass($field) . '_';
             }
 
             return $this->normalizeElementClass($field);

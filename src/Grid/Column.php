@@ -2,12 +2,12 @@
 
 namespace Appsolutely\AIO\Grid;
 
-use Closure;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Grid\Displayers\AbstractDisplayer;
 use Appsolutely\AIO\Support\ArrayHelper;
 use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
+use Closure;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
@@ -58,14 +58,15 @@ use Illuminate\Support\Traits\Macroable;
  */
 class Column
 {
+    use Column\HasDisplayers;
+    use Column\HasHeader;
     use HasBuilderEvents;
-    use Grid\Column\HasHeader;
-    use Grid\Column\HasDisplayers;
     use Macroable {
         __call as __macroCall;
     }
 
     const SELECT_COLUMN_NAME = '__row_selector__';
+
     const ACTION_COLUMN_NAME = '__actions__';
 
     /**
@@ -183,7 +184,7 @@ class Column
     protected static $model;
 
     /**
-     * @var Grid\Column\Condition
+     * @var Column\Condition
      */
     protected $conditions = [];
 
@@ -207,9 +208,6 @@ class Column
 
     /**
      * Extend column displayer.
-     *
-     * @param $name
-     * @param $displayer
      */
     public static function extend($name, $displayer)
     {
@@ -226,8 +224,6 @@ class Column
 
     /**
      * Set grid instance for column.
-     *
-     * @param  Grid  $grid
      */
     public function setGrid(Grid $grid)
     {
@@ -244,8 +240,6 @@ class Column
 
     /**
      * Set original data for column.
-     *
-     * @param  Collection  $collection
      */
     public static function setOriginalGridModels(Collection $collection)
     {
@@ -261,7 +255,6 @@ class Column
     /**
      * Set width for column.
      *
-     * @param  string  $width
      * @return $this|string
      */
     public function width(?string $width)
@@ -300,22 +293,20 @@ class Column
      *         ->end()
      *         ->modal()
      *
-     * @param  \Closure  $condition
      * @return Column\Condition
      */
-    public function if(?\Closure $condition = null)
+    public function if(?Closure $condition = null)
     {
         $condition = $condition ?: function ($column) {
             return $column->getValue();
         };
 
-        return $this->conditions[] = new Grid\Column\Condition($condition, $this);
+        return $this->conditions[] = new Column\Condition($condition, $this);
     }
 
     /**
      * Set column attributes.
      *
-     * @param  array  $attributes
      * @return $this
      */
     public function setAttributes(array $attributes = [])
@@ -456,7 +447,7 @@ class Column
     /**
      * Add a display callback.
      *
-     * @param  \Closure|string  $callback
+     * @param  Closure|string  $callback
      * @param  array  $params
      * @return $this
      */
@@ -478,7 +469,6 @@ class Column
     }
 
     /**
-     * @param  array  $callbacks
      * @return void
      */
     public function setDisplayCallbacks(array $callbacks)
@@ -487,7 +477,7 @@ class Column
     }
 
     /**
-     * @return \Closure[]
+     * @return Closure[]
      */
     public function getDisplayCallbacks()
     {
@@ -505,23 +495,24 @@ class Column
         foreach ($this->displayCallbacks as $callback) {
             [$callback, $params] = $callback;
 
-            if (! $callback instanceof \Closure) {
+            if (! $callback instanceof Closure) {
                 $value = $callback;
+
                 continue;
             }
 
             $previous = $value;
 
             $callback = $this->bindOriginalRowModel($callback);
-            $value = $callback($value, $this, ...$params);
+            $value    = $callback($value, $this, ...$params);
 
             if (
                 $value instanceof static
                 && ($last = array_pop($this->displayCallbacks))
             ) {
                 [$last, $params] = $last;
-                $last = $this->bindOriginalRowModel($last);
-                $value = $last($previous, $this, ...$params);
+                $last            = $this->bindOriginalRowModel($last);
+                $value           = $last($previous, $this, ...$params);
             }
         }
 
@@ -531,7 +522,6 @@ class Column
     /**
      * Set original grid data to column.
      *
-     * @param  Closure  $callback
      * @return Closure
      */
     protected function bindOriginalRowModel(Closure $callback)
@@ -542,7 +532,7 @@ class Column
     /**
      * Fill all data to every column.
      *
-     * @param  \Illuminate\Support\Collection  $data
+     * @param  Collection  $data
      */
     public function fill($data)
     {
@@ -696,7 +686,7 @@ class Column
         }
 
         if (is_subclass_of($abstract, AbstractDisplayer::class)) {
-            $grid = $this->grid;
+            $grid   = $this->grid;
             $column = $this;
 
             return $this->display(function ($value) use ($abstract, $grid, $column, $arguments) {
@@ -713,7 +703,6 @@ class Column
     /**
      * Set column title attributes.
      *
-     * @param  array  $attributes
      * @return $this
      */
     public function setHeaderAttributes(array $attributes = [])
@@ -726,7 +715,6 @@ class Column
     /**
      * Set column title default attributes.
      *
-     * @param  array  $attributes
      * @return $this
      */
     public function setDefaultHeaderAttribute(array $attributes)

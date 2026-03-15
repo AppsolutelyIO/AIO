@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Http\Controllers\Auth;
 
 use Appsolutely\AIO\Http\Controllers\BaseController;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 final class PasswordResetLinkController extends BaseController
 {
     /**
      * Display the password reset link request view.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -23,9 +26,9 @@ final class PasswordResetLinkController extends BaseController
     /**
      * Handle an incoming password reset link request.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {

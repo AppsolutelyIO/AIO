@@ -2,12 +2,13 @@
 
 namespace Appsolutely\AIO\Support;
 
-use Appsolutely\AIO\Grid;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
@@ -137,14 +138,12 @@ class Helper
     }
 
     /**
-     * @param  string  $name
-     * @param  string  $symbol
      * @return mixed
      */
     public static function slug(string $name, string $symbol = '-')
     {
         $text = preg_replace_callback('/([A-Z])/', function ($text) use ($symbol) {
-            return $symbol.strtolower($text[1]);
+            return $symbol . strtolower($text[1]);
         }, $name);
 
         return str_replace('_', $symbol, ltrim($text, $symbol));
@@ -247,7 +246,6 @@ class Helper
     /**
      * 判断是否是ajax请求.
      *
-     * @param  Request  $request
      * @return bool
      */
     public static function isAjaxRequest(?Request $request = null)
@@ -347,7 +345,7 @@ class Helper
             return $value;
         }
 
-        return rtrim(mb_substr($value, 0, $limit, 'UTF-8')).$end;
+        return rtrim(mb_substr($value, 0, $limit, 'UTF-8')) . $end;
     }
 
     /**
@@ -376,7 +374,7 @@ class Helper
         $composer = Composer::parse(base_path('composer.json'));
 
         $map = collect($composer->autoload['psr-4'] ?? [])->mapWithKeys(function ($path, $namespace) {
-            $namespace = trim($namespace, '\\').'\\';
+            $namespace = trim($namespace, '\\') . '\\';
 
             return [$namespace => [$namespace, $path]];
         })->sortBy(function ($_, $namespace) {
@@ -396,19 +394,16 @@ class Helper
         }
 
         if (empty($values)) {
-            $values = [$prefix.'\\', self::slug($prefix).'/'];
+            $values = [$prefix . '\\', self::slug($prefix) . '/'];
         }
 
         [$namespace, $path] = $values;
 
-        return base_path(str_replace([$namespace, '\\'], [$path, '/'], $class)).'.php';
+        return base_path(str_replace([$namespace, '\\'], [$path, '/'], $class)) . '.php';
     }
 
     /**
      * Is input data is has-one relation.
-     *
-     * @param  Collection  $fields
-     * @param  array  $input
      */
     public static function prepareHasOneRelation(Collection $fields, array &$input)
     {
@@ -419,7 +414,7 @@ class Helper
             if (is_array($column)) {
                 foreach ($column as $v) {
                     if (Str::contains($v, '.')) {
-                        $first = explode('.', $v)[0];
+                        $first             = explode('.', $v)[0];
                         $relations[$first] = null;
                     }
                 }
@@ -428,7 +423,7 @@ class Helper
             }
 
             if (Str::contains($column, '.')) {
-                $first = explode('.', $column)[0];
+                $first             = explode('.', $column)[0];
                 $relations[$first] = null;
             }
         });
@@ -450,8 +445,6 @@ class Helper
      * 设置查询条件.
      *
      * @param  mixed  $model
-     * @param  string  $column
-     * @param  string  $query
      * @param mixed array $params
      * @return void
      */
@@ -463,7 +456,7 @@ class Helper
             return;
         }
 
-        $method = $query === 'orWhere' ? 'orWhere' : 'where';
+        $method   = $query === 'orWhere' ? 'orWhere' : 'where';
         $subQuery = $query === 'orWhere' ? 'where' : $query;
 
         $model->$method(function ($q) use ($column, $subQuery, $params) {
@@ -475,8 +468,6 @@ class Helper
      * 设置关联关系查询条件.
      *
      * @param  mixed  $model
-     * @param  string  $column
-     * @param  string  $query
      * @param  mixed  ...$params
      * @return void
      */
@@ -551,9 +542,8 @@ class Helper
      * 跳转.
      *
      * @param  string  $to
-     * @param  int  $statusCode
      * @param  Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @return Application|ResponseFactory|JsonResponse|RedirectResponse|Response|Redirector
      */
     public static function redirect($to, int $statusCode = 302, $request = null)
     {

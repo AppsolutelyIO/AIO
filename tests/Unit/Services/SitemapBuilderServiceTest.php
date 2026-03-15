@@ -8,8 +8,9 @@ use Appsolutely\AIO\Models\Article;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Services\SitemapBuilderService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class SitemapBuilderServiceTest extends TestCase
 {
@@ -191,7 +192,7 @@ final class SitemapBuilderServiceTest extends TestCase
 
         $result = $this->service->getLastModDate($page);
 
-        $this->assertInstanceOf(\Carbon\Carbon::class, $result);
+        $this->assertInstanceOf(Carbon::class, $result);
     }
 
     public function test_get_last_mod_date_returns_updated_at_when_newer(): void
@@ -201,7 +202,7 @@ final class SitemapBuilderServiceTest extends TestCase
         // updated_at will be set to now() by Eloquent on create, which is newer
         $result = $this->service->getLastModDate($page);
 
-        $this->assertInstanceOf(\Carbon\Carbon::class, $result);
+        $this->assertInstanceOf(Carbon::class, $result);
         // updated_at (now) > published_at (10 days ago), so result should be updated_at
         $this->assertTrue($result->greaterThanOrEqualTo($published));
     }

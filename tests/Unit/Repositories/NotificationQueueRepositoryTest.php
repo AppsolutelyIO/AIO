@@ -10,9 +10,9 @@ use Appsolutely\AIO\Models\NotificationQueue;
 use Appsolutely\AIO\Models\NotificationRule;
 use Appsolutely\AIO\Models\NotificationTemplate;
 use Appsolutely\AIO\Repositories\NotificationQueueRepository;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class NotificationQueueRepositoryTest extends TestCase
 {
@@ -125,7 +125,7 @@ final class NotificationQueueRepositoryTest extends TestCase
     {
         $entry    = FormEntry::factory()->create();
         $rule     = NotificationRule::factory()->create();
-        $template = \Appsolutely\AIO\Models\NotificationTemplate::factory()->create();
+        $template = NotificationTemplate::factory()->create();
 
         $queueItem = $this->repository->createQueueItem([
             'rule_id'         => $rule->id,
@@ -150,7 +150,7 @@ final class NotificationQueueRepositoryTest extends TestCase
     public function test_queue_item_can_be_created_without_form_entry_id(): void
     {
         $rule     = NotificationRule::factory()->create();
-        $template = \Appsolutely\AIO\Models\NotificationTemplate::factory()->create();
+        $template = NotificationTemplate::factory()->create();
 
         $queueItem = $this->repository->createQueueItem([
             'rule_id'         => $rule->id,

@@ -21,7 +21,7 @@ class HasManyTest extends TestCase
      *
      * @throws \Throwable
      */
-    public function testCreatePage()
+    public function test_create_page()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new PainterCreatePage());
@@ -33,7 +33,7 @@ class HasManyTest extends TestCase
      *
      * @throws \Throwable
      */
-    public function testAddNewRecord()
+    public function test_add_new_record()
     {
         $this->browse(function (Browser $browser) {
             $data = $this->data();
@@ -67,7 +67,7 @@ class HasManyTest extends TestCase
      *
      * @throws \Throwable
      */
-    public function testEditPage()
+    public function test_edit_page()
     {
         $this->browse(function (Browser $browser) {
             $data = $this->data();
@@ -102,17 +102,17 @@ class HasManyTest extends TestCase
     protected function data()
     {
         return [
-            'username' => 'uuu',
-            'bio'      => 'bxbxbxbxbxbx',
+            'username'  => 'uuu',
+            'bio'       => 'bxbxbxbxbxbx',
             'paintings' => [
                 [
-                    'title' => '蒙娜丽莎',
-                    'body' => '(*￣︶￣)',
+                    'title'        => '蒙娜丽莎',
+                    'body'         => '(*￣︶￣)',
                     'completed_at' => now(),
                 ],
                 [
-                    'title' => '鸡蛋',
-                    'body' => '(*￣︶￣)',
+                    'title'        => '鸡蛋',
+                    'body'         => '(*￣︶￣)',
                     'completed_at' => now(),
                 ],
             ],

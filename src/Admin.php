@@ -2,10 +2,6 @@
 
 namespace Appsolutely\AIO;
 
-use Closure;
-use Appsolutely\AIO\Contracts\ExceptionHandler;
-use Appsolutely\AIO\Contracts\Repository;
-use Appsolutely\AIO\Exception\InvalidArgumentException;
 use Appsolutely\AIO\Admin\Controllers\Api\AttributeGroupController as AttributeGroupApiController;
 use Appsolutely\AIO\Admin\Controllers\Api\DynamicFormApiController;
 use Appsolutely\AIO\Admin\Controllers\Api\FileController as FileApiController;
@@ -32,6 +28,11 @@ use Appsolutely\AIO\Admin\Controllers\ProductReviewController;
 use Appsolutely\AIO\Admin\Controllers\ProductSkuController;
 use Appsolutely\AIO\Admin\Controllers\RefundController;
 use Appsolutely\AIO\Admin\Controllers\ReleaseController;
+use Appsolutely\AIO\Contracts\ExceptionHandler;
+use Appsolutely\AIO\Contracts\Repository;
+use Appsolutely\AIO\Exception\InvalidArgumentException;
+use Appsolutely\AIO\Extend\Manager;
+use Appsolutely\AIO\Extend\ServiceProvider;
 use Appsolutely\AIO\Http\Controllers\AuthController;
 use Appsolutely\AIO\Http\JsonResponse;
 use Appsolutely\AIO\Layout\Menu;
@@ -39,12 +40,20 @@ use Appsolutely\AIO\Layout\Navbar;
 use Appsolutely\AIO\Layout\SectionManager;
 use Appsolutely\AIO\Repositories\EloquentRepository;
 use Appsolutely\AIO\Support\Composer;
+use Appsolutely\AIO\Support\Context;
 use Appsolutely\AIO\Support\HtmlHelper;
+use Appsolutely\AIO\Support\Setting;
+use Appsolutely\AIO\Support\Translator;
 use Appsolutely\AIO\Traits\HasAssets;
 use Appsolutely\AIO\Traits\HasHtml;
 use Appsolutely\AIO\Traits\HasPermissions;
+use Closure;
+use Composer\Autoload\ClassLoader;
 use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -65,14 +74,14 @@ class Admin
 
         // 往body标签内部输入内容
         'BODY_INNER_BEFORE' => 'ADMIN_BODY_INNER_BEFORE',
-        'BODY_INNER_AFTER' => 'ADMIN_BODY_INNER_AFTER',
+        'BODY_INNER_AFTER'  => 'ADMIN_BODY_INNER_AFTER',
 
         // 往#app内部输入内容
         'APP_INNER_BEFORE' => 'ADMIN_APP_INNER_BEFORE',
-        'APP_INNER_AFTER' => 'ADMIN_APP_INNER_AFTER',
+        'APP_INNER_AFTER'  => 'ADMIN_APP_INNER_AFTER',
 
         // 顶部导航栏用户面板
-        'NAVBAR_USER_PANEL' => 'ADMIN_NAVBAR_USER_PANEL',
+        'NAVBAR_USER_PANEL'       => 'ADMIN_NAVBAR_USER_PANEL',
         'NAVBAR_AFTER_USER_PANEL' => 'ADMIN_NAVBAR_AFTER_USER_PANEL',
         // 顶部导航栏之前
         'NAVBAR_BEFORE' => 'ADMIN_NAVBAR_BEFORE',
@@ -112,10 +121,9 @@ class Admin
     /**
      * 菜单管理.
      *
-     * @param  Closure|null  $builder
      * @return Menu
      */
-    public static function menu(Closure $builder = null)
+    public static function menu(?Closure $builder = null)
     {
         $menu = app('admin.menu');
 
@@ -155,8 +163,6 @@ class Admin
 
     /**
      * 设置翻译文件路径.
-     *
-     * @param  string|null  $path
      */
     public static function translation(?string $path)
     {
@@ -174,7 +180,7 @@ class Admin
     }
 
     /**
-     * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard|GuardHelpers
+     * @return Guard|StatefulGuard|GuardHelpers
      */
     public static function guard()
     {
@@ -182,10 +188,9 @@ class Admin
     }
 
     /**
-     * @param  Closure|null  $builder
      * @return Navbar
      */
-    public static function navbar(Closure $builder = null)
+    public static function navbar(?Closure $builder = null)
     {
         $navbar = app('admin.navbar');
 
@@ -199,7 +204,6 @@ class Admin
     /**
      * 启用或禁用Pjax.
      *
-     * @param  bool  $value
      * @return void
      */
     public static function pjax(bool $value = true)
@@ -236,10 +240,9 @@ class Admin
     /**
      * section.
      *
-     * @param  Closure|null  $builder
      * @return SectionManager
      */
-    public static function section(Closure $builder = null)
+    public static function section(?Closure $builder = null)
     {
         $manager = app('admin.sections');
 
@@ -253,7 +256,7 @@ class Admin
     /**
      * 配置.
      *
-     * @return \Appsolutely\AIO\Support\Setting
+     * @return Setting
      */
     public static function setting()
     {
@@ -264,7 +267,6 @@ class Admin
      * 创建数据仓库实例.
      *
      * @param  string|Repository|Model|Builder  $value
-     * @param  array  $args
      * @return Repository
      */
     public static function repository($repository, array $args = [])
@@ -280,7 +282,7 @@ class Admin
         if (! $repository instanceof Repository) {
             $class = is_object($repository) ? get_class($repository) : $repository;
 
-            throw new InvalidArgumentException("The class [{$class}] must be a type of [".Repository::class.'].');
+            throw new InvalidArgumentException("The class [{$class}] must be a type of [" . Repository::class . '].');
         }
 
         return $repository;
@@ -299,7 +301,6 @@ class Admin
     /**
      * 处理异常.
      *
-     * @param  \Throwable  $e
      * @return mixed
      */
     public static function handleException(\Throwable $e)
@@ -310,7 +311,6 @@ class Admin
     /**
      * 上报异常.
      *
-     * @param  \Throwable  $e
      * @return mixed
      */
     public static function reportException(\Throwable $e)
@@ -321,7 +321,6 @@ class Admin
     /**
      * 显示异常信息.
      *
-     * @param  \Throwable  $e
      * @return mixed
      */
     public static function renderException(\Throwable $e)
@@ -364,7 +363,7 @@ class Admin
     /**
      * 上下文管理.
      *
-     * @return \Appsolutely\AIO\Support\Context
+     * @return Context
      */
     public static function context()
     {
@@ -374,7 +373,7 @@ class Admin
     /**
      * 翻译器.
      *
-     * @return \Appsolutely\AIO\Support\Translator
+     * @return Translator
      */
     public static function translator()
     {
@@ -405,7 +404,7 @@ class Admin
     /**
      * 中断默认的渲染逻辑.
      *
-     * @param  string|\Illuminate\Contracts\Support\Renderable|\Closure  $value
+     * @param  string|Renderable|Closure  $value
      */
     public static function prevent($value)
     {
@@ -450,17 +449,16 @@ class Admin
         static::fonts([]);
 
         return $results
-            .static::html()
-            .$asset->jsToHtml()
-            .$asset->cssToHtml()
-            .$asset->scriptToHtml()
-            .$asset->styleToHtml();
+            . static::html()
+            . $asset->jsToHtml()
+            . $asset->cssToHtml()
+            . $asset->scriptToHtml()
+            . $asset->styleToHtml();
     }
 
     /**
      * 响应json数据.
      *
-     * @param  array  $data
      * @return JsonResponse
      */
     public static function json(array $data = [])
@@ -471,8 +469,7 @@ class Admin
     /**
      * 插件管理.
      *
-     * @param  string  $name
-     * @return \Appsolutely\AIO\Extend\Manager|\Appsolutely\AIO\Extend\ServiceProvider|null
+     * @return Manager|ServiceProvider|null
      */
     public static function extension(?string $name = null)
     {
@@ -504,7 +501,7 @@ class Admin
     /**
      * 类自动加载器.
      *
-     * @return \Composer\Autoload\ClassLoader
+     * @return ClassLoader
      */
     public static function classLoader()
     {
@@ -513,8 +510,6 @@ class Admin
 
     /**
      * 往分组插入中间件.
-     *
-     * @param  array  $mix
      */
     public static function mixMiddlewareGroup(array $mix = [])
     {
@@ -552,10 +547,9 @@ class Admin
     /**
      * 获取js配置.
      *
-     * @param  array|null  $variables
      * @return string
      */
-    public static function jsVariables(array $variables = null)
+    public static function jsVariables(?array $variables = null)
     {
         $jsVariables = static::context()->jsVariables ?: [];
 
@@ -572,13 +566,13 @@ class Admin
 
         $pjaxId = static::getPjaxContainerId();
 
-        $jsVariables['pjax_container_selector'] = $pjaxId ? ('#'.$pjaxId) : '';
-        $jsVariables['token'] = csrf_token();
-        $jsVariables['lang'] = ($lang = __('admin.client')) ? array_merge($lang, $jsVariables['lang'] ?? []) : [];
-        $jsVariables['colors'] = static::color()->all();
-        $jsVariables['dark_mode'] = static::isDarkMode();
-        $jsVariables['sidebar_dark'] = config('admin.layout.sidebar_dark') || ($sidebarStyle === 'dark');
-        $jsVariables['sidebar_light_style'] = in_array($sidebarStyle, ['dark', 'light'], true) ? 'sidebar-light-primary' : 'sidebar-primary';
+        $jsVariables['pjax_container_selector'] = $pjaxId ? ('#' . $pjaxId) : '';
+        $jsVariables['token']                   = csrf_token();
+        $jsVariables['lang']                    = ($lang = __('admin.client')) ? array_merge($lang, $jsVariables['lang'] ?? []) : [];
+        $jsVariables['colors']                  = static::color()->all();
+        $jsVariables['dark_mode']               = static::isDarkMode();
+        $jsVariables['sidebar_dark']            = config('admin.layout.sidebar_dark') || ($sidebarStyle === 'dark');
+        $jsVariables['sidebar_light_style']     = in_array($sidebarStyle, ['dark', 'light'], true) ? 'sidebar-light-primary' : 'sidebar-primary';
 
         return admin_javascript_json($jsVariables);
     }
@@ -630,11 +624,11 @@ class Admin
 
                 $authController = config('admin.auth.controller', AuthController::class);
 
-                $router->get('auth/login', $authController.'@getLogin');
-                $router->post('auth/login', $authController.'@postLogin');
-                $router->get('auth/logout', $authController.'@getLogout');
-                $router->get('auth/setting', $authController.'@getSetting');
-                $router->put('auth/setting', $authController.'@putSetting');
+                $router->get('auth/login', $authController . '@getLogin');
+                $router->post('auth/login', $authController . '@postLogin');
+                $router->get('auth/logout', $authController . '@getLogout');
+                $router->get('auth/setting', $authController . '@getSetting');
+                $router->put('auth/setting', $authController . '@putSetting');
             });
         }
 

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
+use App\Models\User;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Models\ProductSku;
-use App\Models\User;
 use Appsolutely\AIO\Models\Wishlist;
 use Appsolutely\AIO\Services\WishlistService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class WishlistServiceTest extends TestCase
 {

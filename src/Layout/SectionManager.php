@@ -27,8 +27,6 @@ class SectionManager
      *
      * @param  string  $section
      * @param  string|Renderable|Htmlable|callable  $content
-     * @param  bool  $append
-     * @param  int  $priority
      * @return void
      */
     public function inject($section, $content, bool $append = true, int $priority = 10)
@@ -37,7 +35,6 @@ class SectionManager
     }
 
     /**
-     * @param  string  $section
      * @param  string|Renderable|Htmlable|callable  $content
      * @return void
      */
@@ -53,10 +50,7 @@ class SectionManager
     /**
      * Set content to a given section.
      *
-     * @param  string  $section
      * @param  string|Renderable|Htmlable|callable  $content
-     * @param  bool  $append
-     * @param  int  $priority
      * @return void
      */
     protected function put(string $section, $content, bool $append = false, int $priority = 10)
@@ -84,9 +78,7 @@ class SectionManager
     /**
      * Get the string contents of a section.
      *
-     * @param  string  $section
      * @param  mixed  $default
-     * @param  array  $options
      * @return string
      */
     public function yieldContent(string $section, $default = '', array $options = [])
@@ -105,7 +97,6 @@ class SectionManager
     /**
      * Get all of the sections for a given name.
      *
-     * @param  string  $name
      * @return array
      */
     public function getSections(string $name)
@@ -116,7 +107,6 @@ class SectionManager
     /**
      * Sort the listeners for a given event by priority.
      *
-     * @param  string  $name
      * @return array
      */
     protected function sortSections(string $name)
@@ -132,7 +122,6 @@ class SectionManager
     /**
      * Check if section exists.
      *
-     * @param  string  $name
      * @return bool
      */
     public function hasSection(string $name)
@@ -143,7 +132,6 @@ class SectionManager
     /**
      * Check if default section exists.
      *
-     * @param  string  $name
      * @return bool
      */
     public function hasDefaultSection(string $name)
@@ -152,9 +140,7 @@ class SectionManager
     }
 
     /**
-     * @param  string  $name
      * @param  mixed  $content
-     * @param  array  $options
      * @return string
      */
     protected function resolveContent(string $name, &$content, array &$options)
@@ -173,7 +159,7 @@ class SectionManager
 
         $result = '';
         foreach ($content as &$item) {
-            $value = HtmlHelper::render($item['value'] ?? '', [$options]);
+            $value  = HtmlHelper::render($item['value'] ?? '', [$options]);
             $append = $item['append'] ?? false;
 
             if (! $append) {
@@ -193,7 +179,7 @@ class SectionManager
      */
     public function flushSections()
     {
-        $this->sections = [];
+        $this->sections        = [];
         $this->defaultSections = [];
     }
 }

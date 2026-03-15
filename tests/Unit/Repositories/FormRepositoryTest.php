@@ -6,10 +6,11 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Form;
+use Appsolutely\AIO\Models\FormEntry;
 use Appsolutely\AIO\Models\FormField;
 use Appsolutely\AIO\Repositories\FormRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class FormRepositoryTest extends TestCase
 {
@@ -140,8 +141,8 @@ final class FormRepositoryTest extends TestCase
         $form1 = Form::factory()->create();
         $form2 = Form::factory()->create();
 
-        \Appsolutely\AIO\Models\FormEntry::factory()->count(3)->create(['form_id' => $form1->id]);
-        \Appsolutely\AIO\Models\FormEntry::factory()->count(2)->create(['form_id' => $form2->id]);
+        FormEntry::factory()->count(3)->create(['form_id' => $form1->id]);
+        FormEntry::factory()->count(2)->create(['form_id' => $form2->id]);
 
         $result = $this->repository->getFormsWithStats();
 

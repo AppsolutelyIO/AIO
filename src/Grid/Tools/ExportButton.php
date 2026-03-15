@@ -15,8 +15,6 @@ class ExportButton implements Renderable
 
     /**
      * Create a new Export button instance.
-     *
-     * @param  Grid  $grid
      */
     public function __construct(Grid $grid)
     {
@@ -67,7 +65,7 @@ JS;
             return;
         }
 
-        $page = $this->grid->model()->getCurrentPage() ?: 1;
+        $page        = $this->grid->model()->getCurrentPage() ?: 1;
         $currentPage = trans('admin.current_page');
 
         return "<li class='dropdown-item'><a href=\"{$this->grid->exportUrl('page', $page)}\" target=\"_blank\">{$currentPage}</a></li>";

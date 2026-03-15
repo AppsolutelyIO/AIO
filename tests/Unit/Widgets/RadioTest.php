@@ -29,7 +29,7 @@ class RadioTest extends TestCase
 
     public function test_inline_returns_fluent_self()
     {
-        $radio = new Radio();
+        $radio  = new Radio();
         $result = $radio->inline();
         $this->assertSame($radio, $result);
     }
@@ -37,7 +37,7 @@ class RadioTest extends TestCase
     public function test_inline_default_is_false()
     {
         $radio = new Radio();
-        $vars = $radio->defaultVariables();
+        $vars  = $radio->defaultVariables();
         $this->assertFalse($vars['inline']);
     }
 }

@@ -8,8 +8,8 @@ use Appsolutely\AIO\Enums\OrderStatus;
 use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\OrderStatusHistory;
 use Appsolutely\AIO\Services\OrderStatusHistoryService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class OrderStatusHistoryServiceTest extends TestCase
 {

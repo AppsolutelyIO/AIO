@@ -64,7 +64,6 @@ class Panel implements Renderable
     /**
      * Set parent container.
      *
-     * @param  Show  $show
      * @return $this
      */
     public function setParent(Show $show)
@@ -128,7 +127,6 @@ class Panel implements Renderable
     /**
      * Add variables to show view.
      *
-     * @param  array  $variables
      * @return $this
      */
     public function with(array $variables = [])
@@ -159,7 +157,6 @@ class Panel implements Renderable
     /**
      * Build panel tools.
      *
-     * @param $callable
      * @return Tools|null
      */
     public function tools($callable = null)

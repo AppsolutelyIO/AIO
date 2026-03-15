@@ -10,7 +10,8 @@ class ModelTreeHasNextSiblingTest extends TestCase
     {
         // Create a minimal stand-in that provides getParentColumn()
         // and delegates to the real trait method via reflection.
-        $model = new class {
+        $model = new class()
+        {
             public function getParentColumn()
             {
                 return 'parent_id';

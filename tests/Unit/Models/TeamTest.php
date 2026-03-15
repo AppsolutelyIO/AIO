@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Models;
 
 use App\Models\Team;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class TeamTest extends TestCase
 {

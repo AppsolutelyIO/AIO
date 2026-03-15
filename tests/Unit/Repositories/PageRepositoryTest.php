@@ -7,8 +7,9 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Repositories\PageRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 
 final class PageRepositoryTest extends TestCase
 {
@@ -166,7 +167,7 @@ final class PageRepositoryTest extends TestCase
 
         // Create page without slug - use DB to ensure slug is actually null
         \DB::table('pages')->insert([
-            'reference'    => (string) \Illuminate\Support\Str::ulid(),
+            'reference'    => (string) Str::ulid(),
             'title'        => 'No Slug Page',
             'name'         => 'No Slug Page',
             'slug'         => null,
@@ -193,7 +194,7 @@ final class PageRepositoryTest extends TestCase
 
         // Create page with empty slug - use DB to ensure slug is actually empty
         \DB::table('pages')->insert([
-            'reference'    => (string) \Illuminate\Support\Str::ulid(),
+            'reference'    => (string) Str::ulid(),
             'title'        => 'Empty Slug Page',
             'name'         => 'Empty Slug Page',
             'slug'         => '',

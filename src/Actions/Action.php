@@ -15,8 +15,8 @@ use Illuminate\Support\Str;
  */
 abstract class Action implements Renderable
 {
-    use HasHtmlAttributes;
     use HasActionHandler;
+    use HasHtmlAttributes;
 
     /**
      * @var array|string
@@ -73,7 +73,6 @@ abstract class Action implements Renderable
     /**
      * 是否禁用动作.
      *
-     * @param  bool  $disable
      * @return $this
      */
     public function disable(bool $disable = true)
@@ -148,7 +147,7 @@ abstract class Action implements Renderable
      */
     public function makeSelector()
     {
-        return '.act-'.Str::random();
+        return '.act-' . Str::random();
     }
 
     /**
@@ -167,9 +166,7 @@ abstract class Action implements Renderable
      *
      * @return string|void
      */
-    protected function script()
-    {
-    }
+    protected function script() {}
 
     /**
      * @return string

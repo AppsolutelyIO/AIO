@@ -21,10 +21,10 @@ class Tree extends Field
         ],
         'checkbox' => [
             'keep_selected_style' => false,
-            'three_state' => true,
+            'three_state'         => true,
         ],
         'types' => [
-            'default'  => [
+            'default' => [
                 'icon' => false,
             ],
         ],
@@ -72,7 +72,6 @@ class Tree extends Field
     /**
      * 设置父级复选框是否禁止被单独选中.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function treeState(bool $value = true)
@@ -85,7 +84,6 @@ class Tree extends Field
     /**
      * 过滤父节点.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function exceptParentNode(bool $value = true)
@@ -147,8 +145,8 @@ class Tree extends Field
             return;
         }
 
-        $idColumn = $this->columnNames['id'];
-        $textColumn = $this->columnNames['text'];
+        $idColumn     = $this->columnNames['id'];
+        $textColumn   = $this->columnNames['text'];
         $parentColumn = $this->columnNames['parent'];
 
         $parentIds = $nodes = [];
@@ -194,7 +192,6 @@ class Tree extends Field
     /**
      * Set type.
      *
-     * @param  array  $value
      * @return $this
      */
     public function type(array $value)
@@ -207,7 +204,6 @@ class Tree extends Field
     /**
      * Set plugins.
      *
-     * @param  array  $value
      * @return $this
      */
     public function plugins(array $value)
@@ -218,7 +214,6 @@ class Tree extends Field
     }
 
     /**
-     * @param  bool  $value
      * @return $this
      */
     public function expand(bool $value = true)

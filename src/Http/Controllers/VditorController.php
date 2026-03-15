@@ -2,6 +2,7 @@
 
 namespace Appsolutely\AIO\Http\Controllers;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -12,10 +13,10 @@ class VditorController
     public function upload(Request $request)
     {
         $files = $request->file('file[]') ?: $request->file('file');
-        $dir = trim($request->get('dir'), '/');
-        $disk = $this->disk();
+        $dir   = trim($request->get('dir'), '/');
+        $disk  = $this->disk();
 
-        $succMap = [];
+        $succMap  = [];
         $errFiles = [];
 
         foreach ((array) $files as $file) {
@@ -40,11 +41,11 @@ class VditorController
 
     protected function generateNewName(UploadedFile $file): string
     {
-        return uniqid(md5($file->getClientOriginalName())).'.'.$file->getClientOriginalExtension();
+        return uniqid(md5($file->getClientOriginalName())) . '.' . $file->getClientOriginalExtension();
     }
 
     /**
-     * @return \Illuminate\Contracts\Filesystem\Filesystem|FilesystemAdapter
+     * @return Filesystem|FilesystemAdapter
      */
     protected function disk()
     {

@@ -7,6 +7,7 @@ namespace Appsolutely\AIO\Repositories;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\NotificationTemplate;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
 
 final class NotificationTemplateRepository extends BaseRepository
 {
@@ -45,7 +46,7 @@ final class NotificationTemplateRepository extends BaseRepository
     public function createWithUniqueSlug(array $data): NotificationTemplate
     {
         if (empty($data['slug'])) {
-            $data['slug'] = \Illuminate\Support\Str::slug($data['name']);
+            $data['slug'] = Str::slug($data['name']);
         }
 
         $data['slug'] = $this->ensureUniqueSlug($data['slug']);
@@ -61,7 +62,7 @@ final class NotificationTemplateRepository extends BaseRepository
         $template = $this->find($id);
 
         if (isset($data['name']) && (empty($data['slug']) || $data['slug'] === $template->slug)) {
-            $data['slug'] = \Illuminate\Support\Str::slug($data['name']);
+            $data['slug'] = Str::slug($data['name']);
             $data['slug'] = $this->ensureUniqueSlug($data['slug'], $template->id);
         }
 

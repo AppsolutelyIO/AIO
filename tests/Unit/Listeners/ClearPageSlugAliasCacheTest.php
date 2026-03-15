@@ -10,9 +10,9 @@ use Appsolutely\AIO\Events\PageUpdated;
 use Appsolutely\AIO\Listeners\ClearPageSlugAliasCache;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Services\PageSlugAliasService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class ClearPageSlugAliasCacheTest extends TestCase
 {

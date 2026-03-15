@@ -35,6 +35,6 @@ class SessionStore implements ColumnSelectorStore
 
     protected function getKey()
     {
-        return $this->grid->getName().'/'.request()->path().'/'.Admin::user()->getKey();
+        return $this->grid->getName() . '/' . request()->path() . '/' . Admin::user()->getKey();
     }
 }

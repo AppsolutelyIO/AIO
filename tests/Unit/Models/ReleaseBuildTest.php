@@ -6,9 +6,9 @@ namespace Appsolutely\AIO\Tests\Unit\Models;
 
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\ReleaseBuild;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class ReleaseBuildTest extends TestCase
 {

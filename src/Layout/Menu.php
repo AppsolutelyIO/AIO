@@ -59,8 +59,6 @@ class Menu
     /**
      * 增加菜单节点.
      *
-     * @param  array  $nodes
-     * @param  int  $priority
      * @return void
      */
     public function add(array $nodes = [], int $priority = 10)
@@ -92,7 +90,6 @@ class Menu
     /**
      * 设置菜单视图.
      *
-     * @param  string  $view
      * @return $this
      */
     public function view(string $view)
@@ -117,7 +114,6 @@ class Menu
      * 判断是否选中.
      *
      * @param  array  $item
-     * @param  null|string  $path
      * @return bool
      */
     public function isActive($item, ?string $path = null)
@@ -175,7 +171,6 @@ class Menu
     /**
      * 判断扩展是否启用.
      *
-     * @param $item
      * @return bool
      */
     protected function checkExtension($item)
@@ -213,14 +208,13 @@ class Menu
     /**
      * 判断权限.
      *
-     * @param $item
      * @return bool
      */
     protected function checkPermission($item)
     {
         $permissionIds = $item['permission_id'] ?? null;
-        $roles = array_column(ArrayHelper::convert($item['roles'] ?? []), 'slug');
-        $permissions = array_column(ArrayHelper::convert($item['permissions'] ?? []), 'slug');
+        $roles         = array_column(ArrayHelper::convert($item['roles'] ?? []), 'slug');
+        $permissions   = array_column(ArrayHelper::convert($item['permissions'] ?? []), 'slug');
 
         if (! $permissionIds && ! $roles && ! $permissions) {
             return true;
@@ -247,7 +241,7 @@ class Menu
      */
     public function translate($text)
     {
-        $titleTranslation = 'menu.titles.'.trim(str_replace(' ', '_', strtolower($text)));
+        $titleTranslation = 'menu.titles.' . trim(str_replace(' ', '_', strtolower($text)));
 
         if (Lang::has($titleTranslation)) {
             return __($titleTranslation);

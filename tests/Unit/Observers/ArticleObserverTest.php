@@ -9,8 +9,8 @@ use Appsolutely\AIO\Events\ArticleDeleted;
 use Appsolutely\AIO\Events\ArticleUpdated;
 use Appsolutely\AIO\Models\Article;
 use Appsolutely\AIO\Observers\ArticleObserver;
-use Illuminate\Support\Facades\Event;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Support\Facades\Event;
 
 final class ArticleObserverTest extends TestCase
 {

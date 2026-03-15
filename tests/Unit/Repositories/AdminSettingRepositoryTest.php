@@ -6,8 +6,9 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 
 use Appsolutely\AIO\Models\AdminSetting;
 use Appsolutely\AIO\Repositories\AdminSettingRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class AdminSettingRepositoryTest extends TestCase
 {
@@ -42,6 +43,6 @@ final class AdminSettingRepositoryTest extends TestCase
     {
         $result = $this->repository->all();
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
     }
 }

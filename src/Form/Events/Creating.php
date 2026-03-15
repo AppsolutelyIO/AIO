@@ -2,6 +2,4 @@
 
 namespace Appsolutely\AIO\Form\Events;
 
-class Creating extends Event
-{
-}
+class Creating extends Event {}

@@ -59,7 +59,6 @@ class Dropdown extends Widget
      * Set the options of dropdown menus.
      *
      * @param  array  $options
-     * @param  string|null  $title
      * @return $this
      */
     public function options($options = [], ?string $title = null)
@@ -76,7 +75,6 @@ class Dropdown extends Widget
     /**
      * Set the button text.
      *
-     * @param  string|null  $text
      * @return $this
      */
     public function button(?string $text)
@@ -89,7 +87,6 @@ class Dropdown extends Widget
     /**
      * Set the button class.
      *
-     * @param  string  $class
      * @return $this
      */
     public function buttonClass(?string $class)
@@ -158,14 +155,13 @@ class Dropdown extends Widget
     /**
      * Add click event listener.
      *
-     * @param  string|null  $defaultLabel
      * @return $this
      */
     public function click(?string $defaultLabel = null)
     {
         $this->click = true;
 
-        $this->buttonId = 'dropd-'.Str::random(8);
+        $this->buttonId = 'dropd-' . Str::random(8);
 
         if ($defaultLabel !== null) {
             $this->button($defaultLabel);

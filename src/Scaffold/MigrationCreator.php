@@ -17,7 +17,6 @@ class MigrationCreator extends BaseMigrationCreator
     /**
      * Create a new migration creator instance.
      *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
      * @return void
      */
     public function __construct(Filesystem $files)
@@ -40,7 +39,7 @@ class MigrationCreator extends BaseMigrationCreator
 
         $path = $this->getPath($name, $path);
 
-        $stub = $this->files->get(__DIR__.'/stubs/create.stub');
+        $stub = $this->files->get(__DIR__ . '/stubs/create.stub');
 
         $this->files->put($path, $this->populateAdminStub($name, $stub, $table));
         $this->files->chmod($path, 0777);
@@ -114,7 +113,7 @@ class MigrationCreator extends BaseMigrationCreator
                 $column .= "->comment('{$field['comment']}')";
             }
 
-            $rows[] = $column.";\n";
+            $rows[] = $column . ";\n";
         }
 
         if ($useTimestamps) {

@@ -4,7 +4,9 @@ namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Form\Field;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class Text extends Field
 {
@@ -23,7 +25,7 @@ class Text extends Field
     /**
      * Render this filed.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function render()
     {
@@ -33,7 +35,7 @@ class Text extends Field
         $this->defaultAttribute('type', 'text')
             ->defaultAttribute('name', $this->getElementName())
             ->defaultAttribute('value', $this->value())
-            ->defaultAttribute('class', 'form-control '.$this->getElementClassString())
+            ->defaultAttribute('class', 'form-control ' . $this->getElementClassString())
             ->defaultAttribute('placeholder', $this->placeholder());
 
         $this->addVariables([
@@ -47,7 +49,6 @@ class Text extends Field
     /**
      * Set input type.
      *
-     * @param  string  $type
      * @return $this
      */
     public function type(string $type)
@@ -61,18 +62,17 @@ class Text extends Field
      * @see http://1000hz.github.io/bootstrap-validator/
      *
      * @param  string|Field  $field
-     * @param  string  $error
      * @return $this
      */
     public function same($field, ?string $error = null)
     {
         $field = $field instanceof Field ? $field : $this->form->field($field);
-        $name = $field->column();
+        $name  = $field->column();
 
-        if ($name.'_confirmation' === $this->column) {
+        if ($name . '_confirmation' === $this->column) {
             $field->rules('confirmed');
         } else {
-            $this->rules('nullable|same:'.$name);
+            $this->rules('nullable|same:' . $name);
         }
 
         $attributes = [
@@ -88,13 +88,11 @@ class Text extends Field
     }
 
     /**
-     * @param  int  $length
-     * @param  string|null  $error
      * @return $this
      */
     public function minLength(int $length, ?string $error = null)
     {
-        $this->rules('nullable|min:'.$length);
+        $this->rules('nullable|min:' . $length);
 
         return $this->attribute([
             'data-minlength'       => $length,
@@ -107,8 +105,6 @@ class Text extends Field
     }
 
     /**
-     * @param  int  $length
-     * @param  string|null  $error
      * @return $this
      */
     public function maxLength(int $length, ?string $error = null)
@@ -121,7 +117,7 @@ AIO.validator.extend('maxlength', function ($el) {
 JS
         );
 
-        $this->rules('max:'.$length);
+        $this->rules('max:' . $length);
 
         return $this->attribute([
             'data-maxlength'       => $length,
@@ -158,18 +154,18 @@ JS
      */
     protected function formatOptions($options)
     {
-        $original = [];
+        $original  = [];
         $toReplace = [];
 
         foreach ($options as $key => &$value) {
             if (is_array($value)) {
-                $subArray = $this->formatOptions($value);
-                $value = $subArray['options'];
-                $original = array_merge($original, $subArray['original']);
+                $subArray  = $this->formatOptions($value);
+                $value     = $subArray['options'];
+                $original  = array_merge($original, $subArray['original']);
                 $toReplace = array_merge($toReplace, $subArray['toReplace']);
             } elseif (preg_match('/function.*?/', $value)) {
-                $original[] = $value;
-                $value = "%{$key}%";
+                $original[]  = $value;
+                $value       = "%{$key}%";
                 $toReplace[] = "\"{$value}\"";
             }
         }

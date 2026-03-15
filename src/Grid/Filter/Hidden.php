@@ -30,9 +30,7 @@ class Hidden extends AbstractFilter
     /**
      * {@inheritdoc}
      */
-    public function condition($inputs)
-    {
-    }
+    public function condition($inputs) {}
 
     /**
      * {@inheritdoc}

@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Support;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class ArrayHelper
@@ -80,9 +81,9 @@ class ArrayHelper
         ?string $parentKeyName = null,
         ?string $childrenKeyName = null
     ): array {
-        $branch = [];
-        $primaryKeyName = $primaryKeyName ?: 'id';
-        $parentKeyName = $parentKeyName ?: 'parent_id';
+        $branch          = [];
+        $primaryKeyName  = $primaryKeyName ?: 'id';
+        $parentKeyName   = $parentKeyName ?: 'parent_id';
         $childrenKeyName = $childrenKeyName ?: 'children';
 
         $parentId = is_numeric($parentId) ? (int) $parentId : $parentId;
@@ -100,7 +101,7 @@ class ArrayHelper
                     $childrenKeyName
                 );
 
-                if ($node instanceof \Illuminate\Database\Eloquent\Model) {
+                if ($node instanceof Model) {
                     $node->setRelation($childrenKeyName, collect($children));
                 } elseif ($children) {
                     $node[$childrenKeyName] = $children;
@@ -118,7 +119,7 @@ class ArrayHelper
     public static function export(array &$array, $level = 1): string
     {
         $start = '[';
-        $end = ']';
+        $end   = ']';
 
         $txt = "$start\n";
 
@@ -126,7 +127,7 @@ class ArrayHelper
             if (is_array($v)) {
                 $pre = is_string($k) ? "'$k' => " : "$k => ";
 
-                $txt .= str_repeat(' ', $level * 4).$pre.static::export($v, $level + 1).",\n";
+                $txt .= str_repeat(' ', $level * 4) . $pre . static::export($v, $level + 1) . ",\n";
 
                 continue;
             }
@@ -145,10 +146,10 @@ class ArrayHelper
 
             $pre = is_string($k) ? "'$k' => " : "$k => ";
 
-            $txt .= str_repeat(' ', $level * 4)."{$pre}{$t},\n";
+            $txt .= str_repeat(' ', $level * 4) . "{$pre}{$t},\n";
         }
 
-        return $txt.str_repeat(' ', ($level - 1) * 4).$end;
+        return $txt . str_repeat(' ', ($level - 1) * 4) . $end;
     }
 
     /**
@@ -156,7 +157,7 @@ class ArrayHelper
      */
     public static function exportPhp(array $array): string
     {
-        return "<?php \nreturn ".static::export($array).";\n";
+        return "<?php \nreturn " . static::export($array) . ";\n";
     }
 
     /**

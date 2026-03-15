@@ -214,7 +214,7 @@ class InstallCommand extends Command
     protected function initAgentConfig(): void
     {
         $source = dirname(__DIR__, 2) . '/resources/agent-config';
-        $files = $this->laravel['files'];
+        $files  = $this->laravel['files'];
 
         // Copy skills directory
         $skillsDest = base_path('.agents/skills');
@@ -236,9 +236,9 @@ class InstallCommand extends Command
 
         // Copy config files (skip if already exists)
         $configMap = [
-            'claude-settings.json'       => '.claude/settings.json',
-            'cursor-mcp.json'            => '.cursor/mcp.json',
-            'codex-config.toml.example'  => '.codex/config.toml.example',
+            'claude-settings.json'      => '.claude/settings.json',
+            'cursor-mcp.json'           => '.cursor/mcp.json',
+            'codex-config.toml.example' => '.codex/config.toml.example',
         ];
 
         foreach ($configMap as $srcFile => $destPath) {

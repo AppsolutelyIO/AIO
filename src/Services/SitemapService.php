@@ -10,6 +10,7 @@ use Appsolutely\AIO\Repositories\PageRepository;
 use Appsolutely\AIO\Repositories\ProductRepository;
 use Appsolutely\AIO\Services\Contracts\SitemapServiceInterface;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\View;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -270,7 +271,7 @@ final readonly class SitemapService implements SitemapServiceInterface
     /**
      * Get all published pages
      */
-    private function getPublishedPages(): \Illuminate\Database\Eloquent\Collection
+    private function getPublishedPages(): Collection
     {
         return $this->pageRepository->getPublishedPagesForSitemap(now());
     }
@@ -278,7 +279,7 @@ final readonly class SitemapService implements SitemapServiceInterface
     /**
      * Get all published articles
      */
-    private function getPublishedArticles(): \Illuminate\Database\Eloquent\Collection
+    private function getPublishedArticles(): Collection
     {
         return $this->articleRepository->getPublishedArticlesForSitemap(now());
     }
@@ -286,7 +287,7 @@ final readonly class SitemapService implements SitemapServiceInterface
     /**
      * Get all published products
      */
-    private function getPublishedProducts(): \Illuminate\Database\Eloquent\Collection
+    private function getPublishedProducts(): Collection
     {
         return $this->productRepository->getPublishedProductsForSitemap(now());
     }

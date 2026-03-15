@@ -9,9 +9,9 @@ use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Models\PageBlock;
 use Appsolutely\AIO\Repositories\PageBlockRepository;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class PageBlockRepositoryTest extends TestCase
 {

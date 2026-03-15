@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Admin\Controllers;
 
-use Appsolutely\AIO\Helpers\DashboardHelper;
-use Appsolutely\AIO\Models\File;
-use Appsolutely\AIO\Services\Contracts\StorageServiceInterface;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Helpers\DashboardHelper;
+use Appsolutely\AIO\Models\File;
+use Appsolutely\AIO\Models\FileAttachment;
+use Appsolutely\AIO\Services\Contracts\StorageServiceInterface;
 use Appsolutely\AIO\Show;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -85,7 +86,7 @@ final class FileController extends AdminBaseController
             $show->disableEditButton();
             // Display related file attachments
             $show->relation('File Attachments', function ($model) {
-                $grid = new Grid(new \Appsolutely\AIO\Models\FileAttachment());
+                $grid = new Grid(new FileAttachment());
                 $grid->model()->where('file_id', $model->id);
                 $grid->column('id');
                 $grid->column('file_path');

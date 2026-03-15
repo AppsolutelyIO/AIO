@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Services;
 
+use Appsolutely\AIO\Exceptions\PageBlockRenderException;
 use Appsolutely\AIO\Models\GeneralPage;
 use Appsolutely\AIO\Repositories\PageBlockGroupRepository;
 use Appsolutely\AIO\Repositories\PageBlockRepository;
@@ -60,6 +61,6 @@ final readonly class PageBlockService implements PageBlockServiceInterface
         }
 
         // In debug mode, throw exception to show error details
-        throw new \Appsolutely\AIO\Exceptions\PageBlockRenderException($message);
+        throw new PageBlockRenderException($message);
     }
 }

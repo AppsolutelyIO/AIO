@@ -17,14 +17,14 @@ class ResponseTest extends TestCase
     public function test_default_status_is_true()
     {
         $response = $this->makeResponse();
-        $array = $response->toArray();
+        $array    = $response->toArray();
         $this->assertTrue($array['status']);
     }
 
     public function test_success_sets_status_true_and_type()
     {
         $response = $this->makeResponse()->success('Done!');
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertTrue($array['status']);
         $this->assertSame('success', $array['data']['type']);
@@ -34,7 +34,7 @@ class ResponseTest extends TestCase
     public function test_error_sets_status_false_and_type()
     {
         $response = $this->makeResponse()->error('Failed!');
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertFalse($array['status']);
         $this->assertSame('error', $array['data']['type']);
@@ -44,7 +44,7 @@ class ResponseTest extends TestCase
     public function test_info_sets_type()
     {
         $response = $this->makeResponse()->info('Notice');
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertSame('info', $array['data']['type']);
         $this->assertSame('Notice', $array['data']['message']);
@@ -53,7 +53,7 @@ class ResponseTest extends TestCase
     public function test_warning_sets_type()
     {
         $response = $this->makeResponse()->warning('Caution');
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertSame('warning', $array['data']['type']);
         $this->assertSame('Caution', $array['data']['message']);
@@ -64,7 +64,7 @@ class ResponseTest extends TestCase
     public function test_refresh_action()
     {
         $response = $this->makeResponse()->refresh();
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertSame('refresh', $array['data']['then']['action']);
         $this->assertTrue($array['data']['then']['value']);
@@ -73,7 +73,7 @@ class ResponseTest extends TestCase
     public function test_script_action()
     {
         $response = $this->makeResponse()->script('alert(1)');
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertSame('script', $array['data']['then']['action']);
         $this->assertSame('alert(1)', $array['data']['then']['value']);
@@ -95,7 +95,7 @@ class ResponseTest extends TestCase
     public function test_message()
     {
         $response = $this->makeResponse()->message('test');
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertSame('test', $array['data']['message']);
     }
@@ -103,7 +103,7 @@ class ResponseTest extends TestCase
     public function test_detail()
     {
         $response = $this->makeResponse()->detail('Some detail');
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertSame('Some detail', $array['data']['detail']);
     }
@@ -111,7 +111,7 @@ class ResponseTest extends TestCase
     public function test_alert()
     {
         $response = $this->makeResponse()->alert();
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertTrue($array['data']['alert']);
     }
@@ -119,7 +119,7 @@ class ResponseTest extends TestCase
     public function test_timeout()
     {
         $response = $this->makeResponse()->timeout(5);
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertSame(5, $array['data']['timeout']);
     }
@@ -129,7 +129,7 @@ class ResponseTest extends TestCase
     public function test_html()
     {
         $response = $this->makeResponse()->html('<div>test</div>');
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertSame('<div>test</div>', $array['html']);
     }
@@ -161,7 +161,7 @@ class ResponseTest extends TestCase
     public function test_with_validation_sets_errors()
     {
         $response = $this->makeResponse()->withValidation(['name' => ['Name is required']]);
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertFalse($array['status']);
         $this->assertSame(['name' => ['Name is required']], $array['errors']);
@@ -172,8 +172,8 @@ class ResponseTest extends TestCase
     public function test_with_exception()
     {
         $exception = new \RuntimeException('Something broke');
-        $response = $this->makeResponse()->withException($exception);
-        $array = $response->toArray();
+        $response  = $this->makeResponse()->withException($exception);
+        $array     = $response->toArray();
 
         $this->assertFalse($array['status']);
         $this->assertStringContainsString('RuntimeException', $array['data']['message']);
@@ -185,7 +185,7 @@ class ResponseTest extends TestCase
     public function test_success_if_true()
     {
         $response = $this->makeResponse()->successIf(true, 'Yay');
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertSame('success', $array['data']['type']);
     }
@@ -193,7 +193,7 @@ class ResponseTest extends TestCase
     public function test_success_if_false()
     {
         $response = $this->makeResponse()->successIf(false, 'Yay');
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertArrayNotHasKey('type', $array['data']);
     }
@@ -201,7 +201,7 @@ class ResponseTest extends TestCase
     public function test_error_if_true()
     {
         $response = $this->makeResponse()->errorIf(true, 'Oops');
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertSame('error', $array['data']['type']);
     }
@@ -209,7 +209,7 @@ class ResponseTest extends TestCase
     public function test_error_if_false_does_nothing()
     {
         $response = $this->makeResponse()->errorIf(false, 'Oops');
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertArrayNotHasKey('type', $array['data']);
     }
@@ -219,7 +219,7 @@ class ResponseTest extends TestCase
     public function test_make_static_constructor()
     {
         $response = JsonResponse::make(['initial' => 'data']);
-        $array = $response->toArray();
+        $array    = $response->toArray();
 
         $this->assertSame('data', $array['data']['initial']);
     }

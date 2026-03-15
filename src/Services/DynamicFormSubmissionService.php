@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Services;
 
+use Appsolutely\AIO\Events\FormSubmitted;
 use Appsolutely\AIO\Exceptions\FormNotFoundException;
 use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Models\FormEntry;
@@ -99,7 +100,7 @@ final readonly class DynamicFormSubmissionService implements DynamicFormSubmissi
         }
 
         // Dispatch form submitted event (listeners will handle notifications)
-        event(new \Appsolutely\AIO\Events\FormSubmitted($form, $formEntry, $validatedData));
+        event(new FormSubmitted($form, $formEntry, $validatedData));
 
         return $formEntry;
     }

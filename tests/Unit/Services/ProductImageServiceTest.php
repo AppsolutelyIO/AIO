@@ -7,8 +7,8 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Models\ProductImage;
 use Appsolutely\AIO\Services\ProductImageService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductImageServiceTest extends TestCase
 {

@@ -8,13 +8,14 @@ use Appsolutely\AIO\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 final class ConfirmablePasswordController extends BaseController
 {
     /**
      * Show the confirm password view.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function show(Request $request)
     {

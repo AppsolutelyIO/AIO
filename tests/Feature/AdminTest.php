@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Tests\Feature;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Application;
+use Appsolutely\AIO\Color;
 
 class AdminTest extends TestCase
 {
@@ -29,7 +30,7 @@ class AdminTest extends TestCase
     {
         $color = Admin::color();
 
-        $this->assertInstanceOf(\Appsolutely\AIO\Color::class, $color);
+        $this->assertInstanceOf(Color::class, $color);
     }
 
     // --- Title ---

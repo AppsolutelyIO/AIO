@@ -7,7 +7,7 @@ if (! function_exists('test_path')) {
      */
     function test_path($file = '')
     {
-        return __DIR__.($file ? '/'.trim($file, '/') : '');
+        return __DIR__ . ($file ? '/' . trim($file, '/') : '');
     }
 }
 
@@ -18,6 +18,6 @@ if (! function_exists('test_resource_path')) {
      */
     function test_resource_path($file = '')
     {
-        return test_path('resources'.($file ? '/'.trim($file, '/') : ''));
+        return test_path('resources' . ($file ? '/' . trim($file, '/') : ''));
     }
 }

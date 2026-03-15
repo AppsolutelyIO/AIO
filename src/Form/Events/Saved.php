@@ -2,6 +2,4 @@
 
 namespace Appsolutely\AIO\Form\Events;
 
-class Saved extends Event
-{
-}
+class Saved extends Event {}

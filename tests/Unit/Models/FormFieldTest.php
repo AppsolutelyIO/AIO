@@ -6,8 +6,8 @@ namespace Appsolutely\AIO\Tests\Unit\Models;
 
 use Appsolutely\AIO\Enums\FormFieldType;
 use Appsolutely\AIO\Models\FormField;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class FormFieldTest extends TestCase
 {

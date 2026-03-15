@@ -5,6 +5,8 @@ namespace Appsolutely\AIO\Grid\Concerns;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Grid\Tools\Selector;
 use Appsolutely\AIO\Support\Helper;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 /**
  * @mixin Grid
@@ -17,7 +19,6 @@ trait HasSelector
     protected $_selector;
 
     /**
-     * @param  \Closure  $closure
      * @return $this|Selector
      */
     public function selector(?\Closure $closure = null)
@@ -84,7 +85,7 @@ trait HasSelector
     /**
      * Render grid selector.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     * @return Factory|View|string
      */
     public function renderSelector()
     {

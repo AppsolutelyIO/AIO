@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Repositories;
 
+use App\Models\User;
 use Appsolutely\AIO\Enums\OrderStatus;
 use Appsolutely\AIO\Models\Order;
-use App\Models\User;
 use Appsolutely\AIO\Repositories\OrderRepository;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class OrderRepositoryTest extends TestCase
 {

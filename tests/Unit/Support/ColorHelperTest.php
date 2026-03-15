@@ -3,6 +3,7 @@
 namespace Appsolutely\AIO\Tests\Unit\Support;
 
 use Appsolutely\AIO\Support\ColorHelper;
+use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Tests\Unit\TestCase;
 
 class ColorHelperTest extends TestCase
@@ -69,28 +70,28 @@ class ColorHelperTest extends TestCase
     // Verify Helper still delegates correctly
     public function test_helper_delegates_color_lighten()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::colorLighten('#333333', 10);
+        $helper = Helper::colorLighten('#333333', 10);
         $direct = ColorHelper::lighten('#333333', 10);
         $this->assertSame($direct, $helper);
     }
 
     public function test_helper_delegates_color_darken()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::colorDarken('#cccccc', 10);
+        $helper = Helper::colorDarken('#cccccc', 10);
         $direct = ColorHelper::darken('#cccccc', 10);
         $this->assertSame($direct, $helper);
     }
 
     public function test_helper_delegates_color_alpha()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::colorAlpha('#3085d6', 0.5);
+        $helper = Helper::colorAlpha('#3085d6', 0.5);
         $direct = ColorHelper::alpha('#3085d6', 0.5);
         $this->assertSame($direct, $helper);
     }
 
     public function test_helper_delegates_color_to_rgb()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::colorToRBG('ff0000');
+        $helper = Helper::colorToRBG('ff0000');
         $direct = ColorHelper::toRGB('ff0000');
         $this->assertSame($direct, $helper);
     }

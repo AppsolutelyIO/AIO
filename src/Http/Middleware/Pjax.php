@@ -2,8 +2,9 @@
 
 namespace Appsolutely\AIO\Http\Middleware;
 
-use Closure;
 use Appsolutely\AIO\Admin;
+use Closure;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,6 @@ class Pjax
      * Handle an incoming request.
      *
      * @param  Request  $request
-     * @param  Closure  $next
      * @return Response
      */
     public function handle($request, Closure $next)
@@ -40,8 +40,7 @@ class Pjax
     /**
      * Handle Response with exceptions.
      *
-     * @param  Response  $response
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     protected function handleErrorResponse(Response $response)
     {
@@ -67,9 +66,6 @@ class Pjax
 
     /**
      * Set the PJAX-URL header to the current uri.
-     *
-     * @param  Response  $response
-     * @param  Request  $request
      */
     protected function setUriHeader(Response $response, Request $request)
     {

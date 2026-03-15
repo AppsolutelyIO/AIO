@@ -2,7 +2,6 @@
 
 namespace Appsolutely\AIO;
 
-use Closure;
 use Appsolutely\AIO\Actions\Action;
 use Appsolutely\AIO\Contracts\Repository;
 use Appsolutely\AIO\Form\AbstractTool;
@@ -10,6 +9,7 @@ use Appsolutely\AIO\Form\Builder;
 use Appsolutely\AIO\Form\Concerns;
 use Appsolutely\AIO\Form\Condition;
 use Appsolutely\AIO\Form\Field;
+use Appsolutely\AIO\Form\Layout;
 use Appsolutely\AIO\Form\NestedForm;
 use Appsolutely\AIO\Form\ResolveField;
 use Appsolutely\AIO\Http\JsonResponse;
@@ -17,10 +17,13 @@ use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Appsolutely\AIO\Traits\HasFormResponse;
 use Appsolutely\AIO\Widgets\DialogForm;
+use Closure;
 use Illuminate\Contracts\Support\MessageProvider;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Fluent;
@@ -92,17 +95,17 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class Form implements Renderable
 {
-    use HasBuilderEvents;
-    use HasFormResponse;
-    use ResolveField;
+    use Concerns\HandleCascadeFields;
     use Concerns\HasEvents;
     use Concerns\HasFiles;
-    use Concerns\HandleCascadeFields;
     use Concerns\HasRows;
     use Concerns\HasTabs;
+    use HasBuilderEvents;
+    use HasFormResponse;
     use Macroable {
-            __call as macroCall;
-        }
+        __call as macroCall;
+    }
+    use ResolveField;
 
     /**
      * Remove flag in `has many` form.
@@ -218,7 +221,7 @@ class Form implements Renderable
     protected $model;
 
     /**
-     * @var \Illuminate\Validation\Validator
+     * @var Validator
      */
     protected $validator;
 
@@ -284,15 +287,13 @@ class Form implements Renderable
      * Create a new form instance.
      *
      * @param  Repository|Model|\Illuminate\Database\Eloquent\Builder|string  $model
-     * @param  \Closure  $callback
-     * @param  Request  $request
      */
-    public function __construct($repository = null, ?Closure $callback = null, Request $request = null)
+    public function __construct($repository = null, ?Closure $callback = null, ?Request $request = null)
     {
-        $this->repository = $repository ? Admin::repository($repository) : null;
-        $this->callback = $callback;
-        $this->request = $request ?: request();
-        $this->builder = new Builder($this);
+        $this->repository    = $repository ? Admin::repository($repository) : null;
+        $this->callback      = $callback;
+        $this->request       = $request ?: request();
+        $this->builder       = new Builder($this);
         $this->isSoftDeletes = $repository ? $this->repository->isSoftDeletes() : false;
 
         $this->model(new Fluent());
@@ -312,7 +313,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param  Field  $field
      * @return $this
      */
     public function pushField(Field $field)
@@ -353,7 +353,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param $column
      * @return $this
      */
     public function removeField($column)
@@ -364,8 +363,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param  string  $title
-     * @param  string  $content
      * @return $this
      */
     public function confirm(?string $title = null, ?string $content = null)
@@ -400,8 +397,8 @@ class Form implements Renderable
     }
 
     /**
-     * @param  Fluent|array|\Illuminate\Database\Eloquent\Model  $model
-     * @return Fluent|\Illuminate\Database\Eloquent\Model|void
+     * @param  Fluent|array|Model  $model
+     * @return Fluent|Model|void
      */
     public function model($model = null)
     {
@@ -429,7 +426,6 @@ class Form implements Renderable
     /**
      * 启用或禁用ajax表单提交.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function ajax(bool $value = true)
@@ -450,7 +446,6 @@ class Form implements Renderable
     /**
      * 设置使用 Toastr 展示字段验证信息.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function validationErrorToastr(bool $value = true)
@@ -461,10 +456,9 @@ class Form implements Renderable
     }
 
     /**
-     * @param  \Closure  $closure
      * @return $this;
      */
-    public function wrap(\Closure $closure)
+    public function wrap(Closure $closure)
     {
         $this->builder->wrap($closure);
 
@@ -488,7 +482,7 @@ class Form implements Renderable
     }
 
     /**
-     * @return \Appsolutely\AIO\Form\Layout
+     * @return Layout
      */
     public function layout()
     {
@@ -506,7 +500,6 @@ class Form implements Renderable
     /**
      * Generate a edit form.
      *
-     * @param $id
      * @return $this
      */
     public function edit($id)
@@ -522,8 +515,6 @@ class Form implements Renderable
     /**
      * Add a fieldset to form.
      *
-     * @param  string  $title
-     * @param  Closure  $setCallback
      * @return Field\Fieldset
      */
     public function fieldset(string $title, Closure $setCallback)
@@ -542,7 +533,6 @@ class Form implements Renderable
     /**
      * Destroy data entity and remove files.
      *
-     * @param $id
      * @return mixed
      */
     public function destroy($id)
@@ -574,7 +564,7 @@ class Form implements Renderable
                 return $this->sendResponse($response);
             }
 
-            $status = (bool) $result;
+            $status  = (bool) $result;
             $message = $result ? trans('admin.delete_succeeded') : trans('admin.delete_failed');
         } catch (\Throwable $exception) {
             $response = $this->handleException($exception);
@@ -583,7 +573,7 @@ class Form implements Renderable
                 return $response;
             }
 
-            $status = false;
+            $status  = false;
             $message = $exception->getMessage() ?: trans('admin.delete_failed');
         }
 
@@ -596,7 +586,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param  \Throwable  $e
      * @return mixed
      */
     protected function handleException(\Throwable $e)
@@ -607,9 +596,8 @@ class Form implements Renderable
     /**
      * Store a new record.
      *
-     * @param  array|null  $data
      * @param  string|string  $redirectTo
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\Http\JsonResponse|Response
+     * @return RedirectResponse|Redirector|\Illuminate\Http\JsonResponse|Response
      */
     public function store(?array $data = null, $redirectTo = null)
     {
@@ -671,8 +659,7 @@ class Form implements Renderable
     /**
      * Before store.
      *
-     * @param  array  $data
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|Response|void
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse|Response|void
      */
     protected function beforeStore(array $data)
     {
@@ -735,10 +722,9 @@ class Form implements Renderable
     /**
      * Get or set data for insert or update.
      *
-     * @param  array  $updates
      * @return $this|array
      */
-    public function updates(array $updates = null)
+    public function updates(?array $updates = null)
     {
         if ($updates === null) {
             return $this->updates;
@@ -753,7 +739,6 @@ class Form implements Renderable
      * Handle orderable update.
      *
      * @param  int  $id
-     * @param  array  $input
      * @return Response
      */
     protected function handleOrderable(array $input = [])
@@ -778,8 +763,6 @@ class Form implements Renderable
     /**
      * Handle update.
      *
-     * @param $id
-     * @param  array|null  $data
      * @param  string|null  $redirectTo
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse||Response
      */
@@ -845,7 +828,6 @@ class Form implements Renderable
     /**
      * Before update.
      *
-     * @param  array  $data
      * @return Response|void
      */
     protected function beforeUpdate($id, array &$data)
@@ -894,7 +876,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param  array  $inputs
      * @return array
      */
     protected function handleHasManyValues(array $inputs)
@@ -921,8 +902,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param $key
-     * @param $redirectTo
      * @return string|null
      */
     public function getRedirectUrl($key, $redirectTo = null)
@@ -939,17 +918,17 @@ class Form implements Renderable
                 return false;
             }
 
-            return rtrim($resourcesPath, '/')."/{$key}/edit";
+            return rtrim($resourcesPath, '/') . "/{$key}/edit";
         }
 
         if ((int) $this->request->get('after-save') === 2) {
             // continue creating
-            return rtrim($resourcesPath, '/').'/create';
+            return rtrim($resourcesPath, '/') . '/create';
         }
 
         if ((int) $this->request->get('after-save') === 3) {
             // view resource
-            return rtrim($resourcesPath, '/')."/{$key}";
+            return rtrim($resourcesPath, '/') . "/{$key}";
         }
 
         return $this->request->get(Builder::PREVIOUS_URL_KEY) ?: $this->getCurrentUrl($resourcesPath);
@@ -958,7 +937,6 @@ class Form implements Renderable
     /**
      * Check if request is from editable.
      *
-     * @param  array  $input
      * @return bool
      */
     protected function isEditable(array $input = [])
@@ -969,13 +947,12 @@ class Form implements Renderable
     /**
      * Handle editable update.
      *
-     * @param  array  $input
      * @return array
      */
     protected function handleEditable(array $input = [])
     {
         if (array_key_exists('_editable', $input)) {
-            $name = $input['name'];
+            $name  = $input['name'];
             $value = $input['value'];
 
             Arr::forget($input, ['pk', 'value', 'name']);
@@ -988,7 +965,6 @@ class Form implements Renderable
     /**
      * Prepare input data for update.
      *
-     * @param  array  $updates
      * @return array
      */
     public function prepareUpdate(array $updates)
@@ -1023,7 +999,6 @@ class Form implements Renderable
     /**
      * Prepare input data for insert.
      *
-     * @param $inserts
      * @return array
      */
     public function prepareInsert($inserts)
@@ -1033,6 +1008,7 @@ class Form implements Renderable
         foreach ($inserts as $column => $value) {
             if (($field = $this->field($column)) === null) {
                 unset($inserts[$column]);
+
                 continue;
             }
 
@@ -1064,7 +1040,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param $keys
      * @return $this
      */
     public function forgetIgnored($keys)
@@ -1170,7 +1145,7 @@ class Form implements Renderable
      *
      *     $form->if(true)->removeField('name');
      *
-     * @param  bool|\Closure  $condition
+     * @param  bool|Closure  $condition
      * @return Condition
      */
     public function if($condition)
@@ -1196,7 +1171,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param  array  $data
      * @return void
      */
     public function fillFields(array $data)
@@ -1333,7 +1307,7 @@ class Form implements Renderable
     public function width($fieldWidth = 8, $labelWidth = 2)
     {
         $this->builder->fields()->each(function ($field) use ($fieldWidth, $labelWidth) {
-            /* @var Field $field  */
+            /* @var Field $field */
             $field->width($fieldWidth, $labelWidth);
         });
 
@@ -1356,7 +1330,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param  array  $vars
      * @return $this
      */
     public function addVariables(array $vars)
@@ -1405,7 +1378,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param  bool  $disable
      * @return $this
      */
     public function disableHeader(bool $disable = true)
@@ -1416,7 +1388,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param  bool  $disable
      * @return $this
      */
     public function disableFooter(bool $disable = true)
@@ -1561,7 +1532,6 @@ class Form implements Renderable
     /**
      * Footer setting for form.
      *
-     * @param  Closure  $callback
      * @return $this
      */
     public function footer(Closure $callback)
@@ -1593,7 +1563,6 @@ class Form implements Renderable
     /**
      * Set resource path.
      *
-     * @param  string  $resource
      * @return $this
      */
     public function setResource(string $resource)
@@ -1655,11 +1624,9 @@ class Form implements Renderable
     }
 
     /**
-     * @param  int  $width
-     * @param  Closure  $callback
      * @return $this
      */
-    public function block(int $width, \Closure $callback)
+    public function block(int $width, Closure $callback)
     {
         $this
             ->builder
@@ -1671,10 +1638,9 @@ class Form implements Renderable
 
     /**
      * @param  int|float  $width
-     * @param  Closure  $callback
      * @return $this
      */
-    public function column($width, \Closure $callback)
+    public function column($width, Closure $callback)
     {
         $this->builder->layout()->onlyColumn($width, function () use ($callback) {
             $callback($this);
@@ -1694,10 +1660,9 @@ class Form implements Renderable
     }
 
     /**
-     * @param  Closure  $callback
      * @return bool|void
      */
-    public function inDialog(?\Closure $callback = null)
+    public function inDialog(?Closure $callback = null)
     {
         if (! $callback) {
             return DialogForm::is();
@@ -1711,7 +1676,6 @@ class Form implements Renderable
     /**
      * Create a dialog form.
      *
-     * @param  string|null  $title
      * @return DialogForm
      */
     public static function dialog(?string $title = null)

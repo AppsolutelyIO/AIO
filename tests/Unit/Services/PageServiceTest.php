@@ -13,10 +13,11 @@ use Appsolutely\AIO\Services\Contracts\PageBlockSettingServiceInterface;
 use Appsolutely\AIO\Services\Contracts\PageStructureServiceInterface;
 use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Appsolutely\AIO\Services\PageService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class PageServiceTest extends TestCase
 {
@@ -110,7 +111,7 @@ final class PageServiceTest extends TestCase
 
     public function test_find_by_reference_throws_exception_when_not_found(): void
     {
-        $this->expectException(\Illuminate\Database\Eloquent\ModelNotFoundException::class);
+        $this->expectException(ModelNotFoundException::class);
 
         $this->pageService->findByReference('non-existent-reference');
     }

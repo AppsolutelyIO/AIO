@@ -44,8 +44,6 @@ class HandleFormController
     }
 
     /**
-     * @param  Request  $request
-     * @param $form
      * @return File
      */
     protected function getField(Request $request, $form)
@@ -88,7 +86,6 @@ class HandleFormController
     }
 
     /**
-     * @param  Request  $request
      * @return Form
      *
      * @throws AdminException

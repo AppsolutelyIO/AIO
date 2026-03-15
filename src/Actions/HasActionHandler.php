@@ -53,9 +53,7 @@ trait HasActionHandler
      *
      * @return string|void
      */
-    public function confirm()
-    {
-    }
+    public function confirm() {}
 
     /**
      * @return mixed

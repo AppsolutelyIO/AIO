@@ -54,7 +54,7 @@ class DialogTable extends Widget
      */
     protected $events = ['shown' => null, 'hidden' => null, 'load' => null];
 
-    public function __construct($title = null, LazyRenderable $table = null)
+    public function __construct($title = null, ?LazyRenderable $table = null)
     {
         if ($title instanceof LazyRenderable) {
             $table = $title;
@@ -72,7 +72,6 @@ class DialogTable extends Widget
     /**
      * 设置异步表格实例.
      *
-     * @param  LazyRenderable|null  $renderable
      * @return $this
      */
     public function from(?LazyRenderable $renderable)
@@ -119,7 +118,6 @@ class DialogTable extends Widget
     /**
      * show max or min.
      *
-     * @param  bool  $maxmin
      * @return $this
      */
     public function maxmin(bool $maxmin)
@@ -132,7 +130,6 @@ class DialogTable extends Widget
     /**
      * resize setting.
      *
-     * @param  bool  $resize
      * @return $this
      */
     public function resize(bool $resize)
@@ -158,12 +155,11 @@ class DialogTable extends Widget
     /**
      * 监听弹窗打开事件.
      *
-     * @param  string  $script
      * @return $this
      */
     public function onShown(string $script)
     {
-        $this->events['shown'] .= ';'.$script;
+        $this->events['shown'] .= ';' . $script;
 
         return $this;
     }
@@ -171,12 +167,11 @@ class DialogTable extends Widget
     /**
      * 监听弹窗隐藏事件.
      *
-     * @param  string  $script
      * @return $this
      */
     public function onHidden(string $script)
     {
-        $this->events['hidden'] .= ';'.$script;
+        $this->events['hidden'] .= ';' . $script;
 
         return $this;
     }
@@ -184,12 +179,11 @@ class DialogTable extends Widget
     /**
      * 监听表格加载完毕事件.
      *
-     * @param  string  $script
      * @return $this
      */
     public function onLoad(string $script)
     {
-        $this->events['load'] .= ';'.$script;
+        $this->events['load'] .= ';' . $script;
 
         return $this;
     }

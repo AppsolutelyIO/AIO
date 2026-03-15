@@ -67,7 +67,7 @@ class InstallFromLocal extends Form implements LazyRenderable
             throw new RuntimeException(sprintf('Missing \'root\' for disk [%s].', $this->disk()));
         }
 
-        return rtrim($root, '/').'/'.$file;
+        return rtrim($root, '/') . '/' . $file;
     }
 
     protected function disk()

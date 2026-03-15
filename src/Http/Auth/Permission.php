@@ -6,6 +6,7 @@ use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Layout\Content;
 use Appsolutely\AIO\Support\Helper;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Symfony\Component\HttpFoundation\Response;
 
 class Permission
@@ -84,7 +85,7 @@ class Permission
     /**
      * Send error response page.
      *
-     * @throws \Illuminate\Http\Exceptions\HttpResponseException
+     * @throws HttpResponseException
      */
     public static function error()
     {
@@ -114,7 +115,6 @@ class Permission
     }
 
     /**
-     * @param  \Closure  $callback
      * @return void
      */
     public static function registerErrorHandler(\Closure $callback)

@@ -2,12 +2,12 @@
 
 namespace Appsolutely\AIO\Widgets;
 
-use Closure;
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Contracts\LazyRenderable;
 use Appsolutely\AIO\Grid\LazyRenderable as LazyGrid;
 use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Traits\InteractsWithRenderApi;
+use Closure;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
 
@@ -51,6 +51,7 @@ class Modal extends Widget
      * @var string
      */
     protected $scrollable = '';
+
     /**
      * @var array
      */
@@ -74,7 +75,7 @@ class Modal extends Widget
      */
     public function __construct($title = null, $content = null)
     {
-        $this->id('modal-'.Str::random(10));
+        $this->id('modal-' . Str::random(10));
         $this->title($title);
         $this->content($content);
 
@@ -84,7 +85,6 @@ class Modal extends Widget
     /**
      * 设置弹窗垂直居中.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function centered(bool $value = true)
@@ -97,7 +97,6 @@ class Modal extends Widget
     /**
      * 设置弹窗内容滚动.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function scrollable(bool $value = true)
@@ -110,7 +109,6 @@ class Modal extends Widget
     /**
      * 设置弹窗尺寸.
      *
-     * @param  string  $size
      * @return $this
      */
     public function size(string $size)
@@ -153,7 +151,6 @@ class Modal extends Widget
     /**
      * 设置loading效果延迟时间.
      *
-     * @param  int  $delay
      * @return $this
      */
     public function delay(int $delay)
@@ -200,9 +197,9 @@ class Modal extends Widget
         if ($content instanceof LazyGrid) {
             $content = $table =
                 LazyTable::make()
-                ->from($content)
-                ->simple()
-                ->load(false);
+                    ->from($content)
+                    ->simple()
+                    ->load(false);
 
             $this->onShow("target.find('{$table->getElementSelector()}').trigger('table:load')");
         }
@@ -228,7 +225,6 @@ class Modal extends Widget
     /**
      * 设置是否返回弹窗HTML.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function join(bool $value = true)
@@ -254,8 +250,6 @@ class Modal extends Widget
     /**
      * 监听弹窗事件.
      *
-     * @param  string  $event
-     * @param  string  $script
      * @return $this
      */
     public function on(string $event, string $script)
@@ -268,7 +262,6 @@ class Modal extends Widget
     /**
      * 监听弹窗显示事件.
      *
-     * @param  string  $script
      * @return $this
      */
     public function onShow(string $script)
@@ -279,7 +272,6 @@ class Modal extends Widget
     /**
      * 监听弹窗已显示事件.
      *
-     * @param  string  $script
      * @return $this
      */
     public function onShown(string $script)
@@ -290,7 +282,6 @@ class Modal extends Widget
     /**
      * 监听弹窗隐藏事件.
      *
-     * @param  string  $script
      * @return $this
      */
     public function onHide(string $script)
@@ -301,7 +292,6 @@ class Modal extends Widget
     /**
      * 监听弹窗已隐藏事件.
      *
-     * @param  string  $script
      * @return $this
      */
     public function onHidden(string $script)
@@ -357,7 +347,7 @@ JS
         $this->addScript();
 
         if ($this->join) {
-            return $this->renderButton().parent::render();
+            return $this->renderButton() . parent::render();
         }
 
         Admin::html(parent::render());

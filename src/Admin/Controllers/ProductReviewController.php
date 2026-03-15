@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Admin\Controllers;
 
 use Appsolutely\AIO\Enums\ReviewStatus;
-use Appsolutely\AIO\Models\ProductReview;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Models\ProductReview;
 
 final class ProductReviewController extends AdminBaseController
 {

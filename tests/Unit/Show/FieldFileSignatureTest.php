@@ -11,7 +11,7 @@ class FieldFileSignatureTest extends TestCase
 
     public function test_file_method_accepts_server_parameter()
     {
-        $ref = new \ReflectionMethod(Field::class, 'file');
+        $ref    = new \ReflectionMethod(Field::class, 'file');
         $params = $ref->getParameters();
 
         $this->assertSame('server', $params[0]->getName());

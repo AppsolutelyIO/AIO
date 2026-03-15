@@ -7,9 +7,9 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Models\FormField;
 use Appsolutely\AIO\Services\DynamicFormValidationService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Validation\ValidationException;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class DynamicFormValidationServiceTest extends TestCase
 {

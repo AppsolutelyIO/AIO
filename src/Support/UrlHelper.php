@@ -23,7 +23,7 @@ class UrlHelper
 
         parse_str($array[1] ?? '', $originalQuery);
 
-        return $url.'?'.http_build_query(array_merge($originalQuery, $query));
+        return $url . '?' . http_build_query(array_merge($originalQuery, $query));
     }
 
     /**
@@ -50,7 +50,7 @@ class UrlHelper
         $baseUrl = explode('?', $url)[0];
 
         return $query
-            ? $baseUrl.'?'.http_build_query($query)
+            ? $baseUrl . '?' . http_build_query($query)
             : $baseUrl;
     }
 

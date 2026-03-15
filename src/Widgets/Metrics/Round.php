@@ -80,22 +80,22 @@ class Round extends RadialBar
             ],
             'plotOptions' => [
                 'radialBar' => [
-                    'size' => 90,
+                    'size'   => 90,
                     'hollow' => [
                         'size' => '20%',
                     ],
                     'track' => [
                         'strokeWidth' => '100%',
-                        'margin' => 13,
+                        'margin'      => 13,
                     ],
                     'dataLabels' => [
                         'name' => [
                             'fontSize' => '14px',
-                            'offsetY' => -2,
+                            'offsetY'  => -2,
                         ],
                         'value' => [
                             'fontSize' => '12px',
-                            'offsetY' => 4,
+                            'offsetY'  => 4,
                         ],
                         'total' => [
                             'show' => true,
@@ -109,7 +109,6 @@ class Round extends RadialBar
     /**
      * 设置圆圈宽度.
      *
-     * @param  int  $size
      * @return $this
      */
     public function chartRadialBarSize(int $size)
@@ -120,7 +119,6 @@ class Round extends RadialBar
     /**
      * 设置圆圈间距.
      *
-     * @param  int  $margin
      * @return $this
      */
     public function chartRadialBarMargin(int $margin)
@@ -131,8 +129,6 @@ class Round extends RadialBar
     /**
      * 设置图表统计总数信息.
      *
-     * @param  string  $label
-     * @param  int  $number
      * @return $this
      */
     public function chartTotal(string $label, int $number)

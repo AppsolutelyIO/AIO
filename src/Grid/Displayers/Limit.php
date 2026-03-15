@@ -3,8 +3,8 @@
 namespace Appsolutely\AIO\Grid\Displayers;
 
 use Appsolutely\AIO\Admin;
-use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Support\ArrayHelper;
+use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Support\HtmlHelper;
 
 class Limit extends AbstractDisplayer

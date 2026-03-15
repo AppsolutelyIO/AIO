@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Services\Concerns;
 
+use Appsolutely\AIO\Services\Concerns\ResolvesLivewireClassName;
 use Appsolutely\AIO\Tests\TestCase;
 
 /**
@@ -11,7 +12,7 @@ use Appsolutely\AIO\Tests\TestCase;
  */
 final class ResolvesLivewireClassNameTestable
 {
-    use \Appsolutely\AIO\Services\Concerns\ResolvesLivewireClassName;
+    use ResolvesLivewireClassName;
 
     public function callResolveClassName(string $className): string
     {

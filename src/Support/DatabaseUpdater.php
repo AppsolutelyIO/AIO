@@ -94,7 +94,7 @@ class DatabaseUpdater
         require_once $file;
 
         if ($class = $this->getClassFromFile($file)) {
-            return new $class;
+            return new $class();
         }
     }
 
@@ -126,8 +126,8 @@ class DatabaseUpdater
     public function getClassFromFile($file)
     {
         $fileParser = fopen($file, 'r');
-        $class = $namespace = $buffer = '';
-        $i = 0;
+        $class      = $namespace = $buffer = '';
+        $i          = 0;
 
         while (! $class) {
             if (feof($fileParser)) {
@@ -137,7 +137,7 @@ class DatabaseUpdater
             $buffer .= fread($fileParser, 512);
 
             // Prefix and suffix string to prevent unterminated comment warning
-            $tokens = token_get_all('/**/'.$buffer.'/**/');
+            $tokens = token_get_all('/**/' . $buffer . '/**/');
 
             if (strpos($buffer, '{') === false) {
                 continue;
@@ -171,7 +171,7 @@ class DatabaseUpdater
             return false;
         }
 
-        return trim($namespace).'\\'.trim($class);
+        return trim($namespace) . '\\' . trim($class);
     }
 
     public function transaction($callback)

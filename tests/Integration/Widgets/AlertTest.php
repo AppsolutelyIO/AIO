@@ -12,7 +12,7 @@ class AlertTest extends TestCase
     public function test_default_style_is_danger()
     {
         $alert = new Alert('Error message');
-        $vars = $alert->defaultVariables();
+        $vars  = $alert->defaultVariables();
 
         $this->assertStringContainsString('alert-danger', $vars['attributes']);
         $this->assertSame('Error message', $vars['content']);
@@ -21,7 +21,7 @@ class AlertTest extends TestCase
     public function test_constructor_with_title()
     {
         $alert = new Alert('Message', 'Title');
-        $vars = $alert->defaultVariables();
+        $vars  = $alert->defaultVariables();
 
         $this->assertSame('Title', $vars['title']);
         $this->assertSame('Message', $vars['content']);
@@ -32,7 +32,7 @@ class AlertTest extends TestCase
     public function test_info_style()
     {
         $alert = (new Alert('msg'))->info();
-        $vars = $alert->defaultVariables();
+        $vars  = $alert->defaultVariables();
 
         $this->assertStringContainsString('alert-info', $vars['attributes']);
         $this->assertSame('fa fa-info', $vars['icon']);
@@ -41,7 +41,7 @@ class AlertTest extends TestCase
     public function test_success_style()
     {
         $alert = (new Alert('msg'))->success();
-        $vars = $alert->defaultVariables();
+        $vars  = $alert->defaultVariables();
 
         $this->assertStringContainsString('alert-success', $vars['attributes']);
         $this->assertSame('fa fa-check', $vars['icon']);
@@ -50,7 +50,7 @@ class AlertTest extends TestCase
     public function test_warning_style()
     {
         $alert = (new Alert('msg'))->warning();
-        $vars = $alert->defaultVariables();
+        $vars  = $alert->defaultVariables();
 
         $this->assertStringContainsString('alert-warning', $vars['attributes']);
         $this->assertSame('fa fa-warning', $vars['icon']);
@@ -59,7 +59,7 @@ class AlertTest extends TestCase
     public function test_danger_style()
     {
         $alert = (new Alert('msg'))->danger();
-        $vars = $alert->defaultVariables();
+        $vars  = $alert->defaultVariables();
 
         $this->assertStringContainsString('alert-danger', $vars['attributes']);
         $this->assertSame('fa fa-ban', $vars['icon']);
@@ -68,7 +68,7 @@ class AlertTest extends TestCase
     public function test_primary_style()
     {
         $alert = (new Alert('msg'))->primary();
-        $vars = $alert->defaultVariables();
+        $vars  = $alert->defaultVariables();
 
         $this->assertStringContainsString('alert-primary', $vars['attributes']);
     }
@@ -98,7 +98,7 @@ class AlertTest extends TestCase
     public function test_custom_icon()
     {
         $alert = (new Alert('msg'))->icon('fa fa-star');
-        $vars = $alert->defaultVariables();
+        $vars  = $alert->defaultVariables();
 
         $this->assertSame('fa fa-star', $vars['icon']);
     }
@@ -108,7 +108,7 @@ class AlertTest extends TestCase
     public function test_removable()
     {
         $alert = (new Alert('msg'))->removable();
-        $vars = $alert->defaultVariables();
+        $vars  = $alert->defaultVariables();
 
         $this->assertTrue($vars['showCloseBtn']);
     }
@@ -116,7 +116,7 @@ class AlertTest extends TestCase
     public function test_not_removable_by_default()
     {
         $alert = new Alert('msg');
-        $vars = $alert->defaultVariables();
+        $vars  = $alert->defaultVariables();
 
         $this->assertFalse($vars['showCloseBtn']);
     }
@@ -146,7 +146,7 @@ class AlertTest extends TestCase
     public function test_make_factory()
     {
         $alert = Alert::make('Factory content', 'Factory Title', 'info');
-        $vars = $alert->defaultVariables();
+        $vars  = $alert->defaultVariables();
 
         $this->assertSame('Factory content', $vars['content']);
         $this->assertSame('Factory Title', $vars['title']);

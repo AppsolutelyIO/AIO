@@ -9,8 +9,8 @@ use Appsolutely\AIO\Widgets\DialogTable;
 
 class SelectTable extends Field
 {
-    use PlainInput;
     use CanLoadFields;
+    use PlainInput;
 
     /**
      * @var DialogTable
@@ -50,7 +50,6 @@ class SelectTable extends Field
      *    $this->width('500px');
      *    $this->width('50%');
      *
-     * @param  string  $width
      * @return $this
      */
     public function dialogWidth(string $width)
@@ -63,7 +62,6 @@ class SelectTable extends Field
     /**
      * Show Max or Min icon.
      *
-     * @param  bool  $maxmin
      * @return $this
      */
     public function dialogMaxMin(bool $maxmin)
@@ -76,7 +74,6 @@ class SelectTable extends Field
     /**
      * Resize.
      *
-     * @param  bool  $resize
      * @return $this
      */
     public function dialogResize(bool $resize)
@@ -89,7 +86,6 @@ class SelectTable extends Field
     /**
      * 设置表格异步渲染实例.
      *
-     * @param  LazyRenderable  $renderable
      * @return $this
      */
     public function from(LazyRenderable $renderable)
@@ -102,14 +98,12 @@ class SelectTable extends Field
     /**
      * 设置选中的key以及标题字段.
      *
-     * @param $visibleColumn
-     * @param $key
      * @return $this
      */
     public function pluck(?string $visibleColumn, ?string $key = 'id')
     {
         $this->visibleColumn = $visibleColumn;
-        $this->key = $key;
+        $this->key           = $key;
 
         return $this;
     }
@@ -128,9 +122,6 @@ class SelectTable extends Field
     /**
      * 设置选中数据显示.
      *
-     * @param  string  $model
-     * @param  string  $id
-     * @param  string  $text
      * @return $this
      */
     public function model(string $model, string $id = 'id', string $text = 'title')
@@ -170,7 +161,7 @@ class SelectTable extends Field
      */
     protected function defaultPlaceholder()
     {
-        return trans('admin.choose').' '.$this->label;
+        return trans('admin.choose') . ' ' . $this->label;
     }
 
     protected function setUpTable()
@@ -194,7 +185,7 @@ class SelectTable extends Field
         $this->formatOptions();
 
         $this->prepend('<i class="feather icon-arrow-up"></i>')
-            ->defaultAttribute('class', 'form-control '.$this->getElementClassString())
+            ->defaultAttribute('class', 'form-control ' . $this->getElementClassString())
             ->defaultAttribute('type', 'text')
             ->defaultAttribute('name', $this->getElementName());
 

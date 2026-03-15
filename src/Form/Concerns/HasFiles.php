@@ -8,6 +8,7 @@ use Appsolutely\AIO\Form\Builder;
 use Appsolutely\AIO\Form\Field;
 use Appsolutely\AIO\Form\NestedForm;
 use Appsolutely\AIO\Support\WebUploader;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,7 @@ trait HasFiles
     protected function handleUploadFile($data)
     {
         $column = $data['upload_column'] ?? null;
-        $file = app('admin.web-uploader')->getUploadedFile() ?: ($data[WebUploader::FILE_NAME] ?? null);
+        $file   = app('admin.web-uploader')->getUploadedFile() ?: ($data[WebUploader::FILE_NAME] ?? null);
 
         if (! $column || ! $file instanceof UploadedFile) {
             return;
@@ -61,7 +62,6 @@ trait HasFiles
     /**
      * 根据字段名称查找字段.
      *
-     * @param  string|null  $column
      * @return Field|null
      */
     public function findFieldByName(?string $column)
@@ -71,7 +71,7 @@ trait HasFiles
         }
 
         $columns = explode('.', $column);
-        $field = $this->builder;
+        $field   = $this->builder;
         foreach ($columns as $column) {
             if ($field instanceof FieldsCollection) {
                 $field = $field->field($column);
@@ -84,8 +84,7 @@ trait HasFiles
     /**
      * 新增页面删除文件.
      *
-     * @param  array  $input
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     protected function deleteFileWhenCreating(array $input)
     {
@@ -93,7 +92,7 @@ trait HasFiles
             return;
         }
 
-        $column = $input['_column'] ?? null;
+        $column   = $input['_column'] ?? null;
         $filePath = $input['key'] ?? null;
         $relation = $input['_relation'] ?? null;
 
@@ -190,7 +189,6 @@ trait HasFiles
     }
 
     /**
-     * @param  array  $input
      * @return array
      */
     protected function handleFileDelete(array $input = [])
@@ -206,7 +204,7 @@ trait HasFiles
                 $input[$input['_column']] = '';
             } else {
                 [$relation, $relationKey] = $input['_relation'];
-                $keyName = $this->builder()->field($relation)->getKeyName();
+                $keyName                  = $this->builder()->field($relation)->getKeyName();
 
                 $input[$relation] = [
                     $relationKey => [

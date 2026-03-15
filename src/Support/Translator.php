@@ -6,7 +6,6 @@ use Appsolutely\AIO\Admin;
 
 class Translator
 {
-
     /**
      * @var \Illuminate\Contracts\Translation\Translator
      */
@@ -25,7 +24,6 @@ class Translator
     /**
      * 设置翻译文件路径.
      *
-     * @param  null|string  $path
      * @return void
      */
     public function setPath(?string $path)
@@ -48,7 +46,6 @@ class Translator
     /**
      * 翻译字段名称.
      *
-     * @param  string  $field
      * @param  null  $locale
      * @return false|mixed|string|string[]
      */
@@ -60,7 +57,6 @@ class Translator
     /**
      * 翻译Label.
      *
-     * @param  null|string  $label
      * @param  array  $replace
      * @param  string  $locale
      * @return array|\Illuminate\Contracts\Translation\Translator|string|null
@@ -76,7 +72,6 @@ class Translator
      * 翻译.
      *
      * @param  string  $key
-     * @param  array  $replace
      * @param  string  $locale
      * @return false|mixed|string|string[]
      */

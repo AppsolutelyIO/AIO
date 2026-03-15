@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Services\PageSlugAliasService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository as CacheRepository;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class PageSlugAliasServiceTest extends TestCase
 {

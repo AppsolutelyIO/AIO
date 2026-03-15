@@ -6,7 +6,7 @@ use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Grid\Exporters\ExporterInterface;
 
 /**
- * @mixin Grid\Exporters\AbstractExporter
+ * @mixin Exporters\AbstractExporter
  *
  * @method mixed export
  */
@@ -16,7 +16,9 @@ class Exporter
      * Export scope constants.
      */
     const SCOPE_ALL = 'all';
+
     const SCOPE_CURRENT_PAGE = 'page';
+
     const SCOPE_SELECTED_ROWS = 'selected';
 
     /**
@@ -39,7 +41,7 @@ class Exporter
     protected $grid;
 
     /**
-     * @var Grid\Exporters\AbstractExporter
+     * @var Exporters\AbstractExporter
      */
     protected $driver;
 
@@ -55,8 +57,6 @@ class Exporter
 
     /**
      * Create a new Exporter instance.
-     *
-     * @param  Grid  $grid
      */
     public function __construct(Grid $grid)
     {
@@ -84,7 +84,6 @@ class Exporter
     /**
      * Disable export all.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function disableExportAll(bool $value = true)
@@ -95,7 +94,6 @@ class Exporter
     /**
      * Disable export current page.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function disableExportCurrentPage(bool $value = true)
@@ -106,7 +104,6 @@ class Exporter
     /**
      * Disable export selected rows.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function disableExportSelectedRow(bool $value = true)
@@ -115,7 +112,6 @@ class Exporter
     }
 
     /**
-     * @param  int  $value
      * @return $this
      */
     public function chunkSize(int $value)
@@ -125,8 +121,6 @@ class Exporter
 
     /**
      * Get export query name.
-     *
-     * @return string
      */
     public function getQueryName(): string
     {
@@ -135,9 +129,6 @@ class Exporter
 
     /**
      * Extends new exporter driver.
-     *
-     * @param $driver
-     * @param $extend
      */
     public static function extend($driver, $extend)
     {
@@ -148,7 +139,7 @@ class Exporter
      * Resolve export driver.
      *
      * @param  string  $driver
-     * @return Grid\Exporters\AbstractExporter
+     * @return Exporters\AbstractExporter
      */
     public function resolve($driver = null)
     {
@@ -156,7 +147,7 @@ class Exporter
             return $this->driver;
         }
 
-        if ($driver && $driver instanceof Grid\Exporters\AbstractExporter) {
+        if ($driver && $driver instanceof Exporters\AbstractExporter) {
             $this->driver = $driver->setGrid($this->grid);
         } elseif ($driver && $driver instanceof ExporterInterface) {
             $this->driver = $driver;
@@ -179,7 +170,7 @@ class Exporter
      * Get export driver.
      *
      * @param  string  $driver
-     * @return Grid\Exporters\AbstractExporter
+     * @return Exporters\AbstractExporter
      */
     protected function newDriver($driver): ExporterInterface
     {
@@ -199,11 +190,11 @@ class Exporter
     /**
      * Get default exporter.
      *
-     * @return Grid\Exporters\ExcelExporter
+     * @return Exporters\ExcelExporter
      */
     public function makeDefaultDriver()
     {
-        return Grid\Exporters\ExcelExporter::make()->setGrid($this->grid);
+        return Exporters\ExcelExporter::make()->setGrid($this->grid);
     }
 
     /**
@@ -233,8 +224,6 @@ class Exporter
     }
 
     /**
-     * @param $method
-     * @param $arguments
      * @return mixed
      */
     public function __call($method, $arguments)

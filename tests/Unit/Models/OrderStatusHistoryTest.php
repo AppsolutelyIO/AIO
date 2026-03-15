@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Models;
 
+use App\Models\User;
 use Appsolutely\AIO\Enums\OrderStatus;
 use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\OrderStatusHistory;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class OrderStatusHistoryTest extends TestCase
 {

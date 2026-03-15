@@ -9,6 +9,7 @@ use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 /**
  * Class HasMany.
@@ -90,7 +91,6 @@ class HasMany extends Field
     /**
      * Create a new HasMany field instance.
      *
-     * @param $relationName
      * @param  array  $arguments
      */
     public function __construct($relationName, $arguments = [])
@@ -102,7 +102,7 @@ class HasMany extends Field
         $this->columnClass = $this->formatClass($relationName);
 
         if (count($arguments) === 1) {
-            $this->label = $this->formatLabel();
+            $this->label   = $this->formatLabel();
             $this->builder = $arguments[0];
         }
 
@@ -119,7 +119,6 @@ class HasMany extends Field
     /**
      * Get validator for this field.
      *
-     * @param  array  $input
      * @return bool|Validator
      */
     public function getValidator(array $input)
@@ -146,7 +145,7 @@ class HasMany extends Field
 
             if (is_array($column)) {
                 foreach ($column as $key => $name) {
-                    $rules[$name.$key] = $fieldRules;
+                    $rules[$name . $key] = $fieldRules;
                 }
 
                 $this->resetInputKey($input, $column);
@@ -176,7 +175,7 @@ class HasMany extends Field
 
         foreach ($rules as $column => $rule) {
             foreach (array_keys(Arr::get($input, $this->column)) as $key) {
-                if (Arr::get($input, "{$this->column}.{$key}.".NestedForm::REMOVE_FLAG_NAME)) {
+                if (Arr::get($input, "{$this->column}.{$key}." . NestedForm::REMOVE_FLAG_NAME)) {
                     continue;
                 }
 
@@ -203,7 +202,7 @@ class HasMany extends Field
 
             $newInput += $this->sanitizeInput($input, $this->column);
 
-            $newRules[$this->column] = $hasManyRules;
+            $newRules[$this->column]   = $hasManyRules;
             $attributes[$this->column] = $this->label;
         }
 
@@ -218,7 +217,7 @@ class HasMany extends Field
             || $field instanceof Tags
         ) {
             foreach (array_keys(Arr::get($input, $this->column)) as $key) {
-                $value = $input[$this->column][$key][$field->column()];
+                $value                                        = $input[$this->column][$key][$field->column()];
                 $input[$this->column][$key][$field->column()] = array_filter($value, function ($v) {
                     return $v !== null;
                 });
@@ -229,18 +228,16 @@ class HasMany extends Field
     /**
      * Format validation messages.
      *
-     * @param  array  $input
-     * @param  array  $messages
      * @return array
      */
     protected function formatValidationMessages(array $input, array $messages)
     {
         $result = [];
         foreach (Arr::get($input, $this->column) as $key => &$value) {
-            $newKey = $this->column.'.'.$key;
+            $newKey = $this->column . '.' . $key;
 
             foreach ($messages as $k => $message) {
-                $result[$newKey.'.'.$k] = $message;
+                $result[$newKey . '.' . $k] = $message;
             }
         }
 
@@ -261,7 +258,7 @@ class HasMany extends Field
 
         if (is_array($column)) {
             foreach ($column as $index => $col) {
-                $new[$col.$index] = $col;
+                $new[$col . $index] = $col;
             }
         }
 
@@ -273,7 +270,7 @@ class HasMany extends Field
             } else {
                 foreach ($new as $k => $val) {
                     if (Str::endsWith($key, ".$k")) {
-                        $attributes[$key] = $label."[$val]";
+                        $attributes[$key] = $label . "[$val]";
                     }
                 }
             }
@@ -285,7 +282,6 @@ class HasMany extends Field
     /**
      * Reset input key for validation.
      *
-     * @param  array  $input
      * @param  array  $column  $column is the column name array set
      * @return void.
      */
@@ -331,7 +327,7 @@ class HasMany extends Field
                  *
                  * I don't know why a form need range input? Only can imagine is for range search....
                  */
-                $newKey = $name.$column[$name];
+                $newKey = $name . $column[$name];
 
                 /*
                  * set new key
@@ -363,7 +359,7 @@ class HasMany extends Field
     public function setParentRelationName($name, $parentKey)
     {
         $this->parentRelationName = $name;
-        $this->parentKey = $parentKey;
+        $this->parentKey          = $parentKey;
 
         return $this;
     }
@@ -371,9 +367,9 @@ class HasMany extends Field
     public function getNestedFormColumnName()
     {
         if ($this->parentRelationName) {
-            $key = $this->parentKey ?? (NestedForm::DEFAULT_KEY_PREFIX.NestedForm::DEFAULT_PARENT_KEY_NAME);
+            $key = $this->parentKey ?? (NestedForm::DEFAULT_KEY_PREFIX . NestedForm::DEFAULT_PARENT_KEY_NAME);
 
-            return $this->parentRelationName.'.'.$key.'.'.$this->column;
+            return $this->parentRelationName . '.' . $key . '.' . $this->column;
         }
 
         return $this->column;
@@ -383,15 +379,15 @@ class HasMany extends Field
     {
         if ($this->parentRelationName) {
             // hasmany嵌套table时，需要重新设置行的默认key
-            return $this->parentRelationName.'_NKEY_';
+            return $this->parentRelationName . '_NKEY_';
         }
     }
 
-    protected function setNestedFormDefaultKey(Form\NestedForm $form)
+    protected function setNestedFormDefaultKey(NestedForm $form)
     {
         if ($this->parentRelationName) {
             // hasmany嵌套table时需要特殊处理
-            $form->setDefaultKey(Form\NestedForm::DEFAULT_KEY_PREFIX.$this->getNestedFormDefaultKeyName());
+            $form->setDefaultKey(NestedForm::DEFAULT_KEY_PREFIX . $this->getNestedFormDefaultKeyName());
         }
     }
 
@@ -403,7 +399,7 @@ class HasMany extends Field
      */
     public function buildNestedForm($key = null)
     {
-        $form = new Form\NestedForm($this->getNestedFormColumnName(), $key);
+        $form = new NestedForm($this->getNestedFormColumnName(), $key);
 
         $this->setNestedFormDefaultKey($form);
 
@@ -436,9 +432,6 @@ class HasMany extends Field
         return $this->relationKeyName;
     }
 
-    /**
-     * @param  string  $relationKeyName
-     */
     public function setRelationKeyName(?string $relationKeyName)
     {
         $this->relationKeyName = $relationKeyName;
@@ -549,7 +542,7 @@ class HasMany extends Field
     /**
      * Render the `HasMany` field.
      *
-     * @return \Illuminate\View\View|string
+     * @return View|string
      *
      * @throws \Exception
      */
@@ -567,12 +560,12 @@ class HasMany extends Field
         $this->view = $this->view ?: $this->views[$this->viewMode];
 
         $this->addVariables([
-            'forms'          => $this->buildRelatedForms(),
-            'template'       => $this->buildNestedForm()->render(),
-            'relationName'   => $this->relationName,
-            'options'        => $this->options,
-            'count'          => count($this->value()),
-            'columnClass'    => $this->columnClass,
+            'forms'        => $this->buildRelatedForms(),
+            'template'     => $this->buildNestedForm()->render(),
+            'relationName' => $this->relationName,
+            'options'      => $this->options,
+            'count'        => count($this->value()),
+            'columnClass'  => $this->columnClass,
         ]);
 
         return parent::render();
@@ -588,8 +581,8 @@ class HasMany extends Field
     protected function renderTable()
     {
         $headers = [];
-        $fields = [];
-        $hidden = [];
+        $fields  = [];
+        $hidden  = [];
 
         /* @var Field $field */
         foreach ($this->buildNestedForm()->fields() as $field) {
@@ -599,7 +592,7 @@ class HasMany extends Field
                 /* Hide label and set field width 100% */
                 $field->setLabelClass(['hidden']);
                 $field->width(12, 0);
-                $fields[] = $field->render();
+                $fields[]  = $field->render();
                 $headers[] = $field->label();
             }
         }
@@ -612,7 +605,7 @@ class HasMany extends Field
         }, '');
 
         /* Build cell with hidden elements */
-        $template .= '<td class="hidden">'.implode('', $hidden).'</td>';
+        $template .= '<td class="hidden">' . implode('', $hidden) . '</td>';
 
         // specify a view to render.
         $this->view = $this->view ?: $this->views[$this->viewMode];

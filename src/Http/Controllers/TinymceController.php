@@ -2,6 +2,7 @@
 
 namespace Appsolutely\AIO\Http\Controllers;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -12,7 +13,7 @@ class TinymceController
     public function upload(Request $request)
     {
         $file = $request->file('file');
-        $dir = trim($request->get('dir'), '/');
+        $dir  = trim($request->get('dir'), '/');
         $disk = $this->disk();
 
         $newName = $this->generateNewName($file);
@@ -24,11 +25,11 @@ class TinymceController
 
     protected function generateNewName(UploadedFile $file)
     {
-        return uniqid(md5($file->getClientOriginalName())).'.'.$file->getClientOriginalExtension();
+        return uniqid(md5($file->getClientOriginalName())) . '.' . $file->getClientOriginalExtension();
     }
 
     /**
-     * @return \Illuminate\Contracts\Filesystem\Filesystem|FilesystemAdapter
+     * @return Filesystem|FilesystemAdapter
      */
     protected function disk()
     {

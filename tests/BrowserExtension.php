@@ -23,7 +23,7 @@ trait BrowserExtension
                     $seconds = $callbackOrSeconds;
                 }
 
-                $text = Arr::wrap($text);
+                $text    = Arr::wrap($text);
                 $message = $this->formatTimeOutMessage('Waited %s seconds for text', implode("', '", $text));
 
                 return $this->waitUsing($seconds, 100, function () use ($text, $callback) {
@@ -77,8 +77,7 @@ JS
             },
             // 判断是否是给定组件
             'is' => function (Component $component) {
-                return $this->with($component, function () {
-                });
+                return $this->with($component, function () {});
             },
             // 判断文本是否存在，忽略大小写
             'assertSeeTextIn' => function (?string $selector, ?string $text) {
@@ -99,7 +98,7 @@ JS
             },
             // 判断全页面中是否存在文本
             'assertSeeInBody' => function (?string $text) {
-                $resolver = clone $this->resolver;
+                $resolver         = clone $this->resolver;
                 $resolver->prefix = 'html';
 
                 $element = $resolver->findOrFail('');
@@ -117,7 +116,7 @@ JS
 
                 $message = $this->formatTimeOutMessage('Waited %s seconds for text', implode("', '", $text));
 
-                $resolver = clone $this->resolver;
+                $resolver         = clone $this->resolver;
                 $resolver->prefix = 'html';
 
                 return $this->waitUsing($seconds, 100, function () use ($resolver, $text) {

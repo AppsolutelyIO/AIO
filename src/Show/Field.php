@@ -4,13 +4,14 @@ namespace Appsolutely\AIO\Show;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Show;
-use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Support\ArrayHelper;
+use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Appsolutely\AIO\Traits\HasVariables;
 use Appsolutely\AIO\Widgets\Dump;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -23,8 +24,8 @@ class Field implements Renderable
     use HasBuilderEvents;
     use HasVariables;
     use Macroable {
-            __call as macroCall;
-        }
+        __call as macroCall;
+    }
 
     /**
      * @var array
@@ -103,8 +104,8 @@ class Field implements Renderable
      */
     public function __construct($name = '', $label = '')
     {
-        $this->name = $name;
-        $this->label = $this->formatLabel($label);
+        $this->name   = $name;
+        $this->label  = $this->formatLabel($label);
         $this->showAs = new Collection();
 
         $this->callResolving();
@@ -113,7 +114,6 @@ class Field implements Renderable
     /**
      * Set parent show instance.
      *
-     * @param  Show  $show
      * @return $this
      */
     public function setParent(Show $show)
@@ -150,7 +150,6 @@ class Field implements Renderable
     /**
      * Format label.
      *
-     * @param $label
      * @return mixed
      */
     protected function formatLabel($label)
@@ -190,7 +189,6 @@ class Field implements Renderable
     /**
      * Display field using array value map.
      *
-     * @param  array  $values
      * @param  null  $default
      * @return $this
      */
@@ -226,7 +224,7 @@ class Field implements Renderable
                 if (url()->isValidUrl($path)) {
                     $src = $path;
                 } elseif ($server) {
-                    $src = rtrim($server, '/').'/'.ltrim($path, '/');
+                    $src = rtrim($server, '/') . '/' . ltrim($path, '/');
                 } else {
                     $disk = config('admin.upload.disk');
 
@@ -269,12 +267,12 @@ class Field implements Renderable
                 if (url()->isValidUrl($path)) {
                     $url = $path;
                 } elseif ($server) {
-                    $url = $server.$path;
+                    $url = $server . $path;
                 } else {
                     $storage = Storage::disk(config('admin.upload.disk'));
                     if ($storage->exists($path)) {
-                        $url = $storage->url($path);
-                        $size = ($storage->size($path) / 1000).'KB';
+                        $url  = $storage->url($path);
+                        $size = ($storage->size($path) / 1000) . 'KB';
                     }
                 }
 
@@ -379,18 +377,17 @@ HTML;
     }
 
     /**
-     * @param $style
      * @return array
      */
     public function formatStyle($style)
     {
-        $class = 'default';
+        $class      = 'default';
         $background = '';
 
         if ($style !== 'default') {
             $class = '';
 
-            $style = Admin::color()->get($style, $style);
+            $style      = Admin::color()->get($style, $style);
             $background = "style='background:{$style}'";
         }
 
@@ -442,7 +439,7 @@ HTML;
                 return $v->prepend($val);
             }
 
-            return $val.$v;
+            return $val . $v;
         });
     }
 
@@ -467,14 +464,13 @@ HTML;
                 return $v->push($val);
             }
 
-            return $v.$val;
+            return $v . $val;
         });
     }
 
     /**
      * Split a string by string.
      *
-     * @param  string  $d
      * @return $this
      */
     public function explode(string $d = ',')
@@ -492,7 +488,6 @@ HTML;
      * Render this column with the given view.
      *
      * @param  string  $view
-     * @param  array  $data
      * @return $this
      */
     public function view($view, array $data = [])
@@ -530,7 +525,7 @@ HTML;
     }
 
     /**
-     * @param  Fluent|\Illuminate\Database\Eloquent\Model  $model
+     * @param  Fluent|Model  $model
      * @return void
      */
     public function fill($model)
@@ -585,7 +580,6 @@ HTML;
     /**
      * Display field as boolean , `✓` for true, and `✗` for false.
      *
-     * @param  array  $map
      * @param  bool  $default
      * @return $this
      */

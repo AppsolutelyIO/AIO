@@ -12,7 +12,7 @@ class ModalTest extends TestCase
     public function test_constructor_sets_title_and_content()
     {
         $modal = new Modal('My Title', 'My Content');
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertStringContainsString('My Title', $html);
         $this->assertStringContainsString('My Content', $html);
@@ -21,7 +21,7 @@ class ModalTest extends TestCase
     public function test_has_modal_class()
     {
         $modal = new Modal();
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertStringContainsString('modal fade', $html);
     }
@@ -29,7 +29,7 @@ class ModalTest extends TestCase
     public function test_has_auto_id()
     {
         $modal = new Modal();
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertMatchesRegularExpression('/id="modal-[a-zA-Z0-9]+"/', $html);
     }
@@ -80,7 +80,7 @@ class ModalTest extends TestCase
     public function test_no_footer_by_default()
     {
         $modal = new Modal('Title', 'Content');
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertStringNotContainsString('modal-footer', $html);
     }
@@ -90,7 +90,7 @@ class ModalTest extends TestCase
     public function test_sm_size()
     {
         $modal = (new Modal())->sm();
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertStringContainsString('modal-sm', $html);
     }
@@ -98,7 +98,7 @@ class ModalTest extends TestCase
     public function test_lg_size()
     {
         $modal = (new Modal())->lg();
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertStringContainsString('modal-lg', $html);
     }
@@ -106,7 +106,7 @@ class ModalTest extends TestCase
     public function test_xl_size()
     {
         $modal = (new Modal())->xl();
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertStringContainsString('modal-xl', $html);
     }
@@ -114,7 +114,7 @@ class ModalTest extends TestCase
     public function test_custom_size()
     {
         $modal = (new Modal())->size('custom');
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertStringContainsString('modal-custom', $html);
     }
@@ -124,7 +124,7 @@ class ModalTest extends TestCase
     public function test_centered()
     {
         $modal = (new Modal())->centered();
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertStringContainsString('modal-dialog-centered', $html);
     }
@@ -132,7 +132,7 @@ class ModalTest extends TestCase
     public function test_not_centered_by_default()
     {
         $modal = new Modal();
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertStringNotContainsString('modal-dialog-centered', $html);
     }
@@ -142,7 +142,7 @@ class ModalTest extends TestCase
     public function test_scrollable()
     {
         $modal = (new Modal())->scrollable();
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertStringContainsString('modal-dialog-scrollable', $html);
     }
@@ -172,28 +172,28 @@ class ModalTest extends TestCase
 
     public function test_on_show()
     {
-        $modal = new Modal();
+        $modal  = new Modal();
         $result = $modal->onShow('console.log("show")');
         $this->assertInstanceOf(Modal::class, $result);
     }
 
     public function test_on_shown()
     {
-        $modal = new Modal();
+        $modal  = new Modal();
         $result = $modal->onShown('console.log("shown")');
         $this->assertInstanceOf(Modal::class, $result);
     }
 
     public function test_on_hide()
     {
-        $modal = new Modal();
+        $modal  = new Modal();
         $result = $modal->onHide('console.log("hide")');
         $this->assertInstanceOf(Modal::class, $result);
     }
 
     public function test_on_hidden()
     {
-        $modal = new Modal();
+        $modal  = new Modal();
         $result = $modal->onHidden('console.log("hidden")');
         $this->assertInstanceOf(Modal::class, $result);
     }
@@ -203,7 +203,7 @@ class ModalTest extends TestCase
     public function test_html_has_modal_structure()
     {
         $modal = new Modal('Title', 'Content');
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertStringContainsString('modal-dialog', $html);
         $this->assertStringContainsString('modal-content', $html);
@@ -218,7 +218,7 @@ class ModalTest extends TestCase
     public function test_make_factory()
     {
         $modal = Modal::make('Factory Title', 'Factory Body');
-        $html = $modal->html();
+        $html  = $modal->html();
 
         $this->assertStringContainsString('Factory Title', $html);
         $this->assertStringContainsString('Factory Body', $html);

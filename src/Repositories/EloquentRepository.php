@@ -8,14 +8,16 @@ use Appsolutely\AIO\Exception\RuntimeException;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Show;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Json as JsonCast;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\Relations;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Casts\Json as JsonCast;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -71,11 +73,11 @@ class EloquentRepository extends Repository implements TreeRepository
             $this->eloquentClass = $modelOrRelations;
         } elseif ($modelOrRelations instanceof EloquentModel) {
             $this->eloquentClass = get_class($modelOrRelations);
-            $this->model = $modelOrRelations;
+            $this->model         = $modelOrRelations;
         } elseif ($modelOrRelations instanceof Builder) {
-            $this->model = $modelOrRelations->getModel();
+            $this->model         = $modelOrRelations->getModel();
             $this->eloquentClass = get_class($this->model);
-            $this->queryBuilder = $modelOrRelations;
+            $this->queryBuilder  = $modelOrRelations;
         } else {
             $this->setRelations($modelOrRelations);
         }
@@ -151,8 +153,7 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 查询Grid表格数据.
      *
-     * @param  Grid\Model  $model
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|Collection|array
+     * @return LengthAwarePaginator|Collection|array
      */
     public function get(Grid\Model $model)
     {
@@ -171,7 +172,6 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 设置表格数据排序.
      *
-     * @param  Grid\Model  $model
      * @return void
      */
     protected function setSort(Grid\Model $model)
@@ -185,8 +185,8 @@ class EloquentRepository extends Repository implements TreeRepository
 
             $orders->each(function ($orderBy) use ($model) {
                 $column = $orderBy['arguments'][0];
-                $type = in_array($orderBy['method'], $model->getSortDescMethods(), true) ? 'desc' : ($orderBy['arguments'][1] ?? 'asc');
-                $cast = null;
+                $type   = in_array($orderBy['method'], $model->getSortDescMethods(), true) ? 'desc' : ($orderBy['arguments'][1] ?? 'asc');
+                $cast   = null;
 
                 $this->addOrderBy($model, $column, $type, $cast);
             });
@@ -200,7 +200,6 @@ class EloquentRepository extends Repository implements TreeRepository
     }
 
     /**
-     * @param  Grid\Model  $model
      * @param  string  $column
      * @param  string  $type
      * @param  string  $cast
@@ -210,7 +209,7 @@ class EloquentRepository extends Repository implements TreeRepository
     protected function addOrderBy(Grid\Model $model, $column, $type, $cast)
     {
         $explodedCols = explode('.', $column);
-        $isRelation = empty($explodedCols[1]) ? false : method_exists($this->model(), $explodedCols[0]);
+        $isRelation   = empty($explodedCols[1]) ? false : method_exists($this->model(), $explodedCols[0]);
 
         if (count($explodedCols) > 1 && $isRelation) {
             $this->setRelationSort($model, $column, $type, $cast);
@@ -225,12 +224,6 @@ class EloquentRepository extends Repository implements TreeRepository
             $cast);
     }
 
-    /**
-     * @param  Grid\Model  $model
-     * @param $column
-     * @param $type
-     * @param $cast
-     */
     protected function setOrderBy(Grid\Model $model, $column, $type, $cast)
     {
         $isJsonColumn = Str::contains($column, '->');
@@ -238,8 +231,8 @@ class EloquentRepository extends Repository implements TreeRepository
         if ($isJsonColumn) {
             $explodedCols = explode('->', $column);
             // json字段排序
-            $col = $this->wrapMySqlColumn(array_shift($explodedCols));
-            $parts = implode('.', $explodedCols);
+            $col    = $this->wrapMySqlColumn(array_shift($explodedCols));
+            $parts  = implode('.', $explodedCols);
             $column = "JSON_UNQUOTE(JSON_EXTRACT({$col}, '$.{$parts}'))";
         }
 
@@ -285,7 +278,6 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 设置关联数据排序.
      *
-     * @param  Grid\Model  $model
      * @param  string  $column
      * @param  string  $type
      * @param  string  $cast
@@ -298,13 +290,13 @@ class EloquentRepository extends Repository implements TreeRepository
 
         $relation = $this->model()->$relationName();
 
-        $model->addQuery('select', [$this->model()->getTable().'.*']);
+        $model->addQuery('select', [$this->model()->getTable() . '.*']);
 
         $model->addQuery('join', $this->joinParameters($relation));
 
         $this->setOrderBy(
             $model,
-            $relation->getRelated()->getTable().'.'.str_replace('.', '->', $relationColumn),
+            $relation->getRelated()->getTable() . '.' . str_replace('.', '->', $relationColumn),
             $type,
             $cast
         );
@@ -313,7 +305,6 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 关联模型 join 连接查询.
      *
-     * @param  Relation  $relation
      * @return array
      *
      * @throws \Exception
@@ -327,7 +318,7 @@ class EloquentRepository extends Repository implements TreeRepository
                 $relatedTable,
                 $relation->getForeignKeyName(),
                 '=',
-                $relatedTable.'.'.$relation->getRelated()->getKeyName(),
+                $relatedTable . '.' . $relation->getRelated()->getKeyName(),
             ];
         }
 
@@ -346,7 +337,6 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 设置分页参数.
      *
-     * @param  Grid\Model  $model
      * @return void
      */
     protected function setPaginate(Grid\Model $model)
@@ -367,7 +357,6 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 获取分页参数.
      *
-     * @param  Grid\Model  $model
      * @param  array|null  $paginate
      * @return array
      */
@@ -392,8 +381,7 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 查询编辑页面数据.
      *
-     * @param  Form  $form
-     * @return array|\Illuminate\Contracts\Support\Arrayable
+     * @return array|Arrayable
      */
     public function edit(Form $form)
     {
@@ -413,8 +401,7 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 查询详情页面数据.
      *
-     * @param  Show  $show
-     * @return array|\Illuminate\Contracts\Support\Arrayable
+     * @return array|Arrayable
      */
     public function detail(Show $show)
     {
@@ -434,7 +421,6 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 新增记录.
      *
-     * @param  Form  $form
      * @return mixed
      */
     public function store(Form $form)
@@ -469,8 +455,7 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 查询更新前的行数据.
      *
-     * @param  Form  $form
-     * @return array|\Illuminate\Contracts\Support\Arrayable
+     * @return array|Arrayable
      */
     public function updating(Form $form)
     {
@@ -480,7 +465,6 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 更新数据.
      *
-     * @param  Form  $form
      * @return bool
      */
     public function update(Form $form)
@@ -525,8 +509,6 @@ class EloquentRepository extends Repository implements TreeRepository
      * are encoded to a string. Prevents "json_decode(): Argument #1 ($json) must be
      * of type string, array given" when the form submits arrays for JSON columns.
      *
-     * @param  EloquentModel  $model
-     * @param  array  $updates
      * @return array
      */
     protected function normalizeJsonCastAttributes(EloquentModel $model, array $updates)
@@ -597,8 +579,6 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 删除数据.
      *
-     * @param  Form  $form
-     * @param  array  $originalData
      * @return bool
      */
     public function delete(Form $form, array $originalData)
@@ -632,7 +612,6 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 查询删除前的行数据.
      *
-     * @param  Form  $form
      * @return array
      */
     public function deleting(Form $form)
@@ -760,7 +739,6 @@ class EloquentRepository extends Repository implements TreeRepository
     }
 
     /**
-     * @param  array  $data
      * @return EloquentModel
      */
     public function createModel(array $data = [])
@@ -802,7 +780,7 @@ class EloquentRepository extends Repository implements TreeRepository
      */
     protected function getRelationInputs($model, $inputs = [])
     {
-        $map = [];
+        $map       = [];
         $relations = [];
 
         foreach ($inputs as $column => $value) {
@@ -820,7 +798,7 @@ class EloquentRepository extends Repository implements TreeRepository
 
             $relation = $model->$relationColumn();
 
-            if ($relation instanceof Relations\Relation) {
+            if ($relation instanceof Relation) {
                 $relations[$column] = $value;
 
                 $map[$column] = $relationColumn;
@@ -833,10 +811,6 @@ class EloquentRepository extends Repository implements TreeRepository
     /**
      * 更新关联关系数据.
      *
-     * @param  Form  $form
-     * @param  EloquentModel  $model
-     * @param  array  $relationsData
-     * @param  array  $relationKeyMap
      *
      * @throws \Exception
      */
@@ -851,9 +825,9 @@ class EloquentRepository extends Repository implements TreeRepository
 
             $relation = $model->$relationName();
 
-            $oneToOneRelation = $relation instanceof Relations\HasOne
+            $oneToOneRelation = $relation instanceof HasOne
                 || $relation instanceof Relations\MorphOne
-                || $relation instanceof Relations\BelongsTo;
+                || $relation instanceof BelongsTo;
 
             $prepared = $oneToOneRelation ? $form->prepareUpdate([$name => $values]) : [$name => $values];
 
@@ -868,15 +842,15 @@ class EloquentRepository extends Repository implements TreeRepository
                         $relation->sync($prepared[$name]);
                     }
                     break;
-                case $relation instanceof Relations\HasOne:
+                case $relation instanceof HasOne:
 
                     $related = $model->$relationName;
 
                     // if related is empty
                     if ($related === null) {
-                        $related = $relation->getRelated();
-                        $qualifiedParentKeyName = $relation->getQualifiedParentKeyName();
-                        $localKey = Arr::last(explode('.', $qualifiedParentKeyName));
+                        $related                                   = $relation->getRelated();
+                        $qualifiedParentKeyName                    = $relation->getQualifiedParentKeyName();
+                        $localKey                                  = Arr::last(explode('.', $qualifiedParentKeyName));
                         $related->{$relation->getForeignKeyName()} = $model->{$localKey};
                     }
 
@@ -886,7 +860,7 @@ class EloquentRepository extends Repository implements TreeRepository
 
                     $related->save();
                     break;
-                case $relation instanceof Relations\BelongsTo:
+                case $relation instanceof BelongsTo:
                 case $relation instanceof Relations\MorphTo:
 
                     $parent = $model->$relationName;
@@ -924,7 +898,7 @@ class EloquentRepository extends Repository implements TreeRepository
                 case $relation instanceof Relations\MorphMany:
 
                     foreach ($prepared[$name] as $related) {
-                        /** @var Relations\Relation $relation */
+                        /** @var Relation $relation */
                         $relation = $model->$relationName();
 
                         $keyName = $relation->getRelated()->getKeyName();

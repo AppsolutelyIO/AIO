@@ -10,8 +10,8 @@ use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Payment;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Services\Contracts\PaymentServiceInterface;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PaymentSystemTest extends TestCase
 {

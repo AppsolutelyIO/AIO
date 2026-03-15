@@ -4,7 +4,9 @@ namespace Appsolutely\AIO\Grid\Tools;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Support\UrlHelper;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Traits\Macroable;
+use Illuminate\View\View;
 
 class QuickSearch extends AbstractTool
 {
@@ -44,7 +46,6 @@ class QuickSearch extends AbstractTool
     }
 
     /**
-     * @param  int  $width
      * @return $this
      */
     public function width(int $width)
@@ -57,7 +58,6 @@ class QuickSearch extends AbstractTool
     /**
      * Set placeholder.
      *
-     * @param  string  $text
      * @return $this
      */
     public function placeholder(?string $text = '')
@@ -88,7 +88,6 @@ class QuickSearch extends AbstractTool
     }
 
     /**
-     * @param  bool  $value
      * @return $this
      */
     public function auto(bool $value = true)
@@ -99,7 +98,7 @@ class QuickSearch extends AbstractTool
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function render()
     {

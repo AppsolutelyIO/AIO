@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Repositories;
 
+use App\Models\User;
 use Appsolutely\AIO\Enums\FormEntrySpamStatus;
 use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Models\FormEntry;
 use Appsolutely\AIO\Models\NotificationQueue;
-use App\Models\User;
 use Appsolutely\AIO\Repositories\FormEntryRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class FormEntryRepositoryTest extends TestCase
 {
@@ -582,7 +583,7 @@ final class FormEntryRepositoryTest extends TestCase
 
     public function test_mark_single_as_spam_throws_for_nonexistent_entry(): void
     {
-        $this->expectException(\Illuminate\Database\Eloquent\ModelNotFoundException::class);
+        $this->expectException(ModelNotFoundException::class);
 
         $this->repository->markSingleAsSpam(99999);
     }
@@ -601,7 +602,7 @@ final class FormEntryRepositoryTest extends TestCase
 
     public function test_mark_single_as_not_spam_throws_for_nonexistent_entry(): void
     {
-        $this->expectException(\Illuminate\Database\Eloquent\ModelNotFoundException::class);
+        $this->expectException(ModelNotFoundException::class);
 
         $this->repository->markSingleAsNotSpam(99999);
     }

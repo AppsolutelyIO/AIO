@@ -28,7 +28,6 @@ class UserController extends AdminController
     /**
      * Edit interface.
      *
-     * @param $id
      * @return Content
      */
     public function edit($id, Content $content)
@@ -57,7 +56,6 @@ class UserController extends AdminController
      * Show interface.
      *
      * @param  mixed  $id
-     * @param  Content  $content
      * @return Content
      */
     public function show($id, Content $content)
@@ -97,11 +95,11 @@ class UserController extends AdminController
         $grid->column('profile.end_at', '结束时间');
 
         $grid->column('column1_not_in_table')->display(function () {
-            return 'full name:'.$this->full_name;
+            return 'full name:' . $this->full_name;
         });
 
         $grid->column('column2_not_in_table')->display(function () {
-            return $this->email.'#'.$this->profile['color'];
+            return $this->email . '#' . $this->profile['color'];
         });
 
         $grid->tags()->display(function ($tags) {
@@ -186,7 +184,7 @@ class UserController extends AdminController
         $form->text('profile.last_name');
         $form->text('profile.postcode')->help('Please input your postcode');
         $form->textarea('profile.address')->rows(15);
-        //$form->map('profile.latitude', 'profile.longitude', 'Position');
+        // $form->map('profile.latitude', 'profile.longitude', 'Position');
         $form->text('profile.color');
         $form->datetime('profile.start_at');
         $form->datetime('profile.end_at');

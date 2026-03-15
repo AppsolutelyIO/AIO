@@ -21,8 +21,6 @@ abstract class LazyRenderable extends Renderable
 
     /**
      * 创建表格.
-     *
-     * @return Grid
      */
     abstract public function grid(): Grid;
 
@@ -48,7 +46,6 @@ HTML;
     /**
      * 是否启用简化模式.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function simple(bool $value = true)
@@ -57,7 +54,6 @@ HTML;
     }
 
     /**
-     * @param  Grid  $grid
      * @return Grid
      */
     protected function prepare(Grid $grid)

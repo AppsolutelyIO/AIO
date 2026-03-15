@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Livewire\GeneralBlock;
+use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Services\Contracts\ManifestServiceInterface;
 use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Appsolutely\AIO\Services\PageBlockSettingService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class PageBlockSettingServiceTest extends TestCase
 {
@@ -134,7 +135,7 @@ final class PageBlockSettingServiceTest extends TestCase
     {
         Cache::flush();
 
-        $page = \Appsolutely\AIO\Models\Page::factory()->create();
+        $page = Page::factory()->create();
 
         $groupId = DB::table('page_block_groups')->insertGetId([
             'title'      => 'Test Group',
@@ -167,7 +168,7 @@ final class PageBlockSettingServiceTest extends TestCase
     {
         Cache::flush();
 
-        $page = \Appsolutely\AIO\Models\Page::factory()->create();
+        $page = Page::factory()->create();
 
         $groupId = DB::table('page_block_groups')->insertGetId([
             'title'      => 'General Group',
@@ -203,7 +204,7 @@ final class PageBlockSettingServiceTest extends TestCase
     {
         Cache::flush();
 
-        $page = \Appsolutely\AIO\Models\Page::factory()->create();
+        $page = Page::factory()->create();
 
         $groupId = DB::table('page_block_groups')->insertGetId([
             'title'      => 'General Group',

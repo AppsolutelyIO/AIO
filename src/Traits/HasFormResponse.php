@@ -4,8 +4,10 @@ namespace Appsolutely\AIO\Traits;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
+use Illuminate\Validation\Validator;
 
 trait HasFormResponse
 {
@@ -22,8 +24,8 @@ trait HasFormResponse
     /**
      * 返回字段验证错误信息.
      *
-     * @param  array|MessageBag|\Illuminate\Validation\Validator  $validationMessages
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @param  array|MessageBag|Validator  $validationMessages
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
      */
     public function validationErrorsResponse($validationMessages)
     {
@@ -50,10 +52,9 @@ trait HasFormResponse
      * 获取当前URL.
      *
      * @param  string|null  $default
-     * @param  Request|null  $request
      * @return string
      */
-    protected function getCurrentUrl($default = null, Request $request = null)
+    protected function getCurrentUrl($default = null, ?Request $request = null)
     {
         if ($this->currentUrl) {
             return admin_url($this->currentUrl);
@@ -76,13 +77,12 @@ trait HasFormResponse
             $query = $this->sanitize($query);
         }
 
-        return url($request->path().'?'.http_build_query($query));
+        return url($request->path() . '?' . http_build_query($query));
     }
 
     /**
      * 响应数据.
      *
-     * @param $response
      * @return \Illuminate\Http\JsonResponse
      */
     protected function sendResponse($response)

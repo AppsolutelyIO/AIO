@@ -6,8 +6,8 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 
 use Appsolutely\AIO\Models\Translation;
 use Appsolutely\AIO\Repositories\TranslationRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class TranslationRepositoryTest extends TestCase
 {

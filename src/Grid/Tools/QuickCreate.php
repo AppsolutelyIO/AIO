@@ -38,8 +38,6 @@ class QuickCreate implements Renderable
 
     /**
      * QuickCreate constructor.
-     *
-     * @param  Grid  $grid
      */
     public function __construct(Grid $grid)
     {
@@ -224,7 +222,6 @@ class QuickCreate implements Renderable
     }
 
     /**
-     * @param  Field  $field
      * @return Field
      */
     protected function addField(Field $field)
@@ -256,7 +253,6 @@ class QuickCreate implements Renderable
     }
 
     /**
-     * @param  string  $action
      * @return $this
      */
     public function action(?string $action)
@@ -267,7 +263,6 @@ class QuickCreate implements Renderable
     }
 
     /**
-     * @param  string  $method
      * @return $this
      */
     public function method(?string $method = 'POST')

@@ -82,7 +82,6 @@ class Setting extends Fluent
      * 批量追加数据.
      *
      * @param  string  $key
-     * @param  array  $value
      * @return $this
      */
     public function addMany($key, array $value)
@@ -95,7 +94,6 @@ class Setting extends Fluent
     /**
      * 保存配置到数据库.
      *
-     * @param  array  $data
      * @return $this
      */
     public function save(array $data = [])

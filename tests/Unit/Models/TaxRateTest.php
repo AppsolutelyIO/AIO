@@ -6,8 +6,8 @@ namespace Appsolutely\AIO\Tests\Unit\Models;
 
 use Appsolutely\AIO\Enums\TaxRateType;
 use Appsolutely\AIO\Models\TaxRate;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TaxRateTest extends TestCase
 {

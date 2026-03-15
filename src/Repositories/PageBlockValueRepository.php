@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Repositories;
 
+use Appsolutely\AIO\Models\PageBlockValue;
+
 final class PageBlockValueRepository extends BaseRepository
 {
     public function model(): string
     {
-        return \Appsolutely\AIO\Models\PageBlockValue::class;
+        return PageBlockValue::class;
     }
 
     /**
      * Find setting value by block ID
      */
-    public function findByBlockId(int $blockId): ?\Appsolutely\AIO\Models\PageBlockValue
+    public function findByBlockId(int $blockId): ?PageBlockValue
     {
         return $this->model->newQuery()
             ->where('block_id', $blockId)
@@ -25,7 +27,7 @@ final class PageBlockValueRepository extends BaseRepository
      * Find block value by block ID and theme.
      * Prefers value with matching theme, then falls back to theme=null.
      */
-    public function findByBlockIdAndTheme(int $blockId, ?string $theme): ?\Appsolutely\AIO\Models\PageBlockValue
+    public function findByBlockIdAndTheme(int $blockId, ?string $theme): ?PageBlockValue
     {
         $query = $this->model->newQuery()->where('block_id', $blockId);
 
@@ -45,7 +47,7 @@ final class PageBlockValueRepository extends BaseRepository
     /**
      * Create or update setting value for a block
      */
-    public function createOrUpdate(int $blockId, array $data): \Appsolutely\AIO\Models\PageBlockValue
+    public function createOrUpdate(int $blockId, array $data): PageBlockValue
     {
         return $this->model->newQuery()
             ->updateOrCreate(

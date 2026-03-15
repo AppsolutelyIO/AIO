@@ -27,7 +27,6 @@ JS;
     /**
      * Set input placeholder.
      *
-     * @param  null|string  $placeholder
      * @return $this
      */
     public function placeholder(?string $placeholder)

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Middleware;
 
 use Appsolutely\AIO\Http\Middleware\RestrictAdminDomainToAdminRoutes;
-use Illuminate\Http\Request;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Http\Request;
 
 final class RestrictAdminDomainToAdminRoutesTest extends TestCase
 {

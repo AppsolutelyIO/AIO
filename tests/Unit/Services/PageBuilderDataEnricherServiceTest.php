@@ -7,9 +7,9 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 use Appsolutely\AIO\Constants\BasicConstant;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Services\PageBuilderDataEnricherService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class PageBuilderDataEnricherServiceTest extends TestCase
 {

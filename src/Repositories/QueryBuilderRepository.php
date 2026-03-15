@@ -7,6 +7,7 @@ use Appsolutely\AIO\Exception\RuntimeException;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Show;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -114,8 +115,7 @@ class QueryBuilderRepository extends Repository implements TreeRepository
     /**
      * 查询Grid表格数据.
      *
-     * @param  Grid\Model  $model
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|Collection|array
+     * @return LengthAwarePaginator|Collection|array
      */
     public function get(Grid\Model $model)
     {
@@ -140,7 +140,6 @@ class QueryBuilderRepository extends Repository implements TreeRepository
     /**
      * 设置表格数据排序.
      *
-     * @param  Grid\Model  $model
      * @return void
      */
     protected function setSort(Grid\Model $model)
@@ -163,7 +162,6 @@ class QueryBuilderRepository extends Repository implements TreeRepository
     /**
      * 设置关联数据排序.
      *
-     * @param  Grid\Model  $model
      * @param  string  $column
      * @param  string  $type
      * @return void
@@ -189,7 +187,6 @@ class QueryBuilderRepository extends Repository implements TreeRepository
     /**
      * 设置分页参数.
      *
-     * @param  Grid\Model  $model
      * @return void
      */
     protected function setPaginate(Grid\Model $model)
@@ -208,7 +205,6 @@ class QueryBuilderRepository extends Repository implements TreeRepository
     /**
      * 获取分页参数.
      *
-     * @param  Grid\Model  $model
      * @param  array|null  $paginate
      * @return array
      */
@@ -232,9 +228,6 @@ class QueryBuilderRepository extends Repository implements TreeRepository
 
     /**
      * 查询编辑页面数据.
-     *
-     * @param  Form  $form
-     * @return array
      */
     public function edit(Form $form): array
     {
@@ -251,9 +244,6 @@ class QueryBuilderRepository extends Repository implements TreeRepository
 
     /**
      * 查询详情页面数据.
-     *
-     * @param  Show  $show
-     * @return array
      */
     public function detail(Show $show): array
     {
@@ -271,7 +261,6 @@ class QueryBuilderRepository extends Repository implements TreeRepository
     /**
      * 新增记录.
      *
-     * @param  Form  $form
      * @return mixed
      */
     public function store(Form $form)
@@ -288,9 +277,6 @@ class QueryBuilderRepository extends Repository implements TreeRepository
 
     /**
      * 查询更新前的行数据.
-     *
-     * @param  Form  $form
-     * @return array
      */
     public function updating(Form $form): array
     {
@@ -300,7 +286,6 @@ class QueryBuilderRepository extends Repository implements TreeRepository
     /**
      * 更新数据.
      *
-     * @param  Form  $form
      * @return bool
      */
     public function update(Form $form)
@@ -340,7 +325,6 @@ class QueryBuilderRepository extends Repository implements TreeRepository
     /**
      * 删除数据.
      *
-     * @param  Form  $form
      * @return bool
      */
     public function delete(Form $form, array $deletingData)
@@ -369,9 +353,6 @@ class QueryBuilderRepository extends Repository implements TreeRepository
 
     /**
      * 查询删除前的行数据.
-     *
-     * @param  Form  $form
-     * @return array
      */
     public function deleting(Form $form): array
     {

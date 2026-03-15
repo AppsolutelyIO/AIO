@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Renderable;
 class Tab extends Widget
 {
     const TYPE_CONTENT = 1;
+
     const TYPE_LINK = 2;
 
     /**
@@ -64,10 +65,10 @@ class Tab extends Widget
     public function addLink($title, $href, $active = false)
     {
         $this->data['tabs'][] = [
-            'id'      => mt_rand(),
-            'title'   => $title,
-            'href'    => $href,
-            'type'    => static::TYPE_LINK,
+            'id'    => mt_rand(),
+            'title' => $title,
+            'href'  => $href,
+            'type'  => static::TYPE_LINK,
         ];
 
         if ($active) {
@@ -79,12 +80,10 @@ class Tab extends Widget
 
     /**
      * Set tab content padding.
-     *
-     * @param  string  $padding
      */
     public function padding(string $padding)
     {
-        $this->data['padding'] = 'padding:'.$padding;
+        $this->data['padding'] = 'padding:' . $padding;
 
         return $this;
     }
@@ -109,7 +108,6 @@ class Tab extends Widget
     /**
      * Set drop-down items.
      *
-     * @param  array  $links
      * @return $this
      */
     public function dropdown(array $links)
@@ -148,7 +146,7 @@ class Tab extends Widget
     public function theme(string $style = 'primary')
     {
         return $this
-            ->class('nav-theme-'.$style, true)
+            ->class('nav-theme-' . $style, true)
             ->style('padding:0!important;');
     }
 

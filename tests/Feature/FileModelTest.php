@@ -6,8 +6,8 @@ namespace Appsolutely\AIO\Tests\Feature;
 
 use Appsolutely\AIO\Models\File;
 use Appsolutely\AIO\Models\FileAttachment;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class FileModelTest extends TestCase
 {

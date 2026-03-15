@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Admin\Controllers;
 
+use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Enums\Status;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Repositories\MenuRepository;
 use Appsolutely\AIO\Services\PageBuilderDataEnricherService;
 use Appsolutely\AIO\Services\PageService;
-use Appsolutely\AIO\Admin;
-use Appsolutely\AIO\Form;
-use Appsolutely\AIO\Grid;
 
 final class PageController extends AdminBaseController
 {

@@ -6,8 +6,9 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Models\Translation;
 use Appsolutely\AIO\Services\TranslationService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class TranslationServiceTest extends TestCase
 {
@@ -115,12 +116,12 @@ final class TranslationServiceTest extends TestCase
         $cacheKey = appsolutely() . '.translations';
 
         // Put something under the root key
-        app(\Illuminate\Contracts\Cache\Repository::class)->put($cacheKey, 'cached-data', 3600);
-        $this->assertNotNull(app(\Illuminate\Contracts\Cache\Repository::class)->get($cacheKey));
+        app(Repository::class)->put($cacheKey, 'cached-data', 3600);
+        $this->assertNotNull(app(Repository::class)->get($cacheKey));
 
         $this->service->clearCache();
 
-        $this->assertNull(app(\Illuminate\Contracts\Cache\Repository::class)->get($cacheKey));
+        $this->assertNull(app(Repository::class)->get($cacheKey));
     }
 
     // --- updateTranslation ---

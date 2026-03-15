@@ -31,20 +31,20 @@ class Map extends Field
 
         switch (static::getUsingMap()) {
             case 'tencent':
-                $js = '//map.qq.com/api/js?v=2.exp&key='.($keys['tencent'] ?? env('TENCENT_MAP_API_KEY'));
+                $js = '//map.qq.com/api/js?v=2.exp&key=' . ($keys['tencent'] ?? env('TENCENT_MAP_API_KEY'));
                 break;
             case 'google':
-                $js = '//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key='.($keys['google'] ?? env('GOOGLE_API_KEY'));
+                $js = '//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=' . ($keys['google'] ?? env('GOOGLE_API_KEY'));
                 break;
             case 'yandex':
                 $js = '//api-maps.yandex.ru/2.1/?lang=ru_RU';
                 break;
             case 'amap':
-                $js = '//webapi.amap.com/maps?v=1.4.15&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geolocation&key='.($keys['amap'] ?? env('AMAP_API_KEY'));
+                $js = '//webapi.amap.com/maps?v=1.4.15&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geolocation&key=' . ($keys['amap'] ?? env('AMAP_API_KEY'));
                 break;
             case 'baidu':
             default:
-                $js = '//api.map.baidu.com/api?v=2.0&ak='.($keys['baidu'] ?? env('BAIDU_MAP_API_KEY'));
+                $js = '//api.map.baidu.com/api?v=2.0&ak=' . ($keys['baidu'] ?? env('BAIDU_MAP_API_KEY'));
         }
 
         Admin::js($js);
@@ -111,17 +111,17 @@ class Map extends Field
 
     public function baidu()
     {
-        return $this->addVariables(['type' => 'baidu', 'searchId' => 'bdmap'.Str::random()]);
+        return $this->addVariables(['type' => 'baidu', 'searchId' => 'bdmap' . Str::random()]);
     }
 
     public function amap()
     {
-        return $this->addVariables(['type' => 'amap', 'searchId' => 'amap'.Str::random()]);
+        return $this->addVariables(['type' => 'amap', 'searchId' => 'amap' . Str::random()]);
     }
 
     protected function getDefaultElementClass()
     {
-        $class = $this->normalizeElementClass($this->column['lat']).$this->normalizeElementClass($this->column['lng']);
+        $class = $this->normalizeElementClass($this->column['lat']) . $this->normalizeElementClass($this->column['lng']);
 
         return [$class, static::NORMAL_CLASS];
     }
@@ -137,7 +137,6 @@ class Map extends Field
      * Set element class.
      *
      * @param  string|array  $class
-     * @param  bool  $normalize
      * @return $this
      */
     public function setElementClass($class, bool $normalize = true)
@@ -146,7 +145,7 @@ class Map extends Field
             $class = $this->normalizeElementClass($class);
         }
 
-        $strClass = array_merge($class['lat'], $class['lng']);
+        $strClass           = array_merge($class['lat'], $class['lng']);
         $this->elementClass = $strClass;
 
         return $this;

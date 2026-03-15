@@ -14,8 +14,10 @@ use Appsolutely\AIO\Grid\Filter\Presenter\Select;
 use Appsolutely\AIO\Grid\Filter\Presenter\Text;
 use Appsolutely\AIO\Grid\LazyRenderable;
 use Appsolutely\AIO\Traits\HasVariables;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\View\View;
 
 /**
  * Class AbstractFilter.
@@ -112,13 +114,12 @@ abstract class AbstractFilter
     /**
      * AbstractFilter constructor.
      *
-     * @param $column
      * @param  string  $label
      */
     public function __construct($column, $label = '')
     {
         $this->column = $column;
-        $this->label = $this->formatLabel($label);
+        $this->label  = $this->formatLabel($label);
     }
 
     /**
@@ -212,12 +213,9 @@ abstract class AbstractFilter
             return $columns;
         }
 
-        return $this->parent->grid()->makeName('filter-column-'.str_replace('.', '-', $columns));
+        return $this->parent->grid()->makeName('filter-column-' . str_replace('.', '-', $columns));
     }
 
-    /**
-     * @param  Filter  $filter
-     */
     public function setParent(Filter $filter)
     {
         $this->parent = $filter;
@@ -317,7 +315,7 @@ abstract class AbstractFilter
     }
 
     /**
-     * @param  array|\Illuminate\Contracts\Support\Arrayable|\Closure  $options
+     * @param  array|Arrayable|\Closure  $options
      * @return MultipleSelect
      */
     public function multipleSelect($options = [])
@@ -326,7 +324,6 @@ abstract class AbstractFilter
     }
 
     /**
-     * @param  LazyRenderable  $table
      * @return Filter\Presenter\SelectTable
      */
     public function selectTable(LazyRenderable $table)
@@ -335,7 +332,6 @@ abstract class AbstractFilter
     }
 
     /**
-     * @param  LazyRenderable  $table
      * @return Filter\Presenter\MultipleSelectTable
      */
     public function multipleSelectTable(LazyRenderable $table)
@@ -425,7 +421,6 @@ abstract class AbstractFilter
     /**
      * Set presenter object of filter.
      *
-     * @param  Presenter  $presenter
      * @return mixed
      */
     public function setPresenter(Presenter $presenter)
@@ -581,7 +576,7 @@ abstract class AbstractFilter
         $relColumn = is_callable($relColumn) ? $relColumn : $col;
 
         return ['whereHas' => [implode('.', $column), function ($q) use ($relColumn, $params) {
-            $relColumn = is_string($relColumn) ? $q->getModel()->getTable().'.'.$relColumn : $relColumn;
+            $relColumn = is_string($relColumn) ? $q->getModel()->getTable() . '.' . $relColumn : $relColumn;
             array_unshift($params, $relColumn);
 
             $q->{$this->query}(...$params);
@@ -643,7 +638,7 @@ abstract class AbstractFilter
     /**
      * Render this filter.
      *
-     * @return \Illuminate\View\View|string
+     * @return View|string
      */
     public function __toString()
     {
@@ -651,8 +646,6 @@ abstract class AbstractFilter
     }
 
     /**
-     * @param $method
-     * @param $params
      * @return mixed
      *
      * @throws \Exception

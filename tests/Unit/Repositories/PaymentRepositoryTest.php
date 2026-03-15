@@ -7,8 +7,9 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Payment;
 use Appsolutely\AIO\Repositories\PaymentRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class PaymentRepositoryTest extends TestCase
 {
@@ -36,7 +37,7 @@ final class PaymentRepositoryTest extends TestCase
     {
         $result = $this->repository->all();
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
     }
 
     public function test_create_stores_payment(): void

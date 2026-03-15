@@ -25,7 +25,6 @@ trait CanHidesColumns
     /**
      * Remove column selector on grid.
      *
-     * @param  bool  $disable
      * @return $this|mixed
      */
     public function disableColumnSelector(bool $disable = true)
@@ -238,7 +237,7 @@ trait CanHidesColumns
 
     protected function makeColumnSelectorStorage()
     {
-        $store = config('admin.grid.column_selector.store') ?: Grid\ColumnSelector\SessionStore::class;
+        $store  = config('admin.grid.column_selector.store') ?: Grid\ColumnSelector\SessionStore::class;
         $params = (array) config('admin.grid.column_selector.store_params') ?: [];
 
         $storage = app($store, $params);

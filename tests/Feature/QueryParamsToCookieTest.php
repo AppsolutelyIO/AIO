@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Feature;
 
 use Appsolutely\AIO\Http\Middleware\QueryParamsToCookie;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Appsolutely\AIO\Tests\TestCase;
 
 class QueryParamsToCookieTest extends TestCase
 {

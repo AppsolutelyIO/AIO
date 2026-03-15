@@ -41,9 +41,9 @@ class Vditor extends Field
             'maxWidth' => 1200,
             'actions'  => ['desktop', 'tablet', 'mobile'],
         ],
-        'link'           => ['isOpen' => true],
-        'image'          => ['isPreview' => true],
-        'toolbar'        => [
+        'link'    => ['isOpen' => true],
+        'image'   => ['isPreview' => true],
+        'toolbar' => [
             'headings', '|', 'bold', 'italic', 'strike', 'inline-code',
             '|', 'link', 'upload', 'emoji',
             '|', 'quote', 'code', 'table', 'line',
@@ -62,7 +62,6 @@ class Vditor extends Field
     /**
      * 设置编辑器高度.
      *
-     * @param  int  $height
      * @return $this
      */
     public function height(int $height)
@@ -75,7 +74,6 @@ class Vditor extends Field
     /**
      * 设置编辑模式: sv (分屏预览) | wysiwyg (所见即所得) | ir (即时渲染).
      *
-     * @param  string  $mode
      * @return $this
      */
     public function mode(string $mode)
@@ -88,7 +86,6 @@ class Vditor extends Field
     /**
      * 设置文件上传存储配置.
      *
-     * @param  string  $disk
      * @return $this
      */
     public function disk(string $disk)
@@ -101,7 +98,6 @@ class Vditor extends Field
     /**
      * 设置图片上传文件夹.
      *
-     * @param  string  $dir
      * @return $this
      */
     public function imageDirectory(string $dir)
@@ -127,7 +123,6 @@ class Vditor extends Field
     /**
      * 自定义图片上传接口.
      *
-     * @param  string  $url
      * @return $this
      */
     public function imageUrl(string $url)
@@ -137,9 +132,6 @@ class Vditor extends Field
         return $this;
     }
 
-    /**
-     * @return string
-     */
     protected function defaultImageUploadUrl(): string
     {
         return UrlHelper::withQuery(
@@ -159,7 +151,7 @@ class Vditor extends Field
     {
         $cdn = admin_asset('@admin/aio/plugins/vditor');
 
-        $this->options['cdn'] = $cdn;
+        $this->options['cdn']  = $cdn;
         $this->options['lang'] = $this->resolveLang();
 
         if ($placeholder = parent::placeholder()) {
@@ -173,13 +165,13 @@ class Vditor extends Field
         }
 
         $this->options['preview']['markdown']['linkBase'] = url('/');
-        $this->options['preview']['theme'] = [
-            'path' => $cdn.'/dist/css/content-theme',
+        $this->options['preview']['theme']                = [
+            'path' => $cdn . '/dist/css/content-theme',
             'list' => ['ant-design' => 'Ant Design', 'dark' => 'Dark', 'light' => 'Light', 'wechat' => 'WeChat'],
         ];
 
         if (empty($this->options['upload']['url'])) {
-            $uploadUrl = $this->defaultImageUploadUrl();
+            $uploadUrl                               = $this->defaultImageUploadUrl();
             $this->options['upload']['url']          = $uploadUrl;
             $this->options['upload']['fieldName']    = 'file[]';
             $this->options['upload']['multiple']     = true;
@@ -192,7 +184,7 @@ class Vditor extends Field
             'withCredentials' => true,
         ];
 
-        $id = 'vditor-'.preg_replace('/[^a-zA-Z0-9_-]/', '-', $this->getElementName());
+        $id = 'vditor-' . preg_replace('/[^a-zA-Z0-9_-]/', '-', $this->getElementName());
 
         $this->options['cache']['id'] = $id;
 

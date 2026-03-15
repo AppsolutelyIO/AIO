@@ -2,7 +2,6 @@
 
 namespace Appsolutely\AIO;
 
-use Closure;
 use Appsolutely\AIO\Contracts\Repository;
 use Appsolutely\AIO\Grid\Column;
 use Appsolutely\AIO\Grid\Concerns;
@@ -13,61 +12,65 @@ use Appsolutely\AIO\Support\HtmlHelper;
 use Appsolutely\AIO\Support\UrlHelper;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
 use Appsolutely\AIO\Traits\HasVariables;
+use Closure;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 
 class Grid
 {
-    use HasBuilderEvents;
-    use HasVariables;
-    use Concerns\HasEvents;
-    use Concerns\HasNames;
-    use Concerns\HasFilter;
-    use Concerns\HasTools;
-    use Concerns\HasActions;
-    use Concerns\HasPaginator;
-    use Concerns\HasExporter;
-    use Concerns\HasComplexHeaders;
-    use Concerns\HasSelector;
-    use Concerns\HasQuickCreate;
-    use Concerns\HasQuickSearch;
     use Concerns\CanFixColumns;
     use Concerns\CanHidesColumns;
+    use Concerns\HasActions;
+    use Concerns\HasComplexHeaders;
+    use Concerns\HasEvents;
+    use Concerns\HasExporter;
+    use Concerns\HasFilter;
+    use Concerns\HasNames;
+    use Concerns\HasPaginator;
+    use Concerns\HasQuickCreate;
+    use Concerns\HasQuickSearch;
+    use Concerns\HasSelector;
+    use Concerns\HasTools;
+    use HasBuilderEvents;
+    use HasVariables;
     use Macroable {
         __call as macroCall;
     }
 
     const CREATE_MODE_DEFAULT = 'default';
+
     const CREATE_MODE_DIALOG = 'dialog';
+
     const ASYNC_NAME = '_async_';
 
     /**
      * The grid data model instance.
      *
-     * @var \Appsolutely\AIO\Grid\Model
+     * @var Model
      */
     protected $model;
 
     /**
      * Collection of grid columns.
      *
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $columns;
 
     /**
      * Collection of all grid columns.
      *
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $allColumns;
 
     /**
      * Collection of all data rows.
      *
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $rows;
 
@@ -86,7 +89,7 @@ class Grid
     /**
      * Grid builder.
      *
-     * @var \Closure
+     * @var Closure
      */
     protected $builder;
 
@@ -99,8 +102,6 @@ class Grid
 
     /**
      * Resource path of the grid.
-     *
-     * @var
      */
     protected $resourcePath;
 
@@ -144,7 +145,7 @@ class Grid
     protected $tableId = 'grid-table';
 
     /**
-     * @var Grid\Tools\RowSelector
+     * @var Tools\RowSelector
      */
     protected $rowSelector;
 
@@ -176,7 +177,7 @@ class Grid
     ];
 
     /**
-     * @var \Illuminate\Http\Request
+     * @var Request
      */
     protected $request;
 
@@ -196,16 +197,15 @@ class Grid
      * Grid constructor.
      *
      * @param  Repository|\Illuminate\Database\Eloquent\Model|Builder|null  $repository
-     * @param  null|\Closure  $builder
      */
-    public function __construct($repository = null, ?\Closure $builder = null, $request = null)
+    public function __construct($repository = null, ?Closure $builder = null, $request = null)
     {
-        $this->model = new Model(request(), $repository);
-        $this->columns = new Collection();
-        $this->allColumns = new Collection();
-        $this->rows = new Collection();
-        $this->builder = $builder;
-        $this->request = $request ?: request();
+        $this->model        = new Model(request(), $repository);
+        $this->columns      = new Collection();
+        $this->allColumns   = new Collection();
+        $this->rows         = new Collection();
+        $this->builder      = $builder;
+        $this->request      = $request ?: request();
         $this->resourcePath = url($this->request->getPathInfo());
 
         if ($repository = $this->model->repository()) {
@@ -268,7 +268,6 @@ class Grid
     /**
      * Add number column.
      *
-     * @param  null|string  $label
      * @return Column
      */
     public function number(?string $label = null)
@@ -279,7 +278,6 @@ class Grid
     /**
      * 启用异步渲染功能.
      *
-     * @param  bool  $async
      * @return $this
      */
     public function async(bool $async = true)
@@ -537,7 +535,7 @@ class Grid
      *
      * @return Collection|$this
      */
-    public function rows(?\Closure $callback = null)
+    public function rows(?Closure $callback = null)
     {
         if ($callback) {
             $this->rowsCallbacks[] = $callback;
@@ -555,7 +553,7 @@ class Grid
      */
     public function getCreateUrl()
     {
-        return $this->urlWithConstraints($this->resource().'/create');
+        return $this->urlWithConstraints($this->resource() . '/create');
     }
 
     /**
@@ -568,7 +566,6 @@ class Grid
     }
 
     /**
-     * @param  string  $url
      * @return string
      */
     public function urlWithConstraints(?string $url)
@@ -579,16 +576,16 @@ class Grid
             $queryString = http_build_query($constraints);
         }
 
-        return $url.($queryString ? ('?'.$queryString) : '');
+        return $url . ($queryString ? ('?' . $queryString) : '');
     }
 
     /**
-     * @param  \Closure  $closure
-     * @return Grid\Tools\RowSelector
+     * @param  Closure  $closure
+     * @return Tools\RowSelector
      */
     public function rowSelector()
     {
-        return $this->rowSelector ?: ($this->rowSelector = new Grid\Tools\RowSelector($this));
+        return $this->rowSelector ?: ($this->rowSelector = new Tools\RowSelector($this));
     }
 
     /**
@@ -603,18 +600,16 @@ class Grid
         }
 
         $rowSelector = $this->rowSelector();
-        $keyName = $this->getKeyName();
+        $keyName     = $this->getKeyName();
 
         $this->prependColumn(
-            Grid\Column::SELECT_COLUMN_NAME
+            Column::SELECT_COLUMN_NAME
         )->setLabel($rowSelector->renderHeader())->display(function () use ($rowSelector, $keyName) {
             return $rowSelector->renderColumn($this, $this->{$keyName});
         });
     }
 
     /**
-     * @param  string  $width
-     * @param  string  $height
      * @return $this
      */
     public function setDialogFormDimensions(string $width, string $height)
@@ -639,7 +634,6 @@ class Grid
     }
 
     /**
-     * @param  bool  $value
      * @return $this
      */
     public function withBorder(bool $value = true)
@@ -650,7 +644,6 @@ class Grid
     }
 
     /**
-     * @param  bool  $value
      * @return $this
      */
     public function tableCollapse(bool $value = true)
@@ -663,7 +656,6 @@ class Grid
     /**
      * 显示横轴滚动条.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function scrollbar(bool $value = true)
@@ -704,7 +696,7 @@ HTML;
 
     protected function renderHeaderOrFooter($callbacks)
     {
-        $target = [$this->processFilter(), $this];
+        $target  = [$this->processFilter(), $this];
         $content = [];
 
         foreach ($callbacks as $callback) {
@@ -829,7 +821,6 @@ HTML;
     }
 
     /**
-     * @param  string  $mode
      * @return $this
      */
     public function createMode(string $mode)
@@ -867,10 +858,9 @@ HTML;
     }
 
     /**
-     * @param  Closure  $closure
      * @return $this;
      */
-    public function wrap(\Closure $closure)
+    public function wrap(Closure $closure)
     {
         $this->wrapper = $closure;
 
@@ -888,7 +878,6 @@ HTML;
     /**
      * Add variables to grid view.
      *
-     * @param  array  $variables
      * @return $this
      */
     public function with(array $variables)
@@ -964,7 +953,6 @@ HTML;
     /**
      * 设置是否显示.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function show(bool $value = true)
@@ -977,7 +965,6 @@ HTML;
     /**
      * 是否显示横向滚动条.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function scrollbarX(bool $value = true)
@@ -993,7 +980,7 @@ HTML;
     public function formatTableParentClass()
     {
         $tableCollaps = $this->option('table_collapse') ? 'table-collapse' : '';
-        $scrollbarX = $this->option('scrollbar_x') ? 'table-scrollbar-x' : '';
+        $scrollbarX   = $this->option('scrollbar_x') ? 'table-scrollbar-x' : '';
 
         return "table-responsive table-wrapper complex-container table-middle mt-1 {$tableCollaps} {$scrollbarX}";
     }
@@ -1028,8 +1015,8 @@ HTML;
     {
         if ($this->async && ! $this->isAsyncRequest()) {
             $query = static::ASYNC_NAME;
-            $url = UrlHelper::fullUrlWithoutQuery(['_pjax']);
-            $url = UrlHelper::withQuery($url, [static::ASYNC_NAME => 1]);
+            $url   = UrlHelper::fullUrlWithoutQuery(['_pjax']);
+            $url   = UrlHelper::withQuery($url, [static::ASYNC_NAME => 1]);
 
             $options = [
                 'selector'  => ".async-{$this->getTableId()}",
@@ -1083,8 +1070,6 @@ JS
     /**
      * Dynamically add columns to the grid view.
      *
-     * @param $method
-     * @param $arguments
      * @return Column
      */
     public function __call($method, $arguments)

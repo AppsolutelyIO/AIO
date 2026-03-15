@@ -3,6 +3,7 @@
 namespace Appsolutely\AIO\Tests\Integration;
 
 use Appsolutely\AIO\AdminServiceProvider;
+use Appsolutely\AIO\Models\Administrator;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -21,7 +22,7 @@ abstract class TestCase extends BaseTestCase
         ]);
 
         $app['config']->set('admin', array_merge(
-            require __DIR__.'/../../config/admin.php',
+            require __DIR__ . '/../../config/admin.php',
             [
                 'auth' => [
                     'enable' => false,
@@ -35,21 +36,21 @@ abstract class TestCase extends BaseTestCase
                     'providers' => [
                         'admin' => [
                             'driver' => 'eloquent',
-                            'model'  => \Appsolutely\AIO\Models\Administrator::class,
+                            'model'  => Administrator::class,
                         ],
                     ],
                 ],
-                'permission' => ['enable' => false],
-                'https' => false,
+                'permission'    => ['enable' => false],
+                'https'         => false,
                 'assets_server' => '',
-                'layout' => [
-                    'color' => 'default',
-                    'body_class' => '',
+                'layout'        => [
+                    'color'         => 'default',
+                    'body_class'    => '',
                     'sidebar_style' => 'light',
-                    'sidebar_dark' => false,
+                    'sidebar_dark'  => false,
                 ],
                 'route' => [
-                    'prefix' => 'admin',
+                    'prefix'     => 'admin',
                     'middleware' => ['web'],
                 ],
             ]

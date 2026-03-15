@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
+use App\Models\User;
 use Appsolutely\AIO\Enums\ReviewStatus;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Models\ProductReview;
-use App\Models\User;
 use Appsolutely\AIO\Services\ProductReviewService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductReviewServiceTest extends TestCase
 {

@@ -56,7 +56,7 @@ class Bootstrap
     }
 
     /**
-     * @param  \Illuminate\Http\Request
+     * @param  Request
      * @return void
      */
     protected function storeCurrentUrl(Request $request)
@@ -76,7 +76,7 @@ class Bootstrap
     }
 
     /**
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return bool
      */
     public function prefetch($request)
@@ -86,6 +86,6 @@ class Bootstrap
         }
 
         return strcasecmp($request->server->get('HTTP_X_MOZ'), 'prefetch') === 0 ||
-            strcasecmp($request->headers->get('Purpose'), 'prefetch') === 0;
+            strcasecmp($request->headers->get('Purpose'), 'prefetch')      === 0;
     }
 }

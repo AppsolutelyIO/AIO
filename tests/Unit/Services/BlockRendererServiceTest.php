@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Models\GeneralPage;
+use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Models\PageBlockSetting;
 use Appsolutely\AIO\Services\BlockRendererService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class BlockRendererServiceTest extends TestCase
 {
@@ -24,7 +25,7 @@ final class BlockRendererServiceTest extends TestCase
 
     private function makePage(): GeneralPage
     {
-        $page = \Appsolutely\AIO\Models\Page::factory()->create();
+        $page = Page::factory()->create();
 
         return new GeneralPage($page);
     }

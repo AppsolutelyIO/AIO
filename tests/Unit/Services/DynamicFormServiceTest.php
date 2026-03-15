@@ -9,8 +9,8 @@ use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Models\FormEntry;
 use Appsolutely\AIO\Models\FormField;
 use Appsolutely\AIO\Services\DynamicFormService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class DynamicFormServiceTest extends TestCase
 {

@@ -8,11 +8,15 @@ use Appsolutely\AIO\Http\Repositories\Administrator;
 use Appsolutely\AIO\Layout\Content;
 use Appsolutely\AIO\Traits\HasFormResponse;
 use Illuminate\Auth\GuardHelpers;
+use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class AuthController extends Controller
 {
@@ -31,7 +35,7 @@ class AuthController extends Controller
     /**
      * Show the login page.
      *
-     * @return Content|\Illuminate\Http\RedirectResponse
+     * @return Content|RedirectResponse
      */
     public function getLogin(Content $content)
     {
@@ -45,18 +49,17 @@ class AuthController extends Controller
     /**
      * Handle a login request.
      *
-     * @param  Request  $request
      * @return mixed
      */
     public function postLogin(Request $request)
     {
         $credentials = $request->only([$this->username(), 'password']);
-        $remember = (bool) $request->input('remember', false);
+        $remember    = (bool) $request->input('remember', false);
 
         /** @var \Illuminate\Validation\Validator $validator */
         $validator = Validator::make($credentials, [
-            $this->username()   => 'required',
-            'password'          => 'required',
+            $this->username() => 'required',
+            'password'        => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -94,7 +97,6 @@ class AuthController extends Controller
     /**
      * User setting page.
      *
-     * @param  Content  $content
      * @return Content
      */
     public function getSetting(Content $content)
@@ -114,7 +116,7 @@ class AuthController extends Controller
     /**
      * Update user setting.
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function putSetting()
     {
@@ -209,7 +211,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @return string|\Symfony\Component\Translation\TranslatorInterface
+     * @return string|TranslatorInterface
      */
     protected function getFailedLoginMessage()
     {
@@ -231,8 +233,7 @@ class AuthController extends Controller
     /**
      * Send the response after the user was authenticated.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function sendLoginResponse(Request $request)
     {
@@ -260,7 +261,7 @@ class AuthController extends Controller
     /**
      * Get the guard to be used during authentication.
      *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard|GuardHelpers
+     * @return StatefulGuard|GuardHelpers
      */
     protected function guard()
     {

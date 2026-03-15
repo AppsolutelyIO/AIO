@@ -49,7 +49,7 @@ class AssetTest extends TestCase
     public function test_get_real_path_resolves_admin_alias()
     {
         $asset = $this->getAsset();
-        $path = $asset->getRealPath('@admin/aio/js/app.js');
+        $path  = $asset->getRealPath('@admin/aio/js/app.js');
         $this->assertSame('vendor/aio/aio/js/app.js', $path);
     }
 
@@ -119,7 +119,7 @@ class AssetTest extends TestCase
 
     public function test_js_null_does_nothing()
     {
-        $asset = $this->getAsset();
+        $asset  = $this->getAsset();
         $before = $asset->js;
         $asset->js(null);
         $this->assertSame($before, $asset->js);
@@ -127,7 +127,7 @@ class AssetTest extends TestCase
 
     public function test_css_null_does_nothing()
     {
-        $asset = $this->getAsset();
+        $asset  = $this->getAsset();
         $before = $asset->css;
         $asset->css(null);
         $this->assertSame($before, $asset->css);
@@ -216,16 +216,16 @@ class AssetTest extends TestCase
 
     public function test_with_version_query()
     {
-        $asset = $this->getAsset();
+        $asset  = $this->getAsset();
         $result = $asset->withVersionQuery('http://example.com/app.js');
-        $this->assertStringContainsString('v'.Admin::VERSION, $result);
+        $this->assertStringContainsString('v' . Admin::VERSION, $result);
     }
 
     public function test_with_version_query_appends_to_existing()
     {
-        $asset = $this->getAsset();
+        $asset  = $this->getAsset();
         $result = $asset->withVersionQuery('http://example.com/app.js?t=1');
-        $this->assertStringContainsString('&v'.Admin::VERSION, $result);
+        $this->assertStringContainsString('&v' . Admin::VERSION, $result);
     }
 
     // --- Base JS/CSS ---
@@ -260,7 +260,7 @@ class AssetTest extends TestCase
 
     public function test_set_base_js_merge()
     {
-        $asset = $this->getAsset();
+        $asset    = $this->getAsset();
         $original = $asset->baseJs;
         $asset->baseJs(['extra' => 'extra.js']);
         $this->assertArrayHasKey('extra', $asset->baseJs);
@@ -287,7 +287,7 @@ class AssetTest extends TestCase
     public function test_normalize_alias_paths_replaces_params()
     {
         $asset = $this->getAsset();
-        $ref = new \ReflectionMethod($asset, 'normalizeAliasPaths');
+        $ref   = new \ReflectionMethod($asset, 'normalizeAliasPaths');
 
         $result = $ref->invoke($asset, ['path/{version}/app.js'], ['version' => '1.0']);
         $this->assertSame(['path/1.0/app.js'], $result);
@@ -296,7 +296,7 @@ class AssetTest extends TestCase
     public function test_normalize_alias_paths_filters_unresolved_placeholders()
     {
         $asset = $this->getAsset();
-        $ref = new \ReflectionMethod($asset, 'normalizeAliasPaths');
+        $ref   = new \ReflectionMethod($asset, 'normalizeAliasPaths');
 
         $result = $ref->invoke($asset, [
             'resolved.js',
@@ -311,7 +311,7 @@ class AssetTest extends TestCase
     public function test_normalize_alias_paths_filters_placeholder_at_start()
     {
         $asset = $this->getAsset();
-        $ref = new \ReflectionMethod($asset, 'normalizeAliasPaths');
+        $ref   = new \ReflectionMethod($asset, 'normalizeAliasPaths');
 
         // Bug test: '{foo}/bar.js' has '{' at position 0
         // mb_strpos returns 0, which is falsy — the file would NOT be filtered
@@ -323,10 +323,10 @@ class AssetTest extends TestCase
 
     public function test_no_dcat_in_default_aliases()
     {
-        $asset = $this->getAsset();
+        $asset   = $this->getAsset();
         $aliases = $asset->getAlias('@aio');
 
-        $jsFiles = (array) ($aliases['js'] ?? []);
+        $jsFiles  = (array) ($aliases['js'] ?? []);
         $cssFiles = (array) ($aliases['css'] ?? []);
 
         foreach (array_merge($jsFiles, $cssFiles) as $file) {

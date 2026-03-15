@@ -2,6 +2,4 @@
 
 namespace Appsolutely\AIO\Form\Events;
 
-class Submitted extends Event
-{
-}
+class Submitted extends Event {}

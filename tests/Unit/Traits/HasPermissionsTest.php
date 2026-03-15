@@ -2,6 +2,7 @@
 
 namespace Appsolutely\AIO\Tests\Unit\Traits;
 
+use Appsolutely\AIO\Models\Administrator;
 use Appsolutely\AIO\Tests\Unit\TestCase;
 
 class HasPermissionsTest extends TestCase
@@ -13,7 +14,7 @@ class HasPermissionsTest extends TestCase
     {
         // Use reflection to find a class that uses the trait
         $ref = new \ReflectionMethod(
-            \Appsolutely\AIO\Models\Administrator::class,
+            Administrator::class,
             'can'
         );
         $params = $ref->getParameters();

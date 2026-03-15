@@ -217,7 +217,6 @@ class EmbeddedForm
     /**
      * Fill data to all fields in form.
      *
-     * @param  array  $data
      * @return $this
      */
     public function fill(array $data)
@@ -232,7 +231,6 @@ class EmbeddedForm
     /**
      * Format form, set `element name` `error key` and `element class`.
      *
-     * @param  Field  $field
      * @return Field
      */
     protected function formatField(Field $field)
@@ -243,13 +241,13 @@ class EmbeddedForm
 
         if (is_array($jsonKey)) {
             foreach ($jsonKey as $index => $name) {
-                $elementName[$index] = $this->formatName("{$this->column}.{$name}");
-                $errorKey[$index] = "{$this->column}.$name";
+                $elementName[$index]  = $this->formatName("{$this->column}.{$name}");
+                $errorKey[$index]     = "{$this->column}.$name";
                 $elementClass[$index] = $this->formatClass("{$this->column}_$name");
             }
         } else {
-            $elementName = $this->formatName("{$this->column}.$jsonKey");
-            $errorKey = "{$this->column}.$jsonKey";
+            $elementName  = $this->formatName("{$this->column}.$jsonKey");
+            $errorKey     = "{$this->column}.$jsonKey";
             $elementClass = $this->formatClass("{$this->column}_$jsonKey");
         }
 
@@ -273,7 +271,6 @@ class EmbeddedForm
     /**
      * Add a field to form.
      *
-     * @param  Field  $field
      * @return $this
      */
     public function pushField(Field $field)

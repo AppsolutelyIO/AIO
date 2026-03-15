@@ -7,8 +7,6 @@ use Appsolutely\AIO\Support\Helper;
 class RepositoryCreator
 {
     /**
-     * @param  string  $modelClass
-     * @param  string  $repositoryClass
      * @return string
      */
     public function create(?string $modelClass, ?string $repositoryClass)
@@ -18,7 +16,7 @@ class RepositoryCreator
         $files = app('files');
 
         $path = Helper::guessClassFileName($repositoryClass);
-        $dir = dirname($path);
+        $dir  = dirname($path);
 
         if (! is_dir($dir)) {
             $files->makeDirectory($dir, 0755, true);
@@ -52,6 +50,6 @@ class RepositoryCreator
 
     protected function stub()
     {
-        return __DIR__.'/stubs/repository.stub';
+        return __DIR__ . '/stubs/repository.stub';
     }
 }

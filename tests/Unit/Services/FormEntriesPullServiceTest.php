@@ -7,8 +7,9 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Models\FormEntry;
 use Appsolutely\AIO\Services\FormEntriesPullService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 final class FormEntriesPullServiceTest extends TestCase
 {
@@ -85,7 +86,7 @@ final class FormEntriesPullServiceTest extends TestCase
         [$success, $paginator, $error] = $this->service->pullEntries('valid-form', $token, ['form_slug' => 'valid-form']);
 
         $this->assertTrue($success);
-        $this->assertInstanceOf(\Illuminate\Pagination\LengthAwarePaginator::class, $paginator);
+        $this->assertInstanceOf(LengthAwarePaginator::class, $paginator);
         $this->assertNull($error);
     }
 

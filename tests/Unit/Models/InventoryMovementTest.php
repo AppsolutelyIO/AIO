@@ -7,11 +7,12 @@ namespace Appsolutely\AIO\Tests\Unit\Models;
 use Appsolutely\AIO\Enums\InventoryMovementType;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\InventoryMovement;
+use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Models\ProductSku;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class InventoryMovementTest extends TestCase
 {
@@ -94,7 +95,7 @@ final class InventoryMovementTest extends TestCase
     public function test_inventory_movement_has_morph_reference(): void
     {
         $sku   = $this->createSku();
-        $order = \Appsolutely\AIO\Models\Order::factory()->create();
+        $order = Order::factory()->create();
 
         $movement = InventoryMovement::create([
             'product_sku_id' => $sku->id,
@@ -106,6 +107,6 @@ final class InventoryMovementTest extends TestCase
             'reference_id'   => $order->id,
         ]);
 
-        $this->assertInstanceOf(\Appsolutely\AIO\Models\Order::class, $movement->reference);
+        $this->assertInstanceOf(Order::class, $movement->reference);
     }
 }

@@ -7,8 +7,9 @@ namespace Appsolutely\AIO\Tests\Unit\Models;
 use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Models\FormEntry;
 use Appsolutely\AIO\Models\NotificationQueue;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Appsolutely\AIO\Models\NotificationTemplate;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class FormEntryNotificationRelationshipTest extends TestCase
 {
@@ -128,7 +129,7 @@ final class FormEntryNotificationRelationshipTest extends TestCase
     {
         $form     = Form::factory()->create();
         $entry    = FormEntry::factory()->create(['form_id' => $form->id]);
-        $template = \Appsolutely\AIO\Models\NotificationTemplate::factory()->create();
+        $template = NotificationTemplate::factory()->create();
 
         $notification = NotificationQueue::create([
             'template_id'     => $template->id,

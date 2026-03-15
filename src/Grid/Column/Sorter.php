@@ -34,15 +34,14 @@ class Sorter implements Renderable
     /**
      * Sorter constructor.
      *
-     * @param  Grid  $grid
      * @param  string  $columnName
      * @param  string  $cast
      */
     public function __construct(Grid $grid, $columnName, $cast)
     {
-        $this->grid = $grid;
+        $this->grid       = $grid;
         $this->columnName = $columnName;
-        $this->cast = $cast;
+        $this->cast       = $cast;
     }
 
     /**
@@ -71,12 +70,12 @@ class Sorter implements Renderable
      */
     public function render()
     {
-        $type = 'desc';
-        $icon = 'down';
+        $type   = 'desc';
+        $icon   = 'down';
         $active = '';
 
         if ($this->isSorted()) {
-            $type = $this->sort['type'] == 'desc' ? 'asc' : 'desc';
+            $type   = $this->sort['type'] == 'desc' ? 'asc' : 'desc';
             $active = 'active';
 
             if ($this->sort['type'] === 'asc') {

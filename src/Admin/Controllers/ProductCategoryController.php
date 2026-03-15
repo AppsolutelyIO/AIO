@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Admin\Controllers;
 
 use Appsolutely\AIO\Admin\Forms\NestedSetForm as Form;
-use Appsolutely\AIO\Models\ProductCategory;
-use Appsolutely\AIO\Repositories\ProductCategoryRepository;
 use Appsolutely\AIO\Form\BlockForm;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Layout\Content;
 use Appsolutely\AIO\Layout\Row;
+use Appsolutely\AIO\Models\ProductCategory;
+use Appsolutely\AIO\Repositories\ProductCategoryRepository;
 use Appsolutely\AIO\Tree;
 use Illuminate\Support\Facades\Request;
 

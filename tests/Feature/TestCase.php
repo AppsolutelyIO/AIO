@@ -3,6 +3,7 @@
 namespace Appsolutely\AIO\Tests\Feature;
 
 use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Http\Controllers\AuthController;
 use Appsolutely\AIO\Models\Administrator;
 use Appsolutely\AIO\Tests\Integration\TestCase as IntegrationTestCase;
 use Illuminate\Support\Facades\Hash;
@@ -20,16 +21,16 @@ abstract class TestCase extends IntegrationTestCase
 
     protected function loadAdminTranslations()
     {
-        $this->app['translator']->addNamespace('admin', __DIR__.'/../../resources/lang');
+        $this->app['translator']->addNamespace('admin', __DIR__ . '/../../resources/lang');
 
         // Load the admin translations into the default namespace so __('admin.xxx') works
-        $langPath = __DIR__.'/../../resources/lang';
+        $langPath = __DIR__ . '/../../resources/lang';
         if (is_dir($langPath)) {
             $this->app['translator']->addJsonPath($langPath);
-            foreach (glob($langPath.'/*', GLOB_ONLYDIR) as $localeDir) {
+            foreach (glob($langPath . '/*', GLOB_ONLYDIR) as $localeDir) {
                 $locale = basename($localeDir);
-                foreach (glob($localeDir.'/*.php') as $file) {
-                    $group = basename($file, '.php');
+                foreach (glob($localeDir . '/*.php') as $file) {
+                    $group        = basename($file, '.php');
                     $translations = require $file;
                     if (is_array($translations)) {
                         $this->app['translator']->addLines(
@@ -157,11 +158,11 @@ abstract class TestCase extends IntegrationTestCase
         parent::getEnvironmentSetUp($app);
 
         // App key required for encryption/sessions
-        $app['config']->set('app.key', 'base64:'.base64_encode(str_repeat('a', 32)));
+        $app['config']->set('app.key', 'base64:' . base64_encode(str_repeat('a', 32)));
 
         // Enable auth for feature tests
         $app['config']->set('admin.auth.enable', true);
-        $app['config']->set('admin.auth.controller', \Appsolutely\AIO\Http\Controllers\AuthController::class);
+        $app['config']->set('admin.auth.controller', AuthController::class);
 
         // Register admin auth guard and provider
         $app['config']->set('auth.guards.admin', [

@@ -18,14 +18,14 @@ use Tests\TestCase;
  */
 class MenuTest extends TestCase
 {
-    public function testMenuIndex()
+    public function test_menu_index()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new MenuPage());
         });
     }
 
-    public function testAddMenu()
+    public function test_add_menu()
     {
         $this->browse(function (Browser $browser) {
             $item = [
@@ -50,13 +50,13 @@ class MenuTest extends TestCase
         });
     }
 
-    public function testDeleteMenu()
+    public function test_delete_menu()
     {
         $this->delete('admin/auth/menu/8');
         $this->assertEquals(7, Menu::count());
     }
 
-    public function testEditMenu()
+    public function test_edit_menu()
     {
         $this->browse(function (Browser $browser) {
             $newTitle = 'blablabla';
@@ -73,7 +73,7 @@ class MenuTest extends TestCase
         });
     }
 
-    public function testEditMenuParent()
+    public function test_edit_menu_parent()
     {
         $this->browse(function (Browser $browser) {
             $id = 5;
@@ -87,7 +87,7 @@ class MenuTest extends TestCase
         });
     }
 
-    public function testQuickEditMenu()
+    public function test_quick_edit_menu()
     {
         $this->browse(function (Browser $browser) {
             $id = 5;
@@ -127,7 +127,7 @@ class MenuTest extends TestCase
 
     private function assertDatabase($id, $updates)
     {
-        $roles = $updates['roles'];
+        $roles       = $updates['roles'];
         $permissions = $updates['permissions'];
 
         unset($updates['roles'], $updates['permissions']);

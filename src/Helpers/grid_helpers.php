@@ -18,7 +18,7 @@ if (! function_exists('extract_values')) {
 }
 
 if (! function_exists('column_value')) {
-    function column_value($key = '', $searches = ';', $replaces = '<br/>'): \Closure
+    function column_value($key = '', $searches = ';', $replaces = '<br/>'): Closure
     {
         return function ($data) use ($key, $searches, $replaces) {
             if (empty($data[$key])) {
@@ -34,7 +34,7 @@ if (! function_exists('column_value')) {
 }
 
 if (! function_exists('column_value_simple')) {
-    function column_value_simple($column, $key = null): \Closure
+    function column_value_simple($column, $key = null): Closure
     {
         return function ($data) use ($key, $column) {
             $data = $data[$key] ?? $data;
@@ -45,7 +45,7 @@ if (! function_exists('column_value_simple')) {
 }
 
 if (! function_exists('column_count')) {
-    function column_count(): \Closure
+    function column_count(): Closure
     {
         return function ($data) {
             return is_countable($data) ? count($data) : 0;
@@ -54,7 +54,7 @@ if (! function_exists('column_count')) {
 }
 
 if (! function_exists('column_time_format')) {
-    function column_time_format(): \Closure
+    function column_time_format(): Closure
     {
         return function ($datetime) {
             if (! $datetime) {
@@ -67,7 +67,7 @@ if (! function_exists('column_time_format')) {
 }
 
 if (! function_exists('column_file_size')) {
-    function column_file_size(): \Closure
+    function column_file_size(): Closure
     {
         return function ($size) {
             return FileHelper::formatSize($size);

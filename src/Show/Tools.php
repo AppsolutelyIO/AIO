@@ -71,14 +71,12 @@ class Tools implements Renderable
 
     /**
      * Tools constructor.
-     *
-     * @param  Panel  $panel
      */
     public function __construct(Panel $panel)
     {
         $this->panel = $panel;
 
-        $this->appends = new Collection();
+        $this->appends  = new Collection();
         $this->prepends = new Collection();
     }
 
@@ -113,7 +111,6 @@ class Tools implements Renderable
     }
 
     /**
-     * @param $tool
      * @return void
      */
     protected function prepareTool($tool)
@@ -174,7 +171,6 @@ class Tools implements Renderable
     }
 
     /**
-     * @param  bool  $disable
      * @return $this
      */
     public function disableQuickEdit(bool $disable = true)
@@ -185,14 +181,12 @@ class Tools implements Renderable
     }
 
     /**
-     * @param  string  $width
-     * @param  string  $height
      * @return $this
      */
     public function showQuickEdit(?string $width = null, ?string $height = null)
     {
         $this->showQuickEdit = true;
-        $this->showEdit = false;
+        $this->showEdit      = false;
 
         $width && ($this->dialogFormDimensions[0] = $width);
         $height && ($this->dialogFormDimensions[1] = $height);
@@ -209,7 +203,7 @@ class Tools implements Renderable
     {
         $url = $this->resource();
 
-        return url()->isValidUrl($url) ? $url : '/'.trim($url, '/');
+        return url()->isValidUrl($url) ? $url : '/' . trim($url, '/');
     }
 
     /**
@@ -221,7 +215,7 @@ class Tools implements Renderable
     {
         $key = $this->panel->parent()->getKey();
 
-        return $this->getListPath().'/'.$key.'/edit';
+        return $this->getListPath() . '/' . $key . '/edit';
     }
 
     /**
@@ -233,7 +227,7 @@ class Tools implements Renderable
     {
         $key = $this->panel->parent()->getKey();
 
-        return $this->getListPath().'/'.$key;
+        return $this->getListPath() . '/' . $key;
     }
 
     /**
@@ -270,7 +264,7 @@ HTML;
         }
 
         $edit = trans('admin.edit');
-        $url = $this->getEditPath();
+        $url  = $this->getEditPath();
 
         $quickBtn = $btn = '';
 
@@ -283,7 +277,7 @@ EOF;
         }
 
         if ($this->showQuickEdit) {
-            $id = 'show-edit-'.Str::random(8);
+            $id               = 'show-edit-' . Str::random(8);
             [$width, $height] = $this->dialogFormDimensions;
 
             Form::dialog($edit)
@@ -344,10 +338,10 @@ HTML;
         $output = $this->renderCustomTools($this->prepends);
 
         foreach ($this->tools as $tool) {
-            $renderMethod = 'render'.ucfirst($tool);
+            $renderMethod = 'render' . ucfirst($tool);
             $output .= $this->$renderMethod();
         }
 
-        return $output.$this->renderCustomTools($this->appends);
+        return $output . $this->renderCustomTools($this->appends);
     }
 }

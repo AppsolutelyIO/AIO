@@ -6,8 +6,8 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Models\Article;
 use Appsolutely\AIO\Services\ArticleService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class ArticleServiceTest extends TestCase
 {

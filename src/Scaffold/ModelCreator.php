@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Scaffold;
 
 use Appsolutely\AIO\Exception\AdminException;
 use Appsolutely\AIO\Support\Helper;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
 class ModelCreator
@@ -25,7 +26,7 @@ class ModelCreator
     /**
      * The filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
@@ -58,7 +59,7 @@ class ModelCreator
     public function create($keyName = 'id', $timestamps = true, $softDeletes = false)
     {
         $path = $this->getpath($this->name);
-        $dir = dirname($path);
+        $dir  = dirname($path);
 
         if (! is_dir($dir)) {
             $this->files->makeDirectory($dir, 0755, true);
@@ -116,7 +117,7 @@ class ModelCreator
      */
     protected function replaceClass(&$stub, $name)
     {
-        $class = str_replace($this->getNamespace($name).'\\', '', $name);
+        $class = str_replace($this->getNamespace($name) . '\\', '', $name);
 
         $stub = str_replace('DummyClass', $class, $stub);
 
@@ -154,7 +155,7 @@ class ModelCreator
 
         if ($softDeletes) {
             $import = 'use Illuminate\\Database\\Eloquent\\SoftDeletes;';
-            $use = 'use SoftDeletes;';
+            $use    = 'use SoftDeletes;';
         }
 
         $stub = str_replace(['DummyImportSoftDeletesTrait', 'DummyUseSoftDeletesTrait'], [$import, $use], $stub);
@@ -174,7 +175,7 @@ class ModelCreator
         $import = $use = '';
 
         $import = 'use Appsolutely\\AIO\\Traits\\HasDateTimeFormatter;';
-        $use = 'use HasDateTimeFormatter;';
+        $use    = 'use HasDateTimeFormatter;';
 
         $stub = str_replace(['DummyImportDateTimeFormatterTrait', 'DummyUseDateTimeFormatterTrait'], [$import, $use], $stub);
 
@@ -206,7 +207,7 @@ class ModelCreator
      */
     protected function replaceTable(&$stub, $name)
     {
-        $class = str_replace($this->getNamespace($name).'\\', '', $name);
+        $class = str_replace($this->getNamespace($name) . '\\', '', $name);
 
         $table = Str::plural(strtolower($class)) !== $this->tableName ? "protected \$table = '$this->tableName';\n" : '';
 
@@ -249,6 +250,6 @@ class ModelCreator
      */
     public function getStub()
     {
-        return __DIR__.'/stubs/model.stub';
+        return __DIR__ . '/stubs/model.stub';
     }
 }

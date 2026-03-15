@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Admin\Forms;
 
-use Appsolutely\AIO\Repositories\ProductSkuRepository;
 use Appsolutely\AIO\Contracts\LazyRenderable;
+use Appsolutely\AIO\Models\ProductAttributeGroup;
+use Appsolutely\AIO\Repositories\ProductSkuRepository;
 use Appsolutely\AIO\Traits\LazyWidget;
 use Appsolutely\AIO\Widgets\Form;
 
@@ -82,7 +83,7 @@ class ProductSkuGeneratorForm extends Form implements LazyRenderable
 
         // Add attribute group selector
         $this->select('attribute_group_id', 'Attribute Group')
-            ->options(\Appsolutely\AIO\Models\ProductAttributeGroup::status()->pluck('title', 'id'))
+            ->options(ProductAttributeGroup::status()->pluck('title', 'id'))
             ->load('attribute_combinations', admin_route('api.attribute-groups'), 'key', 'readable');
 
         // Add multiselect for attribute combinations

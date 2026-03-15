@@ -4,6 +4,4 @@ namespace Tests;
 
 use PHPUnit\Framework\Assert;
 
-class PHPUnit extends Assert
-{
-}
+class PHPUnit extends Assert {}

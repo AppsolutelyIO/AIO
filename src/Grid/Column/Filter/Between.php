@@ -82,7 +82,6 @@ class Between extends Filter
      * Add a binding to the query.
      *
      * @param  mixed  $value
-     * @param  Model  $model
      */
     public function addBinding($value, Model $model)
     {
@@ -125,7 +124,7 @@ class Between extends Filter
             'locale'           => config('app.locale'),
             'allowInputToggle' => true,
             'format'           => $this->dateFormat,
-            'extraFormats' => ['DD-MM-YYYY', 'DD/MM/YYYY', 'DD.MM.YYYY', 'DD,MM,YYYY'],
+            'extraFormats'     => ['DD-MM-YYYY', 'DD/MM/YYYY', 'DD.MM.YYYY', 'DD,MM,YYYY'],
         ];
 
         $options = json_encode($options);
@@ -135,12 +134,12 @@ class Between extends Filter
         $('.{$this->class['end']}').datetimepicker($options);
 JS
         );
-//        $('.{$this->class['start']}').on("dp.change", function (e) {
-//            $('.{$this->class['end']}').data("DateTimePicker").minDate(e.date);
-//        });
-//        $('.{$this->class['end']}').on("dp.change", function (e) {
-//            $('.{$this->class['start']}').data("DateTimePicker").maxDate(e.date);
-//        });
+        //        $('.{$this->class['start']}').on("dp.change", function (e) {
+        //            $('.{$this->class['end']}').data("DateTimePicker").minDate(e.date);
+        //        });
+        //        $('.{$this->class['end']}').on("dp.change", function (e) {
+        //            $('.{$this->class['start']}').data("DateTimePicker").maxDate(e.date);
+        //        });
     }
 
     /**
@@ -164,7 +163,7 @@ JS;
 
         $this->addScript();
 
-        $value = $this->value(['start' => '', 'end' => '']);
+        $value  = $this->value(['start' => '', 'end' => '']);
         $active = empty(array_filter($value)) ? '' : 'active';
 
         return <<<EOT

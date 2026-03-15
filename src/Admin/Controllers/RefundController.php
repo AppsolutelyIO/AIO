@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Admin\Controllers;
 
 use Appsolutely\AIO\Enums\RefundStatus;
-use Appsolutely\AIO\Models\Refund;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Models\Refund;
 
 final class RefundController extends AdminBaseController
 {

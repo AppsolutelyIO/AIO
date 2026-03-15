@@ -7,6 +7,7 @@ namespace Appsolutely\AIO\Models;
 use Appsolutely\AIO\Enums\PageType;
 use Appsolutely\AIO\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * GeneralPage - A unified wrapper class for all page types
@@ -350,7 +351,7 @@ class GeneralPage
     /**
      * Blocks relationship - delegate to appropriate model
      */
-    public function blocks(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function blocks(): HasMany
     {
         if ($this->isNested()) {
             return $this->parentPage->blocks();

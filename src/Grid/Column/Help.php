@@ -30,8 +30,8 @@ class Help implements Renderable
      */
     public function __construct($message = '', ?string $style = null, ?string $placement = null)
     {
-        $this->message = value($message);
-        $this->style = $style;
+        $this->message   = value($message);
+        $this->style     = $style;
         $this->placement = $placement;
     }
 
@@ -42,9 +42,9 @@ class Help implements Renderable
      */
     public function render()
     {
-        $class = 'grid-column-help-'.Str::random(8);
+        $class = 'grid-column-help-' . Str::random(8);
 
-        $tooltip = Tooltip::make('.'.$class);
+        $tooltip = Tooltip::make('.' . $class);
 
         if (in_array($this->style, ['green', 'blue', 'red', 'purple'], true)) {
             $tooltip->{$this->style}();

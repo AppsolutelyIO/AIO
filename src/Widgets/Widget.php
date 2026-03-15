@@ -163,7 +163,6 @@ abstract class Widget implements Renderable
     }
 
     /**
-     * @param $value
      * @return string
      */
     protected function toString($value)
@@ -194,11 +193,10 @@ abstract class Widget implements Renderable
      */
     public function getElementSelector()
     {
-        return '.'.$this->getElementClass();
+        return '.' . $this->getElementClass();
     }
 
     /**
-     * @param  string  $elementClass
      * @return $this
      */
     public function setElementClass(string $elementClass)
@@ -261,7 +259,6 @@ abstract class Widget implements Renderable
     /**
      * 设置是否执行JS代码.
      *
-     * @param  bool  $run
      * @return $this
      */
     public function runScript(bool $run = true)
@@ -297,14 +294,12 @@ abstract class Widget implements Renderable
     }
 
     /**
-     * @param $method
-     * @param $parameters
      * @return $this
      */
     public function __call($method, $parameters)
     {
         if ($method === 'style' || $method === 'class') {
-            $value = $parameters[0] ?? null;
+            $value  = $parameters[0] ?? null;
             $append = $parameters[1] ?? ($method === 'class' ? false : true);
 
             if (is_array($value)) {
@@ -316,7 +311,7 @@ abstract class Widget implements Renderable
 
                 $de = $method === 'style' ? ';' : ' ';
 
-                $value = $original.$de.$value;
+                $value = $original . $de . $value;
             }
 
             return $this->setHtmlAttribute($method, $value);

@@ -9,9 +9,9 @@ use Appsolutely\AIO\Models\Coupon;
 use Appsolutely\AIO\Models\CouponUsage;
 use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Repositories\CouponRepository;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Appsolutely\AIO\Repositories\CouponUsageRepository;
 use Appsolutely\AIO\Services\Contracts\CouponServiceInterface;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 final readonly class CouponService implements CouponServiceInterface
 {

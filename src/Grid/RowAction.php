@@ -2,6 +2,7 @@
 
 namespace Appsolutely\AIO\Grid;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Fluent;
 
 abstract class RowAction extends GridAction
@@ -34,7 +35,7 @@ abstract class RowAction extends GridAction
      * Set row model.
      *
      * @param  mixed  $key
-     * @return \Illuminate\Database\Eloquent\Model|mixed
+     * @return Model|mixed
      */
     public function row($key = null)
     {
@@ -48,7 +49,7 @@ abstract class RowAction extends GridAction
     /**
      * Set row model.
      *
-     * @param  Fluent|\Illuminate\Database\Eloquent\Model  $row
+     * @param  Fluent|Model  $row
      * @return $this
      */
     public function setRow($row)
@@ -64,7 +65,6 @@ abstract class RowAction extends GridAction
     }
 
     /**
-     * @param  Column  $column
      * @return $this
      */
     public function setColumn(Column $column)

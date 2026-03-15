@@ -6,8 +6,8 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 
 use Appsolutely\AIO\Models\NotificationSender;
 use Appsolutely\AIO\Repositories\NotificationSenderRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class NotificationSenderRepositoryTest extends TestCase
 {

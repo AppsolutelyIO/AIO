@@ -13,8 +13,8 @@ use Appsolutely\AIO\Layout\Menu;
 use Appsolutely\AIO\Layout\Navbar;
 use Appsolutely\AIO\Layout\SectionManager;
 use Appsolutely\AIO\Models\SiteSetting;
-use Appsolutely\AIO\Support\Context;
 use Appsolutely\AIO\Support\ArrayHelper;
+use Appsolutely\AIO\Support\Context;
 use Appsolutely\AIO\Support\Setting;
 use Appsolutely\AIO\Support\Translator;
 use Appsolutely\AIO\Support\WebUploader;
@@ -125,7 +125,7 @@ class AdminServiceProvider extends ServiceProvider
 
     protected function registerViews()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'admin');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'admin');
     }
 
     /**
@@ -167,10 +167,10 @@ class AdminServiceProvider extends ServiceProvider
     protected function registerPublishing()
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes([__DIR__.'/../config' => config_path()], 'aio-config');
-            $this->publishes([__DIR__.'/../resources/lang' => $this->app->langPath()], 'aio-lang');
-            $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'aio-migrations');
-            $this->publishes([__DIR__.'/../resources/dist' => public_path(Admin::asset()->getRealPath('@admin'))], 'aio-assets');
+            $this->publishes([__DIR__ . '/../config' => config_path()], 'aio-config');
+            $this->publishes([__DIR__ . '/../resources/lang' => $this->app->langPath()], 'aio-lang');
+            $this->publishes([__DIR__ . '/../database/migrations' => database_path('migrations')], 'aio-migrations');
+            $this->publishes([__DIR__ . '/../resources/dist' => public_path(Admin::asset()->getRealPath('@admin'))], 'aio-assets');
         }
     }
 
@@ -185,7 +185,7 @@ class AdminServiceProvider extends ServiceProvider
 
         foreach ((array) config('admin.multi_app') as $app => $enable) {
             if ($enable) {
-                config(Arr::dot(config($app.'.auth', []), 'auth.'));
+                config(Arr::dot(config($app . '.auth', []), 'auth.'));
             }
         }
     }

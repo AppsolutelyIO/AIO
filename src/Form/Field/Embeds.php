@@ -10,6 +10,7 @@ use Appsolutely\AIO\Support\ArrayHelper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class Embeds extends Field implements FieldsCollection
 {
@@ -31,7 +32,7 @@ class Embeds extends Field implements FieldsCollection
         $this->column = $column;
 
         if (count($arguments) === 1) {
-            $this->label = $this->formatLabel();
+            $this->label   = $this->formatLabel();
             $this->builder = $arguments[0];
         }
 
@@ -62,7 +63,7 @@ class Embeds extends Field implements FieldsCollection
             return false;
         }
 
-        //$input = Arr::only($input, $this->column);
+        // $input = Arr::only($input, $this->column);
 
         $rules = $attributes = $messages = [];
 
@@ -146,15 +147,13 @@ class Embeds extends Field implements FieldsCollection
     /**
      * Format validation messages.
      *
-     * @param  array  $input
-     * @param  array  $messages
      * @return array
      */
     protected function formatValidationMessages(array $input, array $messages)
     {
         $result = [];
         foreach ($messages as $k => $message) {
-            $result[$this->column.'.'.$k] = $message;
+            $result[$this->column . '.' . $k] = $message;
         }
 
         return $result;
@@ -174,7 +173,7 @@ class Embeds extends Field implements FieldsCollection
 
         if (is_array($column)) {
             foreach ($column as $index => $col) {
-                $new[$col.$index] = $col;
+                $new[$col . $index] = $col;
             }
         }
 
@@ -186,7 +185,7 @@ class Embeds extends Field implements FieldsCollection
             } else {
                 foreach ($new as $k => $val) {
                     if (Str::endsWith($key, ".$k")) {
-                        $attributes[$key] = $label."[$val]";
+                        $attributes[$key] = $label . "[$val]";
                     }
                 }
             }
@@ -198,7 +197,6 @@ class Embeds extends Field implements FieldsCollection
     /**
      * Reset input key for validation.
      *
-     * @param  array  $input
      * @param  array  $column  $column is the column name array set
      * @return void.
      */
@@ -211,7 +209,7 @@ class Embeds extends Field implements FieldsCollection
                 continue;
             }
 
-            $newKey = $key.$column[$key];
+            $newKey = $key . $column[$key];
 
             /*
              * set new key
@@ -261,7 +259,7 @@ class Embeds extends Field implements FieldsCollection
     /**
      * Render the form.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function render()
     {

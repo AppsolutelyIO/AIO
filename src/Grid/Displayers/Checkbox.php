@@ -13,8 +13,8 @@ class Checkbox extends Editable
 
     public function display($options = [], $refresh = false)
     {
-        $options['options'] = $options;
-        $options['refresh'] = $refresh;
+        $options['options']  = $options;
+        $options['refresh']  = $refresh;
         $options['checkbox'] = $this->renderCheckbox($options['options']);
 
         return parent::display($options);
@@ -22,7 +22,7 @@ class Checkbox extends Editable
 
     protected function renderCheckbox($options)
     {
-        $checkbox = \Appsolutely\AIO\Widgets\Checkbox::make($this->getName().'[]');
+        $checkbox = \Appsolutely\AIO\Widgets\Checkbox::make($this->getName() . '[]');
         $checkbox->options($options);
         $checkbox->class('ie-input');
 

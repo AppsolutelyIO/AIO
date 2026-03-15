@@ -6,6 +6,7 @@ namespace Appsolutely\AIO\Tests\Feature;
 
 use Appsolutely\AIO\DTOs\PaymentGatewayResult;
 use Appsolutely\AIO\Enums\OrderPaymentStatus;
+use Appsolutely\AIO\Enums\PaymentMethod;
 use Appsolutely\AIO\Enums\PaymentProvider;
 use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\OrderPayment;
@@ -33,8 +34,8 @@ use Appsolutely\AIO\Services\PaymentGateways\RazorpayGateway;
 use Appsolutely\AIO\Services\PaymentGateways\SquareGateway;
 use Appsolutely\AIO\Services\PaymentGateways\StripeGateway;
 use Appsolutely\AIO\Services\PaymentGateways\WechatPayGateway;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PaymentGatewayTest extends TestCase
 {
@@ -609,8 +610,8 @@ class PaymentGatewayTest extends TestCase
 
     public function test_buy_now_pay_later_payment_method(): void
     {
-        $this->assertEquals('buy_now_pay_later', \Appsolutely\AIO\Enums\PaymentMethod::BuyNowPayLater->value);
-        $this->assertEquals('Buy Now, Pay Later', \Appsolutely\AIO\Enums\PaymentMethod::BuyNowPayLater->label());
+        $this->assertEquals('buy_now_pay_later', PaymentMethod::BuyNowPayLater->value);
+        $this->assertEquals('Buy Now, Pay Later', PaymentMethod::BuyNowPayLater->label());
     }
 
     // === New Provider Factory State Tests ===

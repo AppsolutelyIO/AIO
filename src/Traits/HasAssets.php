@@ -2,10 +2,12 @@
 
 namespace Appsolutely\AIO\Traits;
 
+use Appsolutely\AIO\Layout\Asset;
+
 trait HasAssets
 {
     /**
-     * @return \Appsolutely\AIO\Layout\Asset
+     * @return Asset
      */
     public static function asset()
     {
@@ -14,7 +16,6 @@ trait HasAssets
 
     /**
      * @param  string|array  $name
-     * @param  array  $params
      * @return void
      */
     public static function requireAssets($name, array $params = [])
@@ -35,9 +36,6 @@ trait HasAssets
 
     /**
      * Set base css.
-     *
-     * @param  array  $css
-     * @param  bool  $merge
      */
     public static function baseCss(array $css, bool $merge = true)
     {
@@ -59,7 +57,6 @@ trait HasAssets
      * Add js.
      *
      * @param  string|array  $js
-     * @param  bool  $merge
      * @return void
      */
     public static function headerJs($js, bool $merge = true)
@@ -69,9 +66,6 @@ trait HasAssets
 
     /**
      * Set base js.
-     *
-     * @param  array  $js
-     * @param  bool  $merge
      */
     public static function baseJs(array $js, bool $merge = true)
     {
@@ -80,7 +74,6 @@ trait HasAssets
 
     /**
      * @param  string  $script
-     * @param  bool  $direct
      * @return void
      */
     public static function script($script, bool $direct = false)

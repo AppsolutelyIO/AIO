@@ -69,7 +69,7 @@ if (! function_exists('themed_view')) {
     function themed_view($view, $data = [], $mergeData = [])
     {
         if (! view()->exists($view)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('View "%s" not found in theme "%s".', $view, Theme::active())
             );
         }
@@ -95,7 +95,7 @@ if (! function_exists('themed_assets')) {
         $key = path_join(themed_path(), $path);
 
         if (! isset($manifest[$key])) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 "Image asset '{$key}' not found in Vite manifest. Build path: {$buildPath}"
             );
         }
@@ -109,7 +109,7 @@ if (! function_exists('load_vite_manifest')) {
     {
         $manifestPath    = public_path(path_join($path, 'manifest.json'));
         if (! file_exists($manifestPath)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 "Vite manifest.json not found at path: {$manifestPath}. Ensure Vite build has been run."
             );
         }
@@ -167,7 +167,7 @@ if (! function_exists('themed_styles')) {
                     );
                 }
             }
-        } catch (\Throwable) {
+        } catch (Throwable) {
             // Ignore manifest errors
         }
 

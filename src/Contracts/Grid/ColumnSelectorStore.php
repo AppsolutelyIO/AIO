@@ -7,7 +7,6 @@ use Appsolutely\AIO\Grid;
 interface ColumnSelectorStore
 {
     /**
-     * @param  Grid  $grid
      * @return mixed
      */
     public function setGrid(Grid $grid);
@@ -15,7 +14,6 @@ interface ColumnSelectorStore
     /**
      * 存储数据.
      *
-     * @param  array  $input
      * @return void
      */
     public function store(array $input);

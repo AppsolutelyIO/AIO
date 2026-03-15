@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Admin\Controllers;
 
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Models\ProductImage;
 use Appsolutely\AIO\Models\ProductSku;
-use Appsolutely\AIO\Form;
-use Appsolutely\AIO\Grid;
 
 final class ProductImageController extends AdminBaseController
 {

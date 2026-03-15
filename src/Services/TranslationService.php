@@ -9,6 +9,7 @@ use Appsolutely\AIO\Repositories\TranslationRepository;
 use Appsolutely\AIO\Services\Contracts\TranslationServiceInterface;
 use Carbon\Carbon;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 final readonly class TranslationService implements TranslationServiceInterface
 {
@@ -128,7 +129,7 @@ final readonly class TranslationService implements TranslationServiceInterface
     {
         try {
             $translation = $this->translationRepository->find($id);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException) {
+        } catch (ModelNotFoundException) {
             return false;
         }
 

@@ -9,7 +9,8 @@ class ImageFieldTest extends TestCase
 {
     private function createInstance()
     {
-        return new class {
+        return new class()
+        {
             use ImageField {
                 ImageField::__call as imageCall;
             }
@@ -33,14 +34,14 @@ class ImageFieldTest extends TestCase
     public function test_thumbnail_with_array_sets_multiple_thumbnails()
     {
         $instance = $this->createInstance();
-        $result = $instance->thumbnail([
-            'small' => [100, 100],
+        $result   = $instance->thumbnail([
+            'small'  => [100, 100],
             'medium' => [300, 300],
         ]);
 
         $this->assertSame($instance, $result);
         $this->assertSame([
-            'small' => [100, 100],
+            'small'  => [100, 100],
             'medium' => [300, 300],
         ], $instance->getThumbnails());
     }
@@ -49,7 +50,7 @@ class ImageFieldTest extends TestCase
     {
         $instance = $this->createInstance();
         $instance->thumbnail([
-            'valid' => [100, 100],
+            'valid'   => [100, 100],
             'invalid' => [100], // Only one dimension
         ]);
 
@@ -61,7 +62,7 @@ class ImageFieldTest extends TestCase
     public function test_thumbnail_with_three_args_sets_single_thumbnail()
     {
         $instance = $this->createInstance();
-        $result = $instance->thumbnail('small', 100, 100);
+        $result   = $instance->thumbnail('small', 100, 100);
 
         $this->assertSame($instance, $result);
         $this->assertSame(['small' => [100, 100]], $instance->getThumbnails());

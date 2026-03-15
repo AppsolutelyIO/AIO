@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Extend;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Contracts\LazyRenderable;
+use Appsolutely\AIO\Http\JsonResponse;
 use Appsolutely\AIO\Traits\LazyWidget;
 use Appsolutely\AIO\Widgets\Form;
 
@@ -16,7 +17,7 @@ abstract class Setting extends Form implements LazyRenderable
      */
     protected $extension;
 
-    public function __construct(ServiceProvider $extension = null)
+    public function __construct(?ServiceProvider $extension = null)
     {
         parent::__construct();
 
@@ -35,8 +36,7 @@ abstract class Setting extends Form implements LazyRenderable
     /**
      * 处理请求.
      *
-     * @param  array  $input
-     * @return \Appsolutely\AIO\Http\JsonResponse
+     * @return JsonResponse
      */
     public function handle(array $input)
     {
@@ -48,7 +48,6 @@ abstract class Setting extends Form implements LazyRenderable
     /**
      * 格式化配置信息.
      *
-     * @param  array  $input
      * @return array
      */
     protected function formatInput(array $input)

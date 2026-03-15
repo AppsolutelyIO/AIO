@@ -6,7 +6,9 @@ namespace Appsolutely\AIO\Repositories;
 
 use Appsolutely\AIO\Models\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 final class UserRepository extends BaseRepository
 {
@@ -37,7 +39,7 @@ final class UserRepository extends BaseRepository
     /**
      * Get active users (with verified email)
      */
-    public function getActiveUsers(): \Illuminate\Database\Eloquent\Collection
+    public function getActiveUsers(): Collection
     {
         return $this->model->whereNotNull('email_verified_at')->get();
     }
@@ -45,7 +47,7 @@ final class UserRepository extends BaseRepository
     /**
      * Get users with pagination
      */
-    public function getPaginated(int $perPage = 15): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    public function getPaginated(int $perPage = 15): LengthAwarePaginator
     {
         return $this->model->orderBy('created_at', 'desc')->paginate($perPage);
     }

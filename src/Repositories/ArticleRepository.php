@@ -7,6 +7,8 @@ namespace Appsolutely\AIO\Repositories;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Article;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 final class ArticleRepository extends BaseRepository
 {
@@ -15,7 +17,7 @@ final class ArticleRepository extends BaseRepository
         return Article::class;
     }
 
-    public function getPublishedArticles(array $filters = []): \Illuminate\Database\Eloquent\Builder
+    public function getPublishedArticles(array $filters = []): Builder
     {
         $query = $this->model->newQuery()
             ->where('status', Status::ACTIVE) // Published articles only
@@ -56,7 +58,7 @@ final class ArticleRepository extends BaseRepository
     /**
      * Get all published articles for sitemap generation
      */
-    public function getPublishedArticlesForSitemap(Carbon $datetime): \Illuminate\Database\Eloquent\Collection
+    public function getPublishedArticlesForSitemap(Carbon $datetime): Collection
     {
         return $this->model->newQuery()
             ->status()
@@ -73,7 +75,7 @@ final class ArticleRepository extends BaseRepository
     /**
      * Find published articles by category slug
      */
-    public function findByCategorySlug(string $categorySlug, ?Carbon $datetime = null): \Illuminate\Database\Eloquent\Collection
+    public function findByCategorySlug(string $categorySlug, ?Carbon $datetime = null): Collection
     {
         $datetime = $datetime ?? now();
 
@@ -90,7 +92,7 @@ final class ArticleRepository extends BaseRepository
     /**
      * Get recent published articles
      */
-    public function getRecentArticles(int $limit = 10, ?Carbon $datetime = null): \Illuminate\Database\Eloquent\Collection
+    public function getRecentArticles(int $limit = 10, ?Carbon $datetime = null): Collection
     {
         $datetime = $datetime ?? now();
 
@@ -106,7 +108,7 @@ final class ArticleRepository extends BaseRepository
     /**
      * Get published articles with categories eager loaded
      */
-    public function getPublishedWithCategories(?Carbon $datetime = null): \Illuminate\Database\Eloquent\Collection
+    public function getPublishedWithCategories(?Carbon $datetime = null): Collection
     {
         $datetime = $datetime ?? now();
 

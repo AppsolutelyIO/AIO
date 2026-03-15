@@ -4,9 +4,9 @@ namespace Appsolutely\AIO\Grid\Exporters;
 
 use Appsolutely\AIO\Grid;
 use OpenSpout\Common\Entity\Row;
-use OpenSpout\Writer\XLSX\Writer as XlsxWriter;
 use OpenSpout\Writer\CSV\Writer as CsvWriter;
 use OpenSpout\Writer\ODS\Writer as OdsWriter;
+use OpenSpout\Writer\XLSX\Writer as XlsxWriter;
 
 class ExcelExporter extends AbstractExporter
 {
@@ -15,7 +15,7 @@ class ExcelExporter extends AbstractExporter
      */
     public function export()
     {
-        $filename = $this->getFilename().'.'.$this->extension;
+        $filename = $this->getFilename() . '.' . $this->extension;
 
         $writer = $this->createWriter();
         $writer->openToBrowser($filename);
@@ -67,8 +67,8 @@ class ExcelExporter extends AbstractExporter
     protected function createWriter(): XlsxWriter|CsvWriter|OdsWriter
     {
         return match ($this->extension) {
-            'csv' => new CsvWriter(),
-            'ods' => new OdsWriter(),
+            'csv'   => new CsvWriter(),
+            'ods'   => new OdsWriter(),
             default => new XlsxWriter(),
         };
     }

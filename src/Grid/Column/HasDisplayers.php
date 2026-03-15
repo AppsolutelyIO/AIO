@@ -41,7 +41,6 @@ trait HasDisplayers
     /**
      * Display column using array value map.
      *
-     * @param  array  $values
      * @param  null  $default
      * @return $this
      */
@@ -126,7 +125,7 @@ trait HasDisplayers
                 return $v->prepend($val);
             }
 
-            return $val.$v;
+            return $val . $v;
         });
     }
 
@@ -149,14 +148,13 @@ trait HasDisplayers
                 return $v->push($val);
             }
 
-            return $v.$val;
+            return $v . $val;
         });
     }
 
     /**
      * Split a string by string.
      *
-     * @param  string  $d
      * @return $this
      */
     public function explode(string $d = ',')
@@ -212,8 +210,6 @@ trait HasDisplayers
     /**
      * Show children of current node.
      *
-     * @param  bool  $showAll
-     * @param  bool  $sortable
      * @param  mixed  $defaultParentId
      * @return $this
      */
@@ -238,7 +234,6 @@ trait HasDisplayers
     /**
      * Wrap current display value with a tooltip showing the original value.
      *
-     * @param  string  $placement
      * @return $this
      */
     public function tooltip(string $placement = 'left')
@@ -294,7 +289,6 @@ JS);
     /**
      * Display column as boolean , `✓` for true, and `✗` for false.
      *
-     * @param  array  $map
      * @param  bool  $default
      * @return $this
      */

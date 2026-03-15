@@ -79,7 +79,7 @@ class SectionManagerTest extends TestCase
         $mgr = $this->createManager();
         $mgr->inject('section', 'original');
         $mgr->inject('section', function ($opts) {
-            return $opts->previous.'_modified';
+            return $opts->previous . '_modified';
         }, false);
 
         $this->assertSame('original_modified', $mgr->yieldContent('section'));
@@ -140,7 +140,7 @@ class SectionManagerTest extends TestCase
     {
         $mgr = $this->createManager();
         $mgr->injectDefault('section', function ($opts) {
-            return 'Hello '.$opts->name;
+            return 'Hello ' . $opts->name;
         });
 
         $this->assertSame('Hello World', $mgr->yieldContent('section', '', ['name' => 'World']));

@@ -7,10 +7,11 @@ namespace Appsolutely\AIO\Tests\Feature;
 use Appsolutely\AIO\Models\File;
 use Appsolutely\AIO\Models\FileAttachment;
 use Appsolutely\AIO\Services\StorageService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Appsolutely\AIO\Tests\TestCase;
 
 class StorageServiceTest extends TestCase
 {
@@ -108,7 +109,7 @@ class StorageServiceTest extends TestCase
 
         $service = app(StorageService::class);
 
-        $request = \Illuminate\Http\Request::create('/storage/' . $file->full_path, 'GET');
+        $request = Request::create('/storage/' . $file->full_path, 'GET');
 
         $response = $service->response($request, $file->full_path);
 
@@ -129,7 +130,7 @@ class StorageServiceTest extends TestCase
 
         $service = app(StorageService::class);
 
-        $request = \Illuminate\Http\Request::create('/storage/' . $file->full_path, 'GET', [], [], [], [
+        $request = Request::create('/storage/' . $file->full_path, 'GET', [], [], [], [
             'HTTP_IF_NONE_MATCH' => $etag,
         ]);
 

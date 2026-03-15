@@ -2,6 +2,4 @@
 
 namespace Appsolutely\AIO\Exception;
 
-class RuntimeException extends AdminException
-{
-}
+class RuntimeException extends AdminException {}

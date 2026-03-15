@@ -8,10 +8,10 @@ use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\CmsMenu as Menu;
 use Appsolutely\AIO\Services\Contracts\MenuServiceInterface;
 use Appsolutely\AIO\Services\MenuService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class MenuServiceTest extends TestCase
 {

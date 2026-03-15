@@ -64,7 +64,7 @@ class RadialBar extends Card
     protected function defaultChartOptions()
     {
         $gradientColor = Admin::color()->success();
-        $labelColor = '#99a2ac';
+        $labelColor    = '#99a2ac';
 
         return [
             'chart' => [
@@ -72,37 +72,37 @@ class RadialBar extends Card
             ],
             'plotOptions' => [
                 'radialBar' => [
-                    'size' => 200,
+                    'size'       => 200,
                     'startAngle' => -180,
-                    'endAngle' => 175,
-                    'offsetY' => 0,
-                    'hollow' => [
+                    'endAngle'   => 175,
+                    'offsetY'    => 0,
+                    'hollow'     => [
                         'size' => '65%',
                     ],
                     'track' => [
-                        'background' => '#fff',
+                        'background'  => '#fff',
                         'strokeWidth' => '100%',
                     ],
                     'dataLabels' => [
                         'value' => [
-                            'offsetY' => 30,
-                            'color' => $labelColor,
+                            'offsetY'  => 30,
+                            'color'    => $labelColor,
                             'fontSize' => '2rem',
                         ],
                     ],
                 ],
             ],
             'fill' => [
-                'type' => 'gradient',
+                'type'     => 'gradient',
                 'gradient' => [
-                    'shade' => 'dark',
-                    'type' => 'horizontal',
-                    'shadeIntensity' => 0.5,
+                    'shade'            => 'dark',
+                    'type'             => 'horizontal',
+                    'shadeIntensity'   => 0.5,
                     'gradientToColors' => [$gradientColor],
-                    'inverseColors' => true,
-                    'opacityFrom' => 1,
-                    'opacityTo' => 1,
-                    'stops' => [0, 100],
+                    'inverseColors'    => true,
+                    'opacityFrom'      => 1,
+                    'opacityTo'        => 1,
+                    'stops'            => [0, 100],
                 ],
             ],
             'stroke' => [
@@ -127,8 +127,6 @@ class RadialBar extends Card
     /**
      * 设置内容宽度.
      *
-     * @param  int  $left
-     * @param  int  $right
      * @return $this
      */
     public function contentWidth(int $left, int $right)
@@ -141,7 +139,6 @@ class RadialBar extends Card
     /**
      * 图表位置靠右.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function chartPullRight(bool $value = true)

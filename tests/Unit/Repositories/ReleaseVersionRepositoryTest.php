@@ -7,8 +7,9 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\ReleaseVersion;
 use Appsolutely\AIO\Repositories\ReleaseVersionRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class ReleaseVersionRepositoryTest extends TestCase
 {
@@ -36,7 +37,7 @@ final class ReleaseVersionRepositoryTest extends TestCase
     {
         $result = $this->repository->all();
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
     }
 
     public function test_create_stores_release_version(): void

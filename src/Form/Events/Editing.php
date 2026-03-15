@@ -2,6 +2,4 @@
 
 namespace Appsolutely\AIO\Form\Events;
 
-class Editing extends Event
-{
-}
+class Editing extends Event {}

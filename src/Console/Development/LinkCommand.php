@@ -35,11 +35,11 @@ class LinkCommand extends Command
     protected function linkTests($files)
     {
         if (! is_file(base_path('phpunit.dusk.xml'))) {
-            $files->copy(realpath(__DIR__.'/../../../phpunit.dusk.xml'), base_path('phpunit.dusk.xml'));
+            $files->copy(realpath(__DIR__ . '/../../../phpunit.dusk.xml'), base_path('phpunit.dusk.xml'));
         }
 
-        $target = base_path('tests');
-        $testsPath = realpath(__DIR__.'/../../../tests');
+        $target    = base_path('tests');
+        $testsPath = realpath(__DIR__ . '/../../../tests');
 
         if (is_dir($target)) {
             $result = $this->ask("The [{$target}] directory already exists, are you sure to delete it? [yes/no]");
@@ -64,11 +64,11 @@ class LinkCommand extends Command
      */
     protected function linkAssets($files)
     {
-        $basePath = Admin::asset()->getRealPath('@admin');
+        $basePath   = Admin::asset()->getRealPath('@admin');
         $publicPath = public_path($basePath);
 
-        if (! is_dir($publicPath.'/..')) {
-            $files->makeDirectory($publicPath.'/..', 0755, true, true);
+        if (! is_dir($publicPath . '/..')) {
+            $files->makeDirectory($publicPath . '/..', 0755, true, true);
         }
 
         if (file_exists($publicPath)) {
@@ -77,7 +77,7 @@ class LinkCommand extends Command
             return;
         }
 
-        $distPath = realpath(__DIR__.'/../../../resources/pre-dist');
+        $distPath = realpath(__DIR__ . '/../../../resources/pre-dist');
 
         $files->link(
             $distPath, $publicPath

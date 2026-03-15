@@ -2,6 +2,7 @@
 
 namespace Appsolutely\AIO\Tests\Unit\Support;
 
+use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Support\UrlHelper;
 use Appsolutely\AIO\Tests\Unit\TestCase;
 
@@ -84,21 +85,21 @@ class UrlHelperTest extends TestCase
 
     public function test_helper_delegates_url_with_query()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::urlWithQuery('http://example.com', ['page' => 2]);
+        $helper = Helper::urlWithQuery('http://example.com', ['page' => 2]);
         $direct = UrlHelper::withQuery('http://example.com', ['page' => 2]);
         $this->assertSame($direct, $helper);
     }
 
     public function test_helper_delegates_url_without_query()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::urlWithoutQuery('http://example.com?foo=1&bar=2', 'foo');
+        $helper = Helper::urlWithoutQuery('http://example.com?foo=1&bar=2', 'foo');
         $direct = UrlHelper::withoutQuery('http://example.com?foo=1&bar=2', 'foo');
         $this->assertSame($direct, $helper);
     }
 
     public function test_helper_delegates_url_has_query()
     {
-        $helper = \Appsolutely\AIO\Support\Helper::urlHasQuery('http://example.com?page=1', 'page');
+        $helper = Helper::urlHasQuery('http://example.com?page=1', 'page');
         $direct = UrlHelper::hasQuery('http://example.com?page=1', 'page');
         $this->assertSame($direct, $helper);
     }

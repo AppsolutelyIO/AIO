@@ -40,8 +40,6 @@ class Tools implements Renderable
 
     /**
      * Create a new Tools instance.
-     *
-     * @param  Grid  $grid
      */
     public function __construct(Grid $grid)
     {
@@ -135,7 +133,6 @@ class Tools implements Renderable
     }
 
     /**
-     * @param  bool  $value
      * @return $this
      */
     public function withOutline(bool $value)
@@ -221,7 +218,6 @@ class Tools implements Renderable
     }
 
     /**
-     * @param  string  $value
      * @return string
      */
     public function format(string $value)

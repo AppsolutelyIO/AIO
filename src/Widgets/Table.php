@@ -37,7 +37,7 @@ class Table extends Widget
     public function __construct($headers = [], $rows = false, $style = [])
     {
         if ($rows === false) {
-            $rows = $headers;
+            $rows    = $headers;
             $headers = [];
         }
 
@@ -62,7 +62,6 @@ class Table extends Widget
     }
 
     /**
-     * @param  int  $depth
      * @return $this
      */
     public function depth(int $depth)
@@ -95,7 +94,7 @@ class Table extends Widget
 
                     $item = static::make($item)
                         ->depth($this->depth + 1)
-                        ->class('table-no-top-border '.$borderLeft, true)
+                        ->class('table-no-top-border ' . $borderLeft, true)
                         ->render();
 
                     if (! $noTrPadding) {

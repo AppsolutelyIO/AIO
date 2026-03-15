@@ -10,10 +10,10 @@ use Appsolutely\AIO\Events\PageUpdated;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Observers\PageObserver;
 use Appsolutely\AIO\Services\Contracts\PageServiceInterface;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Support\Facades\Event;
 use Mockery;
 use Mockery\MockInterface;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class PageObserverTest extends TestCase
 {

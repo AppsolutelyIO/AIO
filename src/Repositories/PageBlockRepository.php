@@ -60,7 +60,7 @@ final class PageBlockRepository extends BaseRepository
      * Get all active blocks keyed by class (component FQCN).
      * Used for manifest-to-block matching in block registry.
      *
-     * @return array<string, \Appsolutely\AIO\Models\PageBlock>
+     * @return array<string, PageBlock>
      */
     public function getBlocksByClass(): array
     {

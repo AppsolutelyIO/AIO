@@ -6,13 +6,14 @@ namespace Appsolutely\AIO\Http\Controllers\Auth;
 
 use Appsolutely\AIO\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 final class EmailVerificationNotificationController extends BaseController
 {
     /**
      * Send a new email verification notification.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {

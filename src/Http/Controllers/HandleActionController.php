@@ -5,13 +5,13 @@ namespace Appsolutely\AIO\Http\Controllers;
 use Appsolutely\AIO\Actions\Action;
 use Appsolutely\AIO\Actions\Response;
 use Appsolutely\AIO\Exception\AdminException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class HandleActionController
 {
     /**
-     * @param  Request  $request
-     * @return $this|\Illuminate\Http\JsonResponse
+     * @return $this|JsonResponse
      */
     public function handle(Request $request)
     {
@@ -29,9 +29,6 @@ class HandleActionController
     }
 
     /**
-     * @param  Request  $request
-     * @return Action
-     *
      * @throws AdminException
      */
     protected function resolveActionInstance(Request $request): Action

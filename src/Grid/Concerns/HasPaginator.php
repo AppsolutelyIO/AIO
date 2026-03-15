@@ -2,12 +2,14 @@
 
 namespace Appsolutely\AIO\Grid\Concerns;
 
-use Appsolutely\AIO\Grid\Tools;
+use Appsolutely\AIO\Grid\Tools\Paginator;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 trait HasPaginator
 {
     /**
-     * @var Tools\Paginator
+     * @var Paginator
      */
     protected $paginator;
 
@@ -28,7 +30,6 @@ trait HasPaginator
     /**
      * Paginate the grid.
      *
-     * @param  int  $perPage
      * @return void
      */
     public function paginate(int $perPage = 20)
@@ -41,7 +42,6 @@ trait HasPaginator
     /**
      * 是否使用 simplePaginate 方法分页.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function simplePaginate(bool $value = true)
@@ -60,7 +60,6 @@ trait HasPaginator
     }
 
     /**
-     * @param  string  $paginator
      * @return $this
      */
     public function setPaginatorClass(string $paginator)
@@ -73,12 +72,12 @@ trait HasPaginator
     /**
      * Get the grid paginator.
      *
-     * @return \Appsolutely\AIO\Grid\Tools\Paginator
+     * @return Paginator
      */
     public function paginator()
     {
         if (! $this->paginator) {
-            $paginatorClass = $this->options['paginator_class'] ?: (config('admin.grid.paginator_class') ?: Tools\Paginator::class);
+            $paginatorClass = $this->options['paginator_class'] ?: (config('admin.grid.paginator_class') ?: Paginator::class);
 
             $this->paginator = new $paginatorClass($this);
         }
@@ -98,8 +97,6 @@ trait HasPaginator
 
     /**
      * Set per-page options.
-     *
-     * @param  array  $perPages
      */
     public function perPages(array $perPages)
     {
@@ -141,7 +138,6 @@ trait HasPaginator
     /**
      * Show grid pagination.
      *
-     * @param  bool  $val
      * @return $this
      */
     public function showPagination(bool $val = true)
@@ -150,7 +146,7 @@ trait HasPaginator
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\View\View|string
+     * @return Factory|\Illuminate\Contracts\View\View|View|string
      */
     public function renderPagination()
     {

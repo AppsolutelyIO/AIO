@@ -3,6 +3,8 @@
 namespace Appsolutely\AIO\Grid\Displayers;
 
 use Appsolutely\AIO\Support\HtmlHelper;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 class DropdownActions extends Actions
 {
@@ -54,13 +56,13 @@ class DropdownActions extends Actions
                 continue;
             }
 
-            $this->default[] = $this->{'render'.ucfirst($action)}();
+            $this->default[] = $this->{'render' . ucfirst($action)}();
         }
     }
 
     /**
      * @param  \Closure[]  $callback
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function display(array $callbacks = [])
     {
@@ -79,19 +81,11 @@ class DropdownActions extends Actions
         return view($this->view, $actions);
     }
 
-    protected function getViewLabel()
-    {
-    }
+    protected function getViewLabel() {}
 
-    protected function getEditLabel()
-    {
-    }
+    protected function getEditLabel() {}
 
-    protected function getQuickEditLabel()
-    {
-    }
+    protected function getQuickEditLabel() {}
 
-    protected function getDeleteLabel()
-    {
-    }
+    protected function getDeleteLabel() {}
 }

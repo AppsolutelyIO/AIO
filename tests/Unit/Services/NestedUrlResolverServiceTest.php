@@ -7,8 +7,8 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Services\NestedUrlResolverService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class NestedUrlResolverServiceTest extends TestCase
 {

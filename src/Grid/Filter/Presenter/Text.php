@@ -33,8 +33,6 @@ class Text extends Presenter
 
     /**
      * Get variables for field template.
-     *
-     * @return array
      */
     public function defaultVariables(): array
     {

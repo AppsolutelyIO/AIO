@@ -34,10 +34,15 @@ use Illuminate\Validation\ValidationException;
 class JsonResponse implements Arrayable
 {
     protected $status = true;
+
     protected $statusCode = 200;
+
     protected $exception;
+
     protected $data = [];
+
     protected $html;
+
     protected $options = [];
 
     public function __construct(array $data = [])
@@ -48,7 +53,6 @@ class JsonResponse implements Arrayable
     /**
      * 设置请求结果是否成功.
      *
-     * @param  bool  $status
      * @return $this
      */
     public function status(bool $status)
@@ -61,7 +65,6 @@ class JsonResponse implements Arrayable
     /**
      * 设置 HTTP 状态码.
      *
-     * @param  int  $statusCode
      * @return $this
      */
     public function statusCode(int $statusCode)
@@ -74,7 +77,6 @@ class JsonResponse implements Arrayable
     /**
      * 设置提示信息.
      *
-     * @param  string  $message
      * @return $this
      */
     public function message(?string $message)
@@ -87,7 +89,6 @@ class JsonResponse implements Arrayable
     /**
      * 显示 成功 提示弹窗.
      *
-     * @param  string  $message
      * @return $this
      */
     public function success(?string $message)
@@ -98,7 +99,6 @@ class JsonResponse implements Arrayable
     }
 
     /**
-     * @param  string  $message
      * @return $this
      */
     public function info(?string $message)
@@ -107,7 +107,6 @@ class JsonResponse implements Arrayable
     }
 
     /**
-     * @param  string  $message
      * @return $this
      */
     public function warning(?string $message)
@@ -118,7 +117,6 @@ class JsonResponse implements Arrayable
     /**
      * 显示 错误 信息弹窗.
      *
-     * @param  string  $message
      * @param  bool  $alert
      * @return $this
      */
@@ -132,7 +130,6 @@ class JsonResponse implements Arrayable
     /**
      * 设置 toastr 显示时长.
      *
-     * @param $seconds
      * @return $this
      */
     public function timeout($seconds)
@@ -143,7 +140,6 @@ class JsonResponse implements Arrayable
     /**
      * 显示确认弹窗.
      *
-     * @param  bool  $alert
      * @return $this
      */
     public function alert(bool $alert = true)
@@ -154,7 +150,6 @@ class JsonResponse implements Arrayable
     /**
      * 显示弹窗描述信息.
      *
-     * @param  string  $detail
      * @return $this
      */
     public function detail(?string $detail)
@@ -165,8 +160,6 @@ class JsonResponse implements Arrayable
     /**
      * 显示弹窗信息.
      *
-     * @param  string  $type
-     * @param  string  $message
      * @return $this
      */
     protected function show(?string $type, ?string $message = null)
@@ -181,7 +174,6 @@ class JsonResponse implements Arrayable
     /**
      * 跳转.
      *
-     * @param  string  $url
      * @return $this
      */
     public function redirect(?string $url)
@@ -190,7 +182,6 @@ class JsonResponse implements Arrayable
     }
 
     /**
-     * @param  string|null  $url
      * @return $this
      */
     public function redirectToIntended(?string $url)
@@ -212,7 +203,6 @@ class JsonResponse implements Arrayable
     }
 
     /**
-     * @param  string|null  $url
      * @return $this
      */
     public function locationToIntended(?string $url)
@@ -255,7 +245,6 @@ class JsonResponse implements Arrayable
     }
 
     /**
-     * @param  array  $value
      * @return $this
      */
     protected function then(array $value)
@@ -268,7 +257,6 @@ class JsonResponse implements Arrayable
     /**
      * 设置返回数据.
      *
-     * @param  array  $value
      * @return $this
      */
     public function data(array $value)
@@ -294,7 +282,6 @@ class JsonResponse implements Arrayable
     /**
      * 设置其他字段.
      *
-     * @param  array  $options
      * @return $this
      */
     public function options(array $options)
@@ -307,7 +294,6 @@ class JsonResponse implements Arrayable
     /**
      * 设置字段验证错误信息.
      *
-     * @param $errors
      * @return $this
      */
     public function withValidation($errors)
@@ -329,7 +315,6 @@ class JsonResponse implements Arrayable
     /**
      * 响应异常.
      *
-     * @param  \Throwable  $exception
      * @return $this
      */
     public function withException(\Throwable $exception)

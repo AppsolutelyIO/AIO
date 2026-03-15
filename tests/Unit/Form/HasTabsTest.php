@@ -2,14 +2,16 @@
 
 namespace Appsolutely\AIO\Tests\Unit\Form;
 
+use Appsolutely\AIO\Form\Concerns\HasTabs;
 use Appsolutely\AIO\Tests\Unit\TestCase;
 
 class HasTabsTest extends TestCase
 {
     private function createInstance()
     {
-        return new class {
-            use \Appsolutely\AIO\Form\Concerns\HasTabs;
+        return new class()
+        {
+            use HasTabs;
 
             // Stub getTab dependency - HasTabs::getTab creates a Tab which needs a form
             // We only test hasTab() which reads $this->tab directly

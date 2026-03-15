@@ -51,8 +51,6 @@ class Footer implements Renderable
 
     /**
      * Footer constructor.
-     *
-     * @param  Builder  $builder
      */
     public function __construct(Builder $builder)
     {
@@ -62,7 +60,6 @@ class Footer implements Renderable
     /**
      * Disable reset button.
      *
-     * @param  bool  $disable
      * @return $this
      */
     public function disableReset(bool $disable = true)
@@ -75,7 +72,6 @@ class Footer implements Renderable
     /**
      * Disable submit button.
      *
-     * @param  bool  $disable
      * @return $this
      */
     public function disableSubmit(bool $disable = true)
@@ -88,7 +84,6 @@ class Footer implements Renderable
     /**
      * Disable View Checkbox.
      *
-     * @param  bool  $disable
      * @return $this
      */
     public function disableViewCheck(bool $disable = true)
@@ -101,7 +96,6 @@ class Footer implements Renderable
     /**
      * Disable Editing Checkbox.
      *
-     * @param  bool  $disable
      * @return $this
      */
     public function disableEditingCheck(bool $disable = true)
@@ -114,7 +108,6 @@ class Footer implements Renderable
     /**
      * Disable Creating Checkbox.
      *
-     * @param  bool  $disable
      * @return $this
      */
     public function disableCreatingCheck(bool $disable = true)
@@ -127,7 +120,6 @@ class Footer implements Renderable
     /**
      * default View Checked.
      *
-     * @param  bool  $checked
      * @return $this
      */
     public function defaultViewChecked(bool $checked = true)
@@ -140,7 +132,6 @@ class Footer implements Renderable
     /**
      * default Editing Checked.
      *
-     * @param  bool  $checked
      * @return $this
      */
     public function defaultEditingChecked(bool $checked = true)
@@ -153,7 +144,6 @@ class Footer implements Renderable
     /**
      * default Creating Checked.
      *
-     * @param  bool  $checked
      * @return $this
      */
     public function defaultCreatingChecked(bool $checked = true)
@@ -210,9 +200,6 @@ class Footer implements Renderable
 
     /**
      * Use custom view.
-     *
-     * @param  string  $view
-     * @param  array  $data
      */
     public function view(string $view, array $data = [])
     {

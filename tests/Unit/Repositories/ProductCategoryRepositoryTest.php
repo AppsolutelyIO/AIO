@@ -8,8 +8,8 @@ use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Models\ProductCategory;
 use Appsolutely\AIO\Repositories\ProductCategoryRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class ProductCategoryRepositoryTest extends TestCase
 {

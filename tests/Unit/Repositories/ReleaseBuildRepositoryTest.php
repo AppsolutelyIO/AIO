@@ -7,10 +7,10 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\ReleaseBuild;
 use Appsolutely\AIO\Repositories\ReleaseBuildRepository;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class ReleaseBuildRepositoryTest extends TestCase
 {

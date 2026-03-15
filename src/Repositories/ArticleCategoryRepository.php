@@ -6,6 +6,7 @@ namespace Appsolutely\AIO\Repositories;
 
 use Appsolutely\AIO\Models\ArticleCategory;
 use Appsolutely\AIO\Repositories\Traits\ActiveTreeList;
+use Illuminate\Database\Eloquent\Collection;
 
 final class ArticleCategoryRepository extends BaseRepository
 {
@@ -30,7 +31,7 @@ final class ArticleCategoryRepository extends BaseRepository
     /**
      * Get categories with article count
      */
-    public function getWithArticleCount(): \Illuminate\Database\Eloquent\Collection
+    public function getWithArticleCount(): Collection
     {
         return $this->model->newQuery()
             ->status()

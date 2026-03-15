@@ -139,7 +139,7 @@ class Card extends Widget
      */
     protected function init()
     {
-        $this->id('metric-card-'.Str::random(8));
+        $this->id('metric-card-' . Str::random(8));
         $this->class('card');
     }
 
@@ -166,7 +166,6 @@ class Card extends Widget
     /**
      * 设置图标.
      *
-     * @param  string  $icon
      * @return $this
      */
     public function icon(?string $icon)
@@ -179,7 +178,6 @@ class Card extends Widget
     /**
      * 设置卡片标题.
      *
-     * @param  string  $title
      * @return $this
      */
     public function title(?string $title)
@@ -192,7 +190,6 @@ class Card extends Widget
     /**
      * 设置卡片子标题.
      *
-     * @param  string  $title
      * @return $this
      */
     public function subTitle(?string $title)
@@ -231,7 +228,6 @@ class Card extends Widget
     /**
      * 设置主题色.
      *
-     * @param  string  $style
      * @return $this
      */
     public function style(string $style)
@@ -244,7 +240,6 @@ class Card extends Widget
     /**
      * 设置卡片的下拉菜单选项.
      *
-     * @param  array  $items
      * @return $this
      */
     public function dropdown(array $items)
@@ -286,7 +281,6 @@ class Card extends Widget
     /**
      * 设置图表高度.
      *
-     * @param  int  $number
      * @return $this
      */
     public function chartHeight(int $number)
@@ -301,7 +295,6 @@ class Card extends Widget
     /**
      * 设置图表上间距.
      *
-     * @param  int  $number
      * @return $this
      */
     public function chartMarginTop(int $number)
@@ -316,7 +309,6 @@ class Card extends Widget
     /**
      * 设置图表下间距.
      *
-     * @param  int  $number
      * @return $this
      */
     public function chartMarginBottom(int $number)
@@ -532,12 +524,12 @@ JS;
 
         $this->addScript();
 
-        $this->variables['icon'] = $this->icon;
-        $this->variables['title'] = $this->title;
+        $this->variables['icon']     = $this->icon;
+        $this->variables['title']    = $this->title;
         $this->variables['subTitle'] = $this->subTitle;
-        $this->variables['style'] = $this->style;
-        $this->variables['header'] = $this->renderHeader();
-        $this->variables['content'] = $this->renderContent();
+        $this->variables['style']    = $this->style;
+        $this->variables['header']   = $this->renderHeader();
+        $this->variables['content']  = $this->renderContent();
         $this->variables['dropdown'] = $this->dropdown;
 
         return parent::render();
@@ -554,8 +546,8 @@ JS;
 
         return array_merge(
             [
-                'status' => 1,
-                'header' => $this->renderHeader(),
+                'status'  => 1,
+                'header'  => $this->renderHeader(),
                 'content' => $this->renderContent(),
             ],
             (array) optional($this->chart)->valueResult()

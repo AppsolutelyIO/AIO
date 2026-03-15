@@ -21,14 +21,14 @@ class SwitchDisplay extends AbstractDisplayer
             $this->color($color);
         }
 
-        $column = $this->column->getName();
-        $value = $this->value instanceof \BackedEnum ? $this->value->value : $this->value;
-        $checked = $value ? 'checked' : '';
-        $color = $this->color ?: Admin::color()->primary();
-        $url = $this->url();
+        $column               = $this->column->getName();
+        $value                = $this->value instanceof \BackedEnum ? $this->value->value : $this->value;
+        $checked              = $value ? 'checked' : '';
+        $color                = $this->color ?: Admin::color()->primary();
+        $url                  = $this->url();
         $inlineUpdateEndpoint = route(admin_api_route_name('inline-update'));
-        $model = get_class($this->row);
-        $id = $this->getKey();
+        $model                = get_class($this->row);
+        $id                   = $this->getKey();
 
         return Admin::view(
             'admin::grid.displayer.switch',
@@ -38,6 +38,6 @@ class SwitchDisplay extends AbstractDisplayer
 
     protected function url()
     {
-        return $this->resource().'/'.$this->getKey();
+        return $this->resource() . '/' . $this->getKey();
     }
 }

@@ -9,11 +9,11 @@ use Appsolutely\AIO\Admin\Forms\Models\ReleaseBuildForm;
 use Appsolutely\AIO\Admin\Forms\Models\ReleaseVersionForm;
 use Appsolutely\AIO\Enums\Platform;
 use Appsolutely\AIO\Enums\Status;
-use Appsolutely\AIO\Models\ReleaseBuild;
-use Appsolutely\AIO\Models\ReleaseVersion;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Grid\Tools;
 use Appsolutely\AIO\Layout\Content;
+use Appsolutely\AIO\Models\ReleaseBuild;
+use Appsolutely\AIO\Models\ReleaseVersion;
 use Appsolutely\AIO\Widgets\Modal;
 use Appsolutely\AIO\Widgets\Tab;
 

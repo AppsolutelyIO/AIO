@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Jobs;
 
 use Appsolutely\AIO\Jobs\ProcessMissingTranslations;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Log;
 
 final class ProcessMissingTranslationsTest extends TestCase
 {
@@ -75,7 +76,7 @@ final class ProcessMissingTranslationsTest extends TestCase
         $job = new ProcessMissingTranslations('zh', 10, 'deepseek');
 
         // log_error() calls Log::log('error', ...) under the hood
-        \Illuminate\Support\Facades\Log::shouldReceive('log')
+        Log::shouldReceive('log')
             ->once()
             ->withArgs(function (string $level, string $message, ?array $context = []) {
                 return $level === 'error'

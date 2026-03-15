@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Form;
 
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Layout\Column;
+use Appsolutely\AIO\Layout\Row;
 use Appsolutely\AIO\Widgets\Form as WidgetForm;
 
 class Layout
@@ -94,9 +95,6 @@ class Layout
 
     /**
      * block布局.
-     *
-     * @param  int  $width
-     * @param  \Closure  $callback
      */
     public function block(int $width, \Closure $callback)
     {
@@ -105,7 +103,7 @@ class Layout
         $this->column($width, function (Column $column) use ($callback) {
             $this->form->layoutColumn = $column;
 
-            $column->row(function (\Appsolutely\AIO\Layout\Row $row) use ($callback) {
+            $column->row(function (Row $row) use ($callback) {
                 $form = $this->form();
 
                 $form->layoutRow = $row;
@@ -118,7 +116,6 @@ class Layout
     }
 
     /**
-     * @param  int  $width
      * @param  mixed  $content
      */
     public function prepend(int $width, $content)
@@ -129,12 +126,11 @@ class Layout
     }
 
     /**
-     * @param  \Closure|null  $callback
      * @return BlockForm
      */
     public function form(?\Closure $callback = null)
     {
-        $form = new Form\BlockForm($this->form);
+        $form = new BlockForm($this->form);
 
         $form->disableResetButton();
         $form->disableSubmitButton();
@@ -162,7 +158,7 @@ class Layout
             $html .= $column->render();
         }
 
-        return $html.'</div>'.$add;
+        return $html . '</div>' . $add;
     }
 
     public function getColumns()

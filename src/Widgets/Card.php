@@ -10,25 +10,31 @@ use Illuminate\Support\Str;
 class Card extends Widget
 {
     protected $view = 'admin::widgets.card';
+
     protected $title;
+
     protected $content;
+
     protected $footer;
+
     protected $tools = [];
+
     protected $divider = false;
+
     protected $padding;
 
     public function __construct($title = '', $content = null)
     {
         if ($content === null) {
             $content = $title;
-            $title = '';
+            $title   = '';
         }
 
         $this->title($title);
         $this->content($content);
 
         $this->class('card');
-        $this->id('card-'.Str::random(8));
+        $this->id('card-' . Str::random(8));
     }
 
     /**
@@ -43,12 +49,10 @@ class Card extends Widget
 
     /**
      * 设置卡片间距.
-     *
-     * @param  string  $padding
      */
     public function padding(string $padding)
     {
-        $this->padding = 'padding:'.$padding;
+        $this->padding = 'padding:' . $padding;
 
         return $this;
     }

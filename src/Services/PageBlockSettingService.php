@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Services;
 
 use Appsolutely\AIO\Enums\Status;
+use Appsolutely\AIO\Exceptions\TransactionException;
 use Appsolutely\AIO\Livewire\GeneralBlock;
 use Appsolutely\AIO\Models\PageBlockSetting;
 use Appsolutely\AIO\Repositories\PageBlockRepository;
@@ -33,6 +34,7 @@ use PDOException;
 final readonly class PageBlockSettingService implements PageBlockSettingServiceInterface
 {
     use Concerns\ResolvesLivewireClassName;
+
     public function __construct(
         protected PageBlockRepository $pageBlockRepository,
         protected PageBlockValueRepository $pageBlockValueRepository,
@@ -73,7 +75,7 @@ final readonly class PageBlockSettingService implements PageBlockSettingServiceI
                 __CLASS__,
                 __METHOD__
             );
-            throw new \Appsolutely\AIO\Exceptions\TransactionException(
+            throw new TransactionException(
                 "Failed to sync page block settings for page ID {$pageId}: {$exception->getMessage()}",
                 'Unable to save page settings. Please try again.',
                 $exception,
@@ -90,7 +92,7 @@ final readonly class PageBlockSettingService implements PageBlockSettingServiceI
                 __CLASS__,
                 __METHOD__
             );
-            throw new \Appsolutely\AIO\Exceptions\TransactionException(
+            throw new TransactionException(
                 "Failed to sync page block settings for page ID {$pageId}: {$exception->getMessage()}",
                 'Unable to save page settings. Please try again.',
                 $exception,
@@ -180,7 +182,6 @@ final readonly class PageBlockSettingService implements PageBlockSettingServiceI
                     }
                 }
 
-                return null;
             }
         );
     }

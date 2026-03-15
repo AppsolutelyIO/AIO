@@ -4,8 +4,8 @@ namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Form\Field;
-use Appsolutely\AIO\Support\UrlHelper;
 use Appsolutely\AIO\Support\JavaScript;
+use Appsolutely\AIO\Support\UrlHelper;
 
 /**
  * @see https://pandao.github.io/editor.md/
@@ -73,7 +73,6 @@ class Markdown extends Field
     /**
      * 设置文件上传存储配置.
      *
-     * @param  string  $disk
      * @return $this
      */
     public function disk(string $disk)
@@ -86,7 +85,6 @@ class Markdown extends Field
     /**
      * 设置图片上传文件夹.
      *
-     * @param  string  $dir
      * @return $this
      */
     public function imageDirectory(string $dir)
@@ -99,7 +97,6 @@ class Markdown extends Field
     /**
      * 自定义图片上传接口.
      *
-     * @param  string  $url
      * @return $this
      */
     public function imageUrl(string $url)
@@ -110,7 +107,6 @@ class Markdown extends Field
     /**
      * 设置语言包路径.
      *
-     * @param  string  $url
      * @return $this
      */
     public function languageUrl(string $url)
@@ -129,7 +125,6 @@ class Markdown extends Field
     }
 
     /**
-     * @param  string  $url
      * @return string
      */
     protected function formatUrl(string $url)
@@ -149,10 +144,10 @@ class Markdown extends Field
      */
     public function render()
     {
-        $this->options['path'] = admin_asset('@admin/aio/plugins/editor-md/lib').'/';
-        $this->options['name'] = $this->column;
+        $this->options['path']        = admin_asset('@admin/aio/plugins/editor-md/lib') . '/';
+        $this->options['name']        = $this->column;
         $this->options['placeholder'] = $this->placeholder();
-        $this->options['readonly'] = ! empty($this->attributes['readonly']) || ! empty($this->attributes['disabled']);
+        $this->options['readonly']    = ! empty($this->attributes['readonly']) || ! empty($this->attributes['disabled']);
 
         if (empty($this->options['imageUploadURL'])) {
             $this->options['imageUploadURL'] = $this->defaultImageUploadUrl();

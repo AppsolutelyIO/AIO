@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Models;
 
+use App\Models\User;
 use Appsolutely\AIO\Enums\RefundStatus;
 use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\OrderPayment;
 use Appsolutely\AIO\Models\Refund;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class RefundTest extends TestCase
 {

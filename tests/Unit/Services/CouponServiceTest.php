@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
+use App\Models\User;
 use Appsolutely\AIO\Enums\CouponType;
 use Appsolutely\AIO\Models\Coupon;
 use Appsolutely\AIO\Models\CouponUsage;
 use Appsolutely\AIO\Models\Order;
-use App\Models\User;
 use Appsolutely\AIO\Services\CouponService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class CouponServiceTest extends TestCase
 {

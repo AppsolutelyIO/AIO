@@ -17,7 +17,7 @@ class BatchActions extends Component
     public function __construct($gridName = '')
     {
         $this->gridName = $gridName;
-        $this->prefix = $gridName ? $gridName.'-' : '';
+        $this->prefix   = $gridName ? $gridName . '-' : '';
     }
 
     /**
@@ -33,12 +33,9 @@ class BatchActions extends Component
     /**
      * 浏览器包含组件的断言
      *
-     * @param  Browser  $browser
      * @return void
      */
-    public function assert(Browser $browser)
-    {
-    }
+    public function assert(Browser $browser) {}
 
     /**
      * 读取组件的元素快捷方式.
@@ -51,16 +48,15 @@ class BatchActions extends Component
 
         return [
             '@container' => $container,
-            '@btn' => '.btn',
-            '@menu' => '.dropdown-menu',
-            '@item' => '.dropdown-menu .dropdown-item',
+            '@btn'       => '.btn',
+            '@menu'      => '.dropdown-menu',
+            '@item'      => '.dropdown-menu .dropdown-item',
         ];
     }
 
     /**
      * 判断按钮是否已显示.
      *
-     * @param  Browser  $browser
      * @param  null  $number
      * @return Browser
      */
@@ -78,7 +74,6 @@ class BatchActions extends Component
     /**
      * 显示菜单.
      *
-     * @param  Browser  $browser
      * @param  int  $seconds
      * @return Browser
      */
@@ -100,7 +95,6 @@ JS
     /**
      * 关闭菜单.
      *
-     * @param  Browser  $browser
      * @param  int  $seconds
      * @return Browser
      */
@@ -120,7 +114,6 @@ JS
     /**
      * 点击选项.
      *
-     * @param  Browser  $browser
      * @param  string  $value
      * @return Browser
      */

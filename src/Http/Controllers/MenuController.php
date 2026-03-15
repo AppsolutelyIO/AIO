@@ -31,9 +31,9 @@ class MenuController extends AdminController
                     $form = new WidgetForm();
                     $form->action(admin_url('auth/menu'));
 
-                    $menuModel = config('admin.database.menu_model');
+                    $menuModel       = config('admin.database.menu_model');
                     $permissionModel = config('admin.database.permissions_model');
-                    $roleModel = config('admin.database.roles_model');
+                    $roleModel       = config('admin.database.roles_model');
 
                     $form->select('parent_id', trans('admin.parent_id'))->options($menuModel::selectOptions());
                     $form->text('title', trans('admin.title'))->required();
@@ -58,7 +58,7 @@ class MenuController extends AdminController
     }
 
     /**
-     * @return \Appsolutely\AIO\Tree
+     * @return Tree
      */
     protected function treeView()
     {
@@ -79,8 +79,8 @@ class MenuController extends AdminController
             });
 
             $tree->branch(function ($branch) {
-                $icon = e($branch['icon']);
-                $title = e($branch['title']);
+                $icon    = e($branch['icon']);
+                $title   = e($branch['title']);
                 $payload = "<i class='fa {$icon}'></i>&nbsp;<strong>{$title}</strong>";
 
                 if (! isset($branch['children'])) {

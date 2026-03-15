@@ -2,8 +2,8 @@
 
 namespace Appsolutely\AIO\Form\Field;
 
-use Closure;
 use Appsolutely\AIO\Form\Field;
+use Closure;
 
 class Display extends Field
 {

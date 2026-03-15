@@ -8,9 +8,13 @@ use Illuminate\Contracts\Support\Renderable;
 class Box extends Widget
 {
     protected $view = 'admin::widgets.box';
+
     protected $title = 'Box header';
+
     protected $content = 'here is the box content.';
+
     protected $tools = [];
+
     protected $padding;
 
     public function __construct($title = '', $content = '')
@@ -28,12 +32,10 @@ class Box extends Widget
 
     /**
      * Set content padding.
-     *
-     * @param  string  $padding
      */
     public function padding(string $padding)
     {
-        $this->padding = 'padding:'.$padding;
+        $this->padding = 'padding:' . $padding;
 
         return $this;
     }
@@ -103,10 +105,10 @@ class Box extends Widget
     public function style($styles)
     {
         $styles = array_map(function ($style) {
-            return 'box-'.$style;
+            return 'box-' . $style;
         }, (array) $styles);
 
-        $this->class = $this->class.' '.implode(' ', $styles);
+        $this->class = $this->class . ' ' . implode(' ', $styles);
 
         return $this;
     }

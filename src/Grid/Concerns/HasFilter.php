@@ -2,11 +2,13 @@
 
 namespace Appsolutely\AIO\Grid\Concerns;
 
-use Closure;
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Support\UrlHelper;
+use Closure;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Collection;
+use Illuminate\View\View;
 
 trait HasFilter
 {
@@ -48,10 +50,9 @@ trait HasFilter
     /**
      * Get or set the grid filter.
      *
-     * @param  Closure  $callback
      * @return $this|Grid\Filter
      */
-    public function filter(Closure $callback = null)
+    public function filter(?Closure $callback = null)
     {
         if ($callback === null) {
             return $this->filter;
@@ -65,7 +66,7 @@ trait HasFilter
     /**
      * Render the grid filter.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     * @return Factory|View|string
      */
     public function renderFilter()
     {
@@ -103,7 +104,6 @@ trait HasFilter
     /**
      * Show grid filter.
      *
-     * @param  bool  $val
      * @return $this
      */
     public function showFilter(bool $val = true)
@@ -114,7 +114,6 @@ trait HasFilter
     /**
      * Disable filter button.
      *
-     * @param  bool  $disable
      * @return $this
      */
     public function disableFilterButton(bool $disable = true)
@@ -127,7 +126,6 @@ trait HasFilter
     /**
      * Show filter button.
      *
-     * @param  bool  $val
      * @return $this
      */
     public function showFilterButton(bool $val = true)

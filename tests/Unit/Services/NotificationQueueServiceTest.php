@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
+use Appsolutely\AIO\Models\NotificationQueue;
 use Appsolutely\AIO\Services\NotificationQueueService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class NotificationQueueServiceTest extends TestCase
 {
@@ -33,7 +34,7 @@ final class NotificationQueueServiceTest extends TestCase
 
     public function test_process_pending_dispatches_jobs_for_pending_notifications(): void
     {
-        \Appsolutely\AIO\Models\NotificationQueue::factory()->count(3)->create([
+        NotificationQueue::factory()->count(3)->create([
             'status'       => 'pending',
             'scheduled_at' => now()->subMinute(),
         ]);
@@ -45,7 +46,7 @@ final class NotificationQueueServiceTest extends TestCase
 
     public function test_process_pending_respects_limit(): void
     {
-        \Appsolutely\AIO\Models\NotificationQueue::factory()->count(10)->create([
+        NotificationQueue::factory()->count(10)->create([
             'status'       => 'pending',
             'scheduled_at' => now()->subMinute(),
         ]);
@@ -57,7 +58,7 @@ final class NotificationQueueServiceTest extends TestCase
 
     public function test_process_pending_marks_notifications_as_processing(): void
     {
-        $notification = \Appsolutely\AIO\Models\NotificationQueue::factory()->create([
+        $notification = NotificationQueue::factory()->create([
             'status'       => 'pending',
             'scheduled_at' => now()->subMinute(),
         ]);
@@ -72,7 +73,7 @@ final class NotificationQueueServiceTest extends TestCase
 
     public function test_process_pending_does_not_process_non_pending_notifications(): void
     {
-        \Appsolutely\AIO\Models\NotificationQueue::factory()->create([
+        NotificationQueue::factory()->create([
             'status'       => 'sent',
             'scheduled_at' => now()->subMinute(),
         ]);

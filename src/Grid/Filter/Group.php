@@ -31,18 +31,14 @@ class Group extends AbstractFilter
      *
      * @param  string  $column
      * @param  string  $label
-     * @param  \Closure|null  $builder
      */
     public function __construct($column, ?\Closure $builder = null, $label = '')
     {
         $this->builder = $builder;
-        $this->column = $column;
-        $this->label = $this->formatLabel($label);
+        $this->column  = $column;
+        $this->label   = $this->formatLabel($label);
     }
 
-    /**
-     * @param  Filter  $filter
-     */
     public function setParent(Filter $filter)
     {
         parent::setParent($filter);
@@ -56,14 +52,13 @@ class Group extends AbstractFilter
     protected function initialize()
     {
         $this->group = new Collection();
-        $this->name = "{$this->id}-filter-group";
+        $this->name  = "{$this->id}-filter-group";
     }
 
     /**
      * Join a query to group.
      *
      * @param  string  $label
-     * @param  array  $condition
      * @return $this
      */
     protected function joinGroup($label, array $condition)
@@ -163,7 +158,6 @@ class Group extends AbstractFilter
      * Specify a where query.
      *
      * @param  string  $label
-     * @param  \Closure  $builder
      * @return Group
      */
     public function where($label, \Closure $builder)
@@ -269,13 +263,15 @@ class Group extends AbstractFilter
 
     /**
      * Sanitize the filter id.
-     * 
+     *
      * @return string
      */
     protected function sanitizeId()
     {
-        if ($prefix = $this->parent()->grid()->getNamePrefix())
+        if ($prefix = $this->parent()->grid()->getNamePrefix()) {
             return str_replace($prefix, '', $this->id);
+        }
+
         return $this->id;
     }
 

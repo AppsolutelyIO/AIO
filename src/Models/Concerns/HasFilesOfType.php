@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Models\Concerns;
 
 use Appsolutely\AIO\Models\File;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait HasFilesOfType
 {
     /**
      * Get files of a specific type for this model.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     * @return MorphToMany
      */
     public function filesOfType(string $type)
     {
@@ -37,7 +38,7 @@ trait HasFilesOfType
     /**
      * Get files of a specific type ordered by sort_order.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     * @return MorphToMany
      */
     public function orderedFilesOfType(string $type)
     {

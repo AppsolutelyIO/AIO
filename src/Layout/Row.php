@@ -33,7 +33,6 @@ class Row implements Renderable
      * Add a column.
      *
      * @param  int  $width
-     * @param $content
      */
     public function column($width, $content)
     {
@@ -42,16 +41,12 @@ class Row implements Renderable
         $this->addColumn($column);
     }
 
-    /**
-     * @param  Column  $column
-     */
     protected function addColumn(Column $column)
     {
         $this->columns[] = $column;
     }
 
     /**
-     * @param  bool  $value
      * @return $this
      */
     public function noGutters(bool $value = true)
@@ -74,7 +69,7 @@ class Row implements Renderable
             $html .= $column->render();
         }
 
-        return $html.$this->endRow();
+        return $html . $this->endRow();
     }
 
     /**

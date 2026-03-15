@@ -11,9 +11,9 @@ use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\OrderPayment;
 use Appsolutely\AIO\Models\Refund;
 use Appsolutely\AIO\Services\RefundService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-use Appsolutely\AIO\Tests\TestCase;
 
 class RefundServiceTest extends TestCase
 {

@@ -20,7 +20,6 @@ class MenuPage extends Page
     /**
      * Assert that the browser is on the page.
      *
-     * @param  \Laravel\Dusk\Browser  $browser
      * @return void
      */
     public function assert(Browser $browser)
@@ -47,7 +46,7 @@ class MenuPage extends Page
                     ->assertSeeText(__('admin.permission'))
                     ->assertSeeText(__('admin.selectall'))
                     ->assertSeeText(__('admin.expand'))
-                    //->assertSelected('parent_id', 0)
+                    // ->assertSelected('parent_id', 0)
                     ->hasInput('title')
                     ->hasInput('icon')
                     ->hasInput('uri')
@@ -59,8 +58,6 @@ class MenuPage extends Page
     /**
      * 创建.
      *
-     * @param  Browser  $browser
-     * @param  array  $input
      * @return Browser
      */
     public function newMenu(Browser $browser, array $input)

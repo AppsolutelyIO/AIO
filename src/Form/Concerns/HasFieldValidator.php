@@ -223,8 +223,6 @@ trait HasFieldValidator
     }
 
     /**
-     * @param $rules
-     * @param $rule
      * @return void
      */
     protected function deleteRuleByKeyword(&$rules, $rule)
@@ -303,8 +301,6 @@ trait HasFieldValidator
     }
 
     /**
-     * @param $rules
-     * @param $rule
      * @return bool
      */
     protected function isRuleExists($rules, $rule)
@@ -333,7 +329,6 @@ trait HasFieldValidator
     /**
      * Set field validator.
      *
-     * @param  callable  $validator
      * @return $this
      */
     public function validator(callable $validator)
@@ -346,7 +341,6 @@ trait HasFieldValidator
     /**
      * Get validator for this field.
      *
-     * @param  array  $input
      * @return bool|Validator
      */
     public function getValidator(array $input)
@@ -368,7 +362,7 @@ trait HasFieldValidator
 
             $input = $this->sanitizeInput($input, $this->column);
 
-            $rules[$this->column] = $fieldRules;
+            $rules[$this->column]      = $fieldRules;
             $attributes[$this->column] = $this->label;
         }
 
@@ -377,9 +371,9 @@ trait HasFieldValidator
                 if (! Arr::has($input, $column)) {
                     continue;
                 }
-                $k = $column.$key;
+                $k = $column . $key;
                 Arr::set($input, $k, Arr::get($input, $column));
-                $rules[$k] = $fieldRules;
+                $rules[$k]      = $fieldRules;
                 $attributes[$k] = "{$this->label}[$column]";
             }
         }
@@ -391,7 +385,6 @@ trait HasFieldValidator
      * Set validation messages for column.
      *
      * @param  string  $key
-     * @param  array  $messages
      * @return $this
      */
     public function setValidationMessages($key, array $messages)
@@ -422,18 +415,20 @@ trait HasFieldValidator
         foreach ($messages as $k => $v) {
             if (Str::contains($k, '.')) {
                 $result[$k] = $v;
+
                 continue;
             }
 
             if (is_string($this->column)) {
-                $k = $this->column.'.'.$k;
+                $k = $this->column . '.' . $k;
 
                 $result[$k] = $v;
+
                 continue;
             }
 
             foreach ($this->column as $column) {
-                $result[$column.'.'.$k] = $v;
+                $result[$column . '.' . $k] = $v;
             }
         }
 
@@ -445,8 +440,6 @@ trait HasFieldValidator
      *
      * @see http://1000hz.github.io/bootstrap-validator/
      *
-     * @param  string  $error
-     * @param  string  $key
      * @return $this
      */
     public function setClientValidationError(string $error, ?string $key = null)

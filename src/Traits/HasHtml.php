@@ -5,6 +5,7 @@ namespace Appsolutely\AIO\Traits;
 use Appsolutely\AIO\Support\HtmlHelper;
 use DOMDocument;
 use DOMElement;
+use Illuminate\Contracts\Support\Renderable;
 
 trait HasHtml
 {
@@ -29,9 +30,6 @@ trait HasHtml
     }
 
     /**
-     * @param  string  $view
-     * @param  array  $data
-     * @param  array  $data
      * @return string
      *
      * @throws \Throwable
@@ -42,9 +40,8 @@ trait HasHtml
     }
 
     /**
-     * @param  string|\Illuminate\Contracts\Support\Renderable  $content
+     * @param  string|Renderable  $content
      * @param  array  $data
-     * @param  array  $options
      * @return array ['html' => $html, 'script' => $script]
      *
      * @throws \Throwable
@@ -56,7 +53,7 @@ trait HasHtml
         $head = static::resolveElement($dom->getElementsByTagName('head')->item(0) ?: null);
         $body = static::resolveElement($dom->getElementsByTagName('body')->item(0) ?: null);
 
-        $script = $head['script'].$body['script'];
+        $script = $head['script'] . $body['script'];
 
         $runScript = $options['runScript'] ?? true;
         if ($runScript) {
@@ -65,11 +62,10 @@ trait HasHtml
             $script = '';
         }
 
-        return ['html' => $head['html'].$body['html'], 'script' => $script];
+        return ['html' => $head['html'] . $body['html'], 'script' => $script];
     }
 
     /**
-     * @param  string  $html
      * @return DOMDocument
      *
      * @throws \Throwable
@@ -80,7 +76,7 @@ trait HasHtml
 
         libxml_use_internal_errors(true);
 
-        $dom->loadHTML('<?xml encoding="utf-8" ?>'.$html);
+        $dom->loadHTML('<?xml encoding="utf-8" ?>' . $html);
 
         libxml_use_internal_errors(false);
 
@@ -88,18 +84,16 @@ trait HasHtml
     }
 
     /**
-     * @param  DOMElement  $element
      * @return void|string
      */
     protected static function resolve(DOMElement $element)
     {
-        $method = 'resolve'.ucfirst($element->tagName);
+        $method = 'resolve' . ucfirst($element->tagName);
 
         return static::{$method}($element);
     }
 
     /**
-     * @param  DOMElement  $element
      * @return void
      */
     protected static function resolveLink(DOMElement $element)
@@ -110,7 +104,6 @@ trait HasHtml
     }
 
     /**
-     * @param  DOMElement  $element
      * @return void
      */
     protected static function resolveTemplate(DOMElement $element)
@@ -124,7 +117,6 @@ trait HasHtml
     }
 
     /**
-     * @param  DOMElement  $element
      * @return string|void
      */
     protected static function resolveScript(DOMElement $element)
@@ -157,7 +149,6 @@ trait HasHtml
     }
 
     /**
-     * @param  DOMElement  $element
      * @return void
      */
     protected static function resolveStyle(DOMElement $element)

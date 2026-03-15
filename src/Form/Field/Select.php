@@ -56,10 +56,6 @@ class Select extends Field
     }
 
     /**
-     * @param  array  $groups
-     */
-
-    /**
      * Set option groups.
      *
      * eg: $group = [
@@ -73,7 +69,6 @@ class Select extends Field
      *        ...
      *     ]
      *
-     * @param  array  $groups
      * @return $this
      */
     public function groups(array $groups)
@@ -87,8 +82,6 @@ class Select extends Field
      * Load options from current selected resource(s).
      *
      * @param  string  $model
-     * @param  string  $idField
-     * @param  string  $textField
      * @return $this
      */
     public function model($model, string $idField = 'id', string $textField = 'name')
@@ -125,15 +118,12 @@ class Select extends Field
     /**
      * Load options from remote.
      *
-     * @param  string  $url
-     * @param  array  $parameters
-     * @param  array  $options
      * @return $this
      */
     protected function loadRemoteOptions(string $url, array $parameters = [], array $options = [])
     {
         $ajaxOptions = [
-            'url' => admin_url($url.'?'.http_build_query($parameters)),
+            'url' => admin_url($url . '?' . http_build_query($parameters)),
         ];
 
         $ajaxOptions = array_merge($ajaxOptions, $options);
@@ -166,9 +156,6 @@ class Select extends Field
     /**
      * Load options from ajax results.
      *
-     * @param  string  $url
-     * @param $idField
-     * @param $textField
      * @return $this
      */
     public function ajax(string $url, string $idField = 'id', string $textField = 'text')
@@ -187,7 +174,6 @@ class Select extends Field
      *
      * all configurations see https://select2.org/configuration/options-api
      *
-     * @param  string  $key
      * @param  mixed  $val
      * @return $this
      */

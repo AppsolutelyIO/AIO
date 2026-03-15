@@ -9,7 +9,8 @@ class InteractsWithApiTest extends TestCase
 {
     private function createInstance()
     {
-        return new class {
+        return new class()
+        {
             use InteractsWithApi;
 
             // Expose the url property for testing
@@ -43,7 +44,8 @@ class InteractsWithApiTest extends TestCase
 
     public function test_allow_build_request_returns_true_when_handle_method_exists()
     {
-        $instance = new class {
+        $instance = new class()
+        {
             use InteractsWithApi;
 
             public function handle()

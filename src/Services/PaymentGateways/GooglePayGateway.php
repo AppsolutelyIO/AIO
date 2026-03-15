@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Services\PaymentGateways;
 
 use Appsolutely\AIO\DTOs\PaymentGatewayResult;
+use Appsolutely\AIO\Enums\PaymentProvider;
 use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\Payment;
 
@@ -26,7 +27,7 @@ final class GooglePayGateway extends AbstractGateway
             $options['wallet_type']          = 'google_pay';
 
             $gateway = PaymentGatewayFactory::makeFromProvider(
-                \Appsolutely\AIO\Enums\PaymentProvider::from($backingProvider)
+                PaymentProvider::from($backingProvider)
             );
 
             return $gateway->charge($order, $payment, $amount, $options);

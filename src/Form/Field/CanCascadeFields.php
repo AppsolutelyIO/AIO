@@ -23,16 +23,13 @@ trait CanCascadeFields
     protected $cascadeGroups = [];
 
     /**
-     * @param $operator
-     * @param $value
-     * @param $closure
      * @return $this
      */
     public function when($operator, $value, $closure = null)
     {
         if (func_num_args() === 2) {
-            $closure = $value;
-            $value = $operator;
+            $closure  = $value;
+            $value    = $operator;
             $operator = $this->getDefaultOperator();
         }
 
@@ -53,7 +50,6 @@ trait CanCascadeFields
     }
 
     /**
-     * @param  string  $operator
      * @param  mixed  $value
      */
     protected function formatValues(string $operator, &$value)
@@ -70,9 +66,7 @@ trait CanCascadeFields
     }
 
     /**
-     * @param  string  $operator
      * @param  mixed  $value
-     * @param  \Closure  $closure
      */
     protected function addDependents(string $operator, $value, \Closure $closure)
     {
@@ -96,15 +90,15 @@ trait CanCascadeFields
         }
 
         $map = [
-            '=' => '0',
-            '>' => '1',
-            '<' => '2',
-            '!=' => '3',
-            'in' => '4',
+            '='     => '0',
+            '>'     => '1',
+            '<'     => '2',
+            '!='    => '3',
+            'in'    => '4',
             'notIn' => '5',
-            '>=' => '6',
-            '<=' => '7',
-            'has' => '8',
+            '>='    => '6',
+            '<='    => '7',
+            'has'   => '8',
         ];
 
         return str_replace(

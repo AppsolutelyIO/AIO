@@ -24,7 +24,6 @@ class Column implements Renderable
     /**
      * Column constructor.
      *
-     * @param $content
      * @param  int  $width
      */
     public function __construct($content, $width = 12)
@@ -37,7 +36,7 @@ class Column implements Renderable
             $this->append($content);
         }
 
-        ///// set width.
+        // /// set width.
         // if null, or $this->width is empty array, set as "md" => "12"
         if ($width === null || (is_array($width) && count($width) === 0)) {
             $this->width['md'] = 12;
@@ -58,7 +57,6 @@ class Column implements Renderable
     /**
      * Append content to column.
      *
-     * @param $content
      * @return $this
      */
     public function append($content)
@@ -71,7 +69,6 @@ class Column implements Renderable
     /**
      * Add a row for column.
      *
-     * @param $content
      * @return Column
      */
     public function row($content)
@@ -105,7 +102,7 @@ class Column implements Renderable
             $html .= HtmlHelper::render($content);
         }
 
-        return $html.$this->endColumn();
+        return $html . $this->endColumn();
     }
 
     /**

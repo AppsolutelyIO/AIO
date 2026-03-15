@@ -6,6 +6,7 @@ use Appsolutely\AIO\Traits\HasDateTimeFormatter;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Collection;
 
 class Role extends Model
 {
@@ -38,8 +39,6 @@ class Role extends Model
 
     /**
      * A role belongs to many users.
-     *
-     * @return BelongsToMany
      */
     public function administrators(): BelongsToMany
     {
@@ -52,8 +51,6 @@ class Role extends Model
 
     /**
      * A role belongs to many permissions.
-     *
-     * @return BelongsToMany
      */
     public function permissions(): BelongsToMany
     {
@@ -64,9 +61,6 @@ class Role extends Model
         return $this->belongsToMany($relatedModel, $pivotTable, 'role_id', 'permission_id')->withTimestamps();
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function menus(): BelongsToMany
     {
         $pivotTable = config('admin.database.role_menu_table');
@@ -78,9 +72,6 @@ class Role extends Model
 
     /**
      * Check user has permission.
-     *
-     * @param $permission
-     * @return bool
      */
     public function can(?string $permission): bool
     {
@@ -89,9 +80,6 @@ class Role extends Model
 
     /**
      * Check user has no permission.
-     *
-     * @param $permission
-     * @return bool
      */
     public function cannot(?string $permission): bool
     {
@@ -101,8 +89,7 @@ class Role extends Model
     /**
      * Get id of the permission by id.
      *
-     * @param  array  $roleIds
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public static function getPermissionId(array $roleIds)
     {
@@ -111,7 +98,7 @@ class Role extends Model
         }
         $related = config('admin.database.role_permissions_table');
 
-        $model = new static();
+        $model   = new static();
         $keyName = $model->getKeyName();
 
         return $model->newQuery()
@@ -127,7 +114,6 @@ class Role extends Model
     }
 
     /**
-     * @param  string  $slug
      * @return bool
      */
     public static function isAdministrator(?string $slug)

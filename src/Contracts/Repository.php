@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the aio.
  *
@@ -12,7 +13,10 @@ namespace Appsolutely\AIO\Contracts;
 
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Http\JsonResponse;
 use Appsolutely\AIO\Show;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 
 interface Repository
@@ -48,65 +52,56 @@ interface Repository
     /**
      * 获取Grid表格数据.
      *
-     * @param  Grid\Model  $model
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|Collection|array
+     * @return LengthAwarePaginator|Collection|array
      */
     public function get(Grid\Model $model);
 
     /**
      * 获取编辑页面数据.
      *
-     * @param  Form  $form
-     * @return array|\Illuminate\Contracts\Support\Arrayable
+     * @return array|Arrayable
      */
     public function edit(Form $form);
 
     /**
      * 获取详情页面数据.
      *
-     * @param  Show  $show
-     * @return array|\Illuminate\Contracts\Support\Arrayable
+     * @return array|Arrayable
      */
     public function detail(Show $show);
 
     /**
      * 新增记录.
      *
-     * @param  Form  $form
-     * @return int|bool|\Appsolutely\AIO\Http\JsonResponse
+     * @return int|bool|JsonResponse
      */
     public function store(Form $form);
 
     /**
      * 查询更新前的行数据.
      *
-     * @param  Form  $form
-     * @return array|\Illuminate\Contracts\Support\Arrayable
+     * @return array|Arrayable
      */
     public function updating(Form $form);
 
     /**
      * 更新数据.
      *
-     * @param  Form  $form
-     * @return bool|\Appsolutely\AIO\Http\JsonResponse
+     * @return bool|JsonResponse
      */
     public function update(Form $form);
 
     /**
      * 删除数据.
      *
-     * @param  Form  $form
-     * @param  array  $deletingData
-     * @return mixed|\Appsolutely\AIO\Http\JsonResponse
+     * @return mixed|JsonResponse
      */
     public function delete(Form $form, array $deletingData);
 
     /**
      * 查询删除前的行数据.
      *
-     * @param  Form  $form
-     * @return array|\Illuminate\Contracts\Support\Arrayable
+     * @return array|Arrayable
      */
     public function deleting(Form $form);
 }

@@ -70,7 +70,7 @@ class Zip extends ZipArchive
         ], $options));
 
         if (file_exists($destination) || mkdir($destination, $mask, true)) {
-            $zip = new ZipArchive;
+            $zip = new ZipArchive();
             if ($zip->open($source) === true) {
                 $zip->extractTo($destination);
                 $zip->close();
@@ -92,8 +92,8 @@ class Zip extends ZipArchive
      */
     public static function make($destination, $source, $options = [])
     {
-        $zip = new self;
-        $zip->open($destination, ZIPARCHIVE::CREATE | ZipArchive::OVERWRITE);
+        $zip = new self();
+        $zip->open($destination, ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
         if (is_string($source)) {
             $zip->add($source, $options);
@@ -129,23 +129,23 @@ class Zip extends ZipArchive
          */
         if (is_dir($source)) {
             $includeHidden = isset($options['includeHidden']) && $options['includeHidden'];
-            $wildcard = $includeHidden ? '{*,.[!.]*,..?*}' : '*';
-            $source = implode('/', [dirname($source), Helper::basename($source), $wildcard]);
+            $wildcard      = $includeHidden ? '{*,.[!.]*,..?*}' : '*';
+            $source        = implode('/', [dirname($source), Helper::basename($source), $wildcard]);
         }
 
         extract(array_merge([
-            'recursive' => true,
+            'recursive'     => true,
             'includeHidden' => false,
-            'basedir' => dirname($source),
-            'baseglob' => Helper::basename($source),
+            'basedir'       => dirname($source),
+            'baseglob'      => Helper::basename($source),
         ], $options));
 
         if (is_file($source)) {
-            $files = [$source];
+            $files     = [$source];
             $recursive = false;
         } else {
-            $files = glob($source, GLOB_BRACE);
-            $folders = glob(dirname($source).'/*', GLOB_ONLYDIR);
+            $files   = glob($source, GLOB_BRACE);
+            $folders = glob(dirname($source) . '/*', GLOB_ONLYDIR);
         }
 
         foreach ($files as $file) {
@@ -153,8 +153,8 @@ class Zip extends ZipArchive
                 continue;
             }
 
-            $localpath = $this->removePathPrefix($basedir.'/', dirname($file).'/');
-            $localfile = $this->folderPrefix.$localpath.Helper::basename($file);
+            $localpath = $this->removePathPrefix($basedir . '/', dirname($file) . '/');
+            $localfile = $this->folderPrefix . $localpath . Helper::basename($file);
             $this->addFile($file, $localfile);
         }
 
@@ -167,9 +167,9 @@ class Zip extends ZipArchive
                 continue;
             }
 
-            $localpath = $this->folderPrefix.$this->removePathPrefix($basedir.'/', $folder.'/');
+            $localpath = $this->folderPrefix . $this->removePathPrefix($basedir . '/', $folder . '/');
             $this->addEmptyDir($localpath);
-            $this->add($folder.'/'.$baseglob, array_merge($options, ['basedir' => $basedir]));
+            $this->add($folder . '/' . $baseglob, array_merge($options, ['basedir' => $basedir]));
         }
 
         return $this;
@@ -185,12 +185,12 @@ class Zip extends ZipArchive
     public function folder($name, $source = null)
     {
         $prefix = $this->folderPrefix;
-        $this->addEmptyDir($prefix.$name);
+        $this->addEmptyDir($prefix . $name);
         if ($source === null) {
             return $this;
         }
 
-        $this->folderPrefix = $prefix.$name.'/';
+        $this->folderPrefix = $prefix . $name . '/';
 
         if (is_string($source)) {
             $this->add($source);

@@ -8,8 +8,8 @@ use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Models\FormEntry;
 use Appsolutely\AIO\Models\FormField;
 use Appsolutely\AIO\Services\FormFieldFormatterService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class FormFieldFormatterServiceTest extends TestCase
 {

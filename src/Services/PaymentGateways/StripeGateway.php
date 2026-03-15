@@ -8,6 +8,8 @@ use Appsolutely\AIO\DTOs\PaymentGatewayResult;
 use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\OrderPayment;
 use Appsolutely\AIO\Models\Payment;
+use Stripe\StripeClient;
+use Stripe\Webhook;
 
 final class StripeGateway extends AbstractGateway
 {
@@ -38,7 +40,7 @@ final class StripeGateway extends AbstractGateway
         ];
 
         try {
-            $stripe  = new \Stripe\StripeClient($payment->merchant_secret);
+            $stripe  = new StripeClient($payment->merchant_secret);
             $session = $stripe->checkout->sessions->create($sessionParams);
 
             return PaymentGatewayResult::redirect(
@@ -55,7 +57,7 @@ final class StripeGateway extends AbstractGateway
     {
         try {
             $payment = $orderPayment->payment;
-            $stripe  = new \Stripe\StripeClient($payment->merchant_secret);
+            $stripe  = new StripeClient($payment->merchant_secret);
 
             $paymentIntent = $orderPayment->vendor_extra_info['payment_intent'] ?? $orderPayment->vendor_reference;
 
@@ -79,7 +81,7 @@ final class StripeGateway extends AbstractGateway
         $signature = $headers['stripe-signature'] ?? $headers['Stripe-Signature'] ?? '';
 
         try {
-            $event = \Stripe\Webhook::constructEvent($payload, $signature, $secret);
+            $event = Webhook::constructEvent($payload, $signature, $secret);
 
             $object = $event->data->object;
 

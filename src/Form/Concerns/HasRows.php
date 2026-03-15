@@ -2,8 +2,8 @@
 
 namespace Appsolutely\AIO\Form\Concerns;
 
-use Closure;
 use Appsolutely\AIO\Form\Row;
+use Closure;
 
 trait HasRows
 {
@@ -17,7 +17,6 @@ trait HasRows
     /**
      * Add a row in form.
      *
-     * @param  Closure  $callback
      * @return $this
      */
     public function row(Closure $callback)

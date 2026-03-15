@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Feature\Api;
 
-use Appsolutely\AIO\Models\DeliveryToken;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Appsolutely\AIO\Models\DeliveryToken;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DeliveryControllerTest extends TestCase
 {

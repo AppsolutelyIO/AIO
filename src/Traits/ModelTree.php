@@ -8,6 +8,7 @@ use Appsolutely\AIO\Tree;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
 use Spatie\EloquentSortable\SortableTrait;
 
@@ -82,7 +83,6 @@ trait ModelTree
     /**
      * Set query callback to model.
      *
-     * @param  \Closure|null  $query
      * @return $this
      */
     public function withQuery(?\Closure $query = null)
@@ -97,7 +97,7 @@ trait ModelTree
      *
      * @return array
      */
-    public function toTree(array $nodes = null)
+    public function toTree(?array $nodes = null)
     {
         if ($nodes === null) {
             $nodes = $this->allNodes();
@@ -114,7 +114,7 @@ trait ModelTree
     /**
      * Get all elements.
      *
-     * @return static[]|\Illuminate\Support\Collection
+     * @return static[]|Collection
      */
     public function allNodes()
     {
@@ -141,7 +141,6 @@ trait ModelTree
     /**
      * Set the order of branches in the tree.
      *
-     * @param  array  $order
      * @return void
      */
     protected static function setBranchOrder(array $order)
@@ -168,8 +167,8 @@ trait ModelTree
         foreach ($tree as $branch) {
             $node = static::find($branch['id']);
 
-            $node->{$node->getParentColumn()} = $parentId;
-            $node->{$node->getOrderColumn()} = static::$branchOrder[$branch['id']];
+            $node->{$node->getParentColumn()}                           = $parentId;
+            $node->{$node->getOrderColumn()}                            = static::$branchOrder[$branch['id']];
             $node->getDepthColumn() && $node->{$node->getDepthColumn()} = $depth;
             $node->save();
 
@@ -186,7 +185,7 @@ trait ModelTree
 
     public function moveOrderDown()
     {
-        $orderColumnName = $this->determineOrderColumnName();
+        $orderColumnName  = $this->determineOrderColumnName();
         $parentColumnName = $this->getParentColumn();
 
         $sameOrderModel = $this->getSameOrderModel('>');
@@ -215,7 +214,7 @@ trait ModelTree
 
     public function moveOrderUp()
     {
-        $orderColumnName = $this->determineOrderColumnName();
+        $orderColumnName  = $this->determineOrderColumnName();
         $parentColumnName = $this->getParentColumn();
 
         $swapWithModel = $this->buildSortQuery()
@@ -242,7 +241,7 @@ trait ModelTree
 
     protected function getSameOrderModel(string $operator = '<')
     {
-        $orderColumnName = $this->determineOrderColumnName();
+        $orderColumnName  = $this->determineOrderColumnName();
         $parentColumnName = $this->getParentColumn();
 
         return $this->buildSortQuery()
@@ -282,7 +281,6 @@ trait ModelTree
     /**
      * Get options for Select field in form.
      *
-     * @param  \Closure|null  $closure
      * @param  string  $rootText
      * @return array
      */
@@ -298,7 +296,6 @@ trait ModelTree
     /**
      * Build options of select field in form.
      *
-     * @param  array  $nodes
      * @param  int  $parentId
      * @param  string  $prefix
      * @param  string  $space
@@ -306,8 +303,8 @@ trait ModelTree
      */
     protected function buildSelectOptions(array $nodes = [], $parentId = 0, $prefix = '', $space = '&nbsp;')
     {
-        $d = '├─';
-        $prefix = $prefix ?: $d.$space;
+        $d      = '├─';
+        $prefix = $prefix ?: $d . $space;
 
         $options = [];
 
@@ -319,9 +316,9 @@ trait ModelTree
             if ($node[$this->getParentColumn()] == $parentId) {
                 $currentPrefix = $this->hasNextSibling($nodes, $node[$this->getParentColumn()], $index) ? $prefix : str_replace($d, '└─', $prefix);
 
-                $node[$this->getTitleColumn()] = $currentPrefix.$space.$node[$this->getTitleColumn()];
+                $node[$this->getTitleColumn()] = $currentPrefix . $space . $node[$this->getTitleColumn()];
 
-                $childrenPrefix = str_replace($d, str_repeat($space, 6), $prefix).$d.str_replace([$d, $space], '', $prefix);
+                $childrenPrefix = str_replace($d, str_repeat($space, 6), $prefix) . $d . str_replace([$d, $space], '', $prefix);
 
                 $children = $this->buildSelectOptions($nodes, $node[$this->getKeyName()], $childrenPrefix);
 

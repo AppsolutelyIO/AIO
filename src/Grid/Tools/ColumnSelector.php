@@ -26,8 +26,6 @@ class ColumnSelector extends AbstractTool
 
     /**
      * Create a new Export button instance.
-     *
-     * @param  Grid  $grid
      */
     public function __construct(Grid $grid)
     {
@@ -42,7 +40,7 @@ class ColumnSelector extends AbstractTool
     public function render()
     {
         $show = $this->getVisibleColumnNames();
-        $all = $this->getGridColumns();
+        $all  = $this->getGridColumns();
 
         $visibleColumnNames = $this->grid->getVisibleColumnsFromQuery();
 

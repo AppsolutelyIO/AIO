@@ -50,15 +50,13 @@ trait HasTree
     /**
      * 开启树形表格功能.
      *
-     * @param  bool  $showAll
-     * @param  bool  $sortable
      * @param  mixed  $defaultParentId
      * @return void
      */
     public function enableTree(bool $showAll, bool $sortable, $defaultParentId = null)
     {
         $this->showAllChildrenNodes = $showAll;
-        $this->defaultParentId = $defaultParentId;
+        $this->defaultParentId      = $defaultParentId;
 
         $this->grid()->listen(Fetching::class, function () use ($sortable) {
             $this->sortTree($sortable);
@@ -194,7 +192,7 @@ HTML
      */
     public function getChildrenPageName($parentId)
     {
-        return $this->getChildrenQueryNamePrefix().'_children_page_'.$parentId;
+        return $this->getChildrenQueryNamePrefix() . '_children_page_' . $parentId;
     }
 
     /**
@@ -214,7 +212,7 @@ HTML
      */
     public function getParentIdQueryName()
     {
-        return $this->getChildrenQueryNamePrefix().$this->parentIdQueryName;
+        return $this->getChildrenQueryNamePrefix() . $this->parentIdQueryName;
     }
 
     /**
@@ -279,7 +277,7 @@ HTML
      */
     public function getDepthQueryName()
     {
-        return $this->getChildrenQueryNamePrefix().$this->depthQueryName;
+        return $this->getChildrenQueryNamePrefix() . $this->depthQueryName;
     }
 
     /**

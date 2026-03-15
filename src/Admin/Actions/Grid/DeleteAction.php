@@ -30,7 +30,7 @@ class DeleteAction extends RowAction
         $class = $request->get('class');
         if (! class_exists($class)
             || ! str_starts_with($class, 'App\\Models\\')
-            || ! is_subclass_of($class, \Illuminate\Database\Eloquent\Model::class)
+            || ! is_subclass_of($class, Model::class)
         ) {
             return $this->response()->error(__t('Failed to delete action'));
         }

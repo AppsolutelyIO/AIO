@@ -6,12 +6,13 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Enums\InventoryMovementType;
 use Appsolutely\AIO\Enums\Status;
+use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Models\ProductSku;
 use Appsolutely\AIO\Services\InventoryService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class InventoryServiceTest extends TestCase
 {
@@ -97,7 +98,7 @@ final class InventoryServiceTest extends TestCase
     public function test_record_movement_with_reference_model(): void
     {
         $sku   = $this->createSku(100);
-        $order = \Appsolutely\AIO\Models\Order::factory()->create();
+        $order = Order::factory()->create();
 
         $movement = $this->service->recordMovement(
             $sku,

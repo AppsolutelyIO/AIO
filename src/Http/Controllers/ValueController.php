@@ -2,13 +2,13 @@
 
 namespace Appsolutely\AIO\Http\Controllers;
 
+use Appsolutely\AIO\Traits\InteractsWithApi;
 use Exception;
 use Illuminate\Http\Request;
 
 class ValueController
 {
     /**
-     * @param  Request  $request
      * @return mixed
      */
     public function handle(Request $request)
@@ -31,8 +31,7 @@ class ValueController
     }
 
     /**
-     * @param  Request  $request
-     * @return \Appsolutely\AIO\Traits\InteractsWithApi
+     * @return InteractsWithApi
      *
      * @throws Exception
      */

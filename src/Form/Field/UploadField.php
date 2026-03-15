@@ -4,10 +4,12 @@ namespace Appsolutely\AIO\Form\Field;
 
 use Appsolutely\AIO\Exception\UploadException;
 use Appsolutely\AIO\Traits\HasUploadedFile;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -34,7 +36,7 @@ trait UploadField
     /**
      * Storage instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $storage;
 
@@ -93,7 +95,6 @@ trait UploadField
     /**
      * If name already exists, rename it.
      *
-     * @param $file
      * @return void
      */
     public function renameIfExists(UploadedFile $file)
@@ -114,7 +115,6 @@ trait UploadField
     /**
      * Get store name of upload file.
      *
-     * @param  UploadedFile  $file
      * @return string
      */
     protected function getStoreName(UploadedFile $file)
@@ -155,7 +155,6 @@ trait UploadField
     /**
      * Indicates if the underlying field is retainable.
      *
-     * @param  bool  $retainable
      * @return $this
      */
     public function retainable(bool $retainable = true)
@@ -175,7 +174,6 @@ trait UploadField
     /**
      * Upload File.
      *
-     * @param  UploadedFile  $file
      * @return Response
      */
     public function upload(UploadedFile $file)
@@ -210,7 +208,7 @@ trait UploadField
 
         if ($result) {
             $path = $this->getUploadPath();
-            $url = $this->objectUrl($path);
+            $url  = $this->objectUrl($path);
 
             // 上传成功
             return $this->responseUploaded($this->saveFullUrl ? $url : $path, $url);
@@ -227,12 +225,7 @@ trait UploadField
         }
     }
 
-    /**
-     * @param  UploadedFile  $file
-     */
-    protected function prepareFile(UploadedFile $file)
-    {
-    }
+    protected function prepareFile(UploadedFile $file) {}
 
     /**
      * Specify the directory and name for upload file.
@@ -307,38 +300,35 @@ trait UploadField
     /**
      * Generate a unique name for uploaded file.
      *
-     * @param  UploadedFile  $file
      * @return string
      */
     protected function generateUniqueName(UploadedFile $file)
     {
-        return md5(uniqid()).'.'.$file->getClientOriginalExtension();
+        return md5(uniqid()) . '.' . $file->getClientOriginalExtension();
     }
 
     /**
      * Generate a sequence name for uploaded file.
      *
-     * @param  UploadedFile  $file
      * @return string
      */
     protected function generateSequenceName(UploadedFile $file)
     {
-        $index = 1;
-        $extension = $file->getClientOriginalExtension();
+        $index        = 1;
+        $extension    = $file->getClientOriginalExtension();
         $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $newName = $originalName.'_'.$index.'.'.$extension;
+        $newName      = $originalName . '_' . $index . '.' . $extension;
 
         while ($this->getStorage()->exists("{$this->getDirectory()}/$newName")) {
             $index++;
-            $newName = $originalName.'_'.$index.'.'.$extension;
+            $newName = $originalName . '_' . $index . '.' . $extension;
         }
 
         return $newName;
     }
 
     /**
-     * @param  UploadedFile  $file
-     * @return bool|\Illuminate\Support\MessageBag
+     * @return bool|MessageBag
      */
     protected function getValidationErrors(UploadedFile $file)
     {
@@ -379,8 +369,6 @@ trait UploadField
 
     /**
      * Destroy original files.
-     *
-     * @param $file
      */
     public function destroyIfChanged($file)
     {
@@ -388,7 +376,7 @@ trait UploadField
             return $this->destroy();
         }
 
-        $file = array_filter((array) $file);
+        $file     = array_filter((array) $file);
         $original = (array) $this->original;
 
         $this->deleteFile(Arr::except(array_combine($original, $original), $file));
@@ -416,7 +404,7 @@ trait UploadField
                 $storage->delete($path);
             } else {
                 $prefix = $storage->url('');
-                $path = str_replace($prefix, '', $path);
+                $path   = str_replace($prefix, '', $path);
 
                 if ($storage->exists($path)) {
                     $storage->delete($path);
@@ -428,7 +416,7 @@ trait UploadField
     /**
      * Get storage instance.
      *
-     * @return \Illuminate\Filesystem\Filesystem|null
+     * @return Filesystem|null
      */
     public function getStorage()
     {
@@ -483,7 +471,6 @@ trait UploadField
     }
 
     /**
-     * @param $permission
      * @return $this
      */
     public function storagePermission($permission)

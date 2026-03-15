@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Models;
 
-use Appsolutely\AIO\Models\Product;
 use App\Models\User;
+use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Models\Wishlist;
 use Appsolutely\AIO\Models\WishlistItem;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class WishlistTest extends TestCase
 {

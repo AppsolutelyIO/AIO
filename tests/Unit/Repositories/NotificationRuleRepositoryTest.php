@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Repositories;
 
 use Appsolutely\AIO\Enums\Status;
+use Appsolutely\AIO\Models\NotificationQueue;
 use Appsolutely\AIO\Models\NotificationRule;
 use Appsolutely\AIO\Models\NotificationTemplate;
 use Appsolutely\AIO\Repositories\NotificationRuleRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class NotificationRuleRepositoryTest extends TestCase
 {
@@ -344,7 +346,7 @@ final class NotificationRuleRepositoryTest extends TestCase
         $result = $this->repository->getRulesNeedingTemplate();
 
         // All rules have templates (template_id NOT NULL + cascade), so result is empty
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
         $this->assertCount(0, $result);
     }
 
@@ -386,8 +388,8 @@ final class NotificationRuleRepositoryTest extends TestCase
     public function test_get_with_usage_stats_returns_rules_with_counts(): void
     {
         $rule = NotificationRule::factory()->create();
-        \Appsolutely\AIO\Models\NotificationQueue::factory()->sent()->count(3)->create(['rule_id' => $rule->id]);
-        \Appsolutely\AIO\Models\NotificationQueue::factory()->pending()->count(2)->create(['rule_id' => $rule->id]);
+        NotificationQueue::factory()->sent()->count(3)->create(['rule_id' => $rule->id]);
+        NotificationQueue::factory()->pending()->count(2)->create(['rule_id' => $rule->id]);
 
         $result = $this->repository->getWithUsageStats();
 

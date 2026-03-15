@@ -6,10 +6,10 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Services\Contracts\PaymentServiceInterface;
 use Appsolutely\AIO\Services\PaymentService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class PaymentServiceTest extends TestCase
 {

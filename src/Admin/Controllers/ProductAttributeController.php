@@ -9,12 +9,12 @@ use Appsolutely\AIO\Admin\Forms\Models\ProductAttributeForm;
 use Appsolutely\AIO\Admin\Forms\Models\ProductAttributeGroupForm;
 use Appsolutely\AIO\Admin\Forms\Models\ProductAttributeValueForm;
 use Appsolutely\AIO\Enums\Status;
-use Appsolutely\AIO\Models\ProductAttribute;
-use Appsolutely\AIO\Models\ProductAttributeGroup;
-use Appsolutely\AIO\Models\ProductAttributeValue;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Grid\Tools;
 use Appsolutely\AIO\Layout\Content;
+use Appsolutely\AIO\Models\ProductAttribute;
+use Appsolutely\AIO\Models\ProductAttributeGroup;
+use Appsolutely\AIO\Models\ProductAttributeValue;
 use Appsolutely\AIO\Widgets\Modal;
 use Appsolutely\AIO\Widgets\Tab;
 

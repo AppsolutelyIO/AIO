@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Middleware;
 
 use Appsolutely\AIO\Http\Middleware\SecurityHeaders;
-use Illuminate\Http\Request;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 final class SecurityHeadersTest extends TestCase
 {
@@ -25,7 +26,7 @@ final class SecurityHeadersTest extends TestCase
         return Request::create("{$scheme}://example.com/test");
     }
 
-    private function handle(Request $request): \Symfony\Component\HttpFoundation\Response
+    private function handle(Request $request): Response
     {
         return $this->middleware->handle($request, fn ($r) => response('OK'));
     }

@@ -11,11 +11,11 @@ use Appsolutely\AIO\Services\Contracts\PageServiceInterface;
 use Appsolutely\AIO\Services\GeneralPageService;
 use Appsolutely\AIO\Services\NestedUrlResolverService;
 use Appsolutely\AIO\Services\PageSlugAliasService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository as CacheRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class GeneralPageServiceTest extends TestCase
 {

@@ -24,14 +24,12 @@ class Column
      */
     public function __construct($width = 12)
     {
-        $this->width = $width;
+        $this->width   = $width;
         $this->filters = new Collection();
     }
 
     /**
      * Add a filter to this column.
-     *
-     * @param  AbstractFilter  $filter
      */
     public function addFilter(AbstractFilter $filter)
     {

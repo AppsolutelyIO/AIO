@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Services\PageStructureService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class PageStructureServiceTest extends TestCase
 {

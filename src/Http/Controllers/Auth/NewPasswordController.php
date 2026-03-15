@@ -6,17 +6,20 @@ namespace Appsolutely\AIO\Http\Controllers\Auth;
 
 use Appsolutely\AIO\Http\Controllers\BaseController;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 final class NewPasswordController extends BaseController
 {
     /**
      * Display the password reset view.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create(Request $request)
     {
@@ -26,9 +29,9 @@ final class NewPasswordController extends BaseController
     /**
      * Handle an incoming new password request.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {

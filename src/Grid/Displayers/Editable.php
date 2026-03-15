@@ -59,11 +59,11 @@ abstract class Editable extends AbstractDisplayer
 
     protected function getSelector()
     {
-        return 'grid-editable-'.$this->type;
+        return 'grid-editable-' . $this->type;
     }
 
     protected function getUrl()
     {
-        return $this->resource().'/'.$this->getKey();
+        return $this->resource() . '/' . $this->getKey();
     }
 }

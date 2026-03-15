@@ -23,17 +23,15 @@ trait HasPermissions
 
         return $this->allPermissions =
             $this->roles
-            ->pluck('permissions')
-            ->flatten()
-            ->keyBy($this->getKeyName());
+                ->pluck('permissions')
+                ->flatten()
+                ->keyBy($this->getKeyName());
     }
 
     /**
      * Check if user has permission.
      *
-     * @param $ability
      * @param  array|mixed  $parameters
-     * @return bool
      */
     public function can($ability, $parameters = []): bool
     {
@@ -49,15 +47,12 @@ trait HasPermissions
 
         return $permissions->pluck('slug')->contains($ability) ?:
             $permissions
-            ->pluck('id')
-            ->contains($ability);
+                ->pluck('id')
+                ->contains($ability);
     }
 
     /**
      * Check if user has no permission.
-     *
-     * @param $permission
-     * @return bool
      */
     public function cannot(string $permission): bool
     {
@@ -79,7 +74,6 @@ trait HasPermissions
     /**
      * Check if user is $role.
      *
-     * @param  string  $role
      * @return mixed
      */
     public function isRole(string $role): bool
@@ -110,9 +104,6 @@ trait HasPermissions
 
     /**
      * If visible for roles.
-     *
-     * @param $roles
-     * @return bool
      */
     public function visible($roles = []): bool
     {

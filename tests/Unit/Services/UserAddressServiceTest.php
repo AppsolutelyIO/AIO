@@ -7,8 +7,8 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 use App\Models\User;
 use Appsolutely\AIO\Models\UserAddress;
 use Appsolutely\AIO\Services\UserAddressService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserAddressServiceTest extends TestCase
 {

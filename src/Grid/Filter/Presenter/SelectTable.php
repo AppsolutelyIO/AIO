@@ -34,13 +34,12 @@ class SelectTable extends Presenter
     public function __construct(LazyRenderable $table)
     {
         $this->dialog = DialogTable::make($table);
-        $this->id = 'select-table-filter-'.Str::random(8);
+        $this->id     = 'select-table-filter-' . Str::random(8);
     }
 
     /**
      * 设置选中的选项.
      *
-     * @param  \Closure  $options
      * @return $this
      */
     public function options(\Closure $options)
@@ -53,9 +52,6 @@ class SelectTable extends Presenter
     /**
      * 设置选中数据显示.
      *
-     * @param  string  $model
-     * @param  string  $id
-     * @param  string  $text
      * @return $this
      */
     public function model(string $model, string $id = 'id', string $text = 'title')
@@ -72,14 +68,12 @@ class SelectTable extends Presenter
     /**
      * 设置选中的key以及标题字段.
      *
-     * @param $visibleColumn
-     * @param $key
      * @return $this
      */
     public function pluck(?string $visibleColumn, ?string $key = 'id')
     {
         $this->visibleColumn = $visibleColumn;
-        $this->key = $key;
+        $this->key           = $key;
 
         return $this;
     }
@@ -91,7 +85,6 @@ class SelectTable extends Presenter
      *    $this->width('500px');
      *    $this->width('50%');
      *
-     * @param  string  $width
      * @return $this
      */
     public function dialogWidth(string $width)
@@ -115,10 +108,9 @@ class SelectTable extends Presenter
     }
 
     /**
-     * @param  string  $placeholder
      * @return $this|string
      */
-    public function placeholder(string $placeholder = null)
+    public function placeholder(?string $placeholder = null)
     {
         if ($placeholder === null) {
             return $this->placeholder ?: __('admin.choose');
@@ -185,9 +177,6 @@ JS
         );
     }
 
-    /**
-     * @return array
-     */
     public function defaultVariables(): array
     {
         $this->formatOptions();

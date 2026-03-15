@@ -8,8 +8,9 @@ use Appsolutely\AIO\Models\GeneralPage;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Models\PageBlockSetting;
 use Appsolutely\AIO\Services\PageBlockService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class PageBlockServiceTest extends TestCase
 {
@@ -29,7 +30,7 @@ final class PageBlockServiceTest extends TestCase
     {
         $result = $this->service->getCategorisedBlocks();
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
     }
 
     // --- getPublishedBlockSettings ---
@@ -38,7 +39,7 @@ final class PageBlockServiceTest extends TestCase
     {
         $result = $this->service->getPublishedBlockSettings(999);
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
     }
 
     public function test_get_published_block_settings_returns_empty_for_nonexistent_page(): void

@@ -11,8 +11,8 @@ use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\OrderItem;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Services\DeliveryService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DeliveryServiceTest extends TestCase
 {

@@ -5,8 +5,8 @@ namespace Appsolutely\AIO\Models;
 use Appsolutely\AIO\Traits\HasDateTimeFormatter;
 use Appsolutely\AIO\Traits\HasPermissions;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\URL;
 class Administrator extends Model implements AuthenticatableContract, Authorizable
 {
     use Authenticatable,
-        HasPermissions,
-        HasDateTimeFormatter;
+        HasDateTimeFormatter,
+        HasPermissions;
 
     const DEFAULT_ID = 1;
 
@@ -29,8 +29,6 @@ class Administrator extends Model implements AuthenticatableContract, Authorizab
 
     /**
      * Create a new Eloquent model instance.
-     *
-     * @param  array  $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -70,8 +68,6 @@ class Administrator extends Model implements AuthenticatableContract, Authorizab
 
     /**
      * A user has and belongs to many roles.
-     *
-     * @return BelongsToMany
      */
     public function roles(): BelongsToMany
     {

@@ -9,8 +9,9 @@ use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\OrderPayment;
 use Appsolutely\AIO\Models\Payment;
 use Appsolutely\AIO\Repositories\OrderPaymentRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class OrderPaymentRepositoryTest extends TestCase
 {
@@ -38,7 +39,7 @@ final class OrderPaymentRepositoryTest extends TestCase
     {
         $result = $this->repository->all();
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
     }
 
     public function test_create_stores_order_payment(): void

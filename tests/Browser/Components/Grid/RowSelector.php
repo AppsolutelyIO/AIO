@@ -23,12 +23,11 @@ class RowSelector extends Component
     /**
      * 浏览器包含组件的断言
      *
-     * @param  Browser  $browser
      * @return void
      */
     public function assert(Browser $browser)
     {
-//        $browser->assertVisible('table:visible thead th .checkbox-grid');
+        //        $browser->assertVisible('table:visible thead th .checkbox-grid');
     }
 
     /**
@@ -40,15 +39,14 @@ class RowSelector extends Component
     {
         return [
             '@container' => '#grid-table',
-            '@all' => 'input.select-all',
-            '@item' => 'input.grid-row-checkbox',
+            '@all'       => 'input.select-all',
+            '@item'      => 'input.grid-row-checkbox',
         ];
     }
 
     /**
      * 选中.
      *
-     * @param  Browser  $browser
      * @param  string|array  $value
      * @return Browser
      */
@@ -70,7 +68,6 @@ JS
     /**
      * 选中所有.
      *
-     * @param  Browser  $browser
      * @return Browser
      */
     public function selectAll(Browser $browser)

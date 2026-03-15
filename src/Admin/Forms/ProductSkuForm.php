@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Admin\Forms;
 
 use Appsolutely\AIO\Admin\Forms\Fields\Markdown;
-use Appsolutely\AIO\Models\ProductSku;
 use Appsolutely\AIO\Contracts\LazyRenderable;
+use Appsolutely\AIO\Models\ProductSku;
 use Appsolutely\AIO\Traits\LazyWidget;
 use Appsolutely\AIO\Widgets\Form;
 

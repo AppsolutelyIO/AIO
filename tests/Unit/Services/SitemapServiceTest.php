@@ -6,9 +6,9 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Exceptions\InvalidSitemapTypeException;
 use Appsolutely\AIO\Services\SitemapService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class SitemapServiceTest extends TestCase
 {

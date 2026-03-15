@@ -62,6 +62,6 @@ trait HasBuilderEvents
 
     protected static function formatEventKey($key)
     {
-        return static::class.':'.$key;
+        return static::class . ':' . $key;
     }
 }

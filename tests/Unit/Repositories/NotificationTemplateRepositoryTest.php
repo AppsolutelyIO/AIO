@@ -7,8 +7,8 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\NotificationTemplate;
 use Appsolutely\AIO\Repositories\NotificationTemplateRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class NotificationTemplateRepositoryTest extends TestCase
 {

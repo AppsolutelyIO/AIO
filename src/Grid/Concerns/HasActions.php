@@ -2,8 +2,9 @@
 
 namespace Appsolutely\AIO\Grid\Concerns;
 
-use Closure;
 use Appsolutely\AIO\Grid;
+use Closure;
+use Illuminate\Config\Repository;
 use Illuminate\Contracts\Support\Renderable;
 
 trait HasActions
@@ -16,7 +17,6 @@ trait HasActions
     protected $actionsCallback = [];
 
     /**
-     * @param  string  $actionClass
      * @return $this
      */
     public function setActionClass(string $actionClass)
@@ -29,7 +29,7 @@ trait HasActions
     /**
      * Get action display class.
      *
-     * @return \Illuminate\Config\Repository|mixed|string
+     * @return Repository|mixed|string
      */
     public function getActionClass()
     {
@@ -113,7 +113,6 @@ trait HasActions
     /**
      * Disable edit.
      *
-     * @param  bool  $disable
      * @return $this
      */
     public function disableEditButton(bool $disable = true)
@@ -126,7 +125,6 @@ trait HasActions
     /**
      * Show edit.
      *
-     * @param  bool  $val
      * @return $this
      */
     public function showEditButton(bool $val = true)
@@ -159,7 +157,6 @@ trait HasActions
     /**
      * Disable view action.
      *
-     * @param  bool  $disable
      * @return $this
      */
     public function disableViewButton(bool $disable = true)
@@ -183,7 +180,6 @@ trait HasActions
     /**
      * Disable delete.
      *
-     * @param  bool  $disable
      * @return $this
      */
     public function disableDeleteButton(bool $disable = true)

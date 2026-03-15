@@ -51,7 +51,7 @@ class Application
         return array_filter($this->getApps());
     }
 
-    public function switch(string $app = null)
+    public function switch(?string $app = null)
     {
         $this->withName($app);
 
@@ -113,19 +113,19 @@ class Application
 
     public function getApiRoutePrefix(?string $app = null)
     {
-        return $this->getRoutePrefix($app).'api.';
+        return $this->getRoutePrefix($app) . 'api.';
     }
 
     public function getRoutePrefix(?string $app = null)
     {
         $app = $app ?: $this->getName();
 
-        return 'aio.'.$app.'.';
+        return 'aio.' . $app . '.';
     }
 
     public function getRoute(?string $route, array $params = [], $absolute = true)
     {
-        return route($this->getRoutePrefix().$route, $params, $absolute);
+        return route($this->getRoutePrefix() . $route, $params, $absolute);
     }
 
     protected function registerRoute(?string $app)
@@ -154,7 +154,7 @@ class Application
 
     protected function loadRoutesFrom($path, ?string $app, array $extraMiddleware = [])
     {
-        $middleware = ['admin.app:'.$app, ...$extraMiddleware];
+        $middleware = ['admin.app:' . $app, ...$extraMiddleware];
 
         Route::group(array_filter([
             'middleware' => $middleware,

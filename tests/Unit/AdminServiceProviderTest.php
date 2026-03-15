@@ -11,12 +11,12 @@ class AdminServiceProviderTest extends TestCase
 
     public function test_compatible_blade_does_not_use_reflection()
     {
-        $rc = new ReflectionClass(AdminServiceProvider::class);
+        $rc     = new ReflectionClass(AdminServiceProvider::class);
         $method = $rc->getMethod('compatibleBlade');
 
-        $source = file_get_contents($rc->getFileName());
+        $source    = file_get_contents($rc->getFileName());
         $startLine = $method->getStartLine();
-        $endLine = $method->getEndLine();
+        $endLine   = $method->getEndLine();
 
         $lines = array_slice(
             explode("\n", $source),
@@ -36,8 +36,8 @@ class AdminServiceProviderTest extends TestCase
 
     public function test_composer_json_requires_laravel_12_or_higher()
     {
-        $composerPath = dirname(__DIR__, 2).'/composer.json';
-        $composer = json_decode(file_get_contents($composerPath), true);
+        $composerPath = dirname(__DIR__, 2) . '/composer.json';
+        $composer     = json_decode(file_get_contents($composerPath), true);
 
         $laravelConstraint = $composer['require']['laravel/framework'];
 
@@ -60,8 +60,8 @@ class AdminServiceProviderTest extends TestCase
 
     public function test_composer_json_does_not_require_doctrine_dbal()
     {
-        $composerPath = dirname(__DIR__, 2).'/composer.json';
-        $composer = json_decode(file_get_contents($composerPath), true);
+        $composerPath = dirname(__DIR__, 2) . '/composer.json';
+        $composer     = json_decode(file_get_contents($composerPath), true);
 
         $this->assertArrayNotHasKey(
             'doctrine/dbal',
@@ -72,8 +72,8 @@ class AdminServiceProviderTest extends TestCase
 
     public function test_composer_json_requires_spatie_sortable_v5_only()
     {
-        $composerPath = dirname(__DIR__, 2).'/composer.json';
-        $composer = json_decode(file_get_contents($composerPath), true);
+        $composerPath = dirname(__DIR__, 2) . '/composer.json';
+        $composer     = json_decode(file_get_contents($composerPath), true);
 
         $constraint = $composer['require']['spatie/eloquent-sortable'];
 
@@ -91,8 +91,8 @@ class AdminServiceProviderTest extends TestCase
 
     public function test_composer_json_testbench_requires_v10_or_higher()
     {
-        $composerPath = dirname(__DIR__, 2).'/composer.json';
-        $composer = json_decode(file_get_contents($composerPath), true);
+        $composerPath = dirname(__DIR__, 2) . '/composer.json';
+        $composer     = json_decode(file_get_contents($composerPath), true);
 
         $constraint = $composer['require-dev']['orchestra/testbench'];
 

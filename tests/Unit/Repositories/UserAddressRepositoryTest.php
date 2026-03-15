@@ -7,8 +7,9 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 use App\Models\User;
 use Appsolutely\AIO\Models\UserAddress;
 use Appsolutely\AIO\Repositories\UserAddressRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class UserAddressRepositoryTest extends TestCase
 {
@@ -36,7 +37,7 @@ final class UserAddressRepositoryTest extends TestCase
     {
         $result = $this->repository->all();
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
     }
 
     public function test_create_stores_user_address(): void

@@ -2,9 +2,12 @@
 
 namespace Appsolutely\AIO\Tree;
 
+use Appsolutely\AIO\Actions\Action;
 use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Tree;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Model;
 
 class Actions implements Renderable
 {
@@ -14,7 +17,7 @@ class Actions implements Renderable
     protected $parent;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var Model
      */
     public $row;
 
@@ -41,13 +44,13 @@ class Actions implements Renderable
      * @var array
      */
     protected $defaultActions = [
-        'edit'      => Tree\Actions\Edit::class,
-        'quickEdit' => Tree\Actions\QuickEdit::class,
-        'delete'    => Tree\Actions\Delete::class,
+        'edit'      => Actions\Edit::class,
+        'quickEdit' => Actions\QuickEdit::class,
+        'delete'    => Actions\Delete::class,
     ];
 
     /**
-     * @param  string|Renderable|\Appsolutely\AIO\Actions\Action|\Illuminate\Contracts\Support\Htmlable  $action
+     * @param  string|Renderable|Action|Htmlable  $action
      * @return $this
      */
     public function append($action)
@@ -60,7 +63,7 @@ class Actions implements Renderable
     }
 
     /**
-     * @param  string|Renderable|\Appsolutely\AIO\Actions\Action|\Illuminate\Contracts\Support\Htmlable  $action
+     * @param  string|Renderable|Action|Htmlable  $action
      * @return $this
      */
     public function prepend($action)
@@ -120,7 +123,7 @@ class Actions implements Renderable
         $toString = [Helper::class, 'render'];
 
         $prepends = array_map($toString, $this->prepends);
-        $appends = array_map($toString, $this->appends);
+        $appends  = array_map($toString, $this->appends);
 
         return implode('', array_merge($prepends, $appends));
     }

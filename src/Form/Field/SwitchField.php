@@ -99,7 +99,7 @@ class SwitchField extends Field
         $this->attribute('name', $this->getElementName());
         $this->attribute('value', 1);
         $this->attribute('type', 'checkbox');
-        $this->attribute('data-plugin', $this->getFormElementId().'switchery');
+        $this->attribute('data-plugin', $this->getFormElementId() . 'switchery');
 
         return parent::render();
     }

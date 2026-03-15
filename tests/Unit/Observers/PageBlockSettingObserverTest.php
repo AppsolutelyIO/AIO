@@ -6,8 +6,8 @@ namespace Appsolutely\AIO\Tests\Unit\Observers;
 
 use Appsolutely\AIO\Models\PageBlockSetting;
 use Appsolutely\AIO\Observers\PageBlockSettingObserver;
-use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Contracts\Cache\Repository as CacheRepository;
 
 final class PageBlockSettingObserverTest extends TestCase
 {

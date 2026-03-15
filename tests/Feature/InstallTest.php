@@ -14,7 +14,7 @@ class InstallTest extends TestCase
 {
     protected $login = false;
 
-    public function testInstalledDirectories()
+    public function test_installed_directories()
     {
         $this->assertFileExists(admin_path());
         $this->assertFileExists(admin_path('Controllers'));
@@ -31,8 +31,8 @@ class InstallTest extends TestCase
         $this->assertFileExists(config_path('admin.php'));
         $this->assertFileExists(public_path(Admin::asset()->getRealPath('@admin')));
         $this->assertFileExists(database_path('migrations/2016_01_04_173148_create_admin_tables.php'));
-        $this->assertFileExists(app()->langPath().'/en/admin.php');
-        $this->assertFileExists(app()->langPath().'/zh_CN/admin.php');
-        $this->assertFileExists(app()->langPath().'/zh_CN/global.php');
+        $this->assertFileExists(app()->langPath() . '/en/admin.php');
+        $this->assertFileExists(app()->langPath() . '/zh_CN/admin.php');
+        $this->assertFileExists(app()->langPath() . '/zh_CN/global.php');
     }
 }

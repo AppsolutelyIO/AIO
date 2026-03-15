@@ -6,9 +6,10 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 
 use Appsolutely\AIO\Models\File;
 use Appsolutely\AIO\Repositories\FileRepository;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
-use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 final class FileRepositoryTest extends TestCase
 {
@@ -75,7 +76,7 @@ final class FileRepositoryTest extends TestCase
 
         $result = $this->repository->getLibrary($request);
 
-        $this->assertInstanceOf(\Illuminate\Pagination\LengthAwarePaginator::class, $result);
+        $this->assertInstanceOf(LengthAwarePaginator::class, $result);
     }
 
     public function test_get_library_filters_by_image_extensions_only(): void

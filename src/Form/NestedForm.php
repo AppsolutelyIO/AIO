@@ -12,7 +12,9 @@ use Illuminate\Support\Collection;
 class NestedForm extends WidgetForm
 {
     const DEFAULT_KEY_PREFIX = 'new_';
+
     const DEFAULT_PARENT_KEY_NAME = '__PARENT_NESTED__';
+
     const DEFAULT_KEY_NAME = '__NESTED__';
 
     const REMOVE_FLAG_NAME = '_remove_';
@@ -229,7 +231,7 @@ class NestedForm extends WidgetForm
                 $value = $field->prepare($value);
             }
 
-            if (($field instanceof Form\Field\Hidden) || ! ArrayHelper::equal($field->original(), $value)) {
+            if (($field instanceof Field\Hidden) || ! ArrayHelper::equal($field->original(), $value)) {
                 if (is_array($columns)) {
                     foreach ($columns as $name => $column) {
                         Arr::set($prepared, $column, $value[$name]);
@@ -297,7 +299,7 @@ class NestedForm extends WidgetForm
             $this->form->builder()->pushField((clone $field)->display(false));
         }
 
-        if ($field instanceof Form\Field\HasMany) {
+        if ($field instanceof Field\HasMany) {
             // HasMany以及array嵌套table，需要保存上级字段名
             $field->setParentRelationName($this->relationName, $this->key);
         }
@@ -356,7 +358,7 @@ class NestedForm extends WidgetForm
 
     public function getDefaultKey()
     {
-        return $this->defaultKey ?: (static::DEFAULT_KEY_PREFIX.static::DEFAULT_KEY_NAME);
+        return $this->defaultKey ?: (static::DEFAULT_KEY_PREFIX . static::DEFAULT_KEY_NAME);
     }
 
     public function setDefaultKey($key)
@@ -369,7 +371,6 @@ class NestedForm extends WidgetForm
     /**
      * Set `errorKey` `elementName` `elementClass` for fields inside hasmany fields.
      *
-     * @param  Field  $field
      * @return Field
      */
     protected function formatField(Field $field)
@@ -382,13 +383,13 @@ class NestedForm extends WidgetForm
 
         if (is_array($column)) {
             foreach ($column as $k => $name) {
-                $errorKey[$k] = sprintf('%s.%s.%s', $this->relationName, $key, $name);
-                $elementName[$k] = HtmlHelper::formatElementName($this->formatName().'.'.$key.'.'.$name);
+                $errorKey[$k]     = sprintf('%s.%s.%s', $this->relationName, $key, $name);
+                $elementName[$k]  = HtmlHelper::formatElementName($this->formatName() . '.' . $key . '.' . $name);
                 $elementClass[$k] = [$this->formatClass(), $this->formatClass($name), $this->formatClass($name, false)];
             }
         } else {
-            $errorKey = sprintf('%s.%s.%s', $this->relationName, $key, $column);
-            $elementName = HtmlHelper::formatElementName($this->formatName().'.'.$key.'.'.$column);
+            $errorKey     = sprintf('%s.%s.%s', $this->relationName, $key, $column);
+            $elementName  = HtmlHelper::formatElementName($this->formatName() . '.' . $key . '.' . $column);
             $elementClass = [$this->formatClass(), $this->formatClass($column), $this->formatClass($column, false)];
         }
 
@@ -401,7 +402,7 @@ class NestedForm extends WidgetForm
     {
         $class = str_replace('.', '_', $name ?: $this->relationName);
 
-        return $append ? ($class.'_'.$this->key) : $class;
+        return $append ? ($class . '_' . $this->key) : $class;
     }
 
     protected function formatName($name = null)

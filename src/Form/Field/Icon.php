@@ -5,6 +5,7 @@ namespace Appsolutely\AIO\Form\Field;
 class Icon extends Text
 {
     public static $js = '@fontawesome-iconpicker';
+
     public static $css = '@fontawesome-iconpicker';
 
     public function render()

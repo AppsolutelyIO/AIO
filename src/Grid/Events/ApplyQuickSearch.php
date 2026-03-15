@@ -2,6 +2,4 @@
 
 namespace Appsolutely\AIO\Grid\Events;
 
-class ApplyQuickSearch extends Event
-{
-}
+class ApplyQuickSearch extends Event {}

@@ -7,8 +7,8 @@ namespace Appsolutely\AIO\Tests\Integration;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Services\PageService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class PageWorkflowTest extends TestCase
 {

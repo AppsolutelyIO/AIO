@@ -7,12 +7,19 @@ use Illuminate\Contracts\Support\Arrayable;
 class Radio extends Widget
 {
     protected $view = 'admin::widgets.radio';
+
     protected $type = 'radio';
+
     protected $style = 'primary';
+
     protected $right = '16px';
+
     protected $checked;
+
     protected $disabledValues = [];
+
     protected $size;
+
     protected $inline = false;
 
     public function __construct(
@@ -28,7 +35,6 @@ class Radio extends Widget
     /**
      * 设置表单 "name" 属性.
      *
-     * @param  string  $name
      * @return $this
      */
     public function name(?string $name)
@@ -41,7 +47,6 @@ class Radio extends Widget
      *
      * "sm", "lg"
      *
-     * @param  string  $size
      * @return $this
      */
     public function size(string $size)
@@ -54,7 +59,6 @@ class Radio extends Widget
     /**
      * 是否排成一行.
      *
-     * @param  bool  $inline
      * @return $this
      */
     public function inline(bool $inline = true)
@@ -84,7 +88,6 @@ class Radio extends Widget
     /**
      * 设置 "margin-right" 样式.
      *
-     * @param  string  $value
      * @return $this
      */
     public function right(string $value)
@@ -134,7 +137,6 @@ class Radio extends Widget
      *
      * 支持 "info", "primary", "danger", "success".
      *
-     * @param  string  $style
      * @return $this
      */
     public function style(string $style)

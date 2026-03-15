@@ -4,9 +4,10 @@ namespace Appsolutely\AIO\Extend;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * @property \Symfony\Component\Console\Output\OutputInterface $output
+ * @property OutputInterface $output
  */
 trait CanImportMenu
 {
@@ -32,7 +33,6 @@ trait CanImportMenu
     /**
      * 添加菜单.
      *
-     * @param  array  $menu
      *
      * @throws \Exception
      */
@@ -117,7 +117,6 @@ trait CanImportMenu
     /**
      * 验证菜单字段格式是否正确.
      *
-     * @param  array  $menu
      * @return bool
      *
      * @throws \Exception

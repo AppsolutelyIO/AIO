@@ -7,6 +7,8 @@ namespace Appsolutely\AIO\Models;
 use Appsolutely\AIO\Enums\NotificationTriggerType;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Concerns\ScopeStatus;
+use Appsolutely\AIO\Services\NotificationSenderService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -71,7 +73,7 @@ final class NotificationRule extends Model
     /**
      * Get scheduled timestamp based on delay
      */
-    public function getScheduledAt(): \Carbon\Carbon
+    public function getScheduledAt(): Carbon
     {
         return now()->addMinutes($this->delay_minutes);
     }
@@ -128,7 +130,7 @@ final class NotificationRule extends Model
             return $this->sender;
         }
 
-        return app(\Appsolutely\AIO\Services\NotificationSenderService::class)
+        return app(NotificationSenderService::class)
             ->getSenderForRule($this);
     }
 

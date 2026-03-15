@@ -4,10 +4,11 @@ namespace Appsolutely\AIO\Scaffold;
 
 use Appsolutely\AIO\Exception\AdminException;
 use Appsolutely\AIO\Support\Helper;
+use Illuminate\Filesystem\Filesystem;
 
 class ControllerCreator
 {
-    use GridCreator, FormCreator, ShowCreator;
+    use FormCreator, GridCreator, ShowCreator;
 
     /**
      * Controller full name.
@@ -19,7 +20,7 @@ class ControllerCreator
     /**
      * The filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
@@ -47,7 +48,7 @@ class ControllerCreator
     public function create($model)
     {
         $path = $this->getPath($this->name);
-        $dir = dirname($path);
+        $dir  = dirname($path);
 
         if (! is_dir($dir)) {
             $this->files->makeDirectory($dir, 0755, true);
@@ -61,7 +62,7 @@ class ControllerCreator
 
         $slug = str_replace('Controller', '', class_basename($this->name));
 
-        $model = $model ?: 'App\Admin\Repositories\\'.$slug;
+        $model = $model ?: 'App\Admin\Repositories\\' . $slug;
 
         $this->files->put($path, $this->replace($stub, $this->name, $model, $slug));
         $this->files->chmod($path, 0777);
@@ -122,7 +123,7 @@ class ControllerCreator
      */
     protected function replaceClass($stub, $name)
     {
-        $class = str_replace($this->getNamespace($name).'\\', '', $name);
+        $class = str_replace($this->getNamespace($name) . '\\', '', $name);
 
         return str_replace(['DummyClass', 'DummyNamespace'], [$class, $this->getNamespace($name)], $stub);
     }
@@ -145,6 +146,6 @@ class ControllerCreator
      */
     public function getStub()
     {
-        return __DIR__.'/stubs/controller.stub';
+        return __DIR__ . '/stubs/controller.stub';
     }
 }

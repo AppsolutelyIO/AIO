@@ -97,7 +97,6 @@ class Actions extends AbstractDisplayer
     /**
      * Disable view action.
      *
-     * @param  bool  $disable
      * @return $this
      */
     public function disableView(bool $disable = true)
@@ -113,7 +112,6 @@ class Actions extends AbstractDisplayer
     /**
      * Disable delete.
      *
-     * @param  bool  $disable
      * @return $this.
      */
     public function disableDelete(bool $disable = true)
@@ -129,7 +127,6 @@ class Actions extends AbstractDisplayer
     /**
      * Disable edit.
      *
-     * @param  bool  $disable
      * @return $this.
      */
     public function disableEdit(bool $disable = true)
@@ -145,7 +142,6 @@ class Actions extends AbstractDisplayer
     /**
      * Disable quick edit.
      *
-     * @param  bool  $disable
      * @return $this.
      */
     public function disableQuickEdit(bool $disable = true)
@@ -154,7 +150,6 @@ class Actions extends AbstractDisplayer
     }
 
     /**
-     * @param  string  $key
      * @param  bool  $disable
      * @return $this
      */
@@ -168,7 +163,6 @@ class Actions extends AbstractDisplayer
     /**
      * Set resource of current resource.
      *
-     * @param $resource
      * @return $this
      */
     public function setResource($resource)
@@ -200,7 +194,6 @@ class Actions extends AbstractDisplayer
     }
 
     /**
-     * @param  array  $callbacks
      * @return void
      */
     protected function call(array $callbacks = [])
@@ -224,11 +217,11 @@ class Actions extends AbstractDisplayer
         $toString = [Helper::class, 'render'];
 
         $prepends = array_map($toString, $this->prepends);
-        $appends = array_map($toString, $this->appends);
+        $appends  = array_map($toString, $this->appends);
 
         foreach ($this->actions as $action => $enable) {
             if ($enable) {
-                $method = 'render'.ucfirst($action);
+                $method     = 'render' . ucfirst($action);
                 $prepends[] = $this->{$method}();
             }
         }

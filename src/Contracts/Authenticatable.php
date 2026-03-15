@@ -12,6 +12,4 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
  * Host applications should ensure their User model implements this interface.
  * The concrete class is resolved via config('aio.models.user').
  */
-interface Authenticatable extends AuthenticatableContract
-{
-}
+interface Authenticatable extends AuthenticatableContract {}

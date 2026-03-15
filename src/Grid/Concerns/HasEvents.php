@@ -14,9 +14,6 @@ trait HasEvents
 
     /**
      * 监听事件.
-     *
-     * @param  string  $class
-     * @param  \Closure  $callback
      */
     public function listen(string $class, \Closure $callback)
     {
@@ -31,8 +28,6 @@ trait HasEvents
 
     /**
      * 触发事件.
-     *
-     * @param  \Appsolutely\AIO\Grid\Events\Event  $event
      */
     public function fire(Events\Event $event)
     {
@@ -45,8 +40,6 @@ trait HasEvents
 
     /**
      * 只触发一次.
-     *
-     * @param  \Appsolutely\AIO\Grid\Events\Event  $event
      */
     public function fireOnce(Events\Event $event)
     {

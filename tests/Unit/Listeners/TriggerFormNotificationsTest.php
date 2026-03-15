@@ -11,10 +11,10 @@ use Appsolutely\AIO\Models\FormEntry;
 use Appsolutely\AIO\Models\FormField;
 use Appsolutely\AIO\Services\Contracts\NotificationServiceInterface;
 use Appsolutely\AIO\Services\FormFieldFormatterService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Mockery;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class TriggerFormNotificationsTest extends TestCase
 {

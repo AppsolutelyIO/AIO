@@ -9,10 +9,9 @@ use Appsolutely\AIO\Http\Controllers\PageController;
 use Appsolutely\AIO\Models\GeneralPage;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Services\Contracts\GeneralPageServiceInterface;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Route;
-use Mockery;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Mockery;
 
 final class PageControllerTest extends TestCase
 {
@@ -24,7 +23,7 @@ final class PageControllerTest extends TestCase
 
         // Register stub views directory so themed_view() can find pages.show
         $app['config']->set('view.paths', [
-            __DIR__.'/../../resources/views',
+            __DIR__ . '/../../resources/views',
         ]);
     }
 

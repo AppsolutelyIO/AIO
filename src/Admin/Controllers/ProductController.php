@@ -9,12 +9,12 @@ use Appsolutely\AIO\Admin\Forms\Fields\Markdown;
 use Appsolutely\AIO\Admin\Forms\ProductSkuForm;
 use Appsolutely\AIO\Admin\Forms\ProductSkuGeneratorForm;
 use Appsolutely\AIO\Enums\ProductType;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Models\ProductSku;
 use Appsolutely\AIO\Repositories\ProductCategoryRepository;
 use Appsolutely\AIO\Services\Contracts\ProductServiceInterface;
-use Appsolutely\AIO\Form;
-use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Widgets\Modal;
 
 final class ProductController extends AdminBaseController

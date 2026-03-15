@@ -6,9 +6,9 @@ namespace Appsolutely\AIO\Tests\Unit\Models;
 
 use Appsolutely\AIO\Models\GeneralPage;
 use Appsolutely\AIO\Models\Page;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class GeneralPageTest extends TestCase
 {

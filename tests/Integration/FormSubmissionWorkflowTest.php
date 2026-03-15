@@ -7,8 +7,8 @@ namespace Appsolutely\AIO\Tests\Integration;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Services\DynamicFormService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class FormSubmissionWorkflowTest extends TestCase
 {

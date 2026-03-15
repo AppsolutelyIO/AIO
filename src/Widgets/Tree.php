@@ -48,7 +48,7 @@ class Tree extends Widget
     {
         $this->nodes($nodes);
 
-        $this->id = 'widget-tree-'.Str::random(8);
+        $this->id = 'widget-tree-' . Str::random(8);
     }
 
     public function checkAll()
@@ -135,8 +135,8 @@ class Tree extends Widget
             return;
         }
 
-        $idColumn = $this->columnNames['id'];
-        $textColumn = $this->columnNames['text'];
+        $idColumn     = $this->columnNames['id'];
+        $textColumn   = $this->columnNames['text'];
         $parentColumn = $this->columnNames['parent'];
 
         $nodes = [];

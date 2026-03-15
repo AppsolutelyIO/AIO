@@ -11,7 +11,6 @@ class MultipleFile extends File
     /**
      * Allow to sort files.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function sortable(bool $value = true)
@@ -24,7 +23,6 @@ class MultipleFile extends File
     /**
      * Set a limit of files.
      *
-     * @param  int  $limit
      * @return $this
      */
     public function limit(int $limit)
@@ -58,7 +56,5 @@ class MultipleFile extends File
         return $file;
     }
 
-    protected function forceOptions()
-    {
-    }
+    protected function forceOptions() {}
 }

@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
+use Appsolutely\AIO\Exceptions\StorageException;
 use Appsolutely\AIO\Models\File;
 use Appsolutely\AIO\Repositories\AdminSettingRepository;
 use Appsolutely\AIO\Repositories\FileRepository;
 use Appsolutely\AIO\Services\StorageService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Appsolutely\AIO\Tests\TestCase;
 
 class StorageServiceTest extends TestCase
 {
@@ -54,7 +55,7 @@ class StorageServiceTest extends TestCase
 
         $file = UploadedFile::fake()->create('document.pdf', 100);
 
-        $this->expectException(\Appsolutely\AIO\Exceptions\StorageException::class);
+        $this->expectException(StorageException::class);
         $this->expectExceptionMessage('Failed to upload file');
 
         $this->storageService->store($file);
@@ -70,7 +71,7 @@ class StorageServiceTest extends TestCase
 
         $file = UploadedFile::fake()->create('document.pdf', 100);
 
-        $this->expectException(\Appsolutely\AIO\Exceptions\StorageException::class);
+        $this->expectException(StorageException::class);
         $this->expectExceptionMessage('was not found in S3 storage after upload');
 
         $this->storageService->store($file);

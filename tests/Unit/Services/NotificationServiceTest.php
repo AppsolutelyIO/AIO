@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
+use Appsolutely\AIO\Enums\NotificationQueueStatus;
+use Appsolutely\AIO\Enums\Status;
+use Appsolutely\AIO\Exceptions\NotificationTemplateNotFoundException;
+use Appsolutely\AIO\Models\FormEntry;
 use Appsolutely\AIO\Models\NotificationQueue;
 use Appsolutely\AIO\Models\NotificationRule;
 use Appsolutely\AIO\Models\NotificationTemplate;
 use Appsolutely\AIO\Services\NotificationService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class NotificationServiceTest extends TestCase
 {
@@ -79,13 +83,13 @@ final class NotificationServiceTest extends TestCase
             'body_text' => 'Hello {{name}}',
         ]);
 
-        $formEntry = \Appsolutely\AIO\Models\FormEntry::factory()->create();
+        $formEntry = FormEntry::factory()->create();
 
         NotificationRule::factory()->create([
             'trigger_type'      => 'form_submission',
             'trigger_reference' => 'test-form',
             'template_id'       => $template->id,
-            'status'            => \Appsolutely\AIO\Enums\Status::ACTIVE,
+            'status'            => Status::ACTIVE,
             'recipient_type'    => 'custom',
             'recipient_emails'  => ['admin@example.com'],
             'conditions'        => [],
@@ -138,12 +142,12 @@ final class NotificationServiceTest extends TestCase
 
         $this->assertInstanceOf(NotificationQueue::class, $queue);
         $this->assertEquals('user@example.com', $queue->recipient_email);
-        $this->assertEquals(\Appsolutely\AIO\Enums\NotificationQueueStatus::Pending, $queue->status);
+        $this->assertEquals(NotificationQueueStatus::Pending, $queue->status);
     }
 
     public function test_schedule_throws_exception_when_template_not_found(): void
     {
-        $this->expectException(\Appsolutely\AIO\Exceptions\NotificationTemplateNotFoundException::class);
+        $this->expectException(NotificationTemplateNotFoundException::class);
 
         $this->service->schedule('non-existent-template', 'user@example.com', [], now()->addHour());
     }
@@ -187,7 +191,7 @@ final class NotificationServiceTest extends TestCase
 
     public function test_get_statistics_returns_correct_counts(): void
     {
-        NotificationTemplate::factory()->count(3)->create(['status' => \Appsolutely\AIO\Enums\Status::ACTIVE]);
+        NotificationTemplate::factory()->count(3)->create(['status' => Status::ACTIVE]);
 
         $stats = $this->service->getStatistics();
 

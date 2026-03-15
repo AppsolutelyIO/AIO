@@ -24,7 +24,7 @@ trait HasNames
      */
     public function setName($name)
     {
-        $this->_name = $name;
+        $this->_name   = $name;
         $this->tableId = $this->makeName($this->tableId);
 
         return $this;
@@ -57,7 +57,7 @@ trait HasNames
      */
     public function makeName($key)
     {
-        return $this->getNamePrefix().$key;
+        return $this->getNamePrefix() . $key;
     }
 
     /**
@@ -69,7 +69,7 @@ trait HasNames
             return;
         }
 
-        return $name.'_';
+        return $name . '_';
     }
 
     /**

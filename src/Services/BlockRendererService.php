@@ -15,6 +15,7 @@ use Livewire\Livewire;
 final readonly class BlockRendererService implements BlockRendererServiceInterface
 {
     use ResolvesLivewireClassName;
+
     /**
      * Validate and render a block safely
      * Returns the rendered HTML or error message

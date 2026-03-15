@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Admin\Controllers;
 
 use Appsolutely\AIO\Enums\OrderShipmentStatus;
-use Appsolutely\AIO\Models\OrderShipment;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Models\OrderShipment;
 
 final class OrderShipmentController extends AdminBaseController
 {

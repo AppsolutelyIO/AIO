@@ -2,7 +2,6 @@
 
 namespace Appsolutely\AIO\Widgets;
 
-use Closure;
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Contracts\LazyRenderable;
 use Appsolutely\AIO\Exception\RuntimeException;
@@ -16,8 +15,10 @@ use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Traits\HasAuthorization;
 use Appsolutely\AIO\Traits\HasFormResponse;
 use Appsolutely\AIO\Traits\HasHtmlAttributes;
+use Closure;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -87,22 +88,24 @@ use Illuminate\Validation\Validator;
  */
 class Form implements Renderable
 {
-    use HasHtmlAttributes;
-    use HasAuthorization;
     use HandleCascadeFields;
-    use HasRows;
-    use HasTabs;
-    use HasLayout;
-    use ResolveField;
+    use HasAuthorization;
     use HasFormResponse {
         setCurrentUrl as defaultSetCurrentUrl;
     }
+    use HasHtmlAttributes;
+    use HasLayout;
+    use HasRows;
+    use HasTabs;
     use Macroable {
         __call as macroCall;
     }
+    use ResolveField;
 
     const REQUEST_NAME = '_form_';
+
     const CURRENT_URL_NAME = '_current_';
+
     const LAZY_PAYLOAD_NAME = '_payload_';
 
     /**
@@ -270,7 +273,6 @@ class Form implements Renderable
     /**
      * Method of the form.
      *
-     * @param  string  $method
      * @return $this
      */
     public function method(string $method = 'POST')
@@ -279,13 +281,11 @@ class Form implements Renderable
     }
 
     /**
-     * @param  string  $title
-     * @param  string  $content
      * @return $this
      */
     public function confirm(?string $title = null, ?string $content = null)
     {
-        $this->confirm['title'] = $title;
+        $this->confirm['title']   = $title;
         $this->confirm['content'] = $content;
 
         return $this;
@@ -294,7 +294,6 @@ class Form implements Renderable
     /**
      * 设置使用 Toastr 展示字段验证信息.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function validationErrorToastr(bool $value = true)
@@ -328,7 +327,7 @@ class Form implements Renderable
     }
 
     /**
-     * @return Fluent|\Illuminate\Database\Eloquent\Model
+     * @return Fluent|Model
      */
     public function data()
     {
@@ -345,7 +344,7 @@ class Form implements Renderable
      */
     public function fill($data)
     {
-        if ($data instanceof \Closure) {
+        if ($data instanceof Closure) {
             $data = $data($this);
         }
 
@@ -359,7 +358,7 @@ class Form implements Renderable
     }
 
     /**
-     * @return Fluent|\Illuminate\Database\Eloquent\Model
+     * @return Fluent|Model
      */
     public function model()
     {
@@ -369,8 +368,6 @@ class Form implements Renderable
     /**
      * Add a fieldset to form.
      *
-     * @param  string  $title
-     * @param  Closure  $setCallback
      * @return Field\Fieldset
      */
     public function fieldset(string $title, Closure $setCallback)
@@ -420,14 +417,13 @@ class Form implements Renderable
     /**
      * Validate this form fields.
      *
-     * @param  Request  $request
      * @return bool|MessageBag
      */
     public function validate(Request $request)
     {
         $failedValidators = [];
 
-        /** @var \Appsolutely\AIO\Form\Field $field */
+        /** @var Field $field */
         foreach ($this->fields() as $field) {
             if (! $validator = $field->getValidator($request->all())) {
                 continue;
@@ -446,7 +442,7 @@ class Form implements Renderable
     /**
      * Merge validation messages from input validators.
      *
-     * @param  \Illuminate\Validation\Validator[]  $validators
+     * @param  Validator[]  $validators
      * @return MessageBag
      */
     protected function mergeValidationMessages($validators)
@@ -468,7 +464,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param  bool  $value
      * @return $this
      */
     public function submitButton(bool $value = true)
@@ -479,7 +474,6 @@ class Form implements Renderable
     }
 
     /**
-     * @param  bool  $value
      * @return $this
      */
     public function resetButton(bool $value = true)
@@ -492,7 +486,6 @@ class Form implements Renderable
     /**
      * Disable reset button.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function disableResetButton(bool $value = true)
@@ -503,7 +496,6 @@ class Form implements Renderable
     /**
      * Disable submit button.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function disableSubmitButton(bool $value = true)
@@ -526,7 +518,7 @@ class Form implements Renderable
         ];
 
         $this->fields->each(function ($field) use ($fieldWidth, $labelWidth) {
-            /* @var Field $field  */
+            /* @var Field $field */
             $field->width($fieldWidth, $labelWidth);
         });
 
@@ -553,7 +545,6 @@ class Form implements Renderable
     /**
      * Add a form field to form.
      *
-     * @param  Field  $field
      * @return $this
      */
     public function pushField(Field $field)
@@ -657,7 +648,6 @@ HTML;
     /**
      * 设置视图变量.
      *
-     * @param  array  $variables
      * @return $this
      */
     public function addVariables(array $variables)
@@ -719,7 +709,6 @@ HTML;
     }
 
     /**
-     * @param $id
      * @return $this
      */
     public function setFormId($id)
@@ -734,7 +723,7 @@ HTML;
      */
     public function getElementId()
     {
-        return $this->elementId ?: ($this->elementId = 'form-'.Str::random(8));
+        return $this->elementId ?: ($this->elementId = 'form-' . Str::random(8));
     }
 
     /**
@@ -771,19 +760,14 @@ HTML;
     /**
      * @return string|void
      */
-    protected function savedScript()
-    {
-    }
+    protected function savedScript() {}
 
     /**
      * @return string|void
      */
-    protected function errorScript()
-    {
-    }
+    protected function errorScript() {}
 
     /**
-     * @param  array  $input
      * @return array
      */
     public function sanitize(array $input)
@@ -882,7 +866,7 @@ HTML;
     protected function addAjaxScript()
     {
         $confirm = admin_javascript_json($this->confirm);
-        $toastr = $this->validationErrorToastr ? 'true' : 'false';
+        $toastr  = $this->validationErrorToastr ? 'true' : 'false';
 
         Admin::script(
             <<<JS

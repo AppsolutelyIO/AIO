@@ -50,9 +50,6 @@ class Tab
      * Append a tab section.
      *
      * @param  string  $title
-     * @param  \Closure  $content
-     * @param  bool  $active
-     * @param  string  $id
      * @return $this
      */
     public function append($title, \Closure $content, bool $active = false, ?string $id = null)
@@ -62,7 +59,7 @@ class Tab
         $fields = $this->collectFields();
         $layout = $this->collectColumnLayout();
 
-        $id = $id ?: ('tab-form-'.($this->tabs->count() + 1).'-'.mt_rand(0, 9999));
+        $id = $id ?: ('tab-form-' . ($this->tabs->count() + 1) . '-' . mt_rand(0, 9999));
 
         $this->tabs->push(['id' => $id, 'title' => $title, 'fields' => $fields, 'active' => $active, 'layout' => $layout]);
 
@@ -120,9 +117,6 @@ class Tab
 
     /**
      * Set true for some one tab by title or id.
-     *
-     * @param  string  $value
-     * @param  string  $field
      */
     public function active(string $value, string $field = 'title')
     {
@@ -137,8 +131,6 @@ class Tab
 
     /**
      * Set true for some one tab by key.
-     *
-     * @param  int  $index
      */
     public function activeByIndex(int $index = 0)
     {
@@ -162,7 +154,7 @@ class Tab
         if ($this->tabs->filter(function ($tab) {
             return $tab['active'];
         })->isEmpty()) {
-            $first = $this->tabs->first();
+            $first           = $this->tabs->first();
             $first['active'] = true;
 
             $this->tabs->offsetSet(0, $first);

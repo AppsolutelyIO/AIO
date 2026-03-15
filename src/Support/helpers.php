@@ -1,10 +1,21 @@
 <?php
 
 use Appsolutely\AIO\Admin;
+use Appsolutely\AIO\Color;
+use Appsolutely\AIO\Extend\ServiceProvider;
 use Appsolutely\AIO\Support\Helper;
+use Appsolutely\AIO\Support\JavaScript;
+use Appsolutely\AIO\Support\Setting;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\Translation\Translator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\MessageBag;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -14,7 +25,7 @@ if (! function_exists('admin_setting')) {
      *
      * @param  string|array  $key
      * @param  mixed  $default
-     * @return \Appsolutely\AIO\Support\Setting|mixed
+     * @return Setting|mixed
      */
     function admin_setting($key = null, $default = null)
     {
@@ -36,9 +47,8 @@ if (! function_exists('admin_setting_array')) {
     /**
      * 获取配置参数并转化为数组格式.
      *
-     * @param  string  $key
      * @param  mixed  $default
-     * @return \Appsolutely\AIO\Support\Setting|mixed
+     * @return Setting|mixed
      */
     function admin_setting_array(?string $key, $default = [])
     {
@@ -59,7 +69,7 @@ if (! function_exists('admin_extension_setting')) {
     {
         $extension = app($extension);
 
-        if ($extension instanceof Appsolutely\AIO\Extend\ServiceProvider) {
+        if ($extension instanceof ServiceProvider) {
             return $extension->config($key, $default);
         }
     }
@@ -69,9 +79,7 @@ if (! function_exists('admin_section')) {
     /**
      * Get the string contents of a section.
      *
-     * @param  string  $section
      * @param  mixed  $default
-     * @param  array  $options
      * @return mixed
      */
     function admin_section(string $section, $default = null, array $options = [])
@@ -84,7 +92,6 @@ if (! function_exists('admin_has_section')) {
     /**
      * Check if section exists.
      *
-     * @param  string  $section
      * @return mixed
      */
     function admin_has_section(string $section)
@@ -97,10 +104,7 @@ if (! function_exists('admin_inject_section')) {
     /**
      * Injecting content into a section.
      *
-     * @param  string  $section
      * @param  mixed  $content
-     * @param  bool  $append
-     * @param  int  $priority
      */
     function admin_inject_section(string $section, $content = null, bool $append = true, int $priority = 10)
     {
@@ -115,8 +119,6 @@ if (! function_exists('admin_inject_section_if')) {
      * @param  mixed  $condition
      * @param  string  $section
      * @param  mixed  $content
-     * @param  bool  $append
-     * @param  int  $priority
      */
     function admin_inject_section_if($condition, $section, $content = null, bool $append = false, int $priority = 10)
     {
@@ -130,7 +132,6 @@ if (! function_exists('admin_has_default_section')) {
     /**
      * Check if default section exists.
      *
-     * @param  string  $section
      * @return mixed
      */
     function admin_has_default_section(string $section)
@@ -143,7 +144,6 @@ if (! function_exists('admin_inject_default_section')) {
     /**
      * Injecting content into a section.
      *
-     * @param  string  $section
      * @param  string|Renderable|Htmlable|callable  $content
      */
     function admin_inject_default_section(string $section, $content)
@@ -156,9 +156,8 @@ if (! function_exists('admin_trans_field')) {
     /**
      * Translate the field name.
      *
-     * @param $field
      * @param  null  $locale
-     * @return array|\Illuminate\Contracts\Translation\Translator|null|string
+     * @return array|Translator|null|string
      */
     function admin_trans_field($field, $locale = null)
     {
@@ -170,10 +169,9 @@ if (! function_exists('admin_trans_label')) {
     /**
      * Translate the label.
      *
-     * @param $label
      * @param  array  $replace
      * @param  null  $locale
-     * @return array|\Illuminate\Contracts\Translation\Translator|null|string
+     * @return array|Translator|null|string
      */
     function admin_trans_label($label = null, $replace = [], $locale = null)
     {
@@ -185,10 +183,9 @@ if (! function_exists('admin_trans_option')) {
     /**
      * Translate the field name.
      *
-     * @param $field
      * @param  array  $replace
      * @param  null  $locale
-     * @return array|\Illuminate\Contracts\Translation\Translator|null|string
+     * @return array|Translator|null|string
      */
     function admin_trans_option($optionValue, $field, $replace = [], $locale = null)
     {
@@ -205,7 +202,7 @@ if (! function_exists('admin_trans')) {
      * @param  string  $key
      * @param  array  $replace
      * @param  string  $locale
-     * @return \Illuminate\Contracts\Translation\Translator|string|array|null
+     * @return Translator|string|array|null
      */
     function admin_trans($key, $replace = [], $locale = null)
     {
@@ -248,7 +245,7 @@ if (! function_exists('admin_path')) {
      */
     function admin_path($path = '')
     {
-        return ucfirst(config('admin.directory')).($path ? DIRECTORY_SEPARATOR.$path : $path);
+        return ucfirst(config('admin.directory')) . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 }
 
@@ -282,7 +279,7 @@ if (! function_exists('admin_base_path')) {
      */
     function admin_base_path($path = '')
     {
-        $prefix = '/'.trim(config('admin.route.prefix'), '/');
+        $prefix = '/' . trim(config('admin.route.prefix'), '/');
 
         $prefix = ($prefix === '/') ? '' : $prefix;
 
@@ -292,7 +289,7 @@ if (! function_exists('admin_base_path')) {
             return $prefix ?: '/';
         }
 
-        return $prefix.'/'.$path;
+        return $prefix . '/' . $path;
     }
 }
 
@@ -369,7 +366,6 @@ if (! function_exists('admin_info')) {
 
 if (! function_exists('admin_asset')) {
     /**
-     * @param $path
      * @return string
      */
     function admin_asset($path)
@@ -382,8 +378,6 @@ if (! function_exists('admin_route')) {
     /**
      * 根据路由别名获取url.
      *
-     * @param  string|null  $route
-     * @param  array  $params
      * @param  bool  $absolute
      * @return string
      */
@@ -397,12 +391,11 @@ if (! function_exists('admin_route_name')) {
     /**
      * 获取路由别名.
      *
-     * @param  string|null  $route
      * @return string
      */
     function admin_route_name(?string $route)
     {
-        return Admin::app()->getRoutePrefix().$route;
+        return Admin::app()->getRoutePrefix() . $route;
     }
 }
 
@@ -410,18 +403,16 @@ if (! function_exists('admin_api_route_name')) {
     /**
      * 获取api的路由别名.
      *
-     * @param  string  $route
      * @return string
      */
     function admin_api_route_name(?string $route = '')
     {
-        return Admin::app()->getCurrentApiRoutePrefix().$route;
+        return Admin::app()->getCurrentApiRoutePrefix() . $route;
     }
 }
 
 if (! function_exists('admin_extension_path')) {
     /**
-     * @param  string  $path
      * @return string
      */
     function admin_extension_path(string $path = '')
@@ -430,14 +421,13 @@ if (! function_exists('admin_extension_path')) {
 
         $path = ltrim($path, '/');
 
-        return $path ? $dir.'/'.$path : $dir;
+        return $path ? $dir . '/' . $path : $dir;
     }
 }
 
 if (! function_exists('admin_color')) {
     /**
-     * @param  string|null  $color
-     * @return string|\Appsolutely\AIO\Color
+     * @return string|Color
      */
     function admin_color(?string $color = null)
     {
@@ -452,10 +442,9 @@ if (! function_exists('admin_color')) {
 if (! function_exists('admin_view')) {
     /**
      * @param  string  $view
-     * @param  array  $data
      * @return string
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     function admin_view($view, array $data = [])
     {
@@ -466,7 +455,6 @@ if (! function_exists('admin_view')) {
 if (! function_exists('admin_script')) {
     /**
      * @param  string  $js
-     * @param  bool  $direct
      * @return void
      */
     function admin_script($script, bool $direct = false)
@@ -523,12 +511,11 @@ if (! function_exists('admin_javascript')) {
     /**
      * 暂存JS代码，并使用唯一字符串代替.
      *
-     * @param  string  $scripts
      * @return string
      */
     function admin_javascript(string $scripts)
     {
-        return Appsolutely\AIO\Support\JavaScript::make($scripts);
+        return JavaScript::make($scripts);
     }
 }
 
@@ -539,7 +526,7 @@ if (! function_exists('admin_javascript_json')) {
      */
     function admin_javascript_json($data)
     {
-        return Appsolutely\AIO\Support\JavaScript::format($data);
+        return JavaScript::format($data);
     }
 }
 
@@ -549,7 +536,7 @@ if (! function_exists('admin_exit')) {
      *
      * @param  Response|string|array  $response
      *
-     * @throws \Illuminate\Http\Exceptions\HttpResponseException
+     * @throws HttpResponseException
      */
     function admin_exit($response = '')
     {
@@ -562,9 +549,7 @@ if (! function_exists('admin_redirect')) {
      * 跳转.
      *
      * @param  string  $to
-     * @param  int  $statusCode
-     * @param  Request|null  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @return Application|ResponseFactory|JsonResponse|RedirectResponse|Illuminate\Http\Response|Redirector
      */
     function admin_redirect($to, int $statusCode = 302, ?Request $request = null)
     {
@@ -576,20 +561,19 @@ if (! function_exists('format_byte')) {
     /**
      * 文件单位换算.
      *
-     * @param $input
      * @param  int  $dec
      * @return string
      */
     function format_byte($input, $dec = 0)
     {
         $prefix_arr = ['B', 'KB', 'MB', 'GB', 'TB'];
-        $value = round($input, $dec);
-        $i = 0;
+        $value      = round($input, $dec);
+        $i          = 0;
         while ($value > 1024) {
             $value /= 1024;
             $i++;
         }
 
-        return round($value, $dec).$prefix_arr[$i];
+        return round($value, $dec) . $prefix_arr[$i];
     }
 }

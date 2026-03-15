@@ -11,6 +11,7 @@ class KeyValue extends Field
     const DEFAULT_FLAG_NAME = '_def_';
 
     protected $keyLabel;
+
     protected $valueLabel;
 
     public function setKeyLabel(?string $label)
@@ -78,9 +79,9 @@ class KeyValue extends Field
             return false;
         }
 
-        $rules["{$this->column}.keys.*"] = 'distinct';
-        $rules["{$this->column}.values.*"] = $fieldRules;
-        $attributes["{$this->column}.keys.*"] = $this->getKeyLabel();
+        $rules["{$this->column}.keys.*"]        = 'distinct';
+        $rules["{$this->column}.values.*"]      = $fieldRules;
+        $attributes["{$this->column}.keys.*"]   = $this->getKeyLabel();
         $attributes["{$this->column}.values.*"] = $this->getValueLabel();
 
         $input = $this->prepareValidatorInput($input);
@@ -90,7 +91,7 @@ class KeyValue extends Field
 
     protected function prepareValidatorInput(array $input)
     {
-        Arr::forget($input, $this->column.'.'.static::DEFAULT_FLAG_NAME);
+        Arr::forget($input, $this->column . '.' . static::DEFAULT_FLAG_NAME);
 
         return $input;
     }

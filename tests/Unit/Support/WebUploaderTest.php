@@ -12,7 +12,7 @@ class WebUploaderTest extends TestCase
 
     public function test_put_temp_file_content_has_correct_parameter_names()
     {
-        $ref = new \ReflectionMethod(WebUploader::class, 'putTempFileContent');
+        $ref    = new \ReflectionMethod(WebUploader::class, 'putTempFileContent');
         $params = $ref->getParameters();
 
         $this->assertSame('path', $params[0]->getName());

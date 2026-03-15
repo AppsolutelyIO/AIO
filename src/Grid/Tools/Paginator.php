@@ -6,6 +6,7 @@ use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Grid;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class Paginator implements Renderable
 {
@@ -15,14 +16,12 @@ class Paginator implements Renderable
     protected $grid;
 
     /**
-     * @var \Illuminate\Pagination\LengthAwarePaginator
+     * @var LengthAwarePaginator
      */
     public $paginator = null;
 
     /**
      * Create a new Paginator instance.
-     *
-     * @param  Grid  $grid
      */
     public function __construct(Grid $grid)
     {
@@ -72,7 +71,7 @@ class Paginator implements Renderable
     /**
      * Get range infomation of paginator.
      *
-     * @return string|\Symfony\Component\Translation\TranslatorInterface
+     * @return string|TranslatorInterface
      */
     protected function paginationRanger()
     {
@@ -88,7 +87,7 @@ class Paginator implements Renderable
 
         $color = Admin::color()->dark80();
 
-        return "<span class='d-none d-sm-inline' style=\"line-height:33px;color:{$color}\">".trans('admin.pagination.range', $parameters->all()).'</span>';
+        return "<span class='d-none d-sm-inline' style=\"line-height:33px;color:{$color}\">" . trans('admin.pagination.range', $parameters->all()) . '</span>';
     }
 
     /**
@@ -98,8 +97,8 @@ class Paginator implements Renderable
      */
     public function render()
     {
-        return $this->paginationRanger().
-            $this->paginationLinks().
+        return $this->paginationRanger() .
+            $this->paginationLinks() .
             $this->perPageSelector();
     }
 }

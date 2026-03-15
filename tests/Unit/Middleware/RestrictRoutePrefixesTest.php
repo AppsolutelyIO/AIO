@@ -6,11 +6,11 @@ namespace Appsolutely\AIO\Tests\Unit\Middleware;
 
 use Appsolutely\AIO\Http\Middleware\RestrictRoutePrefixes;
 use Appsolutely\AIO\Services\Contracts\RouteRestrictionServiceInterface;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Http\Request;
 use Mockery;
 use Mockery\MockInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class RestrictRoutePrefixesTest extends TestCase
 {

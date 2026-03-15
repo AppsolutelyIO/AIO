@@ -77,7 +77,6 @@ class Manager
     /**
      * 判断扩展是否启用.
      *
-     * @param  string|null  $name
      * @return bool
      */
     public function enabled(?string $name)
@@ -88,8 +87,6 @@ class Manager
     /**
      * 启用或禁用扩展.
      *
-     * @param  string|null  $name
-     * @param  bool  $enable
      * @return void
      */
     public function enable(?string $name, bool $enable = true)
@@ -205,8 +202,6 @@ class Manager
     /**
      * 加载扩展.
      *
-     * @param  string  $directory
-     * @param  bool  $addPsr4
      * @return ServiceProvider|null
      */
     public function loadExtension(string $directory, bool $addPsr4 = true)
@@ -227,16 +222,14 @@ class Manager
     /**
      * 获取扩展类实例.
      *
-     * @param  string  $directory
-     * @param  bool  $addPsr4
      * @return ServiceProvider
      */
     public function resolveExtension(string $directory, bool $addPsr4 = true)
     {
-        $composerProperty = Composer::parse($directory.'/composer.json');
+        $composerProperty = Composer::parse($directory . '/composer.json');
 
         $serviceProvider = $composerProperty->get('extra.aio');
-        $psr4 = $composerProperty->get('autoload.psr-4');
+        $psr4            = $composerProperty->get('autoload.psr-4');
 
         if (! $serviceProvider || ! $psr4) {
             return;
@@ -286,13 +279,11 @@ class Manager
 
     /**
      * 添加扩展.
-     *
-     * @param  \Appsolutely\AIO\Extend\ServiceProvider  $serviceProvider
      */
     public function addExtension(ServiceProvider $serviceProvider)
     {
         if (! $serviceProvider->getName()) {
-            $json = dirname(dirname(Helper::guessClassFileName($serviceProvider))).'/composer.json';
+            $json = dirname(dirname(Helper::guessClassFileName($serviceProvider))) . '/composer.json';
 
             if (! is_file($json)) {
                 throw new RuntimeException(sprintf('Error extension "%s"', get_class($serviceProvider)));
@@ -310,7 +301,6 @@ class Manager
     /**
      * 获取扩展名称.
      *
-     * @param $extension
      * @return string
      */
     public function getName($extension)
@@ -326,7 +316,6 @@ class Manager
      * 解压缩扩展包.
      *
      * @param  string  $filePath
-     * @param  bool  $force
      * @return string
      */
     public function extract($filePath, bool $force = false)
@@ -342,7 +331,6 @@ class Manager
 
     /**
      * @param  string  $filePath
-     * @param  bool  $force
      * @return bool
      */
     public function extractZip($filePath, bool $force = false)
@@ -375,7 +363,7 @@ class Manager
                 throw new RuntimeException(sprintf('Error extension file "%s".', $filePath));
             }
 
-            $composerProperty = Composer::parse($directory.'/composer.json');
+            $composerProperty = Composer::parse($directory . '/composer.json');
 
             $extensionDir = admin_extension_path($composerProperty->name);
 
@@ -398,20 +386,19 @@ class Manager
     /**
      * 校验扩展包内容是否正确.
      *
-     * @param $directory
      * @return bool
      */
     protected function checkFiles($directory)
     {
         if (
-            ! is_dir($directory.'/src')
-            || ! is_file($directory.'/composer.json')
-            || ! is_file($directory.'/version.php')
+            ! is_dir($directory . '/src')
+            || ! is_file($directory . '/composer.json')
+            || ! is_file($directory . '/version.php')
         ) {
             return false;
         }
 
-        $composerProperty = Composer::parse($directory.'/composer.json');
+        $composerProperty = Composer::parse($directory . '/composer.json');
 
         if (! $composerProperty->name || ! $composerProperty->get('extra.aio')) {
             return false;
@@ -428,9 +415,9 @@ class Manager
      */
     protected function getFilePath($fileCode)
     {
-        $name = md5($fileCode).'.arc';
+        $name = md5($fileCode) . '.arc';
 
-        return $this->makeTempDirectory('extensions').'/'.$name;
+        return $this->makeTempDirectory('extensions') . '/' . $name;
     }
 
     /**
@@ -477,7 +464,7 @@ class Manager
      */
     protected function makeTempDirectory($dir = null)
     {
-        $tempDir = storage_path('tmp/'.($dir ?: time().Str::random()));
+        $tempDir = storage_path('tmp/' . ($dir ?: time() . Str::random()));
 
         if (! is_dir($tempDir)) {
             if (! $this->files->makeDirectory($tempDir, 0777, true)) {
@@ -492,14 +479,13 @@ class Manager
      * 注册 PSR4 验证规则.
      *
      * @param  string  $directory
-     * @param  array  $psr4
      */
     protected function registerPsr4($directory, array $psr4)
     {
         $classLoader = Admin::classLoader();
 
         foreach ($psr4 as $namespace => $path) {
-            $path = $directory.'/'.trim($path, '/').'/';
+            $path = $directory . '/' . trim($path, '/') . '/';
 
             $classLoader->addPsr4($namespace, $path);
         }
@@ -507,8 +493,6 @@ class Manager
 
     /**
      * 上报异常.
-     *
-     * @param  \Throwable  $e
      */
     protected function reportException(\Throwable $e)
     {
@@ -527,7 +511,7 @@ class Manager
             if (
                 $value !== '.'
                 && $value !== '..'
-                && is_dir($value = $dir.'/'.$value)
+                && is_dir($value = $dir . '/' . $value)
             ) {
                 $results[] = $value;
             }

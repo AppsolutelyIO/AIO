@@ -31,8 +31,6 @@ trait Resizable
     /**
      * Generate thumbnail URL.
      *
-     * @param $image
-     * @param $type
      * @return string
      */
     public function getThumbnailPath($image, $type)
@@ -41,9 +39,9 @@ trait Resizable
         $ext = pathinfo($image, PATHINFO_EXTENSION);
 
         // We remove extension from file name so we can append thumbnail type
-        $name = Str::replaceLast('.'.$ext, '', $image);
+        $name = Str::replaceLast('.' . $ext, '', $image);
 
         // We merge original name + type + extension
-        return $name.'-'.$type.'.'.$ext;
+        return $name . '-' . $type . '.' . $ext;
     }
 }

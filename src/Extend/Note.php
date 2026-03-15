@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 trait Note
 {
     /**
-     * @var \Symfony\Component\Console\Output\OutputInterface
+     * @var OutputInterface
      */
     public $output;
 

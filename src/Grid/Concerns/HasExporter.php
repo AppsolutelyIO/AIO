@@ -27,7 +27,7 @@ trait HasExporter
     /**
      * Set exporter driver for Grid to export.
      *
-     * @param  string|Grid\Exporters\AbstractExporter|array  $exporterDriver
+     * @param  string|AbstractExporter|array  $exporterDriver
      * @return Exporter
      */
     public function export($exporterDriver = null)
@@ -37,7 +37,7 @@ trait HasExporter
         $titles = [];
 
         if (is_array($exporterDriver) || $exporterDriver === false) {
-            $titles = $exporterDriver;
+            $titles         = $exporterDriver;
             $exporterDriver = null;
         }
 
@@ -117,7 +117,7 @@ trait HasExporter
             $input = array_merge($input, $constraints);
         }
 
-        return $this->resource().'?'.http_build_query($input);
+        return $this->resource() . '?' . http_build_query($input);
     }
 
     /**

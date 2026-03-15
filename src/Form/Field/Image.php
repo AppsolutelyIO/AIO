@@ -67,7 +67,7 @@ class Image extends File
         }
 
         $this->options['accept']['mimeTypes'] = 'image/*';
-        $this->options['isImage'] = true;
+        $this->options['isImage']             = true;
     }
 
     /**
@@ -95,7 +95,7 @@ class Image extends File
             $v = "$k=$v";
         }
 
-        return $this->rules('dimensions:'.implode(',', $options));
+        return $this->rules('dimensions:' . implode(',', $options));
     }
 
     /**
@@ -113,9 +113,6 @@ class Image extends File
         return $this->dimensions(['ratio' => $ratio]);
     }
 
-    /**
-     * @param  UploadedFile  $file
-     */
     protected function prepareFile(UploadedFile $file)
     {
         $this->callInterventionMethods($file->getRealPath(), $file->getMimeType());

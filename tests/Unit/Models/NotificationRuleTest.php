@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Models;
 
 use Appsolutely\AIO\Models\NotificationRule;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class NotificationRuleTest extends TestCase
 {

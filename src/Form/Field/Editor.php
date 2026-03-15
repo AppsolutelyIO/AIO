@@ -33,9 +33,9 @@ class Editor extends Field
             'undo redo | preview fullscreen | styleselect | fontsizeselect bold italic underline strikethrough forecolor backcolor | link image media blockquote removeformat codesample',
             'alignleft aligncenter alignright  alignjustify| indent outdent bullist numlist table subscript superscript | code',
         ],
-        'min_height' => 400,
+        'min_height'           => 400,
         'save_enablewhendirty' => true,
-        'convert_urls' => false,
+        'convert_urls'         => false,
     ];
 
     protected $disk;
@@ -45,7 +45,6 @@ class Editor extends Field
     /**
      * 设置文件上传存储配置.
      *
-     * @param  string  $disk
      * @return $this
      */
     public function disk(string $disk)
@@ -58,7 +57,6 @@ class Editor extends Field
     /**
      * 设置图片上传文件夹.
      *
-     * @param  string  $dir
      * @return $this
      */
     public function imageDirectory(string $dir)
@@ -71,7 +69,6 @@ class Editor extends Field
     /**
      * 自定义图片上传接口.
      *
-     * @param  string  $url
      * @return $this
      */
     public function imageUrl(string $url)
@@ -82,7 +79,6 @@ class Editor extends Field
     /**
      * 设置语言包url.
      *
-     * @param  string  $url
      * @return $this
      */
     public function languageUrl(string $url)
@@ -93,7 +89,6 @@ class Editor extends Field
     /**
      * 设置编辑器高度.
      *
-     * @param  int  $height
      * @return $this
      */
     public function height(int $height)
@@ -125,7 +120,6 @@ class Editor extends Field
     }
 
     /**
-     * @param  string  $url
      * @return string
      */
     protected function formatUrl(string $url)

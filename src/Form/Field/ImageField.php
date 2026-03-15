@@ -6,6 +6,7 @@ use Appsolutely\AIO\Exception\AdminException;
 use Illuminate\Support\Str;
 use Intervention\Image\Constraint;
 use Intervention\Image\Facades\Image as InterventionImage;
+use Intervention\Image\Image;
 use Intervention\Image\ImageManagerStatic;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -91,8 +92,6 @@ trait ImageField
 
     /**
      * @param  string|array  $name
-     * @param  int  $width
-     * @param  int  $height
      * @return $this
      */
     public function thumbnail($name, ?int $width = null, ?int $height = null)
@@ -114,7 +113,6 @@ trait ImageField
      * Destroy original thumbnail files.
      *
      * @param  string|array  $file
-     * @param  bool  $force
      * @return void.
      */
     public function destroyThumbnail($file = null, bool $force = false)
@@ -141,10 +139,10 @@ trait ImageField
             $ext = pathinfo($file, PATHINFO_EXTENSION);
 
             // We remove extension from file name so we can append thumbnail type
-            $path = Str::replaceLast('.'.$ext, '', $file);
+            $path = Str::replaceLast('.' . $ext, '', $file);
 
             // We merge original name + thumbnail name + extension
-            $path = $path.'-'.$name.'.'.$ext;
+            $path = $path . '-' . $name . '.' . $ext;
 
             if ($this->getStorage()->exists($path)) {
                 $this->getStorage()->delete($path);
@@ -155,7 +153,6 @@ trait ImageField
     /**
      * Upload file and delete original thumbnail files.
      *
-     * @param  UploadedFile  $file
      * @return $this
      */
     protected function uploadAndDeleteOriginalThumbnail(UploadedFile $file)
@@ -165,12 +162,12 @@ trait ImageField
             $ext = pathinfo($this->name, PATHINFO_EXTENSION);
 
             // We remove extension from file name so we can append thumbnail type
-            $path = Str::replaceLast('.'.$ext, '', $this->name);
+            $path = Str::replaceLast('.' . $ext, '', $this->name);
 
             // We merge original name + thumbnail name + extension
-            $path = $path.'-'.$name.'.'.$ext;
+            $path = $path . '-' . $name . '.' . $ext;
 
-            /** @var \Intervention\Image\Image $image */
+            /** @var Image $image */
             $image = InterventionImage::make($file);
 
             $action = $size[2] ?? 'resize';

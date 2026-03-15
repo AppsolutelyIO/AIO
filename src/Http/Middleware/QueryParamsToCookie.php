@@ -15,7 +15,7 @@ final class QueryParamsToCookie
      *
      * Captures configured query parameters from the URL and persists them as cookies.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {

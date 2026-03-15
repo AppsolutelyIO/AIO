@@ -28,7 +28,7 @@ class Asset
             ],
         ],
         '@nunito' => [
-            //'css' => 'https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,800,800i,900,900i',
+            // 'css' => 'https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,800,800i,900,900i',
             'css' => '@admin/aio/css/nunito.css',
         ],
         '@aio' => [
@@ -75,7 +75,7 @@ class Asset
             'js' => '@admin/aio/plugins/bootstrap-validator/validator.min.js',
         ],
         '@select2' => [
-            'js'  => [
+            'js' => [
                 '@admin/aio/plugins/select/select2.full.min.js',
                 '@admin/aio/plugins/select/i18n/{lang}.js',
             ],
@@ -168,11 +168,11 @@ class Asset
             'js' => '@admin/aio/plugins/charts/apexcharts.min.js',
         ],
         '@fontawesome-iconpicker' => [
-            'js' => '@admin/aio/plugins/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js',
+            'js'  => '@admin/aio/plugins/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js',
             'css' => '@admin/aio/plugins/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css',
         ],
         '@color' => [
-            'js' => '@admin/aio/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js',
+            'js'  => '@admin/aio/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js',
             'css' => '@admin/aio/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css',
         ],
         '@qrcode' => [
@@ -226,7 +226,7 @@ class Asset
      */
     public $headerJs = [
         'vendors' => '@vendors',
-        'aio'    => '@aio',
+        'aio'     => '@aio',
     ];
 
     /**
@@ -235,10 +235,10 @@ class Asset
      * @var array
      */
     public $baseCss = [
-        'adminlte'    => '@adminlte',
-        'vendors'     => '@vendors',
-        'toastr'      => '@toastr',
-        'datatables'  => '@datatables',
+        'adminlte'   => '@adminlte',
+        'vendors'    => '@vendors',
+        'toastr'     => '@toastr',
+        'datatables' => '@datatables',
         'aio'        => '@aio',
     ];
 
@@ -312,7 +312,7 @@ class Asset
         }
 
         if (! str_starts_with($name, '@')) {
-            $name = '@'.$name;
+            $name = '@' . $name;
         }
 
         $this->alias[$name] = $value;
@@ -322,13 +322,12 @@ class Asset
      * 获取别名.
      *
      * @param  string  $name
-     * @param  array  $params
      * @return array|string
      */
     public function getAlias($name, array $params = [])
     {
         if (! str_starts_with($name, '@')) {
-            $name = '@'.$name;
+            $name = '@' . $name;
         }
 
         [$name, $query] = $this->parseParams($name);
@@ -343,14 +342,13 @@ class Asset
         $params += $query;
 
         return [
-            'js' => $this->normalizeAliasPaths($assets['js'] ?? [], $params) ?: null,
+            'js'  => $this->normalizeAliasPaths($assets['js'] ?? [], $params) ?: null,
             'css' => $this->normalizeAliasPaths($assets['css'] ?? [], $params) ?: null,
         ];
     }
 
     /**
      * @param  array  $files
-     * @param  array  $params
      * @return array
      */
     protected function normalizeAliasPaths($files, array $params)
@@ -393,7 +391,6 @@ class Asset
      * 根据别名设置需要载入的js和css脚本.
      *
      * @param  string|array  $alias
-     * @param  array  $params
      * @return void
      */
     public function require($alias, array $params = [])
@@ -430,8 +427,6 @@ class Asset
 
     /**
      * 设置需要载入的基础css脚本.
-     *
-     * @param  array  $css
      */
     public function baseCss(array $css, bool $merge = false)
     {
@@ -462,7 +457,6 @@ class Asset
      * 根据别名获取资源路径.
      *
      * @param  string  $path
-     * @param  string  $type
      * @return string|array|null
      */
     public function get($path, string $type = 'js')
@@ -499,7 +493,7 @@ class Asset
         $path = $this->getRealPath($path);
 
         if (mb_strpos($path, '//') === false) {
-            $path = config('admin.assets_server').'/'.trim($path, '/');
+            $path = config('admin.assets_server') . '/' . trim($path, '/');
         }
 
         return (config('admin.https') || config('admin.secure')) ? secure_asset($path) : asset($path);
@@ -508,7 +502,6 @@ class Asset
     /**
      * 获取真实路径.
      *
-     * @param  string|null  $path
      * @return string|null
      */
     public function getRealPath(?string $path)
@@ -546,7 +539,6 @@ class Asset
     /**
      * 判断别名是否存在.
      *
-     * @param $value
      * @return bool
      */
     public function hasAlias($value)
@@ -581,9 +573,6 @@ class Asset
 
     /**
      * 设置基础js脚本.
-     *
-     * @param  array  $js
-     * @param  bool  $merge
      */
     public function baseJs(array $js, bool $merge = true)
     {
@@ -598,7 +587,6 @@ class Asset
      * 设置js代码.
      *
      * @param  string|array  $script
-     * @param  bool  $direct
      */
     public function script($script, bool $direct = false)
     {
@@ -689,9 +677,9 @@ class Asset
             $url .= '?';
         }
 
-        $ver = 'v'.Admin::VERSION;
+        $ver = 'v' . Admin::VERSION;
 
-        return Str::endsWith($url, '?') ? $url.$ver : $url.'&'.$ver;
+        return Str::endsWith($url, '?') ? $url . $ver : $url . '&' . $ver;
     }
 
     /**
@@ -753,7 +741,7 @@ class Asset
      */
     public function scriptToHtml()
     {
-        $script = implode(";\n", array_unique($this->script));
+        $script       = implode(";\n", array_unique($this->script));
         $directScript = implode(";\n", array_unique($this->directScript));
 
         return <<<HTML

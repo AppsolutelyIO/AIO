@@ -2,6 +2,4 @@
 
 namespace Appsolutely\AIO\Form\Events;
 
-class Deleted extends Event
-{
-}
+class Deleted extends Event {}

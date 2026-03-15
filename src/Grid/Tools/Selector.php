@@ -4,9 +4,11 @@ namespace Appsolutely\AIO\Grid\Tools;
 
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Support\ArrayHelper;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\View\View;
 
 class Selector
 {
@@ -40,16 +42,14 @@ class Selector
      */
     public function __construct(Grid $grid)
     {
-        $this->grid = $grid;
-        $this->request = request();
+        $this->grid      = $grid;
+        $this->request   = request();
         $this->selectors = new Collection();
     }
 
     /**
-     * @param  string  $column
      * @param  string|array  $label
      * @param  array|\Closure  $options
-     * @param  null|\Closure  $query
      * @return $this
      */
     public function select(string $column, $label, $options = [], ?\Closure $query = null)
@@ -58,10 +58,8 @@ class Selector
     }
 
     /**
-     * @param  string  $column
      * @param  string|array  $label
      * @param  array  $options
-     * @param  null|\Closure  $query
      * @return $this
      */
     public function selectOne(string $column, $label, $options = [], ?\Closure $query = null)
@@ -70,7 +68,6 @@ class Selector
     }
 
     /**
-     * @param  string  $column
      * @param  string  $label
      * @param  array  $options
      * @param  null  $query
@@ -85,7 +82,7 @@ class Selector
             }
 
             $options = $label;
-            $label = admin_trans_field($column);
+            $label   = admin_trans_field($column);
         }
 
         $this->selectors[$column] = [
@@ -109,7 +106,6 @@ class Selector
     /**
      * Get all selectors.
      *
-     * @param  bool  $formatKey
      * @return array|Collection
      */
     public function all(bool $formatKey = false)
@@ -171,8 +167,8 @@ class Selector
 
         $query[$this->grid->model()->getPageName()] = null;
 
-        $selected = $this->parseSelected();
-        $options = Arr::get($selected, $column, []);
+        $selected  = $this->parseSelected();
+        $options   = Arr::get($selected, $column, []);
         $queryName = "{$this->getQueryName()}.{$column}";
 
         if ($value === null) {
@@ -200,7 +196,7 @@ class Selector
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function render()
     {

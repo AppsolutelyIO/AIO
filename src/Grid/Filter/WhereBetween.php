@@ -29,14 +29,13 @@ class WhereBetween extends Between
      * Where constructor.
      *
      * @param  string  $column
-     * @param  \Closure  $query
      * @param  string  $label
      */
     public function __construct($column, \Closure $query, $label = '')
     {
-        $this->where = $query;
+        $this->where  = $query;
         $this->column = $column;
-        $this->label = $this->formatLabel($label);
+        $this->label  = $this->formatLabel($label);
     }
 
     /**

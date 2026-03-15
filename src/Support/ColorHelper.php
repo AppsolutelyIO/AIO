@@ -23,7 +23,7 @@ class ColorHelper
 
         [$red, $blue, $green] = static::toRGB($color, $amt);
 
-        return ($hasPrefix ? '#' : '').dechex($green + ($blue << 8) + ($red << 16));
+        return ($hasPrefix ? '#' : '') . dechex($green + ($blue << 8) + ($red << 16));
     }
 
     /**
@@ -70,8 +70,8 @@ class ColorHelper
 
         $num = hexdec($color);
 
-        $red = $format(($num >> 16) + $amt);
-        $blue = $format((($num >> 8) & 0x00FF) + $amt);
+        $red   = $format(($num >> 16) + $amt);
+        $blue  = $format((($num >> 8) & 0x00FF) + $amt);
         $green = $format(($num & 0x0000FF) + $amt);
 
         return [$red, $blue, $green];

@@ -23,12 +23,9 @@ class Delete extends Component
     /**
      * 浏览器包含组件的断言
      *
-     * @param  Browser  $browser
      * @return void
      */
-    public function assert(Browser $browser)
-    {
-    }
+    public function assert(Browser $browser) {}
 
     /**
      * 读取组件的元素快捷方式.
@@ -38,16 +35,15 @@ class Delete extends Component
     public function elements()
     {
         return [
-            '@item' => 'a[data-action="delete"]:visible',
+            '@item'    => 'a[data-action="delete"]:visible',
             '@confirm' => '.swal2-confirm',
-            '@cancel' => '.swal2-cancel',
+            '@cancel'  => '.swal2-cancel',
         ];
     }
 
     /**
      * 选中.
      *
-     * @param  Browser  $browser
      * @param  string|array  $value
      * @return Browser
      */
@@ -81,8 +77,7 @@ JS
     /**
      * 等待确认弹窗.
      *
-     * @param  \Laravel\Dusk\Browser  $browser
-     * @return \Laravel\Dusk\Browser
+     * @return Browser
      */
     public function waitForConfirmDialog(Browser $browser)
     {
@@ -92,8 +87,7 @@ JS
     /**
      * 等待成功信息.
      *
-     * @param  \Laravel\Dusk\Browser  $browser
-     * @return \Laravel\Dusk\Browser
+     * @return Browser
      */
     public function waitForSucceeded(Browser $browser)
     {
@@ -105,8 +99,7 @@ JS
     /**
      * 点击确认删除按钮.
      *
-     * @param  \Laravel\Dusk\Browser  $browser
-     * @return \Laravel\Dusk\Browser
+     * @return Browser
      */
     public function clickConfirmButton(Browser $browser)
     {

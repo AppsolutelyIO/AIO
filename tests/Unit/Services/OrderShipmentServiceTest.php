@@ -8,8 +8,8 @@ use Appsolutely\AIO\Enums\OrderShipmentStatus;
 use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\OrderShipment;
 use Appsolutely\AIO\Services\OrderShipmentService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class OrderShipmentServiceTest extends TestCase
 {

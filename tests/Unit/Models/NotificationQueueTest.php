@@ -6,9 +6,9 @@ namespace Appsolutely\AIO\Tests\Unit\Models;
 
 use Appsolutely\AIO\Enums\NotificationQueueStatus;
 use Appsolutely\AIO\Models\NotificationQueue;
+use Appsolutely\AIO\Tests\TestCase;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class NotificationQueueTest extends TestCase
 {

@@ -9,8 +9,8 @@ use Appsolutely\AIO\Events\ProductDeleted;
 use Appsolutely\AIO\Events\ProductUpdated;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Observers\ProductObserver;
-use Illuminate\Support\Facades\Event;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Support\Facades\Event;
 
 final class ProductObserverTest extends TestCase
 {

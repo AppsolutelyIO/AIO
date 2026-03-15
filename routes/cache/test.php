@@ -1,13 +1,12 @@
 <?php
 
-use Appsolutely\AIO\Services\MenuService;
+use Appsolutely\AIO\Config\BasicConfig;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/test', function () {
-    $basicTheme=\Appsolutely\AIO\Config\BasicConfig::getTitle();
+    $basicTheme = BasicConfig::getTitle();
     dd($basicTheme);
 })->name('routes');
-
 
 Route::get('/routes', function () {
     $routes = collect(Route::getRoutes())->map(function ($route) {
@@ -19,5 +18,5 @@ Route::get('/routes', function () {
             'middleware' => $route->gatherMiddleware(),
         ];
     });
-dd($routes->toArray());
+    dd($routes->toArray());
 })->name('routes');

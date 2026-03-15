@@ -2,13 +2,14 @@
 
 namespace Appsolutely\AIO\Grid;
 
-use Closure;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Support\HtmlHelper;
+use Closure;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Fluent;
@@ -91,8 +92,6 @@ class Row implements Arrayable
 
     /**
      * Set attributes.
-     *
-     * @param  array  $attributes
      */
     public function setAttributes(array $attributes)
     {
@@ -122,7 +121,7 @@ class Row implements Arrayable
     /**
      * Get data of this row.
      *
-     * @return Fluent|\Illuminate\Database\Eloquent\Model
+     * @return Fluent|Model
      */
     public function model()
     {

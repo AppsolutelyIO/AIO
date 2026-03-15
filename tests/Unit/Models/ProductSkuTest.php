@@ -7,9 +7,9 @@ namespace Appsolutely\AIO\Tests\Unit\Models;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Models\ProductSku;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class ProductSkuTest extends TestCase
 {

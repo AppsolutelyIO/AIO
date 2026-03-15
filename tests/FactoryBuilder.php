@@ -2,8 +2,10 @@
 
 namespace Tests;
 
+use Faker\Generator;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
 
@@ -70,7 +72,7 @@ class FactoryBuilder
     /**
      * The Faker instance for the builder.
      *
-     * @var \Faker\Generator
+     * @var Generator
      */
     protected $faker;
 
@@ -86,22 +88,17 @@ class FactoryBuilder
      *
      * @param  string  $class
      * @param  string  $name
-     * @param  array  $definitions
-     * @param  array  $states
-     * @param  array  $afterMaking
-     * @param  array  $afterCreating
-     * @param  \Faker\Generator  $faker
      * @return void
      */
     public function __construct($class, $name, array $definitions, array $states,
         array $afterMaking, array $afterCreating, Faker $faker)
     {
-        $this->name = $name;
-        $this->class = $class;
-        $this->faker = $faker;
-        $this->states = $states;
-        $this->definitions = $definitions;
-        $this->afterMaking = $afterMaking;
+        $this->name          = $name;
+        $this->class         = $class;
+        $this->faker         = $faker;
+        $this->states        = $states;
+        $this->definitions   = $definitions;
+        $this->afterMaking   = $afterMaking;
         $this->afterCreating = $afterCreating;
     }
 
@@ -158,7 +155,6 @@ class FactoryBuilder
     /**
      * Create a model and persist it in the database if requested.
      *
-     * @param  array  $attributes
      * @return \Closure
      */
     public function lazy(array $attributes = [])
@@ -171,7 +167,6 @@ class FactoryBuilder
     /**
      * Create a collection of models and persist them to the database.
      *
-     * @param  array  $attributes
      * @return mixed
      */
     public function create(array $attributes = [])
@@ -194,7 +189,7 @@ class FactoryBuilder
     /**
      * Set the connection name on the results and store them.
      *
-     * @param  \Illuminate\Support\Collection  $results
+     * @param  Collection  $results
      * @return void
      */
     protected function store($results)
@@ -211,7 +206,6 @@ class FactoryBuilder
     /**
      * Create a collection of models.
      *
-     * @param  array  $attributes
      * @return mixed
      */
     public function make(array $attributes = [])
@@ -223,10 +217,10 @@ class FactoryBuilder
         }
 
         if ($this->amount < 1) {
-            return (new $this->class)->newCollection();
+            return (new $this->class())->newCollection();
         }
 
-        $instances = (new $this->class)->newCollection(array_map(function () use ($attributes) {
+        $instances = (new $this->class())->newCollection(array_map(function () use ($attributes) {
             return $this->makeInstance($attributes);
         }, range(1, $this->amount)));
 
@@ -238,7 +232,6 @@ class FactoryBuilder
     /**
      * Create an array of raw attribute arrays.
      *
-     * @param  array  $attributes
      * @return mixed
      */
     public function raw(array $attributes = [])
@@ -259,10 +252,9 @@ class FactoryBuilder
     /**
      * Get a raw attributes array for the model.
      *
-     * @param  array  $attributes
      * @return mixed
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function getRawAttributes(array $attributes = [])
     {
@@ -283,8 +275,7 @@ class FactoryBuilder
     /**
      * Make an instance of the model with the given attributes.
      *
-     * @param  array  $attributes
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     protected function makeInstance(array $attributes = [])
     {
@@ -304,11 +295,9 @@ class FactoryBuilder
     /**
      * Apply the active states to the model definition array.
      *
-     * @param  array  $definition
-     * @param  array  $attributes
      * @return array
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function applyStates(array $definition, array $attributes = [])
     {
@@ -334,7 +323,6 @@ class FactoryBuilder
      * Get the state attributes.
      *
      * @param  string  $state
-     * @param  array  $attributes
      * @return array
      */
     protected function stateAttributes($state, array $attributes)
@@ -351,7 +339,6 @@ class FactoryBuilder
     /**
      * Expand all attributes to their underlying values.
      *
-     * @param  array  $attributes
      * @return array
      */
     protected function expandAttributes(array $attributes)
@@ -376,7 +363,7 @@ class FactoryBuilder
     /**
      * Run after making callbacks on a collection of models.
      *
-     * @param  \Illuminate\Support\Collection  $models
+     * @param  Collection  $models
      * @return void
      */
     public function callAfterMaking($models)
@@ -387,7 +374,7 @@ class FactoryBuilder
     /**
      * Run after creating callbacks on a collection of models.
      *
-     * @param  \Illuminate\Support\Collection  $models
+     * @param  Collection  $models
      * @return void
      */
     public function callAfterCreating($models)
@@ -398,8 +385,7 @@ class FactoryBuilder
     /**
      * Call after callbacks for each model and state.
      *
-     * @param  array  $afterCallbacks
-     * @param  \Illuminate\Support\Collection  $models
+     * @param  Collection  $models
      * @return void
      */
     protected function callAfter(array $afterCallbacks, $models)
@@ -416,8 +402,7 @@ class FactoryBuilder
     /**
      * Call after callbacks for each model and state.
      *
-     * @param  array  $afterCallbacks
-     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  Model  $model
      * @param  string  $state
      * @return void
      */

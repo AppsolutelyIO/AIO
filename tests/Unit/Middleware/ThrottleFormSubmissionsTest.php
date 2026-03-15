@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Middleware;
 
 use Appsolutely\AIO\Http\Middleware\ThrottleFormSubmissions;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Mockery;
 use Mockery\MockInterface;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class ThrottleFormSubmissionsTest extends TestCase
 {

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Models;
 
+use App\Models\User;
 use Appsolutely\AIO\Enums\CartStatus;
 use Appsolutely\AIO\Models\Cart;
 use Appsolutely\AIO\Models\CartItem;
 use Appsolutely\AIO\Models\Product;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class CartTest extends TestCase
 {

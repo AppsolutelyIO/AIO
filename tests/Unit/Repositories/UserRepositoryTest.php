@@ -6,8 +6,8 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 
 use App\Models\User;
 use Appsolutely\AIO\Repositories\UserRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class UserRepositoryTest extends TestCase
 {

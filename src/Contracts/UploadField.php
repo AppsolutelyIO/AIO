@@ -10,7 +10,6 @@ interface UploadField
     /**
      * Upload File.
      *
-     * @param  UploadedFile  $file
      * @return Response
      */
     public function upload(UploadedFile $file);

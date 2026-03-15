@@ -3,7 +3,7 @@
 namespace Appsolutely\AIO\Tests\Feature;
 
 use Appsolutely\AIO\Admin;
-use Appsolutely\AIO\Models\Administrator;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Support\Facades\Hash;
 
 class AuthTest extends TestCase
@@ -106,7 +106,7 @@ class AuthTest extends TestCase
     {
         $guard = Admin::guard();
 
-        $this->assertInstanceOf(\Illuminate\Contracts\Auth\StatefulGuard::class, $guard);
+        $this->assertInstanceOf(StatefulGuard::class, $guard);
     }
 
     // --- User model ---

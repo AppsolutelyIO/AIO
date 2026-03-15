@@ -19,7 +19,7 @@ class FilterButton extends AbstractTool
     protected $btnClassName;
 
     /**
-     * @return \Appsolutely\AIO\Grid\Filter
+     * @return Filter
      */
     protected function filter()
     {
@@ -34,7 +34,7 @@ class FilterButton extends AbstractTool
     protected function getElementClassName()
     {
         if (! $this->btnClassName) {
-            $this->btnClassName = 'filter-btn-'.Str::random(8);
+            $this->btnClassName = 'filter-btn-' . Str::random(8);
         }
 
         return $this->btnClassName;
@@ -46,7 +46,7 @@ class FilterButton extends AbstractTool
     protected function addScript()
     {
         $filter = $this->filter();
-        $id = $filter->filterID();
+        $id     = $filter->filterID();
 
         if ($filter->mode() === Filter::MODE_RIGHT_SIDE) {
             if ($filter->grid()->model()->getCurrentPage() > 1) {
@@ -139,8 +139,8 @@ JS;
     {
         $filter = $this->filter();
 
-        $scopres = $filter->scopes();
-        $filters = $filter->filters();
+        $scopres    = $filter->scopes();
+        $filters    = $filter->filters();
         $valueCount = $filter->countConditions();
 
         if ($scopres->isEmpty() && ! $filters) {

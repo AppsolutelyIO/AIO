@@ -103,7 +103,6 @@ class Autocomplete extends Text
     /**
      * Load options from ajax results.
      *
-     * @param  string  $url
      * @param  string|null  $valueField
      * @param  string|null  $groupField
      * @return $this
@@ -154,7 +153,7 @@ class Autocomplete extends Text
             }
 
             if (! array_key_exists('value', $opt)) {
-                return null;
+                return;
             }
 
             if ($group) {

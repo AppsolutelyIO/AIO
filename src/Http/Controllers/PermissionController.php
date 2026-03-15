@@ -35,17 +35,17 @@ class PermissionController extends AdminController
             $tree->branch(function ($branch) {
                 $branchName = htmlspecialchars($branch['name']);
                 $branchSlug = htmlspecialchars($branch['slug']);
-                $payload = "<div class='pull-left' style='min-width:310px'><b>{$branchName}</b>&nbsp;&nbsp;[<span class='text-primary'>{$branchSlug}</span>]";
+                $payload    = "<div class='pull-left' style='min-width:310px'><b>{$branchName}</b>&nbsp;&nbsp;[<span class='text-primary'>{$branchSlug}</span>]";
 
                 $path = array_filter($branch['http_path']);
 
                 if (! $path) {
-                    return $payload.'</div>&nbsp;';
+                    return $payload . '</div>&nbsp;';
                 }
 
                 $max = 3;
                 if (count($path) > $max) {
-                    $path = array_slice($path, 0, $max);
+                    $path   = array_slice($path, 0, $max);
                     $path[] = '...';
                 }
 
@@ -70,7 +70,7 @@ class PermissionController extends AdminController
                     return strtoupper($name);
                 })->map(function ($name) {
                     return "<span class='label bg-primary'>{$name}</span>";
-                })->implode('&nbsp;').'&nbsp;';
+                })->implode('&nbsp;') . '&nbsp;';
 
                 $payload .= "</div>&nbsp; $method<a class=\"dd-nodrag\">$path</a>";
 
@@ -89,7 +89,7 @@ class PermissionController extends AdminController
 
         return Form::make(Permission::with($with), function (Form $form) use ($bindMenu) {
             $permissionTable = config('admin.database.permissions_table');
-            $connection = config('admin.database.connection');
+            $connection      = config('admin.database.connection');
             $permissionModel = config('admin.database.permissions_model');
 
             $id = $form->getKey();
@@ -157,9 +157,9 @@ class PermissionController extends AdminController
 
             if (! Str::contains($uri, '{')) {
                 if ($prefix !== '/') {
-                    $route = Str::replaceFirst($prefix, '', $uri.'*');
+                    $route = Str::replaceFirst($prefix, '', $uri . '*');
                 } else {
-                    $route = $uri.'*';
+                    $route = $uri . '*';
                 }
 
                 if ($route !== '*') {

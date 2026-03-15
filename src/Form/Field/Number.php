@@ -42,7 +42,6 @@ class Number extends Text
     /**
      * Set increment and decrement button to disabled.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function disable(bool $value = true)

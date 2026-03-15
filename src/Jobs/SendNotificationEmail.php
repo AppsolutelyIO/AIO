@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Jobs;
 
 use Appsolutely\AIO\Models\NotificationSender;
+use Appsolutely\AIO\Repositories\NotificationQueueRepository;
 use Appsolutely\AIO\Repositories\NotificationSenderRepository;
 use Appsolutely\AIO\Services\NotificationSenderService;
 use Illuminate\Bus\Queueable;
@@ -74,7 +75,7 @@ final class SendNotificationEmail implements ShouldQueue
 
             // Update notification queue status to sent
             if ($this->notificationQueueId) {
-                $queueRepository = app(\Appsolutely\AIO\Repositories\NotificationQueueRepository::class);
+                $queueRepository = app(NotificationQueueRepository::class);
                 $queueRepository->updateStatus($this->notificationQueueId, 'sent');
             }
 
@@ -126,7 +127,7 @@ final class SendNotificationEmail implements ShouldQueue
     {
         // Update notification queue status to failed
         if ($this->notificationQueueId) {
-            $queueRepository = app(\Appsolutely\AIO\Repositories\NotificationQueueRepository::class);
+            $queueRepository = app(NotificationQueueRepository::class);
             $queueRepository->updateStatus(
                 $this->notificationQueueId,
                 'failed',

@@ -22,7 +22,7 @@ use Illuminate\Support\Str;
  */
 class Model
 {
-    use Grid\Concerns\HasTree;
+    use Concerns\HasTree;
 
     /**
      * @var Request
@@ -42,7 +42,7 @@ class Model
     /**
      * Array of queries of the model.
      *
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $queries;
 
@@ -130,7 +130,6 @@ class Model
      * Create a new grid model instance.
      *
      * @param  Repository|\Illuminate\Database\Eloquent\Model  $repository
-     * @param  Request  $request
      */
     public function __construct(Request $request, $repository = null)
     {
@@ -167,7 +166,6 @@ class Model
     }
 
     /**
-     * @param  Collection  $query
      * @return void
      */
     public function setQueries(Collection $query)
@@ -188,7 +186,6 @@ class Model
     /**
      * 是否使用 simplePaginate方法进行分页.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function simple(bool $value = true)
@@ -271,9 +268,6 @@ class Model
         return $this->grid->makeName($this->perPageName);
     }
 
-    /**
-     * @param  int  $perPage
-     */
     public function setPerPage(int $perPage)
     {
         $this->perPage = $perPage;
@@ -324,7 +318,6 @@ class Model
     /**
      * Set parent grid instance.
      *
-     * @param  Grid  $grid
      * @return $this
      */
     public function setGrid(Grid $grid)
@@ -365,7 +358,6 @@ class Model
     }
 
     /**
-     * @param  array  $constraints
      * @return $this
      */
     public function setConstraints(array $constraints)
@@ -424,7 +416,6 @@ class Model
     /**
      * Add conditions to grid model.
      *
-     * @param  array  $conditions
      * @return $this
      */
     public function addConditions(array $conditions)
@@ -467,7 +458,6 @@ class Model
     }
 
     /**
-     * @param  AbstractPaginator  $paginator
      * @return void
      */
     protected function setPaginator(AbstractPaginator $paginator)
@@ -486,7 +476,6 @@ class Model
     }
 
     /**
-     * @param  Collection  $collection
      * @return Collection
      */
     protected function stdObjToArray(Collection $collection)
@@ -514,9 +503,6 @@ class Model
         return $this->currentPage ?: ($this->currentPage = ($this->request->get($this->getPageName()) ?: 1));
     }
 
-    /**
-     * @param  int  $currentPage
-     */
     public function setCurrentPage(int $currentPage)
     {
         $this->currentPage = $currentPage;
@@ -540,13 +526,11 @@ class Model
             return (int) $perPage;
         }
 
-        return null;
     }
 
     /**
      * Find query by method name.
      *
-     * @param $method
      * @return Collection
      */
     public function findQueryByMethod($method)
@@ -632,8 +616,6 @@ class Model
     }
 
     /**
-     * @param  string  $method
-     * @param  array  $arguments
      * @return $this
      */
     public function addQuery(string $method, array $arguments = [])
@@ -661,7 +643,6 @@ class Model
 
     /**
      * @param  Builder  $query
-     * @param  bool  $fetch
      * @param  string[]  $columns
      * @return Builder|Paginator|Collection
      */
@@ -726,7 +707,7 @@ class Model
      */
     public function reset()
     {
-        $this->data = null;
+        $this->data  = null;
         $this->model = null;
         $this->initQueries();
     }

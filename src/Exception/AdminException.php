@@ -4,6 +4,4 @@ namespace Appsolutely\AIO\Exception;
 
 use Exception;
 
-class AdminException extends Exception
-{
-}
+class AdminException extends Exception {}

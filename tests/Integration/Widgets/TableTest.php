@@ -12,7 +12,7 @@ class TableTest extends TestCase
     public function test_constructor_rows_only()
     {
         $table = new Table(['key' => 'value']);
-        $html = $table->render();
+        $html  = $table->render();
 
         $this->assertStringContainsString('key', $html);
         $this->assertStringContainsString('value', $html);
@@ -21,7 +21,7 @@ class TableTest extends TestCase
     public function test_constructor_with_headers_and_rows()
     {
         $table = new Table(['Name', 'Age'], [['Alice', 25], ['Bob', 30]]);
-        $html = $table->render();
+        $html  = $table->render();
 
         $this->assertStringContainsString('Name', $html);
         $this->assertStringContainsString('Age', $html);
@@ -34,7 +34,7 @@ class TableTest extends TestCase
     public function test_default_class()
     {
         $table = new Table(['a' => 'b']);
-        $html = $table->render();
+        $html  = $table->render();
 
         $this->assertStringContainsString('table', $html);
         $this->assertStringContainsString('default-table', $html);
@@ -92,7 +92,7 @@ class TableTest extends TestCase
     public function test_with_border()
     {
         $table = (new Table(['a' => 'b']))->withBorder();
-        $html = $table->render();
+        $html  = $table->render();
 
         $this->assertStringContainsString('table-bordered', $html);
     }
@@ -102,7 +102,7 @@ class TableTest extends TestCase
     public function test_make_factory()
     {
         $table = Table::make(['Name', 'Value'], [['foo', 'bar']]);
-        $html = $table->render();
+        $html  = $table->render();
 
         $this->assertStringContainsString('Name', $html);
         $this->assertStringContainsString('bar', $html);

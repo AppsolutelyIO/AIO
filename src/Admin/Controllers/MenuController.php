@@ -7,10 +7,10 @@ namespace Appsolutely\AIO\Admin\Controllers;
 use Appsolutely\AIO\Enums\MenuTarget;
 use Appsolutely\AIO\Enums\MenuType;
 use Appsolutely\AIO\Enums\Status;
-use Appsolutely\AIO\Models\CmsMenu;
-use Appsolutely\AIO\Repositories\MenuRepository;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Models\CmsMenu;
+use Appsolutely\AIO\Repositories\MenuRepository;
 use Illuminate\Support\Facades\Request;
 
 final class MenuController extends AdminBaseController

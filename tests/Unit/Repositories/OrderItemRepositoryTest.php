@@ -8,9 +8,10 @@ use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Models\OrderItem;
 use Appsolutely\AIO\Models\Product;
 use Appsolutely\AIO\Repositories\OrderItemRepository;
+use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class OrderItemRepositoryTest extends TestCase
 {
@@ -38,7 +39,7 @@ final class OrderItemRepositoryTest extends TestCase
     {
         $result = $this->repository->all();
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
     }
 
     public function test_create_stores_order_item(): void

@@ -18,8 +18,8 @@ class MigrationRegressionTest extends TestCase
     protected function getSrcFiles(): array
     {
         $files = [];
-        $dirs = [
-            __DIR__.'/../../src',
+        $dirs  = [
+            __DIR__ . '/../../src',
         ];
 
         foreach ($dirs as $dir) {
@@ -44,8 +44,8 @@ class MigrationRegressionTest extends TestCase
      */
     protected function getDistJsFiles(): array
     {
-        $files = [];
-        $distDir = __DIR__.'/../../resources/dist';
+        $files   = [];
+        $distDir = __DIR__ . '/../../resources/dist';
 
         if (! is_dir($distDir)) {
             return [];
@@ -75,13 +75,13 @@ class MigrationRegressionTest extends TestCase
 
             // Look for Dcat\Admin namespace usage (not Dcat\Laravel which is a dependency)
             if (preg_match('/\bDcat\\\\Admin\b/', $content)) {
-                $violations[] = str_replace(realpath(__DIR__.'/../..'), '', $file);
+                $violations[] = str_replace(realpath(__DIR__ . '/../..'), '', $file);
             }
         }
 
         $this->assertEmpty(
             $violations,
-            "Found Dcat\\Admin namespace references in:\n".implode("\n", $violations)
+            "Found Dcat\\Admin namespace references in:\n" . implode("\n", $violations)
         );
     }
 
@@ -92,7 +92,7 @@ class MigrationRegressionTest extends TestCase
         $violations = [];
 
         foreach ($this->getSrcFiles() as $file) {
-            $content = file_get_contents($file);
+            $content  = file_get_contents($file);
             $basename = basename($file);
 
             // Skip files that might legitimately reference dcat (e.g., migration notes)
@@ -102,13 +102,13 @@ class MigrationRegressionTest extends TestCase
 
             // Look for CSS class references like 'dcat-box', 'dcat-grid', etc.
             if (preg_match('/[\'"]dcat-/', $content)) {
-                $violations[] = str_replace(realpath(__DIR__.'/../..'), '', $file);
+                $violations[] = str_replace(realpath(__DIR__ . '/../..'), '', $file);
             }
         }
 
         $this->assertEmpty(
             $violations,
-            "Found 'dcat-' CSS class references in:\n".implode("\n", $violations)
+            "Found 'dcat-' CSS class references in:\n" . implode("\n", $violations)
         );
     }
 
@@ -126,13 +126,13 @@ class MigrationRegressionTest extends TestCase
             if (preg_match('/\bCreateDcat\b/', $content)
                 || preg_match('/\bDcat\.ready\b/', $content)
                 || preg_match('/\bDcat\.init\b/', $content)) {
-                $violations[] = str_replace(realpath(__DIR__.'/../..'), '', $file);
+                $violations[] = str_replace(realpath(__DIR__ . '/../..'), '', $file);
             }
         }
 
         $this->assertEmpty(
             $violations,
-            "Found Dcat JS global references in:\n".implode("\n", $violations)
+            "Found Dcat JS global references in:\n" . implode("\n", $violations)
         );
     }
 
@@ -147,13 +147,13 @@ class MigrationRegressionTest extends TestCase
 
             // Look for @dcat asset alias references (should be @aio or @admin)
             if (preg_match('/@dcat(?![\w])/', $content)) {
-                $violations[] = str_replace(realpath(__DIR__.'/../..'), '', $file);
+                $violations[] = str_replace(realpath(__DIR__ . '/../..'), '', $file);
             }
         }
 
         $this->assertEmpty(
             $violations,
-            "Found @dcat asset alias references in:\n".implode("\n", $violations)
+            "Found @dcat asset alias references in:\n" . implode("\n", $violations)
         );
     }
 
@@ -168,13 +168,13 @@ class MigrationRegressionTest extends TestCase
 
             // Look for dcat-api route prefix (should be api)
             if (preg_match('/[\'"]dcat-api/', $content)) {
-                $violations[] = str_replace(realpath(__DIR__.'/../..'), '', $file);
+                $violations[] = str_replace(realpath(__DIR__ . '/../..'), '', $file);
             }
         }
 
         $this->assertEmpty(
             $violations,
-            "Found 'dcat-api' route prefix references in:\n".implode("\n", $violations)
+            "Found 'dcat-api' route prefix references in:\n" . implode("\n", $violations)
         );
     }
 
@@ -189,13 +189,13 @@ class MigrationRegressionTest extends TestCase
 
             // Look for config('dcat. or config("dcat.
             if (preg_match("/config\(['\"]dcat\./", $content)) {
-                $violations[] = str_replace(realpath(__DIR__.'/../..'), '', $file);
+                $violations[] = str_replace(realpath(__DIR__ . '/../..'), '', $file);
             }
         }
 
         $this->assertEmpty(
             $violations,
-            "Found config('dcat.') references in:\n".implode("\n", $violations)
+            "Found config('dcat.') references in:\n" . implode("\n", $violations)
         );
     }
 
@@ -212,8 +212,8 @@ class MigrationRegressionTest extends TestCase
         $violations = [];
 
         foreach ($jsFiles as $file) {
-            $content = file_get_contents($file);
-            $relative = str_replace(realpath(__DIR__.'/../..'), '', $file);
+            $content  = file_get_contents($file);
+            $relative = str_replace(realpath(__DIR__ . '/../..'), '', $file);
 
             // Skip source maps
             if (str_ends_with($file, '.map.js')) {
@@ -231,7 +231,7 @@ class MigrationRegressionTest extends TestCase
 
         $this->assertEmpty(
             $violations,
-            "Found 'Dcat' references in dist JS files:\n".implode("\n", $violations)
+            "Found 'Dcat' references in dist JS files:\n" . implode("\n", $violations)
         );
     }
 
@@ -239,14 +239,14 @@ class MigrationRegressionTest extends TestCase
 
     public function test_no_dcat_references_in_views()
     {
-        $viewDir = __DIR__.'/../../resources/views';
+        $viewDir = __DIR__ . '/../../resources/views';
 
         if (! is_dir($viewDir)) {
             $this->markTestSkipped('No views directory found');
         }
 
         $violations = [];
-        $iterator = new \RecursiveIteratorIterator(
+        $iterator   = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($viewDir, \RecursiveDirectoryIterator::SKIP_DOTS)
         );
 
@@ -255,8 +255,8 @@ class MigrationRegressionTest extends TestCase
                 continue;
             }
 
-            $content = file_get_contents($file->getPathname());
-            $relative = str_replace(realpath(__DIR__.'/../..'), '', $file->getPathname());
+            $content  = file_get_contents($file->getPathname());
+            $relative = str_replace(realpath(__DIR__ . '/../..'), '', $file->getPathname());
 
             if (preg_match('/\bDcat\b/', $content) || preg_match('/\bdcat-/', $content)) {
                 $violations[] = $relative;
@@ -265,7 +265,7 @@ class MigrationRegressionTest extends TestCase
 
         $this->assertEmpty(
             $violations,
-            "Found Dcat references in view files:\n".implode("\n", $violations)
+            "Found Dcat references in view files:\n" . implode("\n", $violations)
         );
     }
 
@@ -273,14 +273,14 @@ class MigrationRegressionTest extends TestCase
 
     public function test_no_dcat_references_in_lang_files()
     {
-        $langDir = __DIR__.'/../../resources/lang';
+        $langDir = __DIR__ . '/../../resources/lang';
 
         if (! is_dir($langDir)) {
             $this->markTestSkipped('No lang directory found');
         }
 
         $violations = [];
-        $iterator = new \RecursiveIteratorIterator(
+        $iterator   = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($langDir, \RecursiveDirectoryIterator::SKIP_DOTS)
         );
 
@@ -289,8 +289,8 @@ class MigrationRegressionTest extends TestCase
                 continue;
             }
 
-            $content = file_get_contents($file->getPathname());
-            $relative = str_replace(realpath(__DIR__.'/../..'), '', $file->getPathname());
+            $content  = file_get_contents($file->getPathname());
+            $relative = str_replace(realpath(__DIR__ . '/../..'), '', $file->getPathname());
 
             // Check for dcat-admin or Dcat Admin in translation values
             if (preg_match('/dcat-admin/', $content) || preg_match('/\bDcat Admin\b/', $content)) {
@@ -300,7 +300,7 @@ class MigrationRegressionTest extends TestCase
 
         $this->assertEmpty(
             $violations,
-            "Found Dcat references in lang files:\n".implode("\n", $violations)
+            "Found Dcat references in lang files:\n" . implode("\n", $violations)
         );
     }
 }

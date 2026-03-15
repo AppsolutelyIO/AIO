@@ -6,8 +6,9 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 
 use Appsolutely\AIO\Models\ProductAttributeGroup;
 use Appsolutely\AIO\Repositories\ProductAttributeGroupRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class ProductAttributeGroupRepositoryTest extends TestCase
 {
@@ -35,7 +36,7 @@ final class ProductAttributeGroupRepositoryTest extends TestCase
     {
         $result = $this->repository->all();
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
     }
 
     public function test_create_stores_product_attribute_group(): void

@@ -4,6 +4,7 @@ namespace Appsolutely\AIO\Grid;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Exception\RuntimeException;
+use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Grid\Events\ApplyFilter;
 use Appsolutely\AIO\Grid\Events\Fetched;
 use Appsolutely\AIO\Grid\Events\Fetching;
@@ -41,6 +42,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
+use Illuminate\View\View;
 
 /**
  * Class Filter.
@@ -72,10 +74,11 @@ use Illuminate\Support\Traits\Macroable;
 class Filter implements Renderable
 {
     use HasBuilderEvents;
-    use Macroable;
     use HasVariables;
+    use Macroable;
 
     const MODE_RIGHT_SIDE = 'right-side';
+
     const MODE_PANEL = 'panel';
 
     /**
@@ -205,8 +208,6 @@ class Filter implements Renderable
 
     /**
      * Create a new filter instance.
-     *
-     * @param  Model  $model
      */
     public function __construct(Model $model)
     {
@@ -228,7 +229,7 @@ class Filter implements Renderable
      */
     protected function initLayout()
     {
-        $this->layout = new Filter\Layout\Layout($this);
+        $this->layout = new Layout($this);
     }
 
     /**
@@ -236,7 +237,7 @@ class Filter implements Renderable
      */
     protected function formatFilterId()
     {
-        return 'filter-box'.Str::random(8);
+        return 'filter-box' . Str::random(8);
     }
 
     /**
@@ -263,7 +264,6 @@ class Filter implements Renderable
     }
 
     /**
-     * @param  bool  $disabled
      * @return $this
      */
     public function disableCollapse(bool $disabled = true)
@@ -274,7 +274,6 @@ class Filter implements Renderable
     }
 
     /**
-     * @param  bool  $disabled
      * @return $this
      */
     public function disableResetButton(bool $disabled = true)
@@ -315,7 +314,7 @@ class Filter implements Renderable
     /**
      * Get grid.
      *
-     * @return \Appsolutely\AIO\Grid
+     * @return Grid
      */
     public function grid()
     {
@@ -352,10 +351,9 @@ class Filter implements Renderable
     }
 
     /**
-     * @param  string|null  $mode
      * @return $this|string
      */
-    public function mode(string $mode = null)
+    public function mode(?string $mode = null)
     {
         if ($mode === null) {
             return $this->mode;
@@ -496,7 +494,6 @@ class Filter implements Renderable
     /**
      * Add a filter to grid.
      *
-     * @param  AbstractFilter  $filter
      * @return AbstractFilter
      */
     protected function addFilter(AbstractFilter $filter)
@@ -511,7 +508,6 @@ class Filter implements Renderable
     /**
      * Use a custom filter.
      *
-     * @param  AbstractFilter  $filter
      * @return AbstractFilter
      */
     public function use(AbstractFilter $filter)
@@ -613,7 +609,6 @@ class Filter implements Renderable
     /**
      * Expand filter container.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function expand(bool $value = true)
@@ -659,7 +654,6 @@ class Filter implements Renderable
     }
 
     /**
-     * @param  string  $style
      * @return $this
      */
     public function style(?string $style)
@@ -697,7 +691,7 @@ class Filter implements Renderable
     /**
      * Get the string contents of the filter view.
      *
-     * @return \Illuminate\View\View|string
+     * @return View|string
      */
     public function render()
     {
@@ -779,7 +773,7 @@ class Filter implements Renderable
         if (! empty(static::$supports[$method])) {
             $class = static::$supports[$method];
             if (! is_subclass_of($class, AbstractFilter::class)) {
-                throw new RuntimeException("The class [{$class}] must be a type of ".AbstractFilter::class.'.');
+                throw new RuntimeException("The class [{$class}] must be a type of " . AbstractFilter::class . '.');
             }
 
             return $this->addFilter(new $class(...$arguments));

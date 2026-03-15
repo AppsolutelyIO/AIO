@@ -5,7 +5,9 @@ namespace Appsolutely\AIO\Grid\Displayers;
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Grid;
 use Appsolutely\AIO\Grid\Column;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Fluent;
+use Symfony\Component\Translation\TranslatorInterface;
 
 abstract class AbstractDisplayer
 {
@@ -30,7 +32,7 @@ abstract class AbstractDisplayer
     protected $column;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var Model
      */
     public $row;
 
@@ -43,14 +45,12 @@ abstract class AbstractDisplayer
      * Create a new displayer instance.
      *
      * @param  mixed  $value
-     * @param  Grid  $grid
-     * @param  Column  $column
      * @param  \stdClass  $row
      */
     public function __construct($value, Grid $grid, Column $column, $row)
     {
-        $this->value = $value;
-        $this->grid = $grid;
+        $this->value  = $value;
+        $this->grid   = $grid;
         $this->column = $column;
 
         $this->setRow($row);
@@ -120,7 +120,7 @@ abstract class AbstractDisplayer
      * Get translation.
      *
      * @param  string  $text
-     * @return string|\Symfony\Component\Translation\TranslatorInterface
+     * @return string|TranslatorInterface
      */
     protected function trans($text)
     {

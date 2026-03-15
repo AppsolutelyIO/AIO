@@ -35,7 +35,7 @@ class Markdown extends Widget
             $this->content($markdown);
         }
 
-        $this->id('mkd-'.Str::random(8));
+        $this->id('mkd-' . Str::random(8));
     }
 
     /**

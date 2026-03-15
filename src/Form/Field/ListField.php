@@ -28,7 +28,6 @@ class ListField extends Field
     /**
      * Set Max list size.
      *
-     * @param  int  $size
      * @return $this
      */
     public function max(int $size)
@@ -41,7 +40,6 @@ class ListField extends Field
     /**
      * Set Minimum list size.
      *
-     * @param  int  $size
      * @return $this
      */
     public function min(int $size)
@@ -95,7 +93,7 @@ class ListField extends Field
             $rules["{$this->column}.values.*"] = $fieldRules;
         }
         $attributes["{$this->column}.values.*"] = __('Value');
-        $rules["{$this->column}.values"][] = 'array';
+        $rules["{$this->column}.values"][]      = 'array';
 
         if ($this->max !== null) {
             $rules["{$this->column}.values"][] = "max:$this->max";
@@ -125,7 +123,7 @@ class ListField extends Field
 
     protected function prepareValidatorInput(array $input)
     {
-        Arr::forget($input, "{$this->column}.values.".static::DEFAULT_FLAG_NAME);
+        Arr::forget($input, "{$this->column}.values." . static::DEFAULT_FLAG_NAME);
 
         return $input;
     }

@@ -7,10 +7,15 @@ use Illuminate\Contracts\Support\Renderable;
 class Alert extends Widget
 {
     protected $view = 'admin::widgets.alert';
+
     protected $title;
+
     protected $content;
+
     protected $style;
+
     protected $icon;
+
     protected $showCloseBtn = false;
 
     public function __construct($content = '', $title = null, $style = 'danger')
@@ -96,7 +101,6 @@ class Alert extends Widget
     /**
      * Show close button.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function removable(bool $value = true)

@@ -11,8 +11,6 @@ class Code extends Markdown
 
     /**
      * @param  string  $content
-     * @param  int  $start
-     * @param  int  $end
      */
     public function __construct($content = '', int $start = 1, int $end = 1000)
     {
@@ -29,7 +27,6 @@ class Code extends Markdown
     /**
      * 设置语言.
      *
-     * @param  string  $lang
      * @return $this
      */
     public function lang(string $lang)

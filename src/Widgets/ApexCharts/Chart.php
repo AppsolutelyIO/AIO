@@ -29,7 +29,7 @@ class Chart extends Widget
     public function __construct($selector = null, $options = [])
     {
         if ($selector && ! is_string($selector)) {
-            $options = $selector;
+            $options  = $selector;
             $selector = null;
         }
 
@@ -41,7 +41,6 @@ class Chart extends Widget
     /**
      * 设置或获取图表容器选择器.
      *
-     * @param  string|null  $selector
      * @return $this|string|null
      */
     public function selector(?string $selector = null)
@@ -265,7 +264,7 @@ JS
             // 没有指定ID，需要自动生成
             $id = $this->generateId();
 
-            $this->selector('#'.$id);
+            $this->selector('#' . $id);
         }
 
         $this->addScript();
@@ -317,6 +316,6 @@ HTML;
      */
     protected function generateId()
     {
-        return 'apex-chart-'.Str::random(8);
+        return 'apex-chart-' . Str::random(8);
     }
 }

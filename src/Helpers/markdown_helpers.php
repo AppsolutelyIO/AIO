@@ -30,7 +30,7 @@ if (! function_exists('parse_markdown_images')) {
             $html = $converter->convert($markdown)->getContent();
 
             // Use DOMDocument to parse the HTML and extract image attributes
-            $dom = new \DOMDocument();
+            $dom = new DOMDocument();
             @$dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
             $images = [];
@@ -47,7 +47,7 @@ if (! function_exists('parse_markdown_images')) {
             }
 
             return $images;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             log_error($e->getMessage(), null, __CLASS__, __FUNCTION__);
 
             return [];

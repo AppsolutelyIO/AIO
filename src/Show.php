@@ -2,7 +2,6 @@
 
 namespace Appsolutely\AIO;
 
-use Closure;
 use Appsolutely\AIO\Contracts\Repository;
 use Appsolutely\AIO\Show\AbstractTool;
 use Appsolutely\AIO\Show\Divider;
@@ -14,6 +13,7 @@ use Appsolutely\AIO\Show\Relation;
 use Appsolutely\AIO\Show\Row;
 use Appsolutely\AIO\Show\Tools;
 use Appsolutely\AIO\Traits\HasBuilderEvents;
+use Closure;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
@@ -28,8 +28,8 @@ class Show implements Renderable
 {
     use HasBuilderEvents;
     use Macroable {
-            __call as macroCall;
-        }
+        __call as macroCall;
+    }
 
     /**
      * @var string
@@ -88,8 +88,9 @@ class Show implements Renderable
      * @var Panel
      */
     protected $panel;
+
     /**
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $rows;
 
@@ -98,9 +99,8 @@ class Show implements Renderable
      *
      * @param  mixed  $id  $id
      * @param  Model|Builder|Repository|array|Arrayable  $model
-     * @param  \Closure  $builder
      */
-    public function __construct($id = null, $model = null, ?\Closure $builder = null)
+    public function __construct($id = null, $model = null, ?Closure $builder = null)
     {
         switch (func_num_args()) {
             case 1:
@@ -109,13 +109,13 @@ class Show implements Renderable
                     $this->setKey($id);
                 } else {
                     $builder = $model;
-                    $model = $id;
+                    $model   = $id;
                 }
                 break;
             default:
                 $this->setKey($id);
         }
-        $this->rows = new Collection();
+        $this->rows    = new Collection();
         $this->builder = $builder;
 
         $this->initModel($model);
@@ -163,7 +163,6 @@ class Show implements Renderable
     }
 
     /**
-     * @param  string  $value
      * @return $this
      */
     public function setKeyName(string $value)
@@ -207,8 +206,8 @@ class Show implements Renderable
     }
 
     /**
-     * @param  Fluent|\Illuminate\Database\Eloquent\Model|null  $model
-     * @return Fluent|$this|\Illuminate\Database\Eloquent\Model
+     * @param  Fluent|Model|null  $model
+     * @return Fluent|$this|Model
      */
     public function model($model = null)
     {
@@ -254,7 +253,7 @@ class Show implements Renderable
     /**
      * @return $this
      */
-    public function wrap(\Closure $wrapper)
+    public function wrap(Closure $wrapper)
     {
         $this->panel->wrap($wrapper);
 
@@ -266,7 +265,7 @@ class Show implements Renderable
      */
     protected function initContents()
     {
-        $this->fields = new Collection();
+        $this->fields    = new Collection();
         $this->relations = new Collection();
     }
 
@@ -289,7 +288,7 @@ class Show implements Renderable
     }
 
     /**
-     * @param  \Closure|array|AbstractTool|Renderable|Htmlable|string  $callback
+     * @param  Closure|array|AbstractTool|Renderable|Htmlable|string  $callback
      * @return $this|Tools
      */
     public function tools($callback = null)
@@ -298,7 +297,7 @@ class Show implements Renderable
             return $this->panel->tools();
         }
 
-        if ($callback instanceof \Closure) {
+        if ($callback instanceof Closure) {
             $callback->call($this->model, $this->panel->tools());
 
             return $this;
@@ -330,10 +329,9 @@ class Show implements Renderable
     /**
      * Get fields or add multiple fields.
      *
-     * @param  array  $fields
      * @return $this|Collection
      */
-    public function fields(array $fields = null)
+    public function fields(?array $fields = null)
     {
         if ($fields === null) {
             return $this->fields;
@@ -374,15 +372,15 @@ class Show implements Renderable
      * Add a relation to show.
      *
      * @param  string  $name
-     * @param  string|\Closure  $label
-     * @param  null|\Closure  $builder
+     * @param  string|Closure  $label
+     * @param  null|Closure  $builder
      * @return Relation
      */
     public function relation($name, $label, $builder = null)
     {
         if ($builder === null) {
             $builder = $label;
-            $label = '';
+            $label   = '';
         }
 
         return $this->addRelation($name, $builder, $label);
@@ -412,7 +410,7 @@ class Show implements Renderable
      * Add a relation panel to show.
      *
      * @param  string  $name
-     * @param  \Closure  $builder
+     * @param  Closure  $builder
      * @param  string  $label
      * @return Relation
      */
@@ -538,8 +536,6 @@ class Show implements Renderable
     /**
      * Show quick edit tool.
      *
-     * @param  null|string  $width
-     * @param  null|string  $height
      * @return $this
      */
     public function showQuickEdit(?string $width = null, ?string $height = null)
@@ -610,7 +606,6 @@ class Show implements Renderable
     }
 
     /**
-     * @param $method
      * @param  array  $arguments
      * @return bool|Show|Field|Relation
      */
@@ -634,9 +629,9 @@ class Show implements Renderable
      */
     protected function handleRelationField($method, $arguments)
     {
-        if (count($arguments) === 1 && $arguments[0] instanceof \Closure) {
+        if (count($arguments) === 1 && $arguments[0] instanceof Closure) {
             return $this->addRelation($method, $arguments[0]);
-        } elseif (count($arguments) === 2 && $arguments[1] instanceof \Closure) {
+        } elseif (count($arguments) === 2 && $arguments[1] instanceof Closure) {
             return $this->addRelation($method, $arguments[1], $arguments[0]);
         }
 
@@ -680,7 +675,6 @@ class Show implements Renderable
     /**
      * Add a row in Show.
      *
-     * @param  Closure  $callback
      * @return $this
      */
     public function row(Closure $callback)
@@ -691,7 +685,7 @@ class Show implements Renderable
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function rows()
     {

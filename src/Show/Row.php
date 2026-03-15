@@ -4,7 +4,9 @@ namespace Appsolutely\AIO\Show;
 
 use Appsolutely\AIO\Show;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Collection;
+use Illuminate\View\View;
 
 class Row implements Renderable
 {
@@ -36,9 +38,6 @@ class Row implements Renderable
 
     /**
      * Row constructor.
-     *
-     * @param  \Closure  $callback
-     * @param  Show  $show
      */
     public function __construct(\Closure $callback, Show $show)
     {
@@ -54,7 +53,7 @@ class Row implements Renderable
     /**
      * Render the row.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function render()
     {
@@ -62,7 +61,7 @@ class Row implements Renderable
     }
 
     /**
-     * @return Collection|\Appsolutely\AIO\Show\Field[]
+     * @return Collection|Field[]
      */
     public function fields()
     {
@@ -87,7 +86,7 @@ class Row implements Renderable
      *
      * @param  string  $name
      * @param  string  $label
-     * @return \Appsolutely\AIO\Show\Field
+     * @return Field
      */
     public function field($name, $label = '')
     {
@@ -101,8 +100,7 @@ class Row implements Renderable
     /**
      * Add field.
      *
-     * @param $name
-     * @return \Appsolutely\AIO\Show\Field|Collection
+     * @return Field|Collection
      */
     public function __get($name)
     {
@@ -114,9 +112,7 @@ class Row implements Renderable
     }
 
     /**
-     * @param $method
-     * @param $arguments
-     * @return \Appsolutely\AIO\Show\Field
+     * @return Field
      */
     public function __call($method, $arguments)
     {
@@ -128,7 +124,7 @@ class Row implements Renderable
     }
 
     /**
-     * @param  \Appsolutely\AIO\Show\Field  $field
+     * @param  Field  $field
      * @return void
      */
     protected function pushField($field)

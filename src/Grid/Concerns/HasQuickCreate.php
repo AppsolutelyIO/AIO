@@ -2,8 +2,8 @@
 
 namespace Appsolutely\AIO\Grid\Concerns;
 
-use Closure;
 use Appsolutely\AIO\Grid\Tools\QuickCreate;
+use Closure;
 
 trait HasQuickCreate
 {
@@ -13,10 +13,9 @@ trait HasQuickCreate
     protected $quickCreate;
 
     /**
-     * @param  Closure  $callback
      * @return $this
      */
-    public function quickCreate(\Closure $callback)
+    public function quickCreate(Closure $callback)
     {
         $this->quickCreate = new QuickCreate($this);
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Models\Concerns;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
 trait Sluggable
@@ -76,8 +77,8 @@ trait Sluggable
      * Scope to find models by slug with flexible matching.
      * Uses getPossibleSlugs() to match various slug formats.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param  Builder  $query
+     * @return Builder
      */
     public function scopeSlug($query, string $slug)
     {

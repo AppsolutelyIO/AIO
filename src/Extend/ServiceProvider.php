@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class ServiceProvider extends LaravelServiceProvider
 {
@@ -52,7 +53,7 @@ abstract class ServiceProvider extends LaravelServiceProvider
     protected $css = [];
 
     /**
-     * @var \Symfony\Component\Console\Output\OutputInterface
+     * @var OutputInterface
      */
     public $output;
 
@@ -221,7 +222,6 @@ abstract class ServiceProvider extends LaravelServiceProvider
     /**
      * 获取扩展包路径.
      *
-     * @param  string  $path
      * @return string
      *
      * @throws \ReflectionException
@@ -229,7 +229,7 @@ abstract class ServiceProvider extends LaravelServiceProvider
     public function path(?string $path = null)
     {
         if (! $this->path) {
-            $this->path = realpath(dirname((new \ReflectionClass(static::class))->getFileName()).'/..');
+            $this->path = realpath(dirname((new \ReflectionClass(static::class))->getFileName()) . '/..');
 
             if (! is_dir($this->path)) {
                 throw new RuntimeException("The {$this->path} is not a directory.");
@@ -238,7 +238,7 @@ abstract class ServiceProvider extends LaravelServiceProvider
 
         $path = ltrim($path, '/');
 
-        return $path ? $this->path.'/'.$path : $this->path;
+        return $path ? $this->path . '/' . $path : $this->path;
     }
 
     /**
@@ -266,7 +266,7 @@ abstract class ServiceProvider extends LaravelServiceProvider
                 fclose($file);
                 $base64 = chunk_split(base64_encode($content));
 
-                return 'data:image/png;base64,'.$base64;
+                return 'data:image/png;base64,' . $base64;
             }
         } catch (\ReflectionException $e) {
         }
@@ -320,8 +320,6 @@ abstract class ServiceProvider extends LaravelServiceProvider
 
     /**
      * 保存配置.
-     *
-     * @param  array  $config
      */
     public function saveConfig(array $config)
     {
@@ -380,14 +378,12 @@ abstract class ServiceProvider extends LaravelServiceProvider
     protected function getPublishsPath()
     {
         return public_path(
-            Admin::asset()->getRealPath('@extension/'.str_replace('.', '/', $this->getName()))
+            Admin::asset()->getRealPath('@extension/' . str_replace('.', '/', $this->getName()))
         );
     }
 
     /**
      * 注册路由.
-     *
-     * @param $callback
      */
     public function registerRoutes($callback)
     {
@@ -415,11 +411,11 @@ abstract class ServiceProvider extends LaravelServiceProvider
     protected function addMiddleware()
     {
         $adminMiddleware = (array) config('admin.route.middleware');
-        $middleware = $this->middleware();
+        $middleware      = $this->middleware();
 
         $before = $middleware['before'] ?? [];
         $middle = $middleware['middle'] ?? [];
-        $after = $middleware['after'] ?? [];
+        $after  = $middleware['after'] ?? [];
 
         $this->mixMiddleware($middle);
 
@@ -492,7 +488,6 @@ abstract class ServiceProvider extends LaravelServiceProvider
     }
 
     /**
-     * @param  ComposerProperty  $composerProperty
      * @return $this
      */
     public function withComposerProperty(ComposerProperty $composerProperty)
@@ -528,7 +523,7 @@ abstract class ServiceProvider extends LaravelServiceProvider
      */
     public static function trans($key, $replace = [], $locale = null)
     {
-        return trans(static::instance()->getName().'::'.$key, $replace, $locale);
+        return trans(static::instance()->getName() . '::' . $key, $replace, $locale);
     }
 
     /**
@@ -549,7 +544,7 @@ abstract class ServiceProvider extends LaravelServiceProvider
         $asset = Admin::asset();
 
         // 注册静态资源路径别名
-        $asset->alias($this->getName().'.path', '@extension/'.$this->getPackageName());
+        $asset->alias($this->getName() . '.path', '@extension/' . $this->getPackageName());
 
         if ($this->js || $this->css) {
             $asset->alias($this->getName(), [
@@ -573,7 +568,7 @@ abstract class ServiceProvider extends LaravelServiceProvider
             return $files;
         }
 
-        return '@'.$this->getName().'.path/'.trim($files, '/');
+        return '@' . $this->getName() . '.path/' . trim($files, '/');
     }
 
     /**
@@ -587,7 +582,6 @@ abstract class ServiceProvider extends LaravelServiceProvider
     }
 
     /**
-     * @param $config
      * @return false|string
      */
     protected function serializeConfig($config)
@@ -596,7 +590,6 @@ abstract class ServiceProvider extends LaravelServiceProvider
     }
 
     /**
-     * @param $config
      * @return array
      */
     protected function unserializeConfig($config)

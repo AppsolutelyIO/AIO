@@ -7,9 +7,13 @@ use Illuminate\Contracts\Support\Renderable;
 class Callout extends Widget
 {
     protected $view = 'admin::widgets.alert';
+
     protected $title;
+
     protected $content;
+
     protected $style = 'default';
+
     protected $showCloseBtn = false;
 
     public function __construct($content = '', ?string $title = null, ?string $style = null)
@@ -22,7 +26,6 @@ class Callout extends Widget
     /**
      * Set title.
      *
-     * @param  string  $title
      * @return $this
      */
     public function title(?string $title)
@@ -108,7 +111,6 @@ class Callout extends Widget
     /**
      * Show close button.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function removable(bool $value = true)
@@ -121,7 +123,6 @@ class Callout extends Widget
     /**
      * Add style.
      *
-     * @param  string  $style
      * @return $this
      */
     public function style(?string $style = 'info')

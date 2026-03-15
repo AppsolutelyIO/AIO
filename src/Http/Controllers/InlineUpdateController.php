@@ -3,22 +3,22 @@
 namespace Appsolutely\AIO\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Throwable;
 
 class InlineUpdateController
 {
     /**
-     * @param  Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function handle(Request $request)
     {
         try {
             $modelClass = $request->input('model');
-            $id = $request->input('id');
-            $field = $request->input('field');
-            $value = $request->input('value');
+            $id         = $request->input('id');
+            $field      = $request->input('field');
+            $value      = $request->input('value');
 
             if (! is_string($modelClass) || ! class_exists($modelClass)) {
                 return $this->error('Invalid model class.');
@@ -33,14 +33,14 @@ class InlineUpdateController
             }
 
             /** @var Model $record */
-            $record = (new $modelClass())->newQuery()->findOrFail($id);
+            $record           = (new $modelClass())->newQuery()->findOrFail($id);
             $record->{$field} = $value;
             $record->save();
 
             return response()->json([
-                'status' => true,
+                'status'  => true,
                 'message' => trans('admin.update_succeeded'),
-                'data' => ['message' => trans('admin.update_succeeded')],
+                'data'    => ['message' => trans('admin.update_succeeded')],
             ]);
         } catch (Throwable $e) {
             report($e);
@@ -51,14 +51,14 @@ class InlineUpdateController
 
     /**
      * @param  string  $message
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     protected function error($message)
     {
         return response()->json([
-            'status' => false,
+            'status'  => false,
             'message' => $message,
-            'data' => ['message' => $message],
+            'data'    => ['message' => $message],
         ]);
     }
 }

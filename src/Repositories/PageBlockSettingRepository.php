@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Repositories;
 
+use Appsolutely\AIO\Enums\BlockScope;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\PageBlockSetting;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 final class PageBlockSettingRepository extends BaseRepository
 {
@@ -52,7 +55,7 @@ final class PageBlockSettingRepository extends BaseRepository
         return $query->update(['status' => Status::INACTIVE, 'sort' => 0]);
     }
 
-    public function getActivePublishedSettings(int $pageId, ?\Carbon\Carbon $datetime = null): \Illuminate\Database\Eloquent\Collection
+    public function getActivePublishedSettings(int $pageId, ?Carbon $datetime = null): \Illuminate\Database\Eloquent\Collection
     {
         $datetime = $datetime ?? now();
 
@@ -136,11 +139,11 @@ final class PageBlockSettingRepository extends BaseRepository
     /**
      * Get block IDs for global blocks that are active and have sort order
      */
-    public function getGlobalBlockIds(): \Illuminate\Support\Collection
+    public function getGlobalBlockIds(): Collection
     {
         return $this->model->newQuery()
             ->whereHas('block', function ($query) {
-                $query->where('scope', \Appsolutely\AIO\Enums\BlockScope::Global->value)->status();
+                $query->where('scope', BlockScope::Global->value)->status();
             })
             ->status()
             ->orderBy('sort')

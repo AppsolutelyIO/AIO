@@ -7,6 +7,7 @@ namespace Appsolutely\AIO\Repositories;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Repositories\Traits\Reference;
 use Appsolutely\AIO\Repositories\Traits\Status;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 
 final class PageRepository extends BaseRepository
@@ -57,7 +58,7 @@ final class PageRepository extends BaseRepository
     /**
      * Get all published pages for sitemap generation (only columns needed for sitemap)
      */
-    public function getPublishedPagesForSitemap(Carbon $datetime): \Illuminate\Database\Eloquent\Collection
+    public function getPublishedPagesForSitemap(Carbon $datetime): Collection
     {
         return $this->model->newQuery()
             ->select(['id', 'slug', 'parent_id', 'status', 'published_at', 'expired_at', 'updated_at'])
@@ -90,7 +91,7 @@ final class PageRepository extends BaseRepository
     /**
      * Get pages by parent ID
      */
-    public function getByParentId(?int $parentId, ?Carbon $datetime = null): \Illuminate\Database\Eloquent\Collection
+    public function getByParentId(?int $parentId, ?Carbon $datetime = null): Collection
     {
         $query = $this->model->newQuery()
             ->where('parent_id', $parentId)
@@ -117,7 +118,7 @@ final class PageRepository extends BaseRepository
     /**
      * Get published pages with blocks eager loaded
      */
-    public function getPublishedWithBlocks(?Carbon $datetime = null): \Illuminate\Database\Eloquent\Collection
+    public function getPublishedWithBlocks(?Carbon $datetime = null): Collection
     {
         $datetime = $datetime ?? now();
 

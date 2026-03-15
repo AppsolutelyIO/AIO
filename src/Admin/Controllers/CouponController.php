@@ -6,9 +6,9 @@ namespace Appsolutely\AIO\Admin\Controllers;
 
 use Appsolutely\AIO\Enums\CouponStatus;
 use Appsolutely\AIO\Enums\CouponType;
-use Appsolutely\AIO\Models\Coupon;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Grid;
+use Appsolutely\AIO\Models\Coupon;
 
 final class CouponController extends AdminBaseController
 {

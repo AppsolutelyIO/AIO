@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Admin\Forms\Models;
 
-use Appsolutely\AIO\Models\Model;
 use Appsolutely\AIO\Contracts\LazyRenderable;
+use Appsolutely\AIO\Models\Model;
 use Appsolutely\AIO\Traits\LazyWidget;
 use Appsolutely\AIO\Widgets\Form;
 

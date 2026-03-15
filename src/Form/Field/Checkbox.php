@@ -39,7 +39,6 @@ class Checkbox extends MultipleSelect
     /**
      * "info", "primary", "inverse", "danger", "success", "purple".
      *
-     * @param  string  $style
      * @return $this
      */
     public function style(string $style)
@@ -82,7 +81,7 @@ class Checkbox extends MultipleSelect
         $this->addCascadeScript();
 
         $checkbox = WidgetCheckbox::make(
-            $this->getElementName().'[]',
+            $this->getElementName() . '[]',
             $this->options,
             $this->style
         );

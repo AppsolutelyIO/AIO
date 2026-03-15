@@ -8,8 +8,9 @@ use Appsolutely\AIO\Exceptions\FormNotFoundException;
 use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Models\FormEntry;
 use Appsolutely\AIO\Services\DynamicFormSubmissionService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 
 final class DynamicFormSubmissionServiceTest extends TestCase
 {
@@ -52,7 +53,7 @@ final class DynamicFormSubmissionServiceTest extends TestCase
     {
         $form = Form::factory()->create(['slug' => 'meta-form']);
 
-        $request = \Illuminate\Http\Request::create('/', 'POST');
+        $request = Request::create('/', 'POST');
 
         $entry = $this->service->submitForm('meta-form', [
             'email' => 'test@example.com',
@@ -98,7 +99,7 @@ final class DynamicFormSubmissionServiceTest extends TestCase
         $_COOKIE['utm_medium'] = 'cpc';
 
         try {
-            $request = \Illuminate\Http\Request::create('/', 'POST');
+            $request = Request::create('/', 'POST');
 
             $entry = $this->service->submitForm('cookie-meta-form', [
                 'email' => 'test@example.com',
@@ -120,7 +121,7 @@ final class DynamicFormSubmissionServiceTest extends TestCase
 
         // Simulate request with decrypted cookies (as EncryptCookies middleware would provide)
         // No $_COOKIE set — proves the value comes from $request->cookie(), not $_COOKIE
-        $request = \Illuminate\Http\Request::create('/', 'POST', [], [
+        $request = Request::create('/', 'POST', [], [
             'utm_source' => 'google',
             'gclid'      => 'abc123',
         ]);
@@ -141,7 +142,7 @@ final class DynamicFormSubmissionServiceTest extends TestCase
         ]);
 
         // Request has decrypted value, $_COOKIE has encrypted gibberish
-        $request = \Illuminate\Http\Request::create('/', 'POST', [], [
+        $request = Request::create('/', 'POST', [], [
             'utm_source' => 'google',
         ]);
         $_COOKIE['utm_source'] = 'eyJpdiI6encrypted_gibberish';
@@ -169,7 +170,7 @@ final class DynamicFormSubmissionServiceTest extends TestCase
         // utm_medium and gclid not set
 
         try {
-            $request = \Illuminate\Http\Request::create('/', 'POST');
+            $request = Request::create('/', 'POST');
 
             $entry = $this->service->submitForm('partial-cookie-form', [
                 'email' => 'test@example.com',
@@ -190,7 +191,7 @@ final class DynamicFormSubmissionServiceTest extends TestCase
             'meta_keys_to_collect' => null,
         ]);
 
-        $request = \Illuminate\Http\Request::create('/', 'POST');
+        $request = Request::create('/', 'POST');
 
         $entry = $this->service->submitForm('no-meta-form', [
             'email' => 'test@example.com',
@@ -210,7 +211,7 @@ final class DynamicFormSubmissionServiceTest extends TestCase
         $_COOKIE['utm_medium'] = '';
 
         try {
-            $request = \Illuminate\Http\Request::create('/', 'POST');
+            $request = Request::create('/', 'POST');
 
             $entry = $this->service->submitForm('empty-cookie-form', [
                 'email' => 'test@example.com',

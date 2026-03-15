@@ -2,7 +2,6 @@
 
 namespace Appsolutely\AIO;
 
-use Closure;
 use Appsolutely\AIO\Contracts\TreeRepository;
 use Appsolutely\AIO\Exception\InvalidArgumentException;
 use Appsolutely\AIO\Repositories\EloquentRepository;
@@ -12,10 +11,12 @@ use Appsolutely\AIO\Traits\HasVariables;
 use Appsolutely\AIO\Tree\AbstractTool;
 use Appsolutely\AIO\Tree\Actions;
 use Appsolutely\AIO\Tree\Tools;
+use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 
@@ -48,7 +49,7 @@ class Tree implements Renderable
     protected $repository;
 
     /**
-     * @var \Closure
+     * @var Closure
      */
     protected $queryCallback;
 
@@ -65,7 +66,7 @@ class Tree implements Renderable
     protected $branchView = 'admin::tree.branch';
 
     /**
-     * @var \Closure
+     * @var Closure
      */
     protected $callback;
 
@@ -132,7 +133,7 @@ class Tree implements Renderable
     protected $actionsClass;
 
     /**
-     * @var \Closure[]
+     * @var Closure[]
      */
     protected $actionCallbacks = [];
 
@@ -146,17 +147,17 @@ class Tree implements Renderable
      *
      * @param  Model|TreeRepository|string|null  $model
      */
-    public function __construct($repository = null, ?\Closure $callback = null)
+    public function __construct($repository = null, ?Closure $callback = null)
     {
         $this->repository = $this->makeRepository($repository);
-        $this->path = $this->path ?: request()->getPathInfo();
-        $this->url = url($this->path);
+        $this->path       = $this->path ?: request()->getPathInfo();
+        $this->url        = url($this->path);
 
         $this->elementId .= Str::random(8);
 
         $this->setUpTools();
 
-        if ($callback instanceof \Closure) {
+        if ($callback instanceof Closure) {
             $callback($this);
         }
 
@@ -172,7 +173,6 @@ class Tree implements Renderable
     }
 
     /**
-     * @param $repository
      * @return TreeRepository
      */
     public function makeRepository($repository)
@@ -188,7 +188,7 @@ class Tree implements Renderable
         if (! $repository instanceof TreeRepository) {
             $class = get_class($repository);
 
-            throw new InvalidArgumentException("The class [{$class}] must be a type of [".TreeRepository::class.'].');
+            throw new InvalidArgumentException("The class [{$class}] must be a type of [" . TreeRepository::class . '].');
         }
 
         return $repository;
@@ -203,7 +203,7 @@ class Tree implements Renderable
     {
         if ($this->branchCallback === null) {
             $this->branchCallback = function ($branch) {
-                $key = $branch[$this->repository->getPrimaryKeyColumn()];
+                $key   = $branch[$this->repository->getPrimaryKeyColumn()];
                 $title = $branch[$this->repository->getTitleColumn()];
 
                 return "$key - $title";
@@ -214,10 +214,9 @@ class Tree implements Renderable
     /**
      * Set branch callback.
      *
-     * @param  \Closure  $branchCallback
      * @return $this
      */
-    public function branch(\Closure $branchCallback)
+    public function branch(Closure $branchCallback)
     {
         $this->branchCallback = $branchCallback;
 
@@ -229,7 +228,7 @@ class Tree implements Renderable
      *
      * @return $this
      */
-    public function query(\Closure $callback)
+    public function query(Closure $callback)
     {
         $this->queryCallback = $callback;
 
@@ -241,7 +240,6 @@ class Tree implements Renderable
      *
      * @see https://github.com/dbushell/Nestable
      *
-     * @param  int  $max
      * @return $this
      */
     public function maxDepth(int $max)
@@ -263,7 +261,6 @@ class Tree implements Renderable
     }
 
     /**
-     * @param  bool  $value
      * @return void
      */
     public function expand(bool $value = true)
@@ -274,7 +271,6 @@ class Tree implements Renderable
     /**
      * Disable create.
      *
-     * @param  bool  $value
      * @return void
      */
     public function disableCreateButton(bool $value = true)
@@ -298,8 +294,6 @@ class Tree implements Renderable
     }
 
     /**
-     * @param  string  $width
-     * @param  string  $height
      * @return $this
      */
     public function setDialogFormDimensions(string $width, string $height)
@@ -312,7 +306,6 @@ class Tree implements Renderable
     /**
      * Disable save.
      *
-     * @param  bool  $value
      * @return void
      */
     public function disableSaveButton(bool $value = true)
@@ -328,7 +321,6 @@ class Tree implements Renderable
     /**
      * Disable refresh.
      *
-     * @param  bool  $value
      * @return void
      */
     public function disableRefreshButton(bool $value = true)
@@ -378,10 +370,9 @@ class Tree implements Renderable
     }
 
     /**
-     * @param  Closure  $closure
      * @return $this;
      */
-    public function wrap(\Closure $closure)
+    public function wrap(Closure $closure)
     {
         $this->wrapper = $closure;
 
@@ -440,7 +431,7 @@ class Tree implements Renderable
     }
 
     /**
-     * @return \Closure
+     * @return Closure
      */
     public function resolveAction()
     {
@@ -468,7 +459,6 @@ class Tree implements Renderable
     /**
      * 自定义行操作类.
      *
-     * @param  string  $actionClass
      * @return $this
      */
     public function setActionClass(string $actionClass)
@@ -481,12 +471,12 @@ class Tree implements Renderable
     /**
      * 设置行操作回调.
      *
-     * @param  \Closure|array  $callback
+     * @param  Closure|array  $callback
      * @return $this
      */
     public function actions($callback)
     {
-        if ($callback instanceof \Closure) {
+        if ($callback instanceof Closure) {
             $this->actionCallbacks[] = $callback;
         } else {
             $this->actionCallbacks[] = function (Actions $actions) use ($callback) {
@@ -577,7 +567,7 @@ class Tree implements Renderable
             return $this->tools;
         }
 
-        if ($callback instanceof \Closure) {
+        if ($callback instanceof Closure) {
             $callback($this->tools);
 
             return $this;
@@ -603,7 +593,7 @@ class Tree implements Renderable
             return '';
         }
 
-        $url = $this->url.'/create';
+        $url = $this->url . '/create';
         $new = trans('admin.new');
 
         $quickBtn = $btn = '';
@@ -612,7 +602,7 @@ class Tree implements Renderable
         }
 
         if ($this->useQuickCreate) {
-            $text = $this->useCreate ? '<i class=\' fa fa-clone\'></i>' : "<i class='feather icon-plus'></i><span class='d-none d-sm-inline'>&nbsp; $new</span>";
+            $text     = $this->useCreate ? '<i class=\' fa fa-clone\'></i>' : "<i class='feather icon-plus'></i><span class='d-none d-sm-inline'>&nbsp; $new</span>";
             $quickBtn = "<button data-url='$url' class='btn btn-sm btn-primary tree-quick-create'>$text</button>";
         }
 
@@ -637,7 +627,7 @@ class Tree implements Renderable
     /**
      * Render a tree.
      *
-     * @return \Illuminate\Http\JsonResponse|string
+     * @return JsonResponse|string
      */
     public function render()
     {

@@ -7,16 +7,19 @@ namespace Appsolutely\AIO\Http\Controllers\Auth;
 use Appsolutely\AIO\Http\Controllers\BaseController;
 use Appsolutely\AIO\Models\Model;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 final class RegisteredUserController extends BaseController
 {
     /**
      * Display the registration view.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -26,9 +29,9 @@ final class RegisteredUserController extends BaseController
     /**
      * Handle an incoming registration request.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {

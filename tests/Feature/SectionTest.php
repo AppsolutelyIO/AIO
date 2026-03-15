@@ -13,7 +13,7 @@ class SectionTest extends TestCase
 {
     protected $login = false;
 
-    public function testInjectValues()
+    public function test_inject_values()
     {
         // view
         admin_inject_section('key1', view('admin-tests::test'));
@@ -33,7 +33,7 @@ class SectionTest extends TestCase
         $this->assertSame(admin_section('key3'), '<h1>Hello world</h1>');
     }
 
-    public function testOptions()
+    public function test_options()
     {
         admin_inject_section('key1', 'value1');
 
@@ -47,7 +47,7 @@ class SectionTest extends TestCase
         );
     }
 
-    public function testAppend()
+    public function test_append()
     {
         // 1 append
         admin_inject_section('key1', 'test1,');
@@ -70,16 +70,16 @@ class SectionTest extends TestCase
         admin_inject_section('key3', 'test1,');
         admin_inject_section('key3', 'test2,', false);
         admin_inject_section('key3', function ($options) {
-            return $options->previous.'test3,';
+            return $options->previous . 'test3,';
         }, false);
         admin_inject_section('key3', function ($options) {
-            return $options->previous.'test4,';
+            return $options->previous . 'test4,';
         }, false);
 
         $this->assertSame(admin_section('key3'), 'test2,test3,test4,');
     }
 
-    public function testSort()
+    public function test_sort()
     {
         // 值越大排序越靠前
         admin_inject_section('key1', '4,', true, -100);
@@ -90,7 +90,7 @@ class SectionTest extends TestCase
         $this->assertSame(admin_section('key1'), '1,2,3,4,');
     }
 
-    public function testInjectDefaultSection()
+    public function test_inject_default_section()
     {
         // step1
         admin_inject_default_section('key', 'Hello');
@@ -99,7 +99,7 @@ class SectionTest extends TestCase
 
         // step2
         admin_inject_default_section('key', function ($options) {
-            return 'Hello '.$options->var1;
+            return 'Hello ' . $options->var1;
         });
 
         $this->assertSame(admin_section('key', null, ['var1' => 'world']), 'Hello world');

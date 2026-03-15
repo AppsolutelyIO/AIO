@@ -6,6 +6,7 @@ namespace Appsolutely\AIO\Repositories;
 
 use Appsolutely\AIO\Models\ProductCategory;
 use Appsolutely\AIO\Repositories\Traits\ActiveTreeList;
+use Illuminate\Database\Eloquent\Collection;
 
 final class ProductCategoryRepository extends BaseRepository
 {
@@ -30,7 +31,7 @@ final class ProductCategoryRepository extends BaseRepository
     /**
      * Get categories with product count
      */
-    public function getWithProductCount(): \Illuminate\Database\Eloquent\Collection
+    public function getWithProductCount(): Collection
     {
         return $this->model->newQuery()
             ->status()

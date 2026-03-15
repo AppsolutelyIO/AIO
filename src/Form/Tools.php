@@ -37,13 +37,11 @@ class Tools implements Renderable
 
     /**
      * Create a new Tools instance.
-     *
-     * @param  Builder  $builder
      */
     public function __construct(Builder $builder)
     {
-        $this->form = $builder;
-        $this->appends = new Collection();
+        $this->form     = $builder;
+        $this->appends  = new Collection();
         $this->prepends = new Collection();
     }
 
@@ -152,7 +150,7 @@ class Tools implements Renderable
     protected function getViewPath()
     {
         if ($key = $this->form->getResourceId()) {
-            return $this->getListPath().'/'.$key;
+            return $this->getListPath() . '/' . $key;
         }
 
         return $this->getListPath();
@@ -251,12 +249,12 @@ HTML;
 
         foreach ($this->tools as $tool => $enable) {
             if ($enable) {
-                $renderMethod = 'render'.ucfirst($tool);
+                $renderMethod = 'render' . ucfirst($tool);
 
                 $output .= $this->$renderMethod();
             }
         }
 
-        return $output.$this->renderCustomTools($this->appends);
+        return $output . $this->renderCustomTools($this->appends);
     }
 }

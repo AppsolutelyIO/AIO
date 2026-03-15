@@ -5,7 +5,6 @@ namespace Appsolutely\AIO\Support;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 
-use Appsolutely\AIO\Support\ArrayHelper;
 class JavaScript
 {
     protected static $scripts = [];
@@ -17,7 +16,7 @@ class JavaScript
 
     public function __construct($script)
     {
-        $this->id = 'js('.Str::random().')';
+        $this->id = 'js(' . Str::random() . ')';
 
         $this->value($script);
     }
@@ -58,8 +57,6 @@ class JavaScript
 
     /**
      * 删除代码.
-     *
-     * @param  string  $id
      */
     public static function delete(string $id)
     {

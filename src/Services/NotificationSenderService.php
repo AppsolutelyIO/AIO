@@ -7,6 +7,7 @@ namespace Appsolutely\AIO\Services;
 use Appsolutely\AIO\Models\NotificationRule;
 use Appsolutely\AIO\Models\NotificationSender;
 use Appsolutely\AIO\Repositories\NotificationSenderRepository;
+use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Support\Facades\Mail;
 
 final readonly class NotificationSenderService
@@ -153,7 +154,7 @@ final readonly class NotificationSenderService
         }
     }
 
-    public function getMailer(NotificationSender $sender): \Illuminate\Contracts\Mail\Mailer
+    public function getMailer(NotificationSender $sender): Mailer
     {
         $this->configureMailer($sender);
         $mailerName = "sender_{$sender->id}";

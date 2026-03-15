@@ -7,8 +7,8 @@ namespace Appsolutely\AIO\Tests\Unit\Models;
 use Appsolutely\AIO\Enums\FormEntrySpamStatus;
 use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Models\FormEntry;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class FormTest extends TestCase
 {

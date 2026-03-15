@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 abstract class AbstractExporter implements ExporterInterface
 {
     /**
-     * @var \Appsolutely\AIO\Grid
+     * @var Grid
      */
     protected $grid;
 
@@ -115,7 +115,6 @@ abstract class AbstractExporter implements ExporterInterface
     /**
      * Set export data callback function.
      *
-     * @param  \Closure  $builder
      * @return $this
      */
     public function rows(\Closure $builder)
@@ -163,12 +162,11 @@ abstract class AbstractExporter implements ExporterInterface
     /**
      * Set grid for exporter.
      *
-     * @param  Grid  $grid
      * @return $this
      */
     public function setGrid(Grid $grid)
     {
-        $this->grid = $grid;
+        $this->grid   = $grid;
         $this->parent = $grid->exporter();
 
         return $this;
@@ -179,15 +177,13 @@ abstract class AbstractExporter implements ExporterInterface
      */
     public function getFilename()
     {
-        return $this->filename ?: (admin_trans_label().'-'.date('Ymd-His').'-'.Str::random(6));
+        return $this->filename ?: (admin_trans_label() . '-' . date('Ymd-His') . '-' . Str::random(6));
     }
 
     /**
      * Get data with export query.
      *
-     * @param  int  $page
-     * @param  int  $perPage
-     * @return array|\Illuminate\Support\Collection|mixed
+     * @return array|Collection|mixed
      */
     public function buildData(?int $page = null, ?int $perPage = null)
     {
@@ -195,7 +191,7 @@ abstract class AbstractExporter implements ExporterInterface
 
         // current page
         if ($this->scope === Grid\Exporter::SCOPE_CURRENT_PAGE) {
-            $page = $model->getCurrentPage();
+            $page    = $model->getCurrentPage();
             $perPage = $model->getPerPage();
         }
 
@@ -217,7 +213,6 @@ abstract class AbstractExporter implements ExporterInterface
     /**
      * 格式化待导出数据.
      *
-     * @param  Collection  $data
      * @return array
      */
     protected function normalize(Collection $data)
@@ -255,7 +250,6 @@ abstract class AbstractExporter implements ExporterInterface
     }
 
     /**
-     * @param  Collection  $data
      * @return array
      */
     protected function callBuilder(Collection &$data)
@@ -283,9 +277,9 @@ abstract class AbstractExporter implements ExporterInterface
      */
     public function withScope($scope)
     {
-        $data = explode(':', $scope);
+        $data  = explode(':', $scope);
         $scope = $data[0] ?? '';
-        $args = $data[1] ?? '';
+        $args  = $data[1] ?? '';
 
         $this->scope = $scope;
 
@@ -304,8 +298,6 @@ abstract class AbstractExporter implements ExporterInterface
     abstract public function export();
 
     /**
-     * @param $method
-     * @param $arguments
      * @return mixed
      */
     public function __call($method, $arguments)

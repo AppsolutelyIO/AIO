@@ -6,8 +6,13 @@ namespace Appsolutely\AIO\Tests;
 
 use Appsolutely\AIO\AdminServiceProvider;
 use Appsolutely\AIO\AIOServiceProvider;
+use Appsolutely\AIO\Models\Administrator;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Laravel\Sanctum\SanctumServiceProvider;
+use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Qirolab\Theme\ThemeServiceProvider;
+use Spatie\ResponseCache\ResponseCacheServiceProvider;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -26,11 +31,11 @@ abstract class TestCase extends BaseTestCase
             // Fall back to Laravel's default convention
             $appNamespace = 'App\\';
 
-            $modelBaseName = str_starts_with($modelName, $appNamespace.'Models\\')
-                ? substr($modelName, \strlen($appNamespace.'Models\\'))
+            $modelBaseName = str_starts_with($modelName, $appNamespace . 'Models\\')
+                ? substr($modelName, \strlen($appNamespace . 'Models\\'))
                 : substr($modelName, \strlen($appNamespace));
 
-            return 'Database\\Factories\\'.$modelBaseName.'Factory';
+            return 'Database\\Factories\\' . $modelBaseName . 'Factory';
         });
     }
 
@@ -43,10 +48,10 @@ abstract class TestCase extends BaseTestCase
     protected function getPackageProviders($app): array
     {
         return [
-            \Laravel\Sanctum\SanctumServiceProvider::class,
-            \Livewire\LivewireServiceProvider::class,
-            \Qirolab\Theme\ThemeServiceProvider::class,
-            \Spatie\ResponseCache\ResponseCacheServiceProvider::class,
+            SanctumServiceProvider::class,
+            LivewireServiceProvider::class,
+            ThemeServiceProvider::class,
+            ResponseCacheServiceProvider::class,
             AdminServiceProvider::class,
             AIOServiceProvider::class,
         ];
@@ -61,7 +66,7 @@ abstract class TestCase extends BaseTestCase
             'foreign_key_constraints' => true,
         ]);
 
-        $app['config']->set('app.key', 'base64:'.base64_encode(str_repeat('a', 32)));
+        $app['config']->set('app.key', 'base64:' . base64_encode(str_repeat('a', 32)));
 
         // AIO helpers expect these config values
         $app['config']->set('appsolutely.prefix', 'aio_test');
@@ -70,10 +75,10 @@ abstract class TestCase extends BaseTestCase
         $app['config']->set('appsolutely.local_timezone', 'UTC');
 
         // Load AIO config
-        $app['config']->set('aio', require __DIR__.'/../config/aio.php');
+        $app['config']->set('aio', require __DIR__ . '/../config/aio.php');
 
-        if (file_exists(__DIR__.'/../config/admin.php')) {
-            $app['config']->set('admin', require __DIR__.'/../config/admin.php');
+        if (file_exists(__DIR__ . '/../config/admin.php')) {
+            $app['config']->set('admin', require __DIR__ . '/../config/admin.php');
         }
 
         // Admin auth guard
@@ -84,7 +89,7 @@ abstract class TestCase extends BaseTestCase
 
         $app['config']->set('auth.providers.admin', [
             'driver' => 'eloquent',
-            'model'  => \Appsolutely\AIO\Models\Administrator::class,
+            'model'  => Administrator::class,
         ]);
 
         // Sanctum auth guard for API tests
@@ -94,8 +99,8 @@ abstract class TestCase extends BaseTestCase
         ]);
 
         // Load query_params_cookie config for middleware tests
-        if (file_exists(__DIR__.'/../config/query_params_cookie.php')) {
-            $app['config']->set('query_params_cookie', require __DIR__.'/../config/query_params_cookie.php');
+        if (file_exists(__DIR__ . '/../config/query_params_cookie.php')) {
+            $app['config']->set('query_params_cookie', require __DIR__ . '/../config/query_params_cookie.php');
         }
     }
 
@@ -107,6 +112,6 @@ abstract class TestCase extends BaseTestCase
     protected function defineDatabaseMigrations(): void
     {
         $this->loadMigrationsFrom(\Orchestra\Testbench\default_migration_path());
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
     }
 }

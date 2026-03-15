@@ -7,13 +7,14 @@ namespace Appsolutely\AIO\Http\Controllers\Auth;
 use Appsolutely\AIO\Http\Controllers\BaseController;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\RedirectResponse;
 
 final class VerifyEmailController extends BaseController
 {
     /**
      * Mark the authenticated user's email address as verified.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function __invoke(EmailVerificationRequest $request)
     {

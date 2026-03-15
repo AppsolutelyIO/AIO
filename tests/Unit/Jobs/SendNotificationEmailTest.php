@@ -7,9 +7,10 @@ namespace Appsolutely\AIO\Tests\Unit\Jobs;
 use Appsolutely\AIO\Enums\NotificationQueueStatus;
 use Appsolutely\AIO\Jobs\SendNotificationEmail;
 use Appsolutely\AIO\Models\NotificationQueue;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Support\Facades\Log;
 
 final class SendNotificationEmailTest extends TestCase
 {
@@ -66,7 +67,7 @@ final class SendNotificationEmailTest extends TestCase
         );
 
         // Should not throw - the job logs via Log::error()
-        \Illuminate\Support\Facades\Log::shouldReceive('error')
+        Log::shouldReceive('error')
             ->once()
             ->withArgs(function (string $message, array $context) {
                 return str_contains($message, 'SendNotificationEmail')

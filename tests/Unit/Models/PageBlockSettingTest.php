@@ -8,9 +8,9 @@ use Appsolutely\AIO\Enums\BlockScope;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Models\PageBlockSetting;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class PageBlockSettingTest extends TestCase
 {

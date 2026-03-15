@@ -51,8 +51,6 @@ trait InteractsWithApi
 
     /**
      * 返回请求附带参数.
-     *
-     * @return array
      */
     public function parameters(): array
     {
@@ -62,15 +60,12 @@ trait InteractsWithApi
     /**
      * 设置请求地址.
      *
-     * @param  string  $method
-     * @param  string  $url
-     * @param  array  $query
      * @return $this
      */
     public function request(string $method, string $url, array $query = [])
     {
         $this->method = $method;
-        $this->url = admin_url(UrlHelper::withQuery($url, $query));
+        $this->url    = admin_url(UrlHelper::withQuery($url, $query));
 
         return $this;
     }
@@ -188,7 +183,7 @@ trait InteractsWithApi
         }
 
         $fetching = implode(';', $this->requestScripts['fetching']);
-        $fetched = implode(';', $this->requestScripts['fetched']);
+        $fetched  = implode(';', $this->requestScripts['fetched']);
 
         return <<<JS
 (function () {
@@ -267,16 +262,16 @@ JS;
      */
     public function merge($self)
     {
-        $this->url = $self->getRequestUrl();
-        $this->method = $self->getRequestMethod();
-        $this->uriKey = $self->getUriKey();
+        $this->url              = $self->getRequestUrl();
+        $this->method           = $self->getRequestMethod();
+        $this->uriKey           = $self->getUriKey();
         $this->requestSelectors = $self->getRequestSelectors();
-        $this->parameters = array_merge($this->parameters, $self->parameters());
+        $this->parameters       = array_merge($this->parameters, $self->parameters());
 
         $scripts = $self->getRequestScripts();
 
         $this->requestScripts['fetching'] = array_merge($this->requestScripts['fetching'], $scripts['fetching']);
-        $this->requestScripts['fetched'] = array_merge($this->requestScripts['fetched'], $scripts['fetched']);
+        $this->requestScripts['fetched']  = array_merge($this->requestScripts['fetched'], $scripts['fetched']);
 
         return $this;
     }

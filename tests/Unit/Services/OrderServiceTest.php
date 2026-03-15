@@ -12,9 +12,9 @@ use Appsolutely\AIO\Events\OrderShipped;
 use Appsolutely\AIO\Events\OrderStatusUpdated;
 use Appsolutely\AIO\Models\Order;
 use Appsolutely\AIO\Services\OrderService;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-use Appsolutely\AIO\Tests\TestCase;
 
 class OrderServiceTest extends TestCase
 {

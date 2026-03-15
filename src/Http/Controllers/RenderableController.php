@@ -31,11 +31,11 @@ class RenderableController
         $asset = Admin::asset();
 
         return HtmlHelper::render($renderable->render())
-            .Admin::html()
-            .$asset->jsToHtml()
-            .$asset->cssToHtml()
-            .$asset->scriptToHtml()
-            .$asset->styleToHtml();
+            . Admin::html()
+            . $asset->jsToHtml()
+            . $asset->cssToHtml()
+            . $asset->scriptToHtml()
+            . $asset->styleToHtml();
     }
 
     protected function initTranslation(Request $request)

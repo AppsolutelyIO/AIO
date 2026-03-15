@@ -17,9 +17,6 @@ trait HasComplexHeaders
     /**
      * Merge cells.
      *
-     * @param  string  $column
-     * @param  array  $columnNames
-     * @param  string  $label
      * @return ComplexHeader
      */
     public function combine(string $column, array $columnNames, ?string $label = null)
@@ -85,11 +82,12 @@ trait HasComplexHeaders
             }
         }
 
-        $before = $after = [];
+        $before   = $after = [];
         $isBefore = true;
         foreach ($originalColumns as $name => $column) {
             if ($isBefore && ! isset($this->columns[$name])) {
                 $before[$name] = $column;
+
                 continue;
             }
             $isBefore = false;
@@ -99,7 +97,7 @@ trait HasComplexHeaders
         }
 
         $beforeHeaders = $this->createHeaderWithColumns($before);
-        $afterHeaders = $this->createHeaderWithColumns($after);
+        $afterHeaders  = $this->createHeaderWithColumns($after);
 
         $this->columnNames = array_merge(
             array_keys($before),
@@ -107,7 +105,7 @@ trait HasComplexHeaders
             array_keys($after)
         );
 
-        $this->columns = collect($this->columns);
+        $this->columns        = collect($this->columns);
         $this->complexHeaders = collect(
             array_merge(
                 $beforeHeaders,

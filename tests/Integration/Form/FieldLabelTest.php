@@ -10,7 +10,8 @@ class FieldLabelTest extends TestCase
     private function createField(): Field
     {
         // Field constructor requires column and arguments
-        return new class('test_column', ['Test Label']) extends Field {
+        return new class('test_column', ['Test Label']) extends Field
+        {
             // Minimal stub - Field is abstract-like but actually concrete
         };
     }
@@ -28,7 +29,7 @@ class FieldLabelTest extends TestCase
 
     public function test_label_sets_new_label()
     {
-        $field = $this->createField();
+        $field  = $this->createField();
         $result = $field->label('New Label');
         $this->assertSame($field, $result);
         $this->assertSame('New Label', $field->label());
@@ -38,7 +39,7 @@ class FieldLabelTest extends TestCase
     {
         $field = $this->createField();
         $field->label(function ($current) {
-            return $current.' Modified';
+            return $current . ' Modified';
         });
         $this->assertSame('Test Label Modified', $field->label());
     }
@@ -47,14 +48,14 @@ class FieldLabelTest extends TestCase
 
     public function test_label_with_null_acts_as_getter()
     {
-        $field = $this->createField();
+        $field  = $this->createField();
         $result = $field->label(null);
         $this->assertSame('Test Label', $result);
     }
 
     public function test_label_with_empty_string_acts_as_setter()
     {
-        $field = $this->createField();
+        $field  = $this->createField();
         $result = $field->label('');
         // After fix: empty string should set the label, not act as getter
         $this->assertSame($field, $result);
@@ -63,7 +64,7 @@ class FieldLabelTest extends TestCase
 
     public function test_label_with_zero_acts_as_setter()
     {
-        $field = $this->createField();
+        $field  = $this->createField();
         $result = $field->label('0');
         $this->assertSame($field, $result);
         $this->assertSame('0', $field->label());

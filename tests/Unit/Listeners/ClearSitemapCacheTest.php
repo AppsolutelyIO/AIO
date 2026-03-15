@@ -10,9 +10,9 @@ use Appsolutely\AIO\Events\PageUpdated;
 use Appsolutely\AIO\Listeners\ClearSitemapCache;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Services\Contracts\SitemapServiceInterface;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
-use Appsolutely\AIO\Tests\TestCase;
 
 final class ClearSitemapCacheTest extends TestCase
 {

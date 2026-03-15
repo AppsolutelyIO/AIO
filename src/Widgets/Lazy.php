@@ -11,14 +11,15 @@ class Lazy extends Widget
     use InteractsWithRenderApi;
 
     protected $target = 'lazy';
+
     protected $load = true;
 
-    public function __construct(LazyRenderable $renderable = null, bool $load = true)
+    public function __construct(?LazyRenderable $renderable = null, bool $load = true)
     {
         $this->setRenderable($renderable);
         $this->load($load);
 
-        $this->elementClass = 'lazy-'.Str::random(10);
+        $this->elementClass = 'lazy-' . Str::random(10);
 
         $this->class(['lazy-box']);
     }
@@ -26,7 +27,6 @@ class Lazy extends Widget
     /**
      * 设置是否立即加载.
      *
-     * @param  bool  $value
      * @return $this
      */
     public function load(bool $value)

@@ -13,13 +13,13 @@ class Session
         }
 
         $path_prefix = '';
-        $path_arr = parse_url(config('app.url'));
+        $path_arr    = parse_url(config('app.url'));
 
         if (array_key_exists('path', $path_arr) && ! empty($path_arr['path'])) {
             $path_prefix = rtrim($path_arr['path'], '/');
         }
 
-        $path = $path_prefix.'/'.trim(config('admin.route.prefix'), '/');
+        $path = $path_prefix . '/' . trim(config('admin.route.prefix'), '/');
 
         config(['session.path' => $path]);
 

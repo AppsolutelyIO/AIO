@@ -2,8 +2,8 @@
 
 namespace Appsolutely\AIO\Scaffold;
 
-use Appsolutely\AIO\Support\Helper;
 use Appsolutely\AIO\Support\ArrayHelper;
+use Appsolutely\AIO\Support\Helper;
 use Illuminate\Support\Facades\App;
 
 class LangCreator
@@ -18,8 +18,6 @@ class LangCreator
     /**
      * 生成语言包.
      *
-     * @param  string  $controller
-     * @param  string  $title
      * @return string
      */
     public function create(string $controller, ?string $title)
@@ -35,7 +33,7 @@ class LangCreator
 
         $content = [
             'labels' => [
-                $controller => $title,
+                $controller               => $title,
                 Helper::slug($controller) => $title,
             ],
             'fields'  => [],
@@ -60,13 +58,12 @@ class LangCreator
     /**
      * 获取语言包路径.
      *
-     * @param  string  $controller
      * @return string
      */
     protected function getLangPath(string $controller)
     {
-        $path = rtrim(app()->langPath(), '/').'/'.App::getLocale();
+        $path = rtrim(app()->langPath(), '/') . '/' . App::getLocale();
 
-        return $path.'/'.Helper::slug($controller).'.php';
+        return $path . '/' . Helper::slug($controller) . '.php';
     }
 }

@@ -8,6 +8,7 @@ use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Repositories\FormEntryRepository;
 use Appsolutely\AIO\Repositories\FormRepository;
 use Appsolutely\AIO\Services\Contracts\DynamicFormExportServiceInterface;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final readonly class DynamicFormExportService implements DynamicFormExportServiceInterface
 {
@@ -80,7 +81,7 @@ final readonly class DynamicFormExportService implements DynamicFormExportServic
     /**
      * Export form entries to CSV with custom format (for API usage)
      */
-    public function exportFormEntriesForApi(?int $formId = null): \Symfony\Component\HttpFoundation\StreamedResponse
+    public function exportFormEntriesForApi(?int $formId = null): StreamedResponse
     {
         $entries  = $this->entryRepository->getValidEntriesForExport($formId);
         $filename = 'form-entries-' . date('Y-m-d-H-i-s') . '.csv';

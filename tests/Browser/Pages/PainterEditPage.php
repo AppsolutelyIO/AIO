@@ -11,7 +11,7 @@ use Tests\PHPUnit;
 class PainterEditPage extends PainterCreatePage
 {
     /**
-     * @var \Tests\Models\Painter
+     * @var Painter
      */
     protected $painter;
 

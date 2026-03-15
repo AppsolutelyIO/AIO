@@ -53,8 +53,6 @@ class Permission extends Model implements Sortable
 
     /**
      * Permission belongs to many roles.
-     *
-     * @return BelongsToMany
      */
     public function roles(): BelongsToMany
     {
@@ -65,9 +63,6 @@ class Permission extends Model implements Sortable
         return $this->belongsToMany($relatedModel, $pivotTable, 'permission_id', 'role_id');
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function menus(): BelongsToMany
     {
         $pivotTable = config('admin.database.permission_menu_table');
@@ -79,9 +74,6 @@ class Permission extends Model implements Sortable
 
     /**
      * If request should pass through the current permission.
-     *
-     * @param  Request  $request
-     * @return bool
      */
     public function shouldPassThrough(Request $request): bool
     {
@@ -94,7 +86,7 @@ class Permission extends Model implements Sortable
         $matches = array_map(function ($path) use ($method) {
             if (Str::contains($path, ':')) {
                 [$method, $path] = explode(':', $path);
-                $method = explode(',', $method);
+                $method          = explode(',', $method);
             }
 
             $path = Str::contains($path, '.') ? $path : ltrim(admin_base_path($path), '/');
@@ -114,7 +106,6 @@ class Permission extends Model implements Sortable
     /**
      * Get options for Select field in form.
      *
-     * @param  \Closure|null  $closure
      * @return array
      */
     public static function selectOptions(?\Closure $closure = null)
@@ -133,9 +124,6 @@ class Permission extends Model implements Sortable
         return explode(',', $path);
     }
 
-    /**
-     * @param $path
-     */
     public function setHttpPathAttribute($path)
     {
         if (is_array($path)) {
@@ -147,10 +135,6 @@ class Permission extends Model implements Sortable
 
     /**
      * If a request match the specific HTTP method and path.
-     *
-     * @param  array  $match
-     * @param  Request  $request
-     * @return bool
      */
     protected function matchRequest(array $match, Request $request): bool
     {
@@ -169,9 +153,6 @@ class Permission extends Model implements Sortable
         return $method->isEmpty() || $method->contains($request->method());
     }
 
-    /**
-     * @param $method
-     */
     public function setHttpMethodAttribute($method)
     {
         if (is_array($method)) {
@@ -180,7 +161,6 @@ class Permission extends Model implements Sortable
     }
 
     /**
-     * @param $method
      * @return array
      */
     public function getHttpMethodAttribute($method)

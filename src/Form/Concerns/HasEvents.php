@@ -2,10 +2,11 @@
 
 namespace Appsolutely\AIO\Form\Concerns;
 
-use Closure;
 use Appsolutely\AIO\Contracts\UploadField as UploadFieldInterface;
 use Appsolutely\AIO\Form\Events;
+use Appsolutely\AIO\Form\Field;
 use Appsolutely\AIO\Http\JsonResponse;
+use Closure;
 use Illuminate\Support\Facades\Event;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,7 +19,6 @@ trait HasEvents
     /**
      * 监听创建页面访问事件.
      *
-     * @param  Closure  $callback
      * @return $this
      */
     public function creating(Closure $callback)
@@ -31,7 +31,6 @@ trait HasEvents
     /**
      * 监听编辑页面访问时间.
      *
-     * @param  Closure  $callback
      * @return $this
      */
     public function editing(Closure $callback)
@@ -44,7 +43,6 @@ trait HasEvents
     /**
      * 监听提交事件.
      *
-     * @param  Closure  $callback
      * @return $this
      */
     public function submitted(Closure $callback)
@@ -57,7 +55,6 @@ trait HasEvents
     /**
      * 保存.
      *
-     * @param  Closure  $callback
      * @return $this
      */
     public function saving(Closure $callback)
@@ -70,7 +67,6 @@ trait HasEvents
     /**
      * 保存完成.
      *
-     * @param  Closure  $callback
      * @return $this
      */
     public function saved(Closure $callback)
@@ -83,7 +79,6 @@ trait HasEvents
     /**
      * 删除.
      *
-     * @param  Closure  $callback
      * @return $this
      */
     public function deleting(Closure $callback)
@@ -96,7 +91,6 @@ trait HasEvents
     /**
      * 删除完成.
      *
-     * @param  Closure  $callback
      * @return $this
      */
     public function deleted(Closure $callback)
@@ -109,7 +103,6 @@ trait HasEvents
     /**
      * 文件上传.
      *
-     * @param  \Closure  $callback
      * @return $this
      */
     public function uploading(Closure $callback)
@@ -122,7 +115,6 @@ trait HasEvents
     /**
      * 上传完成.
      *
-     * @param  \Closure  $callback
      * @return $this
      */
     public function uploaded(Closure $callback)
@@ -135,7 +127,6 @@ trait HasEvents
     /**
      * 删除文件.
      *
-     * @param  \Closure  $callback
      * @return $this
      */
     public function fileDeleting(Closure $callback)
@@ -148,7 +139,6 @@ trait HasEvents
     /**
      * 删除文件完成.
      *
-     * @param  \Closure  $callback
      * @return $this
      */
     public function fileDeleted(Closure $callback)
@@ -159,8 +149,7 @@ trait HasEvents
     }
 
     /**
-     * @param  \Closure  $callback
-     * @return \Closure
+     * @return Closure
      */
     protected function makeListener(Closure $callback)
     {
@@ -258,7 +247,7 @@ trait HasEvents
     /**
      * 触发文件上传事件.
      *
-     * @param  UploadFieldInterface|\Appsolutely\AIO\Form\Field  $field
+     * @param  UploadFieldInterface|Field  $field
      * @param  UploadedFile  $file
      * @return mixed|null
      */
@@ -270,10 +259,10 @@ trait HasEvents
     /**
      * 触发文件上传完成事件.
      *
-     * @param  UploadFieldInterface|\Appsolutely\AIO\Form\Field  $field
+     * @param  UploadFieldInterface|Field  $field
      * @param  UploadedFile  $file
      * @param  Response  $response
-     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\RedirectResponse|void
+     * @return \Illuminate\Http\Response|RedirectResponse|void
      */
     protected function callUploaded($field, $file, $response)
     {
@@ -283,10 +272,10 @@ trait HasEvents
     /**
      * 触发文件删除事件.
      *
-     * @param  UploadFieldInterface|\Appsolutely\AIO\Form\Field  $field
+     * @param  UploadFieldInterface|Field  $field
      * @param  UploadedFile  $file
      * @param  Response  $response
-     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\RedirectResponse|void
+     * @return \Illuminate\Http\Response|RedirectResponse|void
      */
     protected function callFileDeleting($field)
     {
@@ -296,10 +285,10 @@ trait HasEvents
     /**
      * 触发文件删除完成事件.
      *
-     * @param  UploadFieldInterface|\Appsolutely\AIO\Form\Field  $field
+     * @param  UploadFieldInterface|Field  $field
      * @param  UploadedFile  $file
      * @param  Response  $response
-     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\RedirectResponse|void
+     * @return \Illuminate\Http\Response|RedirectResponse|void
      */
     protected function callFileDeleted($field)
     {
@@ -308,7 +297,6 @@ trait HasEvents
 
     /**
      * @param  string  $name
-     * @param  array  $payload
      * @return RedirectResponse|\Illuminate\Http\Response|void
      */
     protected function fire($name, array $payload = [])

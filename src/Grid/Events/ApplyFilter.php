@@ -2,6 +2,4 @@
 
 namespace Appsolutely\AIO\Grid\Events;
 
-class ApplyFilter extends Event
-{
-}
+class ApplyFilter extends Event {}

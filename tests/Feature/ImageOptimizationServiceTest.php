@@ -7,9 +7,9 @@ namespace Appsolutely\AIO\Tests\Feature;
 use Appsolutely\AIO\Models\File;
 use Appsolutely\AIO\Models\FileAttachment;
 use Appsolutely\AIO\Services\Contracts\ImageOptimizationServiceInterface;
+use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
-use Appsolutely\AIO\Tests\TestCase;
 
 class ImageOptimizationServiceTest extends TestCase
 {
