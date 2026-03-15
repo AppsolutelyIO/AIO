@@ -7,12 +7,14 @@ namespace Appsolutely\AIO\Services;
 use Appsolutely\AIO\Livewire\Anchor;
 use Appsolutely\AIO\Models\GeneralPage;
 use Appsolutely\AIO\Models\PageBlockSetting;
+use Appsolutely\AIO\Services\Concerns\ResolvesLivewireClassName;
 use Appsolutely\AIO\Services\Contracts\BlockRendererServiceInterface;
 use Livewire\Component;
 use Livewire\Livewire;
 
 final readonly class BlockRendererService implements BlockRendererServiceInterface
 {
+    use ResolvesLivewireClassName;
     /**
      * Validate and render a block safely
      * Returns the rendered HTML or error message
@@ -94,23 +96,6 @@ final readonly class BlockRendererService implements BlockRendererServiceInterfa
                 'block_title'     => (string) ($b->block?->title ?? ''),
             ];
         })->values()->toArray();
-    }
-
-    /**
-     * Resolve legacy App\ class names to AIO package namespace.
-     */
-    private function resolveClassName(string $className): string
-    {
-        if (str_starts_with($className, 'App\\Livewire\\') && ! class_exists($className)) {
-            $shortName = substr($className, strlen('App\\Livewire\\'));
-            $aioClass  = 'Appsolutely\\AIO\\Livewire\\' . $shortName;
-
-            if (class_exists($aioClass)) {
-                return $aioClass;
-            }
-        }
-
-        return $className;
     }
 
     /**

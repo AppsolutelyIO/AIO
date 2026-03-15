@@ -8,6 +8,7 @@ use Appsolutely\AIO\Livewire\Anchor;
 use Appsolutely\AIO\Models\PageBlock;
 use Appsolutely\AIO\Models\PageBlockGroup;
 use Appsolutely\AIO\Repositories\PageBlockRepository;
+use Appsolutely\AIO\Services\Concerns\ResolvesLivewireClassName;
 use Appsolutely\AIO\Services\Contracts\ManifestServiceInterface;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
@@ -26,6 +27,7 @@ use Qirolab\Theme\Theme;
  */
 final readonly class BlockRegistryService
 {
+    use ResolvesLivewireClassName;
     private const CACHE_KEY_PREFIX = 'block_registry:';
 
     private const CACHE_TTL = 3600;
@@ -258,23 +260,6 @@ final readonly class BlockRegistryService
         } catch (\Throwable) {
             return $this->buildPlaceholder($type);
         }
-    }
-
-    /**
-     * Resolve legacy App\ class names to AIO package namespace.
-     */
-    private function resolveClassName(string $className): string
-    {
-        if (str_starts_with($className, 'App\\Livewire\\') && ! class_exists($className)) {
-            $shortName = substr($className, strlen('App\\Livewire\\'));
-            $aioClass  = 'Appsolutely\\AIO\\Livewire\\' . $shortName;
-
-            if (class_exists($aioClass)) {
-                return $aioClass;
-            }
-        }
-
-        return $className;
     }
 
     /**
