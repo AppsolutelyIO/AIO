@@ -1,11 +1,10 @@
-
-import Helpers from './extensions/Helpers'
-import Translator from './extensions/Translator'
+import Helpers from './extensions/Helpers';
+import Translator from './extensions/Translator';
 
 let $ = jQuery,
-    $document = $(document),
+    $document = $(document) as JQuery<any>,
     waiting = false,
-    bootingCallbacks: Array<[((aio: AIO) => void), boolean]> = [],
+    bootingCallbacks: Array<[(aio: AIO) => void, boolean]> = [],
     actions: Record<string, (selector: string, aio: AIO) => void> = {},
     initialized: Record<string, { disconnect(): void } | null> = {},
     defaultOptions: Record<string, unknown> = {
@@ -26,7 +25,7 @@ export default class AIO {
         this.helpers = {};
 
         // 工具函数
-        new Helpers(this);
+        new Helpers(this as unknown as AIOInstance);
 
         this.withConfig(config);
     }
@@ -39,14 +38,14 @@ export default class AIO {
 
         bootingCallbacks.push([callback, once]);
 
-        return this
+        return this;
     }
 
     /**
      * 初始化事件监听方法，每个请求都会触发
      */
     bootingEveryRequest(callback: (aio: AIO) => void): AIO {
-        return this.booting(callback, false)
+        return this.booting(callback, false);
     }
 
     /**
@@ -58,16 +57,16 @@ export default class AIO {
 
         bootingCallbacks = [];
 
-        callbacks.forEach(data => {
+        callbacks.forEach((data) => {
             data[0](this);
 
             if (data[1] === false) {
-                bootingCallbacks.push(data)
+                bootingCallbacks.push(data);
             }
         });
 
         // 脚本加载完毕后重新触发
-        _this.onPjaxLoaded(_this.boot.bind(this))
+        _this.onPjaxLoaded(_this.boot.bind(this));
     }
 
     /**
@@ -77,9 +76,9 @@ export default class AIO {
     ready(callback: (e?: JQuery.Event) => void, _window?: Window & { AIO: AIO; $: JQueryStatic }): JQuery | void {
         let _this = this;
 
-        if (! _window || _window === window) {
-            if (! waiting) {
-                return $(callback);
+        if (!_window || _window === (window as any)) {
+            if (!waiting) {
+                return $(callback as any);
             }
 
             return _this.onPjaxLoaded(callback);
@@ -110,23 +109,27 @@ export default class AIO {
         clear();
 
         setTimeout(function () {
-            initialized[selector] = ($ as any).initialize(selector, function (this: HTMLElement) {
-                let $this = $(this),
-                    id = $this.attr('id');
+            initialized[selector] = ($ as any).initialize(
+                selector,
+                function (this: HTMLElement) {
+                    let $this = $(this),
+                        id = $this.attr('id');
 
-                if ($this.attr('initialized')) {
-                    return;
-                }
-                $this.attr('initialized', '1');
+                    if ($this.attr('initialized')) {
+                        return;
+                    }
+                    $this.attr('initialized', '1');
 
-                // 如果没有ID，则自动生成
-                if (! id) {
-                    id = "_"+(self.helpers as any).random();
-                    $this.attr('id', id!);
-                }
+                    // 如果没有ID，则自动生成
+                    if (!id) {
+                        id = '_' + (self.helpers as any).random();
+                        $this.attr('id', id!);
+                    }
 
-                callback.call(this, $this, id!)
-            }, options);
+                    callback.call(this, $this, id!);
+                },
+                options,
+            );
         });
     }
 
@@ -138,7 +141,7 @@ export default class AIO {
             initialized[selector]!.disconnect();
         }
 
-        $(document).trigger('aio:init:off', selector, initialized[selector])
+        $(document).trigger('aio:init:off', [selector, initialized[selector]]);
 
         initialized[selector] = null;
     }
@@ -147,7 +150,7 @@ export default class AIO {
      * 主动触发 ready 事件
      */
     triggerReady(): void {
-        if (! waiting) {
+        if (!waiting) {
             return;
         }
 
@@ -164,7 +167,7 @@ export default class AIO {
 
         $document.trigger('aio:waiting');
 
-        return this
+        return this;
     }
 
     /**
@@ -172,7 +175,7 @@ export default class AIO {
      */
     reload(url?: string): void {
         let container = this.config.pjax_container_selector as string,
-            opt: Record<string, unknown> = {container: container};
+            opt: Record<string, unknown> = { container: container };
 
         if ($(container).length) {
             url && (opt.url = url);
@@ -223,13 +226,13 @@ export default class AIO {
         delete config.lang;
         delete config.token;
 
-        return this
+        return this;
     }
 
     withToken(token: string): AIO {
         token && (this.token = token);
 
-        return this
+        return this;
     }
 
     withLang(lang: Record<string, string>): AIO {
@@ -237,12 +240,12 @@ export default class AIO {
             this.lang = this.Translator(lang);
         }
 
-        return this
+        return this;
     }
 
     // 语言包
     Translator(lang: Record<string, string>): InstanceType<typeof Translator> {
-        return new Translator(this, lang);
+        return new Translator(this as unknown as AIOInstance, lang);
     }
 
     // 注册动作
@@ -254,6 +257,6 @@ export default class AIO {
 
     // 获取动作
     actions(): Record<string, (selector: string, aio: AIO) => void> {
-        return actions
+        return actions;
     }
 }

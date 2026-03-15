@@ -1,4 +1,3 @@
-
 interface DialogFormOptions {
     title: string;
     defaultUrl: string;
@@ -13,10 +12,10 @@ interface DialogFormOptions {
     error: (status: boolean, response: Record<string, unknown>) => unknown;
 }
 
-let w = window as Window & Record<string, unknown>;
+let w: any = window;
 
-if (top && (w as Record<string, unknown>).layer) {
-    w = top as unknown as Window & Record<string, unknown>;
+if (top && w.layer) {
+    w = top;
 }
 
 export default class DialogForm {
@@ -31,24 +30,28 @@ export default class DialogForm {
     public submitting: number;
 
     constructor(AIO: AIOInstance, options: Partial<DialogFormOptions>) {
-        let self = this, nullFun = function (): void {};
+        let self = this,
+            nullFun = function (): void {};
 
-        self.options = $.extend({
-            title: '',
-            defaultUrl: '',
-            buttonSelector: '',
-            area: [],
-            lang: {
-                submit: AIO.lang['submit'] || 'Submit',
-                reset: AIO.lang['reset'] || 'Reset',
+        self.options = $.extend(
+            {
+                title: '',
+                defaultUrl: '',
+                buttonSelector: '',
+                area: [],
+                lang: {
+                    submit: AIO.lang['submit'] || 'Submit',
+                    reset: AIO.lang['reset'] || 'Reset',
+                },
+                query: '',
+                forceRefresh: false,
+                resetButton: true,
+                saved: nullFun,
+                success: nullFun,
+                error: nullFun,
             },
-            query: '',
-            forceRefresh: false,
-            resetButton: true,
-            saved: nullFun,
-            success: nullFun,
-            error: nullFun,
-        }, options) as DialogFormOptions;
+            options,
+        ) as DialogFormOptions;
 
         self.$form = null;
         self.$target = null;
@@ -59,7 +62,7 @@ export default class DialogForm {
         self.rendering = 0;
         self.submitting = 0;
 
-        self.init(self.options)
+        self.init(self.options);
     }
 
     init(options: DialogFormOptions): void {
@@ -67,40 +70,45 @@ export default class DialogForm {
             defUrl = options.defaultUrl,
             selector = options.buttonSelector;
 
-        selector && $(selector).off('click').click(function () {
-            self.$target = $(this);
+        selector &&
+            $(selector)
+                .off('click')
+                .click(function () {
+                    self.$target = $(this);
 
-            let counter = self.$target.attr('counter') as unknown as number, url: string;
+                    let counter = self.$target.attr('counter') as unknown as number,
+                        url: string;
 
-            if (! counter) {
-                counter = self._counter;
+                    if (!counter) {
+                        counter = self._counter;
 
-                self.$target.attr('counter', counter);
+                        self.$target.attr('counter', counter);
 
-                self._counter++;
-            }
+                        self._counter++;
+                    }
 
-            url = self.$target.data('url') as string || defUrl;
+                    url = (self.$target.data('url') as string) || defUrl;
 
-            if (url.indexOf('?') === -1) {
-                url += '?' + options.query + '=1'
-            } else if (url.indexOf(options.query) === -1) {
-                url += '&' + options.query + '=1'
-            }
+                    if (url.indexOf('?') === -1) {
+                        url += '?' + options.query + '=1';
+                    } else if (url.indexOf(options.query) === -1) {
+                        url += '&' + options.query + '=1';
+                    }
 
-            self._build(url, counter);
-        });
+                    self._build(url, counter);
+                });
 
-        selector || setTimeout(function () {
-            self._build(defUrl, self._counter)
-        }, 400);
+        selector ||
+            setTimeout(function () {
+                self._build(defUrl, self._counter);
+            }, 400);
     }
 
     _build(url: string, counter: number): void {
         let self = this,
             $btn = self.$target;
 
-        if (! url || self.rendering) {
+        if (!url || self.rendering) {
             return;
         }
 
@@ -109,15 +117,15 @@ export default class DialogForm {
 
             try {
                 (self._dialog as unknown as Record<string, (idx: number) => void>).restore(self._idx[counter]);
-            } catch (e) {
-            }
+            } catch (e) {}
 
             return;
         }
 
         const AIO = (window as Window & { AIO: AIOInstance }).AIO;
 
-        (AIO as Record<string, unknown>).onPjaxComplete = ((AIO as Record<string, (cb: () => void) => void>).onPjaxComplete || function () {});
+        (AIO as Record<string, unknown>).onPjaxComplete =
+            (AIO as Record<string, (cb: () => void) => void>).onPjaxComplete || function () {};
         (AIO as Record<string, (cb: () => void) => void>).onPjaxComplete(() => {
             self._destroy(counter);
         });
@@ -143,7 +151,7 @@ export default class DialogForm {
                 }
 
                 self._popup(template, counter);
-            }
+            },
         });
     }
 
@@ -160,16 +168,16 @@ export default class DialogForm {
             dialogOpts: Record<string, unknown> = {
                 type: 1,
                 area: (function (v: string[]) {
-                        if ((w as Window).screen.width <= 800) {
-                            return ['100%', '100%',];
-                        }
+                    if ((w as Window).screen.width <= 800) {
+                        return ['100%', '100%'];
+                    }
 
-                        return v;
-                    })(options.area),
+                    return v;
+                })(options.area),
                 content: template,
                 title: options.title,
                 yes: function () {
-                    self.submit()
+                    self.submit();
                 },
                 cancel: function () {
                     if (options.forceRefresh) {
@@ -179,7 +187,7 @@ export default class DialogForm {
                         (self._dialogs[counter] as JQuery).hide();
                         return false;
                     }
-                }
+                },
             };
 
         if (options.resetButton) {
@@ -195,7 +203,7 @@ export default class DialogForm {
         dialogOpts.btn = btns;
 
         self._idx[counter] = self._dialog.open(dialogOpts);
-        self._dialogs[counter] = (w as Window & { $: JQueryStatic }).$ ('#layui-layer' + self._idx[counter]) as JQuery;
+        self._dialogs[counter] = w.$('#layui-layer' + self._idx[counter]) as JQuery;
         self.$form = (self._dialogs[counter] as JQuery).find('form').first();
     }
 
@@ -245,7 +253,7 @@ export default class DialogForm {
                     return false;
                 }
 
-                if (! status) {
+                if (!status) {
                     return options.error(status, response);
                 }
                 if (response.status) {
@@ -257,7 +265,7 @@ export default class DialogForm {
                 }
 
                 return options.error(status, response);
-            }
+            },
         });
 
         return false;

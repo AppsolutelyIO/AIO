@@ -1,5 +1,6 @@
-import Dropdown from "../../../adminlte/js/Dropdown";
-import AIO from "../AIO";
+// @ts-expect-error legacy import - module may not exist
+import Dropdown from '../../../adminlte/js/Dropdown';  
+import AIO from '../AIO';
 
 let $document = $(document);
 
@@ -7,16 +8,16 @@ type ActionHandler = (action: string, aio: AIO) => void;
 
 let defaultActions: Record<string, ActionHandler> = {
     // 刷新按钮
-    refresh (action: string, AIO: AIO): void {
+    refresh(action: string, AIO: AIO): void {
         $document.on('click', action, function () {
             (AIO as any).reload($(this).data('url'));
         });
     },
     // 删除按钮初始化
-    delete (action: string, AIO: AIO): void {
+    delete(action: string, AIO: AIO): void {
         let lang = AIO.lang as any;
 
-        $document.on('click', action, function() {
+        $document.on('click', action, function () {
             let url = $(this).data('url'),
                 redirect = $(this).data('redirect'),
                 msg = $(this).data('message');
@@ -30,26 +31,26 @@ let defaultActions: Record<string, ActionHandler> = {
 
                         response.data.detail = msg;
 
-                        if (redirect && ! response.data.then) {
-                            response.data.then = {action: 'redirect', value: redirect}
+                        if (redirect && !response.data.then) {
+                            response.data.then = { action: 'redirect', value: redirect };
                         }
 
                         (AIO as any).handleJsonResponse(response);
-                    }
+                    },
                 });
             });
         });
     },
     // 批量删除按钮初始化
-    'batch-delete' (action: string, AIO: AIO): void {
-        $document.on('click', action, function() {
+    'batch-delete'(action: string, AIO: AIO): void {
+        $document.on('click', action, function () {
             let url = $(this).data('url'),
                 name = $(this).data('name'),
                 redirect = $(this).data('redirect'),
                 keys = (AIO as any).grid.selected(name),
                 lang = AIO.lang as any;
 
-            if (! keys.length) {
+            if (!keys.length) {
                 return;
             }
             let msg = 'ID - ' + keys.join(', ');
@@ -61,54 +62,54 @@ let defaultActions: Record<string, ActionHandler> = {
                     success: function (response: any) {
                         (AIO as any).NP.done();
 
-                        if (redirect && ! response.data.then) {
-                            response.data.then = {action: 'redirect', value: redirect}
+                        if (redirect && !response.data.then) {
+                            response.data.then = { action: 'redirect', value: redirect };
                         }
 
                         (AIO as any).handleJsonResponse(response);
-                    }
+                    },
                 });
             });
         });
     },
 
     // 图片预览
-    'preview-img' (action: string, AIO: AIO): void {
+    'preview-img'(action: string, AIO: AIO): void {
         $document.on('click', action, function () {
             return (AIO as any).helpers.previewImage($(this).attr('src'));
         });
     },
 
-    'popover' (action: string, AIO: AIO): void {
+    popover(action: string, AIO: AIO): void {
         AIO.onPjaxComplete(function () {
             $('.popover').remove();
         }, false);
 
         $document.on('click', action, function () {
-            ($(this) as any).popover()
+            ($(this) as any).popover();
         });
     },
 
-    'box-actions' (): void {
+    'box-actions'(): void {
         $document.on('click', '.box [data-action="collapse"]', function (e: JQuery.Event) {
             e.preventDefault();
 
             $(this).find('i').toggleClass('icon-minus icon-plus');
 
-            ($(this).closest('.box').find('.box-body').first() as any).collapse("toggle");
+            ($(this).closest('.box').find('.box-body').first() as any).collapse('toggle');
         });
 
         // Close box
         $document.on('click', '.box [data-action="remove"]', function () {
-            $(this).closest(".box").removeClass().slideUp("fast");
+            $(this).closest('.box').removeClass().slideUp('fast');
         });
     },
 
-    dropdown (): void {
+    dropdown(): void {
         function hide(): void {
-            $('.dropdown-menu').removeClass('show')
+            $('.dropdown-menu').removeClass('show');
         }
-        $document.off('click', document as any, hide)
+        $document.off('click', document as any, hide);
         $document.on('click', hide);
 
         function toggle(this: HTMLElement, event: JQuery.Event): void {
@@ -120,23 +121,23 @@ let defaultActions: Record<string, ActionHandler> = {
                 }
             });
 
-            ($this as any).Dropdown('toggleSubmenu')
+            ($this as any).Dropdown('toggleSubmenu');
         }
 
         function fix(this: HTMLElement, event: JQuery.Event): void {
-            event.preventDefault()
-            event.stopPropagation()
+            event.preventDefault();
+            event.stopPropagation();
 
             let $this = $(this);
 
-            setTimeout(function() {
-                ($this as any).Dropdown('fixPosition')
-            }, 1)
+            setTimeout(function () {
+                ($this as any).Dropdown('fixPosition');
+            }, 1);
         }
 
         let selector = '[data-toggle="dropdown"]';
 
-        $document.off('click',selector).on('click', selector, toggle).on('click', selector, fix);
+        $document.off('click', selector).on('click', selector, toggle).on('click', selector, fix);
     },
 };
 

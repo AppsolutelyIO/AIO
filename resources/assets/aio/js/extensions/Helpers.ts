@@ -1,5 +1,4 @@
-
-import debounce from './Debounce'
+import debounce from './Debounce';
 
 interface LoadFieldsOptions {
     textField: string;
@@ -26,9 +25,10 @@ export default class Helpers {
         if (typeof obj !== 'object') {
             return 0;
         }
-        let i: string, len = 0;
+        let i: string,
+            len = 0;
 
-        for(i in obj as Record<string, unknown>) {
+        for (i in obj as Record<string, unknown>) {
             len += 1;
         }
 
@@ -36,7 +36,7 @@ export default class Helpers {
     }
 
     isset(_var: unknown, key?: string): boolean {
-        let isset = (typeof _var !== 'undefined' && _var !== null);
+        let isset = typeof _var !== 'undefined' && _var !== null;
 
         if (typeof key === 'undefined') {
             return isset;
@@ -94,7 +94,7 @@ export default class Helpers {
                 if (val === (arr as Record<string, unknown>)[i]) {
                     return true;
                 }
-                continue
+                continue;
             }
 
             if (val == (arr as Record<string, unknown>)[i]) {
@@ -110,14 +110,15 @@ export default class Helpers {
         }
 
         let len1 = this.len(array),
-            len2 = this.len(array2), i: string;
+            len2 = this.len(array2),
+            i: string;
 
         if (len1 !== len2) {
             return false;
         }
 
         for (i in array as Record<string, unknown>) {
-            if (! this.isset(array2, i)) {
+            if (!this.isset(array2, i)) {
                 return false;
             }
 
@@ -125,8 +126,13 @@ export default class Helpers {
                 return true;
             }
 
-            if (typeof (array as Record<string, unknown>)[i] === 'object' && typeof (array2 as Record<string, unknown>)[i] === 'object') {
-                if (! this.equal((array as Record<string, unknown>)[i], (array2 as Record<string, unknown>)[i], strict)) {
+            if (
+                typeof (array as Record<string, unknown>)[i] === 'object' &&
+                typeof (array2 as Record<string, unknown>)[i] === 'object'
+            ) {
+                if (
+                    !this.equal((array as Record<string, unknown>)[i], (array2 as Record<string, unknown>)[i], strict)
+                ) {
                     return false;
                 }
                 continue;
@@ -141,7 +147,6 @@ export default class Helpers {
                     return false;
                 }
             }
-
         }
         return true;
     }
@@ -151,20 +156,19 @@ export default class Helpers {
             return str;
         }
 
-        return str.replace(
-            new RegExp(replace, "g"),
-            subject
-        );
+        return str.replace(new RegExp(replace, 'g'), subject);
     }
 
     random(len?: number): string {
-        return Math.random().toString(12).substr(2, len || 16)
+        return Math.random()
+            .toString(12)
+            .substr(2, len || 16);
     }
 
     previewImage(src: string, width?: string, title?: string): void {
         let AIO = this.aio,
             img = new Image(),
-            win = this.isset(window.top) ? top as Window : window,
+            win = this.isset(window.top) ? (top as Window) : window,
             clientWidth = Math.ceil(win.screen.width * 0.6),
             clientHeight = Math.ceil(win.screen.height * 0.8);
 
@@ -181,11 +185,11 @@ export default class Helpers {
             let srcw = this.width,
                 srch = this.height,
                 imgWidth = srcw > clientWidth ? clientWidth : srcw,
-                imgHeight = Math.ceil(imgWidth * (srch/srcw));
+                imgHeight = Math.ceil(imgWidth * (srch / srcw));
 
             imgHeight = imgHeight > clientHeight ? clientHeight : imgHeight;
 
-            title = title || src.split('/').pop() as string;
+            title = title || (src.split('/').pop() as string);
 
             if (title.length > 50) {
                 title = title.substr(0, 50) + '...';
@@ -199,62 +203,75 @@ export default class Helpers {
                 shadeClose: true,
                 closeBtn: 2,
                 content: $(img),
-                area: [imgWidth+'px', (imgHeight) + 'px'],
+                area: [imgWidth + 'px', imgHeight + 'px'],
                 skin: 'layui-layer-nobg',
                 end: function () {
                     document.body.removeChild(img);
-                }
+                },
             });
         };
         img.onerror = function () {
             (AIO as Record<string, (state: boolean) => void>).loading(false);
-            AIO.error((AIO.lang as Record<string, (...args: unknown[]) => string>).trans('no_preview'))
+            AIO.error((AIO.lang as any).trans('no_preview'));
         };
     }
 
-    asyncRender(url: string, done: (html: string) => void, error?: (a: JQueryXHR, b: string, c: string) => unknown): void {
+    asyncRender(
+        url: string,
+        done: (html: string) => void,
+        error?: (a: JQueryXHR, b: string, c: string) => unknown,
+    ): void {
         let AIO = this.aio;
 
-        $.ajax(url).then(function (data: string) {
-            const resolved = AIO.assets.resolveHtml(data, AIO.triggerReady) as unknown as { render(): string };
-            done(resolved.render());
-        }, function (a: JQueryXHR, b: string, c: string) {
-            if (error) {
-                if (error(a, b, c) === false) {
-                    return false;
+        $.ajax(url).then(
+            function (data: string) {
+                const resolved = AIO.assets.resolveHtml(data, AIO.triggerReady) as unknown as { render(): string };
+                done(resolved.render());
+            },
+            function (a: JQueryXHR, b: string, c: string) {
+                if (error) {
+                    if (error(a, b, c) === false) {
+                        return false;
+                    }
                 }
-            }
 
-            AIO.handleAjaxError(a, b, c);
-        })
+                AIO.handleAjaxError(a, b, c);
+            },
+        );
     }
 
     loadFields(_this: HTMLElement | JQuery, options: LoadFieldsOptions): void {
         const AIO = this.aio;
 
-        let refreshOptions = function(url: string, target: JQuery): void {
+        let refreshOptions = function (url: string, target: JQuery): void {
             (AIO as Record<string, unknown>).loading && (AIO as Record<string, () => void>).loading();
 
-            $.ajax(url).then(function(data: Array<Record<string, unknown>>) {
+            $.ajax(url).then(function (data: Array<Record<string, unknown>>) {
                 (AIO as Record<string, (state: boolean) => void>).loading(false);
-                target.find("option").remove();
+                target.find('option').remove();
 
                 $.map(data, function (d: Record<string, unknown>) {
-                    target.append(new Option(d[options.textField] as string, d[options.idField] as string, false, false));
+                    target.append(
+                        new Option(d[options.textField] as string, d[options.idField] as string, false, false),
+                    );
                 });
 
-                $(target).val(String(target.data('value')).split(',')).trigger('change');
+                $(target)
+                    .val(String(target.data('value')).split(','))
+                    .trigger('change');
             });
         };
 
         let values: string[] = [];
 
-        if (! options.values) {
-            $(_this).find('option:selected').each(function () {
-                if (String((this as HTMLOptionElement).value) === '0' || (this as HTMLOptionElement).value) {
-                    values.push((this as HTMLOptionElement).value)
-                }
-            });
+        if (!options.values) {
+            $(_this)
+                .find('option:selected')
+                .each(function () {
+                    if (String((this as HTMLOptionElement).value) === '0' || (this as HTMLOptionElement).value) {
+                        values.push((this as HTMLOptionElement).value);
+                    }
+                });
         } else {
             if (typeof options.values === 'string') {
                 values = [options.values];
@@ -263,17 +280,22 @@ export default class Helpers {
             }
         }
 
-        if (! values.length) {
+        if (!values.length) {
             return;
         }
 
-        options.fields.forEach(function(field: string, index: number){
-            var target = $(_this).closest(options.group).find('.' + options.fields[index]);
+        options.fields.forEach(function (field: string, index: number) {
+            var target = $(_this)
+                .closest(options.group)
+                .find('.' + options.fields[index]);
 
-            if (! values.length) {
+            if (!values.length) {
                 return;
             }
-            refreshOptions(options.urls[index] + (options.urls[index].match(/\?/)?'&':'?') + "q="+ values.join(','), target);
+            refreshOptions(
+                options.urls[index] + (options.urls[index].match(/\?/) ? '&' : '?') + 'q=' + values.join(','),
+                target,
+            );
         });
     }
 }

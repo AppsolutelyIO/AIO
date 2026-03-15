@@ -1,11 +1,10 @@
-
-import AIO from "../AIO";
+import AIO from '../AIO';
 
 let $d = $(document);
 
 export default class Pjax {
     constructor(AIO: AIO) {
-        this.boot(AIO)
+        this.boot(AIO);
     }
 
     boot(AIO: AIO): void {
@@ -20,7 +19,7 @@ export default class Pjax {
             ($ as any).pjax.click(event, container, {
                 container: container,
                 fragment: container,
-                timeout: 8000
+                timeout: 8000,
             });
         });
 
@@ -29,34 +28,41 @@ export default class Pjax {
         });
 
         $d.off('submit', formContainer).on('submit', formContainer, function (event: JQuery.Event) {
-            ($ as any).pjax.submit(event, container)
+            ($ as any).pjax.submit(event, container);
         });
 
-        $d.on("pjax:popstate", function () {
-            $d.one("pjax:end", function (event: JQuery.Event) {
-                $(event.target!).find(scriptContainer).each(function () {
-                    ($ as any).globalEval((this as HTMLScriptElement).text || (this as HTMLScriptElement).textContent || (this as HTMLScriptElement).innerHTML || '');
-                });
+        $d.on('pjax:popstate', function () {
+            $d.one('pjax:end', function (event: JQuery.Event) {
+                $((event as any).target!)
+                    .find(scriptContainer)
+                    .each(function () {
+                        ($ as any).globalEval(
+                            (this as HTMLScriptElement).text ||
+                                (this as HTMLScriptElement).textContent ||
+                                (this as HTMLScriptElement).innerHTML ||
+                                '',
+                        );
+                    });
             });
         });
 
         $d.on('pjax:send', function (xhr: any) {
             if (xhr.relatedTarget && xhr.relatedTarget.tagName && xhr.relatedTarget.tagName.toLowerCase() === 'form') {
-                $(formContainer).find('[type="submit"],.submit').buttonLoading();
+                ($(formContainer).find('[type="submit"],.submit') as any).buttonLoading();
             }
             (AIO as any).NP.start();
         });
 
         $d.on('pjax:complete', function (xhr: any) {
             if (xhr.relatedTarget && xhr.relatedTarget.tagName && xhr.relatedTarget.tagName.toLowerCase() === 'form') {
-                $(formContainer).find('[type="submit"],.submit').buttonLoading(false)
+                ($(formContainer).find('[type="submit"],.submit') as any).buttonLoading(false);
             }
 
             var $body = $('body');
 
             // 移除遮罩层
-            $(".modal-backdrop").remove();
-            $body.removeClass("modal-open");
+            $('.modal-backdrop').remove();
+            $body.removeClass('modal-open');
 
             // 刷新页面后需要重置modal弹窗设置的间隔
             if ($body.css('padding-right')) {

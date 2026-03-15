@@ -1,4 +1,3 @@
-
 export default class Translator {
     private aio: AIOInstance;
     private lang: Record<string, string>;
@@ -9,7 +8,7 @@ export default class Translator {
         this.lang = lang;
 
         for (let i in lang) {
-            if (! AIO.helpers.isset(this, i)) {
+            if (!(AIO.helpers as any).isset(this, i)) {
                 (this as Record<string, unknown>)[i] = lang[i];
             }
         }
@@ -23,17 +22,18 @@ export default class Translator {
             return label;
         }
 
-        var text = helpers.get(_this.lang, label) as string | null, i: string;
-        if (! helpers.isset(text)) {
+        var text = (helpers as any).get(_this.lang, label) as string | null,
+            i: string;
+        if (!helpers.isset(text)) {
             return label;
         }
 
-        if (! replace) {
+        if (!replace) {
             return text as string;
         }
 
         for (i in replace) {
-            text = helpers.replace(text as string, ':'+i, replace[i]);
+            text = helpers.replace(text as string, ':' + i, replace[i]);
         }
 
         return text as string;

@@ -1,4 +1,3 @@
-
 import '../jquery-form/jquery.form.min';
 
 interface FormOptions {
@@ -26,8 +25,10 @@ interface FormCallbacks {
 }
 
 let formCallbacks: FormCallbacks = {
-        before: [], success: [], error: []
-    };
+    before: [],
+    success: [],
+    error: [],
+};
 
 class Form {
     public options: FormOptions;
@@ -36,31 +37,38 @@ class Form {
     public _errColumns: Record<string, JQuery | undefined>;
 
     static submitting: (callback: (...args: unknown[]) => unknown) => typeof Form;
-    static submitted: (success?: (...args: unknown[]) => unknown, error?: (...args: unknown[]) => unknown) => typeof Form;
+    static submitted: (
+        success?: (...args: unknown[]) => unknown,
+        error?: (...args: unknown[]) => unknown,
+    ) => typeof Form;
 
     constructor(options: Partial<FormOptions>) {
         let _this = this;
 
-        _this.options = $.extend({
-            form: null,
-            validate: false,
-            confirm: {title: null, content: null},
-            validationErrorToastr: false,
-            errorClass: 'has-error',
-            errorContainerSelector: '.with-errors',
-            groupSelector: '.form-group,.form-label-group,.form-field',
-            tabSelector: '.tab-pane',
-            errorTemplate: '<label class="control-label" for="inputError"><i class="feather icon-x-circle"></i> {message}</label><br/>',
-            redirect: true,
-            autoRemoveError: true,
-            before: function () {},
-            after: function () {},
-            success: function () {},
-            error: function () {},
-        }, options) as FormOptions;
+        _this.options = $.extend(
+            {
+                form: null,
+                validate: false,
+                confirm: { title: null, content: null },
+                validationErrorToastr: false,
+                errorClass: 'has-error',
+                errorContainerSelector: '.with-errors',
+                groupSelector: '.form-group,.form-label-group,.form-field',
+                tabSelector: '.tab-pane',
+                errorTemplate:
+                    '<label class="control-label" for="inputError"><i class="feather icon-x-circle"></i> {message}</label><br/>',
+                redirect: true,
+                autoRemoveError: true,
+                before: function () {},
+                after: function () {},
+                success: function () {},
+                error: function () {},
+            },
+            options,
+        ) as FormOptions;
 
         _this.originalValues = {};
-        _this.$form = $(_this.options.form as string | JQuery).first();
+        _this.$form = ($(_this.options.form as any) as JQuery).first();
         _this._errColumns = {};
 
         _this.init();
@@ -70,7 +78,7 @@ class Form {
         let _this = this;
         let confirm = _this.options.confirm;
 
-        if (! confirm.title) {
+        if (!confirm.title) {
             return _this.submit();
         }
 
@@ -88,7 +96,7 @@ class Form {
         _this.removeErrors();
 
         ($form as unknown as Record<string, (opts: Record<string, unknown>) => void>).ajaxSubmit({
-            data: {_token: (window as Window & { AIO: AIOInstance }).AIO.token},
+            data: { _token: (window as Window & { AIO: AIOInstance }).AIO.token },
             beforeSubmit: function (fields: unknown[], form: JQuery, _opt: Record<string, unknown>) {
                 if (options.before(fields, form, _opt, _this) === false) {
                     return false;
@@ -125,7 +133,7 @@ class Form {
                     return;
                 }
 
-                if (response.redirect === false || ! options.redirect) {
+                if (response.redirect === false || !options.redirect) {
                     if (response.data && (response.data as Record<string, unknown>).then) {
                         delete (response.data as Record<string, unknown>)['then'];
                         delete (response.data as Record<string, unknown>)['then'];
@@ -156,7 +164,7 @@ class Form {
 
                     const AIO = (window as Window & { AIO: AIOInstance }).AIO;
 
-                    if (response.status != 422 || ! error || ! AIO.helpers.isset(error, 'errors')) {
+                    if (response.status != 422 || !error || !(AIO.helpers as any).isset(error, 'errors')) {
                         let json = response.responseJSON as Record<string, unknown> | undefined;
                         if (json && json.message) {
                             return AIO.error(json.message as string);
@@ -169,11 +177,12 @@ class Form {
                     for (key in error) {
                         _this._errColumns[key] = _this.showError($form, key, error[key] as string[]);
                     }
-
                 } catch (e) {
-                    return (window as Window & { AIO: AIOInstance }).AIO.error(response.status + ' ' + response.statusText);
+                    return (window as Window & { AIO: AIOInstance }).AIO.error(
+                        response.status + ' ' + response.statusText,
+                    );
                 }
-            }
+            },
         });
     }
 
@@ -189,9 +198,10 @@ class Form {
                 }
 
                 for (let j in msg) {
-                    $group.find(_this.options.errorContainerSelector).first().append(
-                        _this.options.errorTemplate.replace('{message}', msg[j])
-                    );
+                    $group
+                        .find(_this.options.errorContainerSelector)
+                        .first()
+                        .append(_this.options.errorTemplate.replace('{message}', msg[j]));
                 }
 
                 if (_this.options.validationErrorToastr) {
@@ -203,10 +213,10 @@ class Form {
 
         _this.originalValues[column] = _this.getFieldValue($field);
 
-        if (! $field) {
+        if (!$field) {
             const AIO = (window as Window & { AIO: AIOInstance }).AIO;
             if (AIO.helpers.len(errors) && errors.length) {
-                AIO.error(errors.join("  \n  "));
+                AIO.error(errors.join('  \n  '));
             }
             return;
         }
@@ -239,7 +249,7 @@ class Form {
     }
 
     isValueChanged($field: JQuery, column: string): boolean {
-        return ! (window as Window & { AIO: AIOInstance }).AIO.helpers.equal(this.originalValues[column], this.getFieldValue($field));
+        return !(window as any).AIO.helpers.equal(this.originalValues[column], this.getFieldValue($field));
     }
 
     queryFieldByName($form: JQuery, column: string | string[]): JQuery {
@@ -287,9 +297,9 @@ class Form {
 
         let tab: JQuery;
 
-        if (! queryTabByField(this, $field).find('.'+errorClass).length) {
+        if (!queryTabByField(this, $field).find('.' + errorClass).length) {
             tab = queryTabTitleError(this, $field);
-            if (! tab.hasClass('d-none')) {
+            if (!tab.hasClass('d-none')) {
                 tab.addClass('d-none');
             }
         }
@@ -309,7 +319,7 @@ class Form {
 
         for (column in _this._errColumns) {
             tab = queryTabTitleError(_this, _this._errColumns[column] as unknown as JQuery);
-            if (! tab.hasClass('d-none')) {
+            if (!tab.hasClass('d-none')) {
                 tab.addClass('d-none');
             }
         }
@@ -319,33 +329,36 @@ class Form {
 }
 
 Form.submitting = function (callback: (...args: unknown[]) => unknown): typeof Form {
-    typeof callback == 'function' && (formCallbacks.before.push(callback));
+    typeof callback == 'function' && formCallbacks.before.push(callback);
 
-    return this
+    return this;
 };
 
-Form.submitted = function (success?: (...args: unknown[]) => unknown, error?: (...args: unknown[]) => unknown): typeof Form {
-    typeof success == 'function' && (formCallbacks.success.push(success));
-    typeof error == 'function' && (formCallbacks.error.push(error));
+Form.submitted = function (
+    success?: (...args: unknown[]) => unknown,
+    error?: (...args: unknown[]) => unknown,
+): typeof Form {
+    typeof success == 'function' && formCallbacks.success.push(success);
+    typeof error == 'function' && formCallbacks.error.push(error);
 
-    return this
+    return this;
 };
 
 function removeErrorWhenValChanged(form: Form, $field: JQuery, column: string): void {
     let remove = function (): void {
-        form.removeError($field, column)
+        form.removeError($field, column);
     };
 
     $field.one('change', remove);
     $field.off('blur', remove).on('blur', function () {
-        if (form.isValueChanged($field, column))  {
+        if (form.isValueChanged($field, column)) {
             remove();
         }
     });
 
     let interval = function (): void {
         setTimeout(function () {
-            if (! $field.length) {
+            if (!$field.length) {
                 return;
             }
             if (form.isValueChanged($field, column)) {
@@ -359,7 +372,6 @@ function removeErrorWhenValChanged(form: Form, $field: JQuery, column: string): 
     interval();
 }
 
-
 function getTabId(form: Form, $field: JQuery): string | undefined {
     return $field.parents(form.options.tabSelector).attr('id');
 }
@@ -367,7 +379,7 @@ function getTabId(form: Form, $field: JQuery): string | undefined {
 function queryTabByField(form: Form, $field: JQuery): JQuery {
     let tabId = getTabId(form, $field);
 
-    if (! tabId) {
+    if (!tabId) {
         return $('<none></none>');
     }
 
@@ -379,8 +391,7 @@ function queryTabTitleError(form: Form, $field: JQuery): JQuery {
 }
 
 function fire(callbacks: Array<(...args: unknown[]) => unknown>, ...rest: unknown[]): unknown {
-    let i: string,
-        result: unknown;
+    let i: string, result: unknown;
 
     for (i in callbacks) {
         result = callbacks[i].apply(callbacks[i], rest);
@@ -391,8 +402,7 @@ function fire(callbacks: Array<(...args: unknown[]) => unknown>, ...rest: unknow
     }
 }
 
-
-($.fn as Record<string, unknown>).form = function (this: JQuery, options: Record<string, unknown>): void {
+($.fn as any).form = function (this: JQuery, options: Record<string, unknown>): void {
     let $this = $(this);
 
     options = $.extend(options, {
@@ -410,4 +420,4 @@ function fire(callbacks: Array<(...args: unknown[]) => unknown>, ...rest: unknow
     });
 };
 
-export default Form
+export default Form;

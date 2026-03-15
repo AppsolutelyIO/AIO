@@ -1,4 +1,3 @@
-
 export default class Ajax {
     private aio: AIOInstance;
 
@@ -8,15 +7,15 @@ export default class Ajax {
         AIO.handleAjaxError = this.handleAjaxError.bind(this);
         AIO.handleJsonResponse = this.handleJsonResponse.bind(this);
 
-        this.init(AIO)
+        this.init(AIO);
     }
 
     init(AIO: AIOInstance): void {
-        ($ as Record<string, unknown>).get = function (
+        ($ as any).get = function (
             url: string,
             data?: Record<string, unknown> | ((response: unknown) => void),
             success?: ((response: unknown) => void) | string,
-            dataType?: string
+            dataType?: string,
         ): JQueryXHR {
             let options: Record<string, unknown> = {
                 type: 'GET',
@@ -34,33 +33,33 @@ export default class Ajax {
             }
 
             if (typeof data === 'object') {
-                options.data = data
+                options.data = data;
             }
 
             if (dataType) {
                 options.dataType = dataType;
             }
 
-            return $.ajax(options as JQueryAjaxSettings)
+            return $.ajax(options as JQueryAjaxSettings);
         };
 
-        ($ as Record<string, unknown>).post = function (options: Record<string, unknown>): JQueryXHR {
+        ($ as any).post = function (options: Record<string, unknown>): JQueryXHR {
             options.type = 'POST';
-            Object.assign(options.data as Record<string, unknown>, {_token: AIO.token});
+            Object.assign(options.data as Record<string, unknown>, { _token: AIO.token });
 
             return $.ajax(options as JQueryAjaxSettings);
         };
 
-        ($ as Record<string, unknown>).delete = function (options: Record<string, unknown>): JQueryXHR {
+        ($ as any).delete = function (options: Record<string, unknown>): JQueryXHR {
             options.type = 'POST';
-            options.data = {_method: 'DELETE', _token: AIO.token};
+            options.data = { _method: 'DELETE', _token: AIO.token };
 
             return $.ajax(options as JQueryAjaxSettings);
         };
 
-        ($ as Record<string, unknown>).put = function (options: Record<string, unknown>): JQueryXHR {
+        ($ as any).put = function (options: Record<string, unknown>): JQueryXHR {
             options.type = 'POST';
-            Object.assign(options.data as Record<string, unknown>, {_method: 'PUT', _token: AIO.token});
+            Object.assign(options.data as Record<string, unknown>, { _method: 'PUT', _token: AIO.token });
 
             return $.ajax(options as JQueryAjaxSettings);
         };
@@ -68,18 +67,18 @@ export default class Ajax {
 
     handleAjaxError(xhr: JQueryXHR, text: string, msg: string): void {
         let AIO = this.aio,
-            json = xhr.responseJSON || {} as Record<string, unknown>,
+            json = xhr.responseJSON || ({} as Record<string, unknown>),
             _msg = json.message as string | undefined;
 
         AIO.NP.done();
         (AIO as Record<string, unknown>).loading = false;
-        $('.btn-loading').buttonLoading(false);
+        ($('.btn-loading') as any).buttonLoading(false);
 
         switch (xhr.status) {
             case 500:
-                return AIO.error(_msg || (AIO.lang['500'] || 'Server internal error.'));
+                return AIO.error(_msg || AIO.lang['500'] || 'Server internal error.');
             case 403:
-                return AIO.error(_msg || (AIO.lang['403'] || 'Permission deny!'));
+                return AIO.error(_msg || AIO.lang['403'] || 'Permission deny!');
             case 401:
                 if (json.redirect) {
                     location.href = json.redirect as string;
@@ -100,7 +99,8 @@ export default class Ajax {
             case 422:
                 if (json.errors) {
                     try {
-                        var err: string[] = [], i: string;
+                        var err: string[] = [],
+                            i: string;
                         for (i in json.errors as Record<string, string[]>) {
                             err.push((json.errors as Record<string, string[]>)[i].join('<br/>'));
                         }
@@ -108,18 +108,19 @@ export default class Ajax {
                     } catch (e) {}
                     return;
                 }
-             case 0:
+                return;
+            case 0:
                 return;
         }
 
-        AIO.error(_msg || (xhr.status + ' ' + msg));
+        AIO.error(_msg || xhr.status + ' ' + msg);
     }
 
     handleJsonResponse(response: Record<string, unknown>, options?: Record<string, unknown>): void {
         let AIO = this.aio,
             data = response.data as Record<string, unknown>;
 
-        if (! response) {
+        if (!response) {
             return;
         }
 
@@ -130,13 +131,13 @@ export default class Ajax {
         var processThen = function (thenData: Record<string, unknown>): void {
             switch (thenData.action) {
                 case 'refresh':
-                    (AIO as Record<string, unknown>).reload();
+                    (AIO as any).reload();
                     break;
                 case 'download':
                     window.open(thenData.value as string, '_blank');
                     break;
                 case 'redirect':
-                    (AIO as Record<string, unknown>).reload(thenData.value || null);
+                    (AIO as any).reload(thenData.value || null);
                     break;
                 case 'location':
                     setTimeout(function () {
@@ -149,7 +150,7 @@ export default class Ajax {
                     break;
                 case 'script':
                     (function () {
-                        // eslint-disable-next-line no-eval
+                         
                         const indirectEval = globalThis.eval;
                         indirectEval(thenData.value as string);
                     })();
@@ -167,7 +168,7 @@ export default class Ajax {
 
         let message = (data.message || response.message) as string | undefined;
 
-        if (! data.type) {
+        if (!data.type) {
             data.type = response.status ? 'success' : 'error';
         }
 
@@ -175,7 +176,11 @@ export default class Ajax {
             if (data.alert) {
                 (AIO.swal as Record<string, (...args: unknown[]) => void>)[data.type as string](message, data.detail);
             } else {
-                (AIO as Record<string, (...args: unknown[]) => void>)[data.type as string](message, null, data.timeout ? {timeOut: (data.timeout as number)*1000} : {});
+                (AIO as Record<string, (...args: unknown[]) => void>)[data.type as string](
+                    message,
+                    null,
+                    data.timeout ? { timeOut: (data.timeout as number) * 1000 } : {},
+                );
             }
         }
 

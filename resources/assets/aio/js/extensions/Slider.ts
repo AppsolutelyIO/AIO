@@ -1,4 +1,3 @@
-
 declare class PerfectScrollbar {
     constructor(selector: string);
 }
@@ -23,19 +22,18 @@ export default class Slider {
     constructor(AIO: AIOInstance, options: Partial<SliderOptions>) {
         let _this = this;
 
-        _this.options = $.extend({
-            target: null,
-            class: null,
-            autoDestory: true,
-        }, options) as SliderOptions;
+        _this.options = $.extend(
+            {
+                target: null,
+                class: null,
+                autoDestory: true,
+            },
+            options,
+        ) as SliderOptions;
 
         _this.id = idPrefix + AIO.helpers.random();
-        _this.$target = $(_this.options.target as string | HTMLElement);
-        _this.$container = $(
-            template
-                .replace('{id}', _this.id)
-                .replace('{class}', _this.options.class || '')
-        );
+        _this.$target = $(_this.options.target as any);
+        _this.$container = $(template.replace('{id}', _this.id).replace('{class}', _this.options.class || ''));
 
         _this.$container.appendTo('body');
         _this.$container.find('.slider-content').append(_this.$target);
@@ -62,6 +60,6 @@ export default class Slider {
     }
 
     destroy(): void {
-        this.$container.remove()
+        this.$container.remove();
     }
 }
