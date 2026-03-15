@@ -50,16 +50,6 @@ class AdminMenuCmsSeeder extends Seeder
             'uri'       => 'pages/entry',
         ]);
 
-        // ── Page Blocks ──────────────────────────────────────
-        Menu::create([
-            'id'        => ++$id,
-            'parent_id' => 0,
-            'order'     => ++$order,
-            'title'     => 'Page Blocks',
-            'icon'      => 'feather icon-grid',
-            'uri'       => 'pages/blocks',
-        ]);
-
         // ── Categories ───────────────────────────────────────
         Menu::create([
             'id'        => ++$id,
