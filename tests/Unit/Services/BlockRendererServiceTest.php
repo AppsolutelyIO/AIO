@@ -11,6 +11,8 @@ use Appsolutely\AIO\Services\BlockRendererService;
 use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use function Livewire\invade;
+
 final class BlockRendererServiceTest extends TestCase
 {
     use RefreshDatabase;
@@ -78,5 +80,26 @@ final class BlockRendererServiceTest extends TestCase
 
         // Without a block relationship, 'block.class' won't exist → Invalid block structure
         $this->assertStringContainsString('Invalid block structure', $result);
+    }
+
+    public function test_render_block_safely_preserves_view_section_stack_on_failure(): void
+    {
+        $factory = view();
+
+        // Simulate a parent view having an active @section('content')
+        $factory->startSection('content');
+
+        $page  = $this->makePage();
+        $block = $this->makeBlock(['reference' => 'test-ref']);
+
+        // This will fail early (invalid block structure), but test the principle
+        $this->service->renderBlockSafely($block, $page);
+
+        // The sectionStack should still contain 'content'
+        $sectionStack = invade($factory)->sectionStack;
+        $this->assertContains('content', $sectionStack);
+
+        // Cleanup: stop the section to avoid test pollution
+        $factory->stopSection();
     }
 }

@@ -12,6 +12,8 @@ use Appsolutely\AIO\Services\Contracts\BlockRendererServiceInterface;
 use Livewire\Component;
 use Livewire\Livewire;
 
+use function Livewire\invade;
+
 final readonly class BlockRendererService implements BlockRendererServiceInterface
 {
     use ResolvesLivewireClassName;
@@ -68,9 +70,23 @@ final readonly class BlockRendererService implements BlockRendererServiceInterfa
             $data['blocksForAnchor'] = $this->buildBlocksForAnchor($page);
         }
 
+        // Save View Factory state before rendering.
+        // If Livewire::mount() throws, Laravel's View::render() catch block
+        // calls flushState() which clears the sectionStack — destroying any
+        // parent @section that is still open (e.g., in pages/show.blade.php).
+        $factory      = view();
+        $sectionStack = invade($factory)->sectionStack;
+        $sections     = invade($factory)->sections;
+        $renderCount  = invade($factory)->renderCount;
+
         try {
             return Livewire::mount($className, $data, $reference);
         } catch (\Throwable $e) {
+            // Restore the View Factory state so the parent view can continue.
+            invade($factory)->sectionStack = $sectionStack;
+            invade($factory)->sections     = $sections;
+            invade($factory)->renderCount  = $renderCount;
+
             return $this->getBlockErrorHtml($e->getMessage());
         }
     }
