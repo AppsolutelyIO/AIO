@@ -1,3 +1,4 @@
+import { existsSync } from 'fs';
 import laravel from 'laravel-vite-plugin';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -6,12 +7,17 @@ import { defineConfig } from 'vite';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Detect context: running from site (has artisan) or from AIO package
+const isLaravelRoot = existsSync(path.resolve('artisan'));
+const publicDirectory = isLaravelRoot ? 'public' : '../site/public';
+
 export default defineConfig({
     base: '/build/themes/tabler',
     plugins: [
         laravel({
             input: ['themes/tabler/sass/app.scss', 'themes/tabler/js/app.ts'],
             buildDirectory: 'build/themes/tabler',
+            publicDirectory,
         }),
         {
             name: 'blade',
