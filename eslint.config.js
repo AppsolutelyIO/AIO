@@ -16,6 +16,7 @@ export default tseslint.config(
             'resources/pre-dist/**',
             'resources/assets/aio/plugins/**',
             '.agents/**',
+            'resources/agent-config/**',
             '_ide_helper.php',
             '_ide_helper_models.php',
             '*.config.js',

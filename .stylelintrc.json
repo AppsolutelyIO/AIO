@@ -1,5 +1,15 @@
 {
     "extends": ["stylelint-config-standard-scss"],
+    "ignoreFiles": [
+        "resources/assets/adminlte/**",
+        "resources/assets/sass/**",
+        "resources/assets/aio/**",
+        "resources/dist/**",
+        "resources/pre-dist/**",
+        "themes/tabler/**",
+        "node_modules/**",
+        "vendor/**"
+    ],
     "rules": {
         "no-duplicate-selectors": true,
         "color-hex-length": "short",
