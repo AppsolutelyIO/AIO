@@ -74,14 +74,20 @@ final class PageBlockSettingRepository extends BaseRepository
     }
 
     /**
-     * Update status and sort for a page block setting
+     * Update status, sort, and optionally block_value_id for a page block setting.
      */
-    public function updateStatusAndSort(int $id, int $status, int $sort): PageBlockSetting
+    public function updateStatusAndSort(int $id, int $status, int $sort, ?int $blockValueId = null): PageBlockSetting
     {
-        return $this->update([
+        $data = [
             'status' => $status,
             'sort'   => $sort,
-        ], $id);
+        ];
+
+        if ($blockValueId !== null) {
+            $data['block_value_id'] = $blockValueId;
+        }
+
+        return $this->update($data, $id);
     }
 
     /**

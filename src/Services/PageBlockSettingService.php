@@ -118,25 +118,24 @@ final readonly class PageBlockSettingService implements PageBlockSettingServiceI
             return []; // Return empty array to skip this item
         }
 
+        // Resolve view and theme for block value resolution
+        $view  = $this->resolveViewFromManifest($blockReference);
+        $theme = $this->themeService->resolveThemeName();
+
         // Check if this block setting already exists for this page
         $found = $this->pageBlockSettingRepository->findBy($pageId, $blockId, $reference);
         if ($found) {
-            // Update existing setting: reactivate it and update sort order
-            // This handles cases where blocks are reordered or reactivated
+            // Reactivate, update sort order, and ensure block_value_id matches current theme
+            $blockValueId = $this->getBlockValueId($blockId, $theme, $view);
             $this->pageBlockSettingRepository->updateStatusAndSort(
                 $found->id,
                 Status::ACTIVE->value,
-                $sort
+                $sort,
+                $blockValueId
             );
 
             return []; // Return empty array since we updated, not created
         }
-
-        // Resolve view (template name) from manifest for new block values
-        $view = $this->resolveViewFromManifest($blockReference);
-
-        // Create new block setting with all required data
-        $theme = $this->themeService->resolveThemeName();
         $data  = [
             'page_id'        => $pageId,
             'block_id'       => $blockId,
