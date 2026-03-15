@@ -27,7 +27,7 @@ final class MenuController extends AdminBaseController
                 ->width('50px')->setAttributes(children_attributes());
             $grid->column('url', __t('Url'))->width('200px');
             $grid->column('target', __t('Target'))->display(function ($target) {
-                return $target->toArray();
+                return $target?->toArray() ?? '';
             });
             $grid->column('published_at', __t('Published At'))->display(column_time_format())->sortable();
             $grid->column('expired_at', __t('Expired At'))->display(column_time_format())->sortable();
