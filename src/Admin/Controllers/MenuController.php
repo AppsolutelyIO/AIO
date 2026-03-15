@@ -33,7 +33,7 @@ final class MenuController extends AdminBaseController
             $grid->column('expired_at', __t('Expired At'))->display(column_time_format())->sortable();
             $grid->column('status', __t('Status'))->switch();
             $grid->order->orderable();
-            $grid->model()->withCount('children')->orderBy('left', 'ASC');
+            $grid->model()->withCount('children')->orderBy('order', 'ASC');
 
             $grid->quickSearch('id', 'title');
             $grid->filter(function (Grid\Filter $filter) {
