@@ -27,7 +27,7 @@ final readonly class PageBuilderDataEnricherService
     public function __construct(
         protected BlockRendererService $blockRendererService,
         protected PageBlockSettingRepository $blockSettingRepository,
-        protected ThemeServiceInterface $themeService
+        protected ThemeServiceInterface $themeService,
     ) {}
 
     /**
@@ -61,21 +61,12 @@ final readonly class PageBuilderDataEnricherService
     }
 
     /**
-     * Enrich a single component with rendered HTML.
-     *
-     * @param  array<string, mixed>  $component  GrapesJS component data
-     * @return array<string, mixed>|null Component with content (HTML) injected, or null if no matching setting
-     */
-    /**
      * Ensure theme view paths are registered (needed in admin context where ApplyThemeMiddleware skips).
      */
     private function ensureThemeSetup(): void
     {
-        if (Theme::active() !== null) {
-            return;
-        }
+        $themeName = Theme::active() ?? $this->themeService->resolveThemeName();
 
-        $themeName = $this->themeService->resolveThemeName();
         if ($themeName === null) {
             return;
         }
@@ -84,6 +75,12 @@ final readonly class PageBuilderDataEnricherService
         $this->themeService->setupTheme($themeName, $parentTheme);
     }
 
+    /**
+     * Enrich a single component with rendered HTML.
+     *
+     * @param  array<string, mixed>  $component  GrapesJS component data
+     * @return array<string, mixed>|null Component with content (HTML) injected, or null if no matching setting
+     */
     private function enrichComponent(array $component, int $pageId, GeneralPage $generalPage): ?array
     {
         $reference = $component['reference'] ?? $component['attributes']['reference'] ?? null;

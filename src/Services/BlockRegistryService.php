@@ -285,10 +285,6 @@ final readonly class BlockRegistryService
      */
     private function ensureThemeSetup(string $themeName): void
     {
-        if (Theme::active() !== null) {
-            return;
-        }
-
         $parentTheme = $this->themeService->getParentTheme();
         $this->themeService->setupTheme($themeName, $parentTheme);
     }
