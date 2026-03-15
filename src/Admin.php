@@ -731,6 +731,8 @@ class Admin
                     $router->patch('block-option', [PageBuilderAdminApiController::class, 'updateBlockOption'])->name('block-option.update');
                     $router->get('block-html', [PageBuilderAdminApiController::class, 'getBlockHtml'])->name('block-html');
                     $router->post('render-block', [PageBuilderAdminApiController::class, 'renderBlockWithOptions'])->name('render-block');
+                    $router->get('{reference}/theme-sync', [PageBuilderAdminApiController::class, 'getThemeSyncOptions'])->name('theme-sync');
+                    $router->post('{reference}/theme-sync', [PageBuilderAdminApiController::class, 'syncThemeBlocks'])->name('theme-sync.execute');
                 });
 
                 // Menu API Routes

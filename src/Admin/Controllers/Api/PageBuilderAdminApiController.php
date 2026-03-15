@@ -8,6 +8,8 @@ use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Services\BlockOptionFormRenderer;
 use Appsolutely\AIO\Services\BlockOptionService;
 use Appsolutely\AIO\Services\BlockRegistryService;
+use Appsolutely\AIO\Services\Contracts\PageBlockSettingServiceInterface;
+use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Appsolutely\AIO\Services\PageBlockService;
 use Appsolutely\AIO\Services\PageBuilderDataEnricherService;
 use Appsolutely\AIO\Services\PageService;
@@ -22,7 +24,9 @@ final class PageBuilderAdminApiController extends AdminBaseApiController
         protected BlockRegistryService $blockRegistryService,
         protected PageBuilderDataEnricherService $dataEnricherService,
         protected BlockOptionService $blockOptionService,
-        protected BlockOptionFormRenderer $blockOptionFormRenderer
+        protected BlockOptionFormRenderer $blockOptionFormRenderer,
+        protected PageBlockSettingServiceInterface $blockSettingService,
+        protected ThemeServiceInterface $themeService
     ) {}
 
     /**
@@ -232,5 +236,57 @@ final class PageBuilderAdminApiController extends AdminBaseApiController
         );
 
         return $this->success(['html' => $html]);
+    }
+
+    /**
+     * Get available themes with block counts for syncing to current theme.
+     *
+     * GET /api/pages/{reference}/theme-sync
+     */
+    public function getThemeSyncOptions(Request $request, string $reference): JsonResponse
+    {
+        $page         = $this->pageService->findByReference($reference);
+        $currentTheme = $this->themeService->resolveThemeName();
+
+        if ($currentTheme === null) {
+            return $this->error('No active theme found.');
+        }
+
+        $options = $this->blockSettingService->getAvailableThemesForSync($page->id, $currentTheme);
+
+        return $this->success([
+            'current_theme' => $currentTheme,
+            'options'       => $options,
+        ]);
+    }
+
+    /**
+     * Sync block settings from a source theme to the current theme.
+     *
+     * POST /api/pages/{reference}/theme-sync
+     * Body: { source_theme: "june" }
+     */
+    public function syncThemeBlocks(Request $request, string $reference): JsonResponse
+    {
+        $sourceTheme = (string) $request->string('source_theme', '')->trim();
+
+        if ($sourceTheme === '') {
+            return $this->failValidation(['source_theme' => ['source_theme is required.']]);
+        }
+
+        $page         = $this->pageService->findByReference($reference);
+        $currentTheme = $this->themeService->resolveThemeName();
+
+        if ($currentTheme === null) {
+            return $this->error('No active theme found.');
+        }
+
+        if ($sourceTheme === $currentTheme) {
+            return $this->failValidation(['source_theme' => ['Cannot sync from the same theme.']]);
+        }
+
+        $result = $this->blockSettingService->syncFromTheme($page->id, $sourceTheme, $currentTheme);
+
+        return $this->success($result, "Synced {$result['synced']} blocks, skipped {$result['skipped']}.");
     }
 }
