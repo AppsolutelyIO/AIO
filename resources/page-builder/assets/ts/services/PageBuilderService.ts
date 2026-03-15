@@ -8,6 +8,7 @@ import {
 export class PageBuilderService {
     private editor: any;
     private blockRegistry: any[] = [];
+    private blockRegistryPromise: Promise<void> | null = null;
     private initializationPromise: Promise<void>;
 
     constructor() {
@@ -159,8 +160,16 @@ export class PageBuilderService {
     }
 
     public async loadBlockRegistry(): Promise<void> {
+        if (this.blockRegistryPromise) {
+            return this.blockRegistryPromise;
+        }
+
+        this.blockRegistryPromise = this.fetchBlockRegistry();
+        return this.blockRegistryPromise;
+    }
+
+    private async fetchBlockRegistry(): Promise<void> {
         try {
-            // Use the URL from window configuration (set by Blade template)
             const blockRegistryUrl =
                 (window as any).pageBuilderConfig?.blockRegistryUrl || '/admin/api/pages/block-registry';
 
@@ -171,6 +180,7 @@ export class PageBuilderService {
             this.registerBlocks();
         } catch (error) {
             console.error('Failed to load block registry:', error);
+            this.blockRegistryPromise = null;
         }
     }
 
@@ -330,7 +340,7 @@ export class PageBuilderService {
         if (!component.get('reference')) {
             component.set('reference', this.generateRandomId(component.get('type')));
         }
-        // Ensure block_id and type are on attributes for option panel (getBlockOption)
+        // Ensure block_id and type are on attributes for option panel (getBlockOption / getSchemaFields)
         const attrs = component.get('attributes') || {};
         const type = component.get('type') || attrs.type;
         if (type && (attrs.block_id == null || attrs.block_id === undefined)) {
