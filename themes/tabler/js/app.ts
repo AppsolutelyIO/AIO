@@ -7,8 +7,8 @@
  */
 
 import '@tabler/core';
+
 import './components/lazy-loading';
 import './init';
-
 // Store locations exports openSmartMap (used by Blade)
 import './components/store-locations';

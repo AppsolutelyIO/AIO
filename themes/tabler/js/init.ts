@@ -7,16 +7,17 @@
  */
 
 import type { ComponentInit } from './types';
+
 import { init as initAnchor } from './components/anchor';
-import { init as initVideoShowcase } from './components/video-showcase';
+import { init as initDynamicFormInteractive } from './components/dynamic-form-interactive';
 import { init as initFeatures } from './components/features';
 import { init as initMediaSlider } from './components/media-slider';
-import { init as initStoreLocations } from './components/store-locations';
-import { init as initStoreLocationsDropdown } from './components/store-locations-dropdown';
 import { init as initPhotoGallery } from './components/photo-gallery';
 import { init as initProductVariantBlock } from './components/product-variant-block';
-import { init as initDynamicFormInteractive } from './components/dynamic-form-interactive';
+import { init as initStoreLocations } from './components/store-locations';
+import { init as initStoreLocationsDropdown } from './components/store-locations-dropdown';
 import { init as initTextDocumentCollapsible } from './components/text-document-collapsible';
+import { init as initVideoShowcase } from './components/video-showcase';
 
 const componentInits: ComponentInit[] = [
     initAnchor,

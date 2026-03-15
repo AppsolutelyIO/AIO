@@ -65,13 +65,13 @@ class VideoShowcase {
             () => {
                 this.video?.play().catch(() => {});
             },
-            { once: true }
+            { once: true },
         );
     }
 
     handleVideoError(): void {
         const fallbackImage = document.querySelector<HTMLImageElement>(
-            '.video-showcase .video-showcase__mobile-fallback img'
+            '.video-showcase .video-showcase__mobile-fallback img',
         );
         if (fallbackImage && this.video) {
             fallbackImage.style.display = 'block';
@@ -95,7 +95,7 @@ class VideoShowcase {
             {
                 threshold: 0.5,
                 rootMargin: '50px',
-            }
+            },
         );
 
         this.observer.observe(this.video);

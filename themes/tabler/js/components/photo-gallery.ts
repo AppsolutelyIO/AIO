@@ -1,7 +1,8 @@
 // Photo Gallery client-side filtering
 
-import { buildUrl } from '../utils/url';
 import type { Photo } from '../types';
+
+import { buildUrl } from '../utils/url';
 
 export function init(): void {
     const grid = document.getElementById('gallery-grid');
@@ -83,7 +84,7 @@ export function init(): void {
                         }
                     }
                 },
-                { once: true }
+                { once: true },
             );
         }
 

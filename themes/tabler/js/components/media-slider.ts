@@ -3,8 +3,9 @@
  * Uses Swiper.js for carousel functionality
  */
 
+import type { SwiperOptions, Swiper as SwiperType } from 'swiper/types';
+
 import Swiper from 'swiper/bundle';
-import type { Swiper as SwiperType, SwiperOptions } from 'swiper/types';
 
 class MediaSliderCarousel {
     private swipers: Map<string, SwiperType>;

@@ -6,6 +6,7 @@
  */
 
 import LazyLoad, { type ILazyLoadInstance, type ILazyLoadOptions } from 'vanilla-lazyload';
+
 import { escapeHtmlAttr } from '../utils/escape';
 
 interface LazyLoadOptions {
@@ -105,7 +106,7 @@ class LazyLoadingManager {
         element.dispatchEvent(
             new window.CustomEvent('lazyLoaded', {
                 detail: { element },
-            })
+            }),
         );
     }
 
@@ -119,7 +120,7 @@ class LazyLoadingManager {
         element.dispatchEvent(
             new window.CustomEvent('lazyError', {
                 detail: { element },
-            })
+            }),
         );
     }
 

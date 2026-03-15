@@ -3,7 +3,7 @@
     foreach ($formFields ?? [] as $fieldConfig) {
         $opts = $fieldConfig['options'] ?? [];
         if (
-            ($fieldConfig['type'] ?? null) === \App\Enums\FormFieldType::Hidden &&
+            ($fieldConfig['type'] ?? null) === \Appsolutely\AIO\Enums\FormFieldType::Hidden &&
             is_array($opts) &&
             !empty($opts) &&
             !array_is_list($opts)

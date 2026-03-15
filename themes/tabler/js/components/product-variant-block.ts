@@ -93,7 +93,7 @@ function initializeNativeFallback(container: HTMLElement): void {
         }
 
         const colorOptions = container.querySelectorAll<HTMLButtonElement>(
-            '.product-variant-block__color-selection .product-variant-block__color-option'
+            '.product-variant-block__color-selection .product-variant-block__color-option',
         );
         colorOptions.forEach((option, idx) => {
             option.classList.toggle('active', idx === colorIndex);
@@ -127,13 +127,13 @@ function initializeNativeFallback(container: HTMLElement): void {
         }
 
         const colorButton = target.closest<HTMLButtonElement>(
-            '.product-variant-block__color-selection .product-variant-block__color-option'
+            '.product-variant-block__color-selection .product-variant-block__color-option',
         );
         if (colorButton) {
             e.preventDefault();
             e.stopPropagation();
             const colorOptions = container.querySelectorAll<HTMLButtonElement>(
-                '.product-variant-block__color-selection .product-variant-block__color-option'
+                '.product-variant-block__color-selection .product-variant-block__color-option',
             );
             const colorIndex = Array.from(colorOptions).indexOf(colorButton);
             if (colorIndex >= 0 && colorIndex !== currentColorIndex) {

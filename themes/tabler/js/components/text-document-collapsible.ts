@@ -98,7 +98,7 @@ class TextDocumentCollapsible {
 
     focusFirstFocusableElement(container: HTMLElement): void {
         const focusableElements = container.querySelectorAll<HTMLElement>(
-            'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
         );
 
         if (focusableElements.length > 0) {
@@ -142,7 +142,7 @@ class TextDocumentCollapsible {
 
     static expandAll(): void {
         const headers = document.querySelectorAll<HTMLElement>(
-            '.text-document-collapsible__header[aria-expanded="false"]'
+            '.text-document-collapsible__header[aria-expanded="false"]',
         );
 
         headers.forEach((header: HTMLElement) => {

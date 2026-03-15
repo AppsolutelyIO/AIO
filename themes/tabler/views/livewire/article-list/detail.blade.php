@@ -1,5 +1,5 @@
 @php
-    $article = ($page['model'] ?? null) instanceof \App\Models\Article ? $page['model'] : null;
+    $article = ($page['model'] ?? null) instanceof \Appsolutely\AIO\Models\Article ? $page['model'] : null;
 @endphp
 <div class="container-xl">
     <div class="row justify-content-center">

@@ -62,7 +62,7 @@ function getOrCreateObserver(threshold: number, rootMargin: string): Intersectio
                             if (isInView) {
                                 setTimeout(
                                     () => item.classList.add('animate'),
-                                    config.initialDelay + index * config.staggerDelay
+                                    config.initialDelay + index * config.staggerDelay,
                                 );
                             } else {
                                 item.classList.remove('animate');
@@ -71,7 +71,7 @@ function getOrCreateObserver(threshold: number, rootMargin: string): Intersectio
                     }
                 });
             },
-            { root: null, rootMargin, threshold }
+            { root: null, rootMargin, threshold },
         );
         observerCache.set(key, observer);
     }

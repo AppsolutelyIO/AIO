@@ -93,7 +93,7 @@ class StoreLocationsDropdown {
                         .substring(colonIndex + 1)
                         .trim()
                         .replace(/:00 /g, '')
-                        .toLowerCase()
+                        .toLowerCase(),
                 );
 
                 return `<tr><td class="pe-2 text-nowrap">${day}</td><td class="ps-2 text-muted">${time}</td></tr>`;

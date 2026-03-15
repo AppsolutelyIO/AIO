@@ -114,7 +114,7 @@ function applyInitialImage(
     container: HTMLElement,
     baseUrl: string,
     urlValue: string | null,
-    mapping: OptionsMapping
+    mapping: OptionsMapping,
 ): void {
     const imageUrl = urlValue ? findMatchingOption(urlValue, mapping) : getRandomImageUrl(mapping);
     if (imageUrl) {

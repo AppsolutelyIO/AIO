@@ -8,13 +8,13 @@
                 $errorName = "formData.{$fieldName}";
             @endphp
 
-            @if ($fieldConfig['type'] === \App\Enums\FormFieldType::Hidden)
+            @if ($fieldConfig['type'] === \Appsolutely\AIO\Enums\FormFieldType::Hidden)
                 <input type="hidden" id="{{ $fieldName }}" name="{{ $fieldName }}"
                     wire:model.defer="formData.{{ $fieldName }}" value="{{ $fieldConfig['default'] ?? '' }}"
                     @if (!empty($fieldConfig['options']) && is_array($fieldConfig['options'])) data-options-mapping="{{ json_encode($fieldConfig['options']) }}" @endif>
             @else
                 <div class="{{ $colClass }}">
-                    @if (in_array($fieldConfig['type'], [\App\Enums\FormFieldType::Text, \App\Enums\FormFieldType::Email]))
+                    @if (in_array($fieldConfig['type'], [\Appsolutely\AIO\Enums\FormFieldType::Text, \Appsolutely\AIO\Enums\FormFieldType::Email]))
                         <div class="mb-0">
                             <label for="{{ $fieldName }}" class="form-label">
                                 {{ $fieldConfig['label'] }}
@@ -32,7 +32,7 @@
                             @enderror
                         </div>
 
-                    @elseif($fieldConfig['type'] === \App\Enums\FormFieldType::Date)
+                    @elseif($fieldConfig['type'] === \Appsolutely\AIO\Enums\FormFieldType::Date)
                         <div class="mb-0">
                             <label for="{{ $fieldName }}" class="form-label">
                                 {{ $fieldConfig['label'] }}
@@ -50,7 +50,7 @@
                             @enderror
                         </div>
 
-                    @elseif($fieldConfig['type'] === \App\Enums\FormFieldType::Select)
+                    @elseif($fieldConfig['type'] === \Appsolutely\AIO\Enums\FormFieldType::Select)
                         <div class="mb-0">
                             <label for="{{ $fieldName }}" class="form-label">
                                 {{ $fieldConfig['label'] }}
@@ -72,7 +72,7 @@
                             @enderror
                         </div>
 
-                    @elseif($fieldConfig['type'] === \App\Enums\FormFieldType::Textarea)
+                    @elseif($fieldConfig['type'] === \Appsolutely\AIO\Enums\FormFieldType::Textarea)
                         <div class="mb-0">
                             <label for="{{ $fieldName }}" class="form-label">
                                 {{ $fieldConfig['label'] }}
@@ -89,7 +89,7 @@
                             @enderror
                         </div>
 
-                    @elseif($fieldConfig['type'] === \App\Enums\FormFieldType::Checkbox)
+                    @elseif($fieldConfig['type'] === \Appsolutely\AIO\Enums\FormFieldType::Checkbox)
                         <div class="mb-0">
                             <label class="form-check">
                                 <input type="checkbox" id="{{ $fieldName }}"
@@ -108,7 +108,7 @@
                             </label>
                         </div>
 
-                    @elseif($fieldConfig['type'] === \App\Enums\FormFieldType::MultipleSelect)
+                    @elseif($fieldConfig['type'] === \Appsolutely\AIO\Enums\FormFieldType::MultipleSelect)
                         <div class="mb-0">
                             <label for="{{ $fieldName }}" class="form-label">
                                 {{ $fieldConfig['label'] }}
