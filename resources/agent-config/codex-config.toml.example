@@ -1,0 +1,4 @@
+[mcp_servers.laravel-boost]
+command = "docker"
+args = ["exec", "-i", "-w", "/var/www/appsolutely/site", "laradock_workspace", "php", "artisan", "boost:mcp"]
+cwd = "/absolute/path/to/your/appsolutely/site"

@@ -1,0 +1,17 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "docker",
+            "args": [
+                "exec",
+                "-i",
+                "-w",
+                "/var/www/appsolutely/site",
+                "laradock_workspace",
+                "php",
+                "artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}

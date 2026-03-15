@@ -39,6 +39,8 @@ class InstallCommand extends Command
 
         $this->initAdminDirectory();
 
+        $this->initAgentConfig();
+
         $this->info('Done.');
     }
 
@@ -204,6 +206,50 @@ class InstallCommand extends Command
         $contents = $this->getStub('routes');
         $this->laravel['files']->put($file, str_replace('DummyNamespace', $this->namespace('Controllers'), $contents));
         $this->line('<info>Routes file was created:</info> ' . str_replace(base_path(), '', $file));
+    }
+
+    /**
+     * Publish agent config files (skills, Claude/Cursor/Codex settings) to the project root.
+     */
+    protected function initAgentConfig(): void
+    {
+        $source = dirname(__DIR__, 2) . '/resources/agent-config';
+        $files = $this->laravel['files'];
+
+        // Copy skills directory
+        $skillsDest = base_path('.agents/skills');
+        if (! is_dir($skillsDest)) {
+            $files->copyDirectory($source . '/.agents-skills', $skillsDest);
+            $this->line('<info>Agent skills were published:</info> .agents/skills');
+        }
+
+        // Create symlinks for .agent/skills, .claude/skills, .cursor/skills
+        foreach (['.agent', '.claude', '.cursor'] as $dir) {
+            $link = base_path($dir . '/skills');
+            $files->ensureDirectoryExists(base_path($dir));
+
+            if (! file_exists($link)) {
+                symlink('../.agents/skills', $link);
+                $this->line("<info>Symlink created:</info> {$dir}/skills -> ../.agents/skills");
+            }
+        }
+
+        // Copy config files (skip if already exists)
+        $configMap = [
+            'claude-settings.json'       => '.claude/settings.json',
+            'cursor-mcp.json'            => '.cursor/mcp.json',
+            'codex-config.toml.example'  => '.codex/config.toml.example',
+        ];
+
+        foreach ($configMap as $srcFile => $destPath) {
+            $dest = base_path($destPath);
+            if (! file_exists($dest)) {
+                $files->ensureDirectoryExists(dirname($dest));
+                $files->copy($source . '/' . $srcFile, $dest);
+                $this->line("<info>Config published:</info> {$destPath}");
+            }
+        }
+
     }
 
     /**

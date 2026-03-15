@@ -1,0 +1,50 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(npm *)",
+            "Bash(npx *)",
+            "Bash(node *)",
+            "Bash(php *)",
+            "Bash(composer *)",
+            "Bash(vendor/bin/pint *)",
+            "Bash(git *)",
+            "Bash(gh *)",
+            "Bash(docker *)",
+
+            "Bash(ls *)",
+            "Bash(cp *)",
+            "Bash(mkdir *)",
+            "Bash(ln *)",
+            "Bash(wc *)",
+            "Bash(wait *)",
+
+            "Bash(curl *)",
+            "Bash(wget *)",
+            "Bash(ping *)",
+            "Bash(pgrep *)",
+
+            "Bash(grep *)",
+            "Bash(sed *)",
+            "Bash(cat *)",
+            "Bash(head *)",
+            "Bash(tail *)",
+
+            "Bash(open *)",
+            "Bash(python3 *)",
+            "Bash(claude *)",
+
+            "WebSearch",
+            "WebFetch(domain:github.com)",
+            "WebFetch(domain:raw.githubusercontent.com)",
+            "WebFetch(domain:api.github.com)",
+            "WebFetch(domain:skills.sh)",
+
+            "mcp__laravel-boost__*",
+            "mcp__playwright__*",
+            "mcp__github__*",
+            "mcp__context7__*"
+        ],
+        "deny": ["Bash(git push --force*)", "Bash(rm -rf /*)", "Bash(dd *)"]
+    },
+    "enableAllProjectMcpServers": true
+}
