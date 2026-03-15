@@ -65,7 +65,7 @@ final readonly class BlockRegistryService
 
     private function buildRegistry(string $themeName): array
     {
-        $this->ensureThemeSetup($themeName);
+        $this->themeService->ensureSetup();
 
         $manifest  = $this->manifestService->loadManifest($themeName);
         $templates = $manifest['templates'] ?? [];
@@ -240,7 +240,7 @@ final readonly class BlockRegistryService
             return $this->buildPlaceholder($type);
         }
 
-        $this->ensureThemeSetup($themeName);
+        $this->themeService->ensureSetup();
 
         $config = $this->manifestService->getTemplateConfig($type, $themeName);
 
@@ -278,15 +278,6 @@ final readonly class BlockRegistryService
         } catch (Throwable) {
             return $this->buildPlaceholder($type);
         }
-    }
-
-    /**
-     * Ensure theme view paths are registered (needed in admin context where ApplyThemeMiddleware skips).
-     */
-    private function ensureThemeSetup(string $themeName): void
-    {
-        $parentTheme = $this->themeService->getParentTheme();
-        $this->themeService->setupTheme($themeName, $parentTheme);
     }
 
     /**

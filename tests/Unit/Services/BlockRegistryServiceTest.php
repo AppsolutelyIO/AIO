@@ -6,8 +6,8 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Services\BlockRegistryService;
 use Appsolutely\AIO\Services\Contracts\ManifestServiceInterface;
-use Illuminate\Support\Facades\Cache;
 use Appsolutely\AIO\Tests\TestCase;
+use Illuminate\Support\Facades\Cache;
 
 final class BlockRegistryServiceTest extends TestCase
 {
@@ -79,6 +79,8 @@ final class BlockRegistryServiceTest extends TestCase
 
     public function test_render_block_preview_returns_placeholder_when_config_is_null(): void
     {
+        config(['theme.active' => 'tabler']);
+
         $mock = $this->mock(ManifestServiceInterface::class);
         $mock->shouldReceive('getTemplateConfig')->once()->andReturn(null);
 
@@ -91,6 +93,8 @@ final class BlockRegistryServiceTest extends TestCase
 
     public function test_render_block_preview_returns_string(): void
     {
+        config(['theme.active' => 'tabler']);
+
         $mock = $this->mock(ManifestServiceInterface::class);
         $mock->shouldReceive('getTemplateConfig')->once()->andReturn(null);
 
@@ -98,5 +102,16 @@ final class BlockRegistryServiceTest extends TestCase
         $result  = $service->renderBlockPreview('hero');
 
         $this->assertIsString($result);
+    }
+
+    public function test_render_block_preview_returns_placeholder_when_no_theme(): void
+    {
+        config(['theme.active' => null]);
+
+        $service = app(BlockRegistryService::class);
+        $result  = $service->renderBlockPreview('hero');
+
+        $this->assertStringContainsString('hero', $result);
+        $this->assertStringContainsString('<section', $result);
     }
 }

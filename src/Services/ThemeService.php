@@ -64,6 +64,18 @@ final readonly class ThemeService implements ThemeServiceInterface
         $this->buildViewPathCascade($viewFinder, $themeName, $parentTheme);
     }
 
+    public function ensureSetup(): void
+    {
+        $themeName = Theme::active() ?? $this->resolveThemeName();
+
+        if ($themeName === null) {
+            return;
+        }
+
+        $parentTheme = $this->getParentTheme();
+        $this->setupTheme($themeName, $parentTheme);
+    }
+
     public function getThemeViewPath(string $themeName): string
     {
         // Site themes take priority over package themes

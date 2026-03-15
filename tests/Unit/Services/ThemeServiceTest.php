@@ -7,6 +7,7 @@ namespace Appsolutely\AIO\Tests\Unit\Services;
 use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Appsolutely\AIO\Services\ThemeService;
 use Appsolutely\AIO\Tests\TestCase;
+use Qirolab\Theme\Theme;
 
 final class ThemeServiceTest extends TestCase
 {
@@ -159,6 +160,27 @@ final class ThemeServiceTest extends TestCase
             @rmdir($sitePath);
             @rmdir(base_path('themes/tabler'));
         }
+    }
+
+    // --- ensureSetup ---
+
+    public function test_ensure_setup_does_nothing_when_no_theme_configured(): void
+    {
+        config(['theme.active' => null]);
+
+        // Should not throw
+        $this->service->ensureSetup();
+
+        $this->assertNull(config('theme.active'));
+    }
+
+    public function test_ensure_setup_sets_up_theme_from_config(): void
+    {
+        config(['theme.active' => 'tabler', 'theme.parent' => null]);
+
+        $this->service->ensureSetup();
+
+        $this->assertSame('tabler', Theme::active());
     }
 
     public function test_get_theme_view_path_falls_back_to_package_when_no_site_theme(): void

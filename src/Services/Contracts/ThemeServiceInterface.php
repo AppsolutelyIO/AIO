@@ -30,4 +30,10 @@ interface ThemeServiceInterface
      * Get the theme path for views
      */
     public function getThemeViewPath(string $themeName): string;
+
+    /**
+     * Ensure theme view paths are registered, resolving the theme if not already active.
+     * Safe to call multiple times — skips setup when theme is already active.
+     */
+    public function ensureSetup(): void;
 }

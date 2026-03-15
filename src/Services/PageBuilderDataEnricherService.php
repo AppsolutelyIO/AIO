@@ -10,7 +10,6 @@ use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Repositories\PageBlockSettingRepository;
 use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Illuminate\Support\Arr;
-use Qirolab\Theme\Theme;
 
 /**
  * Enriches Page Builder project data by injecting server-rendered HTML for each block.
@@ -43,7 +42,7 @@ final readonly class PageBuilderDataEnricherService
             return $setting;
         }
 
-        $this->ensureThemeSetup();
+        $this->themeService->ensureSetup();
 
         $generalPage = new GeneralPage($page);
 
@@ -58,21 +57,6 @@ final readonly class PageBuilderDataEnricherService
         Arr::set($setting, BasicConstant::PAGE_GRAPESJS_KEY, $enriched);
 
         return $setting;
-    }
-
-    /**
-     * Ensure theme view paths are registered (needed in admin context where ApplyThemeMiddleware skips).
-     */
-    private function ensureThemeSetup(): void
-    {
-        $themeName = Theme::active() ?? $this->themeService->resolveThemeName();
-
-        if ($themeName === null) {
-            return;
-        }
-
-        $parentTheme = $this->themeService->getParentTheme();
-        $this->themeService->setupTheme($themeName, $parentTheme);
     }
 
     /**
