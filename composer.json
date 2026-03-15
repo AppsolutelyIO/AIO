@@ -46,7 +46,8 @@
         "fakerphp/faker": "^1.23",
         "mockery/mockery": "^1.6|^2.0",
         "orchestra/testbench": "^10.0",
-        "laravel/sanctum": "^4.0"
+        "laravel/sanctum": "^4.0",
+        "laravel/pint": "^1.29"
     },
     "autoload": {
         "psr-4": {
