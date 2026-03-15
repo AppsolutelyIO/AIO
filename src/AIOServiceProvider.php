@@ -140,6 +140,13 @@ class AIOServiceProvider extends ServiceProvider
         if (config('aio.routes.cache', true)) {
             $this->loadRoutesFrom(__DIR__ . '/../routes/cache/test.php');
         }
+
+        // Fallback (catch-all page routes) must load last
+        if (config('aio.routes.web', true)) {
+            $this->booted(function () {
+                $this->loadRoutesFrom(__DIR__ . '/../routes/fallback.php');
+            });
+        }
     }
 
     /**
