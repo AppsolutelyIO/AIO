@@ -131,6 +131,59 @@ final class PageBlockSettingRepositoryTest extends TestCase
         $this->assertEquals(3, $setting2->fresh()->sort);
     }
 
+    public function test_reset_setting_with_theme_only_affects_matching_theme(): void
+    {
+        $page    = Page::factory()->create();
+        $blockId = $this->createBlock();
+        $june    = $this->createSetting($page->id, $blockId, ['theme' => 'june', 'sort' => 1]);
+        $tabler  = $this->createSetting($page->id, $blockId, ['theme' => 'tabler', 'sort' => 2, 'reference' => 'ref-2']);
+
+        $this->repository->resetSetting($page->id, 'june');
+
+        $this->assertEquals(Status::INACTIVE->value, $june->fresh()->status->value);
+        $this->assertEquals(Status::ACTIVE->value, $tabler->fresh()->status->value);
+        $this->assertEquals(2, $tabler->fresh()->sort);
+    }
+
+    public function test_reset_setting_without_theme_affects_all_themes(): void
+    {
+        $page    = Page::factory()->create();
+        $blockId = $this->createBlock();
+        $june    = $this->createSetting($page->id, $blockId, ['theme' => 'june', 'sort' => 1]);
+        $tabler  = $this->createSetting($page->id, $blockId, ['theme' => 'tabler', 'sort' => 2, 'reference' => 'ref-2']);
+
+        $this->repository->resetSetting($page->id);
+
+        $this->assertEquals(Status::INACTIVE->value, $june->fresh()->status->value);
+        $this->assertEquals(Status::INACTIVE->value, $tabler->fresh()->status->value);
+    }
+
+    // --- findBy with theme ---
+
+    public function test_find_by_with_theme_returns_matching_setting(): void
+    {
+        $page    = Page::factory()->create();
+        $blockId = $this->createBlock();
+        $this->createSetting($page->id, $blockId, ['theme' => 'june', 'reference' => 'block-ref']);
+        $tabler = $this->createSetting($page->id, $blockId, ['theme' => 'tabler', 'reference' => 'block-ref']);
+
+        $result = $this->repository->findBy($page->id, $blockId, 'block-ref', 'tabler');
+
+        $this->assertNotNull($result);
+        $this->assertEquals($tabler->id, $result->id);
+    }
+
+    public function test_find_by_with_theme_returns_null_when_no_match(): void
+    {
+        $page    = Page::factory()->create();
+        $blockId = $this->createBlock();
+        $this->createSetting($page->id, $blockId, ['theme' => 'june', 'reference' => 'block-ref']);
+
+        $result = $this->repository->findBy($page->id, $blockId, 'block-ref', 'tabler');
+
+        $this->assertNull($result);
+    }
+
     // --- getActivePublishedSettings ---
 
     public function test_get_active_published_settings_returns_active_and_published(): void
