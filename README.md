@@ -233,6 +233,42 @@ Safe to run multiple times — each run clears the existing menu and rebuilds it
 
 ---
 
+## Extras
+
+AIO bundles several packages that accelerate development. They are already included as dependencies — just use their artisan commands directly.
+
+### AI (Laravel AI + OpenAI)
+
+Build AI-powered features with [Laravel AI](https://github.com/laravel/ai) and [OpenAI for Laravel](https://github.com/openai-php/laravel). Scaffold agents, tools, and middleware instantly:
+
+```bash
+# Create an AI agent
+php artisan make:agent MyAgent
+
+# Create an agent with structured output
+php artisan make:agent MyAgent --structured
+
+# Create an AI tool
+php artisan make:tool SearchTool
+
+# Create agent middleware
+php artisan make:agent-middleware RateLimitMiddleware
+```
+
+> Publish stubs to customize generated code: `php artisan stub:publish`
+
+### AI Agent Config
+
+`admin:install` also publishes shared agent configuration for AI coding assistants (Claude Code, Cursor, Codex):
+
+- `.agents/skills/` — Reusable skill definitions
+- `.claude/settings.json` — Claude Code permissions
+- `.cursor/mcp.json` — Cursor MCP server config
+- `.codex/config.toml.example` — Codex configuration template
+- Symlinks: `.agent/skills`, `.claude/skills`, `.cursor/skills` → `.agents/skills`
+
+---
+
 ## Available Commands
 
 | Command | Description |
