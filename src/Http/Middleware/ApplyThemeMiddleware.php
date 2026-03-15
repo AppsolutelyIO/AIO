@@ -18,16 +18,11 @@ final class ApplyThemeMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $themeName = $this->themeService->resolveThemeName();
-
-        if ($themeName && $this->themeService->shouldApplyTheme($request->path())) {
-            $parentTheme = $this->themeService->getParentTheme();
-            $this->themeService->setupTheme($themeName, $parentTheme);
-        }
+        $this->themeService->ensureSetup();
 
         return $next($request);
     }

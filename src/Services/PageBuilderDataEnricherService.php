@@ -42,8 +42,6 @@ final readonly class PageBuilderDataEnricherService
             return $setting;
         }
 
-        $this->themeService->ensureSetup();
-
         $generalPage = new GeneralPage($page);
 
         $enriched = [];

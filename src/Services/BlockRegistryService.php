@@ -65,8 +65,6 @@ final readonly class BlockRegistryService
 
     private function buildRegistry(string $themeName): array
     {
-        $this->themeService->ensureSetup();
-
         $manifest  = $this->manifestService->loadManifest($themeName);
         $templates = $manifest['templates'] ?? [];
 
@@ -239,8 +237,6 @@ final readonly class BlockRegistryService
         if ($themeName === null || $themeName === '') {
             return $this->buildPlaceholder($type);
         }
-
-        $this->themeService->ensureSetup();
 
         $config = $this->manifestService->getTemplateConfig($type, $themeName);
 

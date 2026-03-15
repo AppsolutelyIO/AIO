@@ -17,11 +17,6 @@ interface ThemeServiceInterface
     public function getParentTheme(): ?string;
 
     /**
-     * Check if theme should be applied for the given request
-     */
-    public function shouldApplyTheme(string $path): bool;
-
-    /**
      * Set up the theme view finder and paths
      */
     public function setupTheme(string $themeName, ?string $parentTheme = null): void;

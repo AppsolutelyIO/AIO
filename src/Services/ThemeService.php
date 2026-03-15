@@ -26,13 +26,6 @@ final readonly class ThemeService implements ThemeServiceInterface
         return config('theme.parent');
     }
 
-    public function shouldApplyTheme(string $path): bool
-    {
-        $adminPrefix = config('admin.route.prefix', 'admin');
-
-        return ! str_starts_with($path, $adminPrefix);
-    }
-
     public function setupTheme(string $themeName, ?string $parentTheme = null): void
     {
         $viewFinder = View::getFinder();

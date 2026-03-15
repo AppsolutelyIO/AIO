@@ -33,49 +33,6 @@ final class ThemeServiceTest extends TestCase
         $this->assertInstanceOf(ThemeServiceInterface::class, $this->service);
     }
 
-    // --- shouldApplyTheme ---
-
-    public function test_should_apply_theme_returns_true_for_non_admin_path(): void
-    {
-        config(['admin.route.prefix' => 'admin']);
-
-        $this->assertTrue($this->service->shouldApplyTheme('/home'));
-        $this->assertTrue($this->service->shouldApplyTheme('/products'));
-        $this->assertTrue($this->service->shouldApplyTheme('/about'));
-    }
-
-    public function test_should_apply_theme_returns_false_for_admin_path(): void
-    {
-        config(['admin.route.prefix' => 'admin']);
-
-        $this->assertFalse($this->service->shouldApplyTheme('admin'));
-        $this->assertFalse($this->service->shouldApplyTheme('admin/users'));
-        $this->assertFalse($this->service->shouldApplyTheme('admin/settings'));
-    }
-
-    public function test_should_apply_theme_uses_configured_admin_prefix(): void
-    {
-        config(['admin.route.prefix' => 'dashboard']);
-
-        $this->assertFalse($this->service->shouldApplyTheme('dashboard/settings'));
-        $this->assertTrue($this->service->shouldApplyTheme('admin/settings'));
-    }
-
-    public function test_should_apply_theme_with_empty_string_prefix(): void
-    {
-        config(['admin.route.prefix' => '']);
-
-        // Empty string prefix: str_starts_with is always true, so theme never applies
-        $this->assertFalse($this->service->shouldApplyTheme('anything'));
-    }
-
-    public function test_should_apply_theme_returns_true_for_root_path(): void
-    {
-        config(['admin.route.prefix' => 'admin']);
-
-        $this->assertTrue($this->service->shouldApplyTheme(''));
-    }
-
     // --- resolveThemeName ---
 
     public function test_resolve_theme_name_returns_config_value_when_no_basic_config(): void
