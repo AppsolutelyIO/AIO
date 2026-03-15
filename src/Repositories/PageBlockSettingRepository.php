@@ -14,7 +14,7 @@ final class PageBlockSettingRepository extends BaseRepository
         return PageBlockSetting::class;
     }
 
-    public function findBy(?int $pageId, ?int $blockId, ?string $reference): ?PageBlockSetting
+    public function findBy(?int $pageId, ?int $blockId, ?string $reference, ?string $theme = null): ?PageBlockSetting
     {
         $query = $this->model->newQuery();
         if (! empty($pageId)) {
@@ -29,6 +29,10 @@ final class PageBlockSettingRepository extends BaseRepository
             $query->where('reference', $reference);
         }
 
+        if ($theme !== null) {
+            $query->where('theme', $theme);
+        }
+
         return $query->first();
     }
 
@@ -37,11 +41,15 @@ final class PageBlockSettingRepository extends BaseRepository
         return $this->model->newQuery()->where('block_id', $blockId)->status()->first();
     }
 
-    public function resetSetting(int $pageId): int
+    public function resetSetting(int $pageId, ?string $theme = null): int
     {
-        return $this->model->newQuery()
-            ->where('page_id', $pageId)
-            ->update(['status' => Status::INACTIVE, 'sort' => 0]);
+        $query = $this->model->newQuery()->where('page_id', $pageId);
+
+        if ($theme !== null) {
+            $query->where('theme', $theme);
+        }
+
+        return $query->update(['status' => Status::INACTIVE, 'sort' => 0]);
     }
 
     public function getActivePublishedSettings(int $pageId, ?\Carbon\Carbon $datetime = null): \Illuminate\Database\Eloquent\Collection
