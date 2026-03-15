@@ -8,6 +8,7 @@ use Appsolutely\AIO\Constants\BasicConstant;
 use Appsolutely\AIO\Models\GeneralPage;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Repositories\PageBlockSettingRepository;
+use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Illuminate\Support\Arr;
 
 /**
@@ -24,7 +25,8 @@ final readonly class PageBuilderDataEnricherService
 {
     public function __construct(
         protected BlockRendererService $blockRendererService,
-        protected PageBlockSettingRepository $blockSettingRepository
+        protected PageBlockSettingRepository $blockSettingRepository,
+        protected ThemeServiceInterface $themeService
     ) {}
 
     /**
@@ -67,7 +69,8 @@ final readonly class PageBuilderDataEnricherService
             return $component;
         }
 
-        $setting = $this->blockSettingRepository->findBy($pageId, $blockId, $reference);
+        $theme   = $this->themeService->resolveThemeName();
+        $setting = $this->blockSettingRepository->findBy($pageId, $blockId, $reference, $theme);
 
         if ($setting === null) {
             return $component;
