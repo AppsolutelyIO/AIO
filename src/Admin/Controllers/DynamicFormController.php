@@ -204,7 +204,7 @@ final class DynamicFormController extends AdminBaseController
                     : '<span class="badge badge-success">' . __t('Valid') . '</span>';
             });
             $grid->column('submitted_at', __t('Submitted'))->display(column_time_format())->sortable();
-            $grid->column('ip_address', __t('IP Address'));
+            $grid->column('ip_address', __t('IP Address'))->copyable()->truncate('140px');
 
             $grid->model()->orderByDesc('submitted_at');
             $grid->quickSearch('id', 'email', 'first_name', 'last_name');
