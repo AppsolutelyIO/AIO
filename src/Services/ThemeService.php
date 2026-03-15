@@ -39,9 +39,17 @@ final readonly class ThemeService implements ThemeServiceInterface
 
         // Create new theme finder if needed
         if (! ($viewFinder instanceof ThemeViewFinder)) {
-            // Force the view finder to be the theme finder
+            $oldHints = $viewFinder->getHints();
+
             View::setFinder(app('theme.finder'));
             $viewFinder = View::getFinder();
+
+            // Preserve namespace hints registered by service providers (e.g. "page-builder")
+            foreach ($oldHints as $namespace => $paths) {
+                foreach ($paths as $path) {
+                    $viewFinder->addNamespace($namespace, $path);
+                }
+            }
         }
 
         // Set the active theme
