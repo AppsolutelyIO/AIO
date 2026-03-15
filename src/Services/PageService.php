@@ -65,16 +65,18 @@ final readonly class PageService implements PageServiceInterface
 
     public function resetSetting(string $reference): Model
     {
-        $page = $this->findByReference($reference);
+        $page  = $this->findByReference($reference);
+        $theme = $this->themeService->resolveThemeName();
         $this->pageRepository->updateSetting($page->id, []);
-        $this->pageBlockSettingRepository->resetSetting($page->id);
+        $this->pageBlockSettingRepository->resetSetting($page->id, $theme);
 
         return $this->pageRepository->find($page->id);
     }
 
     public function saveSetting(string $reference, array $data): Model
     {
-        $page = $this->findByReference($reference);
+        $page  = $this->findByReference($reference);
+        $theme = $this->themeService->resolveThemeName();
 
         // Extract block data from GrapesJS structure
         $blockData = Arr::get($data, BasicConstant::PAGE_GRAPESJS_KEY);
@@ -82,8 +84,8 @@ final readonly class PageService implements PageServiceInterface
             $blockData = [];
         }
 
-        // Reset existing settings and sync new ones
-        $this->pageBlockSettingRepository->resetSetting($page->id);
+        // Reset existing settings for current theme and sync new ones
+        $this->pageBlockSettingRepository->resetSetting($page->id, $theme);
         $this->blockSettingService->syncSettings($blockData, $page->id);
 
         // Update page settings
@@ -117,8 +119,8 @@ final readonly class PageService implements PageServiceInterface
     }
 
     /**
-     * Filter page blocks to only those whose block value matches the current theme.
-     * Keeps settings where blockValue.theme is null (theme-agnostic) or equals current theme.
+     * Filter page blocks to only those matching the current theme.
+     * Keeps settings where theme is null (theme-agnostic) or equals current theme.
      */
     protected function filterPageBlocksByTheme(Page $page): void
     {
@@ -130,17 +132,13 @@ final readonly class PageService implements PageServiceInterface
         }
 
         $filtered = $blocks->filter(function ($setting) use ($theme) {
-            $blockValue = $setting->blockValue;
-            if ($blockValue === null) {
+            $settingTheme = $setting->theme;
+
+            if ($settingTheme === null || $settingTheme === '') {
                 return true;
             }
 
-            $valueTheme = $blockValue->theme;
-            if ($valueTheme === null || $valueTheme === '') {
-                return true;
-            }
-
-            return $theme !== null && $valueTheme === $theme;
+            return $theme !== null && $settingTheme === $theme;
         });
 
         $page->setRelation('blocks', $filtered->sortBy('sort')->values());
