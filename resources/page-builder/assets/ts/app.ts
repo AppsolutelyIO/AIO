@@ -14,6 +14,7 @@ import './components/BlockOptionManager';
 import './components/NotificationManager';
 import './components/DeviceManager';
 import './components/PreviewManager';
+import './components/ThemeSyncManager';
 
 // Initialize Page Builder when DOM is ready
 document.addEventListener('DOMContentLoaded', async () => {
@@ -23,6 +24,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (service) {
             // renderPageData handles loading block registry first
             await service.renderPageData(window.pageBuilderData);
+
+            // After rendering, check if theme sync is needed (empty canvas)
+            window.dispatchEvent(new Event('pagebuilder:check-theme-sync'));
         }
     }
 });
