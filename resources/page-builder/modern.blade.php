@@ -43,6 +43,8 @@
             saveUrl: '{{ admin_route('api.pages.save', [$reference]) }}',
             resetUrl: '{{ admin_route('api.pages.reset', [$reference]) }}',
             dataUrl: '{{ admin_route('api.pages.data', [$reference]) }}',
+            themeSyncUrl: '{{ admin_route('api.pages.theme-sync', [$reference]) }}',
+            themeSyncExecuteUrl: '{{ admin_route('api.pages.theme-sync.execute', [$reference]) }}',
             themedStyles: @json(themed_styles())
         };
     </script>
