@@ -83,7 +83,13 @@ if (! function_exists('__t')) {
 
         // Try Laravel's lang files first (lang/{locale}/*.php)
         if (Lang::has($text, $locale)) {
-            return __($text, $parameters, $locale);
+            $translated = __($text, $parameters, $locale);
+
+            // Lang::has() matches array keys too (e.g. 'Admin' matches admin.php),
+            // which returns an array instead of a string. Skip to fallback in that case.
+            if (is_string($translated)) {
+                return $translated;
+            }
         }
 
         return __translate($text, $parameters, 'auto', $locale);
