@@ -101,7 +101,11 @@ class ArrayHelper
                 );
 
                 if ($children) {
-                    $node[$childrenKeyName] = $children;
+                    if ($node instanceof \Illuminate\Database\Eloquent\Model) {
+                        $node->setRelation($childrenKeyName, collect($children));
+                    } else {
+                        $node[$childrenKeyName] = $children;
+                    }
                 }
                 $branch[] = $node;
             }
