@@ -256,7 +256,8 @@ final class PageBuilderAdminApiController extends AdminBaseApiController
 
         return $this->success([
             'current_theme' => $currentTheme,
-            'options'       => $options,
+            'options'       => $options['sync_options'],
+            'has_blocks'    => $options['has_blocks'],
         ]);
     }
 

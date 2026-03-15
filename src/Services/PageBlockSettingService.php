@@ -195,8 +195,16 @@ final readonly class PageBlockSettingService implements PageBlockSettingServiceI
 
     public function getAvailableThemesForSync(int $pageId, string $currentTheme): array
     {
-        return $this->pageBlockSettingRepository
-            ->getThemesWithBlockCount($pageId, $currentTheme);
+        $currentCount = $this->pageBlockSettingRepository
+            ->getActiveSettingsByTheme($pageId, $currentTheme)
+            ->count();
+
+        return [
+            'has_blocks'   => $currentCount > 0,
+            'sync_options' => $currentCount > 0
+                ? []
+                : $this->pageBlockSettingRepository->getThemesWithBlockCount($pageId, $currentTheme),
+        ];
     }
 
     public function syncFromTheme(int $pageId, string $sourceTheme, string $targetTheme): array
