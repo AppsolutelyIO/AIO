@@ -252,24 +252,26 @@ class AIOServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting(): void
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->ip());
+        $isProduction = app()->isProduction();
+
+        RateLimiter::for('api', function (Request $request) use ($isProduction) {
+            return Limit::perMinute($isProduction ? 60 : 500)->by($request->ip());
         });
 
-        RateLimiter::for('api:authenticated', function (Request $request) {
+        RateLimiter::for('api:authenticated', function (Request $request) use ($isProduction) {
             return $request->user()
-                ? Limit::perMinute(120)->by($request->user()->id)
-                : Limit::perMinute(60)->by($request->ip());
+                ? Limit::perMinute($isProduction ? 120 : 1000)->by($request->user()->id)
+                : Limit::perMinute($isProduction ? 60 : 500)->by($request->ip());
         });
 
         RateLimiter::for('form-submission', function (Request $request) {
             return Limit::perMinute(5)->by($request->ip());
         });
 
-        RateLimiter::for('admin-api', function (Request $request) {
+        RateLimiter::for('admin-api', function (Request $request) use ($isProduction) {
             return $request->user()
-                ? Limit::perMinute(100)->by($request->user()->id)
-                : Limit::perMinute(10)->by($request->ip());
+                ? Limit::perMinute($isProduction ? 200 : 1000)->by($request->user()->id)
+                : Limit::perMinute($isProduction ? 60 : 500)->by($request->ip());
         });
 
         RateLimiter::for('password-reset', function (Request $request) {
@@ -285,8 +287,8 @@ class AIOServiceProvider extends ServiceProvider
                 : Limit::perHour(3)->by($request->ip());
         });
 
-        RateLimiter::for('web', function (Request $request) {
-            return Limit::perMinute(100)->by($request->ip());
+        RateLimiter::for('web', function (Request $request) use ($isProduction) {
+            return Limit::perMinute($isProduction ? 100 : 1000)->by($request->ip());
         });
     }
 
