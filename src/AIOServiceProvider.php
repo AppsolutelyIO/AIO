@@ -143,11 +143,31 @@ class AIOServiceProvider extends ServiceProvider
             }
         }
 
+        if (config('aio.routes.admin', true)) {
+            $this->registerAdminRoutes();
+        }
+
         // Fallback (catch-all page routes) must load last
         if (config('aio.routes.web', true)) {
             $this->booted(function () {
                 $this->loadRoutesFrom(__DIR__ . '/../routes/fallback.php');
             });
+        }
+    }
+
+    /**
+     * Register admin panel routes with optional domain scoping.
+     */
+    protected function registerAdminRoutes(): void
+    {
+        $domain = config('admin.route.domain');
+
+        if ($domain) {
+            Route::domain($domain)->group(function () {
+                Admin::routes();
+            });
+        } else {
+            Admin::routes();
         }
     }
 
