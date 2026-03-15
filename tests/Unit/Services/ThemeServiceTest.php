@@ -144,4 +144,28 @@ final class ThemeServiceTest extends TestCase
         $this->assertStringContainsString('june', $june);
         $this->assertStringContainsString('tabler', $tabler);
     }
+
+    public function test_get_theme_view_path_prioritizes_site_over_package(): void
+    {
+        // 'tabler' exists in both site and package — site should win
+        // Create a temporary site tabler theme directory
+        $sitePath = base_path('themes/tabler/views');
+        @mkdir($sitePath, 0755, true);
+
+        try {
+            $result = $this->service->getThemeViewPath('tabler');
+            $this->assertSame($sitePath, $result);
+        } finally {
+            @rmdir($sitePath);
+            @rmdir(base_path('themes/tabler'));
+        }
+    }
+
+    public function test_get_theme_view_path_falls_back_to_package_when_no_site_theme(): void
+    {
+        // 'tabler' only exists in the package, not in the site themes directory
+        $result = $this->service->getThemeViewPath('tabler');
+
+        $this->assertStringContainsString('aio/themes/tabler/views', $result);
+    }
 }

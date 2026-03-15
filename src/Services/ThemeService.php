@@ -52,35 +52,42 @@ final readonly class ThemeService implements ThemeServiceInterface
             }
         }
 
-        // Set the active theme
+        // Set the active theme (registers site theme paths via Qirolab)
         Theme::set($themeName, $parentTheme);
 
-        // Register package theme view paths for themes bundled with AIO
-        $this->registerPackageThemePaths($viewFinder, $themeName, $parentTheme);
-
-        // Ensure the view finder is properly set
-        $paths = $viewFinder->getPaths();
-
-        // Verify the paths include the theme path
-        $themePath = $this->getThemeViewPath($themeName);
-
-        // Make sure the theme path is the first path in the list
-        if (! in_array($themePath, $paths, true) || array_search($themePath, $paths, true) !== 0) {
-            $newPaths = array_merge([$themePath], array_diff($paths, [$themePath]));
-            $viewFinder->setPaths($newPaths);
-        }
-
+        // Build explicit path cascade:
+        // 1. Site active theme  (./themes/{name}/views)
+        // 2. Package active theme (aio/themes/{name}/views)
+        // 3. Site parent theme  (./themes/{parent}/views)
+        // 4. Package parent theme (aio/themes/{parent}/views)
+        // 5. Default resources  (./resources/views)
+        $this->buildViewPathCascade($viewFinder, $themeName, $parentTheme);
     }
 
     public function getThemeViewPath(string $themeName): string
     {
-        // Check package themes directory first, then fall back to site themes
+        // Site themes take priority over package themes
+        $sitePath = $this->getSiteThemeViewPath($themeName);
+        if ($sitePath !== null) {
+            return $sitePath;
+        }
+
         $packagePath = $this->getPackageThemeViewPath($themeName);
         if ($packagePath !== null) {
             return $packagePath;
         }
 
         return themed_absolute_path($themeName, 'views');
+    }
+
+    /**
+     * Get the view path for a theme in the site's themes directory.
+     */
+    private function getSiteThemeViewPath(string $themeName): ?string
+    {
+        $path = base_path('themes/' . $themeName . '/views');
+
+        return is_dir($path) ? $path : null;
     }
 
     /**
@@ -94,26 +101,47 @@ final readonly class ThemeService implements ThemeServiceInterface
     }
 
     /**
-     * Register view paths for themes that live in the AIO package directory.
-     * This allows themes bundled with AIO to be resolved by the view finder
-     * even when they don't exist in the site's themes/ directory.
+     * Build the view path cascade in priority order:
+     * site active → package active → site parent → package parent → resources/views
      */
-    private function registerPackageThemePaths(ThemeViewFinder $viewFinder, string $themeName, ?string $parentTheme): void
+    private function buildViewPathCascade(ThemeViewFinder $viewFinder, string $themeName, ?string $parentTheme): void
     {
-        $paths = $viewFinder->getPaths();
+        $existingPaths = $viewFinder->getPaths();
+        $cascadePaths  = [];
 
-        // Register parent theme from package
+        // 1. Site active theme
+        $sitePath = $this->getSiteThemeViewPath($themeName);
+        if ($sitePath !== null) {
+            $cascadePaths[] = $sitePath;
+        }
+
+        // 2. Package active theme
+        $packagePath = $this->getPackageThemeViewPath($themeName);
+        if ($packagePath !== null) {
+            $cascadePaths[] = $packagePath;
+        }
+
         if ($parentTheme) {
-            $parentPath = $this->getPackageThemeViewPath($parentTheme);
-            if ($parentPath !== null && ! in_array($parentPath, $paths, true)) {
-                $viewFinder->prependLocation($parentPath);
+            // 3. Site parent theme
+            $siteParentPath = $this->getSiteThemeViewPath($parentTheme);
+            if ($siteParentPath !== null) {
+                $cascadePaths[] = $siteParentPath;
+            }
+
+            // 4. Package parent theme
+            $packageParentPath = $this->getPackageThemeViewPath($parentTheme);
+            if ($packageParentPath !== null) {
+                $cascadePaths[] = $packageParentPath;
             }
         }
 
-        // Register active theme from package (prepend so it takes priority)
-        $themePath = $this->getPackageThemeViewPath($themeName);
-        if ($themePath !== null && ! in_array($themePath, $paths, true)) {
-            $viewFinder->prependLocation($themePath);
+        // 5. Append remaining paths (resources/views, etc.) preserving their order
+        foreach ($existingPaths as $path) {
+            if (! in_array($path, $cascadePaths, true)) {
+                $cascadePaths[] = $path;
+            }
         }
+
+        $viewFinder->setPaths($cascadePaths);
     }
 }
