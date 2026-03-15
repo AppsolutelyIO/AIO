@@ -83,7 +83,7 @@ echo ""
 # PHPStan static analysis
 if [ -f ./vendor/bin/phpstan ]; then
     echo "🔬 Running PHPStan..."
-    OUTPUT=$(./vendor/bin/phpstan analyse 2>&1)
+    OUTPUT=$(./vendor/bin/phpstan analyse --memory-limit=512M 2>&1)
     EXIT=$?
     if [ $EXIT -ne 0 ]; then
         echo "$OUTPUT"
