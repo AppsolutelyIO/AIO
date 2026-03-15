@@ -40,6 +40,7 @@ use Illuminate\Support\Traits\Macroable;
  * @method $this copyable()
  * @method $this orderable()
  * @method $this limit(int $limit = 100, string $end = '...')
+ * @method $this truncate(string $maxWidth = '150px')
  * @method $this ascii()
  * @method $this camel()
  * @method $this finish($cap)
@@ -93,6 +94,7 @@ class Column
         'copyable'         => Displayers\Copyable::class,
         'orderable'        => Displayers\Orderable::class,
         'limit'            => Displayers\Limit::class,
+        'truncate'         => Displayers\Truncate::class,
         'editable'         => Displayers\Input::class,
         'input'            => Displayers\Input::class,
         'textarea'         => Displayers\Textarea::class,
