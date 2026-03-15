@@ -10,6 +10,7 @@ use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Repositories\PageBlockSettingRepository;
 use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Illuminate\Support\Arr;
+use Qirolab\Theme\Theme;
 
 /**
  * Enriches Page Builder project data by injecting server-rendered HTML for each block.
@@ -42,6 +43,8 @@ final readonly class PageBuilderDataEnricherService
             return $setting;
         }
 
+        $this->ensureThemeSetup();
+
         $generalPage = new GeneralPage($page);
 
         $enriched = [];
@@ -63,6 +66,24 @@ final readonly class PageBuilderDataEnricherService
      * @param  array<string, mixed>  $component  GrapesJS component data
      * @return array<string, mixed>|null Component with content (HTML) injected, or null if no matching setting
      */
+    /**
+     * Ensure theme view paths are registered (needed in admin context where ApplyThemeMiddleware skips).
+     */
+    private function ensureThemeSetup(): void
+    {
+        if (Theme::active() !== null) {
+            return;
+        }
+
+        $themeName = $this->themeService->resolveThemeName();
+        if ($themeName === null) {
+            return;
+        }
+
+        $parentTheme = $this->themeService->getParentTheme();
+        $this->themeService->setupTheme($themeName, $parentTheme);
+    }
+
     private function enrichComponent(array $component, int $pageId, GeneralPage $generalPage): ?array
     {
         $reference = $component['reference'] ?? $component['attributes']['reference'] ?? null;
