@@ -99,6 +99,41 @@ final class PageBlockSettingRepository extends BaseRepository
     }
 
     /**
+     * Get themes with block counts for a page (excluding a given theme).
+     *
+     * @return array<int, array{theme: string, block_count: int}>
+     */
+    public function getThemesWithBlockCount(int $pageId, string $excludeTheme): array
+    {
+        return $this->model->newQuery()
+            ->where('page_id', $pageId)
+            ->where('theme', '!=', $excludeTheme)
+            ->whereNotNull('theme')
+            ->status()
+            ->selectRaw('theme, count(*) as block_count')
+            ->groupBy('theme')
+            ->get()
+            ->map(fn ($row) => ['theme' => $row->theme, 'block_count' => $row->block_count])
+            ->values()
+            ->toArray();
+    }
+
+    /**
+     * Get active block settings for a page and theme, with block and blockValue loaded.
+     */
+    public function getActiveSettingsByTheme(int $pageId, string $theme): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->model->newQuery()
+            ->where('page_id', $pageId)
+            ->where('theme', $theme)
+            ->status()
+            ->whereNotNull('sort')
+            ->orderBy('sort')
+            ->with(['block', 'blockValue'])
+            ->get();
+    }
+
+    /**
      * Get block IDs for global blocks that are active and have sort order
      */
     public function getGlobalBlockIds(): \Illuminate\Support\Collection

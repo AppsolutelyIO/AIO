@@ -193,6 +193,71 @@ final readonly class PageBlockSettingService implements PageBlockSettingServiceI
         return $config['view'] ?? $type;
     }
 
+    public function getAvailableThemesForSync(int $pageId, string $currentTheme): array
+    {
+        return $this->pageBlockSettingRepository
+            ->getThemesWithBlockCount($pageId, $currentTheme);
+    }
+
+    public function syncFromTheme(int $pageId, string $sourceTheme, string $targetTheme): array
+    {
+        $sourceSettings = $this->pageBlockSettingRepository
+            ->getActiveSettingsByTheme($pageId, $sourceTheme);
+
+        if ($sourceSettings->isEmpty()) {
+            return ['synced' => 0, 'skipped' => 0];
+        }
+
+        $synced  = 0;
+        $skipped = 0;
+
+        $this->db->transaction(function () use ($sourceSettings, $pageId, $targetTheme, &$synced, &$skipped) {
+            foreach ($sourceSettings as $sourceSetting) {
+                $block     = $sourceSetting->block;
+                $blockType = $block?->reference ?? '';
+
+                // Check if this block type exists in the target theme's manifest
+                $config = $this->manifestService->getTemplateConfig($blockType, $targetTheme);
+                if ($config === null) {
+                    $skipped++;
+
+                    continue;
+                }
+
+                // Get view name from target theme's manifest (may differ from source)
+                $targetView = $config['view'] ?? $blockType;
+
+                // Create block value for target theme with default displayOptions from manifest
+                $blockValueId     = $this->getBlockValueId($sourceSetting->block_id, $targetTheme, $targetView);
+                $targetBlockValue = $this->pageBlockValueRepository->find($blockValueId);
+
+                // Copy queryOptions from source (theme-independent data like "show 5 articles")
+                if ($targetBlockValue !== null) {
+                    $sourceQueryOptions = $sourceSetting->blockValue?->query_options;
+                    if (! empty($sourceQueryOptions)) {
+                        $targetBlockValue->update(['query_options' => $sourceQueryOptions]);
+                    }
+                }
+
+                // Create block setting for target theme
+                $this->pageBlockSettingRepository->create([
+                    'page_id'        => $pageId,
+                    'block_id'       => $sourceSetting->block_id,
+                    'block_value_id' => $blockValueId,
+                    'reference'      => $sourceSetting->reference,
+                    'theme'          => $targetTheme,
+                    'status'         => Status::ACTIVE->value,
+                    'sort'           => $sourceSetting->sort,
+                    'published_at'   => now(),
+                ]);
+
+                $synced++;
+            }
+        });
+
+        return ['synced' => $synced, 'skipped' => $skipped];
+    }
+
     public function getBlockValueId(int $blockId, ?string $theme = null, string $view = ''): int
     {
         $block = $this->pageBlockRepository->find($blockId);

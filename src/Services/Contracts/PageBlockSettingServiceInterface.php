@@ -26,4 +26,18 @@ interface PageBlockSettingServiceInterface
      * @return int The block value ID
      */
     public function getBlockValueId(int $blockId, ?string $theme = null, string $view = ''): int;
+
+    /**
+     * Get available themes with block counts for a page (excluding current theme).
+     *
+     * @return array<int, array{theme: string, block_count: int}>
+     */
+    public function getAvailableThemesForSync(int $pageId, string $currentTheme): array;
+
+    /**
+     * Sync block settings from a source theme to the current theme.
+     *
+     * @return array{synced: int, skipped: int}
+     */
+    public function syncFromTheme(int $pageId, string $sourceTheme, string $targetTheme): array;
 }
