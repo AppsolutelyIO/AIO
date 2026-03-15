@@ -7,7 +7,7 @@ namespace Appsolutely\AIO\Admin\Controllers;
 use Appsolutely\AIO\Enums\MenuTarget;
 use Appsolutely\AIO\Enums\MenuType;
 use Appsolutely\AIO\Enums\Status;
-use Appsolutely\AIO\Models\Menu;
+use Appsolutely\AIO\Models\CmsMenu;
 use Appsolutely\AIO\Repositories\MenuRepository;
 use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Grid;
@@ -19,7 +19,7 @@ final class MenuController extends AdminBaseController
 
     protected function grid(): Grid
     {
-        return Grid::make(Menu::class, function (Grid $grid) {
+        return Grid::make(CmsMenu::class, function (Grid $grid) {
             $grid->column('id', __t('ID'))->width('50px');
             $grid->column('title', __t('Title'))->tree(true)->width('300px');
             $grid->column('menu.title', __t('Menu'));
@@ -33,7 +33,7 @@ final class MenuController extends AdminBaseController
             $grid->column('expired_at', __t('Expired At'))->display(column_time_format())->sortable();
             $grid->column('status', __t('Status'))->switch();
             $grid->order->orderable();
-            $grid->model()->withCount('children')->orderBy('order', 'ASC');
+            $grid->model()->withCount('children')->orderBy('left', 'ASC');
 
             $grid->quickSearch('id', 'title');
             $grid->filter(function (Grid\Filter $filter) {
@@ -51,7 +51,7 @@ final class MenuController extends AdminBaseController
 
     protected function form(): Form
     {
-        return Form::make(Menu::class, function (Form $form) {
+        return Form::make(CmsMenu::class, function (Form $form) {
             $form->disableViewButton();
             $form->disableViewCheck();
             $form->display('id', __t('ID'));
@@ -87,14 +87,14 @@ final class MenuController extends AdminBaseController
             $form->switch('status', __t('Status'))->default(Status::ACTIVE->value);
 
             $form->saving(function (Form $form) {
-                /** @var Menu $model */
+                /** @var CmsMenu $model */
                 $model    = $form->model();
                 $parentId = $form->input('parent_id');
 
-                $isChildItem = $parentId && Menu::find($parentId);
+                $isChildItem = $parentId && CmsMenu::find($parentId);
 
                 if ($isChildItem) {
-                    $parent = Menu::find($parentId);
+                    $parent = CmsMenu::find($parentId);
                     $model->appendToNode($parent)->save();
                 } else {
                     $model->saveAsRoot();
