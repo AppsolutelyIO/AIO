@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
 use Appsolutely\AIO\Livewire\GeneralBlock;
+use Appsolutely\AIO\Services\Contracts\ManifestServiceInterface;
+use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Appsolutely\AIO\Services\PageBlockSettingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Appsolutely\AIO\Tests\TestCase;
 
@@ -19,6 +22,15 @@ final class PageBlockSettingServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->mock(ThemeServiceInterface::class, function ($mock) {
+            $mock->shouldReceive('resolveThemeName')->andReturn('default');
+        });
+
+        $this->mock(ManifestServiceInterface::class, function ($mock) {
+            $mock->shouldReceive('getTemplateConfig')->andReturn(null);
+        });
+
         $this->service = app(PageBlockSettingService::class);
     }
 
@@ -114,5 +126,110 @@ final class PageBlockSettingServiceTest extends TestCase
 
         // GeneralBlock always creates a new block value per call
         $this->assertNotEquals($firstId, $secondId);
+    }
+
+    // --- resolveBlockId (via syncSettings) ---
+
+    public function test_sync_settings_resolves_block_by_reference(): void
+    {
+        Cache::flush();
+
+        $page = \Appsolutely\AIO\Models\Page::factory()->create();
+
+        $groupId = DB::table('page_block_groups')->insertGetId([
+            'title'      => 'Test Group',
+            'sort'       => 0,
+            'status'     => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $blockId = DB::table('page_blocks')->insertGetId([
+            'block_group_id' => $groupId,
+            'title'          => 'Header',
+            'class'          => 'Appsolutely\\AIO\\Livewire\\Header',
+            'reference'      => 'header',
+            'sort'           => 0,
+            'status'         => 1,
+            'created_at'     => now(),
+            'updated_at'     => now(),
+        ]);
+
+        $result = $this->service->syncSettings([
+            ['type' => 'header', 'reference' => 'ref-header-1'],
+        ], $page->id);
+
+        $this->assertCount(1, $result);
+        $this->assertEquals($blockId, $result[0]->block_id);
+    }
+
+    public function test_sync_settings_falls_back_to_general_block_with_legacy_class_name(): void
+    {
+        Cache::flush();
+
+        $page = \Appsolutely\AIO\Models\Page::factory()->create();
+
+        $groupId = DB::table('page_block_groups')->insertGetId([
+            'title'      => 'General Group',
+            'sort'       => 0,
+            'status'     => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Store with legacy App\Livewire namespace (as found in production DB)
+        $blockId = DB::table('page_blocks')->insertGetId([
+            'block_group_id' => $groupId,
+            'title'          => 'General Block',
+            'class'          => 'App\\Livewire\\GeneralBlock',
+            'reference'      => 'general-block',
+            'sort'           => 0,
+            'status'         => 1,
+            'created_at'     => now(),
+            'updated_at'     => now(),
+        ]);
+
+        // Use a reference that doesn't match any block, triggering the GeneralBlock fallback
+        $result = $this->service->syncSettings([
+            ['type' => 'nonexistent-block-type', 'reference' => 'ref-custom-1'],
+        ], $page->id);
+
+        // classNameVariants resolves App\Livewire\GeneralBlock from Appsolutely\AIO\Livewire\GeneralBlock
+        $this->assertCount(1, $result);
+        $this->assertEquals($blockId, $result[0]->block_id);
+    }
+
+    public function test_sync_settings_falls_back_to_general_block_with_aio_class_name(): void
+    {
+        Cache::flush();
+
+        $page = \Appsolutely\AIO\Models\Page::factory()->create();
+
+        $groupId = DB::table('page_block_groups')->insertGetId([
+            'title'      => 'General Group',
+            'sort'       => 0,
+            'status'     => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Store with current AIO namespace
+        $blockId = DB::table('page_blocks')->insertGetId([
+            'block_group_id' => $groupId,
+            'title'          => 'General Block',
+            'class'          => GeneralBlock::class,
+            'reference'      => 'general-block',
+            'sort'           => 0,
+            'status'         => 1,
+            'created_at'     => now(),
+            'updated_at'     => now(),
+        ]);
+
+        $result = $this->service->syncSettings([
+            ['type' => 'unknown-block', 'reference' => 'ref-custom-2'],
+        ], $page->id);
+
+        $this->assertCount(1, $result);
+        $this->assertEquals($blockId, $result[0]->block_id);
     }
 }

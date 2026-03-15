@@ -8,6 +8,7 @@ use Appsolutely\AIO\Constants\BasicConstant;
 use Appsolutely\AIO\Models\Page;
 use Appsolutely\AIO\Services\PageBuilderDataEnricherService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Arr;
 use Appsolutely\AIO\Tests\TestCase;
 
 final class PageBuilderDataEnricherServiceTest extends TestCase
@@ -20,6 +21,30 @@ final class PageBuilderDataEnricherServiceTest extends TestCase
     {
         parent::setUp();
         $this->service = app(PageBuilderDataEnricherService::class);
+    }
+
+    /**
+     * Build a GrapesJS project data structure with components at the correct nested path.
+     *
+     * @param  array<int, array<string, mixed>>  $components
+     * @return array<string, mixed>
+     */
+    private function buildProjectData(array $components): array
+    {
+        $setting = [];
+        Arr::set($setting, BasicConstant::PAGE_GRAPESJS_KEY, $components);
+
+        return $setting;
+    }
+
+    /**
+     * Get components from enriched result at the correct nested path.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    private function getComponents(array $result): array
+    {
+        return Arr::get($result, BasicConstant::PAGE_GRAPESJS_KEY, []);
     }
 
     // --- enrich ---
@@ -37,7 +62,8 @@ final class PageBuilderDataEnricherServiceTest extends TestCase
     public function test_enrich_returns_setting_unchanged_when_components_is_not_array(): void
     {
         $page    = Page::factory()->create();
-        $setting = [BasicConstant::PAGE_GRAPESJS_KEY => 'not-an-array'];
+        $setting = [];
+        Arr::set($setting, BasicConstant::PAGE_GRAPESJS_KEY, 'not-an-array');
 
         $result = $this->service->enrich($page, $setting);
 
@@ -47,40 +73,37 @@ final class PageBuilderDataEnricherServiceTest extends TestCase
     public function test_enrich_processes_empty_components_array(): void
     {
         $page    = Page::factory()->create();
-        $setting = [BasicConstant::PAGE_GRAPESJS_KEY => []];
+        $setting = $this->buildProjectData([]);
 
         $result = $this->service->enrich($page, $setting);
 
-        $this->assertIsArray($result[BasicConstant::PAGE_GRAPESJS_KEY]);
-        $this->assertEmpty($result[BasicConstant::PAGE_GRAPESJS_KEY]);
+        $components = $this->getComponents($result);
+        $this->assertIsArray($components);
+        $this->assertEmpty($components);
     }
 
-    public function test_enrich_skips_component_without_reference(): void
+    public function test_enrich_filters_out_component_without_reference(): void
     {
         $page      = Page::factory()->create();
         $component = ['type' => 'section', 'attributes' => []];
-        $setting   = [BasicConstant::PAGE_GRAPESJS_KEY => [$component]];
+        $setting   = $this->buildProjectData([$component]);
 
         $result = $this->service->enrich($page, $setting);
 
-        $components = $result[BasicConstant::PAGE_GRAPESJS_KEY];
-        $this->assertCount(1, $components);
-        // Component returned unchanged (no reference → no enrichment)
-        $this->assertArrayNotHasKey('content', $components[0]);
+        $components = $this->getComponents($result);
+        $this->assertCount(0, $components);
     }
 
-    public function test_enrich_skips_component_when_block_setting_not_found(): void
+    public function test_enrich_filters_out_component_when_block_setting_not_found(): void
     {
         $page      = Page::factory()->create();
         $component = ['reference' => 'nonexistent-ref', 'block_id' => 999];
-        $setting   = [BasicConstant::PAGE_GRAPESJS_KEY => [$component]];
+        $setting   = $this->buildProjectData([$component]);
 
         $result = $this->service->enrich($page, $setting);
 
-        $components = $result[BasicConstant::PAGE_GRAPESJS_KEY];
-        $this->assertCount(1, $components);
-        // No block setting found → content not injected
-        $this->assertArrayNotHasKey('content', $components[0]);
+        $components = $this->getComponents($result);
+        $this->assertCount(0, $components);
     }
 
     public function test_enrich_returns_array(): void
