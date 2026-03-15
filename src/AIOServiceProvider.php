@@ -138,7 +138,7 @@ class AIOServiceProvider extends ServiceProvider
         }
 
         if (config('aio.routes.cache', true)) {
-            foreach (glob(__DIR__ . '/../routes/cache/*.php') as $routeFile) {
+            foreach (glob(base_path('routes/cache/*.php')) as $routeFile) {
                 $this->loadRoutesFrom($routeFile);
             }
         }
