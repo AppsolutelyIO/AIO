@@ -28,11 +28,25 @@
     <ol class="breadcrumb float-right text-capitalize">
         <li class="breadcrumb-item"><a href="{{ admin_url('/') }}"><i class="fa fa-dashboard"></i> {{admin_trans('admin.home')}}</a></li>
         @for($i = 2; $i <= ($len = count(Request::segments())); $i++)
-            @if($i < $len)
+            @php
+                $segmentUrl = implode('/', array_slice(Request::segments(), 0, $i));
+                $hasRoute = false;
+                if ($i < $len) {
+                    try {
+                        $matched = app('router')->getRoutes()->match(app('request')->create($segmentUrl, 'GET'));
+                        $hasRoute = ! $matched->isFallback;
+                    } catch (\Throwable $e) {}
+                }
+            @endphp
+            @if($i < $len && $hasRoute)
                 <li class="breadcrumb-item">
-                    <a href="{{ url(implode('/', array_slice(Request::segments(), 0, $i))) }}">
+                    <a href="{{ url($segmentUrl) }}">
                         {{admin_trans_label(Request::segment($i))}}
                     </a>
+                </li>
+            @elseif($i < $len)
+                <li class="breadcrumb-item">
+                    {{admin_trans_label(Request::segment($i))}}
                 </li>
             @else
                 <li class="active breadcrumb-item">
