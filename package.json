@@ -15,6 +15,7 @@
         "lint:all:fix": "npm run lint:fix && npm run lint:scss:fix",
         "format": "prettier --write '**/*.{scss,css,ts,js,json,md}'",
         "format:check": "prettier --check '**/*.{scss,css,ts,js,json,md}'",
+        "format:blade": "blade-formatter --write --no-php-syntax-check '**/*.blade.php'",
         "prepare": "husky"
     },
     "devDependencies": {
@@ -24,6 +25,7 @@
         "@typescript-eslint/eslint-plugin": "^8.56.1",
         "@typescript-eslint/parser": "^8.56.1",
         "apexcharts": "^5.10.3",
+        "blade-formatter": "^1.44.2",
         "bootstrap-colorpicker": "^3.4.0",
         "bootstrap-duallistbox": "^3.0.9",
         "bootstrap-validator": "^0.11.9",
@@ -63,6 +65,9 @@
     "lint-staged": {
         "*.php": [
             "./vendor/bin/pint"
+        ],
+        "*.blade.php": [
+            "blade-formatter --write --no-php-syntax-check"
         ],
         "*.scss": [
             "prettier --write",
