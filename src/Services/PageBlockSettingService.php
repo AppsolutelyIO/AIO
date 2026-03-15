@@ -32,6 +32,7 @@ use PDOException;
  */
 final readonly class PageBlockSettingService implements PageBlockSettingServiceInterface
 {
+    use Concerns\ResolvesLivewireClassName;
     public function __construct(
         protected PageBlockRepository $pageBlockRepository,
         protected PageBlockValueRepository $pageBlockValueRepository,
@@ -172,10 +173,14 @@ final readonly class PageBlockSettingService implements PageBlockSettingServiceI
         return Cache::rememberForever(
             'page_block:class:general_block',
             function () {
-                $block = $this->pageBlockRepository->findByFieldFirst('class', GeneralBlock::class)
-                    ?? $this->pageBlockRepository->findByFieldFirst('class', 'App\\Livewire\\GeneralBlock');
+                foreach ($this->classNameVariants(GeneralBlock::class) as $className) {
+                    $block = $this->pageBlockRepository->findByFieldFirst('class', $className);
+                    if ($block !== null) {
+                        return $block->id;
+                    }
+                }
 
-                return $block?->id;
+                return null;
             }
         );
     }

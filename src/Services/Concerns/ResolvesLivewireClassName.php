@@ -25,4 +25,25 @@ trait ResolvesLivewireClassName
 
         return $className;
     }
+
+    /**
+     * Get all possible class name variants for database lookups.
+     *
+     * Returns both App\Livewire\* and Appsolutely\AIO\Livewire\* forms
+     * so queries can match regardless of which namespace is stored.
+     *
+     * @return string[]
+     */
+    private function classNameVariants(string $className): array
+    {
+        $variants = [$className];
+
+        if (str_starts_with($className, 'App\\Livewire\\')) {
+            $variants[] = 'Appsolutely\\AIO\\Livewire\\' . substr($className, strlen('App\\Livewire\\'));
+        } elseif (str_starts_with($className, 'Appsolutely\\AIO\\Livewire\\')) {
+            $variants[] = 'App\\Livewire\\' . substr($className, strlen('Appsolutely\\AIO\\Livewire\\'));
+        }
+
+        return array_unique($variants);
+    }
 }
