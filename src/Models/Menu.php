@@ -6,6 +6,7 @@ use Appsolutely\AIO\Traits\HasDateTimeFormatter;
 use Appsolutely\AIO\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\EloquentSortable\Sortable;
 
 /**
@@ -71,6 +72,11 @@ class Menu extends Model implements Sortable
         $relatedModel = config('admin.database.roles_model');
 
         return $this->belongsToMany($relatedModel, $pivotTable, 'menu_id', 'role_id')->withTimestamps();
+    }
+
+    public function children(): HasMany
+    {
+        return $this->hasMany(static::class, $this->getParentColumn());
     }
 
     public function permissions(): BelongsToMany
