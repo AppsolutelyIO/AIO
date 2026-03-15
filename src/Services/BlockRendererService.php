@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Services;
 
+use Appsolutely\AIO\Livewire\Anchor;
 use Appsolutely\AIO\Models\GeneralPage;
 use Appsolutely\AIO\Models\PageBlockSetting;
 use Appsolutely\AIO\Services\Contracts\BlockRendererServiceInterface;
@@ -60,11 +61,15 @@ final readonly class BlockRendererService implements BlockRendererServiceInterfa
             'blockSort'      => (int) ($block->sort ?? 0),
         ];
 
-        if ($className === \Appsolutely\AIO\Livewire\Anchor::class) {
+        if ($className === Anchor::class) {
             $data['blocksForAnchor'] = $this->buildBlocksForAnchor($page);
         }
 
-        return Livewire::mount($className, $data, $reference);
+        try {
+            return Livewire::mount($className, $data, $reference);
+        } catch (\Throwable $e) {
+            return $this->getBlockErrorHtml($e->getMessage());
+        }
     }
 
     /**
@@ -98,7 +103,7 @@ final readonly class BlockRendererService implements BlockRendererServiceInterfa
     {
         if (str_starts_with($className, 'App\\Livewire\\') && ! class_exists($className)) {
             $shortName = substr($className, strlen('App\\Livewire\\'));
-            $aioClass = 'Appsolutely\\AIO\\Livewire\\' . $shortName;
+            $aioClass  = 'Appsolutely\\AIO\\Livewire\\' . $shortName;
 
             if (class_exists($aioClass)) {
                 return $aioClass;
