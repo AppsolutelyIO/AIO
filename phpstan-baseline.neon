@@ -1387,12 +1387,6 @@ parameters:
 			path: src/Form.php
 
 		-
-			message: '#^Class Appsolutely\\AIO\\Form\\Field\\DatetimeRange referenced with incorrect case\: Appsolutely\\AIO\\Form\\Field\\DateTimeRange\.$#'
-			identifier: class.nameCase
-			count: 1
-			path: src/Form.php
-
-		-
 			message: '#^If condition is always true\.$#'
 			identifier: if.alwaysTrue
 			count: 4
@@ -1617,12 +1611,6 @@ parameters:
 		-
 			message: '#^Call to function is_string\(\) with non\-empty\-array will always evaluate to false\.$#'
 			identifier: function.impossibleType
-			count: 1
-			path: src/Form/EmbeddedForm.php
-
-		-
-			message: '#^Class Appsolutely\\AIO\\Form\\Field\\DatetimeRange referenced with incorrect case\: Appsolutely\\AIO\\Form\\Field\\DateTimeRange\.$#'
-			identifier: class.nameCase
 			count: 1
 			path: src/Form/EmbeddedForm.php
 
@@ -2435,12 +2423,6 @@ parameters:
 			identifier: deadCode.unreachable
 			count: 1
 			path: src/Form/NestedForm.php
-
-		-
-			message: '#^Class Appsolutely\\AIO\\Form\\Field\\DatetimeRange referenced with incorrect case\: Appsolutely\\AIO\\Form\\Field\\DateTimeRange\.$#'
-			identifier: class.nameCase
-			count: 1
-			path: src/Form/Row.php
 
 		-
 			message: '#^Parameter \#1 \$view of function view expects view\-string\|null, string given\.$#'
@@ -7971,12 +7953,6 @@ parameters:
 		-
 			message: '#^Call to function method_exists\(\) with \$this\(Appsolutely\\AIO\\Widgets\\Form\) and ''sanitize'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/Widgets/Form.php
-
-		-
-			message: '#^Class Appsolutely\\AIO\\Form\\Field\\DatetimeRange referenced with incorrect case\: Appsolutely\\AIO\\Form\\Field\\DateTimeRange\.$#'
-			identifier: class.nameCase
 			count: 1
 			path: src/Widgets/Form.php
 
