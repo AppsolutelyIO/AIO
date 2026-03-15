@@ -352,7 +352,7 @@ final class DynamicFormController extends AdminBaseController
         $spamEntriesLabel  = __t('Spam Entries');
 
         return "
-        <div class='row mt-2 mb-1'>
+        <div class='row mt-2'>
             <div class='col-md-2'>
                 <div class='card'>
                     <div class='card-body text-center'>
