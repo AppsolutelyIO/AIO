@@ -27,7 +27,7 @@ final class ArticleController extends AdminBaseController
 
             $grid->column('id', __t('ID'))->sortable();
 
-            $grid->column('title', __t('Title'))->display(fn ($value) => new HtmlString(truncate($value)))->tooltip()->editable();
+            $grid->column('title', __t('Title'))->display(fn ($value) => new HtmlString(truncate($value)))->tooltip();
 
             $grid->column('urls', __t('Links'))->display(function () use ($controller) {
                 return $controller->buildSlugUrls($this);
