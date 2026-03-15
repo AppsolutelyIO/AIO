@@ -172,7 +172,8 @@ final readonly class PageBlockSettingService implements PageBlockSettingServiceI
         return Cache::rememberForever(
             'page_block:class:general_block',
             function () {
-                $block = $this->pageBlockRepository->findByFieldFirst('class', GeneralBlock::class);
+                $block = $this->pageBlockRepository->findByFieldFirst('class', GeneralBlock::class)
+                    ?? $this->pageBlockRepository->findByFieldFirst('class', 'App\\Livewire\\GeneralBlock');
 
                 return $block?->id;
             }
