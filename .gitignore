@@ -10,4 +10,5 @@ pre-dist
 /laravel-tests
 *.bak.*
 .DS_Store
+.env
 .phpunit.result.cache
