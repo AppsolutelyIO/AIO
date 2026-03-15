@@ -6,6 +6,32 @@ use Closure;
 use Appsolutely\AIO\Contracts\ExceptionHandler;
 use Appsolutely\AIO\Contracts\Repository;
 use Appsolutely\AIO\Exception\InvalidArgumentException;
+use Appsolutely\AIO\Admin\Controllers\Api\AttributeGroupController as AttributeGroupApiController;
+use Appsolutely\AIO\Admin\Controllers\Api\DynamicFormApiController;
+use Appsolutely\AIO\Admin\Controllers\Api\FileController as FileApiController;
+use Appsolutely\AIO\Admin\Controllers\Api\MenuApiController;
+use Appsolutely\AIO\Admin\Controllers\Api\NotificationApiController;
+use Appsolutely\AIO\Admin\Controllers\Api\PageBuilderAdminApiController;
+use Appsolutely\AIO\Admin\Controllers\ArticleCategoryController;
+use Appsolutely\AIO\Admin\Controllers\ArticleController;
+use Appsolutely\AIO\Admin\Controllers\CouponController;
+use Appsolutely\AIO\Admin\Controllers\DynamicFormController;
+use Appsolutely\AIO\Admin\Controllers\FileController;
+use Appsolutely\AIO\Admin\Controllers\HomeController;
+use Appsolutely\AIO\Admin\Controllers\MenuController as CmsMenuController;
+use Appsolutely\AIO\Admin\Controllers\NotificationController;
+use Appsolutely\AIO\Admin\Controllers\OrderController;
+use Appsolutely\AIO\Admin\Controllers\OrderShipmentController;
+use Appsolutely\AIO\Admin\Controllers\PageBlockController;
+use Appsolutely\AIO\Admin\Controllers\PageController;
+use Appsolutely\AIO\Admin\Controllers\ProductAttributeController;
+use Appsolutely\AIO\Admin\Controllers\ProductCategoryController;
+use Appsolutely\AIO\Admin\Controllers\ProductController;
+use Appsolutely\AIO\Admin\Controllers\ProductImageController;
+use Appsolutely\AIO\Admin\Controllers\ProductReviewController;
+use Appsolutely\AIO\Admin\Controllers\ProductSkuController;
+use Appsolutely\AIO\Admin\Controllers\RefundController;
+use Appsolutely\AIO\Admin\Controllers\ReleaseController;
 use Appsolutely\AIO\Http\Controllers\AuthController;
 use Appsolutely\AIO\Http\JsonResponse;
 use Appsolutely\AIO\Layout\Menu;
@@ -629,107 +655,107 @@ class Admin
         ];
 
         app('router')->group($attributes, function ($router) {
-            $router->get('', [\Appsolutely\AIO\Admin\Controllers\HomeController::class, 'index']);
+            $router->get('', [HomeController::class, 'index']);
 
-            $router->resource('file-manager', \Appsolutely\AIO\Admin\Controllers\FileController::class)->names('file-manager');
-            $router->get('uploads/{path?}', [\Appsolutely\AIO\Admin\Controllers\FileController::class, 'retrieve'])->where('path', '(.*)')->name('file.self');
+            $router->resource('file-manager', FileController::class)->names('file-manager');
+            $router->get('uploads/{path?}', [FileController::class, 'retrieve'])->where('path', '(.*)')->name('file.self');
 
             // Content Management Routes
             $router->prefix('articles')->name('articles.')->group(function () use ($router) {
-                $router->resource('entry', \Appsolutely\AIO\Admin\Controllers\ArticleController::class);
-                $router->resource('categories', \Appsolutely\AIO\Admin\Controllers\ArticleCategoryController::class)->names('categories');
+                $router->resource('entry', ArticleController::class);
+                $router->resource('categories', ArticleCategoryController::class)->names('categories');
             });
 
             $router->prefix('pages')->name('pages.')->group(function () use ($router) {
-                $router->resource('entry', \Appsolutely\AIO\Admin\Controllers\PageController::class);
-                $router->get('{reference}/design', [\Appsolutely\AIO\Admin\Controllers\PageController::class, 'design'])->name('design');
-                $router->resource('blocks', \Appsolutely\AIO\Admin\Controllers\PageBlockController::class)->names('blocks');
+                $router->resource('entry', PageController::class);
+                $router->get('{reference}/design', [PageController::class, 'design'])->name('design');
+                $router->resource('blocks', PageBlockController::class)->names('blocks');
             });
 
             // Menu Management Routes
             $router->prefix('menus')->name('menus.')->group(function () use ($router) {
-                $router->resource('entry', \Appsolutely\AIO\Admin\Controllers\MenuController::class)->names('entry');
+                $router->resource('entry', CmsMenuController::class)->names('entry');
             });
 
             // Product Management Routes
             $router->prefix('products')->name('products.')->group(function () use ($router) {
-                $router->resource('entry', \Appsolutely\AIO\Admin\Controllers\ProductController::class);
-                $router->resource('categories', \Appsolutely\AIO\Admin\Controllers\ProductCategoryController::class)->names('categories');
-                $router->resource('skus', \Appsolutely\AIO\Admin\Controllers\ProductSkuController::class)->names('skus');
-                $router->resource('attributes', \Appsolutely\AIO\Admin\Controllers\ProductAttributeController::class)->names('attributes');
-                $router->resource('images', \Appsolutely\AIO\Admin\Controllers\ProductImageController::class)->names('images');
-                $router->resource('reviews', \Appsolutely\AIO\Admin\Controllers\ProductReviewController::class)->names('reviews');
+                $router->resource('entry', ProductController::class);
+                $router->resource('categories', ProductCategoryController::class)->names('categories');
+                $router->resource('skus', ProductSkuController::class)->names('skus');
+                $router->resource('attributes', ProductAttributeController::class)->names('attributes');
+                $router->resource('images', ProductImageController::class)->names('images');
+                $router->resource('reviews', ProductReviewController::class)->names('reviews');
             });
 
             // Order Management Routes
             $router->prefix('orders')->name('orders.')->group(function () use ($router) {
-                $router->resource('entry', \Appsolutely\AIO\Admin\Controllers\OrderController::class);
-                $router->resource('shipments', \Appsolutely\AIO\Admin\Controllers\OrderShipmentController::class)->names('shipments');
-                $router->resource('refunds', \Appsolutely\AIO\Admin\Controllers\RefundController::class)->names('refunds');
+                $router->resource('entry', OrderController::class);
+                $router->resource('shipments', OrderShipmentController::class)->names('shipments');
+                $router->resource('refunds', RefundController::class)->names('refunds');
             });
 
             // Coupon Management Routes
             $router->prefix('coupons')->name('coupons.')->group(function () use ($router) {
-                $router->resource('entry', \Appsolutely\AIO\Admin\Controllers\CouponController::class);
+                $router->resource('entry', CouponController::class);
             });
 
             // Application releases
             $router->prefix('releases')->name('releases.')->group(function () use ($router) {
-                $router->resource('', \Appsolutely\AIO\Admin\Controllers\ReleaseController::class)->names('entry');
+                $router->resource('', ReleaseController::class)->names('entry');
             });
 
             // Dynamic Forms Management
             $router->prefix('forms')->name('forms.')->group(function () use ($router) {
-                $router->resource('', \Appsolutely\AIO\Admin\Controllers\DynamicFormController::class)->only(['index'])->names('entry');
+                $router->resource('', DynamicFormController::class)->only(['index'])->names('entry');
             });
 
             // Notifications Management
             $router->prefix('notifications')->name('notifications.')->group(function () use ($router) {
-                $router->resource('', \Appsolutely\AIO\Admin\Controllers\NotificationController::class)->only(['index'])->names('entry');
+                $router->resource('', NotificationController::class)->only(['index'])->names('entry');
             });
 
             // CMS API Routes
             $router->prefix('api/')->name('api.')->middleware('throttle:admin-api')->group(function () use ($router) {
-                $router->match(['get', 'post'], 'files', [\Appsolutely\AIO\Admin\Controllers\Api\FileController::class, 'upload'])->name('files.upload')->middleware('admin.upload');
-                $router->get('file-library', [\Appsolutely\AIO\Admin\Controllers\Api\FileController::class, 'library'])->name('file-library');
-                $router->get('products/attribute-groups', [\Appsolutely\AIO\Admin\Controllers\Api\AttributeGroupController::class, 'query'])->name('attribute-groups');
+                $router->match(['get', 'post'], 'files', [FileApiController::class, 'upload'])->name('files.upload')->middleware('admin.upload');
+                $router->get('file-library', [FileApiController::class, 'library'])->name('file-library');
+                $router->get('products/attribute-groups', [AttributeGroupApiController::class, 'query'])->name('attribute-groups');
 
                 // Page Builder Routes
                 $router->prefix('pages')->name('pages.')->group(function () use ($router) {
-                    $router->get('{reference}/data', [\Appsolutely\AIO\Admin\Controllers\Api\PageBuilderAdminApiController::class, 'getPageData'])->name('data');
-                    $router->put('{reference}/save', [\Appsolutely\AIO\Admin\Controllers\Api\PageBuilderAdminApiController::class, 'savePageData'])->name('save');
-                    $router->put('{reference}/reset', [\Appsolutely\AIO\Admin\Controllers\Api\PageBuilderAdminApiController::class, 'resetPageData'])->name('reset');
-                    $router->get('block-registry', [\Appsolutely\AIO\Admin\Controllers\Api\PageBuilderAdminApiController::class, 'getBlockRegistry'])->name('block-registry');
-                    $router->get('block/schema-fields', [\Appsolutely\AIO\Admin\Controllers\Api\PageBuilderAdminApiController::class, 'getSchemaFields'])->name('block.schema-fields');
-                    $router->get('block-option', [\Appsolutely\AIO\Admin\Controllers\Api\PageBuilderAdminApiController::class, 'getBlockOption'])->name('block-option');
-                    $router->patch('block-option', [\Appsolutely\AIO\Admin\Controllers\Api\PageBuilderAdminApiController::class, 'updateBlockOption'])->name('block-option.update');
-                    $router->get('block-html', [\Appsolutely\AIO\Admin\Controllers\Api\PageBuilderAdminApiController::class, 'getBlockHtml'])->name('block-html');
-                    $router->post('render-block', [\Appsolutely\AIO\Admin\Controllers\Api\PageBuilderAdminApiController::class, 'renderBlockWithOptions'])->name('render-block');
+                    $router->get('{reference}/data', [PageBuilderAdminApiController::class, 'getPageData'])->name('data');
+                    $router->put('{reference}/save', [PageBuilderAdminApiController::class, 'savePageData'])->name('save');
+                    $router->put('{reference}/reset', [PageBuilderAdminApiController::class, 'resetPageData'])->name('reset');
+                    $router->get('block-registry', [PageBuilderAdminApiController::class, 'getBlockRegistry'])->name('block-registry');
+                    $router->get('block/schema-fields', [PageBuilderAdminApiController::class, 'getSchemaFields'])->name('block.schema-fields');
+                    $router->get('block-option', [PageBuilderAdminApiController::class, 'getBlockOption'])->name('block-option');
+                    $router->patch('block-option', [PageBuilderAdminApiController::class, 'updateBlockOption'])->name('block-option.update');
+                    $router->get('block-html', [PageBuilderAdminApiController::class, 'getBlockHtml'])->name('block-html');
+                    $router->post('render-block', [PageBuilderAdminApiController::class, 'renderBlockWithOptions'])->name('render-block');
                 });
 
                 // Menu API Routes
                 $router->prefix('menus')->name('menus.')->group(function () use ($router) {
-                    $router->get('active-by-page-slug', [\Appsolutely\AIO\Admin\Controllers\Api\MenuApiController::class, 'activeMenusByPageSlug'])->name('active-by-page-slug');
+                    $router->get('active-by-page-slug', [MenuApiController::class, 'activeMenusByPageSlug'])->name('active-by-page-slug');
                 });
 
                 // Dynamic Forms API Routes
                 $router->prefix('forms')->name('forms.')->group(function () use ($router) {
-                    $router->post('entries/{id}/mark-spam', [\Appsolutely\AIO\Admin\Controllers\Api\DynamicFormApiController::class, 'markAsSpam'])->name('entries.mark-spam');
-                    $router->post('entries/{id}/mark-not-spam', [\Appsolutely\AIO\Admin\Controllers\Api\DynamicFormApiController::class, 'markAsNotSpam'])->name('entries.mark-not-spam');
-                    $router->get('entries/export', [\Appsolutely\AIO\Admin\Controllers\Api\DynamicFormApiController::class, 'exportCsv'])->name('entries.export');
-                    $router->get('{formId}/entries/export', [\Appsolutely\AIO\Admin\Controllers\Api\DynamicFormApiController::class, 'exportCsv'])->name('entries.export-by-form');
+                    $router->post('entries/{id}/mark-spam', [DynamicFormApiController::class, 'markAsSpam'])->name('entries.mark-spam');
+                    $router->post('entries/{id}/mark-not-spam', [DynamicFormApiController::class, 'markAsNotSpam'])->name('entries.mark-not-spam');
+                    $router->get('entries/export', [DynamicFormApiController::class, 'exportCsv'])->name('entries.export');
+                    $router->get('{formId}/entries/export', [DynamicFormApiController::class, 'exportCsv'])->name('entries.export-by-form');
                 });
 
                 // Notifications API Routes
                 $router->prefix('notifications')->name('notifications.')->group(function () use ($router) {
-                    $router->post('process-queue', [\Appsolutely\AIO\Admin\Controllers\Api\NotificationApiController::class, 'processQueue'])->name('process-queue');
-                    $router->post('retry-failed', [\Appsolutely\AIO\Admin\Controllers\Api\NotificationApiController::class, 'retryFailed'])->name('retry-failed');
-                    $router->delete('clean-old', [\Appsolutely\AIO\Admin\Controllers\Api\NotificationApiController::class, 'cleanOld'])->name('clean-old');
-                    $router->post('{id}/retry', [\Appsolutely\AIO\Admin\Controllers\Api\NotificationApiController::class, 'retry'])->name('retry');
-                    $router->post('{id}/cancel', [\Appsolutely\AIO\Admin\Controllers\Api\NotificationApiController::class, 'cancel'])->name('cancel');
-                    $router->post('{id}/duplicate-template', [\Appsolutely\AIO\Admin\Controllers\Api\NotificationApiController::class, 'duplicateTemplate'])->name('duplicate-template');
-                    $router->post('test-rule/{id}', [\Appsolutely\AIO\Admin\Controllers\Api\NotificationApiController::class, 'testRule'])->name('test-rule');
-                    $router->get('{id}/preview', [\Appsolutely\AIO\Admin\Controllers\Api\NotificationApiController::class, 'preview'])->name('preview');
+                    $router->post('process-queue', [NotificationApiController::class, 'processQueue'])->name('process-queue');
+                    $router->post('retry-failed', [NotificationApiController::class, 'retryFailed'])->name('retry-failed');
+                    $router->delete('clean-old', [NotificationApiController::class, 'cleanOld'])->name('clean-old');
+                    $router->post('{id}/retry', [NotificationApiController::class, 'retry'])->name('retry');
+                    $router->post('{id}/cancel', [NotificationApiController::class, 'cancel'])->name('cancel');
+                    $router->post('{id}/duplicate-template', [NotificationApiController::class, 'duplicateTemplate'])->name('duplicate-template');
+                    $router->post('test-rule/{id}', [NotificationApiController::class, 'testRule'])->name('test-rule');
+                    $router->get('{id}/preview', [NotificationApiController::class, 'preview'])->name('preview');
                 });
             });
         });
