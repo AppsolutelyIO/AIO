@@ -25,8 +25,9 @@
     },
     "include": [
         "resources/assets/**/*.ts",
+        "resources/page-builder/assets/**/*.ts",
         "types/**/*.d.ts",
         "build.ts"
     ],
-    "exclude": ["node_modules", "vendor", "resources/dist"]
+    "exclude": ["node_modules", "vendor", "resources/dist", "resources/pre-dist"]
 }

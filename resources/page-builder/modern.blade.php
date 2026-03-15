@@ -37,14 +37,13 @@
         window.pageBuilderConfig = {
             blockRegistryUrl: '{{ admin_route('api.pages.block-registry') }}',
             blockOptionUrl: '{{ admin_route('api.pages.block-option') }}',
+            blockSchemaFieldsUrl: '{{ admin_route('api.pages.block.schema-fields') }}',
             blockHtmlUrl: '{{ admin_route('api.pages.block-html') }}',
             renderBlockUrl: '{{ admin_route('api.pages.render-block') }}',
             fileUploadUrl: '{{ admin_route('api.files.upload') }}',
             saveUrl: '{{ admin_route('api.pages.save', [$reference]) }}',
             resetUrl: '{{ admin_route('api.pages.reset', [$reference]) }}',
             dataUrl: '{{ admin_route('api.pages.data', [$reference]) }}',
-            themeSyncUrl: '{{ admin_route('api.pages.theme-sync', [$reference]) }}',
-            themeSyncExecuteUrl: '{{ admin_route('api.pages.theme-sync.execute', [$reference]) }}',
             themedStyles: @json(themed_styles())
         };
     </script>

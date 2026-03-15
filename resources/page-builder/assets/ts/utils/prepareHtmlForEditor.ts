@@ -91,7 +91,7 @@ export function prepareLazyContentForEditor(html: string): string {
  */
 export function attachDataSrcToSrcInDocument(doc: Document): void {
     doc.querySelectorAll<HTMLImageElement | HTMLVideoElement | HTMLSourceElement>(
-        'img[data-src], video[data-src], source[data-src]'
+        'img[data-src], video[data-src], source[data-src]',
     ).forEach((el) => {
         const dataSrc = el.getAttribute('data-src');
         if (!dataSrc) return;

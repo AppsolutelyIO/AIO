@@ -1,0 +1,16 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["resources/page-builder/assets/*"],
+            "@themes/*": ["./themes/*"]
+        }
+    },
+    "include": [
+        "types/**/*.d.ts",
+        "resources/page-builder/assets/**/*.ts",
+        "resources/page-builder/assets/**/*.tsx"
+    ],
+    "exclude": ["node_modules", "vendor", "storage", "resources/dist", "resources/pre-dist"]
+}

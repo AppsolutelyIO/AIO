@@ -123,7 +123,7 @@ export class PageBuilderService {
         const hasConfigBtn = defaultToolbar.some(
             (b: any) =>
                 b.command === 'tlb-open-config' ||
-                (b.attributes && b.attributes.class && b.attributes.class.includes('fa-cog'))
+                (b.attributes && b.attributes.class && b.attributes.class.includes('fa-cog')),
         );
         if (!hasConfigBtn) {
             component.set('toolbar', [configButton, ...defaultToolbar]);

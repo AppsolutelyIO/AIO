@@ -246,7 +246,7 @@ export class BlockOptionManager {
                 const targetId = input.dataset['pbUploadTarget'];
                 const hidden = targetId ? (document.getElementById(targetId) as HTMLInputElement | null) : null;
                 if (url && hidden) hidden.value = url;
-            })
+            }),
         );
     }
 
