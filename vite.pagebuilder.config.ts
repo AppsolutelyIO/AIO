@@ -3,6 +3,10 @@ import laravel from 'laravel-vite-plugin';
 import path from 'path';
 import { defineConfig } from 'vite';
 
+import { findPublicDirectory } from './vite.utils';
+
+const publicDirectory = findPublicDirectory();
+
 export default defineConfig({
     base: '/build/page-builder',
     plugins: [
@@ -14,6 +18,7 @@ export default defineConfig({
                 'resources/page-builder/assets/ts/app.ts',
             ],
             buildDirectory: 'build/page-builder',
+            publicDirectory,
         }),
         {
             name: 'blade',

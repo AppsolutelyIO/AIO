@@ -1,15 +1,14 @@
-import { existsSync } from 'fs';
 import laravel from 'laravel-vite-plugin';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { defineConfig } from 'vite';
 
+import { findPublicDirectory } from '../../vite.utils';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Detect context: running from site (has artisan) or from AIO package
-const isLaravelRoot = existsSync(path.resolve('artisan'));
-const publicDirectory = isLaravelRoot ? 'public' : '../site/public';
+const publicDirectory = findPublicDirectory();
 
 export default defineConfig({
     base: '/build/themes/tabler',
