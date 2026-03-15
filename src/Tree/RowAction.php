@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RowAction extends Action
 {
     /**
-     * @var \Appsolutely\AIO\Tree\Actions;
+     * @var Actions
      */
     protected $actions;
 

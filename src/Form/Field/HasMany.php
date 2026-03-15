@@ -283,7 +283,7 @@ class HasMany extends Field
      * Reset input key for validation.
      *
      * @param  array  $column  $column is the column name array set
-     * @return void.
+     * @return void
      */
     protected function resetInputKey(array &$input, array $column)
     {

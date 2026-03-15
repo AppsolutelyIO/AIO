@@ -8,7 +8,7 @@ use Appsolutely\AIO\Grid\Exporters\ExporterInterface;
 /**
  * @mixin Exporters\AbstractExporter
  *
- * @method mixed export
+ * @method mixed export()
  */
 class Exporter
 {

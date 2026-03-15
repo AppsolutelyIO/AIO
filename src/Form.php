@@ -456,7 +456,7 @@ class Form implements Renderable
     }
 
     /**
-     * @return $this;
+     * @return $this
      */
     public function wrap(Closure $closure)
     {
@@ -764,7 +764,7 @@ class Form implements Renderable
      * Handle update.
      *
      * @param  string|null  $redirectTo
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse||Response
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse|Response
      */
     public function update(
         $id,
@@ -1356,7 +1356,7 @@ class Form implements Renderable
      * Tools setting for form.
      *
      * @param  Closure|string|AbstractTool|Renderable|Action|array  $callback
-     * @return $this;
+     * @return $this
      */
     public function tools($callback)
     {

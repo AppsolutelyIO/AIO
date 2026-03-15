@@ -159,7 +159,7 @@ class Builder implements FieldsCollection
     }
 
     /**
-     * @return $this;
+     * @return $this
      */
     public function wrap(Closure $closure)
     {

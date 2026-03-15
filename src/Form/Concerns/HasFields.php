@@ -92,7 +92,7 @@ trait HasFields
     /**
      * Reject Fields.
      *
-     * @param [type] $reject
+     * @param  mixed  $reject
      * @return void
      */
     public function rejectFields($reject)

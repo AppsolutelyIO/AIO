@@ -81,7 +81,7 @@ trait UploadField
     /**
      * Initialize the storage instance.
      *
-     * @return void.
+     * @return void
      */
     protected function initStorage()
     {
@@ -360,7 +360,7 @@ trait UploadField
     /**
      * Destroy original files.
      *
-     * @return void.
+     * @return void
      */
     public function destroy()
     {

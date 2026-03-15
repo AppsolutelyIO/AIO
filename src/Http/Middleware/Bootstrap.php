@@ -56,7 +56,6 @@ class Bootstrap
     }
 
     /**
-     * @param  Request
      * @return void
      */
     protected function storeCurrentUrl(Request $request)

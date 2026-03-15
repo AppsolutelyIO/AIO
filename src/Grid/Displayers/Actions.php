@@ -112,7 +112,7 @@ class Actions extends AbstractDisplayer
     /**
      * Disable delete.
      *
-     * @return $this.
+     * @return $this
      */
     public function disableDelete(bool $disable = true)
     {
@@ -127,7 +127,7 @@ class Actions extends AbstractDisplayer
     /**
      * Disable edit.
      *
-     * @return $this.
+     * @return $this
      */
     public function disableEdit(bool $disable = true)
     {
@@ -142,7 +142,7 @@ class Actions extends AbstractDisplayer
     /**
      * Disable quick edit.
      *
-     * @return $this.
+     * @return $this
      */
     public function disableQuickEdit(bool $disable = true)
     {

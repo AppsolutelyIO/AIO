@@ -113,7 +113,7 @@ trait ImageField
      * Destroy original thumbnail files.
      *
      * @param  string|array  $file
-     * @return void.
+     * @return void
      */
     public function destroyThumbnail($file = null, bool $force = false)
     {

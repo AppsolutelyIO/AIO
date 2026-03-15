@@ -445,7 +445,6 @@ class Helper
      * 设置查询条件.
      *
      * @param  mixed  $model
-     * @param mixed array $params
      * @return void
      */
     public static function withQueryCondition($model, ?string $column, string $query, array $params)

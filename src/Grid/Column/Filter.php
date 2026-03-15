@@ -123,7 +123,6 @@ abstract class Filter implements Renderable
 
     /**
      * @param  mixed  $model
-     * @param mixed array $params
      * @return void
      */
     protected function withQuery($model, string $query, array $params)

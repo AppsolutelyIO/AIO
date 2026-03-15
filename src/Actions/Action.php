@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 /**
  * Class Action.
  *
- * @method string href
+ * @method string href()
  */
 abstract class Action implements Renderable
 {

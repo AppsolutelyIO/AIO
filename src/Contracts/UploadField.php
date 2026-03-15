@@ -17,7 +17,7 @@ interface UploadField
     /**
      * Destroy original files.
      *
-     * @return void.
+     * @return void
      */
     public function destroy();
 

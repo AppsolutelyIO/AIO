@@ -72,7 +72,7 @@ trait HasUploadedFile
      * 删除文件并响应返回值.
      *
      * @param  Filesystem|FilesystemAdapter  $disk
-     * @param string|null
+     * @param  string|null  $path
      * @return JsonResponse
      */
     public function deleteFileAndResponse($disk = null, $path = null)

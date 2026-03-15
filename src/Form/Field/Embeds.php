@@ -198,7 +198,7 @@ class Embeds extends Field implements FieldsCollection
      * Reset input key for validation.
      *
      * @param  array  $column  $column is the column name array set
-     * @return void.
+     * @return void
      */
     public function resetInputKey(array &$input, array $column)
     {

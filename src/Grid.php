@@ -858,7 +858,7 @@ HTML;
     }
 
     /**
-     * @return $this;
+     * @return $this
      */
     public function wrap(Closure $closure)
     {

@@ -135,7 +135,7 @@ trait HasActions
     /**
      * Disable quick edit.
      *
-     * @return $this.
+     * @return $this
      */
     public function disableQuickEditButton(bool $disable = true)
     {
@@ -147,7 +147,7 @@ trait HasActions
     /**
      * Show quick edit button.
      *
-     * @return $this.
+     * @return $this
      */
     public function showQuickEditButton(bool $val = true)
     {
