@@ -80,10 +80,24 @@ final readonly class ManifestService implements ManifestServiceInterface
     }
 
     /**
-     * Get the manifest.json file path for a theme
+     * Get the manifest.json file path for a theme.
+     * Checks site themes directory first, then falls back to AIO package themes.
      */
     private function getManifestPath(string $themeName): string
     {
-        return base_path("themes/{$themeName}/manifest.json");
+        $sitePath = base_path("themes/{$themeName}/manifest.json");
+
+        if (file_exists($sitePath)) {
+            return $sitePath;
+        }
+
+        // Fall back to AIO package's bundled themes
+        $packagePath = dirname(__DIR__, 2) . '/themes/' . $themeName . '/manifest.json';
+
+        if (file_exists($packagePath)) {
+            return $packagePath;
+        }
+
+        return $sitePath;
     }
 }
