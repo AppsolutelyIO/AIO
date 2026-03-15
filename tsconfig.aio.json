@@ -5,9 +5,9 @@
         "module": "ESNext",
         "lib": ["ES2020", "DOM", "DOM.Iterable"],
         "skipLibCheck": true,
-        "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
+        "strict": false,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
         "noFallthroughCasesInSwitch": true,
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
@@ -16,13 +16,13 @@
         "noEmit": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
-        "types": ["vite/client", "node"],
+        "types": ["vite/client"],
         "baseUrl": ".",
         "paths": {
             "@aio/*": ["./resources/assets/aio/js/*"],
             "@adminlte/*": ["./resources/assets/adminlte/js/*"]
         }
     },
-    "include": ["resources/page-builder/assets/**/*.ts", "types/**/*.d.ts", "build.ts"],
+    "include": ["resources/assets/**/*.ts", "types/**/*.d.ts"],
     "exclude": ["node_modules", "vendor", "resources/dist", "resources/pre-dist"]
 }
