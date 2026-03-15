@@ -37,7 +37,8 @@
         "qirolab/laravel-themer": "^2.4",
         "spatie/eloquent-sortable": "^5.0",
         "spatie/laravel-data": "4.*",
-        "spatie/laravel-responsecache": "^8.0"
+        "spatie/laravel-responsecache": "^8.0",
+        "diglactic/laravel-breadcrumbs": "^10.0"
     },
     "require-dev": {
         "laravel/dusk": "^8.0",

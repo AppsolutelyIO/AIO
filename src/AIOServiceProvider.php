@@ -147,6 +147,9 @@ class AIOServiceProvider extends ServiceProvider
             $this->registerAdminRoutes();
         }
 
+        // Breadcrumb definitions (used by article-list and other front-end blocks)
+        $this->loadRoutesFrom(__DIR__ . '/../routes/breadcrumbs.php');
+
         // Fallback (catch-all page routes) must load last
         if (config('aio.routes.web', true)) {
             $this->booted(function () {
