@@ -40,15 +40,6 @@ export class ThemeSyncManager {
 
             if (!data.options || data.options.length === 0) return;
 
-            // Check if current theme has any blocks on the canvas
-            const editor = pageBuilderService.getEditor();
-            if (!editor) return;
-
-            const wrapper = editor.getWrapper();
-            const componentCount = wrapper?.components()?.length ?? 0;
-
-            if (componentCount > 0) return;
-
             this.showDialog(data.current_theme, data.options);
         } catch (error) {
             console.error('Failed to check theme sync options:', error);
