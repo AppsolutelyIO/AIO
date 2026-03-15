@@ -21,7 +21,7 @@ final class PageBlockRepository extends BaseRepository
     public function getGlobalBlocks(): Collection
     {
         return $this->model->newQuery()
-            ->with(['settings'])
+            ->with(['settings.page'])
             ->whereHas('settings', function ($query) {
                 $query->status();
             })
