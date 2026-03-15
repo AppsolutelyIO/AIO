@@ -83,7 +83,8 @@ export class ThemeSyncManager {
 
         const description = document.createElement('p');
         description.className = 'theme-sync-description';
-        description.textContent = 'No blocks configured for the current theme. Choose a theme to sync blocks from:';
+        description.textContent =
+            'No blocks configured for the current theme. Only blocks that exist in both themes can be synced — blocks unique to a theme will be skipped.';
         content.appendChild(description);
 
         const optionsContainer = document.createElement('div');
