@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Build output
+resources/dist/
+resources/pre-dist/
+
+# Storage and cache
+storage/
+bootstrap/cache/
+
+# IDE & AI tools
+.idea/
+.vscode/
+.cursor/
+.claude/
+
+# Git
+.git/
+
+# Compiled files
+*.min.js
+*.min.css
+
+# Lock files
+package-lock.json
+composer.lock
+
+# Vendored plugins (pre-built third-party assets)
+resources/assets/aio/plugins/
