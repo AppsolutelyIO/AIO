@@ -156,19 +156,16 @@ class AIOServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register admin panel routes with optional domain scoping.
+     * Register admin panel routes via Application route loader.
+     *
+     * Uses Admin::app()->routes() to ensure correct name prefix (aio.admin.*),
+     * domain scoping, and pjax middleware are applied automatically.
      */
     protected function registerAdminRoutes(): void
     {
-        $domain = config('admin.route.domain');
-
-        if ($domain) {
-            Route::domain($domain)->group(function () {
-                Admin::routes();
-            });
-        } else {
+        Admin::app()->routes(function () {
             Admin::routes();
-        }
+        });
     }
 
     /**
