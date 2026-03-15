@@ -58,7 +58,7 @@ echo ""
 
 # TypeScript type check
 echo "📝 Type checking TypeScript files..."
-OUTPUT=$(npm run type-check 2>&1)
+OUTPUT=$(npm run type-check:all 2>&1)
 EXIT=$?
 if [ $EXIT -ne 0 ]; then
     echo "$OUTPUT"

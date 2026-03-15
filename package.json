@@ -7,6 +7,8 @@
         "prod": "NODE_ENV=production tsx build.ts",
         "production": "NODE_ENV=production tsx build.ts",
         "type-check": "tsc --noEmit",
+        "type-check:themes": "tsc --noEmit -p themes/tabler/tsconfig.json",
+        "type-check:all": "npm run type-check && npm run type-check:themes",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "lint:scss": "stylelint '**/*.scss' --allow-empty-input",
