@@ -27,7 +27,7 @@
         "fahlisaputra/laravel-minify": "^1.2",
         "intervention/image": "^3.0",
         "kalnoy/nestedset": "^6.0",
-        "laravel/ai": "^0.2.6",
+        "laravel/ai": "^0.3.0",
         "laravel/framework": "^12.0",
         "livewire/livewire": "^4.0",
         "mcamara/laravel-localization": "^2.3",
@@ -42,7 +42,7 @@
     "require-dev": {
         "laravel/dusk": "^8.0",
         "larastan/larastan": "^3.0",
-        "phpunit/phpunit": "^11.0",
+        "phpunit/phpunit": "^12.0",
         "fakerphp/faker": "^1.23",
         "mockery/mockery": "^1.6|^2.0",
         "orchestra/testbench": "^10.0",
