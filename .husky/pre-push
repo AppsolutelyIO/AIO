@@ -14,6 +14,12 @@ print_success() {
     echo "${GREEN}✅ $1${NC}"
 }
 
+# Check if npm is available
+if ! command -v npm >/dev/null 2>&1; then
+    print_error "npm is not available. Please install Node.js and npm."
+    exit 1
+fi
+
 # Check if we're in a git repository
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
     print_error "Not in a git repository!"
@@ -51,30 +57,28 @@ fi
 echo ""
 
 # TypeScript type check
-if command -v npm >/dev/null 2>&1; then
-    echo "📝 Type checking TypeScript files..."
-    OUTPUT=$(npm run type-check 2>&1)
-    EXIT=$?
-    if [ $EXIT -ne 0 ]; then
-        echo "$OUTPUT"
-        print_error "TypeScript type check failed!"
-        FAILED=1
-    fi
-    echo ""
-
-    # Linters
-    echo "🧹 Running linters..."
-    OUTPUT=$(npm run lint:all 2>&1)
-    EXIT=$?
-    if [ $EXIT -ne 0 ]; then
-        echo "$OUTPUT"
-        print_error "Linting failed!"
-        echo ""
-        echo "💡 Run 'npm run lint:all:fix' to auto-fix."
-        FAILED=1
-    fi
-    echo ""
+echo "📝 Type checking TypeScript files..."
+OUTPUT=$(npm run type-check 2>&1)
+EXIT=$?
+if [ $EXIT -ne 0 ]; then
+    echo "$OUTPUT"
+    print_error "TypeScript type check failed!"
+    FAILED=1
 fi
+echo ""
+
+# Linters
+echo "🧹 Running linters..."
+OUTPUT=$(npm run lint:all 2>&1)
+EXIT=$?
+if [ $EXIT -ne 0 ]; then
+    echo "$OUTPUT"
+    print_error "Linting failed!"
+    echo ""
+    echo "💡 Run 'npm run lint:all:fix' to auto-fix."
+    FAILED=1
+fi
+echo ""
 
 # PHPStan static analysis
 if [ -f ./vendor/bin/phpstan ]; then
