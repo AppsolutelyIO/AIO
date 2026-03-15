@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Services;
 
+use Appsolutely\AIO\Livewire\Anchor;
+use Appsolutely\AIO\Models\PageBlock;
 use Appsolutely\AIO\Models\PageBlockGroup;
 use Appsolutely\AIO\Repositories\PageBlockRepository;
 use Appsolutely\AIO\Services\Contracts\ManifestServiceInterface;
@@ -68,14 +70,18 @@ final readonly class BlockRegistryService
                 continue;
             }
 
+            $resolvedComponent = $this->resolveClassName($component);
+
             $pageBlock = $blocksByClass[$component] ?? null;
             if ($pageBlock === null) {
                 continue;
             }
 
-            if (! class_exists($component)) {
+            if (! class_exists($resolvedComponent)) {
                 continue;
             }
+
+            $component = $resolvedComponent;
 
             $registryBlocks[] = [
                 'page_block'     => $pageBlock,
@@ -107,7 +113,7 @@ final readonly class BlockRegistryService
     }
 
     /**
-     * @param  array<int, array{page_block: \Appsolutely\AIO\Models\PageBlock, manifest_ref: string, label: string, description: string, view: string, displayOptions: array, component: string}>  $registryBlocks
+     * @param  array<int, array{page_block: PageBlock, manifest_ref: string, label: string, description: string, view: string, displayOptions: array, component: string}>  $registryBlocks
      * @return array<int, array<string, mixed>>
      */
     private function groupAndFormat(array $registryBlocks): array
@@ -162,7 +168,7 @@ final readonly class BlockRegistryService
     /**
      * Render block HTML from local theme template (not from database).
      *
-     * @param  array{page_block: \Appsolutely\AIO\Models\PageBlock, manifest_ref: string, view: string, displayOptions: array, component: string}  $item
+     * @param  array{page_block: PageBlock, manifest_ref: string, view: string, displayOptions: array, component: string}  $item
      */
     private function renderBlockContent(array $item): string
     {
@@ -191,7 +197,7 @@ final readonly class BlockRegistryService
                 'blockSort'      => 0,
             ];
 
-            if ($component === \Appsolutely\AIO\Livewire\Anchor::class) {
+            if ($component === Anchor::class) {
                 $data['blocksForAnchor'] = [];
             }
 
@@ -243,7 +249,7 @@ final readonly class BlockRegistryService
             'blockSort'      => 0,
         ];
 
-        if ($component === \Appsolutely\AIO\Livewire\Anchor::class) {
+        if ($component === Anchor::class) {
             $data['blocksForAnchor'] = [];
         }
 
@@ -252,6 +258,23 @@ final readonly class BlockRegistryService
         } catch (\Throwable) {
             return $this->buildPlaceholder($type);
         }
+    }
+
+    /**
+     * Resolve legacy App\ class names to AIO package namespace.
+     */
+    private function resolveClassName(string $className): string
+    {
+        if (str_starts_with($className, 'App\\Livewire\\') && ! class_exists($className)) {
+            $shortName = substr($className, strlen('App\\Livewire\\'));
+            $aioClass  = 'Appsolutely\\AIO\\Livewire\\' . $shortName;
+
+            if (class_exists($aioClass)) {
+                return $aioClass;
+            }
+        }
+
+        return $className;
     }
 
     /**
