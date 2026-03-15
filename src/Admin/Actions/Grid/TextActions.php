@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Admin\Actions\Grid;
 
+use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Grid\Displayers\Actions;
 
 /**
@@ -11,6 +12,24 @@ use Appsolutely\AIO\Grid\Displayers\Actions;
  */
 class TextActions extends Actions
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function display(array $callbacks = []): string
+    {
+        static $styleInjected = false;
+
+        if (! $styleInjected) {
+            Admin::style(
+                'td.grid__actions__ a { display: block; margin: 3px 0; min-width: 80px; }'
+                . ' td.grid__actions__ a:hover span { text-decoration: underline; }'
+            );
+            $styleInjected = true;
+        }
+
+        return parent::display($callbacks);
+    }
+
     /**
      * @return string
      */
