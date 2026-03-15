@@ -12,3 +12,4 @@ pre-dist
 .DS_Store
 .env
 .phpunit.result.cache
+build/
