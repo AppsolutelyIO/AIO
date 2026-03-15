@@ -1,0 +1,26 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "simplified_null_return": true,
+        "new_with_parentheses": {
+            "anonymous_class": true,
+            "named_class": true
+        },
+        "array_syntax": true,
+        "array_indentation": true,
+        "trim_array_spaces": true,
+        "binary_operator_spaces": {
+            "operators": {
+                "=": "align_single_space",
+                "+=": "align_single_space_minimal",
+                "=>": "align_single_space_minimal",
+                "===": "align_single_space_minimal",
+                "|": "align_single_space"
+            }
+        },
+        "concat_space": {
+            "spacing": "one"
+        }
+    },
+    "exclude": ["config", "resources", "database"]
+}
