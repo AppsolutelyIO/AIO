@@ -73,7 +73,7 @@ final readonly class PageBuilderDataEnricherService
         }
 
         $theme   = $this->themeService->resolveThemeName();
-        $setting = $this->blockSettingRepository->findBy($pageId, $blockId, $reference, $theme);
+        $setting = $this->blockSettingRepository->findBy($pageId, null, $reference, $theme);
 
         if ($setting === null) {
             return null;
