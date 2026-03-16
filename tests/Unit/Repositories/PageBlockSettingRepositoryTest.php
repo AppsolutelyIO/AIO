@@ -184,6 +184,31 @@ final class PageBlockSettingRepositoryTest extends TestCase
         $this->assertNull($result);
     }
 
+    public function test_find_by_with_theme_falls_back_to_null_theme(): void
+    {
+        $page     = Page::factory()->create();
+        $blockId  = $this->createBlock();
+        $fallback = $this->createSetting($page->id, $blockId, ['theme' => null, 'reference' => 'block-ref']);
+
+        $result = $this->repository->findBy($page->id, $blockId, 'block-ref', 'june');
+
+        $this->assertNotNull($result);
+        $this->assertEquals($fallback->id, $result->id);
+    }
+
+    public function test_find_by_with_theme_prefers_exact_match_over_null(): void
+    {
+        $page    = Page::factory()->create();
+        $blockId = $this->createBlock();
+        $this->createSetting($page->id, $blockId, ['theme' => null, 'reference' => 'block-ref']);
+        $exact = $this->createSetting($page->id, $blockId, ['theme' => 'june', 'reference' => 'block-ref']);
+
+        $result = $this->repository->findBy($page->id, $blockId, 'block-ref', 'june');
+
+        $this->assertNotNull($result);
+        $this->assertEquals($exact->id, $result->id);
+    }
+
     // --- getActivePublishedSettings ---
 
     public function test_get_active_published_settings_returns_active_and_published(): void

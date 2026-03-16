@@ -33,7 +33,11 @@ final class PageBlockSettingRepository extends BaseRepository
         }
 
         if ($theme !== null) {
-            $query->where('theme', $theme);
+            $query->where(function ($q) use ($theme) {
+                $q->where('theme', $theme)->orWhereNull('theme');
+            });
+
+            $query->orderByRaw('CASE WHEN theme = ? THEN 0 ELSE 1 END', [$theme]);
         }
 
         return $query->first();
@@ -128,9 +132,12 @@ final class PageBlockSettingRepository extends BaseRepository
     {
         return $this->model->newQuery()
             ->where('page_id', $pageId)
-            ->where('theme', $theme)
+            ->where(function ($q) use ($theme) {
+                $q->where('theme', $theme)->orWhereNull('theme');
+            })
             ->status()
             ->whereNotNull('sort')
+            ->orderByRaw('CASE WHEN theme = ? THEN 0 ELSE 1 END', [$theme])
             ->orderBy('sort')
             ->with(['block', 'blockValue'])
             ->get();
