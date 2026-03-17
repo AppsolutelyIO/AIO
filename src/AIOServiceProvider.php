@@ -32,6 +32,7 @@ use Appsolutely\AIO\Observers\PageBlockValueObserver;
 use Appsolutely\AIO\Observers\PageObserver;
 use Appsolutely\AIO\Observers\ProductObserver;
 use Appsolutely\AIO\Repositories\TranslationRepository;
+use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Appsolutely\AIO\Services\PageBlockService;
 use Appsolutely\AIO\Services\Translation\DeepSeekTranslator;
 use Appsolutely\AIO\Services\Translation\OpenAITranslator;
@@ -100,6 +101,7 @@ class AIOServiceProvider extends ServiceProvider
         $this->registerCommands();
         $this->registerSchedule();
         $this->registerPublishing();
+        $this->setupThemeViewPaths();
     }
 
     /**
@@ -377,6 +379,20 @@ class AIOServiceProvider extends ServiceProvider
                 ->onFailure(function () {
                     Log::error('Notification queue processing failed');
                 });
+        });
+    }
+
+    /**
+     * Ensure theme view paths resolve to existing directories for CLI commands.
+     *
+     * Qirolab registers theme paths without existence checks. During HTTP
+     * requests the middleware corrects this, but artisan commands like
+     * view:cache need it fixed at boot time.
+     */
+    protected function setupThemeViewPaths(): void
+    {
+        $this->booted(function () {
+            app(ThemeServiceInterface::class)->ensureSetup();
         });
     }
 

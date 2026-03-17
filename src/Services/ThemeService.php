@@ -141,8 +141,9 @@ final readonly class ThemeService implements ThemeServiceInterface
         }
 
         // 5. Append remaining paths (resources/views, etc.) preserving their order
+        //    Skip non-existent directories to prevent view:cache failures
         foreach ($existingPaths as $path) {
-            if (! in_array($path, $cascadePaths, true)) {
+            if (! in_array($path, $cascadePaths, true) && is_dir($path)) {
                 $cascadePaths[] = $path;
             }
         }
