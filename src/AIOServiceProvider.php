@@ -150,7 +150,9 @@ class AIOServiceProvider extends ServiceProvider
         }
 
         // Breadcrumb definitions (used by article-list and other front-end blocks)
-        $this->loadRoutesFrom(__DIR__ . '/../routes/breadcrumbs.php');
+        // Loaded via require instead of loadRoutesFrom() because Breadcrumbs::for()
+        // calls are not route definitions and get lost when routes are cached.
+        require __DIR__ . '/../routes/breadcrumbs.php';
 
         // Fallback (catch-all page routes) must load last
         if (config('aio.routes.web', true)) {
