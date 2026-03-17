@@ -143,6 +143,32 @@ if (! function_exists('public_url')) {
     }
 }
 
+if (! function_exists('aio_slug_pattern')) {
+    /**
+     * Build the regex pattern for the CMS catch-all route, excluding reserved slugs.
+     *
+     * Reserved slugs (e.g. "up" for Laravel's health check) are defined in
+     * config('aio.routes.reserved_slugs') and excluded via negative lookahead.
+     */
+    function aio_slug_pattern(): string
+    {
+        $reserved = config('aio.routes.reserved_slugs', []);
+
+        $healthPath = config('aio.routes.health');
+        if ($healthPath) {
+            $reserved[] = ltrim($healthPath, '/');
+        }
+
+        if (empty($reserved)) {
+            return '[a-zA-Z0-9\/_\-\.~%]+';
+        }
+
+        $escaped = array_map(fn (string $s) => preg_quote($s, '/'), $reserved);
+
+        return '(?!' . implode('$|', $escaped) . '$)[a-zA-Z0-9\/_\-\.~%]+';
+    }
+}
+
 if (! function_exists('normalize_slug')) {
     /**
      * Normalize a slug for consistent storage and lookup.

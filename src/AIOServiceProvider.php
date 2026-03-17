@@ -39,6 +39,7 @@ use Appsolutely\AIO\Services\Translation\OpenAITranslator;
 use Appsolutely\AIO\Services\Translation\TranslatorInterface;
 use Appsolutely\AIO\Services\TranslationService;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Foundation\Events\DiagnosingHealth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
@@ -131,6 +132,8 @@ class AIOServiceProvider extends ServiceProvider
      */
     protected function registerRoutes(): void
     {
+        $this->registerHealthRoute();
+
         if (config('aio.routes.web', true)) {
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         }
@@ -160,6 +163,39 @@ class AIOServiceProvider extends ServiceProvider
                 $this->loadRoutesFrom(__DIR__ . '/../routes/fallback.php');
             });
         }
+    }
+
+    /**
+     * Register the health check route from config.
+     */
+    protected function registerHealthRoute(): void
+    {
+        $path = config('aio.routes.health');
+
+        if (! $path) {
+            return;
+        }
+
+        Route::get($path, function () {
+            $exception = null;
+
+            try {
+                event(new DiagnosingHealth());
+            } catch (\Throwable $e) {
+                if (app()->hasDebugModeEnabled()) {
+                    throw $e;
+                }
+
+                report($e);
+
+                $exception = $e->getMessage();
+            }
+
+            return response(View::file(
+                base_path('vendor/laravel/framework/src/Illuminate/Foundation/resources/health-up.blade.php'),
+                ['exception' => $exception],
+            ), status: $exception ? 500 : 200);
+        });
     }
 
     /**
