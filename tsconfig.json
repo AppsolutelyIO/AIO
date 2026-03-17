@@ -20,9 +20,10 @@
         "baseUrl": ".",
         "paths": {
             "@aio/*": ["./resources/assets/aio/js/*"],
-            "@adminlte/*": ["./resources/assets/adminlte/js/*"]
+            "@adminlte/*": ["./resources/assets/adminlte/js/*"],
+            "@resources/*": ["./resources/*"]
         }
     },
-    "include": ["resources/page-builder/assets/**/*.ts", "types/**/*.d.ts", "build.ts"],
+    "include": ["resources/page-builder/assets/**/*.ts", "types/**/*.d.ts", "build.ts", "tests/**/*.ts"],
     "exclude": ["node_modules", "vendor", "resources/dist", "resources/pre-dist"]
 }
