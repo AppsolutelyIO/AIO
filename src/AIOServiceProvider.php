@@ -139,7 +139,9 @@ class AIOServiceProvider extends ServiceProvider
         }
 
         if (config('aio.routes.api', true)) {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
+            Route::prefix('api')
+                ->middleware('api')
+                ->group(__DIR__ . '/../routes/api.php');
         }
 
         if (config('aio.routes.cache', true)) {
