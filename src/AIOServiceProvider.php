@@ -39,6 +39,7 @@ use Appsolutely\AIO\Services\Translation\OpenAITranslator;
 use Appsolutely\AIO\Services\Translation\TranslatorInterface;
 use Appsolutely\AIO\Services\TranslationService;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Events\DiagnosingHealth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
@@ -46,7 +47,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Schedule;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -395,7 +395,9 @@ class AIOServiceProvider extends ServiceProvider
      */
     protected function registerSchedule(): void
     {
-        $this->app->afterResolving(Schedule::class, function (Schedule $schedule) {
+        $this->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+
             // Run the translation job every minute
             $schedule->job(new ProcessMissingTranslations(null, 10))
                 ->everyMinute()
