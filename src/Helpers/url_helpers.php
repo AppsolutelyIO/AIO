@@ -159,13 +159,27 @@ if (! function_exists('aio_slug_pattern')) {
             $reserved[] = ltrim($healthPath, '/');
         }
 
-        if (empty($reserved)) {
+        // Framework paths that must never be captured by the catch-all route.
+        // Livewire v4 uses a hashed prefix (e.g. "livewire-f89580e0/...").
+        $frameworkPrefixes = ['livewire'];
+
+        $lookaheads = [];
+
+        // Exact-match exclusions (anchored with $)
+        foreach ($reserved as $slug) {
+            $lookaheads[] = preg_quote($slug, '/') . '$';
+        }
+
+        // Prefix exclusions (match start, no $ anchor)
+        foreach ($frameworkPrefixes as $prefix) {
+            $lookaheads[] = preg_quote($prefix, '/');
+        }
+
+        if (empty($lookaheads)) {
             return '[a-zA-Z0-9\/_\-\.~%]+';
         }
 
-        $escaped = array_map(fn (string $s) => preg_quote($s, '/'), $reserved);
-
-        return '(?!' . implode('$|', $escaped) . '$)[a-zA-Z0-9\/_\-\.~%]+';
+        return '(?!' . implode('|', $lookaheads) . ')[a-zA-Z0-9\/_\-\.~%]+';
     }
 }
 
