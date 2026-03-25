@@ -66,7 +66,11 @@ class Admin
     use HasAssets;
     use HasHtml;
 
-    const VERSION = '2.2.2-beta';
+    const VERSION = '1.0.8';
+
+    const WEBSITE_URL = 'https://appsolutely.io/';
+
+    const GITHUB_URL = 'https://github.com/AppsolutelyIO/AIO';
 
     const SECTION = [
         // 往 <head> 标签内输入内容
