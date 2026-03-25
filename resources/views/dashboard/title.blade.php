@@ -1,7 +1,7 @@
 <style>
     .dashboard-title .links {
         text-align: center;
-        margin-bottom: 2.5rem;
+        margin-bottom: 1.75rem;
     }
 
     .dashboard-title .links>a {
@@ -33,7 +33,7 @@
             <img class="avatar img-circle shadow mt-1" src="{{ admin_asset('@admin/images/logo.png') }}">
 
             <div class="text-center mb-1">
-                <h1 class="mb-3 mt-2 text-white">Appsolutely AIO</h1>
+                <h1 class="mb-2 mt-2 text-white">Appsolutely AIO</h1>
                 <div class="links">
                     <a href="{{ \Appsolutely\AIO\Admin::WEBSITE_URL }}" target="_blank">Website</a>
                     <a href="{{ \Appsolutely\AIO\Admin::GITHUB_URL }}" target="_blank">Github</a>
