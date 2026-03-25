@@ -6,7 +6,6 @@ namespace Appsolutely\AIO\Admin\Metrics;
 
 use Appsolutely\AIO\Admin;
 use Appsolutely\AIO\Traits\HasAuthorization;
-use Appsolutely\AIO\Traits\InteractsWithApi;
 use Appsolutely\AIO\Widgets\Card;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -14,7 +13,6 @@ use Illuminate\Support\Facades\Artisan;
 class ClearCache extends Card
 {
     use HasAuthorization;
-    use InteractsWithApi;
 
     public function __construct()
     {
