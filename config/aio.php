@@ -148,6 +148,7 @@ use Appsolutely\AIO\Services\Contracts\StorageServiceInterface;
 use Appsolutely\AIO\Services\Contracts\TaxServiceInterface;
 use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Appsolutely\AIO\Services\Contracts\TranslationServiceInterface;
+use Appsolutely\AIO\Services\Contracts\TurnstileServiceInterface;
 use Appsolutely\AIO\Services\Contracts\UserAddressServiceInterface;
 use Appsolutely\AIO\Services\Contracts\WishlistServiceInterface;
 use Appsolutely\AIO\Services\CouponService;
@@ -190,6 +191,7 @@ use Appsolutely\AIO\Services\StorageService;
 use Appsolutely\AIO\Services\TaxService;
 use Appsolutely\AIO\Services\ThemeService;
 use Appsolutely\AIO\Services\TranslationService;
+use Appsolutely\AIO\Services\TurnstileService;
 use Appsolutely\AIO\Services\UserAddressService;
 use Appsolutely\AIO\Services\WishlistService;
 
@@ -285,6 +287,7 @@ return [
         DynamicFormSubmissionServiceInterface::class => DynamicFormSubmissionService::class,
         DynamicFormValidationServiceInterface::class => DynamicFormValidationService::class,
         FormEntriesPullServiceInterface::class       => FormEntriesPullService::class,
+        TurnstileServiceInterface::class             => TurnstileService::class,
         FormExportServiceInterface::class            => FormExportService::class,
         GeneralPageServiceInterface::class           => GeneralPageService::class,
         ImageOptimizationServiceInterface::class     => ImageOptimizationService::class,

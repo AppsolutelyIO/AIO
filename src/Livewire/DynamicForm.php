@@ -7,6 +7,7 @@ namespace Appsolutely\AIO\Livewire;
 use Appsolutely\AIO\Enums\FormFieldType;
 use Appsolutely\AIO\Models\Form;
 use Appsolutely\AIO\Services\Contracts\DynamicFormServiceInterface;
+use Appsolutely\AIO\Services\Contracts\TurnstileServiceInterface;
 use Appsolutely\AIO\Services\PageSlugAliasService;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Facades\RateLimiter;
@@ -28,7 +29,24 @@ final class DynamicForm extends GeneralBlock
 
     public ?Form $form = null;
 
+    /**
+     * Honeypot field — must remain empty (bots auto-fill it).
+     */
+    public string $website = '';
+
+    /**
+     * Cloudflare Turnstile response token (set by frontend widget).
+     */
+    public string $turnstileToken = '';
+
+    /**
+     * Timestamp when form was mounted (server-side, tamper-proof).
+     */
+    protected float $mountedAt = 0;
+
     protected ?DynamicFormServiceInterface $formService = null;
+
+    protected ?TurnstileServiceInterface $turnstileService = null;
 
     protected ?PageSlugAliasService $pageSlugAliasService = null;
 
@@ -39,7 +57,9 @@ final class DynamicForm extends GeneralBlock
     protected function initializeComponent(Container $container): void
     {
         $this->formService           = $container->make(DynamicFormServiceInterface::class);
+        $this->turnstileService      = $container->make(TurnstileServiceInterface::class);
         $this->pageSlugAliasService  = $container->make(PageSlugAliasService::class);
+        $this->mountedAt             = microtime(true);
 
         $formSlug = $this->queryOptions['form_slug'] ?? '';
 
@@ -173,6 +193,20 @@ final class DynamicForm extends GeneralBlock
      */
     public function submit(): void
     {
+        // Layer 1: Honeypot check — reject if hidden field is filled or form submitted too fast
+        if ($this->isHoneypotTriggered()) {
+            $this->fakeSuccess();
+
+            return;
+        }
+
+        // Layer 2: Cloudflare Turnstile verification
+        if (! $this->verifyTurnstile()) {
+            throw ValidationException::withMessages([
+                'turnstile' => __('Human verification failed. Please try again.'),
+            ]);
+        }
+
         // Apply rate limiting to prevent spam (5 submissions per minute per IP)
         $key = 'form-submission:' . client_ip();
         if (RateLimiter::tooManyAttempts($key, 5)) {
@@ -234,6 +268,62 @@ final class DynamicForm extends GeneralBlock
     }
 
     /**
+     * Check if honeypot was triggered (hidden field filled or submission too fast).
+     */
+    protected function isHoneypotTriggered(): bool
+    {
+        if (! config('forms.captcha.honeypot.enabled', true)) {
+            return false;
+        }
+
+        // Hidden field was filled — definitely a bot
+        if ($this->website !== '') {
+            \Log::info('Honeypot triggered: hidden field filled', ['ip' => client_ip()]);
+
+            return true;
+        }
+
+        // Submitted faster than a human could fill the form
+        $minTime = (float) config('forms.captcha.honeypot.min_time', 3);
+        $elapsed = microtime(true) - $this->mountedAt;
+        if ($this->mountedAt > 0 && $elapsed < $minTime) {
+            \Log::info('Honeypot triggered: submitted too fast', [
+                'ip'      => client_ip(),
+                'elapsed' => round($elapsed, 2),
+            ]);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Verify Turnstile token with Cloudflare API.
+     */
+    protected function verifyTurnstile(): bool
+    {
+        if (! $this->turnstileService) {
+            $this->turnstileService = app(TurnstileServiceInterface::class);
+        }
+
+        if (! $this->turnstileService->isEnabled()) {
+            return true;
+        }
+
+        return $this->turnstileService->verify($this->turnstileToken, client_ip());
+    }
+
+    /**
+     * Show fake success to fool bots — no actual submission.
+     */
+    protected function fakeSuccess(): void
+    {
+        $this->submitted      = true;
+        $this->successMessage = $this->displayOptions['success_message'] ?? '';
+    }
+
+    /**
      * Reset the form
      */
     public function resetForm(): void
@@ -252,6 +342,7 @@ final class DynamicForm extends GeneralBlock
         $this->submitted      = false;
         $this->successMessage = '';
         $this->formData       = [];
+        $this->turnstileToken = '';
         $this->resetValidation();
         $this->initializeComponent(app());
     }

@@ -74,6 +74,13 @@ class SiteSettingSeeder extends Seeder
             ['group' => 'social', 'key' => 'social.pinterest',  'type' => 'string', 'default' => null],
             ['group' => 'social', 'key' => 'social.whatsapp',   'type' => 'string', 'default' => null],
 
+            // Forms / Captcha
+            ['group' => 'forms', 'key' => 'forms.captcha.honeypot.enabled',  'type' => 'boolean', 'default' => '1'],
+            ['group' => 'forms', 'key' => 'forms.captcha.honeypot.min_time', 'type' => 'integer', 'default' => '3'],
+            ['group' => 'forms', 'key' => 'forms.captcha.turnstile.enabled',    'type' => 'boolean', 'default' => '0'],
+            ['group' => 'forms', 'key' => 'forms.captcha.turnstile.site_key',   'type' => 'string',  'default' => null],
+            ['group' => 'forms', 'key' => 'forms.captcha.turnstile.secret_key', 'type' => 'string',  'default' => null],
+
             // Contact
             ['group' => 'contact', 'key' => 'contact.email',           'type' => 'string', 'default' => null],
             ['group' => 'contact', 'key' => 'contact.phone',           'type' => 'string', 'default' => null],
