@@ -54,7 +54,7 @@ class ClearCache extends Card
     {
         $id  = $this->id();
         $url = route(admin_api_route_name('value'));
-        $key = static::class;
+        $key = str_replace('\\', '\\\\', static::class);
 
         Admin::script(<<<JS
 (function () {
