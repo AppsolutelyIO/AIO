@@ -53,7 +53,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Appsolutely\\AIO\\": "src/"
+            "Appsolutely\\AIO\\": "src/",
+            "Qirolab\\Theme\\": "src/Support/Overrides/Qirolab/Theme/"
         },
         "files": [
             "src/Support/helpers.php",
