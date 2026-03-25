@@ -143,14 +143,14 @@ if (! function_exists('public_url')) {
     }
 }
 
-if (! function_exists('aio_slug_pattern')) {
+if (! function_exists('slug_pattern')) {
     /**
      * Build the regex pattern for the CMS catch-all route, excluding reserved slugs.
      *
      * Reserved slugs (e.g. "up" for Laravel's health check) are defined in
      * config('aio.routes.reserved_slugs') and excluded via negative lookahead.
      */
-    function aio_slug_pattern(): string
+    function slug_pattern(): string
     {
         $reserved = config('aio.routes.reserved_slugs', []);
 
