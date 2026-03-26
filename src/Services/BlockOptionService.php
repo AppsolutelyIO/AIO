@@ -8,7 +8,6 @@ use Appsolutely\AIO\Models\PageBlockSetting;
 use Appsolutely\AIO\Repositories\PageBlockRepository;
 use Appsolutely\AIO\Repositories\PageBlockSettingRepository;
 use Appsolutely\AIO\Services\Contracts\ManifestServiceInterface;
-use Carbon\Carbon;
 
 /**
  * Fetches and saves block options (display_options, query_options) for a single block.
@@ -225,8 +224,8 @@ final readonly class BlockOptionService
 
         $setting->blockValue->display_options = $displayOptions;
         $setting->blockValue->query_options   = $queryOptions;
-        $setting->blockValue->published_at    = $publishedAt !== null && $publishedAt !== '' ? Carbon::parse($publishedAt)->utc() : null;
-        $setting->blockValue->expired_at      = $expiredAt !== null && $expiredAt !== '' ? Carbon::parse($expiredAt)->utc() : null;
+        $setting->blockValue->published_at    = parse_datetime_to_utc($publishedAt);
+        $setting->blockValue->expired_at      = parse_datetime_to_utc($expiredAt);
 
         $setting->checkAndCreateNewBlockValue();
         $setting->save();

@@ -71,3 +71,24 @@ if (! function_exists('user_timezone_to_utc')) {
         return $standardTime->copy()->setTimezone(config('app.timezone'));
     }
 }
+
+if (! function_exists('parse_datetime_to_utc')) {
+    /**
+     * Parse a datetime string (with or without timezone offset) and convert to UTC Carbon.
+     *
+     * Designed for frontend-submitted ISO 8601 strings like "2026-03-26T14:00:00+08:00".
+     * Laravel's datetime cast does not auto-convert to UTC when storing — this helper
+     * ensures the value is always in UTC before Eloquent serializes it to the database.
+     *
+     * @param  string|null  $datetime  ISO 8601 or any Carbon-parseable datetime string
+     * @return Carbon|null Carbon instance in UTC, or null if input is empty
+     */
+    function parse_datetime_to_utc(?string $datetime): ?Carbon
+    {
+        if ($datetime === null || $datetime === '') {
+            return null;
+        }
+
+        return Carbon::parse($datetime)->utc();
+    }
+}
