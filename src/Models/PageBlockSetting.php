@@ -45,7 +45,7 @@ final class PageBlockSetting extends Model
      */
     public function checkAndCreateNewBlockValue(): void
     {
-        if (! $this->blockValue || ! $this->blockValue->isDirty(['display_options', 'query_options', 'theme', 'anchor_label', 'view_style'])) {
+        if (! $this->blockValue || ! $this->blockValue->isDirty(['display_options', 'query_options', 'theme', 'anchor_label', 'view_style', 'published_at', 'expired_at'])) {
             return;
         }
 
@@ -69,6 +69,8 @@ final class PageBlockSetting extends Model
             'scripts'         => $this->blockValue->scripts,
             'styles'          => $this->blockValue->styles,
             'template'        => $this->blockValue->template,
+            'published_at'    => $this->blockValue->published_at,
+            'expired_at'      => $this->blockValue->expired_at,
         ]);
 
         // Update this setting to use the new block value
