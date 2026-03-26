@@ -64,6 +64,15 @@ return new class() extends Migration
             $table->index(['is_default', 'category']);
             $table->index('slug');
         });
+
+        // Add foreign key constraints now that notification_senders exists
+        Schema::table('notification_rules', function (Blueprint $table) {
+            $table->foreign('sender_id')->references('id')->on('notification_senders')->onDelete('set null');
+        });
+
+        Schema::table('notification_queue', function (Blueprint $table) {
+            $table->foreign('sender_id')->references('id')->on('notification_senders')->onDelete('set null');
+        });
     }
 
     /**
@@ -71,6 +80,14 @@ return new class() extends Migration
      */
     public function down(): void
     {
+        Schema::table('notification_rules', function (Blueprint $table) {
+            $table->dropForeign(['sender_id']);
+        });
+
+        Schema::table('notification_queue', function (Blueprint $table) {
+            $table->dropForeign(['sender_id']);
+        });
+
         Schema::dropIfExists('notification_senders');
     }
 };

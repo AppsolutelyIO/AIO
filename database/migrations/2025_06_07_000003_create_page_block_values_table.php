@@ -16,12 +16,17 @@ return new class() extends Migration
         Schema::create('page_block_values', function (Blueprint $table) {
             $table->id();
             $table->foreignId('block_id')->constrained('page_blocks')->cascadeOnDelete();
+            $table->string('theme')->nullable();
             $table->string('view')->nullable();
+            $table->string('view_style')->default('default');
+            $table->string('anchor_label')->nullable();
             $table->json('query_options')->nullable();
             $table->json('display_options')->nullable();
             $table->json('scripts')->nullable();
             $table->json('styles')->nullable();
             $table->text('template')->nullable();
+            $table->dateTimeTz('published_at')->nullable();
+            $table->dateTimeTz('expired_at')->nullable();
             $table->timestamps();
         });
     }

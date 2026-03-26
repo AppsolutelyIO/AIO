@@ -17,6 +17,8 @@ return new class() extends Migration
             $table->id();
             $table->unsignedBigInteger('rule_id')->nullable();
             $table->unsignedBigInteger('template_id');
+            $table->unsignedBigInteger('sender_id')->nullable();
+            $table->foreignId('form_entry_id')->nullable()->constrained('form_entries')->onDelete('set null')->comment('Form entry that triggered this notification');
             $table->string('recipient_email');
             $table->string('subject');
             $table->longText('body_html');
@@ -34,6 +36,8 @@ return new class() extends Migration
             $table->index(['status', 'scheduled_at']);
             $table->index(['recipient_email', 'status']);
             $table->index('status');
+            $table->index('sender_id');
+            $table->index('form_entry_id');
         });
     }
 

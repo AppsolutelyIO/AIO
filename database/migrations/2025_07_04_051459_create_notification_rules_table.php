@@ -19,6 +19,7 @@ return new class() extends Migration
             $table->string('trigger_type', 100)->comment('form_submission, user_registration, order_placed, etc.');
             $table->string('trigger_reference')->comment('form_slug, product_category, etc.');
             $table->unsignedBigInteger('template_id');
+            $table->unsignedBigInteger('sender_id')->nullable();
             $table->enum('recipient_type', ['admin', 'user', 'custom', 'conditional'])->default('admin');
             $table->json('recipient_emails')->nullable()->comment('Static email list for custom type');
             $table->json('conditions')->nullable()->comment('Conditional logic for when to trigger');
@@ -30,6 +31,7 @@ return new class() extends Migration
             $table->index(['trigger_type', 'status']);
             $table->index(['trigger_type', 'trigger_reference']);
             $table->index('status');
+            $table->index('sender_id');
         });
     }
 

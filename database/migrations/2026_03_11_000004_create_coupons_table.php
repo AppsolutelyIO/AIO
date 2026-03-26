@@ -30,10 +30,19 @@ return new class() extends Migration
 
             $table->index(['status', 'starts_at', 'expires_at']);
         });
+
+        // Add foreign key constraint now that coupons table exists
+        Schema::table('orders', function (Blueprint $table) {
+            $table->foreign('coupon_id')->references('id')->on('coupons')->onDelete('set null');
+        });
     }
 
     public function down(): void
     {
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropForeign(['coupon_id']);
+        });
+
         Schema::dropIfExists('coupons');
     }
 };

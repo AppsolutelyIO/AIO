@@ -24,6 +24,7 @@ return new class() extends Migration
             $table->string('email')->nullable();
             $table->string('mobile')->nullable();
             $table->json('data')->nullable();
+            $table->json('meta')->nullable()->comment('Collected meta key-value pairs (from cookies) per form config');
             $table->boolean('is_spam')->default(false);
             $table->text('referer')->nullable();
             $table->string('ip_address', 45)->nullable();

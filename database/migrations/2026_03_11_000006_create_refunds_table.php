@@ -28,6 +28,7 @@ return new class() extends Migration
 
             $table->index('order_id');
             $table->index('user_id');
+            $table->index(['order_id', 'status']);
         });
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+return new class() extends Migration
 {
     public function up(): void
     {
@@ -14,6 +14,8 @@ return new class extends Migration
             $table->id();
             $table->string('group', 50)->index();
             $table->string('key', 100)->unique();
+            $table->string('label', 100)->nullable();
+            $table->string('description', 255)->nullable();
             $table->text('value')->nullable();
             $table->string('type', 20)->default('string');
             $table->timestamps();

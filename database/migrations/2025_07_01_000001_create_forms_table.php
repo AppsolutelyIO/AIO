@@ -20,6 +20,8 @@ return new class() extends Migration
             $table->text('description')->nullable();
             $table->string('target_table')->nullable();
             $table->tinyInteger('status')->default(0);
+            $table->string('api_access_token', 64)->nullable()->unique();
+            $table->json('meta_keys_to_collect')->nullable()->comment('Array of meta key names to collect from cookies when form is submitted');
             $table->timestamps();
 
             $table->index(['status', 'created_at']);

@@ -17,6 +17,9 @@ return new class() extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('product_category_id');
             $table->json('setting')->nullable();
+
+            $table->index('product_id');
+            $table->index('product_category_id');
         });
     }
 

@@ -21,6 +21,7 @@ return new class() extends Migration
             $table->index('coupon_id');
             $table->index('user_id');
             $table->index('order_id');
+            $table->index(['coupon_id', 'user_id']);
         });
     }
 

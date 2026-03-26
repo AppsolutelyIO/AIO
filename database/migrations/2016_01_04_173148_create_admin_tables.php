@@ -13,7 +13,7 @@ class CreateAdminTables extends Migration
 
     public function config($key)
     {
-        return config('admin.'.$key);
+        return config('admin.' . $key);
     }
 
     /**
@@ -58,6 +58,8 @@ class CreateAdminTables extends Migration
             $table->string('title', 50);
             $table->string('icon', 50)->nullable();
             $table->string('uri', 50)->nullable();
+            $table->string('extension', 50)->default('');
+            $table->tinyInteger('show')->default(1);
 
             $table->timestamps();
         });

@@ -16,6 +16,7 @@ return new class() extends Migration
             $table->foreignId('block_id')->constrained('page_blocks')->cascadeOnDelete();
             $table->foreignId('block_value_id')->constrained('page_block_values')->cascadeOnDelete();
             $table->string('reference')->nullable();
+            $table->string('theme', 50)->nullable()->index();
             $table->string('type')->nullable();
             $table->string('remark')->nullable();
             $table->unsignedTinyInteger('sort')->default(0);

@@ -36,6 +36,8 @@ return new class() extends Migration
             $table->dateTimeTz('expired_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index(['status', 'published_at']);
         });
     }
 

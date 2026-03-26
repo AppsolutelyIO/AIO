@@ -13,6 +13,7 @@ return new class() extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('coupon_id')->nullable();
             $table->string('reference');
             $table->string('summary');
             $table->unsignedInteger('amount')->default(0);
@@ -28,6 +29,10 @@ return new class() extends Migration
             $table->softDeletes();
             $table->index('user_id');
             $table->index('reference');
+            $table->index('status');
+            $table->index('coupon_id');
+            $table->index(['user_id', 'status']);
+            $table->index(['user_id', 'created_at']);
         });
     }
 

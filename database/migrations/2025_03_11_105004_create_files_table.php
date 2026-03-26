@@ -21,6 +21,10 @@ return new class() extends Migration
             $table->string('mime_type');
             $table->string('path');
             $table->unsignedBigInteger('size');
+            $table->unsignedInteger('width')->nullable();
+            $table->unsignedInteger('height')->nullable();
+            $table->string('disk', 50)->default('s3');
+            $table->json('metadata')->nullable();
             $table->string('hash');
             $table->timestamps();
             $table->softDeletes();

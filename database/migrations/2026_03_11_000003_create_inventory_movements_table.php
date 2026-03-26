@@ -24,6 +24,7 @@ return new class() extends Migration
 
             $table->index('product_sku_id');
             $table->index(['product_sku_id', 'type']);
+            $table->index(['product_sku_id', 'created_at']);
         });
     }
 
