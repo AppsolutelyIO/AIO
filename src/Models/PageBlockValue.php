@@ -25,6 +25,8 @@ final class PageBlockValue extends Model
         'scripts',
         'styles',
         'template',
+        'published_at',
+        'expired_at',
     ];
 
     protected $casts = [
@@ -32,6 +34,8 @@ final class PageBlockValue extends Model
         'display_options' => 'array',
         'scripts'         => 'array',
         'styles'          => 'array',
+        'published_at'    => 'datetime',
+        'expired_at'      => 'datetime',
     ];
 
     public function block(): BelongsTo

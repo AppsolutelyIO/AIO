@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Appsolutely\AIO\Livewire;
 
 use Appsolutely\AIO\Services\Contracts\ManifestServiceInterface;
-use Carbon\Carbon;
 use Illuminate\Contracts\Container\Container;
 use Livewire\Component;
 
@@ -31,16 +30,6 @@ class GeneralBlock extends Component
     protected array $defaultQueryOptions = [];
 
     /**
-     * Published date for the block.
-     */
-    protected ?Carbon $publishedAt = null;
-
-    /**
-     * Expired date for the block.
-     */
-    protected ?Carbon $expiredAt = null;
-
-    /**
      * Mount the component with data.
      *
      * @param  array  $page  page data
@@ -64,7 +53,6 @@ class GeneralBlock extends Component
         }
 
         $this->initializeComponent(app());
-        $this->initializePublishDates();
     }
 
     /**
@@ -76,46 +64,6 @@ class GeneralBlock extends Component
     protected function initializeComponent(Container $container): void
     {
         // Override in child classes if needed
-    }
-
-    /**
-     * Initialize publish dates from data.
-     */
-    protected function initializePublishDates(): void
-    {
-        $this->publishedAt = $this->getData('published_at')
-            ? Carbon::parse($this->getData('published_at'))
-            : null;
-
-        $this->expiredAt = $this->getData('expired_at')
-            ? Carbon::parse($this->getData('expired_at'))
-            : null;
-    }
-
-    /**
-     * Check if the block should be visible based on publish dates.
-     */
-    public function isVisible(): bool
-    {
-        $now = now();
-
-        // If no published_at is set, block is always visible
-        if (! $this->publishedAt) {
-            return true;
-        }
-
-        // Check if current time is after or equal to published_at
-        if ($now->lt($this->publishedAt)) {
-            return false;
-        }
-
-        // If expired_at is null, block is visible after published_at
-        if (! $this->expiredAt) {
-            return true;
-        }
-
-        // Check if current time is before or equal to expired_at
-        return $now->lte($this->expiredAt);
     }
 
     public static function mergeByKey(array $default, array $data): array
@@ -173,11 +121,6 @@ class GeneralBlock extends Component
      */
     public function render()
     {
-        // Check if block should be visible
-        if (! $this->isVisible()) {
-            return '<span></span>';
-        }
-
         $viewName = 'livewire.' . $this->getViewName();
 
         return themed_view($viewName, $this->getExtraData());

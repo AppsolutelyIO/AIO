@@ -7,8 +7,10 @@ namespace Appsolutely\AIO\Services;
 use Appsolutely\AIO\Livewire\Anchor;
 use Appsolutely\AIO\Models\GeneralPage;
 use Appsolutely\AIO\Models\PageBlockSetting;
+use Appsolutely\AIO\Models\PageBlockValue;
 use Appsolutely\AIO\Services\Concerns\ResolvesLivewireClassName;
 use Appsolutely\AIO\Services\Contracts\BlockRendererServiceInterface;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\Livewire;
 
@@ -48,7 +50,13 @@ final readonly class BlockRendererService implements BlockRendererServiceInterfa
             return $this->getBlockErrorHtml("Class '{$className}' is not a Livewire component");
         }
 
-        $blockValue     = $block->blockValue ?? null;
+        $blockValue = $block->blockValue ?? null;
+
+        // Check publish/expire dates before mounting the Livewire component
+        if ($blockValue && ! $this->isBlockValueVisible($blockValue)) {
+            return '';
+        }
+
         $viewName       = $blockValue?->view ?? '';
         $viewStyle      = ($blockValue?->view_style !== null && $blockValue?->view_style !== '')
             ? (string) $blockValue->view_style
@@ -89,6 +97,30 @@ final readonly class BlockRendererService implements BlockRendererServiceInterfa
 
             return $this->getBlockErrorHtml($e->getMessage());
         }
+    }
+
+    /**
+     * Check if a block value is currently visible based on its publish/expire dates.
+     */
+    private function isBlockValueVisible(PageBlockValue $blockValue): bool
+    {
+        $publishedAt = $blockValue->published_at;
+        $expiredAt   = $blockValue->expired_at;
+
+        // No published_at means always visible
+        if (! $publishedAt) {
+            return true;
+        }
+
+        $now = Carbon::now();
+
+        // Not yet published
+        if ($now->lt($publishedAt)) {
+            return false;
+        }
+
+        // No expiry or not yet expired
+        return ! $expiredAt || $now->lte($expiredAt);
     }
 
     /**
