@@ -46,6 +46,7 @@ final class MigrateBlockValueDisplayOptionToColumnCommand extends Command
         }
 
         foreach ($values as $blockValue) {
+            /** @var array|string|null $displayOptions — may be string when cast is bypassed or data is double-encoded */
             $displayOptions = $blockValue->display_options;
 
             // Parse if string (e.g. double-encoded from textarea, or raw JSON from DB)

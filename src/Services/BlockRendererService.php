@@ -58,8 +58,8 @@ final readonly class BlockRendererService implements BlockRendererServiceInterfa
             return '';
         }
 
-        $viewName       = $blockValue?->view ?? '';
-        $viewStyle      = ($blockValue?->view_style !== null && $blockValue?->view_style !== '')
+        $viewName       = $blockValue->view ?? '';
+        $viewStyle      = ($blockValue->view_style !== null && $blockValue->view_style !== '')
             ? (string) $blockValue->view_style
             : 'default';
         $queryOptions   = $block->queryOptionsValue ?? [];

@@ -82,6 +82,7 @@ final class PageBlockSetting extends Model
         return $this->belongsTo(PageBlock::class, 'block_id');
     }
 
+    /** @return BelongsTo<PageBlockValue, $this> */
     public function blockValue(): BelongsTo
     {
         return $this->belongsTo(PageBlockValue::class, 'block_value_id');

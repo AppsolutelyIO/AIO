@@ -667,36 +667,6 @@ parameters:
 			path: src/Admin/Forms/Models/NotificationSenderForm.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$anchor_label\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Admin/Forms/Models/PageBlockSettingForm.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_options\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Admin/Forms/Models/PageBlockSettingForm.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$query_options\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Admin/Forms/Models/PageBlockSettingForm.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$theme\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Admin/Forms/Models/PageBlockSettingForm.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$view_style\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Admin/Forms/Models/PageBlockSettingForm.php
-
-		-
 			message: '#^Negated boolean expression is always false\.$#'
 			identifier: booleanNot.alwaysFalse
 			count: 1
@@ -949,12 +919,6 @@ parameters:
 			path: src/Console/IdeHelperCommand.php
 
 		-
-			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\PageBlockValue\:\:\$display_options\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Console/MigrateBlockValueDisplayOptionToColumnCommand.php
-
-		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
 			identifier: deadCode.unreachable
 			count: 1
@@ -1013,6 +977,12 @@ parameters:
 			identifier: empty.variable
 			count: 2
 			path: src/Console/ResyncFormEntryNotificationsCommand.php
+
+		-
+			message: '#^Method Appsolutely\\AIO\\Console\\SyncDisplayOptionsToManifestCommand\:\:collectDbDisplayOptions\(\) should return Illuminate\\Support\\Collection\<int\|string, array\<string, mixed\>\> but returns Illuminate\\Support\\Collection\<string, array\<string, mixed\>\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Console/SyncDisplayOptionsToManifestCommand.php
 
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\NotificationSender\|Illuminate\\Database\\Eloquent\\Collection\<int, Appsolutely\\AIO\\Models\\NotificationSender\>\:\:\$name\.$#'
@@ -3709,24 +3679,6 @@ parameters:
 			path: src/Http/Controllers/ScaffoldController.php
 
 		-
-			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\SiteSetting\:\:\$key\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Http/Controllers/SiteSettingController.php
-
-		-
-			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\SiteSetting\:\:\$type\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Controllers/SiteSettingController.php
-
-		-
-			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\SiteSetting\:\:\$value\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Controllers/SiteSettingController.php
-
-		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Form\:\:\$password\.$#'
 			identifier: property.notFound
 			count: 1
@@ -4495,21 +4447,9 @@ parameters:
 			path: src/Models/PageBlockSetting.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$anchor_label\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Models/PageBlockSetting.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_options\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Models/PageBlockSetting.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$query_options\.$#'
 			identifier: property.notFound
-			count: 3
+			count: 1
 			path: src/Models/PageBlockSetting.php
 
 		-
@@ -4525,44 +4465,38 @@ parameters:
 			path: src/Models/PageBlockSetting.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$scripts\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Models/PageBlockSetting.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$styles\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Models/PageBlockSetting.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$template\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Models/PageBlockSetting.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$theme\.$#'
-			identifier: property.notFound
-			count: 3
-			path: src/Models/PageBlockSetting.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$title\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Models/PageBlockSetting.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$view\.$#'
-			identifier: property.notFound
+			message: '#^Call to function is_array\(\) with non\-empty\-array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
 			count: 2
 			path: src/Models/PageBlockSetting.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$view_style\.$#'
-			identifier: property.notFound
+			message: '#^Call to function is_array\(\) with non\-empty\-array\<mixed, mixed\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Models/PageBlockSetting.php
+
+		-
+			message: '#^Call to function is_string\(\) with \*NEVER\* will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: src/Models/PageBlockSetting.php
+
+		-
+			message: '#^Call to function is_string\(\) with non\-empty\-array\<mixed, mixed\> will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Models/PageBlockSetting.php
+
+		-
+			message: '#^Result of \|\| is always true\.$#'
+			identifier: booleanOr.alwaysTrue
 			count: 1
 			path: src/Models/PageBlockSetting.php
 
@@ -4581,6 +4515,12 @@ parameters:
 		-
 			message: '#^Using nullsafe property access "\?\-\>view" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
+			count: 1
+			path: src/Models/PageBlockSetting.php
+
+		-
+			message: '#^Variable \$options on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.variable
 			count: 1
 			path: src/Models/PageBlockSetting.php
 
@@ -5503,37 +5443,7 @@ parameters:
 			path: src/Services/ArticleService.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_options\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Services/BlockOptionService.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Services/BlockOptionService.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$query_options\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Services/BlockOptionService.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$theme\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Services/BlockOptionService.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$view\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Services/BlockOptionService.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$view_style\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Services/BlockOptionService.php
@@ -5611,18 +5521,6 @@ parameters:
 			path: src/Services/BlockRegistryService.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$view\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Services/BlockRendererService.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$view_style\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Services/BlockRendererService.php
-
-		-
 			message: '#^Using nullsafe property access "\?\-\>scope" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
@@ -5636,12 +5534,6 @@ parameters:
 
 		-
 			message: '#^Using nullsafe property access "\?\-\>view" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 2
-			path: src/Services/BlockRendererService.php
-
-		-
-			message: '#^Using nullsafe property access on non\-nullable type Illuminate\\Database\\Eloquent\\Model\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
 			path: src/Services/BlockRendererService.php

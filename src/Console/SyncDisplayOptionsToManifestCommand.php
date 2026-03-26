@@ -106,7 +106,7 @@ final class SyncDisplayOptionsToManifestCommand extends Command
     /**
      * Collect all DB display_options merged by view — union of all keys across all rows.
      *
-     * @return Collection<string, array<string, mixed>>
+     * @return Collection<int|string, array<string, mixed>>
      */
     private function collectDbDisplayOptions(string $theme): Collection
     {
@@ -116,7 +116,8 @@ final class SyncDisplayOptionsToManifestCommand extends Command
             ->select('view', 'display_options')
             ->get();
 
-        return $values
+        /** @var Collection<string, array<string, mixed>> $result */
+        $result = $values
             ->groupBy('view')
             ->map(function ($group) {
                 $merged = [];
@@ -129,6 +130,8 @@ final class SyncDisplayOptionsToManifestCommand extends Command
 
                 return $merged;
             });
+
+        return $result;
     }
 
     /**
@@ -349,7 +352,7 @@ final class SyncDisplayOptionsToManifestCommand extends Command
             }
 
             // Associative array → object
-            if (! array_is_list($value) && ! empty($value)) {
+            if (! array_is_list($value)) {
                 $fields = $this->inferFieldsFromRow($value);
 
                 return [
@@ -396,7 +399,7 @@ final class SyncDisplayOptionsToManifestCommand extends Command
                         'label'  => $this->keyToLabel($fieldKey),
                         'fields' => $this->inferFieldsFromRow($subRow),
                     ];
-                } elseif (! array_is_list($fieldValue) && ! empty($fieldValue)) {
+                } elseif (! array_is_list($fieldValue)) {
                     // Nested object
                     $fields[$fieldKey] = [
                         'type'   => 'object',
