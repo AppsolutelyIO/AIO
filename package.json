@@ -84,6 +84,7 @@
         "admin-lte": "^3.2.0",
         "bootstrap-icons": "^1.13.1",
         "grapesjs": "^0.22.13",
+        "moment-timezone": "^0.6.1",
         "nprogress": "^0.2.0",
         "sweetalert2": "^9.17.4",
         "swiper": "^12.1.2",
