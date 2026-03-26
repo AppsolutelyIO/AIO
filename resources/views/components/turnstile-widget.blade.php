@@ -14,8 +14,8 @@
             }
             turnstile.render($el, {
                 sitekey: '{{ config('forms.captcha.turnstile.site_key') }}',
-                callback: (token) => { $wire.set('{{ $wireModel }}', token); },
-                'expired-callback': () => { $wire.set('{{ $wireModel }}', ''); },
+                callback: (token) => { $wire.{{ $wireModel }} = token; },
+                'expired-callback': () => { $wire.{{ $wireModel }} = ''; },
                 theme: '{{ $theme }}',
             });
         };
