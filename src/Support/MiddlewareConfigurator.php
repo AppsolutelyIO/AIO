@@ -11,7 +11,11 @@ use Appsolutely\AIO\Http\Middleware\RestrictRoutePrefixes;
 use Appsolutely\AIO\Http\Middleware\SecurityHeaders;
 use Appsolutely\AIO\Http\Middleware\StagingAccessGate;
 use Appsolutely\AIO\Http\Middleware\ThrottleFormSubmissions;
+use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
+use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MiddlewareConfigurator
 {
@@ -49,5 +53,34 @@ class MiddlewareConfigurator
             'theme'         => ApplyThemeMiddleware::class,
             'throttle.form' => ThrottleFormSubmissions::class,
         ]);
+    }
+
+    /**
+     * Configure AIO exception handling on the application.
+     *
+     * Call this from bootstrap/app.php within the withExceptions callback.
+     * Registers themed 404 error pages with theme setup.
+     */
+    public static function configureExceptions(Exceptions $exceptions): void
+    {
+        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'status'  => false,
+                    'code'    => 404,
+                    'message' => 'Route not found',
+                ], 404);
+            }
+
+            // Set up theme for error pages
+            app(ThemeServiceInterface::class)->ensureSetup();
+
+            // Try to find themed error view
+            if (view()->exists('errors.404')) {
+                return response()->view('errors.404', [], 404);
+            }
+
+            // Fallback to Laravel's default
+        });
     }
 }
