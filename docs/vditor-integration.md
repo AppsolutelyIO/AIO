@@ -1,6 +1,6 @@
 # 集成 Vditor Markdown 编辑器
 
-本文档记录将 [Vditor](https://b3log.org/vditor/) 集成进 dcat-admin 的完整步骤，供日后维护或集成其他编辑器时参考。
+本文档记录将 [Vditor](https://b3log.org/vditor/) 集成进 AIO 的完整步骤，供日后维护或集成其他编辑器时参考。
 
 ## 背景
 
@@ -21,8 +21,8 @@ npm install vditor --save-dev
 将 Vditor 的 dist 文件复制到项目的静态资源目录，**必须放在 `vditor/dist/` 子目录下**：
 
 ```bash
-cp -r node_modules/vditor/dist resources/dist/dcat/plugins/vditor/dist
-cp -r node_modules/vditor/dist resources/assets/dcat/plugins/vditor/dist
+cp -r node_modules/vditor/dist resources/dist/aio/plugins/vditor/dist
+cp -r node_modules/vditor/dist resources/assets/aio/plugins/vditor/dist
 ```
 
 `resources/dist` 是发布给使用者的静态资源，`resources/assets` 是源文件目录，两者保持同步。
@@ -32,8 +32,9 @@ cp -r node_modules/vditor/dist resources/assets/dcat/plugins/vditor/dist
 > 如果把 dist 内容直接复制到 `vditor/`（而不是 `vditor/dist/`），`cdn` 指向 `vditor/` 时，子资源请求会落在 `vditor/dist/js/...`，但实际文件只在 `vditor/js/...`，导致所有子资源 404。
 >
 > 正确结构：
+>
 > ```
-> resources/dist/dcat/plugins/vditor/          ← cdn 指向这里
+> resources/dist/aio/plugins/vditor/          ← cdn 指向这里
 > └── dist/
 >     ├── index.min.js                          ← 主 JS（别名路径）
 >     ├── index.css                             ← 主 CSS（别名路径）
@@ -55,8 +56,8 @@ cp -r node_modules/vditor/dist resources/assets/dcat/plugins/vditor/dist
 
 ```php
 '@vditor' => [
-    'js'  => '@admin/dcat/plugins/vditor/index.min.js',
-    'css' => '@admin/dcat/plugins/vditor/index.css',
+    'js'  => '@admin/aio/plugins/vditor/dist/index.min.js',
+    'css' => '@admin/aio/plugins/vditor/dist/index.css',
 ],
 ```
 
@@ -72,7 +73,7 @@ cp -r node_modules/vditor/dist resources/assets/dcat/plugins/vditor/dist
 $router->post('vditor/upload', 'VditorController@upload')->name('vditor.upload');
 ```
 
-路由前缀为 `dcat-api/`，完整路径为 `{admin_prefix}/dcat-api/vditor/upload`。路由名称通过 `admin_api_route_name('vditor.upload')` 获取。
+路由前缀为 `api/`，完整路径为 `{admin_prefix}/api/vditor/upload`。路由名称通过 `admin_api_route_name('vditor.upload')` 获取。
 
 ---
 
@@ -105,16 +106,17 @@ Vditor 的上传接口与 editor.md 不同，要求返回固定格式：
 
 继承 `Field` 基类，提供以下公共方法：
 
-| 方法 | 说明 |
-|------|------|
-| `height(int $height)` | 设置编辑器高度，默认 500px |
-| `mode(string $mode)` | 编辑模式：`sv`（分屏）、`wysiwyg`（所见即所得）、`ir`（即时渲染），默认 `sv` |
-| `disk(string $disk)` | 指定 Laravel Storage disk |
-| `imageDirectory(string $dir)` | 图片上传目录，默认 `vditor/images` |
-| `imageUrl(string $url)` | 自定义上传接口 URL |
+| 方法                          | 说明                                                                         |
+| ----------------------------- | ---------------------------------------------------------------------------- |
+| `height(int $height)`         | 设置编辑器高度，默认 500px                                                   |
+| `mode(string $mode)`          | 编辑模式：`sv`（分屏）、`wysiwyg`（所见即所得）、`ir`（即时渲染），默认 `sv` |
+| `disk(string $disk)`          | 指定 Laravel Storage disk                                                    |
+| `imageDirectory(string $dir)` | 图片上传目录，默认 `vditor/images`                                           |
+| `imageUrl(string $url)`       | 自定义上传接口 URL                                                           |
 
 `render()` 方法负责：
-1. 将 `cdn` 选项设为本地资源路径（`admin_asset('@admin/dcat/plugins/vditor')`）
+
+1. 将 `cdn` 选项设为本地资源路径（`admin_asset('@admin/aio/plugins/vditor')`）
 2. 根据 `config('app.locale')` 自动映射 Vditor 语言包
 3. 注入默认上传配置（URL、字段名、多文件支持）
 4. 调用 `Admin::requireAssets('@vditor')` 加载 JS/CSS
@@ -145,7 +147,7 @@ editor.md 的视图直接用带 `name` 属性的 `<textarea>` 提交数据，而
 
 ```html
 <div id="{{ $id }}"></div>
-<input type="hidden" name="{{ $name }}" id="{{ $id }}_val" value="{{ $value ?? '' }}">
+<input type="hidden" name="{{ $name }}" id="{{ $id }}_val" value="{{ $value ?? '' }}" />
 ```
 
 ```js
@@ -222,27 +224,27 @@ $form->vditor('content', '内容')
 
 ## 涉及文件清单
 
-| 操作 | 文件 |
-|------|------|
-| 新增 | `src/Form/Field/Vditor.php` |
-| 新增 | `src/Http/Controllers/VditorController.php` |
-| 新增 | `resources/views/form/vditor.blade.php` |
-| 新增 | `resources/dist/dcat/plugins/vditor/`（整个 dist 目录） |
-| 新增 | `resources/assets/dcat/plugins/vditor/`（整个 dist 目录） |
-| 修改 | `src/Admin.php`：注册上传路由 |
-| 修改 | `src/Form.php`：注册字段类和 PHPDoc |
-| 修改 | `src/Layout/Asset.php`：注册 `@vditor` 资源别名 |
+| 操作 | 文件                                                     |
+| ---- | -------------------------------------------------------- |
+| 新增 | `src/Form/Field/Vditor.php`                              |
+| 新增 | `src/Http/Controllers/VditorController.php`              |
+| 新增 | `resources/views/form/vditor.blade.php`                  |
+| 新增 | `resources/dist/aio/plugins/vditor/`（整个 dist 目录）   |
+| 新增 | `resources/assets/aio/plugins/vditor/`（整个 dist 目录） |
+| 修改 | `src/Admin.php`：注册上传路由                            |
+| 修改 | `src/Form.php`：注册字段类和 PHPDoc                      |
+| 修改 | `src/Layout/Asset.php`：注册 `@vditor` 资源别名          |
 
 ---
 
 ## 与 editor.md 的对比
 
-| 项目 | editor.md | Vditor |
-|------|-----------|--------|
-| 最后维护 | ~2016 | 持续活跃 |
-| 编辑模式 | 分屏预览 | sv / wysiwyg / ir |
-| 图片上传响应格式 | `{success: 1, url: '...'}` | `{code: 0, data: {succMap: {...}}}` |
-| 上传字段名 | `editormd-image-file` | `file[]` |
-| 表单数据提交 | 直接用 `<textarea name="...">` | 隐藏 `<input>` 同步 |
-| 离线支持 | 是 | 是（本地 cdn） |
-| 中文支持 | 有语言文件 | 内置，原生支持 |
+| 项目             | editor.md                      | Vditor                              |
+| ---------------- | ------------------------------ | ----------------------------------- |
+| 最后维护         | ~2016                          | 持续活跃                            |
+| 编辑模式         | 分屏预览                       | sv / wysiwyg / ir                   |
+| 图片上传响应格式 | `{success: 1, url: '...'}`     | `{code: 0, data: {succMap: {...}}}` |
+| 上传字段名       | `editormd-image-file`          | `file[]`                            |
+| 表单数据提交     | 直接用 `<textarea name="...">` | 隐藏 `<input>` 同步                 |
+| 离线支持         | 是                             | 是（本地 cdn）                      |
+| 中文支持         | 有语言文件                     | 内置，原生支持                      |

@@ -6,7 +6,7 @@
 
 ## 1. 文字格式
 
-**粗体**、*斜体*、~~删除线~~、`行内代码`、==高亮标记==
+**粗体**、_斜体_、~~删除线~~、`行内代码`、==高亮标记==
 
 中英文混排自动空格：测试autoSpace效果，English and 中文之间会自动加空格。
 
@@ -16,19 +16,19 @@
 
 ## 2. 表格
 
-| 功能模块 | 状态 | 说明 |
-|----------|:----:|------|
-| 代码高亮 | ✅ | hljs，github / monokai 主题 |
-| 数学公式 | ✅ | KaTeX，支持行内和块级 |
-| Mermaid  | ✅ | 流程图、时序图、甘特图等 |
-| ECharts  | ✅ | 柱状图、折线图、饼图等 |
-| Markmap  | ✅ | 思维导图 |
-| Flowchart.js | ✅ | 简单流程图 |
-| Graphviz | ✅ | DOT 语言图形 |
-| PlantUML | ✅ | UML 图表 |
-| 图片预览 | ✅ | 悬停预览 |
-| PDF 上传 | ✅ | 插入为链接格式 |
-| 深色模式 | ✅ | 跟随系统自动切换 |
+| 功能模块     | 状态 | 说明                        |
+| ------------ | :--: | --------------------------- |
+| 代码高亮     |  ✅  | hljs，github / monokai 主题 |
+| 数学公式     |  ✅  | KaTeX，支持行内和块级       |
+| Mermaid      |  ✅  | 流程图、时序图、甘特图等    |
+| ECharts      |  ✅  | 柱状图、折线图、饼图等      |
+| Markmap      |  ✅  | 思维导图                    |
+| Flowchart.js |  ✅  | 简单流程图                  |
+| Graphviz     |  ✅  | DOT 语言图形                |
+| PlantUML     |  ✅  | UML 图表                    |
+| 图片预览     |  ✅  | 悬停预览                    |
+| PDF 上传     |  ✅  | 插入为链接格式              |
+| 深色模式     |  ✅  | 跟随系统自动切换            |
 
 ---
 
@@ -51,6 +51,7 @@
 Vditor 是一款浏览器端的 Markdown 编辑器[^1]，支持所见即所得、即时渲染、分屏预览三种模式[^2]。
 
 [^1]: Vditor 由 B3log 团队开发，开源地址：https://github.com/Vanessa219/vditor
+
 [^2]: 三种模式可通过工具栏右侧的「编辑模式」按钮切换。
 
 ---
@@ -86,12 +87,12 @@ $$
 ```php
 <?php
 
-namespace App\Admin\Controllers;
+namespace Appsolutely\AIO\Admin\Controllers;
 
-use Dcat\Admin\Form;
-use Dcat\Admin\Grid;
+use Appsolutely\AIO\Form;
+use Appsolutely\AIO\Grid;
 
-class ArticleController extends AdminController
+class ArticleController extends AdminBaseController
 {
     protected function grid(): Grid
     {
@@ -117,13 +118,9 @@ class ArticleController extends AdminController
 // 自动深色模式检测
 const mq = window.matchMedia('(prefers-color-scheme: dark)');
 const applyTheme = (dark) => {
-    editor.setTheme(
-        dark ? 'dark' : 'classic',
-        dark ? 'dark' : 'light',
-        dark ? 'monokai' : 'github'
-    );
+    editor.setTheme(dark ? 'dark' : 'classic', dark ? 'dark' : 'light', dark ? 'monokai' : 'github');
 };
-mq.addEventListener('change', e => applyTheme(e.matches));
+mq.addEventListener('change', (e) => applyTheme(e.matches));
 ```
 
 ```sql
@@ -372,4 +369,4 @@ B --> 管理员: 保存成功提示
 
 ---
 
-*文档生成完毕。将以上内容完整复制粘贴进编辑器即可验证所有功能。*
+_文档生成完毕。将以上内容完整复制粘贴进编辑器即可验证所有功能。_

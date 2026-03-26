@@ -20,17 +20,17 @@ aio/
 
 site/
 ├── public/
-│   └── vendors/aio/     # publish 后的前端资源（从 dist 复制过来）
+│   └── vendor/aio/     # publish 后的前端资源（从 dist 复制过来）
 └── vendor/
     └── appsolutely/aio  # symlink → ../../aio
 ```
 
 **构建命令：**
 
-| 命令 | 输出目录 | 用途 |
-|------|----------|------|
-| `npm run dev` | `resources/pre-dist` | 开发环境，含 sourcemap |
-| `npm run build` | `resources/dist` | 生产环境 |
+| 命令            | 输出目录             | 用途                   |
+| --------------- | -------------------- | ---------------------- |
+| `npm run dev`   | `resources/pre-dist` | 开发环境，含 sourcemap |
+| `npm run build` | `resources/dist`     | 生产环境               |
 
 **发布命令：**
 
@@ -54,7 +54,7 @@ php artisan vendor:publish --tag=aio-assets --force
 php artisan tinker --execute="echo public_path(\Admin::asset()->getRealPath('@admin'))"
 ```
 
-假设输出为 `public/vendors/dcat-admin`（以实际为准，下文用 `$ASSET_PATH` 代替）。
+假设输出为 `public/vendor/aio`（以实际为准，下文用 `$ASSET_PATH` 代替）。
 
 2. 删除已 publish 的资源，替换为 symlink：
 
@@ -94,9 +94,9 @@ php artisan vendor:publish --tag=aio-assets --force
 
 ```json
 {
-  "scripts": {
-    "watch": "NODE_ENV=development tsx build.ts --watch"
-  }
+    "scripts": {
+        "watch": "NODE_ENV=development tsx build.ts --watch"
+    }
 }
 ```
 
@@ -158,12 +158,12 @@ protected function bootDevAssets(): void
 
 ## 各方案对比
 
-| | 方案一：Symlink | 方案二：Watch | 方案三：Provider 切换 |
-|---|---|---|---|
-| 改动量 | 零代码改动 | 改 build.ts + package.json | 改 ServiceProvider + Asset 类 |
-| 生效速度 | 手动 build 后即时 | 自动 build 后即时 | 自动 build 后即时 |
-| 团队协作 | 每人手动设置一次 | 统一命令 | 零配置 |
-| 推荐场景 | 立刻开始用 | 日常开发 | 长期维护 |
+|          | 方案一：Symlink   | 方案二：Watch              | 方案三：Provider 切换         |
+| -------- | ----------------- | -------------------------- | ----------------------------- |
+| 改动量   | 零代码改动        | 改 build.ts + package.json | 改 ServiceProvider + Asset 类 |
+| 生效速度 | 手动 build 后即时 | 自动 build 后即时          | 自动 build 后即时             |
+| 团队协作 | 每人手动设置一次  | 统一命令                   | 零配置                        |
+| 推荐场景 | 立刻开始用        | 日常开发                   | 长期维护                      |
 
 ## 推荐组合
 
