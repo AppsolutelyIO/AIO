@@ -263,13 +263,25 @@ export class BlockOptionManager {
         }
     }
 
-    /** Convert an ISO datetime string to datetime-local input value (YYYY-MM-DDTHH:mm). */
+    /** Convert an ISO/UTC datetime string to datetime-local input value in user's local timezone. */
     private toDatetimeLocalValue(value: string | null | undefined): string {
         if (!value) return '';
         const date = new Date(value);
         if (isNaN(date.getTime())) return '';
         const pad = (n: number) => String(n).padStart(2, '0');
         return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+    }
+
+    /** Convert a datetime-local value to ISO 8601 with timezone offset, or null if empty. */
+    private toIsoWithOffset(value: string | null | undefined): string | null {
+        if (!value) return null;
+        const date = new Date(value);
+        if (isNaN(date.getTime())) return null;
+        const offset = -date.getTimezoneOffset();
+        const sign = offset >= 0 ? '+' : '-';
+        const h = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0');
+        const m = String(Math.abs(offset) % 60).padStart(2, '0');
+        return `${value}:00${sign}${h}:${m}`;
     }
 
     // -------------------------------------------------------------------------
@@ -412,8 +424,8 @@ export class BlockOptionManager {
 
         const publishedAtInput = document.getElementById('block-option-published-at') as HTMLInputElement | null;
         const expiredAtInput = document.getElementById('block-option-expired-at') as HTMLInputElement | null;
-        const publishedAt = publishedAtInput?.value || null;
-        const expiredAt = expiredAtInput?.value || null;
+        const publishedAt = this.toIsoWithOffset(publishedAtInput?.value);
+        const expiredAt = this.toIsoWithOffset(expiredAtInput?.value);
 
         const saveBtn = document.getElementById('block-option-modal-save') as HTMLButtonElement | null;
         const cancelBtn = document.getElementById('block-option-modal-cancel') as HTMLButtonElement | null;
