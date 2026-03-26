@@ -27,6 +27,7 @@ Route::get('/staging-registry', function (Request $request): JsonResponse {
     }
 
     $registry = app(StagingRegistryService::class);
+    $registry->heartbeat();
 
     return response()->json([
         'environments' => $registry->list(),
