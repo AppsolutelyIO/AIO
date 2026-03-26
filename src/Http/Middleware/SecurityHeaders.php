@@ -79,11 +79,11 @@ final class SecurityHeaders
         // Production should have stricter CSP
         if (app()->isProduction()) {
             // Stricter CSP for production
-            return "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https:; frame-ancestors 'self';";
+            return "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https:; frame-src 'self' https://challenges.cloudflare.com; frame-ancestors 'self';";
         }
 
         // More permissive for development
-        return "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https: http:; font-src 'self' data: https: http:; media-src 'self' https: http:; connect-src 'self' https: http: ws: wss:; frame-ancestors 'self';";
+        return "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https: http:; font-src 'self' data: https: http:; media-src 'self' https: http:; connect-src 'self' https: http: ws: wss:; frame-src 'self' https://challenges.cloudflare.com; frame-ancestors 'self';";
     }
 
     /**
