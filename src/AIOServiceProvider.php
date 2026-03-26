@@ -73,6 +73,7 @@ class AIOServiceProvider extends ServiceProvider
         Console\TranslateCommand::class,
         Console\StagingTokenCommand::class,
         Console\SyncDisplayOptionsToManifestCommand::class,
+        Console\CleanupOrphanMigrationsCommand::class,
     ];
 
     /**
