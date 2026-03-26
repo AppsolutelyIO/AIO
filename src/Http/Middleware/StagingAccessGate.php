@@ -26,9 +26,18 @@ class StagingAccessGate
 
     private const COOKIE_LIFETIME_MINUTES = 60 * 24 * 7; // 7 days
 
+    /** @var list<string> Routes that handle their own token verification */
+    private const EXCLUDED_PATHS = [
+        'api/staging-registry',
+    ];
+
     public function handle(Request $request, Closure $next): Response
     {
         if (! config('aio.staging_access_enabled')) {
+            return $next($request);
+        }
+
+        if ($request->is(...self::EXCLUDED_PATHS)) {
             return $next($request);
         }
 

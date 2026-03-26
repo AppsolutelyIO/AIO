@@ -429,7 +429,7 @@ class AIOServiceProvider extends ServiceProvider
                     $registry = app(Services\StagingRegistryService::class);
                     $registry->heartbeat();
                     $registry->cleanup();
-                })->everyTenMinutes()->withoutOverlapping();
+                })->name('staging-registry-heartbeat')->everyTenMinutes()->withoutOverlapping();
             }
         });
     }
