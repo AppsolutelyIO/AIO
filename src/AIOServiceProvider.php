@@ -72,6 +72,7 @@ class AIOServiceProvider extends ServiceProvider
         Console\TestNotificationEmailCommand::class,
         Console\TranslateCommand::class,
         Console\StagingTokenCommand::class,
+        Console\SyncDisplayOptionsToManifestCommand::class,
     ];
 
     /**
