@@ -109,11 +109,24 @@ async function buildAll(): Promise<void> {
 
     // Plugins sourced from npm (skip when copying vendored assets)
     const npmPlugins = new Set([
-        'autocomplete', 'bootstrap-colorpicker', 'bootstrap-datetimepicker',
-        'bootstrap-duallistbox', 'bootstrap-validator', 'charts',
-        'extensions', 'fontawesome-iconpicker', 'input-mask', 'ionslider',
-        'jquery.initialize', 'jstree-theme', 'moment',
-        'moment-timezone', 'nestable', 'select', 'sortable', 'tinymce',
+        'autocomplete',
+        'bootstrap-colorpicker',
+        'bootstrap-datetimepicker',
+        'bootstrap-duallistbox',
+        'bootstrap-validator',
+        'charts',
+        'extensions',
+        'fontawesome-iconpicker',
+        'input-mask',
+        'ionslider',
+        'jquery.initialize',
+        'jstree-theme',
+        'moment',
+        'moment-timezone',
+        'nestable',
+        'select',
+        'sortable',
+        'tinymce',
         'vditor',
     ]);
 
@@ -149,7 +162,10 @@ async function buildAll(): Promise<void> {
     copy('node_modules/moment/min/moment-with-locales.min.js', `${p}/moment/moment-with-locales.min.js`);
 
     // moment-timezone
-    copy('node_modules/moment-timezone/builds/moment-timezone-with-data.min.js', `${p}/moment-timezone/moment-timezone-with-data.min.js`);
+    copy(
+        'node_modules/moment-timezone/builds/moment-timezone-with-data.min.js',
+        `${p}/moment-timezone/moment-timezone-with-data.min.js`,
+    );
 
     // bootstrap-validator
     copy('node_modules/bootstrap-validator/dist/validator.min.js', `${p}/bootstrap-validator/validator.min.js`);
@@ -176,19 +192,37 @@ async function buildAll(): Promise<void> {
     cpSync(`${pluginsSrc}/jstree-theme/themes`, `${p}/jstree-theme/themes`, { recursive: true });
 
     // bootstrap4-datetimepicker (pc-bootstrap4-datetimepicker)
-    copy('node_modules/pc-bootstrap4-datetimepicker/build/js/bootstrap-datetimepicker.min.js', `${p}/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js`);
-    copy('node_modules/pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.min.css', `${p}/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css`);
+    copy(
+        'node_modules/pc-bootstrap4-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+        `${p}/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js`,
+    );
+    copy(
+        'node_modules/pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
+        `${p}/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css`,
+    );
 
     // devbridge-autocomplete
-    copy('node_modules/devbridge-autocomplete/dist/jquery.autocomplete.min.js', `${p}/autocomplete/jquery.autocomplete.min.js`);
+    copy(
+        'node_modules/devbridge-autocomplete/dist/jquery.autocomplete.min.js',
+        `${p}/autocomplete/jquery.autocomplete.min.js`,
+    );
 
     // jquery.inputmask (phone-codes kept as vendored assets)
-    copy('node_modules/jquery.inputmask/dist/jquery.inputmask.bundle.js', `${p}/input-mask/jquery.inputmask.bundle.min.js`);
+    copy(
+        'node_modules/jquery.inputmask/dist/jquery.inputmask.bundle.js',
+        `${p}/input-mask/jquery.inputmask.bundle.min.js`,
+    );
     cpSync(`${pluginsSrc}/input-mask/phone-codes`, `${p}/input-mask/phone-codes`, { recursive: true });
 
     // bootstrap-duallistbox
-    copy('node_modules/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js', `${p}/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js`);
-    copy('node_modules/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css', `${p}/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css`);
+    copy(
+        'node_modules/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js',
+        `${p}/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js`,
+    );
+    copy(
+        'node_modules/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css',
+        `${p}/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css`,
+    );
 
     // tinymce (langs from tinymce-i18n)
     copy('node_modules/tinymce/tinymce.min.js', `${p}/tinymce/tinymce.min.js`);
@@ -201,15 +235,28 @@ async function buildAll(): Promise<void> {
 
     // toastr (extensions dir only needs toastr; sweetalert2 is bundled via TS)
     copy('node_modules/toastr/build/toastr.min.js', `${p}/extensions/toastr.min.js`);
+    copy('node_modules/toastr/build/toastr.js.map', `${p}/extensions/toastr.js.map`);
     copy('node_modules/toastr/build/toastr.css', `${p}/extensions/toastr.css`);
 
     // bootstrap-colorpicker
-    copy('node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js', `${p}/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js`);
-    copy('node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css', `${p}/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css`);
+    copy(
+        'node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js',
+        `${p}/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js`,
+    );
+    copy(
+        'node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css',
+        `${p}/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css`,
+    );
 
     // fontawesome-iconpicker
-    copy('node_modules/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js', `${p}/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js`);
-    copy('node_modules/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css', `${p}/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css`);
+    copy(
+        'node_modules/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js',
+        `${p}/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js`,
+    );
+    copy(
+        'node_modules/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css',
+        `${p}/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css`,
+    );
 
     // vditor
     copy('node_modules/vditor/dist', `${p}/vditor/dist`);
