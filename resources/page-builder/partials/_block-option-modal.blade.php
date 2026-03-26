@@ -50,9 +50,11 @@
                         <div class="w-1/2">
                             <label for="block-option-published-at"
                                 class="block text-sm font-medium text-slate-700 mb-1">Publish at</label>
-                            <input type="datetime-local" id="block-option-published-at"
-                                class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
-                                aria-describedby="block-option-published-at-help">
+                            <div>
+                                <input type="text" id="block-option-published-at" placeholder="Select date and time"
+                                    class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
+                                    aria-describedby="block-option-published-at-help">
+                            </div>
                             <p id="block-option-published-at-help" class="mt-1 text-xs text-slate-500">
                                 Leave empty to publish immediately.
                             </p>
@@ -60,9 +62,11 @@
                         <div class="w-1/2">
                             <label for="block-option-expired-at"
                                 class="block text-sm font-medium text-slate-700 mb-1">Expire at</label>
-                            <input type="datetime-local" id="block-option-expired-at"
-                                class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
-                                aria-describedby="block-option-expired-at-help">
+                            <div>
+                                <input type="text" id="block-option-expired-at" placeholder="Select date and time"
+                                    class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
+                                    aria-describedby="block-option-expired-at-help">
+                            </div>
                             <p id="block-option-expired-at-help" class="mt-1 text-xs text-slate-500">
                                 Leave empty to never expire.
                             </p>

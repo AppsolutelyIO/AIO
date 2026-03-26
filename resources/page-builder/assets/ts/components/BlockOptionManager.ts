@@ -1,4 +1,6 @@
 // Block Option Manager - Handles the block option modal (display_options + query_options from API)
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
 import { pageBuilderService } from '../services/PageBuilderService';
 
 function escapeHtml(s: string): string {
@@ -26,6 +28,7 @@ type BlockOption = {
 
 export class BlockOptionManager {
     private currentOption: BlockOption | null = null;
+    private flatpickrInstances: flatpickr.Instance[] = [];
 
     constructor() {
         this.initializeModal();
@@ -194,11 +197,31 @@ export class BlockOptionManager {
             queryPanel.innerHTML = option.query_options_html!;
         }
 
-        // Populate schedule inputs
+        // Initialize flatpickr on schedule inputs
+        this.flatpickrInstances.forEach((fp) => fp.destroy());
+        this.flatpickrInstances = [];
+
+        const fpConfig: flatpickr.Options.Options = {
+            enableTime: true,
+            time_24hr: true,
+            dateFormat: 'Y-m-d H:i',
+            allowInput: true,
+        };
+
         const publishedAtInput = document.getElementById('block-option-published-at') as HTMLInputElement | null;
         const expiredAtInput = document.getElementById('block-option-expired-at') as HTMLInputElement | null;
-        if (publishedAtInput) publishedAtInput.value = this.toDatetimeLocalValue(option.published_at);
-        if (expiredAtInput) expiredAtInput.value = this.toDatetimeLocalValue(option.expired_at);
+
+        [publishedAtInput, expiredAtInput].forEach((input, i) => {
+            if (!input) return;
+            const defaultDate = i === 0 ? option.published_at : option.expired_at;
+            const fp = flatpickr(input, {
+                ...fpConfig,
+                defaultDate: defaultDate ? new Date(defaultDate) : undefined,
+                onChange: () => this.toggleClearButton(input),
+            });
+            this.flatpickrInstances.push(fp as flatpickr.Instance);
+            this.setupClearButton(input);
+        });
 
         // Clone buttons to remove any previously attached listeners
         const freshTabDisplay = tabDisplay?.cloneNode(true) as HTMLElement | undefined;
@@ -272,16 +295,46 @@ export class BlockOptionManager {
         return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
     }
 
-    /** Convert a datetime-local value to ISO 8601 with timezone offset, or null if empty. */
+    /** Convert a flatpickr value (YYYY-MM-DD HH:mm) to ISO 8601 with timezone offset, or null if empty. */
     private toIsoWithOffset(value: string | null | undefined): string | null {
         if (!value) return null;
-        const date = new Date(value);
+        const date = new Date(value.replace(' ', 'T'));
         if (isNaN(date.getTime())) return null;
         const offset = -date.getTimezoneOffset();
         const sign = offset >= 0 ? '+' : '-';
         const h = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0');
         const m = String(Math.abs(offset) % 60).padStart(2, '0');
-        return `${value}:00${sign}${h}:${m}`;
+        const iso = value.replace(' ', 'T');
+        return `${iso}:00${sign}${h}:${m}`;
+    }
+
+    /** Add an inline clear button (×) inside the input's wrapper, visible only when input has a value. */
+    private setupClearButton(input: HTMLInputElement): void {
+        const wrapper = input.parentElement;
+        if (!wrapper) return;
+        wrapper.classList.add('relative');
+        input.classList.add('pr-8');
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 hidden';
+        btn.setAttribute('aria-label', 'Clear');
+        btn.innerHTML = '<i class="fas fa-times text-xs" aria-hidden="true"></i>';
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            input.value = '';
+            const fp = (input as any)._flatpickr;
+            if (fp) fp.clear();
+            btn.classList.add('hidden');
+        });
+        wrapper.appendChild(btn);
+
+        this.toggleClearButton(input);
+    }
+
+    private toggleClearButton(input: HTMLInputElement): void {
+        const btn = input.parentElement?.querySelector<HTMLElement>('button[aria-label="Clear"]');
+        btn?.classList.toggle('hidden', !input.value);
     }
 
     // -------------------------------------------------------------------------
