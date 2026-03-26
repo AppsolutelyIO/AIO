@@ -1,6 +1,7 @@
 // Block Option Manager - Handles the block option modal (display_options + query_options from API)
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+
 import { pageBuilderService } from '../services/PageBuilderService';
 
 function escapeHtml(s: string): string {
@@ -192,7 +193,8 @@ export class BlockOptionManager {
             option.display_options_html ??
             '<p class="text-sm text-slate-500 italic">No display options defined for this block.</p>';
 
-        const hasQueryOptions = !!option.query_options_definition && Object.keys(option.query_options_definition).length > 0;
+        const hasQueryOptions =
+            !!option.query_options_definition && Object.keys(option.query_options_definition).length > 0;
         if (hasQueryOptions) {
             queryPanel.innerHTML = option.query_options_html!;
         }
@@ -284,15 +286,6 @@ export class BlockOptionManager {
         if (maxHeight > 0) {
             container.style.height = `${maxHeight}px`;
         }
-    }
-
-    /** Convert an ISO/UTC datetime string to datetime-local input value in user's local timezone. */
-    private toDatetimeLocalValue(value: string | null | undefined): string {
-        if (!value) return '';
-        const date = new Date(value);
-        if (isNaN(date.getTime())) return '';
-        const pad = (n: number) => String(n).padStart(2, '0');
-        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
     }
 
     /** Convert a flatpickr value (YYYY-MM-DD HH:mm) to ISO 8601 with timezone offset, or null if empty. */
