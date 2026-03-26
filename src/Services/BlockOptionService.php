@@ -92,6 +92,8 @@ final readonly class BlockOptionService
             'block_value_id'             => $blockValue?->id,
             'view'                       => (string) ($blockValue?->view ?? $this->getViewFromManifest($type)),
             'view_style'                 => (string) ($blockValue?->view_style ?? 'default'),
+            'published_at'               => $blockValue?->published_at?->toIso8601String(),
+            'expired_at'                 => $blockValue?->expired_at?->toIso8601String(),
             'display_options_definition' => $displayOptionsDefinition,
             'query_options_definition'   => $queryOptionsDefinition,
         ];
@@ -188,6 +190,8 @@ final readonly class BlockOptionService
             'block_value_id'             => null,
             'view'                       => (string) $view,
             'view_style'                 => 'default',
+            'published_at'               => null,
+            'expired_at'                 => null,
             'display_options_definition' => $displayOptionsDefinition,
             'query_options_definition'   => $queryOptionsDefinition,
         ];
@@ -199,8 +203,13 @@ final readonly class BlockOptionService
      * Uses PageBlockSetting::checkAndCreateNewBlockValue() to handle shared block values —
      * if the block value is shared with other settings, a new copy is created automatically.
      */
-    public function saveOptions(string $reference, array $displayOptions, array $queryOptions): bool
-    {
+    public function saveOptions(
+        string $reference,
+        array $displayOptions,
+        array $queryOptions,
+        ?string $publishedAt = null,
+        ?string $expiredAt = null
+    ): bool {
         $setting = $this->settingRepository->findBy(null, null, $reference);
 
         if ($setting === null) {
@@ -215,6 +224,8 @@ final readonly class BlockOptionService
 
         $setting->blockValue->display_options = $displayOptions;
         $setting->blockValue->query_options   = $queryOptions;
+        $setting->blockValue->published_at    = $publishedAt !== null && $publishedAt !== '' ? $publishedAt : null;
+        $setting->blockValue->expired_at      = $expiredAt !== null && $expiredAt !== '' ? $expiredAt : null;
 
         $setting->checkAndCreateNewBlockValue();
         $setting->save();

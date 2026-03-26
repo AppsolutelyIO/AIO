@@ -13,8 +13,12 @@ type BlockOption = {
     reference: string;
     display_options: Record<string, unknown>;
     query_options: Record<string, unknown>;
+    published_at?: string | null;
+    expired_at?: string | null;
     view?: string;
     view_style?: string;
+    display_options_definition?: Record<string, unknown>;
+    query_options_definition?: Record<string, unknown>;
     // Server-rendered form HTML returned by BlockOptionFormRenderer
     display_options_html?: string;
     query_options_html?: string;
@@ -154,9 +158,9 @@ export class BlockOptionManager {
 
             const option = json.data as BlockOption;
             this.currentOption = option;
-            this.renderPanels(option);
             placeholder.classList.add('hidden');
             document.getElementById('block-option-tabs-wrap')?.classList.remove('hidden');
+            this.renderPanels(option);
         } catch (err) {
             console.error('[PageBuilder] Failed to load block options:', err);
             if (placeholderP) placeholderP.textContent = 'Failed to load options.';
@@ -164,50 +168,108 @@ export class BlockOptionManager {
         }
     }
 
-    /** Inject server-rendered HTML into the two tab panels. */
+    /**
+     * Inject server-rendered HTML into tab panels and populate schedule fields.
+     *
+     * Note: innerHTML is used here intentionally — the HTML comes from our own
+     * server-side BlockOptionFormRenderer (trusted), not from user input.
+     */
     private renderPanels(option: BlockOption): void {
         const displayPanel = document.getElementById('block-option-panel-display');
         const queryPanel = document.getElementById('block-option-panel-query');
+        const schedulePanel = document.getElementById('block-option-panel-schedule');
         const tabDisplay = document.getElementById('block-option-tab-display');
         const tabQuery = document.getElementById('block-option-tab-query');
+        const tabSchedule = document.getElementById('block-option-tab-schedule');
 
-        if (!displayPanel || !queryPanel) return;
+        if (!displayPanel || !queryPanel || !schedulePanel) return;
 
+        // Server-rendered HTML from BlockOptionFormRenderer (trusted source)
         displayPanel.innerHTML =
             option.display_options_html ??
             '<p class="text-sm text-slate-500 italic">No display options defined for this block.</p>';
-        queryPanel.innerHTML =
-            option.query_options_html ??
-            '<p class="text-sm text-slate-500 italic">No query options defined for this block.</p>';
+
+        const hasQueryOptions = !!option.query_options_definition && Object.keys(option.query_options_definition).length > 0;
+        if (hasQueryOptions) {
+            queryPanel.innerHTML = option.query_options_html!;
+        }
+
+        // Populate schedule inputs
+        const publishedAtInput = document.getElementById('block-option-published-at') as HTMLInputElement | null;
+        const expiredAtInput = document.getElementById('block-option-expired-at') as HTMLInputElement | null;
+        if (publishedAtInput) publishedAtInput.value = this.toDatetimeLocalValue(option.published_at);
+        if (expiredAtInput) expiredAtInput.value = this.toDatetimeLocalValue(option.expired_at);
 
         // Clone buttons to remove any previously attached listeners
         const freshTabDisplay = tabDisplay?.cloneNode(true) as HTMLElement | undefined;
         const freshTabQuery = tabQuery?.cloneNode(true) as HTMLElement | undefined;
+        const freshTabSchedule = tabSchedule?.cloneNode(true) as HTMLElement | undefined;
         tabDisplay?.replaceWith(freshTabDisplay!);
         tabQuery?.replaceWith(freshTabQuery!);
+        tabSchedule?.replaceWith(freshTabSchedule!);
 
-        // Tab switching — closures reference the fresh (live) elements
-        const showDisplay = () => {
-            displayPanel.classList.remove('hidden');
+        // Hide query tab if no query options defined
+        if (!hasQueryOptions) {
+            freshTabQuery?.classList.add('hidden');
             queryPanel.classList.add('hidden');
-            freshTabDisplay?.setAttribute('aria-selected', 'true');
-            freshTabQuery?.setAttribute('aria-selected', 'false');
-            freshTabDisplay?.classList.add('block-option-tab--active');
-            freshTabQuery?.classList.remove('block-option-tab--active');
-        };
-        const showQuery = () => {
-            displayPanel.classList.add('hidden');
-            queryPanel.classList.remove('hidden');
-            freshTabDisplay?.setAttribute('aria-selected', 'false');
-            freshTabQuery?.setAttribute('aria-selected', 'true');
-            freshTabQuery?.classList.add('block-option-tab--active');
-            freshTabDisplay?.classList.remove('block-option-tab--active');
+        }
+
+        const allTabs = [freshTabDisplay, hasQueryOptions ? freshTabQuery : undefined, freshTabSchedule];
+        const allPanels = [displayPanel, hasQueryOptions ? queryPanel : undefined, schedulePanel];
+
+        const showTab = (activeIndex: number) => {
+            allPanels.forEach((panel, i) => panel?.classList.toggle('hidden', i !== activeIndex));
+            allTabs.forEach((tab, i) => {
+                tab?.setAttribute('aria-selected', i === activeIndex ? 'true' : 'false');
+                tab?.classList.toggle('block-option-tab--active', i === activeIndex);
+            });
         };
 
-        freshTabDisplay?.addEventListener('click', showDisplay);
-        freshTabQuery?.addEventListener('click', showQuery);
+        freshTabDisplay?.addEventListener('click', () => showTab(0));
+        freshTabQuery?.addEventListener('click', () => showTab(1));
+        freshTabSchedule?.addEventListener('click', () => showTab(2));
 
-        showDisplay();
+        // Lock modal container height: show each panel, measure container, take max
+        this.lockContainerHeight(allPanels);
+
+        showTab(0);
+    }
+
+    /**
+     * Lock the modal container to the height of its tallest tab.
+     * Shows each panel one at a time, measures the container, sets a fixed height.
+     */
+    private lockContainerHeight(panels: (HTMLElement | undefined)[]): void {
+        const container = document.getElementById('block-option-modal-container');
+        if (!container) return;
+
+        container.style.height = '';
+
+        let maxHeight = 0;
+        for (const panel of panels) {
+            if (!panel) continue;
+            // Show only this panel
+            panels.forEach((p) => p?.classList.add('hidden'));
+            panel.classList.remove('hidden');
+            // Force layout reflow then measure
+            const h = container.getBoundingClientRect().height;
+            if (h > maxHeight) maxHeight = h;
+        }
+
+        panels.forEach((p) => p?.classList.add('hidden'));
+
+        if (maxHeight > 0) {
+            container.style.height = `${maxHeight}px`;
+        }
+    }
+
+    /** Convert an ISO datetime string to datetime-local input value (YYYY-MM-DDTHH:mm). */
+    private toDatetimeLocalValue(value: string | null | undefined): string {
+        if (!value) return '';
+        const date = new Date(value);
+        if (isNaN(date.getTime())) return '';
+        const pad = (n: number) => String(n).padStart(2, '0');
+        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
     }
 
     // -------------------------------------------------------------------------
@@ -348,6 +410,11 @@ export class BlockOptionManager {
         const displayOptions = displayPanel ? this.collectPanelValues(displayPanel) : {};
         const queryOptions = queryPanel ? this.collectPanelValues(queryPanel) : {};
 
+        const publishedAtInput = document.getElementById('block-option-published-at') as HTMLInputElement | null;
+        const expiredAtInput = document.getElementById('block-option-expired-at') as HTMLInputElement | null;
+        const publishedAt = publishedAtInput?.value || null;
+        const expiredAt = expiredAtInput?.value || null;
+
         const saveBtn = document.getElementById('block-option-modal-save') as HTMLButtonElement | null;
         const cancelBtn = document.getElementById('block-option-modal-cancel') as HTMLButtonElement | null;
 
@@ -373,6 +440,8 @@ export class BlockOptionManager {
                     reference,
                     display_options: displayOptions,
                     query_options: queryOptions,
+                    published_at: publishedAt,
+                    expired_at: expiredAt,
                 }),
             });
 

@@ -136,6 +136,8 @@ final class PageBuilderAdminApiController extends AdminBaseApiController
         $reference      = (string) $request->string('reference', '')->trim();
         $displayOptions = $request->input('display_options', []);
         $queryOptions   = $request->input('query_options', []);
+        $publishedAt    = $request->input('published_at');
+        $expiredAt      = $request->input('expired_at');
 
         if ($reference === '') {
             return $this->failValidation(['reference' => [__t('reference is required.')]]);
@@ -149,7 +151,7 @@ final class PageBuilderAdminApiController extends AdminBaseApiController
             $queryOptions = [];
         }
 
-        $saved = $this->blockOptionService->saveOptions($reference, $displayOptions, $queryOptions);
+        $saved = $this->blockOptionService->saveOptions($reference, $displayOptions, $queryOptions, $publishedAt, $expiredAt);
 
         if (! $saved) {
             return $this->error(__t('Block not found.'));
