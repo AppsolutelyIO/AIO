@@ -1,6 +1,6 @@
 import { build, type InlineConfig } from 'vite';
 import { resolve, basename } from 'path';
-import { cpSync, copyFileSync, mkdirSync, readdirSync } from 'fs';
+import { cpSync, copyFileSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'fs';
 import { globSync } from 'glob';
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -270,6 +270,16 @@ async function buildAll(): Promise<void> {
     const adminlteSrc = isProduction ? 'adminlte.min.js' : 'adminlte.js';
     copyFileSync(`node_modules/admin-lte/dist/js/${adminlteSrc}`, `${outDir}/adminlte/adminlte.js`);
     copyFileSync(`node_modules/admin-lte/dist/js/${adminlteSrc}.map`, `${outDir}/adminlte/adminlte.js.map`);
+
+    // Fix sourceMappingURL when renaming minified file
+    if (isProduction) {
+        const jsPath = `${outDir}/adminlte/adminlte.js`;
+        const content = readFileSync(jsPath, 'utf-8');
+        writeFileSync(
+            jsPath,
+            content.replace('//# sourceMappingURL=adminlte.min.js.map', '//# sourceMappingURL=adminlte.js.map'),
+        );
+    }
 
     console.log('Done.');
 }
