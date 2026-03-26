@@ -29,7 +29,7 @@ trait LocalizesDateTime
                 // Only override if the attribute exists
                 if (array_key_exists($field, $model->attributes ?? []) && $model->getOriginal($field) instanceof Carbon) {
                     $time = $model->getRawOriginal($field);
-                    $model->setAttribute(self::getPrefix() . $field, utc_to_app_timezone($time));
+                    $model->setAttribute(self::getPrefix() . $field, utc_to_local_timezone($time));
                 }
             }
         });
@@ -45,7 +45,7 @@ trait LocalizesDateTime
                     } else {
                         $value = Carbon::now();
                     }
-                    $model->attributes[$field] = app_timezone_to_utc($value) ?? Carbon::now();
+                    $model->attributes[$field] = local_timezone_to_utc($value) ?? Carbon::now();
                 }
                 unset($model->attributes[$localKey]);
             }

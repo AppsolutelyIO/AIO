@@ -61,7 +61,7 @@ if (! function_exists('column_time_format')) {
                 return '—';
             }
 
-            return utc_to_app_timezone($datetime);
+            return utc_to_local_timezone($datetime);
         };
     }
 }

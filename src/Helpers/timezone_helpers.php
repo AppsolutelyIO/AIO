@@ -12,8 +12,8 @@ if (! function_exists('timezone_convert')) {
     }
 }
 
-if (! function_exists('utc_to_app_timezone')) {
-    function utc_to_app_timezone($time, ?string $format = null): string
+if (! function_exists('utc_to_local_timezone')) {
+    function utc_to_local_timezone($time, ?string $format = null): string
     {
         $format = $format ?? app_time_format();
 
@@ -22,12 +22,28 @@ if (! function_exists('utc_to_app_timezone')) {
     }
 }
 
-if (! function_exists('app_timezone_to_utc')) {
-    function app_timezone_to_utc($time): Carbon
+if (! function_exists('utc_to_app_timezone')) {
+    /** @deprecated Use utc_to_local_timezone() instead */
+    function utc_to_app_timezone($time, ?string $format = null): string
+    {
+        return utc_to_local_timezone($time, $format);
+    }
+}
+
+if (! function_exists('local_timezone_to_utc')) {
+    function local_timezone_to_utc($time): Carbon
     {
         $standardTime = Carbon::createFromFormat(app_time_format(), $time, app_local_timezone());
 
         return $standardTime->copy()->setTimezone(config('app.timezone'));
+    }
+}
+
+if (! function_exists('app_timezone_to_utc')) {
+    /** @deprecated Use local_timezone_to_utc() instead */
+    function app_timezone_to_utc($time): Carbon
+    {
+        return local_timezone_to_utc($time);
     }
 }
 
