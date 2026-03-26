@@ -424,4 +424,24 @@ return [
         'reserved_slugs' => [],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Staging Access Gate
+    |--------------------------------------------------------------------------
+    |
+    | When enabled, the StagingAccessGate middleware blocks all routes
+    | unless the visitor provides a valid token via ?token= query parameter.
+    | The token is derived from APP_URL, so each staging environment gets
+    | a unique but stable token automatically (survives redeployments).
+    |
+    | A cookie is set after first successful access (7-day TTL). Visitors
+    | without a valid token receive a 404 response, hiding the
+    | environment's existence entirely.
+    |
+    | Set to true on staging/preview environments. Leave false in production.
+    |
+    */
+
+    'staging_access_enabled' => env('STAGING_ACCESS_ENABLED', false),
+
 ];

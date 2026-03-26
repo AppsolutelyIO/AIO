@@ -71,6 +71,7 @@ class AIOServiceProvider extends ServiceProvider
         Console\ResyncFormEntryNotificationsCommand::class,
         Console\TestNotificationEmailCommand::class,
         Console\TranslateCommand::class,
+        Console\StagingTokenCommand::class,
     ];
 
     /**
@@ -421,6 +422,15 @@ class AIOServiceProvider extends ServiceProvider
                 ->onFailure(function () {
                     Log::error('Notification queue processing failed');
                 });
+
+            // Staging registry: heartbeat + cleanup stale entries
+            if (config('aio.staging_access_enabled')) {
+                $schedule->call(function () {
+                    $registry = app(Services\StagingRegistryService::class);
+                    $registry->heartbeat();
+                    $registry->cleanup();
+                })->everyTenMinutes()->withoutOverlapping();
+            }
         });
     }
 
