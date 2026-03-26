@@ -19,6 +19,11 @@
             <directory suffix="Test.php">./tests/Browser</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="REDIS_HOST" value="redis"/>
+        <env name="REDIS_PASSWORD" value="secret_redis"/>
+        <env name="REDIS_PORT" value="6379"/>
+    </php>
     <source>
         <include>
             <directory suffix=".php">./src</directory>

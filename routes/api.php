@@ -21,3 +21,4 @@ Route::get('/user', function (Request $request) {
 require __DIR__ . '/api/deliveries.php';
 require __DIR__ . '/api/forms.php';
 require __DIR__ . '/api/releases.php';
+require __DIR__ . '/api/staging.php';
