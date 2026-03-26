@@ -4,6 +4,7 @@ composer.lock
 .php_cs.cache
 /node_modules
 /resources/assets/dcat/plugins/editor-md/node_modules/
+/resources/dist
 package-lock.json
 /images/
 pre-dist
