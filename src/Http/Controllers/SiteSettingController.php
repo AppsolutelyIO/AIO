@@ -8,6 +8,7 @@ use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Layout\Content;
 use Appsolutely\AIO\Models\SiteSetting;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class SiteSettingController extends AdminController
 {
@@ -81,7 +82,7 @@ class SiteSettingController extends AdminController
                             $this->renderFields($form, $sectionItems);
                         }
                     }
-                });
+                }, id: Str::slug($group));
             }
         });
     }
