@@ -214,11 +214,11 @@ final class AdminButtonHelper
         $js .= "        success: function(response) {\n";
 
         if ($config['success_message']) {
-            $js .= "            Dcat.success('" . addslashes($config['success_message']) . "');\n";
+            $js .= "            AIO.success('" . addslashes($config['success_message']) . "');\n";
         }
 
         if ($config['refresh']) {
-            $js .= "            Dcat.reload();\n";
+            $js .= "            AIO.reload();\n";
         }
 
         if ($config['redirect']) {
@@ -245,9 +245,9 @@ final class AdminButtonHelper
             $js .= "            if (xhr.responseJSON && xhr.responseJSON.message) {\n";
             $js .= "                message = xhr.responseJSON.message;\n";
             $js .= "            }\n";
-            $js .= "            Dcat.error(message);\n";
+            $js .= "            AIO.error(message);\n";
         } else {
-            $js .= "            Dcat.error('An error occurred');\n";
+            $js .= "            AIO.error('An error occurred');\n";
         }
 
         $js .= "        }\n";

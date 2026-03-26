@@ -7,7 +7,7 @@ use Appsolutely\AIO\Form;
 use Appsolutely\AIO\Grid;
 
 /**
- * Dcat-admin - admin builder based on Laravel.
+ * AIO - admin builder based on Laravel.
  *
  * @author jqh <https://github.com/jqhph>
  *
