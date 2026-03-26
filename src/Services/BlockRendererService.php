@@ -11,6 +11,7 @@ use Appsolutely\AIO\Models\PageBlockValue;
 use Appsolutely\AIO\Services\Concerns\ResolvesLivewireClassName;
 use Appsolutely\AIO\Services\Contracts\BlockRendererServiceInterface;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Livewire;
 
@@ -104,6 +105,11 @@ final readonly class BlockRendererService implements BlockRendererServiceInterfa
      */
     private function isBlockValueVisible(PageBlockValue $blockValue): bool
     {
+        $adminGuard = config('admin.auth.guard', 'admin');
+        if (Auth::guard($adminGuard)->check()) {
+            return true;
+        }
+
         $publishedAt = $blockValue->published_at;
         $expiredAt   = $blockValue->expired_at;
 
