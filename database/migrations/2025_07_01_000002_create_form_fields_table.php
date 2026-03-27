@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Appsolutely\AIO\Enums\FormFieldType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ return new class() extends Migration
             $table->foreignId('form_id')->constrained('forms')->onDelete('cascade');
             $table->string('label');
             $table->string('name');
-            $table->string('type', 50);
+            $table->enum('type', array_column(FormFieldType::cases(), 'value'));
             $table->string('placeholder')->nullable();
             $table->boolean('required')->default(false);
             $table->json('options')->nullable();

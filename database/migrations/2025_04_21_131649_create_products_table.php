@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Appsolutely\AIO\Enums\ProductType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class() extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('type')->default('PHYSICAL');
+            $table->enum('type', array_column(ProductType::cases(), 'value'))->default(ProductType::Physical->value);
             $table->json('shipment_methods')->nullable();
             $table->string('slug')->unique();
             $table->string('title');

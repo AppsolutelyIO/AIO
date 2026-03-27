@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Appsolutely\AIO\Enums\NotificationTriggerType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,7 @@ return new class() extends Migration
         Schema::create('notification_rules', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('trigger_type', 100)->comment('form_submission, user_registration, order_placed, etc.');
+            $table->enum('trigger_type', array_column(NotificationTriggerType::cases(), 'value'));
             $table->string('trigger_reference')->comment('form_slug, product_category, etc.');
             $table->unsignedBigInteger('template_id');
             $table->unsignedBigInteger('sender_id')->nullable();

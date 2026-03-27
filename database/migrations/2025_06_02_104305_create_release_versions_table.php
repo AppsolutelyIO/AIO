@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Appsolutely\AIO\Enums\ReleaseChannel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,7 @@ return new class() extends Migration
             $table->id();
             $table->string('version');
             $table->string('remark')->nullable();
-            $table->string('release_channel')->nullable(); // stable, beta, dev
+            $table->enum('release_channel', array_column(ReleaseChannel::cases(), 'value'))->nullable();
             $table->tinyInteger('status');
             $table->dateTimeTz('published_at')->useCurrent();
             $table->timestamps();

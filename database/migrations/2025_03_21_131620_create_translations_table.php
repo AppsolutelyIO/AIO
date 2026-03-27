@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Appsolutely\AIO\Enums\TranslationType;
+use Appsolutely\AIO\Enums\TranslatorType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,10 +18,10 @@ return new class() extends Migration
         Schema::create('translations', function (Blueprint $table) {
             $table->id();
             $table->string('locale');
-            $table->string('type'); // php, blade, variable
+            $table->enum('type', array_column(TranslationType::cases(), 'value'));
             $table->text('original_text');
             $table->text('translated_text')->nullable();
-            $table->string('translator')->nullable(); // Options: Google, DeepSeek, OpenAI, Manual
+            $table->enum('translator', array_column(TranslatorType::cases(), 'value'))->nullable();
             $table->text('call_stack')->nullable();
             $table->unsignedBigInteger('used_count')->default(0);
             $table->dateTimeTz('last_used')->useCurrent();

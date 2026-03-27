@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Appsolutely\AIO\Enums\OrderPaymentStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +20,7 @@ return new class() extends Migration
             $table->string('vendor_reference')->nullable();
             $table->json('vendor_extra_info')->nullable();
             $table->unsignedInteger('payment_amount')->default(0);
-            $table->string('status');
+            $table->enum('status', array_column(OrderPaymentStatus::cases(), 'value'))->default(OrderPaymentStatus::Pending->value);
             $table->timestamps();
             $table->softDeletes();
             $table->index('order_id');

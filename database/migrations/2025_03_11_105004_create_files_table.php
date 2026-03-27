@@ -31,7 +31,7 @@ return new class() extends Migration
 
             // Add indexes for commonly queried fields
             $table->index('filename');
-            $table->index('hash');
+            $table->unique('hash');
         });
     }
 

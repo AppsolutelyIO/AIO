@@ -8,15 +8,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class() extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('assessables', function (Blueprint $table) {
+        Schema::create('file_attachments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('file_id')->constrained('files');
-            $table->nullableUuidMorphs('assessable');
+            $table->nullableUuidMorphs('attachable');
             $table->string('type')->nullable();
             $table->string('file_path');
             $table->string('optimized_path')->nullable();
@@ -35,15 +32,12 @@ return new class() extends Migration
             $table->dateTimeTz('expired_at')->nullable();
             $table->timestamps();
 
-            $table->index(['assessable_type', 'assessable_id', 'type'], 'assessables_polymorphic_type_index');
+            $table->index(['attachable_type', 'attachable_id', 'type'], 'file_attachments_polymorphic_type_index');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('assessables');
+        Schema::dropIfExists('file_attachments');
     }
 };

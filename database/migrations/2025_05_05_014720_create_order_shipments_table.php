@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Appsolutely\AIO\Enums\OrderShipmentStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -27,7 +28,7 @@ return new class() extends Migration
             $table->string('delivery_vendor')->nullable();
             $table->string('delivery_reference')->nullable();
             $table->string('remark')->nullable();
-            $table->string('status');
+            $table->enum('status', array_column(OrderShipmentStatus::cases(), 'value'))->default(OrderShipmentStatus::Pending->value);
             $table->timestamps();
             $table->softDeletes();
             $table->index('order_id');

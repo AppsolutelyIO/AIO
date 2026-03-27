@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Appsolutely\AIO\Enums\OrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +20,7 @@ return new class() extends Migration
             $table->unsignedInteger('amount')->default(0);
             $table->unsignedInteger('discounted_amount')->default(0);
             $table->unsignedInteger('total_amount')->default(0);
-            $table->string('status')->nullable();
+            $table->enum('status', array_column(OrderStatus::cases(), 'value'))->nullable();
             $table->json('delivery_info')->nullable();
             $table->string('note')->nullable();
             $table->string('remark')->nullable();

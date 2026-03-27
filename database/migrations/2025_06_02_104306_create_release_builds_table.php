@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Appsolutely\AIO\Enums\BuildStatus;
+use Appsolutely\AIO\Enums\Platform;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,12 +18,12 @@ return new class() extends Migration
         Schema::create('release_builds', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('version_id');
-            $table->string('platform')->default('windows');
+            $table->enum('platform', array_column(Platform::cases(), 'value'))->default(Platform::Windows->value);
             $table->string('arch')->nullable();
             $table->tinyInteger('force_update')->default(0);
             $table->json('gray_strategy')->nullable();
             $table->text('release_notes')->nullable();
-            $table->string('build_status')->nullable();
+            $table->enum('build_status', array_column(BuildStatus::cases(), 'value'))->nullable();
             $table->string('build_log')->nullable();
             $table->string('path')->nullable();
             $table->string('signature')->nullable();

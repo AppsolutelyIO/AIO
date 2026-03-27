@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Appsolutely\AIO\Enums\OrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,7 +26,7 @@ return new class() extends Migration
             $table->json('product_snapshot')->nullable();
             $table->string('note')->nullable();
             $table->string('remark')->nullable();
-            $table->string('status')->nullable();
+            $table->enum('status', array_column(OrderStatus::cases(), 'value'))->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->index('order_id');
