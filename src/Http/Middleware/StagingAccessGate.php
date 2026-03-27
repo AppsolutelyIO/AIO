@@ -26,9 +26,10 @@ class StagingAccessGate
 
     private const COOKIE_LIFETIME_MINUTES = 60 * 24 * 7; // 7 days
 
-    /** @var list<string> Routes that handle their own token verification */
+    /** @var list<string> Routes that bypass the staging gate */
     private const EXCLUDED_PATHS = [
         'api/staging-registry',
+        'up',
     ];
 
     public function handle(Request $request, Closure $next): Response
