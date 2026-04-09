@@ -25,7 +25,7 @@ final class PageController extends BaseController
 
         // Alias URL without ?submitted=1 → redirect to canonical page
         if ($page->getPageAlias() !== null && $request->query('submitted') !== '1') {
-            return redirect(normalize_slug($page->slug));
+            return redirect(normalize_slug($page->getContent()->getAttribute('slug')));
         }
 
         return themed_view('pages.show', [

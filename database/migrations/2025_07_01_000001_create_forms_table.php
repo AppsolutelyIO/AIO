@@ -18,7 +18,7 @@ return new class() extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->string('target_table')->nullable();
+            $table->string('target_table')->nullable()->comment('Target table to insert form data');
             $table->tinyInteger('status')->default(0);
             $table->string('api_access_token', 64)->nullable()->unique();
             $table->json('meta_keys_to_collect')->nullable()->comment('Array of meta key names to collect from cookies when form is submitted');
