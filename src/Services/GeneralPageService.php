@@ -129,13 +129,11 @@ final readonly class GeneralPageService implements GeneralPageServiceInterface
         $slugToResolve = $fullSlug;
         $pageAlias     = null;
 
-        // Only resolve alias when coming from form submit (session submitting=true)
-        if (session('submitting') === true) {
-            $canonicalSlug = $this->pageSlugAliasService->resolveAlias($fullSlug);
-            if ($canonicalSlug !== null) {
-                $slugToResolve = $canonicalSlug;
-                $pageAlias     = $fullSlug;
-            }
+        // Resolve alias (e.g. thank-you-for-submitting -> test-drive)
+        $canonicalSlug = $this->pageSlugAliasService->resolveAlias($fullSlug);
+        if ($canonicalSlug !== null) {
+            $slugToResolve = $canonicalSlug;
+            $pageAlias     = $fullSlug;
         }
 
         $page = $this->pageService->findPublishedPage($slugToResolve);

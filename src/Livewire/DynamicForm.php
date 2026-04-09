@@ -74,9 +74,10 @@ final class DynamicForm extends GeneralBlock
             $this->formFields = $this->formService->getFields($this->form);
             $this->initializeFormDataFromQuery();
 
-            // When visiting via alias URL (e.g. thank-you-for-submitting), show success state
+            // When visiting via alias URL (e.g. thank-you-for-submitting?submitted=1),
+            // show success state. Direct alias visits without the param show the form.
             $pageAlias = $this->page['page_alias'] ?? null;
-            if ($pageAlias !== null && $pageAlias !== '') {
+            if ($pageAlias !== null && $pageAlias !== '' && request()->query('submitted') === '1') {
                 $this->submitted      = true;
                 $this->successMessage = $this->displayOptions['success_message'] ?? '';
             } else {
@@ -243,8 +244,7 @@ final class DynamicForm extends GeneralBlock
             } elseif ($this->hasForceRedirect()) {
                 $path = trim((string) $this->displayOptions['redirect_url']);
                 if ($path !== '') {
-                    session()->flash('submitting', true);
-                    $this->redirect(normalize_slug($path));
+                    $this->redirect(normalize_slug($path) . '?submitted=1');
                 }
             }
         } catch (ValidationException $e) {

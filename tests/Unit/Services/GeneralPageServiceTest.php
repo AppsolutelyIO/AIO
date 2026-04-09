@@ -177,6 +177,37 @@ final class GeneralPageServiceTest extends TestCase
         $this->assertNull($result);
     }
 
+    public function test_resolve_page_resolves_alias_to_canonical_page(): void
+    {
+        $page = Page::factory()->create(['slug' => 'test-drive']);
+
+        $this->pageSlugAliasService->addAlias('thank-you-for-submitting', 'test-drive');
+
+        $this->pageService
+            ->shouldReceive('findPublishedPage')
+            ->with('/test-drive')
+            ->andReturn($page);
+
+        $result = $this->service->resolvePage('/thank-you-for-submitting');
+
+        $this->assertInstanceOf(GeneralPage::class, $result);
+        $this->assertEquals('/thank-you-for-submitting', $result->getPageAlias());
+    }
+
+    public function test_resolve_page_without_alias_has_no_page_alias(): void
+    {
+        $page = Page::factory()->create(['slug' => 'about-us']);
+
+        $this->pageService
+            ->shouldReceive('findPublishedPage')
+            ->with('about-us')
+            ->andReturn($page);
+
+        $result = $this->service->resolvePage('about-us');
+
+        $this->assertNull($result->getPageAlias());
+    }
+
     // --- clearPageCache ---
 
     public function test_clear_page_cache_removes_cached_page(): void
