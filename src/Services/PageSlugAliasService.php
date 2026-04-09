@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Services;
 
+use Appsolutely\AIO\Models\Page;
+use Appsolutely\AIO\Repositories\PageBlockSettingRepository;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 
 /**
- * Caches page_slug_aliases on demand. When a user visits a form page with redirect='force',
- * that alias is added to the cache. Lookup resolves alias -> canonical slug.
+ * Resolves page slug aliases (e.g. thank-you-for-submitting -> test-drive).
+ *
+ * Aliases are cached on demand and fall back to a database lookup when the
+ * cache is empty (e.g. after cache expiry, cold start, or deployment).
  */
 final readonly class PageSlugAliasService
 {
@@ -17,7 +21,8 @@ final readonly class PageSlugAliasService
     private const CACHE_TTL = 3600;
 
     public function __construct(
-        private CacheRepository $cache
+        private CacheRepository $cache,
+        private PageBlockSettingRepository $blockSettingRepository
     ) {}
 
     /**
@@ -53,12 +58,18 @@ final readonly class PageSlugAliasService
 
     /**
      * Resolve a slug via aliases. Returns canonical slug if the given slug is an alias.
+     * Falls back to database when cache misses.
      */
     public function resolveAlias(string $normalizedSlug): ?string
     {
         $aliases = $this->getAliases();
 
-        return $aliases[$normalizedSlug] ?? null;
+        if (isset($aliases[$normalizedSlug])) {
+            return $aliases[$normalizedSlug];
+        }
+
+        // Cache miss — resolve from database and warm cache
+        return $this->resolveFromDatabase($normalizedSlug);
     }
 
     /**
@@ -67,5 +78,37 @@ final readonly class PageSlugAliasService
     public function clearCache(): void
     {
         $this->cache->forget(self::CACHE_KEY);
+    }
+
+    /**
+     * Look up a redirect_url alias directly from page block display_options.
+     * Called when cache is empty (expired, cold start, post-deploy).
+     */
+    private function resolveFromDatabase(string $normalizedSlug): ?string
+    {
+        try {
+            $bare    = ltrim($normalizedSlug, '/');
+            $setting = $this->blockSettingRepository->findByForceRedirectUrl([
+                $normalizedSlug,
+                $bare,
+                '/' . $bare,
+            ]);
+
+            /** @var Page|null $page */
+            $page = $setting?->page;
+
+            if (! $page) {
+                return null;
+            }
+
+            $canonicalSlug = normalize_slug($page->getAttribute('slug'));
+
+            // Warm cache for subsequent requests
+            $this->addAlias($normalizedSlug, $canonicalSlug);
+
+            return $canonicalSlug;
+        } catch (\Throwable) {
+            return null;
+        }
     }
 }

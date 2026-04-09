@@ -157,4 +157,27 @@ final class PageBlockSettingRepository extends BaseRepository
             ->pluck('block_id')
             ->unique();
     }
+
+    /**
+     * Find the first active block setting whose blockValue has a force-redirect
+     * matching the given redirect_url slug.
+     *
+     * @param  array<string>  $slugVariants  Possible redirect_url values (with/without leading slash)
+     */
+    public function findByForceRedirectUrl(array $slugVariants): ?PageBlockSetting
+    {
+        /** @var PageBlockSetting|null */
+        return $this->model->newQuery()
+            ->whereHas('blockValue', function ($q) use ($slugVariants) {
+                $q->where('display_options->redirect', 'force')
+                    ->where(function ($q2) use ($slugVariants) {
+                        foreach ($slugVariants as $variant) {
+                            $q2->orWhere('display_options->redirect_url', $variant);
+                        }
+                    });
+            })
+            ->where('status', Status::ACTIVE)
+            ->with('page')
+            ->first();
+    }
 }

@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Appsolutely\AIO\Tests\Unit\Services;
 
+use Appsolutely\AIO\Repositories\PageBlockSettingRepository;
 use Appsolutely\AIO\Services\PageSlugAliasService;
 use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository as CacheRepository;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 final class PageSlugAliasServiceTest extends TestCase
 {
+    use RefreshDatabase;
+
     private PageSlugAliasService $service;
 
     private CacheRepository $cache;
@@ -19,7 +23,10 @@ final class PageSlugAliasServiceTest extends TestCase
     {
         parent::setUp();
         $this->cache   = new CacheRepository(new ArrayStore());
-        $this->service = new PageSlugAliasService($this->cache);
+        $this->service = new PageSlugAliasService(
+            $this->cache,
+            app(PageBlockSettingRepository::class)
+        );
     }
 
     // --- getAliases ---
