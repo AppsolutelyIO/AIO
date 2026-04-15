@@ -105,9 +105,11 @@ use Appsolutely\AIO\Repositories\WishlistRepository;
 use Appsolutely\AIO\Services\ArticleService;
 use Appsolutely\AIO\Services\BlockRendererService;
 use Appsolutely\AIO\Services\CartService;
+use Appsolutely\AIO\Services\ConditionalContentRenderer;
 use Appsolutely\AIO\Services\Contracts\ArticleServiceInterface;
 use Appsolutely\AIO\Services\Contracts\BlockRendererServiceInterface;
 use Appsolutely\AIO\Services\Contracts\CartServiceInterface;
+use Appsolutely\AIO\Services\Contracts\ConditionalContentRendererInterface;
 use Appsolutely\AIO\Services\Contracts\CouponServiceInterface;
 use Appsolutely\AIO\Services\Contracts\DeliveryServiceInterface;
 use Appsolutely\AIO\Services\Contracts\DynamicFormExportServiceInterface;
@@ -279,6 +281,7 @@ return [
         ArticleServiceInterface::class               => ArticleService::class,
         BlockRendererServiceInterface::class         => BlockRendererService::class,
         CartServiceInterface::class                  => CartService::class,
+        ConditionalContentRendererInterface::class   => ConditionalContentRenderer::class,
         CouponServiceInterface::class                => CouponService::class,
         DeliveryServiceInterface::class              => DeliveryService::class,
         DynamicFormExportServiceInterface::class     => DynamicFormExportService::class,
