@@ -32,6 +32,7 @@ use Appsolutely\AIO\Observers\PageBlockValueObserver;
 use Appsolutely\AIO\Observers\PageObserver;
 use Appsolutely\AIO\Observers\ProductObserver;
 use Appsolutely\AIO\Repositories\TranslationRepository;
+use Appsolutely\AIO\Services\Contracts\ConditionalContentRendererInterface;
 use Appsolutely\AIO\Services\Contracts\ThemeServiceInterface;
 use Appsolutely\AIO\Services\PageBlockService;
 use Appsolutely\AIO\Services\Translation\DeepSeekTranslator;
@@ -266,6 +267,14 @@ class AIOServiceProvider extends ServiceProvider
 
         Blade::directive('description', function ($expression) {
             return "<?php echo page_meta($expression, 'description'); ?>";
+        });
+
+        Blade::directive('conditionalContent', function ($expression) {
+            return "<?php echo app('" . ConditionalContentRendererInterface::class . "')->render($expression); ?>";
+        });
+
+        Blade::directive('conditionalMarkdown', function ($expression) {
+            return "<?php echo md2html(app('" . ConditionalContentRendererInterface::class . "')->render($expression)); ?>";
         });
     }
 
