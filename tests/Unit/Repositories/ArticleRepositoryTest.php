@@ -7,6 +7,7 @@ namespace Appsolutely\AIO\Tests\Unit\Repositories;
 use Appsolutely\AIO\Enums\Status;
 use Appsolutely\AIO\Models\Article;
 use Appsolutely\AIO\Models\ArticleCategory;
+use Appsolutely\AIO\Models\Tag;
 use Appsolutely\AIO\Repositories\ArticleRepository;
 use Appsolutely\AIO\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -43,6 +44,20 @@ final class ArticleRepositoryTest extends TestCase
         $article1->categories()->attach($category->id);
 
         $result = $this->repository->getPublishedArticles(['category_filter' => 'tech']);
+
+        $this->assertCount(1, $result->get());
+        $this->assertEquals($article1->id, $result->first()->id);
+    }
+
+    public function test_get_published_articles_filters_by_tag(): void
+    {
+        $tag      = Tag::factory()->create(['slug' => 'laravel']);
+        $article1 = Article::factory()->create(['status' => Status::ACTIVE, 'published_at' => now()->subDay()]);
+        $article2 = Article::factory()->create(['status' => Status::ACTIVE, 'published_at' => now()->subDay()]);
+
+        $article1->tags()->attach($tag->id);
+
+        $result = $this->repository->getPublishedArticles(['tag_filter' => 'laravel']);
 
         $this->assertCount(1, $result->get());
         $this->assertEquals($article1->id, $result->first()->id);

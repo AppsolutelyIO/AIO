@@ -32,12 +32,12 @@
         "livewire/livewire": "^4.0",
         "mcamara/laravel-localization": "^2.3",
         "openai-php/laravel": "^0.19.0",
-        "openspout/openspout": "^5.4",
+        "openspout/openspout": "~5.3.0",
         "prettus/l5-repository": "^3.0",
         "qirolab/laravel-themer": "^2.4",
         "spatie/eloquent-sortable": "^5.0",
         "spatie/laravel-data": "4.*",
-        "spatie/laravel-responsecache": "^8.0",
+        "spatie/laravel-responsecache": "^7.7",
         "diglactic/laravel-breadcrumbs": "^10.0"
     },
     "require-dev": {

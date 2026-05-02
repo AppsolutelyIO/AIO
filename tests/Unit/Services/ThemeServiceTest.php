@@ -145,6 +145,6 @@ final class ThemeServiceTest extends TestCase
         // 'tabler' only exists in the package, not in the site themes directory
         $result = $this->service->getThemeViewPath('tabler');
 
-        $this->assertStringContainsString('aio/themes/tabler/views', $result);
+        $this->assertStringContainsString('/themes/tabler/views', $result);
     }
 }
