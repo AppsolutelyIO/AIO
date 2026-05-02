@@ -50,7 +50,7 @@ final class PageBlockSetting extends Model
         }
 
         $data = self::where('block_value_id', $this->block_value_id)->whereNot('id', $this->id)->first();
-        if (empty($data) || $this->block?->scope == BlockScope::Global->value) {
+        if (empty($data) || ($this->block->scope ?? null) == BlockScope::Global->value) {
             $this->blockValue->save();
 
             return;

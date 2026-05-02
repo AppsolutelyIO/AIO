@@ -58,4 +58,9 @@ class Article extends Model
     {
         return $this->belongsToMany(ArticleCategory::class, 'article_category_pivot');
     }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'article_tag_pivot');
+    }
 }

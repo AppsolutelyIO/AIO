@@ -99,7 +99,7 @@ parameters:
 		-
 			message: '#^Unsafe access to private property Appsolutely\\AIO\\Admin\:\:\$defaultPjaxContainerId through static\:\:\.$#'
 			identifier: staticClassAccess.privateProperty
-			count: 2
+			count: 1
 			path: src/Admin.php
 
 		-
@@ -207,7 +207,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Admin/Controllers/Api/PageBuilderAdminApiController.php
 
 		-
@@ -285,13 +285,13 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Admin\\Controllers\\CouponController\:\:\$value\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Admin/Controllers/CouponController.php
 
 		-
 			message: '#^Call to an undefined method BackedEnum\:\:label\(\)\.$#'
 			identifier: method.notFound
-			count: 2
+			count: 1
 			path: src/Admin/Controllers/CouponController.php
 
 		-
@@ -321,7 +321,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Admin\\Controllers\\FileController\:\:\$full_path\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Admin/Controllers/FileController.php
 
 		-
@@ -385,13 +385,6 @@ parameters:
 			path: src/Admin/Controllers/OrderController.php
 
 		-
-			message: '#^Parameter \#1 \$order of method Appsolutely\\AIO\\Services\\OrderService\:\:canTransitionTo\(\) expects Appsolutely\\AIO\\Models\\Order, Illuminate\\Database\\Eloquent\\Model\|Illuminate\\Support\\Fluent\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Admin/Controllers/OrderController.php
-
-		-
-			message: '#^Access to an undefined property Appsolutely\\AIO\\Admin\\Controllers\\OrderShipmentController\:\:\$order_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Admin/Controllers/OrderShipmentController.php
@@ -411,13 +404,13 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$settings\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Admin/Controllers/PageBlockController.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$title\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Admin/Controllers/PageBlockController.php
 
 		-
@@ -483,7 +476,7 @@ parameters:
 		-
 			message: '#^Using nullsafe property access on non\-nullable type Illuminate\\Database\\Eloquent\\Model\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
-			count: 2
+			count: 1
 			path: src/Admin/Controllers/PageController.php
 
 		-
@@ -591,7 +584,7 @@ parameters:
 		-
 			message: '#^Instantiated class Appsolutely\\AIO\\Grid\\BatchAction is abstract\.$#'
 			identifier: new.abstract
-			count: 2
+			count: 1
 			path: src/Admin/Controllers/RefundController.php
 
 		-
@@ -603,7 +596,7 @@ parameters:
 		-
 			message: '#^Parameter \#2 \$content of method Appsolutely\\AIO\\Widgets\\Tab\:\:add\(\) expects Illuminate\\Contracts\\Support\\Renderable\|string, Appsolutely\\AIO\\Grid given\.$#'
 			identifier: argument.type
-			count: 2
+			count: 1
 			path: src/Admin/Controllers/ReleaseController.php
 
 		-
@@ -675,7 +668,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_options\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Admin/Forms/Models/PageBlockSettingForm.php
 
 		-
@@ -807,7 +800,7 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$view of function view expects view\-string\|null, string given\.$#'
 			identifier: argument.type
-			count: 2
+			count: 1
 			path: src/AdminServiceProvider.php
 
 		-
@@ -843,13 +836,13 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Form\:\:\$name\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Console/ExportFormEntriesCommand.php
 
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Form\|Illuminate\\Database\\Eloquent\\Collection\<int, Appsolutely\\AIO\\Models\\Form\>\:\:\$name\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Console/ExportFormEntriesCommand.php
 
 		-
@@ -921,7 +914,7 @@ parameters:
 		-
 			message: '#^Method Appsolutely\\AIO\\Console\\GeneratorCommand\:\:handle\(\) should return bool\|null but return statement is missing\.$#'
 			identifier: return.missing
-			count: 2
+			count: 1
 			path: src/Console/GeneratorCommand.php
 
 		-
@@ -943,19 +936,8 @@ parameters:
 			path: src/Console/IdeHelperCommand.php
 
 		-
-			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\PageBlockValue\:\:\$display_options\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Console/MigrateBlockValueDisplayOptionToColumnCommand.php
-
 		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Console/ProcessNotificationQueueCommand.php
-
-		-
-			message: '#^While loop condition is always true\.$#'
 			identifier: while.alwaysTrue
 			count: 1
 			path: src/Console/ProcessNotificationQueueCommand.php
@@ -963,13 +945,13 @@ parameters:
 		-
 			message: '#^Instantiated class League\\Flysystem\\Adapter\\Local not found\.$#'
 			identifier: class.notFound
-			count: 2
+			count: 1
 			path: src/Console/PublishCommand.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Console/ResyncFormEntryNotificationsCommand.php
 
 		-
@@ -1005,7 +987,7 @@ parameters:
 		-
 			message: '#^Variable \$entryIdsArray in empty\(\) always exists and is not falsy\.$#'
 			identifier: empty.variable
-			count: 2
+			count: 1
 			path: src/Console/ResyncFormEntryNotificationsCommand.php
 
 		-
@@ -1299,7 +1281,7 @@ parameters:
 		-
 			message: '#^Negated boolean expression is always false\.$#'
 			identifier: booleanNot.alwaysFalse
-			count: 2
+			count: 1
 			path: src/Extend/ServiceProvider.php
 
 		-
@@ -1407,7 +1389,7 @@ parameters:
 		-
 			message: '#^Method Appsolutely\\AIO\\Form\:\:deleteFileWhenCreating\(\) should return Illuminate\\Http\\JsonResponse but empty return statement found\.$#'
 			identifier: return.empty
-			count: 2
+			count: 1
 			path: src/Form.php
 
 		-
@@ -1455,7 +1437,7 @@ parameters:
 		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$file$#'
 			identifier: parameter.notFound
-			count: 2
+			count: 1
 			path: src/Form.php
 
 		-
@@ -1473,7 +1455,7 @@ parameters:
 		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$response$#'
 			identifier: parameter.notFound
-			count: 2
+			count: 1
 			path: src/Form.php
 
 		-
@@ -1491,7 +1473,7 @@ parameters:
 		-
 			message: '#^Strict comparison using \!\=\= between string\|null and false will always evaluate to true\.$#'
 			identifier: notIdentical.alwaysTrue
-			count: 2
+			count: 1
 			path: src/Form.php
 
 		-
@@ -1647,13 +1629,13 @@ parameters:
 		-
 			message: '#^If condition is always true\.$#'
 			identifier: if.alwaysTrue
-			count: 2
+			count: 1
 			path: src/Form/Field.php
 
 		-
 			message: '#^Instanceof between array and Closure will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
-			count: 2
+			count: 1
 			path: src/Form/Field.php
 
 		-
@@ -1701,13 +1683,13 @@ parameters:
 		-
 			message: '#^Parameter \#1 \.\.\.\$arrays of function array_merge expects array, string given\.$#'
 			identifier: argument.type
-			count: 2
+			count: 1
 			path: src/Form/Field.php
 
 		-
 			message: '#^Ternary operator condition is always true\.$#'
 			identifier: ternary.alwaysTrue
-			count: 2
+			count: 1
 			path: src/Form/Field.php
 
 		-
@@ -1881,13 +1863,13 @@ parameters:
 		-
 			message: '#^Call to an undefined method Illuminate\\Filesystem\\Filesystem\:\:putFileAs\(\)\.$#'
 			identifier: method.notFound
-			count: 2
+			count: 1
 			path: src/Form/Field/File.php
 
 		-
 			message: '#^Call to an undefined method Illuminate\\Filesystem\\Filesystem\:\:url\(\)\.$#'
 			identifier: method.notFound
-			count: 2
+			count: 1
 			path: src/Form/Field/File.php
 
 		-
@@ -1935,13 +1917,13 @@ parameters:
 		-
 			message: '#^Method Appsolutely\\AIO\\Form\\Field\\File\:\:getValidationErrors\(\) should return bool\|Illuminate\\Support\\MessageBag but returns string\.$#'
 			identifier: return.type
-			count: 2
+			count: 1
 			path: src/Form/Field/File.php
 
 		-
 			message: '#^Negated boolean expression is always false\.$#'
 			identifier: booleanNot.alwaysFalse
-			count: 2
+			count: 1
 			path: src/Form/Field/File.php
 
 		-
@@ -1977,7 +1959,7 @@ parameters:
 		-
 			message: '#^Property Appsolutely\\AIO\\Form\\Field\\File\:\:\$name \(null\) does not accept string\.$#'
 			identifier: assign.propertyType
-			count: 2
+			count: 1
 			path: src/Form/Field/File.php
 
 		-
@@ -1995,7 +1977,7 @@ parameters:
 		-
 			message: '#^Result of method Appsolutely\\AIO\\Form\\Field\\File\:\:destroy\(\) \(void\) is used\.$#'
 			identifier: method.void
-			count: 2
+			count: 1
 			path: src/Form/Field/File.php
 
 		-
@@ -2069,13 +2051,6 @@ parameters:
 			identifier: nullCoalesce.property
 			count: 1
 			path: src/Form/Field/HasMany.php
-
-		-
-			message: '#^Return type \(Illuminate\\Contracts\\View\\Factory\|Illuminate\\View\\View\) of method Appsolutely\\AIO\\Form\\Field\\Icon\:\:render\(\) should be compatible with return type \(string\) of method Illuminate\\Contracts\\Support\\Renderable\:\:render\(\)$#'
-			identifier: method.childReturnType
-			count: 1
-			path: src/Form/Field/Icon.php
-
 		-
 			message: '#^Static property Appsolutely\\AIO\\Form\\Field\\Icon\:\:\$css \(array\) does not accept default value of type string\.$#'
 			identifier: property.defaultValue
@@ -2091,7 +2066,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method Intervention\\Image\\Interfaces\\EncodedImageInterface\:\:stream\(\)\.$#'
 			identifier: method.notFound
-			count: 2
+			count: 1
 			path: src/Form/Field/Image.php
 
 		-
@@ -2253,7 +2228,7 @@ parameters:
 		-
 			message: '#^Property Appsolutely\\AIO\\Form\\Field\:\:\$options \(array\) does not accept Closure\.$#'
 			identifier: assign.propertyType
-			count: 2
+			count: 1
 			path: src/Form/Field/Select.php
 
 		-
@@ -2307,7 +2282,7 @@ parameters:
 		-
 			message: '#^Parameter \#2 \$replace of function str_replace expects array\<string\>\|string, array\<int, int\|string\> given\.$#'
 			identifier: argument.type
-			count: 2
+			count: 1
 			path: src/Form/Field/Text.php
 
 		-
@@ -2343,19 +2318,19 @@ parameters:
 		-
 			message: '#^Access to offset ''continue_creating'' on an unknown class Appsolutely\\AIO\\Form\\arrays\.$#'
 			identifier: class.notFound
-			count: 2
+			count: 1
 			path: src/Form/Footer.php
 
 		-
 			message: '#^Access to offset ''continue_editing'' on an unknown class Appsolutely\\AIO\\Form\\arrays\.$#'
 			identifier: class.notFound
-			count: 2
+			count: 1
 			path: src/Form/Footer.php
 
 		-
 			message: '#^Access to offset ''view'' on an unknown class Appsolutely\\AIO\\Form\\arrays\.$#'
 			identifier: class.notFound
-			count: 2
+			count: 1
 			path: src/Form/Footer.php
 
 		-
@@ -2511,7 +2486,7 @@ parameters:
 		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$disable$#'
 			identifier: parameter.notFound
-			count: 2
+			count: 1
 			path: src/Grid.php
 
 		-
@@ -2565,13 +2540,13 @@ parameters:
 		-
 			message: '#^Variable \$scope might not be defined\.$#'
 			identifier: variable.undefined
-			count: 2
+			count: 1
 			path: src/Grid.php
 
 		-
 			message: '#^Argument of an invalid type Appsolutely\\AIO\\Grid\\Column\\Condition supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
-			count: 2
+			count: 1
 			path: src/Grid/Column.php
 
 		-
@@ -2583,7 +2558,7 @@ parameters:
 		-
 			message: '#^Cannot use array destructuring on Closure\.$#'
 			identifier: offsetAccess.nonArray
-			count: 2
+			count: 1
 			path: src/Grid/Column.php
 
 		-
@@ -2799,7 +2774,7 @@ parameters:
 		-
 			message: '#^Instanceof between array and Illuminate\\Contracts\\Support\\Arrayable will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
-			count: 2
+			count: 1
 			path: src/Grid/Displayers/DialogTree.php
 
 		-
@@ -3357,7 +3332,7 @@ parameters:
 		-
 			message: '#^Call to method inRoles\(\) on an unknown class Appsolutely\\AIO\\Traits\\HasPermissions\.$#'
 			identifier: class.notFound
-			count: 2
+			count: 1
 			path: src/Http/Auth/Permission.php
 
 		-
@@ -3393,7 +3368,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\DeliveryToken\:\:\$delivered_at\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Http/Controllers/Api/DeliveryController.php
 
 		-
@@ -3423,13 +3398,13 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\DeliveryToken\:\:\$status\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Http/Controllers/Api/DeliveryController.php
 
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\DeliveryToken\:\:\$token\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Http/Controllers/Api/DeliveryController.php
 
 		-
@@ -3471,7 +3446,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$version\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Http/Controllers/Api/ReleaseController.php
 
 		-
@@ -3507,7 +3482,7 @@ parameters:
 		-
 			message: '#^Method Appsolutely\\AIO\\Http\\Controllers\\Auth\\EmailVerificationNotificationController\:\:store\(\) should return Illuminate\\Http\\Response but returns Illuminate\\Http\\RedirectResponse\.$#'
 			identifier: return.type
-			count: 2
+			count: 1
 			path: src/Http/Controllers/Auth/EmailVerificationNotificationController.php
 
 		-
@@ -3585,7 +3560,7 @@ parameters:
 		-
 			message: '#^Call to method getKey\(\) on an unknown class Appsolutely\\AIO\\Traits\\HasPermissions\.$#'
 			identifier: class.notFound
-			count: 2
+			count: 1
 			path: src/Http/Controllers/AuthController.php
 
 		-
@@ -3669,7 +3644,7 @@ parameters:
 		-
 			message: '#^Method Appsolutely\\AIO\\Http\\Controllers\\HandleFormController\:\:getField\(\) should return Appsolutely\\AIO\\Form\\Field\\File but returns Appsolutely\\AIO\\Form\\Field\|null\.$#'
 			identifier: return.type
-			count: 2
+			count: 1
 			path: src/Http/Controllers/HandleFormController.php
 
 		-
@@ -3681,7 +3656,7 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$view of function view expects view\-string\|null, string given\.$#'
 			identifier: argument.type
-			count: 2
+			count: 1
 			path: src/Http/Controllers/IconController.php
 
 		-
@@ -3705,7 +3680,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\SiteSetting\:\:\$key\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Http/Controllers/SiteSettingController.php
 
 		-
@@ -3921,7 +3896,7 @@ parameters:
 		-
 			message: '#^Negated boolean expression is always false\.$#'
 			identifier: booleanNot.alwaysFalse
-			count: 2
+			count: 1
 			path: src/Layout/Menu.php
 
 		-
@@ -3945,7 +3920,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Form\:\:\$slug\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Listeners/TriggerFormNotifications.php
 
 		-
@@ -4257,7 +4232,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Page\:\:\$slug\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Models/GeneralPage.php
 
 		-
@@ -4281,7 +4256,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Models/GeneralPage.php
 
 		-
@@ -4323,7 +4298,7 @@ parameters:
 		-
 			message: '#^Using nullsafe property access "\?\-\>title" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
-			count: 2
+			count: 1
 			path: src/Models/GeneralPage.php
 
 		-
@@ -4485,7 +4460,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\PageBlockSetting\:\:\$block_value_id\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Models/PageBlockSetting.php
 
 		-
@@ -4497,7 +4472,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_options\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Models/PageBlockSetting.php
 
 		-
@@ -4509,7 +4484,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$reference\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Models/PageBlockSetting.php
 
 		-
@@ -4551,7 +4526,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$view\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Models/PageBlockSetting.php
 
 		-
@@ -4851,7 +4826,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\TaxRate\:\:\$rate\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Models/TaxRate.php
 
 		-
@@ -4875,7 +4850,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Order\:\:\$status\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Observers/OrderObserver.php
 
 		-
@@ -5055,19 +5030,19 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$total\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Repositories/FormEntryRepository.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$valid\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Repositories/FormEntryRepository.php
 
 		-
 			message: '#^Call to an undefined method Appsolutely\\AIO\\Repositories\\FormEntryRepository\:\:findOrFail\(\)\.$#'
 			identifier: method.notFound
-			count: 2
+			count: 1
 			path: src/Repositories/FormEntryRepository.php
 
 		-
@@ -5133,7 +5108,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:status\(\)\.$#'
 			identifier: method.notFound
-			count: 2
+			count: 1
 			path: src/Repositories/FormRepository.php
 
 		-
@@ -5235,7 +5210,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:status\(\)\.$#'
 			identifier: method.notFound
-			count: 2
+			count: 1
 			path: src/Repositories/NotificationRuleRepository.php
 
 		-
@@ -5259,7 +5234,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:status\(\)\.$#'
 			identifier: method.notFound
-			count: 2
+			count: 1
 			path: src/Repositories/PageBlockGroupRepository.php
 
 		-
@@ -5295,7 +5270,7 @@ parameters:
 		-
 			message: '#^Method Appsolutely\\AIO\\Repositories\\PageBlockValueRepository\:\:findByBlockIdAndTheme\(\) should return Appsolutely\\AIO\\Models\\PageBlockValue\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
 			identifier: return.type
-			count: 2
+			count: 1
 			path: src/Repositories/PageBlockValueRepository.php
 
 		-
@@ -5313,7 +5288,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:reference\(\)\.$#'
 			identifier: method.notFound
-			count: 2
+			count: 1
 			path: src/Repositories/PageRepository.php
 
 		-
@@ -5355,7 +5330,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:status\(\)\.$#'
 			identifier: method.notFound
-			count: 2
+			count: 1
 			path: src/Repositories/ProductRepository.php
 
 		-
@@ -5493,7 +5468,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Article\:\:\$content\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/ArticleService.php
 
 		-
@@ -5505,7 +5480,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/BlockOptionService.php
 
 		-
@@ -5523,7 +5498,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$view\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/BlockOptionService.php
 
 		-
@@ -5541,7 +5516,7 @@ parameters:
 		-
 			message: '#^Using nullsafe property access "\?\-\>view" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
-			count: 2
+			count: 1
 			path: src/Services/BlockOptionService.php
 
 		-
@@ -5631,7 +5606,7 @@ parameters:
 		-
 			message: '#^Using nullsafe property access "\?\-\>view" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
-			count: 2
+			count: 1
 			path: src/Services/BlockRendererService.php
 
 		-
@@ -5691,13 +5666,13 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Coupon\:\:\$value\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/CouponService.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Contracts\\Auth\\Authenticatable\:\:\$id\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/CouponService.php
 
 		-
@@ -5709,7 +5684,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\DeliveryToken\:\:\$status\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/DeliveryService.php
 
 		-
@@ -5733,13 +5708,13 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/DynamicFormExportService.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/DynamicFormExportService.php
 
 		-
@@ -5751,7 +5726,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/DynamicFormExportService.php
 
 		-
@@ -5763,19 +5738,19 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/DynamicFormExportService.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$mobile\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/DynamicFormExportService.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$submitted_at\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/DynamicFormExportService.php
 
 		-
@@ -5805,7 +5780,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\FormField\:\:\$placeholder\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/DynamicFormRenderService.php
 
 		-
@@ -5817,7 +5792,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\FormField\:\:\$type\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/DynamicFormRenderService.php
 
 		-
@@ -5937,7 +5912,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$label\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/DynamicFormValidationService.php
 
 		-
@@ -6009,7 +5984,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/FormExportService.php
 
 		-
@@ -6051,19 +6026,19 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$label\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/FormFieldFormatterService.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/FormFieldFormatterService.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$type\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/FormFieldFormatterService.php
 
 		-
@@ -6075,7 +6050,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Page\:\:\$parent_id\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/GeneralPageService.php
 
 		-
@@ -6129,7 +6104,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\ProductSku\:\:\$stock\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/InventoryService.php
 
 		-
@@ -6231,7 +6206,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\NotificationSender\:\:\$type\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/NotificationSenderService.php
 
 		-
@@ -6339,7 +6314,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$block_id\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/PageBlockSettingService.php
 
 		-
@@ -6381,7 +6356,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$reference\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/PageStructureService.php
 
 		-
@@ -6495,7 +6470,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\OrderPayment\:\:\$vendor_reference\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/PaymentGateways/AlipayGateway.php
 
 		-
@@ -6651,7 +6626,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Order\:\:\$reference\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/PaymentGateways/KlarnaGateway.php
 
 		-
@@ -6735,7 +6710,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Order\:\:\$reference\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/PaymentGateways/MercadoPagoGateway.php
 
 		-
@@ -6765,7 +6740,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Order\:\:\$reference\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/PaymentGateways/MollieGateway.php
 
 		-
@@ -6879,7 +6854,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Order\:\:\$reference\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/PaymentGateways/RazorpayGateway.php
 
 		-
@@ -6915,7 +6890,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Order\:\:\$reference\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/PaymentGateways/SquareGateway.php
 
 		-
@@ -6951,7 +6926,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\Order\:\:\$reference\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/PaymentGateways/StripeGateway.php
 
 		-
@@ -6993,7 +6968,7 @@ parameters:
 		-
 			message: '#^Instantiated class Stripe\\StripeClient not found\.$#'
 			identifier: class.notFound
-			count: 2
+			count: 1
 			path: src/Services/PaymentGateways/StripeGateway.php
 
 		-
@@ -7095,7 +7070,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\ShippingRate\:\:\$price\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/ShippingService.php
 
 		-
@@ -7143,7 +7118,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$categories\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/SitemapService.php
 
 		-
@@ -7209,7 +7184,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Models\\File\:\:\$extension\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Services/StorageService.php
 
 		-
@@ -7329,7 +7304,7 @@ parameters:
 		-
 			message: '#^Negated boolean expression is always false\.$#'
 			identifier: booleanNot.alwaysFalse
-			count: 2
+			count: 1
 			path: src/Show.php
 
 		-
@@ -7377,7 +7352,7 @@ parameters:
 		-
 			message: '#^Instanceof between string and Closure will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
-			count: 2
+			count: 1
 			path: src/Show/Field.php
 
 		-
@@ -7425,7 +7400,7 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$array of static method Illuminate\\Support\\Arr\:\:get\(\) expects array\|ArrayAccess, \$this\(Appsolutely\\AIO\\Show\\Field\) given\.$#'
 			identifier: argument.type
-			count: 2
+			count: 1
 			path: src/Show/Field.php
 
 		-
@@ -7527,7 +7502,7 @@ parameters:
 		-
 			message: '#^Unsafe usage of new static\(\)\.$#'
 			identifier: new.static
-			count: 2
+			count: 1
 			path: src/Support/ComposerProperty.php
 
 		-
@@ -7581,7 +7556,7 @@ parameters:
 		-
 			message: '#^Strict comparison using \=\=\= between object and null will always evaluate to false\.$#'
 			identifier: identical.alwaysFalse
-			count: 2
+			count: 1
 			path: src/Support/DatabaseUpdater.php
 
 		-
@@ -7665,13 +7640,13 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Support\\WebUploader\:\:\$_id\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Support/WebUploader.php
 
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Support\\WebUploader\:\:\$chunk\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Support/WebUploader.php
 
 		-
@@ -7689,7 +7664,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Support\\WebUploader\:\:\$upload_column\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Support/WebUploader.php
 
 		-
@@ -7791,7 +7766,7 @@ parameters:
 		-
 			message: '#^Property Appsolutely\\AIO\\Tree\:\:\$branchCallback \(null\) does not accept Closure\.$#'
 			identifier: assign.propertyType
-			count: 2
+			count: 1
 			path: src/Tree.php
 
 		-
@@ -7851,7 +7826,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Appsolutely\\AIO\\Widgets\\Box\:\:\$class\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/Widgets/Box.php
 
 		-
@@ -7995,7 +7970,7 @@ parameters:
 		-
 			message: '#^Negated boolean expression is always false\.$#'
 			identifier: booleanNot.alwaysFalse
-			count: 2
+			count: 1
 			path: src/Widgets/Form.php
 
 		-
@@ -8019,7 +7994,7 @@ parameters:
 		-
 			message: '#^Result of && is always false\.$#'
 			identifier: booleanAnd.alwaysFalse
-			count: 2
+			count: 1
 			path: src/Widgets/Form.php
 
 		-
@@ -8055,7 +8030,7 @@ parameters:
 		-
 			message: '#^If condition is always true\.$#'
 			identifier: if.alwaysTrue
-			count: 2
+			count: 1
 			path: src/Widgets/Metrics/Card.php
 
 		-
@@ -8085,13 +8060,13 @@ parameters:
 		-
 			message: '#^Ternary operator condition is always true\.$#'
 			identifier: ternary.alwaysTrue
-			count: 2
+			count: 1
 			path: src/Widgets/Metrics/Card.php
 
 		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$size$#'
 			identifier: parameter.notFound
-			count: 2
+			count: 1
 			path: src/Widgets/Metrics/Round.php
 
 		-

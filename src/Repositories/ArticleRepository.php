@@ -30,12 +30,11 @@ final class ArticleRepository extends BaseRepository
             });
         }
 
-        // Apply tag filter (if tags are implemented)
+        // Apply tag filter
         if (! empty($filters['tag_filter'])) {
-            // TODO: Implement tag filtering when tags are added to Article model
-            // $query->whereHas('tags', function ($q) use ($filters) {
-            //     $q->where('slug', $filters['tag_filter']);
-            // });
+            $query->whereHas('tags', function ($q) use ($filters) {
+                $q->where('slug', $filters['tag_filter']);
+            });
         }
 
         // Apply ordering
