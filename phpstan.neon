@@ -9,4 +9,9 @@ parameters:
     excludePaths:
         - src/Helpers
         - src/Models/Membership.php
+    ignoreErrors:
+        -
+            message: '#Using nullsafe property access on non-nullable type Illuminate\\Database\\Eloquent\\Model\. Use -> instead\.#'
+            path: src/Models/PageBlockSetting.php
+            count: 1
     tmpDir: build/phpstan

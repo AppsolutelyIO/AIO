@@ -52,11 +52,11 @@ final readonly class ImageOptimizationService implements ImageOptimizationServic
 
         // Encode to optimized format
         $encoded = match ($format) {
-            'webp' => $image->toWebp($quality),
-            'avif' => $image->toAvif($quality),
+            'webp'        => $image->toWebp($quality),
+            'avif'        => $image->toAvif($quality),
             'jpg', 'jpeg' => $image->toJpeg($quality),
-            'png'   => $image->toPng(),
-            default => $image->toWebp($quality),
+            'png'         => $image->toPng(),
+            default       => $image->toWebp($quality),
         };
 
         $encodedContents = $encoded->toString();

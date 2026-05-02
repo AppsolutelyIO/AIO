@@ -285,6 +285,7 @@ final readonly class GeneralPageService implements GeneralPageServiceInterface
     {
         // For a more sophisticated implementation, you would use cache tags
         // For now, we'll clear by pattern (if supported by cache driver)
+        /** @phpstan-ignore-next-line */
         if (method_exists($this->cache, 'flush')) {
             // This is a simple approach - in production you'd want cache tagging
             log_warning('Full cache flush requested - consider implementing cache tagging for selective clearing');

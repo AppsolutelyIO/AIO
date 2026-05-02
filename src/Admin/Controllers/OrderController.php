@@ -108,8 +108,10 @@ final class OrderController extends AdminBaseController
             }
 
             return collect(OrderStatus::toArray())->filter(function ($label, $value) use ($currentStatus, $form) {
+                $model = $form->model();
+
                 return $value === $currentStatus->value
-                    || $this->orderService->canTransitionTo($form->model(), OrderStatus::from($value));
+                    || ($model instanceof Order && $this->orderService->canTransitionTo($model, OrderStatus::from($value)));
             })->toArray();
         });
 
